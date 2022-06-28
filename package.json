@@ -12,6 +12,7 @@
     "electron": "wait-on tcp:3000 && electron ."
   },
   "dependencies": {
+    "moment": "^2.29.3",
     "sass": "^1.53.0",
     "vue": "^3.2.25"
   },

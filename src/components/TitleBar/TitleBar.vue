@@ -33,14 +33,16 @@ const minWindow = () => {
   justify-content: flex-end;
 
   div {
+    margin-top: 2px;
     height: 20px;
     width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 8px;
+    margin-right: 7.5px;
     border-radius: 5px;
     -webkit-app-region: no-drag;
+    cursor: pointer;
 
     img {
       width: 12px;
@@ -51,6 +53,10 @@ const minWindow = () => {
   .close-button {
     background-color: #e5544b;
 
+    &:hover {
+      background-color: #c95047;
+    }
+
     &:active {
       background-color: #99362f;
     }
@@ -59,8 +65,12 @@ const minWindow = () => {
   .min-button {
     border: 0.5px solid #594b4270;
 
+    &:hover {
+      background-color: #00000010;
+    }
+
     &:active {
-      background-color: #00000020;
+      background-color: #00000030;
     }
   }
 }

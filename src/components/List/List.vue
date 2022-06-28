@@ -1,11 +1,23 @@
 <template>
   <div class="list">
-    <Item />
+    <Item 
+      v-for="(item, index) in list"
+      :key="index"
+      :text="item.text"
+      :time="item.id" 
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import firstLoad from '../../util/firstLoad';
+import LocalStorage from '../../util/localStorage';
 import Item from './Item/Item.vue';
+
+firstLoad()
+
+const list = ref(LocalStorage('get'))
 
 </script>
 

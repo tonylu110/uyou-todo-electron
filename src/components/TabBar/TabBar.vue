@@ -18,7 +18,7 @@ const onAddClick = () => {
 <style lang="scss" scoped>
 .title-bar {
   position: relative;
-  height: 50px;
+  height: 55px;
   width: 100%;
   background-color: #7a695c;
   display: flex;

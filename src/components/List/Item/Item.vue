@@ -1,11 +1,11 @@
 <template>
   <div class="list-item">
     <div class="time-area">
-      <span>123213</span>
-      <div>复制</div>
+      <span>{{ getTime(time!) }}</span>
+      <div>{{ i18n().copyText }}</div>
     </div>
     <span class="item-text">
-      13515615615
+      {{ text }}
     </span>
     <div class="close-button">
       <img src="/images/close.png" alt="" />
@@ -17,7 +17,13 @@
 </template>
 
 <script setup lang="ts">
+import getTime from '../../../util/getTime';
+import i18n from '../../../i18n';
 
+const props = defineProps({
+  time: Number,
+  text: String
+})
 </script>
 
 <style lang="scss" scoped>
