@@ -1,15 +1,20 @@
 <template>
   <div class="title-bar">
-    <div class="min-button" @click="minWindow()">
+    <div :class="topState ? 'on-top-button-sel' :'on-top-button'" @click="onTopWindow">
+      <img src="/images/top.png" alt="">
+    </div>
+    <div class="min-button" @click="minWindow">
       <img src="/images/min.png" alt="">
     </div>
-    <div class="close-button" @click="closeWindow()">
+    <div class="close-button" @click="closeWindow">
       <img src="/images/close.png" alt="">
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+
 const ipcRenderer = require('electron').ipcRenderer
 const closeWindow = () => {
   ipcRenderer.send("window-close")
@@ -17,6 +22,12 @@ const closeWindow = () => {
 
 const minWindow = () => {
   ipcRenderer.send("window-min")
+}
+
+const topState = ref(false)
+const onTopWindow = () => {
+  topState.value = !topState.value
+  ipcRenderer.send('window-on-top', topState.value)
 }
 </script>
 
@@ -26,7 +37,7 @@ const minWindow = () => {
   background-color: #7a695c;
   width: 100%;
   height: 40px;
-  border-bottom: 1.5px solid #594b4270;
+  border-bottom: 1px solid #594b4270;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -48,29 +59,43 @@ const minWindow = () => {
       width: 12px;
       height: 12px;
     }
-  }
 
-  .close-button {
-    background-color: #e5544b;
+    &.close-button {
+      background-color: #e5544b;
+      width: 52px;
+      height: 21px;
 
-    &:hover {
-      background-color: #c95047;
+      &:hover {
+        background-color: #c95047;
+      }
+
+      &:active {
+        background-color: #99362f;
+      }
     }
 
-    &:active {
-      background-color: #99362f;
+    &.min-button {
+      border: 0.5px solid #594b4270;
+
+      &:hover {
+        background-color: #00000010;
+      }
+
+      &:active {
+        background-color: #00000030;
+      }
     }
-  }
 
-  .min-button {
-    border: 0.5px solid #594b4270;
-
-    &:hover {
-      background-color: #00000010;
+    &.on-top-button {
+      @extend .min-button;
+      position: absolute;
+      left: 7.5px;
     }
 
-    &:active {
-      background-color: #00000030;
+    &.on-top-button-sel {
+      @extend .close-button;
+      position: absolute;
+      left: 7.5px;
     }
   }
 }

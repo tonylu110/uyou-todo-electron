@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 
-const NODE_ENV = 'development'
+const NODE_ENV = process.env.NODE_ENV
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -41,6 +41,9 @@ function createWindow() {
   });
   ipcMain.on("window-close", () => {
     mainWindow.destroy();
+  });
+  ipcMain.on("window-on-top", (event, arg) => {
+    mainWindow.setAlwaysOnTop(arg)
   });
 }
 

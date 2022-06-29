@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "electron:serve": "concurrently -k \"yarn dev\" \"yarn electron\"",
     "electron:build": "vite build && electron-builder",
-    "electron": "wait-on tcp:3000 && electron ."
+    "electron": "wait-on tcp:3000 && cross-env NODE_ENV=development electron ."
   },
   "dependencies": {
     "moment": "^2.29.3",
