@@ -27,9 +27,9 @@ function createWindow() {
       : `file://${path.join(__dirname, `../dist/index.html`)}`
   )
 
-  // if (NODE_ENV === 'development') {
-  //   mainWindow.webContents.openDevTools()
-  // }
+  if (NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools({mode: 'detach'})
+  }
 
   ipcMain.on("window-min", () => mainWindow.minimize());
   ipcMain.on("window-max", () => {

@@ -5,6 +5,8 @@
       :key="index"
       :text="item.text"
       :time="item.id" 
+      :isOk="item.ok"
+      @setOk="setOk"
     />
   </div>
 </template>
@@ -14,11 +16,20 @@ import { ref } from 'vue';
 import firstLoad from '../../util/firstLoad';
 import LocalStorage from '../../util/localStorage';
 import Item from './Item/Item.vue';
+import saveItemSet from './saveItemSet'
 
 firstLoad()
 
 const list = ref(LocalStorage('get'))
 
+const setOk = (id: number, isOk: boolean) => {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id) {
+      list.value![i].ok = isOk
+    }
+  }
+  saveItemSet(list.value!)
+}
 </script>
 
 <style scoped>
