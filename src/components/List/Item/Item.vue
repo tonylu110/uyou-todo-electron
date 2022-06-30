@@ -7,7 +7,7 @@
     <span class="item-text" :style="okStyle">
       {{ text }}
     </span>
-    <div class="close-button">
+    <div class="close-button" @click="deleteItem">
       <img src="/images/close.png" alt="" />
     </div>
     <div class="ok-button" @click="setOk">
@@ -29,7 +29,8 @@ const props = defineProps({
 })
 
 const emits = defineEmits<{
-  (e: 'setOk', id: number, isOk: boolean): void
+  (e: 'setOk', id: number, isOk: boolean): void,
+  (e: 'deleteItem', id: number): void
 }>()
 
 const okState = ref(props.isOk)
@@ -46,6 +47,9 @@ const setOk = () => {
   emits('setOk', props.time!, okState.value)
 }
 
+const deleteItem = () => {
+  emits('deleteItem', props.time!)
+}
 </script>
 
 <style lang="scss" scoped>

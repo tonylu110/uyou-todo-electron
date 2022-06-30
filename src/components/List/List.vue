@@ -12,6 +12,7 @@
       :time="item.id" 
       :isOk="item.ok"
       @setOk="setOk"
+      @deleteItem="deleteItem"
     />
   </div>
 </template>
@@ -59,6 +60,15 @@ const emits = defineEmits<{
 
 const setAddItem = () => {
   emits('setAddItem')
+}
+
+const deleteItem = (id: number) => {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id) {
+      list.value!.splice(i, 1)
+    }
+  }
+  saveItemSet(list.value!)
 }
 </script>
 
