@@ -33,7 +33,7 @@
     "copyright": "Copyright © 2022 Anthony Lu",
     "mac": {
       "category": "public.app-category.utilities",
-      "icon": "./logo.ico"
+      "icon": "./logo.icns"
     },
     "win": {
       "icon": "./logo.ico"

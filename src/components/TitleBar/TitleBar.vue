@@ -1,12 +1,25 @@
 <template>
-  <div class="title-bar">
-    <div :class="topState ? 'on-top-button-sel' :'on-top-button'" @click="onTopWindow">
+  <div class="title-bar" :style="{justifyContent: isMac ? 'flex-start' : ''}">
+    <div 
+      :class="topState ? 'on-top-button-sel' :'on-top-button'"
+      :style="{
+        left: isMac ? '' : '7.5px',
+        right: isMac ? '0' : ''
+      }"  
+      @click="onTopWindow"
+    >
       <img src="/images/top.png" alt="">
     </div>
-    <div class="min-button" @click="minWindow">
+    <div v-if="isMac" class="close-button-mac" @click="closeWindow">
+      <img src="/images/close.png" alt="">
+    </div>
+    <div v-if="isMac" class="min-button-mac" @click="minWindow">
       <img src="/images/min.png" alt="">
     </div>
-    <div class="close-button" @click="closeWindow">
+    <div v-if="!isMac" class="min-button" @click="minWindow">
+      <img src="/images/min.png" alt="">
+    </div>
+    <div v-if="!isMac" class="close-button" @click="closeWindow">
       <img src="/images/close.png" alt="">
     </div>
   </div>
@@ -14,6 +27,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+
+const isMac = navigator.userAgent.indexOf('Mac')>=0
 
 const ipcRenderer = require('electron').ipcRenderer
 const closeWindow = () => {
@@ -86,16 +101,26 @@ const onTopWindow = () => {
       }
     }
 
+    &.close-button-mac {
+      @extend .close-button;
+      margin-left: 7.5px;
+      width: 21px;
+      margin-top: 1px;
+    }
+
+    &.min-button-mac {
+      @extend .min-button;
+      width: 20px;
+    }
+
     &.on-top-button {
       @extend .min-button;
       position: absolute;
-      left: 7.5px;
     }
 
     &.on-top-button-sel {
       @extend .close-button;
       position: absolute;
-      left: 7.5px;
     }
   }
 }
