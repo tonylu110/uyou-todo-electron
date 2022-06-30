@@ -1,14 +1,22 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import TabBar from './components/TabBar/TabBar.vue';
 import List from './components/List/List.vue';
 import TitleBar from './components/TitleBar/TitleBar.vue';
+
+const showAddItem = ref(false)
 </script>
 
 <template>
   <div class="list-main">
     <TitleBar />
-    <TabBar />
-    <List />
+    <TabBar
+      @onAddClick="() => showAddItem = true" 
+    />
+    <List
+      :showAddItem="showAddItem" 
+      @setAddItem="() => showAddItem = false"
+    />
   </div>
 </template>
 

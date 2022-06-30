@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import getTime from '../../../util/getTime';
 import i18n from '../../../i18n';
 import getOkStyle from '../../../data/getOkStyle';
@@ -34,6 +34,11 @@ const emits = defineEmits<{
 
 const okState = ref(props.isOk)
 const okStyle = ref(getOkStyle(okState.value))
+
+watchEffect(() => {
+  okState.value = props.isOk
+  okStyle.value = getOkStyle(props.isOk)
+})
 
 const setOk = () => {
   okState.value = !okState.value

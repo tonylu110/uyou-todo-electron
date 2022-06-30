@@ -1,5 +1,10 @@
 <template>
   <div class="list">
+    <AddItem 
+      v-if="showAddItem"
+      @setAddItem="setAddItem"
+      @addItem="addItem"
+    />
     <Item 
       v-for="(item, index) in list"
       :key="index"
@@ -17,6 +22,12 @@ import firstLoad from '../../util/firstLoad';
 import LocalStorage from '../../util/localStorage';
 import Item from './Item/Item.vue';
 import saveItemSet from './saveItemSet'
+import AddItem from './AddItem/AddItem.vue';
+import ITodoList from '../../interface/ITodoListArray';
+
+defineProps({
+  showAddItem: Boolean,
+})
 
 firstLoad()
 
@@ -29,6 +40,25 @@ const setOk = (id: number, isOk: boolean) => {
     }
   }
   saveItemSet(list.value!)
+}
+
+const addItem = (id: number, text: string) => {
+  emits('setAddItem')
+  const item: ITodoList = {
+    text: text,
+    id: id,
+    ok: false
+  }
+  list.value!.unshift(item)
+  saveItemSet(list.value!)
+}
+
+const emits = defineEmits<{
+  (e: 'setAddItem'): void
+}>()
+
+const setAddItem = () => {
+  emits('setAddItem')
 }
 </script>
 

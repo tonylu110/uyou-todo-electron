@@ -1,13 +1,15 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, screen } = require('electron')
 const path = require('path')
 
 const NODE_ENV = process.env.NODE_ENV
 
 function createWindow() {
+  const { height } = screen.getPrimaryDisplay().workAreaSize
+
   const mainWindow = new BrowserWindow({
     width: 320,
     height: 640,
-    maxHeight: 900,
+    maxHeight: height - 100,
     maxWidth: 600,
     minHeight: 600,
     minWidth: 300,
@@ -26,6 +28,8 @@ function createWindow() {
       ? 'http://localhost:3000'
       : `file://${path.join(__dirname, `../dist/index.html`)}`
   )
+
+  mainWindow.setMaximizable(false)
 
   if (NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools({mode: 'detach'})
