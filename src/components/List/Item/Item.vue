@@ -2,7 +2,7 @@
   <div class="list-item">
     <div class="time-area">
       <span>{{ getTime(time!) }}</span>
-      <div>{{ i18n().copyText }}</div>
+      <div @click="copyText">{{ i18n().copyText }}</div>
     </div>
     <span class="item-text" :style="okStyle">
       {{ text }}
@@ -13,6 +13,10 @@
     <div class="ok-button" @click="setOk">
       <img src="/images/ok.png" alt="" />
     </div>
+    <Toast
+      v-if="showToast"
+      :msg="i18n().copyToast"
+    />
   </div>
 </template>
 
@@ -21,6 +25,7 @@ import { ref, watchEffect } from 'vue';
 import getTime from '../../../util/getTime';
 import i18n from '../../../i18n';
 import getOkStyle from '../../../data/getOkStyle';
+import Toast from '../../Toast/Toast.vue';
 
 const props = defineProps({
   time: Number,
@@ -49,6 +54,16 @@ const setOk = () => {
 
 const deleteItem = () => {
   emits('deleteItem', props.time!)
+}
+
+const showToast = ref(false)
+const copyText = () => {
+  navigator.clipboard.writeText(props.text!).then(() => {
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 1000)
+  })
 }
 </script>
 
