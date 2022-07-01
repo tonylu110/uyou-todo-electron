@@ -7,7 +7,7 @@
 - 开发运行
     ``` 
     yarn
-    yarn electron:server
+    yarn electron:serve
     ```
 - 编译
   ```

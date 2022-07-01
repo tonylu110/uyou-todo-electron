@@ -1,12 +1,15 @@
-const { app, BrowserWindow, ipcMain, screen } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Menu } = require('electron')
 const path = require('path')
+const menuTemplate = require('./menu.js')
 
 const NODE_ENV = process.env.NODE_ENV
+
+let mainWindow
 
 function createWindow() {
   const { height } = screen.getPrimaryDisplay().workAreaSize
 
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 320,
     height: 640,
     maxHeight: height - 100,
@@ -32,7 +35,7 @@ function createWindow() {
   mainWindow.setMaximizable(false)
 
   if (NODE_ENV === 'development') {
-    mainWindow.webContents.openDevTools({mode: 'detach'})
+    mainWindow.webContents.openDevTools({ mode: 'detach' })
   }
 
   ipcMain.on("window-min", () => mainWindow.minimize());
@@ -44,7 +47,7 @@ function createWindow() {
     }
   });
   ipcMain.on("window-close", () => {
-    mainWindow.destroy();
+    app.quit();
   });
   ipcMain.on("window-on-top", (event, arg) => {
     mainWindow.setAlwaysOnTop(arg)
@@ -52,10 +55,17 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  const { height } = screen.getPrimaryDisplay().workAreaSize
+
   createWindow()
 
-  const { Menu } = require('electron');
+  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height));
+
   Menu.setApplicationMenu(null);
+
+  if (process.platform == 'darwin') {
+    Menu.setApplicationMenu(appMenu)
+  }
 
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()

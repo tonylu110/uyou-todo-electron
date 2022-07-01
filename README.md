@@ -7,7 +7,7 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
 - run in development mode
     ``` 
     yarn
-    yarn electron:server
+    yarn electron:serve
     ```
 - build
   ```

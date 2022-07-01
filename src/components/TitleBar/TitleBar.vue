@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import firstLoad from './firstLoad';
 
 const isMac = navigator.userAgent.indexOf('Mac')>=0
 
@@ -39,10 +40,11 @@ const minWindow = () => {
   ipcRenderer.send("window-min")
 }
 
-const topState = ref(false)
+const topState = ref(firstLoad())
 const onTopWindow = () => {
   topState.value = !topState.value
   ipcRenderer.send('window-on-top', topState.value)
+  localStorage.setItem('alwaysOnTop', topState.value + '')
 }
 </script>
 
@@ -79,6 +81,7 @@ const onTopWindow = () => {
       background-color: #e5544b;
       width: 52px;
       height: 21px;
+      margin-top: 1px;
 
       &:hover {
         background-color: #c95047;
@@ -105,7 +108,6 @@ const onTopWindow = () => {
       @extend .close-button;
       margin-left: 7.5px;
       width: 21px;
-      margin-top: 1px;
     }
 
     &.min-button-mac {

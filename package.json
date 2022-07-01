@@ -1,7 +1,7 @@
 {
   "name": "uyoutodo",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "electron/main.js",
   "scripts": {
     "dev": "vite",
