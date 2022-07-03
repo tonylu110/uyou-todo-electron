@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.1",
   "main": "electron/main.js",
+  "author": "Anthony Lu <luxiaoyu1848367623@gmail.com>",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -39,7 +40,12 @@
       "icon": "./logo.ico"
     },
     "linux": {
-      "icon": "./logo.ico"
+      "icon": "./logo.png",
+      "target": [
+        "deb",
+        "rpm",
+        "AppImage"
+      ]
     },
     "nsis": {
       "oneClick": false,
