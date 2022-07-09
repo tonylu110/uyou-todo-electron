@@ -7,8 +7,8 @@ const routes = [
     component: () => import("./pages/Home.vue"),
   },
   {
-    path: "/help",
-    name: "help",
+    path: "/setting",
+    name: "setting",
     component: () => import("./pages/Setting.vue"),
   }
 ];

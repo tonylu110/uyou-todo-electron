@@ -1,18 +1,35 @@
 <template>
   <div class="title-bar">
-    <span>uyou ToDo</span>
-    <img src="/images/plus.png" alt="" @click="onAddClick" />
+    <img v-if="leftImgShow" class="left-img" :src="leftImg" alt="" @click="() => emits('leftClick')">
+    <span>{{ title }}</span>
+    <img v-if="rightImgShow" class="right-img" src="/images/plus.png" alt="" @click="() => emits('rightClick')" />
   </div>
 </template>
 
 <script setup lang="ts">
-const emits = defineEmits<{
-  (e: 'onAddClick'): void
-}>()
+defineProps({
+  title: {
+    default: 'uyou ToDo',
+    type: String
+  },
+  leftImgShow: {
+    default: true,
+    type: Boolean
+  },
+  rightImgShow: {
+    default: true,
+    type: Boolean
+  },
+  leftImg: {
+    default: './images/setting.png',
+    tyoe: String
+  }
+})
 
-const onAddClick = () => {
-  emits('onAddClick')
-}
+const emits = defineEmits<{
+  (e: 'rightClick'): void,
+  (e: 'leftClick'): void
+}>()
 </script>
 
 <style lang="scss" scoped>
@@ -39,8 +56,18 @@ const onAddClick = () => {
     border-radius: 5px;
     width: 30px;
     height: 30px;
-    right: 10px;
     cursor: pointer;
+
+    &.left-img {
+      left: 10px;
+      width: 22px;
+      height: 22px;
+      padding: 4px;
+    }
+
+    &.right-img {
+      right: 10px;
+    }
 
     &:hover {
       background-color: #00000010;
