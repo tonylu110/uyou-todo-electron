@@ -1,7 +1,7 @@
 {
   "name": "uyoutodo",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "electron/main.js",
   "author": "Anthony Lu <luxiaoyu1848367623@gmail.com>",
   "scripts": {
@@ -15,7 +15,8 @@
   "dependencies": {
     "moment": "^2.29.3",
     "sass": "^1.53.0",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-router": "^4.1.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
