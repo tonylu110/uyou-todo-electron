@@ -7,11 +7,13 @@
     <div class="setting-item lang-set" @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </div>
+    <LangSet v-if="langMenuShow" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import LangSet from './LangSet/LangSet.vue';
 
 const langMenuShow = ref(false)
 </script>

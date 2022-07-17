@@ -1,9 +1,11 @@
-import ITodoList from "../interface/ITodoListArray";
+import ITodoList from "../interface/ITodoListArray"
 
 const addText = 'Add'
 const cancelText = 'Cancel'
 const copyText = 'Copy'
 const copyToast = 'Copy successfully'
+const settingTitleText = 'Setting'
+const setLangText = 'Auto'
 const firstLoadData: ITodoList[] = [
     {
         text: 'Welcome to use uyou ToDo',
@@ -32,5 +34,7 @@ export default {
     cancelText,
     copyText,
     copyToast,
-    firstLoadData
+    firstLoadData,
+    settingTitleText,
+    setLangText
 }

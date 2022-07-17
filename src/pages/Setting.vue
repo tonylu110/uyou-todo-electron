@@ -1,6 +1,6 @@
 <template>
   <TabBar 
-    title="设置"
+    :title="i18n().settingTitleText"
     :rightImgShow="false"
     leftImg="./images/back.png"
     @leftClick="() => router.push('/')"
@@ -12,4 +12,5 @@
 import TabBar from '../components/TabBar/TabBar.vue';
 import router from '../router'
 import SettingList from '../components/SettingList/SettingList.vue';
+import i18n from '../i18n';
 </script>
