@@ -8,6 +8,7 @@
       <img src="/images/lang.png" alt="" class="lang-img" />
     </div>
     <LangSet v-if="langMenuShow" />
+    <div class="black-back" v-if="langMenuShow" @click="() => langMenuShow = !langMenuShow"></div>
   </div>
 </template>
 

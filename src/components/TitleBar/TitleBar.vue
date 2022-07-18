@@ -59,6 +59,7 @@ const onTopWindow = () => {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  z-index: 100;
 
   div {
     margin-top: 2px;

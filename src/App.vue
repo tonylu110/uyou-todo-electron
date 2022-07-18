@@ -28,4 +28,14 @@ body {
   flex-direction: column;
   height: 100vh;
 }
+
+.black-back {
+  background-color: #00000030;
+  height: calc(100% - 50px);
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+  margin-top: 25px;
+}
 </style>
