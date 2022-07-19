@@ -6,6 +6,12 @@ const copyText = 'Copiar'
 const copyToast = 'Copiado correctamente'
 const settingTitleText = 'Ajustes'
 const setLangText = 'Automático'
+const updateText = 'Actualizar'
+
+const alertText = {
+    cancelText: 'Cancelar',
+    returnText: 'Confirmar'
+}
 const firstLoadData: ITodoList[] = [
   {
     text: 'Bienvenido a utilizar uyou ToDo',
@@ -36,5 +42,7 @@ export default {
   copyToast,
   firstLoadData,
   settingTitleText,
-  setLangText
+  setLangText,
+  updateText,
+  alertText
 }

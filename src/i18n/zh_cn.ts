@@ -6,6 +6,13 @@ const copyText = '复制'
 const copyToast = '复制成功'
 const settingTitleText = '设置'
 const setLangText = '跟随系统'
+const updateText = '更新'
+
+const alertText = {
+    cancelText: '取消',
+    returnText: '确定'
+}
+
 const firstLoadData: ITodoList[] = [
     {
         text: '欢迎使用 uyou ToDo',
@@ -36,5 +43,7 @@ export default {
     copyToast,
     firstLoadData,
     settingTitleText,
-    setLangText
+    setLangText,
+    updateText,
+    alertText
 }
