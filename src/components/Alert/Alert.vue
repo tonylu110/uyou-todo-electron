@@ -41,11 +41,14 @@ const emits = defineEmits<{
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: #edd9b7;
-  width: 220px;
-  border-radius: 8px;
+  width: 250px;
+  border-radius: 9px;
   box-shadow: 0 5px 8px #594b4270;
+  border: 1px solid #999;
+  overflow: hidden;
 
   .title {
+    -webkit-app-region: drag;
     background-color: #7a695c;
     color: white;
     padding: 8px;
@@ -53,14 +56,16 @@ const emits = defineEmits<{
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    border-radius: 8px 8px 0 0;
   }
 
   .body {
-    padding: 8px;
+    padding: 10px;
+    font-size: 14px;
+    color: #6e492f;
 
     span {
       display: block;
+      white-space:pre;
     }
   }
 
@@ -70,7 +75,6 @@ const emits = defineEmits<{
     align-items: center;
     height: 35px;
     background-color: #ece1cc;
-    border-radius: 0 0 8px 8px;
 
     div {
       width: 50%;
@@ -78,9 +82,11 @@ const emits = defineEmits<{
       display: flex;
       justify-content: center;
       align-items: center;
+      font-size: 15px;
+      color: #7a695c;
+      font-weight: bold;
 
       &.cancel {
-        border-radius: 0 0 0 8px;
         border-right: 2px solid #00000010;
 
         &:active {
@@ -89,8 +95,6 @@ const emits = defineEmits<{
       }
 
       &.return {
-        border-radius: 0 0 8px 0;
-
         &:active {
           background-color: #5985eb;
           color: white;

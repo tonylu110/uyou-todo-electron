@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, Ref } from 'vue';
 import i18n from './i18n';
 import TitleBar from './components/TitleBar/TitleBar.vue';
 import Alert from './components/Alert/Alert.vue';
 
 const alertShow = ref(false)
-const alertMsg = ref([])
+const alertMsg: Ref<string[]> = ref([])
 
-const version = 102
+const version = 110
 
-fetch('http://api.todo.uyou.org.cn/update/get').then(res => {
+fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
   return res.json()
 }).then(res => {
   if (res[1].code > version) {
