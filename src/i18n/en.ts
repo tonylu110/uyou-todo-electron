@@ -7,6 +7,8 @@ const copyToast = 'Copy successfully'
 const settingTitleText = 'Setting'
 const setLangText = 'Auto'
 const updateText = 'Update'
+const loginText = 'Not logged in'
+const myAccount = 'My Account'
 
 const alertText = {
     cancelText: 'Cancel',
@@ -45,5 +47,7 @@ export default {
     settingTitleText,
     setLangText,
     updateText,
-    alertText
+    alertText,
+    loginText,
+    myAccount
 }

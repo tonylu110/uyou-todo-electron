@@ -65,7 +65,7 @@ const emits = defineEmits<{
 
     span {
       display: block;
-      white-space:pre;
+      white-space: pre;
     }
   }
 

@@ -7,11 +7,14 @@ const copyToast = '正常にコピー'
 const settingTitleText = '設定'
 const setLangText = '自動'
 const updateText = 'アップデート'
+const loginText = 'ログインしていない'
+const myAccount = 'マイアカウント'
 
 const alertText = {
     cancelText: 'キャンセル',
     returnText: '確認'
 }
+
 const firstLoadData: ITodoList[] = [
     {
         text: 'uyou ToDoの使用へようこそ',
@@ -44,5 +47,7 @@ export default {
     settingTitleText,
     setLangText,
     updateText,
-    alertText
+    alertText,
+    loginText,
+    myAccount
 }

@@ -7,6 +7,8 @@ const copyToast = '複製成功'
 const settingTitleText = '設定'
 const setLangText = '跟隨系統'
 const updateText = '更新'
+const loginText = '未登入'
+const myAccount = '我的賬號'
 
 const alertText = {
     cancelText: '取消',
@@ -45,5 +47,7 @@ export default {
     settingTitleText,
     setLangText,
     updateText,
-    alertText
+    alertText,
+    loginText,
+    myAccount
 }

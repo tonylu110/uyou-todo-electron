@@ -2,7 +2,11 @@
   <div class="list">
     <div class="title-img">
       <img src="/images/logo.png" alt="" />
-      <span>uyou ToDo v1.0.2</span>
+      <span>uyou ToDo v1.1.0</span>
+    </div>
+    <div class="setting-item" @click="() => router.push('/account')">
+      <span>{{ loginState ? i18n().myAccount : i18n().loginText }}</span>
+      <ArrowRightBold style="width: 1em; height: 1em;" />
     </div>
     <div class="setting-item lang-set" @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
@@ -14,7 +18,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { ArrowRightBold } from '@element-plus/icons-vue'
+import router from '../../router';
 import LangSet from './LangSet/LangSet.vue';
+import i18n from '../../i18n';
+
+const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
 
 const langMenuShow = ref(false)
 </script>
