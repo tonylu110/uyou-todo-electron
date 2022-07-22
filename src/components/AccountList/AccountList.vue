@@ -23,6 +23,7 @@
       @return="closeAlert"
       v-if="alertShow"
     />
+    <Toast v-if="showToast" :msg="toastMsg" />
   </div>
 </template>
 
@@ -30,6 +31,7 @@
 import { ref, onMounted } from 'vue';
 import i18n from '../../i18n';
 import Alert from '../Alert/Alert.vue';
+import Toast from '../Toast/Toast.vue';
 
 const loginText = ref('')
 
@@ -51,6 +53,8 @@ const uname = ref('')
 const passwd = ref('')
 const alertMsg = ref([''])
 const alertShow = ref(false)
+const showToast = ref(false)
+const toastMsg = ref('')
 const login = () => {
   if (uname.value === '' || passwd.value === '') {
     alertMsg.value = ['请输入账号和密码']
@@ -73,6 +77,66 @@ const login = () => {
         localStorage.setItem('uname', uname.value)
         localStorage.setItem('uid', res._id)
         loginState.value = true
+        toastMsg.value = '同步数据'
+        showToast.value = true
+        fetch(`https://api.todo.uyou.org.cn/todoexist?uid=${res._id}`).then(res => {
+          return res.json()
+        }).then(res => {
+          const uid = localStorage.getItem('uid')
+          const data = localStorage.getItem('ToDo')
+          if (res.code === 200) {
+            fetch('https://api.todo.uyou.org.cn/addtodo', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                uid: uid,
+                data: data
+              })
+            }).then(res => {
+              return res.json()
+            }).then(res => {
+              if (res.code === 200) {
+                toastMsg.value = '同步成功'
+                setTimeout(() => {
+                  showToast.value = false
+                }, 500)
+              } else {
+                toastMsg.value = '同步失败'
+                setTimeout(() => {
+                  showToast.value = false
+                }, 500)
+              }
+            })
+          } else {
+            const uid = localStorage.getItem('uid')
+            fetch('https://api.todo.uyou.org.cn/gettodo', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                uid: uid
+              })
+            }).then(res => {
+              return res.json()
+            }).then(res => {
+              if (res._id) {
+                toastMsg.value = '同步成功'
+                setTimeout(() => {
+                  showToast.value = false
+                }, 500)
+                localStorage.setItem('ToDo', res.data)
+              } else {
+                toastMsg.value = '同步失败'
+                setTimeout(() => {
+                  showToast.value = false
+                }, 500)
+              }
+            })
+          }
+        })
       } else {
         alertMsg.value = ['登录失败']
         alertShow.value = true
