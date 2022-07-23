@@ -3,10 +3,13 @@
     <img v-if="leftImgShow" class="left-img" :src="leftImg" alt="" @click="() => emits('leftClick')">
     <span>{{ title }}</span>
     <img v-if="rightImgShow" class="right-img" src="/images/plus.png" alt="" @click="() => emits('rightClick')" />
+    <img v-if="syncImgShow && rightImgShow" class="sync-img" src="/images/sync.png" alt="" @click="sync" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
+
 defineProps({
   title: {
     default: 'uyou ToDo',
@@ -28,8 +31,36 @@ defineProps({
 
 const emits = defineEmits<{
   (e: 'rightClick'): void,
-  (e: 'leftClick'): void
+  (e: 'leftClick'): void,
 }>()
+
+const syncImgShow = ref(false)
+
+onMounted(() => {
+  const uid = localStorage.getItem('uid')
+  if (uid !== '' && uid !== null) {
+    syncImgShow.value = true
+  }
+})
+
+const sync = () => {
+  if (syncImgShow.value) {
+    fetch('https://api.todo.uyou.org.cn/gettodo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        uid: localStorage.getItem('uid')
+      })
+    }).then(res => {
+      return res.json()
+    }).then(res => {
+      localStorage.setItem('ToDo', res.data)
+      window.location.reload()
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -75,6 +106,13 @@ const emits = defineEmits<{
 
     &:active {
       background-color: #00000020;
+    }
+
+    &.sync-img {
+      width: 22px;
+      height: 22px;
+      padding: 4px;
+      right: 47px;
     }
   }
 }
