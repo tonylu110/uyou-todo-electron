@@ -13,6 +13,10 @@
     <div v-if="!loginState" class="item register" @click="openRegister">
       <span>注册</span>
     </div>
+    <div v-if="loginState" class="item" style="background-color: white; color: black;">
+      <span>自动同步</span>
+      <Switch :swichState="swichState" @switch="swichState = !swichState" />
+    </div>
     <div v-if="loginState" class="item logout" @click="logout">
       <span>退出登录</span>
     </div>
@@ -32,6 +36,9 @@ import { ref, onMounted } from 'vue';
 import i18n from '../../i18n';
 import Alert from '../Alert/Alert.vue';
 import Toast from '../Toast/Toast.vue';
+import Switch from '../Switch/Switch.vue';
+
+const swichState = ref(true)
 
 const loginText = ref('')
 
