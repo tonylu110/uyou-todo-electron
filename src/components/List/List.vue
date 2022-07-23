@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import firstLoad from '../../util/firstLoad';
 import LocalStorage from '../../util/localStorage';
 import Item from './Item/Item.vue';
@@ -33,6 +33,15 @@ defineProps({
 firstLoad()
 
 const list = ref(LocalStorage('get'))
+
+onMounted(() => {
+  const uid = localStorage.getItem('uid')
+  if (uid !== '' && uid !== null) {
+    document.addEventListener("storage", () => {
+      list.value = LocalStorage('get')
+    })
+  }
+})
 
 const setOk = (id: number, isOk: boolean) => {
   for (let i = 0; i < list.value!.length; i++) {
