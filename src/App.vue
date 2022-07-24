@@ -23,21 +23,24 @@ const returnClick = () => {
   window.open('https://github.com/tonylu110/uyou-todo-electron/releases')
 }
 
-const uid = localStorage.getItem('uid')
-if (uid !== '' && uid !== null) {
-  fetch('https://api.todo.uyou.org.cn/gettodo', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      uid: uid
+const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
+if (autoSync) {
+  const uid = localStorage.getItem('uid')
+  if (uid !== '' && uid !== null) {
+    fetch('https://api.todo.uyou.org.cn/gettodo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        uid: uid
+      })
+    }).then(res => {
+      return res.json()
+    }).then(res => {
+      localStorage.setItem('ToDo', res.data)
     })
-  }).then(res => {
-    return res.json()
-  }).then(res => {
-    localStorage.setItem('ToDo', res.data)
-  })
+  }
 }
 </script>
 

@@ -15,7 +15,7 @@
     </div>
     <div v-if="loginState" class="item" style="background-color: white; color: black;">
       <span>自动同步</span>
-      <Switch :swichState="swichState" @switch="swichState = !swichState" />
+      <Switch :swichState="swichState" @switch="setAutoSync" />
     </div>
     <div v-if="loginState" class="item logout" @click="logout">
       <span>退出登录</span>
@@ -38,7 +38,12 @@ import Alert from '../Alert/Alert.vue';
 import Toast from '../Toast/Toast.vue';
 import Switch from '../Switch/Switch.vue';
 
-const swichState = ref(true)
+const swichState = ref(localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null)
+
+const setAutoSync = () => {
+  swichState.value = !swichState.value
+  localStorage.setItem('autoSync', swichState.value + '')
+}
 
 const loginText = ref('')
 
