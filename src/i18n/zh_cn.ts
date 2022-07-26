@@ -15,7 +15,13 @@ const accountPage = {
     login: '登录',
     register: '注册',
     autoSync: '自动同步',
-    logout: '退出登录'
+    logout: '退出登录',
+    alertNoAnP: '请输入账号和密码',
+    syncData: '同步数据',
+    syncSuccess: '同步成功',
+    syncFail: '同步失败',
+    loginError: '登录失败',
+    alertTitle: '提示'
 }
 
 const alertText = {

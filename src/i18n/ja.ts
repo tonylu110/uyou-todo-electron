@@ -15,7 +15,13 @@ const accountPage = {
     login: 'ログイン',
     register: '登録',
     autoSync: '自動同期',
-    logout: 'ログアウト'
+    logout: 'ログアウト',
+    alertNoAnP: 'アカウントとパスワードを入力してください',
+    syncData: '同期データ',
+    syncSuccess: '同期に成功しました',
+    syncFail: '同期に失敗しました',
+    loginError: 'ログインに失敗しました',
+    alertTitle: 'ヒント'
 }
 
 const alertText = {

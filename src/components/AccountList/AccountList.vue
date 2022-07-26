@@ -21,7 +21,7 @@
       <span>{{ i18n().accountPage.logout }}</span>
     </div>
     <Alert
-      title="提示"
+      :title="i18n().accountPage.alertTitle"
       :body="alertMsg"
       :cancelButtonShow="false" 
       @return="closeAlert"
@@ -69,7 +69,7 @@ const showToast = ref(false)
 const toastMsg = ref('')
 const login = () => {
   if (uname.value === '' || passwd.value === '') {
-    alertMsg.value = ['请输入账号和密码']
+    alertMsg.value = [i18n().accountPage.alertNoAnP]
     alertShow.value = true
   } else {
     fetch('https://api.todo.uyou.org.cn/login', {
@@ -89,7 +89,7 @@ const login = () => {
         localStorage.setItem('uname', uname.value)
         localStorage.setItem('uid', res._id)
         loginState.value = true
-        toastMsg.value = '同步数据'
+        toastMsg.value = i18n().accountPage.syncData
         showToast.value = true
         fetch(`https://api.todo.uyou.org.cn/todoexist?uid=${res._id}`).then(res => {
           return res.json()
@@ -110,12 +110,12 @@ const login = () => {
               return res.json()
             }).then(res => {
               if (res.code === 200) {
-                toastMsg.value = '同步成功'
+                toastMsg.value = i18n().accountPage.syncSuccess
                 setTimeout(() => {
                   showToast.value = false
                 }, 500)
               } else {
-                toastMsg.value = '同步失败'
+                toastMsg.value = i18n().accountPage.syncFail
                 setTimeout(() => {
                   showToast.value = false
                 }, 500)
@@ -135,13 +135,13 @@ const login = () => {
               return res.json()
             }).then(res => {
               if (res._id) {
-                toastMsg.value = '同步成功'
+                toastMsg.value = i18n().accountPage.syncSuccess
                 setTimeout(() => {
                   showToast.value = false
                 }, 500)
                 localStorage.setItem('ToDo', res.data)
               } else {
-                toastMsg.value = '同步失败'
+                toastMsg.value = i18n().accountPage.syncFail
                 setTimeout(() => {
                   showToast.value = false
                 }, 500)
@@ -150,7 +150,7 @@ const login = () => {
           }
         })
       } else {
-        alertMsg.value = ['登录失败']
+        alertMsg.value = [i18n().accountPage.loginError]
         alertShow.value = true
       }
     })

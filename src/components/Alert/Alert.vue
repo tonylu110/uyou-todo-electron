@@ -3,7 +3,7 @@
     <div class="title">
       {{ title }}
     </div>
-    <div class="body" :style="{alignItems: title === '提示' ? 'center' : ''}">
+    <div class="body" :style="{alignItems: title === i18n().accountPage.alertTitle ? 'center' : ''}">
       <span v-for="(item, index) in body" :key="index">{{ item }}</span>
     </div>
     <div class="buttons">
@@ -71,7 +71,7 @@ const emits = defineEmits<{
 
     span {
       display: block;
-      white-space: pre;
+      white-space: pre-wrap;
     }
   }
 

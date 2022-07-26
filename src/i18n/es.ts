@@ -15,7 +15,13 @@ const accountPage = {
   login: 'Iniciar sesión',
   register: 'Registro',
   autoSync: 'Sincronización automática',
-  logout: 'Cerrar sesión'
+  logout: 'Cerrar sesión',
+  alertNoAnP: 'Por favor ingrese cuenta y contraseña',
+  syncData: 'Datos sincrónicos',
+  syncSuccess: 'Sincronización exitosa',
+  syncFail: 'Sincronización fallida',
+  loginError: 'error de inicio de sesion',
+  alertTitle: 'Insinuación'
 }
 
 const alertText = {

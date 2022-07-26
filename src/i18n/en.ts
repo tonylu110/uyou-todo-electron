@@ -15,7 +15,13 @@ const accountPage = {
     login: 'Log in',
     register: 'Register',
     autoSync: 'Automatic sync',
-    logout: 'Log out'
+    logout: 'Log out',
+    alertNoAnP: 'Please enter account and password',
+    syncData: 'Synchronous Data',
+    syncSuccess: 'Sync succeeded',
+    syncFail: 'Sync failed',
+    loginError: 'Login failed',
+    alertTitle: 'Hint'
 }
 
 const alertText = {
