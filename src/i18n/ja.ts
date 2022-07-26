@@ -9,6 +9,14 @@ const setLangText = '自動'
 const updateText = 'アップデート'
 const loginText = 'ログインしていない'
 const myAccount = 'マイアカウント'
+const accountPage = {
+    account: 'アカウント',
+    passwd: 'パスワード',
+    login: 'ログイン',
+    register: '登録',
+    autoSync: '自動同期',
+    logout: 'ログアウト'
+}
 
 const alertText = {
     cancelText: 'キャンセル',
@@ -49,5 +57,6 @@ export default {
     updateText,
     alertText,
     loginText,
-    myAccount
+    myAccount,
+    accountPage
 }

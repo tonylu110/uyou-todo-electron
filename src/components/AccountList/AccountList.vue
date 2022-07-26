@@ -4,21 +4,21 @@
       <span>{{ loginText }}</span>
     </div>
     <div v-if="!loginState" class="login-input">
-      <input type="text" placeholder="账号" v-model="uname">
-      <input type="password" placeholder="密码" v-model="passwd">
+      <input type="text" :placeholder="i18n().accountPage.account" v-model="uname">
+      <input type="password" :placeholder="i18n().accountPage.passwd" v-model="passwd">
     </div>
     <div v-if="!loginState" class="item login" @click="login">
-      <span>登录</span>
+      <span>{{ i18n().accountPage.login }}</span>
     </div>
     <div v-if="!loginState" class="item register" @click="openRegister">
-      <span>注册</span>
+      <span>{{ i18n().accountPage.register }}</span>
     </div>
     <div v-if="loginState" class="item" style="background-color: white; color: black;">
-      <span>自动同步</span>
+      <span>{{ i18n().accountPage.autoSync }}</span>
       <Switch :swichState="swichState" @switch="setAutoSync" />
     </div>
     <div v-if="loginState" class="item logout" @click="logout">
-      <span>退出登录</span>
+      <span>{{ i18n().accountPage.logout }}</span>
     </div>
     <Alert
       title="提示"

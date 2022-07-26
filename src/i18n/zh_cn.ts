@@ -9,6 +9,14 @@ const setLangText = '跟随系统'
 const updateText = '更新'
 const loginText = '未登录'
 const myAccount = '我的账号'
+const accountPage = {
+    account: '账号',
+    passwd: '密码',
+    login: '登录',
+    register: '注册',
+    autoSync: '自动同步',
+    logout: '退出登录'
+}
 
 const alertText = {
     cancelText: '取消',
@@ -49,5 +57,6 @@ export default {
     updateText,
     alertText,
     loginText,
-    myAccount
+    myAccount,
+    accountPage
 }

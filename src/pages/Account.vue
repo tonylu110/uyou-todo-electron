@@ -1,6 +1,6 @@
 <template>
   <TabBar 
-    title="账号"
+    :title="i18n().accountPage.account"
     :rightImgShow="false"
     leftImg="./images/back.png"
     @leftClick="() => router.push('/setting')"
@@ -12,7 +12,7 @@
 import router from '../router';
 import TabBar from '../components/TabBar/TabBar.vue';
 import AccountList from '../components/AccountList/AccountList.vue';
-
+import i18n from '../i18n';
 </script>
 
 <style scoped>

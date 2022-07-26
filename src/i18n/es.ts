@@ -9,6 +9,14 @@ const setLangText = 'Automático'
 const updateText = 'Actualizar'
 const loginText = 'Sin iniciar sesión'
 const myAccount = 'Mi cuenta'
+const accountPage = {
+  account: 'Cuenta',
+  passwd: 'Clave',
+  login: 'Iniciar sesión',
+  register: 'Registro',
+  autoSync: 'Sincronización automática',
+  logout: 'Cerrar sesión'
+}
 
 const alertText = {
     cancelText: 'Cancelar',
@@ -49,5 +57,6 @@ export default {
   updateText,
   alertText,
   loginText,
-  myAccount
+  myAccount,
+  accountPage
 }
