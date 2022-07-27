@@ -8,10 +8,10 @@
       {{ text }}
     </span>
     <div class="close-button" @click="deleteItem">
-      <img src="/images/close.png" alt="" />
+      <span class="material-icons">close</span>
     </div>
     <div class="ok-button" @click="setOk">
-      <img src="/images/ok.png" alt="" />
+      <span class="material-icons">check</span>
     </div>
     <Toast
       v-if="showToast"

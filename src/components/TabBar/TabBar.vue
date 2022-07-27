@@ -1,9 +1,15 @@
 <template>
   <div class="title-bar">
-    <img v-if="leftImgShow" class="left-img" :src="leftImg" alt="" @click="() => emits('leftClick')">
+    <div v-if="leftImgShow" class="left-img" @click="() => emits('leftClick')">
+      <span class="material-icons">{{ leftImg }}</span>
+    </div>
     <span>{{ title }}</span>
-    <img v-if="rightImgShow" class="right-img" src="/images/plus.png" alt="" @click="() => emits('rightClick')" />
-    <img v-if="syncImgShow && rightImgShow" class="sync-img" src="/images/sync.png" alt="" @click="sync" />
+    <div v-if="rightImgShow" class="right-img" @click="() => emits('rightClick')">
+      <span class="material-icons">add_circle_outline</span>
+    </div>
+    <div v-if="syncImgShow && rightImgShow" class="sync-img" @click="sync">
+      <span class="material-icons">cloud_sync</span>
+    </div>
   </div>
 </template>
 
@@ -24,7 +30,7 @@ defineProps({
     type: Boolean
   },
   leftImg: {
-    default: './images/setting.png',
+    default: 'arrow_back',
     tyoe: String
   }
 })
@@ -82,22 +88,21 @@ const sync = () => {
     font-weight: bold;
   }
 
-  img {
+  div {
     position: absolute;
     border-radius: 5px;
-    width: 30px;
-    height: 30px;
+    width: 22px;
+    height: 22px;
+    padding: 4px;
     cursor: pointer;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    &.left-img {
-      left: 10px;
-      width: 22px;
-      height: 22px;
-      padding: 4px;
-    }
-
-    &.right-img {
-      right: 10px;
+    & span {
+      display: block;
+      font-size: 22px;
     }
 
     &:hover {
@@ -108,10 +113,15 @@ const sync = () => {
       background-color: #00000020;
     }
 
+    &.left-img {
+      left: 10px;
+    }
+
+    &.right-img {
+      right: 10px;
+    }
+
     &.sync-img {
-      width: 22px;
-      height: 22px;
-      padding: 4px;
       right: 47px;
     }
   }

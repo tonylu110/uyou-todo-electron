@@ -2,7 +2,6 @@
   <TabBar 
     :title="i18n().accountPage.account"
     :rightImgShow="false"
-    leftImg="./images/back.png"
     @leftClick="() => router.push('/setting')"
   />
   <AccountList />

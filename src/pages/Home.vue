@@ -2,6 +2,7 @@
   <TabBar
     @rightClick="() => showAddItem = true" 
     @leftClick="() => router.push('/setting')"
+    leftImg="settings"
   />
   <List
     :showAddItem="showAddItem" 

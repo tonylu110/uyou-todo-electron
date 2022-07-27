@@ -7,7 +7,7 @@ import Alert from './components/Alert/Alert.vue';
 const alertShow = ref(false)
 const alertMsg: Ref<string[]> = ref([])
 
-const version = 110
+const version = 111
 
 fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
   return res.json()

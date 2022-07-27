@@ -2,7 +2,6 @@
   <TabBar 
     :title="i18n().settingTitleText"
     :rightImgShow="false"
-    leftImg="./images/back.png"
     @leftClick="() => router.push('/')"
   />
   <SettingList />

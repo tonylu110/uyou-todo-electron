@@ -6,7 +6,7 @@
     </div>
     <div class="setting-item" @click="() => router.push('/account')">
       <span>{{ loginState ? i18n().myAccount : i18n().loginText }}</span>
-      <ArrowRightBold style="width: 1em; height: 1em;" />
+      <span class="material-icons">arrow_forward_ios</span>
     </div>
     <div class="setting-item lang-set" @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ArrowRightBold } from '@element-plus/icons-vue'
 import router from '../../router';
 import LangSet from './LangSet/LangSet.vue';
 import i18n from '../../i18n';

@@ -11,16 +11,16 @@
       <img src="/images/top.png" alt="">
     </div>
     <div v-if="isMac" class="close-button-mac" @click="closeWindow">
-      <img src="/images/close.png" alt="">
+      <span class="material-icons">close</span>
     </div>
     <div v-if="isMac" class="min-button-mac" @click="minWindow">
-      <img src="/images/min.png" alt="">
+      <span class="material-icons">horizontal_rule</span>
     </div>
     <div v-if="!isMac" class="min-button" @click="minWindow">
-      <img src="/images/min.png" alt="">
+      <span class="material-icons">close</span>
     </div>
     <div v-if="!isMac" class="close-button" @click="closeWindow">
-      <img src="/images/close.png" alt="">
+      <span class="material-icons">horizontal_rule</span>
     </div>
   </div>
 </template>
@@ -72,10 +72,17 @@ const onTopWindow = () => {
     border-radius: 5px;
     -webkit-app-region: no-drag;
     cursor: pointer;
+    color: white;
 
     img {
       width: 12px;
       height: 12px;
+    }
+
+    span {
+      display: block;
+      font-size: 16px;
+      font-weight: bold;
     }
 
     &.close-button {
