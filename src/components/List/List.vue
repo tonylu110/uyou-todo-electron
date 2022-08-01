@@ -84,7 +84,7 @@ const deleteItem = (id: number) => {
 <style scoped>
 .list {
   background-color: #edd9b7;
-  width: 100%;
+  width: calc(100vw - 300px);
   height: 100%;
   display: flex;
   flex-direction: column;

@@ -3,6 +3,8 @@
     @rightClick="() => showAddItem = true" 
     @leftClick="() => router.push('/setting')"
     leftImg="settings"
+    title=""
+    :leftImgShow="false"
   />
   <List
     :showAddItem="showAddItem" 

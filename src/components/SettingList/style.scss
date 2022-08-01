@@ -1,6 +1,6 @@
 .list {
   background-color: #eee;
-  width: 100%;
+  width: calc(100vw - 300px);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
   padding-top: 10px;
 
   .title-img {
-    width: calc(100vw - 80px);
+    width: calc(100vw - 480px);
     height: 100px;
     display: flex;
     flex-direction: column;
@@ -32,7 +32,7 @@
   }
 
   .setting-item {
-    width: calc(100vw - 50px);
+    width: calc(100vw - 450px);
     height: 30px;
     padding: 10px 15px;
     border-radius: 7px;
@@ -53,7 +53,7 @@
     &.lang-set {
       padding: 0px;
       height: 50px;
-      width: calc(100vw - 20px);
+      width: calc(100vw - 420px);
       display: flex;
       flex-direction: row;
       justify-content: center;

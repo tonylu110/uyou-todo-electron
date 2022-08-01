@@ -73,7 +73,7 @@ const sync = () => {
 .title-bar {
   position: relative;
   height: 55px;
-  width: 100%;
+  width: calc(100vw - 300px);
   background-color: #7a695c;
   display: flex;
   flex-direction: row;

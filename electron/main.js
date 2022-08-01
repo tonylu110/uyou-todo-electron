@@ -10,10 +10,10 @@ function createWindow() {
   const { height } = screen.getPrimaryDisplay().workAreaSize
 
   mainWindow = new BrowserWindow({
-    width: 320,
-    height: 640,
+    width: 1000,
+    height: 750,
     maxHeight: height - 100,
-    maxWidth: 600,
+    maxWidth: 1200,
     minHeight: 600,
     minWidth: 300,
     icon: path.join(__dirname, '../dist/logo.png'),

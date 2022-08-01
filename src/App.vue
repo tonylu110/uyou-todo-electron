@@ -3,6 +3,7 @@ import { ref, Ref } from 'vue';
 import i18n from './i18n';
 import TitleBar from './components/TitleBar/TitleBar.vue';
 import Alert from './components/Alert/Alert.vue';
+import ListMenu from './components/ListMenu/ListMenu.vue';
 
 const alertShow = ref(false)
 const alertMsg: Ref<string[]> = ref([])
@@ -47,7 +48,12 @@ if (autoSync) {
 <template>
   <div class="list-main">
     <TitleBar />
-    <router-view></router-view>
+    <div class="list-in">
+      <ListMenu />
+      <div class="todo-list">
+        <router-view></router-view>
+      </div>
+    </div>
     <Alert 
       v-if="alertShow" 
       :title="i18n().updateText"
@@ -59,7 +65,7 @@ if (autoSync) {
   </div>
 </template>
 
-<style>
+<style lang="scss">
 ::-webkit-scrollbar {
     display: none;
 }
@@ -77,6 +83,15 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+
+  .list-in {
+    display: flex;
+    flex-direction: row;
+    
+    .todo-list {
+      height: calc(100vh - 106px);
+    }
+  }
 }
 
 .black-back {

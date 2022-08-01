@@ -1,7 +1,7 @@
 <template>
   <div class="title-bar" :style="{justifyContent: isMac ? 'flex-start' : ''}">
     <div 
-      :class="topState ? 'on-top-button-sel' :'on-top-button'"
+      :class="topState ? 'on-top-button-sel button' :'on-top-button button'"
       :style="{
         left: isMac ? '' : '7.5px',
         right: isMac ? '0' : ''
@@ -10,18 +10,22 @@
     >
       <img src="/images/top.png" alt="">
     </div>
-    <div v-if="isMac" class="close-button-mac" @click="closeWindow">
+    <span class="title-text">
+      uyou ToDo
+    </span>
+    <div v-if="isMac" class="close-button-mac button" @click="closeWindow">
       <span class="material-icons">close</span>
     </div>
-    <div v-if="isMac" class="min-button-mac" @click="minWindow">
+    <div v-if="isMac" class="min-button-mac button" @click="minWindow">
       <span class="material-icons">horizontal_rule</span>
     </div>
-    <div v-if="!isMac" class="min-button" @click="minWindow">
+    <div v-if="!isMac" class="min-button button" @click="minWindow">
       <span class="material-icons">close</span>
     </div>
-    <div v-if="!isMac" class="close-button" @click="closeWindow">
+    <div v-if="!isMac" class="close-button button" @click="closeWindow">
       <span class="material-icons">horizontal_rule</span>
     </div>
+    <div class="list-menu-color"></div>
   </div>
 </template>
 
@@ -61,7 +65,15 @@ const onTopWindow = () => {
   justify-content: flex-end;
   z-index: 100;
 
-  div {
+  .title-text {
+    position: absolute;
+    color: white;
+    left: 50%;
+    font-weight: bold;
+    transform: translateX(-50%);
+  }
+
+  .button {
     margin-top: 2px;
     height: 20px;
     width: 50px;
@@ -73,6 +85,7 @@ const onTopWindow = () => {
     -webkit-app-region: no-drag;
     cursor: pointer;
     color: white;
+    z-index: 1;
 
     img {
       width: 12px;
@@ -102,6 +115,7 @@ const onTopWindow = () => {
 
     &.min-button {
       border: 0.5px solid #594b4270;
+      color: black;
 
       &:hover {
         background-color: #00000010;
@@ -132,6 +146,16 @@ const onTopWindow = () => {
       @extend .close-button;
       position: absolute;
     }
+  }
+
+  .list-menu-color {
+    height: 39px;
+    width: 300px;
+    background-color: #edd9b7;
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-bottom: 1px solid #594b4250;
   }
 }
 </style>
