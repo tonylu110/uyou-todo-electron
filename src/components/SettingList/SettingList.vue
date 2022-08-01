@@ -2,7 +2,7 @@
   <div class="list">
     <div class="title-img">
       <img src="/images/logo.png" alt="" />
-      <span>uyou ToDo v1.1.0</span>
+      <span>uyou ToDo v1.1.1</span>
     </div>
     <div class="setting-item" @click="() => router.push('/account')">
       <span>{{ loginState ? i18n().myAccount : i18n().loginText }}</span>

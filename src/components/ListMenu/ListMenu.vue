@@ -1,6 +1,13 @@
 <template>
   <div class="list-menu">
     <div class="list">
+      <span class="title">{{ i18n().accountPage.account }}</span>
+      <div class="all-todo-list" @click="router.push('/account')">
+        <div>
+          <span class="material-icons">account_circle</span>
+          <span style="font-size: 14px; margin-left: 10px;">{{ i18n().myAccount }}</span>
+        </div>
+      </div>
       <span class="title">分类</span>
       <div class="all-todo-list" @click="router.push('/')">
         <div>
@@ -34,6 +41,7 @@ import router from '../../router';
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 10;
 
   .list {
     .title {

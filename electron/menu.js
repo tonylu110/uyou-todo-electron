@@ -46,7 +46,7 @@ module.exports = function (app, mainWindow, height) {
         {
           label: i18n(app).smallestText,
           click() {
-            mainWindow.setSize(800, 700)
+            mainWindow.setSize(800, 600)
           },
           accelerator: 'CmdOrCtrl+Shift+S',
         },

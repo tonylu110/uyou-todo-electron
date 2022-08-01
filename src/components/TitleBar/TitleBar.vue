@@ -8,7 +8,7 @@
       }"  
       @click="onTopWindow"
     >
-      <img src="/images/top.png" alt="">
+      <img :src="isMac ? './images/top.png' : (topState ? './images/top.png' : './images/top-black.png')" alt="">
     </div>
     <span class="title-text">
       uyou ToDo
@@ -104,22 +104,25 @@ const onTopWindow = () => {
 
     span {
       display: block;
-      font-size: 16px;
+      font-size: 12px;
       font-weight: bold;
+      margin-left: 1px;
     }
 
     &.close-button {
       background-color: #e5544b;
-      width: 52px;
-      height: 21px;
-      margin-top: 1px;
+      width: 50px;
+      height: 20px;
+      border: 1px solid #e5544b;
 
       &:hover {
         background-color: #c95047;
+        border: 1px solid #c95047;
       }
 
       &:active {
         background-color: #99362f;
+        border: 1px solid #99362f;
       }
     }
 
@@ -139,7 +142,7 @@ const onTopWindow = () => {
     &.close-button-mac {
       @extend .close-button;
       margin-left: 7.5px;
-      width: 21px;
+      width: 20px;
     }
 
     &.min-button-mac {

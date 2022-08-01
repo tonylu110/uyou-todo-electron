@@ -12,7 +12,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 750,
-    minHeight: 700,
+    minHeight: 600,
     minWidth: 800,
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: false,

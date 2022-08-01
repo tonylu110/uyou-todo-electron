@@ -1,7 +1,7 @@
 {
   "name": "uyoutodo",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "electron/main.js",
   "author": "Anthony Lu <luxiaoyu1848367623@gmail.com>",
   "scripts": {
