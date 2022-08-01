@@ -28,7 +28,7 @@ import router from '../../router';
 <style scoped lang="scss">
 .list-menu {
   width: 300px;
-  background-color: #edd9b7;
+  background-color: #fff6dc;
   height: calc(100vh - 40px);
   border-right: 1px solid #00000010;
   display: flex;

@@ -3,7 +3,7 @@ const aboutText = 'About uyou ToDo'
 const gotoWebText = 'Go to the official website'
 const quitText = 'Quit uyou ToDo'
 const minimizeText = 'Minimize'
-const biggestText = 'Biggest Window'
+const biggestText = 'Maximize'
 const smallestText = 'Smallest Window'
 const resetWindowText = 'Restore default window size'
 

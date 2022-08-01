@@ -39,14 +39,14 @@ module.exports = function (app, mainWindow, height) {
         {
           label: i18n(app).biggestText,
           click() {
-            mainWindow.setSize(600, height - 100)
+            mainWindow.maximize()
           },
           accelerator: 'CmdOrCtrl+Shift+M',
         },
         {
           label: i18n(app).smallestText,
           click() {
-            mainWindow.setSize(300, 600)
+            mainWindow.setSize(800, 700)
           },
           accelerator: 'CmdOrCtrl+Shift+S',
         },
@@ -56,7 +56,7 @@ module.exports = function (app, mainWindow, height) {
         {
           label: i18n(app).resetWindowText,
           click() {
-            mainWindow.setSize(320, 640)
+            mainWindow.setSize(1000, 750)
           },
           accelerator: 'CmdOrCtrl+R'
         }

@@ -19,11 +19,17 @@
     <div v-if="isMac" class="min-button-mac button" @click="minWindow">
       <span class="material-icons">horizontal_rule</span>
     </div>
+    <div v-if="isMac" class="min-button-mac button" @click="maxWindow">
+      <span class="material-icons">check_box_outline_blank</span>
+    </div>
     <div v-if="!isMac" class="min-button button" @click="minWindow">
-      <span class="material-icons">close</span>
+      <span class="material-icons" style="color: white;">horizontal_rule</span>
+    </div>
+    <div v-if="!isMac" class="min-button button" @click="maxWindow">
+      <span class="material-icons" style="color: white;">check_box_outline_blank</span>
     </div>
     <div v-if="!isMac" class="close-button button" @click="closeWindow">
-      <span class="material-icons">horizontal_rule</span>
+      <span class="material-icons">close</span>
     </div>
     <div class="list-menu-color"></div>
   </div>
@@ -42,6 +48,10 @@ const closeWindow = () => {
 
 const minWindow = () => {
   ipcRenderer.send("window-min")
+}
+
+const maxWindow = () => {
+  ipcRenderer.send("window-max")
 }
 
 const topState = ref(firstLoad())
@@ -115,7 +125,7 @@ const onTopWindow = () => {
 
     &.min-button {
       border: 0.5px solid #594b4270;
-      color: black;
+      color: #00000090;
 
       &:hover {
         background-color: #00000010;
@@ -151,7 +161,7 @@ const onTopWindow = () => {
   .list-menu-color {
     height: 39px;
     width: 300px;
-    background-color: #edd9b7;
+    background-color: #fff6dc;
     position: fixed;
     left: 0;
     top: 0;
