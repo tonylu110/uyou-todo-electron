@@ -51,6 +51,11 @@
     display: block;
     margin-top: 10px;
     color: #6e492f;
+    user-select: text;
+
+    &::selection {
+      background-color: #dcc6a9;
+    }
   }
 
   .close-button {

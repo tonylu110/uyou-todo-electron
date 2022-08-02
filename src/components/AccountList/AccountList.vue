@@ -170,5 +170,5 @@ const closeAlert = () => {
 </script>
 
 <style scoped lang="scss">
-@import './styel.scss';
+@import './style.scss';
 </style>

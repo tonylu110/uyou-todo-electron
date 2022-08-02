@@ -19,7 +19,7 @@
     <div v-if="isMac" class="min-button-mac button" @click="minWindow">
       <span class="material-icons">horizontal_rule</span>
     </div>
-    <div v-if="isMac" class="min-button-mac button" @click="maxWindow">
+    <div v-if="isMac" class="min-button-mac button max" @click="maxWindow">
       <span class="material-icons">check_box_outline_blank</span>
     </div>
     <div v-if="!isMac" class="min-button button" @click="minWindow">
@@ -63,112 +63,5 @@ const onTopWindow = () => {
 </script>
 
 <style lang="scss" scoped>
-.title-bar {
-  -webkit-app-region: drag;
-  background-color: #7a695c;
-  width: 100%;
-  height: 40px;
-  border-bottom: 1px solid #594b4270;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  z-index: 100;
-
-  .title-text {
-    position: absolute;
-    color: white;
-    left: 50%;
-    font-weight: bold;
-    transform: translateX(-50%);
-  }
-
-  .button {
-    margin-top: 2px;
-    height: 20px;
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 7.5px;
-    border-radius: 5px;
-    -webkit-app-region: no-drag;
-    cursor: pointer;
-    color: white;
-    z-index: 1;
-
-    img {
-      width: 12px;
-      height: 12px;
-    }
-
-    span {
-      display: block;
-      font-size: 12px;
-      font-weight: bold;
-      margin-left: 1px;
-    }
-
-    &.close-button {
-      background-color: #e5544b;
-      width: 50px;
-      height: 20px;
-      border: 1px solid #e5544b;
-
-      &:hover {
-        background-color: #c95047;
-        border: 1px solid #c95047;
-      }
-
-      &:active {
-        background-color: #99362f;
-        border: 1px solid #99362f;
-      }
-    }
-
-    &.min-button {
-      border: 0.5px solid #594b4270;
-      color: #00000090;
-
-      &:hover {
-        background-color: #00000010;
-      }
-
-      &:active {
-        background-color: #00000030;
-      }
-    }
-
-    &.close-button-mac {
-      @extend .close-button;
-      margin-left: 7.5px;
-      width: 20px;
-    }
-
-    &.min-button-mac {
-      @extend .min-button;
-      width: 20px;
-    }
-
-    &.on-top-button {
-      @extend .min-button;
-      position: absolute;
-    }
-
-    &.on-top-button-sel {
-      @extend .close-button;
-      position: absolute;
-    }
-  }
-
-  .list-menu-color {
-    height: 39px;
-    width: 300px;
-    background-color: #fff6dc;
-    position: fixed;
-    left: 0;
-    top: 0;
-    border-bottom: 1px solid #594b4250;
-  }
-}
+@import './style.scss';
 </style>
