@@ -14,6 +14,8 @@ function createWindow() {
     height: 750,
     minHeight: 600,
     minWidth: 800,
+    vibrancy: 'light',
+    visualEffectState: "active",
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: false,
     webPreferences: {

@@ -1,7 +1,8 @@
 .title-bar {
   -webkit-app-region: drag;
   background-color: #7a695c;
-  width: 100%;
+  width: calc(100vw - 300px);
+  margin-left: 300px;
   height: 40px;
   border-bottom: 1px solid #594b4270;
   display: flex;
@@ -78,11 +79,19 @@
       @extend .close-button;
       margin-left: 7.5px;
       width: 20px;
+      left: 0;
+      position: absolute
     }
 
     &.min-button-mac {
       @extend .min-button;
       width: 20px;
+      position: absolute;
+      left: 37.5px;
+      
+      &.max {
+        left: 67.5px
+      }
     }
 
     &.on-top-button {
@@ -99,7 +108,8 @@
   .list-menu-color {
     height: 40px;
     width: 300px;
-    background-color: #fff6dc;
+    background-color: #fff6dcaa;
+    overflow: visible;
     position: fixed;
     left: 0;
     top: 0;
