@@ -1,6 +1,6 @@
 <template>
   <TabBar 
-    :title="i18n().settingTitleText"
+    title=""
     :rightImgShow="false"
     :leftImgShow="false"
   />
@@ -9,7 +9,5 @@
 
 <script setup lang="ts">
 import TabBar from '../components/TabBar/TabBar.vue';
-import router from '../router'
 import SettingList from '../components/SettingList/SettingList.vue';
-import i18n from '../i18n';
 </script>

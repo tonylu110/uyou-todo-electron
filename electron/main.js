@@ -7,8 +7,6 @@ const NODE_ENV = process.env.NODE_ENV
 let mainWindow
 
 function createWindow() {
-  const { height } = screen.getPrimaryDisplay().workAreaSize
-
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 750,

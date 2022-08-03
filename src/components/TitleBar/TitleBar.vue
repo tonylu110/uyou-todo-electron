@@ -11,7 +11,7 @@
       <img :src="isMac ? './images/top.png' : (topState ? './images/top.png' : './images/top-black.png')" alt="">
     </div>
     <span class="title-text">
-      uyou ToDo
+      {{ title }}
     </span>
     <div v-if="isMac" class="close-button-mac button" @click="closeWindow">
       <span class="material-icons">close</span>
@@ -36,8 +36,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
+import { useRoute } from 'vue-router';
 import firstLoad from './firstLoad';
+import i18n from '../../i18n';
 
 const isMac = navigator.userAgent.indexOf('Mac')>=0
 
@@ -60,6 +62,22 @@ const onTopWindow = () => {
   ipcRenderer.send('window-on-top', topState.value)
   localStorage.setItem('alwaysOnTop', topState.value + '')
 }
+
+const title = ref('')
+const route = useRoute()
+watchEffect(() => {
+  switch (route.name) {
+    case 'account':
+      title.value = i18n().accountPage.account
+      break;
+    case 'setting':
+      title.value = i18n().settingTitleText
+      break;
+    default:
+      title.value = 'uyou ToDo'
+      break;
+  }
+})
 </script>
 
 <style lang="scss" scoped>
