@@ -4,14 +4,14 @@
       <img src="/images/logo.png" alt="" />
       <span>uyou ToDo v1.1.1</span>
     </div>
-    <div class="setting-item" @click="() => router.push('/account')">
+    <!-- <div class="setting-item" @click="() => router.push('/account')">
       <span>{{ loginState ? i18n().myAccount : i18n().loginText }}</span>
       <span class="material-icons">arrow_forward_ios</span>
     </div>
     <div v-if="loginState" class="setting-item" style="background-color: white; color: black;">
       <span>标题栏样式</span>
       <Switch />
-    </div>
+    </div> -->
     <div class="setting-item lang-set" @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </div>

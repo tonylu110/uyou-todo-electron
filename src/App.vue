@@ -52,16 +52,16 @@ if (autoSync) {
       <ListMenu />
       <div class="todo-list">
         <router-view></router-view>
+        <Alert 
+          v-if="alertShow" 
+          :title="i18n().updateText"
+          :body="alertMsg"
+          @cancel="alertShow = false"
+          @return="returnClick"
+        />
+        <div class="black-back" v-if="alertShow" @click="alertShow = false"></div>
       </div>
     </div>
-    <Alert 
-      v-if="alertShow" 
-      :title="i18n().updateText"
-      :body="alertMsg"
-      @cancel="alertShow = false"
-      @return="returnClick"
-    />
-    <div class="black-back" v-if="alertShow" @click="alertShow = false"></div>
   </div>
 </template>
 
@@ -96,8 +96,9 @@ body {
 
 .black-back {
   background-color: #00000030;
+  backdrop-filter: blur(10px);
   height: calc(100% - 50px);
-  width: 100%;
+  width: calc(100vw - 300px);
   position: absolute;
   top: 50%;
   transform: translate(0%, -50%);

@@ -3,6 +3,7 @@
     :title="i18n().accountPage.account"
     :rightImgShow="false"
     @leftClick="() => router.push('/setting')"
+    :leftImgShow="false"
   />
   <AccountList />
 </template>
