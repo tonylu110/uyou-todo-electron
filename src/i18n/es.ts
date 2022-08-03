@@ -29,6 +29,11 @@ const alertText = {
     returnText: 'Confirmar'
 }
 
+const listMenu = {
+  cate: 'Categorías',
+  allTodo: 'Todas las tareas pendientes'
+}
+
 const firstLoadData: ITodoList[] = [
   {
     text: 'Bienvenido a utilizar uyou ToDo',
@@ -64,5 +69,6 @@ export default {
   alertText,
   loginText,
   myAccount,
-  accountPage
+  accountPage,
+  listMenu
 }

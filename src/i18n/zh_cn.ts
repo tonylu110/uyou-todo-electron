@@ -24,6 +24,11 @@ const accountPage = {
     alertTitle: '提示'
 }
 
+const listMenu = {
+    cate: '分类',
+    allTodo: '所有 ToDo'
+}
+
 const alertText = {
     cancelText: '取消',
     returnText: '确定'
@@ -64,5 +69,6 @@ export default {
     alertText,
     loginText,
     myAccount,
-    accountPage
+    accountPage,
+    listMenu
 }

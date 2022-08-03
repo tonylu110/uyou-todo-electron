@@ -29,6 +29,11 @@ const alertText = {
     returnText: 'Confirm'
 }
 
+const listMenu = {
+    cate: 'Categories',
+    allTodo: 'All ToDos'
+}
+
 const firstLoadData: ITodoList[] = [
     {
         text: 'Welcome to use uyou ToDo',
@@ -64,5 +69,6 @@ export default {
     alertText,
     loginText,
     myAccount,
-    accountPage
+    accountPage,
+    listMenu
 }

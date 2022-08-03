@@ -29,6 +29,11 @@ const alertText = {
     returnText: '確認'
 }
 
+const listMenu = {
+    cate: '分類',
+    allTodo: '所有 ToDo'
+}
+
 const firstLoadData: ITodoList[] = [
     {
         text: '歡迎使用 uyou ToDo',
@@ -64,5 +69,6 @@ export default {
     alertText,
     loginText,
     myAccount,
-    accountPage
+    accountPage,
+    listMenu
 }

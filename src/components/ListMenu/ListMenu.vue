@@ -8,11 +8,11 @@
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().myAccount }}</span>
         </div>
       </div>
-      <span class="title">分类</span>
+      <span class="title">{{ i18n().listMenu.cate }}</span>
       <div class="all-todo-list" @click="router.push('/')">
         <div>
           <span class="material-icons">list_alt</span>
-          <span style="font-size: 14px; margin-left: 10px;">所有 ToDo</span>
+          <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.allTodo }}</span>
         </div>
       </div>
     </div>

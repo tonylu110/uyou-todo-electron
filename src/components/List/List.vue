@@ -36,8 +36,20 @@ const list = ref(LocalStorage('get'))
 
 onMounted(() => {
   const uid = localStorage.getItem('uid')
-  if (uid !== '' && uid !== null) {
-    document.addEventListener("storage", () => {
+  const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
+  if ((uid !== '' && uid !== null) && autoSync) {
+    fetch('https://api.todo.uyou.org.cn/gettodo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        uid: uid
+      })
+    }).then(res => {
+      return res.json()
+    }).then(res => {
+      localStorage.setItem('ToDo', res.data)
       list.value = LocalStorage('get')
     })
   }
