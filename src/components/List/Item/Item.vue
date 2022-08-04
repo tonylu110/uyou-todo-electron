@@ -1,22 +1,30 @@
 <template>
-  <div class="list-item">
-    <div class="time-area">
-      <span>{{ getTime(time!) }}</span>
-      <div @click="copyText">{{ i18n().copyText }}</div>
-    </div>
-    <span class="item-text" :style="okStyle">
-      {{ text }}
-    </span>
-    <div class="close-button" @click="deleteItem">
-      <span class="material-icons">close</span>
-    </div>
-    <div class="ok-button" @click="setOk">
+  <div>
+    <div class="button" @click="setOk">
       <span class="material-icons">check</span>
     </div>
-    <Toast
-      v-if="showToast"
-      :msg="i18n().copyToast"
-    />
+    <div class="delete" @click="deleteItem">
+      <span class="material-icons">close</span>
+    </div>
+    <div class="list-item">
+      <div class="time-area">
+        <span>{{ getTime(time!) }}</span>
+        <div @click="copyText">{{ i18n().copyText }}</div>
+      </div>
+      <span class="item-text" :style="okStyle">
+        {{ text }}
+      </span>
+      <!-- <div class="close-button" @click="deleteItem">
+        <span class="material-icons">close</span>
+      </div>
+      <div class="ok-button" @click="setOk">
+        <span class="material-icons">check</span>
+      </div> -->
+      <Toast
+        v-if="showToast"
+        :msg="i18n().copyToast"
+      />
+    </div>
   </div>
 </template>
 

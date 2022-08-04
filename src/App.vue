@@ -8,7 +8,7 @@ import ListMenu from './components/ListMenu/ListMenu.vue';
 const alertShow = ref(false)
 const alertMsg: Ref<string[]> = ref([])
 
-const version = 111
+const version = 112
 
 fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
   return res.json()

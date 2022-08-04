@@ -13,7 +13,7 @@
     <span class="title-text">
       {{ title }}
     </span>
-    <div v-if="isMac" class="close-button-mac button" @click="closeWindow">
+    <!-- <div v-if="isMac" class="close-button-mac button" @click="closeWindow">
       <span class="material-icons">close</span>
     </div>
     <div v-if="isMac" class="min-button-mac button" @click="minWindow">
@@ -21,7 +21,7 @@
     </div>
     <div v-if="isMac" class="min-button-mac button max" @click="maxWindow">
       <span class="material-icons">check_box_outline_blank</span>
-    </div>
+    </div> -->
     <div v-if="!isMac" class="min-button button" @click="minWindow">
       <span class="material-icons" style="color: white;">horizontal_rule</span>
     </div>

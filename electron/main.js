@@ -12,10 +12,11 @@ function createWindow() {
     height: 750,
     minHeight: 600,
     minWidth: 800,
-    vibrancy: 'light',
-    visualEffectState: "active",
+    vibrancy: 'menu',
+    visualEffectState: 'active',
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: false,
+    titleBarStyle: 'hiddenInset',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       enableRemoteModule: true,
@@ -30,7 +31,7 @@ function createWindow() {
       : `file://${path.join(__dirname, `../dist/index.html`)}`
   )
 
-  mainWindow.setMaximizable(false)
+  // mainWindow.setMaximizable(false)
 
   if (NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools({ mode: 'detach' })
