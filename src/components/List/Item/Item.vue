@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="item">
     <div class="button" @click="setOk">
       <span class="material-icons">check</span>
     </div>

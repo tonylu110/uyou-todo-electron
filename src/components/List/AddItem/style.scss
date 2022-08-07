@@ -58,8 +58,8 @@
     margin-top: 10px;
     color: #6e492f;
     border: 0;
-    max-width: 260px;
-    min-width: 260px;
+    max-width: calc(100vw - 340px);
+    min-width: calc(100vw - 340px);
     outline: none;
     background-color: transparent;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

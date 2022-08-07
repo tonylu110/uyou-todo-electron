@@ -41,12 +41,12 @@ const firstLoadData: ITodoList[] = [
         ok: false
     },
     {
-        text: '将鼠标移至左上角，完成 ToDo',
+        text: '将鼠标移至 ToDo 项的左边，完成 ToDo',
         id: new Date().getTime() + 1,
         ok: false
     },
     {
-        text: '将鼠标移至右上角，删除 ToDo',
+        text: '将鼠标移至 ToDo 项的右边，删除 ToDo',
         id: new Date().getTime() + 3,
         ok: false
     },
