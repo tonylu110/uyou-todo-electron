@@ -25,6 +25,11 @@ function createWindow() {
     }
   })
 
+  if (process.platform === 'win32') {
+    const { setVibrancy } = require('electron-acrylic-window')
+    setVibrancy(mainWindow, 'light')
+  }
+
   mainWindow.loadURL(
     NODE_ENV === "development"
       ? 'http://localhost:3000'

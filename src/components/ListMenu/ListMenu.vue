@@ -1,5 +1,5 @@
 <template>
-  <div class="list-menu">
+  <div class="list-menu" :style="{backgroundColor: listMenuColor}">
     <div class="list">
       <span class="title">{{ i18n().accountPage.account }}</span>
       <div class="all-todo-list" :style="{backgroundColor: routeName === 'account' ? '#00000010' : ''}" @click="router.push('/account')">
@@ -39,6 +39,12 @@ watchEffect(() => {
   routeName.value = route.name as unknown as string
   console.log(routeName.value);
 })
+
+const isWindows = navigator.userAgent.indexOf('Win')>=0
+const listMenuColor = ref('')
+if (isWindows) {
+  listMenuColor.value = '#fff6dc77'
+}
 </script>
 
 <style scoped lang="scss">

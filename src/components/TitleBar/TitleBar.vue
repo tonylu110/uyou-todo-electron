@@ -31,7 +31,8 @@
     <div v-if="!isMac" class="close-button button" @click="closeWindow">
       <span class="material-icons">close</span>
     </div>
-    <div class="list-menu-color"></div>
+    <div class="list-menu-color" :style="{backgroundColor: listMenuColor}"></div>
+    <div class="list-menu-drag"></div>
   </div>
 </template>
 
@@ -78,6 +79,12 @@ watchEffect(() => {
       break;
   }
 })
+
+const isWindows = navigator.userAgent.indexOf('Win')>=0
+const listMenuColor = ref('')
+if (isWindows) {
+  listMenuColor.value = '#fff6dc77'
+}
 </script>
 
 <style lang="scss" scoped>
