@@ -111,14 +111,14 @@
   }
   
   .button {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-color: #00b600;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    // margin-left: 10px;
-    border-radius: 5px;
+    margin-left: 10px;
+    border-radius: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
