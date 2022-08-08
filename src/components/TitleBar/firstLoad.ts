@@ -6,8 +6,12 @@ const firstLoad = () => {
     alwaysOnTop = false
   }
   const ipcRenderer = require('electron').ipcRenderer
-  ipcRenderer.send('window-on-top', alwaysOnTop)
-  return alwaysOnTop
+  if (localStorage.getItem('saveTopState') !== 'false') {
+    ipcRenderer.send('window-on-top', alwaysOnTop)
+    return alwaysOnTop
+  } else {
+    return false
+  }
 }
 
 export default firstLoad

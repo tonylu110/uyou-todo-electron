@@ -2,14 +2,14 @@
   <div class="list-menu">
     <div class="list">
       <span class="title">{{ i18n().accountPage.account }}</span>
-      <div class="all-todo-list" @click="router.push('/account')">
+      <div class="all-todo-list" :style="{backgroundColor: routeName === 'account' ? '#00000010' : ''}" @click="router.push('/account')">
         <div>
           <span class="material-icons">account_circle</span>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().myAccount }}</span>
         </div>
       </div>
       <span class="title">{{ i18n().listMenu.cate }}</span>
-      <div class="all-todo-list" @click="router.push('/')">
+      <div class="all-todo-list" :style="{backgroundColor: routeName === 'Home' ? '#00000010' : ''}" @click="router.push('/')">
         <div>
           <span class="material-icons">list_alt</span>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.allTodo }}</span>
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="list">
-      <div class="setting-list" @click="router.push('/setting')">
+      <div class="setting-list" :style="{backgroundColor: routeName === 'setting' ? '#00000010' : ''}" @click="router.push('/setting')">
         <div>
           <span class="material-icons">settings</span>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().settingTitleText }}</span>
@@ -30,6 +30,15 @@
 <script setup lang="ts">
 import i18n from '../../i18n';
 import router from '../../router';
+import { ref, watchEffect } from 'vue';
+import { useRoute } from 'vue-router';
+
+const routeName = ref('')
+const route = useRoute()
+watchEffect(() => {
+  routeName.value = route.name as unknown as string
+  console.log(routeName.value);
+})
 </script>
 
 <style scoped lang="scss">

@@ -40,7 +40,9 @@
   }
 
   .item {
+    position: relative;
     width: calc(100vw - 450px);
+    max-width: 550px;
     height: 30px;
     padding: 10px 15px;
     border-radius: 7px;

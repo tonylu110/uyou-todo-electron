@@ -29,7 +29,7 @@ const clickSwitch = () => {
   background-color: white;
   box-shadow: inset 1px 1px 5px #00000030;
   position: absolute;
-  right: 70px;
+  right: 10px;
   width: 3.45em;
   border-radius: 1em;
   display: flex;

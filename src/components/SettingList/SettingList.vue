@@ -7,11 +7,14 @@
     <!-- <div class="setting-item" @click="() => router.push('/account')">
       <span>{{ loginState ? i18n().myAccount : i18n().loginText }}</span>
       <span class="material-icons">arrow_forward_ios</span>
-    </div>
-    <div v-if="loginState" class="setting-item" style="background-color: white; color: black;">
-      <span>标题栏样式</span>
-      <Switch />
     </div> -->
+    <div v-if="loginState" class="setting-item" style="background-color: white; color: black;">
+      <span>保存置顶状态</span>
+      <Switch 
+        :swichState="saveTopState"
+        @switch="setTopState"
+      />
+    </div>
     <div class="setting-item lang-set" @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </div>
@@ -22,14 +25,18 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import router from '../../router';
 import LangSet from './LangSet/LangSet.vue';
-import i18n from '../../i18n';
 import Switch from '../Switch/Switch.vue';
 
 const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
 
 const langMenuShow = ref(false)
+
+const saveTopState = ref(localStorage.getItem('saveTopState') === 'true' || localStorage.getItem('saveTopState') === null)
+const setTopState = () => {
+  saveTopState.value = !saveTopState.value
+  localStorage.setItem('saveTopState', saveTopState.value + '')
+}
 </script>
 
 <style scoped lang="scss">
