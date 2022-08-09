@@ -2,7 +2,7 @@
   <div class="list">
     <div class="title-img">
       <img src="/images/logo.png" alt="" />
-      <span>uyou ToDo v1.1.2</span>
+      <span>uyou ToDo v{{ app.getVersion() }}</span>
     </div>
     <!-- <div class="setting-item" @click="() => router.push('/account')">
       <span>{{ loginState ? i18n().myAccount : i18n().loginText }}</span>
@@ -27,6 +27,7 @@
 import { ref } from 'vue';
 import LangSet from './LangSet/LangSet.vue';
 import Switch from '../Switch/Switch.vue';
+const { app } = require('@electron/remote')
 
 const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
 

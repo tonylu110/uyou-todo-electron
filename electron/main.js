@@ -1,8 +1,11 @@
 const { app, BrowserWindow, ipcMain, screen, Menu } = require('electron')
 const path = require('path')
 const menuTemplate = require('./menu.js')
+const remoteMain = require('@electron/remote/main')
 
 const NODE_ENV = process.env.NODE_ENV
+
+remoteMain.initialize();
 
 let mainWindow
 
@@ -17,7 +20,7 @@ function createWindow() {
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: false,
     titleBarStyle: 'hiddenInset',
-    backgroundColor: '#00000000',
+    show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       enableRemoteModule: true,
@@ -25,6 +28,8 @@ function createWindow() {
       contextIsolation: false
     }
   })
+
+  remoteMain.enable(mainWindow.webContents);
 
   if (process.platform === 'win32') {
     const { setVibrancy } = require('electron-acrylic-window')
@@ -69,6 +74,10 @@ app.whenReady().then(() => {
   const { height } = screen.getPrimaryDisplay().workAreaSize
 
   createWindow()
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+  })
 
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height));
 
