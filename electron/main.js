@@ -17,6 +17,7 @@ function createWindow() {
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: false,
     titleBarStyle: 'hiddenInset',
+    backgroundColor: '#00000000',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       enableRemoteModule: true,
@@ -27,7 +28,11 @@ function createWindow() {
 
   if (process.platform === 'win32') {
     const { setVibrancy } = require('electron-acrylic-window')
-    setVibrancy(mainWindow, 'light')
+    setVibrancy(mainWindow, {
+      theme: 'light',
+      effect: 'acrylic',
+      disableOnBlur: true
+    })
   }
 
   mainWindow.loadURL(
@@ -42,7 +47,9 @@ function createWindow() {
     mainWindow.webContents.openDevTools({ mode: 'detach' })
   }
 
-  ipcMain.on("window-min", () => mainWindow.minimize());
+  ipcMain.on("window-min", () => {
+    mainWindow.minimize()
+  });
   ipcMain.on("window-max", () => {
     if (mainWindow.isMaximized()) {
       mainWindow.unmaximize();

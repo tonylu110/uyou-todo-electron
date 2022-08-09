@@ -25,7 +25,6 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      pointer-events: visible;
   
       span {
         color: #cebfae;
@@ -43,6 +42,7 @@
         opacity: 0;
         cursor: pointer;
         transition: opacity 0.2s ease-in-out;
+        pointer-events: visible;
   
         &:hover {
           opacity: 1;
@@ -117,12 +117,14 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    margin-left: 10px;
-    border-radius: 20px;
+    margin-left: 4px;
+    border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: inset 1px 1px 10px #00000030;
+    border: 3px solid white;
   
     span {
       color: white;
@@ -141,7 +143,7 @@
   .delete {
     @extend .button;
     background-color: #d6010f;
-    right: 0;
+    right: 4px;
   
     &:hover + .list-item {
       transform: translateX(-60px);

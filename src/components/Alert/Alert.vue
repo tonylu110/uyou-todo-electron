@@ -45,7 +45,7 @@ const emits = defineEmits<{
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: #edd9b7;
-  width: 250px;
+  width: 300px;
   border-radius: 9px;
   box-shadow: 0 5px 8px #594b4270;
   border: 1px solid #999;

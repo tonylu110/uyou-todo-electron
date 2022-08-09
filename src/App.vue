@@ -7,6 +7,7 @@ import ListMenu from './components/ListMenu/ListMenu.vue';
 
 const alertShow = ref(false)
 const alertMsg: Ref<string[]> = ref([])
+const newVersion = ref('')
 
 const version = 112
 
@@ -14,6 +15,7 @@ fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
   return res.json()
 }).then(res => {
   if (res[1].code > version) {
+    newVersion.value = ' ' + res[1].version
     alertMsg.value = res[1].data
     alertShow.value = true
   }
@@ -54,7 +56,7 @@ const returnClick = () => {
         <router-view></router-view>
         <Alert 
           v-if="alertShow" 
-          :title="i18n().updateText"
+          :title="i18n().updateText + newVersion"
           :body="alertMsg"
           @cancel="alertShow = false"
           @return="returnClick"
