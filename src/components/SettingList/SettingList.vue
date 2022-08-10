@@ -8,7 +8,7 @@
       <span>{{ loginState ? i18n().myAccount : i18n().loginText }}</span>
       <span class="material-icons">arrow_forward_ios</span>
     </div> -->
-    <div v-if="loginState" class="setting-item" style="background-color: white; color: black;">
+    <div class="setting-item" style="background-color: white; color: black;">
       <span>{{ i18n().setTopState }}</span>
       <Switch 
         :swichState="saveTopState"
