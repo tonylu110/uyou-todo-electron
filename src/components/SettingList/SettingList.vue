@@ -9,7 +9,7 @@
       <span class="material-icons">arrow_forward_ios</span>
     </div> -->
     <div v-if="loginState" class="setting-item" style="background-color: white; color: black;">
-      <span>保存置顶状态</span>
+      <span>{{ i18n().setTopState }}</span>
       <Switch 
         :swichState="saveTopState"
         @switch="setTopState"
@@ -27,6 +27,8 @@
 import { ref } from 'vue';
 import LangSet from './LangSet/LangSet.vue';
 import Switch from '../Switch/Switch.vue';
+import i18n from '../../i18n';
+
 const { app } = require('@electron/remote')
 
 const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null

@@ -6,9 +6,10 @@ const copyText = 'Copy'
 const copyToast = 'Copy successfully'
 const settingTitleText = 'Setting'
 const setLangText = 'Auto'
-const updateText = 'Update'
+const updateText = 'New Version'
 const loginText = 'Not logged in'
 const myAccount = 'My Account'
+const setTopState = 'Save Top Status'
 const accountPage = {
     account: 'Account',
     passwd: 'Password',
@@ -41,12 +42,12 @@ const firstLoadData: ITodoList[] = [
         ok: false
     },
     {
-        text: 'Move the mouse to the upper left corner to complete the ToDo',
+        text: 'Move the mouse to the left of the ToDo item to complete the ToDo',
         id: new Date().getTime() + 1,
         ok: false
     },
     {
-        text: 'Move the mouse to the upper right corner to delete ToDo',
+        text: 'Move the mouse to the right of the ToDo item to delete the ToDo',
         id: new Date().getTime() + 3,
         ok: false
     },
@@ -70,5 +71,6 @@ export default {
     loginText,
     myAccount,
     accountPage,
-    listMenu
+    listMenu,
+    setTopState
 }

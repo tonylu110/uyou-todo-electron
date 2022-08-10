@@ -15,7 +15,7 @@ fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
   return res.json()
 }).then(res => {
   if (res[1].code > version) {
-    newVersion.value = ' ' + res[1].version
+    newVersion.value = res[1].version
     alertMsg.value = res[1].data
     alertShow.value = true
   }
@@ -56,7 +56,7 @@ const returnClick = () => {
         <router-view></router-view>
         <Alert 
           v-if="alertShow" 
-          :title="i18n().updateText + newVersion"
+          :title="`${i18n().updateText} v${newVersion}`"
           :body="alertMsg"
           @cancel="alertShow = false"
           @return="returnClick"

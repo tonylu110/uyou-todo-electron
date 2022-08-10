@@ -6,9 +6,10 @@ const copyText = 'Copiar'
 const copyToast = 'Copiado correctamente'
 const settingTitleText = 'Ajustes'
 const setLangText = 'Automático'
-const updateText = 'Actualizar'
+const updateText = 'Nueva versión'
 const loginText = 'Sin iniciar sesión'
 const myAccount = 'Mi cuenta'
+const setTopState = 'Guardar Estado Superior'
 const accountPage = {
   account: 'Cuenta',
   passwd: 'Clave',
@@ -41,12 +42,12 @@ const firstLoadData: ITodoList[] = [
     ok: false
   },
   {
-    text: 'Mueva el ratón a la esquina superior izquierda para completar el ToDo',
+    text: 'Mueva el mouse a la izquierda del elemento ToDo para completar el ToDo',
     id: new Date().getTime() + 1,
     ok: false
   },
   {
-    text: 'Mueva el ratón a la esquina superior derecha para borrar ToDo',
+    text: 'Mueva el mouse a la derecha del elemento ToDo para eliminar el ToDo',
     id: new Date().getTime() + 3,
     ok: false
   },
@@ -70,5 +71,6 @@ export default {
   loginText,
   myAccount,
   accountPage,
-  listMenu
+  listMenu,
+  setTopState
 }

@@ -6,9 +6,10 @@ const copyText = 'コピー'
 const copyToast = '正常にコピー'
 const settingTitleText = '設定'
 const setLangText = '自動'
-const updateText = 'アップデート'
+const updateText = '新しいバージョン'
 const loginText = 'ログインしていない'
 const myAccount = 'マイアカウント'
+const setTopState = 'トップステータスを保存'
 const accountPage = {
     account: 'アカウント',
     passwd: 'パスワード',
@@ -36,22 +37,22 @@ const listMenu = {
 
 const firstLoadData: ITodoList[] = [
     {
-        text: 'uyou ToDoの使用へようこそ',
+        text: 'uyou ToDo の使用へようこそ',
         id: new Date().getTime(),
         ok: false
     },
     {
-        text: 'マウスを左上隅に移動して、ToDoを完了します',
+        text: 'マウスを ToDo アイテムの左側に移動して、ToDo を完了します',
         id: new Date().getTime() + 1,
         ok: false
     },
     {
-        text: 'ToDoを削除するには、マウスを右上隅に移動します',
+        text: 'ToDo アイテムの右にマウスを移動して、ToDo を削除します',
         id: new Date().getTime() + 3,
         ok: false
     },
     {
-        text: 'ToDoタイトルバーの右上隅にマウスを移動して、ToDoコンテンツをコピーします',
+        text: 'ToDo タイトルバーの右上隅にマウスを移動して、ToDo コンテンツをコピーします',
         id: new Date().getTime() + 4,
         ok: false
     }
@@ -70,5 +71,6 @@ export default {
     loginText,
     myAccount,
     accountPage,
-    listMenu
+    listMenu,
+    setTopState
 }

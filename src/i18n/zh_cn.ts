@@ -6,9 +6,10 @@ const copyText = '复制'
 const copyToast = '复制成功'
 const settingTitleText = '设置'
 const setLangText = '跟随系统'
-const updateText = '更新'
+const updateText = '新版本'
 const loginText = '未登录'
 const myAccount = '我的账号'
+const setTopState = '保存置顶状态'
 const accountPage = {
     account: '账号',
     passwd: '密码',
@@ -70,5 +71,6 @@ export default {
     loginText,
     myAccount,
     accountPage,
-    listMenu
+    listMenu,
+    setTopState
 }

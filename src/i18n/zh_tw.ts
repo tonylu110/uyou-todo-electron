@@ -6,9 +6,10 @@ const copyText = '複製'
 const copyToast = '複製成功'
 const settingTitleText = '設定'
 const setLangText = '跟隨系統'
-const updateText = '更新'
+const updateText = '新版本'
 const loginText = '未登入'
 const myAccount = '我的賬號'
+const setTopState = '保存置頂狀態'
 const accountPage = {
     account: '賬號',
     passwd: '密碼',
@@ -41,12 +42,12 @@ const firstLoadData: ITodoList[] = [
         ok: false
     },
     {
-        text: '將滑鼠移至左上角，完成 ToDo',
+        text: '將滑鼠移至 ToDo 項的左邊，完成 ToDo',
         id: new Date().getTime() + 1,
         ok: false
     },
     {
-        text: '將滑鼠移至右上角，刪除 ToDo',
+        text: '將滑鼠移至 ToDo 項的右邊，刪除 ToDo',
         id: new Date().getTime() + 3,
         ok: false
     },
@@ -70,5 +71,6 @@ export default {
     loginText,
     myAccount,
     accountPage,
-    listMenu
+    listMenu,
+    setTopState
 }
