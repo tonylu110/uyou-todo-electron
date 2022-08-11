@@ -9,7 +9,7 @@ const alertShow = ref(false)
 const alertMsg: Ref<string[]> = ref([])
 const newVersion = ref('')
 
-const version = 112
+const version = 113
 
 fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
   return res.json()
@@ -45,6 +45,14 @@ const returnClick = () => {
 //     })
 //   }
 // }
+
+const ipcRenderer = require('electron').ipcRenderer
+window.addEventListener('resize', () => {
+  ipcRenderer.send('getWindowSize', {
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
+})
 </script>
 
 <template>

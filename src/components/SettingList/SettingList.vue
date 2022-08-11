@@ -15,6 +15,13 @@
         @switch="setTopState"
       />
     </div>
+    <div class="setting-item" style="background-color: white; color: black;">
+      <span>保存窗口大小</span>
+      <Switch 
+        :swichState="saveWindowSizeState"
+        @switch="setWindowSizeState"
+      />
+    </div>
     <div class="setting-item lang-set" @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </div>
@@ -29,6 +36,8 @@ import LangSet from './LangSet/LangSet.vue';
 import Switch from '../Switch/Switch.vue';
 import i18n from '../../i18n';
 
+const ipcRenderer = require('electron').ipcRenderer
+
 const { app } = require('@electron/remote')
 
 const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
@@ -39,6 +48,13 @@ const saveTopState = ref(localStorage.getItem('saveTopState') === 'true' || loca
 const setTopState = () => {
   saveTopState.value = !saveTopState.value
   localStorage.setItem('saveTopState', saveTopState.value + '')
+}
+
+const saveWindowSizeState = ref(localStorage.getItem('saveWindowSizeState') === 'true')
+const setWindowSizeState = () => {
+  saveWindowSizeState.value = !saveWindowSizeState.value
+  localStorage.setItem('saveWindowSizeState', saveWindowSizeState.value + '')
+  ipcRenderer.send('setWindowSizeState', saveWindowSizeState.value)
 }
 </script>
 
