@@ -8,19 +8,23 @@
       <span>{{ loginState ? i18n().myAccount : i18n().loginText }}</span>
       <span class="material-icons">arrow_forward_ios</span>
     </div> -->
-    <div class="setting-item" style="background-color: white; color: black;">
-      <span>{{ i18n().setTopState }}</span>
-      <Switch 
-        :swichState="saveTopState"
-        @switch="setTopState"
-      />
-    </div>
-    <div class="setting-item" style="background-color: white; color: black;">
-      <span>保存窗口大小</span>
-      <Switch 
-        :swichState="saveWindowSizeState"
-        @switch="setWindowSizeState"
-      />
+    <div class="item-box">
+      <div class="box-radius">
+        <div class="setting-item" style="background-color: white; color: black;">
+          <span>{{ i18n().setTopState }}</span>
+          <Switch 
+            :swichState="saveTopState"
+            @switch="setTopState"
+          />
+        </div>
+        <div class="setting-item" style="background-color: white; color: black;">
+          <span>保存窗口大小</span>
+          <Switch 
+            :swichState="saveWindowSizeState"
+            @switch="setWindowSizeState"
+          />
+        </div>
+      </div>
     </div>
     <div class="setting-item lang-set" @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />

@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, screen, Menu } = require('electron')
 const path = require('path')
 const menuTemplate = require('./menu.js')
 const remoteMain = require('@electron/remote/main')
-const { initWindowSize, setWindowSizeStore, windowSize, setWindowSizeSet, windowSizeState } = require('./store/windowSizeStore')
+const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -76,13 +76,7 @@ function createWindow() {
     mainWindow.setAlwaysOnTop(arg)
   });
 
-  ipcMain.on('getWindowSize', (event, arg) => {
-    setWindowSizeStore(arg)
-  })
-
-  ipcMain.on('setWindowSizeState', (event, arg) => {
-    setWindowSizeSet(arg)
-  })
+  windowSizeIpc()
 }
 
 app.whenReady().then(() => {

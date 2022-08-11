@@ -1,3 +1,4 @@
+const { ipcMain } = require('electron')
 const Store = require('electron-store')
 const store = new Store()
 
@@ -13,22 +14,23 @@ const initWindowSize = () => {
   }
 }
 
-const setWindowSizeStore = (windowSize) => {
-  store.set('windowSize', windowSize)
-}
-
 const windowSize = store.get('windowSize')
-
-const setWindowSizeSet = (windowSizeState) => {
-  store.set('windowSizeState', windowSizeState)
-}
 
 const windowSizeState = store.get('windowSizeState')
 
+const windowSizeIpc = () => {
+  ipcMain.on('getWindowSize', (event, arg) => {
+    store.set('windowSize', arg)
+  })
+  
+  ipcMain.on('setWindowSizeState', (event, arg) => {
+    store.set('windowSizeState', arg)
+  })
+}
+
 module.exports = {
   initWindowSize,
-  setWindowSizeStore,
   windowSize,
-  setWindowSizeSet,
-  windowSizeState
+  windowSizeState,
+  windowSizeIpc
 }
