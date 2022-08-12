@@ -4,31 +4,27 @@
       <img src="/images/logo.png" alt="" />
       <span>uyou ToDo v{{ app.getVersion() }}</span>
     </div>
-    <!-- <div class="setting-item" @click="() => router.push('/account')">
-      <span>{{ loginState ? i18n().myAccount : i18n().loginText }}</span>
-      <span class="material-icons">arrow_forward_ios</span>
-    </div> -->
-    <div class="item-box">
-      <div class="box-radius">
-        <div class="setting-item" style="background-color: white; color: black;">
-          <span>{{ i18n().setTopState }}</span>
-          <Switch 
-            :swichState="saveTopState"
-            @switch="setTopState"
-          />
-        </div>
-        <div class="setting-item" style="background-color: white; color: black;">
-          <span>保存窗口大小</span>
-          <Switch 
-            :swichState="saveWindowSizeState"
-            @switch="setWindowSizeState"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="setting-item lang-set" @click="() => langMenuShow = !langMenuShow">
+    <!-- <Item 
+      :title="loginState ? i18n().myAccount : i18n().loginText" 
+      @itemFun="() => router.push('/account')" 
+    /> -->
+    <ItemBox>
+      <Item 
+        :title="i18n().setTopState" 
+        :showSwitch="true"
+        :switchState="saveTopState"
+        @switchFun="setTopState" 
+      />
+      <Item 
+        title="保存窗口大小"
+        :showSwitch="true" 
+        :switchState="saveWindowSizeState"
+        @switchFun="setWindowSizeState"
+      />
+    </ItemBox>
+    <ItemButton @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
-    </div>
+    </ItemButton>
     <LangSet v-if="langMenuShow" />
     <div class="black-back" v-if="langMenuShow" @click="() => langMenuShow = !langMenuShow"></div>
   </div>
@@ -37,8 +33,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import LangSet from './LangSet/LangSet.vue';
-import Switch from '../Switch/Switch.vue';
 import i18n from '../../i18n';
+import Item from '../ItemBox/Item/Item.vue';
+import ItemBox from '../ItemBox/ItemBox.vue';
+import ItemButton from '../ItemBox/ItemButton/ItemButton.vue';
 
 const ipcRenderer = require('electron').ipcRenderer
 
@@ -63,5 +61,38 @@ const setWindowSizeState = () => {
 </script>
 
 <style scoped lang="scss">
-@import './style.scss';
+.list {
+  background-color: #eee;
+  width: calc(100vw - 300px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  padding-top: 10px;
+
+  .title-img {
+    width: calc(100vw - 480px);
+    max-width: 520px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 30px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px #00000030;
+    
+    img {
+      height: 100%;
+    }
+    
+    span {
+      margin-top: 15px;
+      color: #00000050;
+    }
+  }
+}
 </style>

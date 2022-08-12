@@ -1,25 +1,20 @@
 <template>
   <div class="list">
-    <div class="item">
-      <span>{{ loginText }}</span>
-    </div>
+    <Item :title="loginText" :showArrow="false" />
     <div v-if="!loginState" class="login-input">
       <input type="text" :placeholder="i18n().accountPage.account" v-model="uname">
       <input type="password" :placeholder="i18n().accountPage.passwd" v-model="passwd">
     </div>
-    <div v-if="!loginState" class="item login" @click="login">
-      <span>{{ i18n().accountPage.login }}</span>
-    </div>
-    <div v-if="!loginState" class="item register" @click="openRegister">
-      <span>{{ i18n().accountPage.register }}</span>
-    </div>
-    <div v-if="loginState" class="item" style="background-color: white; color: black;">
-      <span>{{ i18n().accountPage.autoSync }}</span>
-      <Switch :swichState="swichState" @switch="setAutoSync" />
-    </div>
-    <div v-if="loginState" class="item logout" @click="logout">
-      <span>{{ i18n().accountPage.logout }}</span>
-    </div>
+    <ItemButton v-if="!loginState" @click="login" mode="primary">{{ i18n().accountPage.login }}</ItemButton>
+    <ItemButton v-if="!loginState" @click="openRegister">{{ i18n().accountPage.register }}</ItemButton>
+    <Item
+      v-if="loginState"
+      :title="i18n().accountPage.autoSync"
+      :showSwitch="true"
+      :switchState="swichState"
+      @switchFun="setAutoSync"
+    />
+    <ItemButton v-if="loginState" mode="error" @click="logout">{{ i18n().accountPage.logout }}</ItemButton>
     <Alert
       :title="i18n().accountPage.alertTitle"
       :body="alertMsg"
@@ -36,7 +31,8 @@ import { ref, onMounted } from 'vue';
 import i18n from '../../i18n';
 import Alert from '../Alert/Alert.vue';
 import Toast from '../Toast/Toast.vue';
-import Switch from '../Switch/Switch.vue';
+import Item from '../ItemBox/Item/Item.vue';
+import ItemButton from '../ItemBox/ItemButton/ItemButton.vue';
 
 const swichState = ref(localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null)
 
@@ -170,5 +166,33 @@ const closeAlert = () => {
 </script>
 
 <style scoped lang="scss">
-@import './style.scss';
+.list {
+  background-color: #eee;
+  width: calc(100vw - 300px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  padding-top: 10px;
+
+  .login-input {
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 7px;
+    box-shadow: 0 2px 10px #00000030;
+    width: calc(100vw - 450px);
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+
+    input {
+      padding: 15px;
+      margin: 5px 0px;
+      border: 1.5px solid #00000020;
+      background-color: #00000010;
+      border-radius: 5px;
+    }
+  }
+}
 </style>
