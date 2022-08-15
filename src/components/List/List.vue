@@ -18,13 +18,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, Ref, ref } from 'vue';
+import { onMounted, Ref, ref, watchEffect } from 'vue';
 import LocalStorage from '../../util/localStorage';
 import Item from './Item/Item.vue';
 import saveItemSet from './saveItemSet'
 import AddItem from './AddItem/AddItem.vue';
 import ITodoList from '../../interface/ITodoListArray';
 import { useRoute } from 'vue-router';
+
+const route = useRoute()
 
 const props = defineProps({
   showAddItem: Boolean,
@@ -36,8 +38,11 @@ const props = defineProps({
 
 const list: Ref<ITodoList[]> = ref(props.listData) as Ref<ITodoList[]>
 
+watchEffect(() => {
+  list.value = props.listData as unknown as ITodoList[]
+})
+
 onMounted(() => {
-  const route = useRoute()
   if (route.name === 'Home') {
     const uid = localStorage.getItem('uid')
     const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
@@ -61,12 +66,14 @@ onMounted(() => {
 })
 
 const setOk = (id: number, isOk: boolean) => {
-  for (let i = 0; i < list.value!.length; i++) {
-    if (list.value![i].id === id) {
-      list.value![i].ok = isOk
+  if (route.name === 'Home') {
+    for (let i = 0; i < list.value!.length; i++) {
+      if (list.value![i].id === id) {
+        list.value![i].ok = isOk
+      }
     }
+    saveItemSet(list.value!)
   }
-  saveItemSet(list.value!)
 }
 
 const addItem = (id: number, text: string) => {
@@ -89,12 +96,14 @@ const setAddItem = () => {
 }
 
 const deleteItem = (id: number) => {
-  for (let i = 0; i < list.value!.length; i++) {
-    if (list.value![i].id === id) {
-      list.value!.splice(i, 1)
+  if (route.name === 'Home') {
+    for (let i = 0; i < list.value!.length; i++) {
+      if (list.value![i].id === id) {
+        list.value!.splice(i, 1)
+      }
     }
+    saveItemSet(list.value!)
   }
-  saveItemSet(list.value!)
 }
 </script>
 

@@ -12,10 +12,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { Ref, ref, watchEffect } from 'vue';
 import TabBar from '../components/TabBar/TabBar.vue';
 import List from '../components/List/List.vue';
 import router from '../router';
+import { useRoute } from 'vue-router';
+import LocalStorage from '../util/localStorage';
+import ITodoList from '../interface/ITodoListArray';
 
-const listData = ref([])
+const listData = ref([]) as unknown as Ref<ITodoList[]>
+
+const route = useRoute()
+const list = ref(LocalStorage('get'))
+watchEffect(() => {
+  if (route.query.listName === 'allNotDo') {
+    listData.value = list.value!.filter(listData => listData.ok === false)
+  } else if (route.query.listName === 'allDo') {
+    listData.value = list.value!.filter(listData => listData.ok === true)
+  }
+  console.log(listData.value);
+})
 </script>
