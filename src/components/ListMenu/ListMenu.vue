@@ -2,17 +2,39 @@
   <div class="list-menu" :style="{backgroundColor: listMenuColor}">
     <div class="list">
       <span class="title">{{ i18n().accountPage.account }}</span>
-      <div class="all-todo-list" :style="{backgroundColor: routeName === 'account' ? '#00000010' : ''}" @click="router.push('/account')">
+      <div class="all-todo-list" 
+        :style="{
+          backgroundColor: routeName === 'account' ? '#00000010' : '',
+          marginBottom: '17px',
+          marginTop: '12px'
+        }" 
+        @click="router.push('/account')"
+      >
         <div>
           <span class="material-icons">account_circle</span>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().myAccount }}</span>
         </div>
       </div>
       <span class="title">{{ i18n().listMenu.cate }}</span>
-      <div class="all-todo-list" :style="{backgroundColor: routeName === 'Home' ? '#00000010' : ''}" @click="router.push('/')">
+      <div class="all-todo-list" 
+        :style="{ backgroundColor: routeName === 'Home' ? '#00000010' : '' }" 
+        @click="router.push('/')"
+      >
         <div>
           <span class="material-icons">list_alt</span>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.allTodo }}</span>
+        </div>
+      </div>
+      <div class="all-todo-list" :style="{backgroundColor: routeName === 'other' ? '#00000010' : ''}" @click="router.push('/other')">
+        <div>
+          <span class="material-icons">circle</span>
+          <span style="font-size: 14px; margin-left: 10px;">未完成</span>
+        </div>
+      </div>
+      <div class="all-todo-list" :style="{backgroundColor: routeName === 'other' ? '#00000010' : ''}" @click="router.push('/other')">
+        <div>
+          <span class="material-icons">check_circle</span>
+          <span style="font-size: 14px; margin-left: 10px;">已完成</span>
         </div>
       </div>
     </div>
@@ -101,6 +123,10 @@ if (isWindows) {
     .all-todo-list {
       @extend .setting-list;
       margin-top: 10px;
+      
+      &:not(:last-child) {
+        margin-bottom: -12px;
+      }
     }
   }
 }

@@ -18,40 +18,45 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import firstLoad from '../../util/firstLoad';
+import { onMounted, Ref, ref } from 'vue';
 import LocalStorage from '../../util/localStorage';
 import Item from './Item/Item.vue';
 import saveItemSet from './saveItemSet'
 import AddItem from './AddItem/AddItem.vue';
 import ITodoList from '../../interface/ITodoListArray';
+import { useRoute } from 'vue-router';
 
-defineProps({
+const props = defineProps({
   showAddItem: Boolean,
+  listData: {
+    default: [] as ITodoList[],
+    type: Array
+  }
 })
 
-firstLoad()
-
-const list = ref(LocalStorage('get'))
+const list: Ref<ITodoList[]> = ref(props.listData) as Ref<ITodoList[]>
 
 onMounted(() => {
-  const uid = localStorage.getItem('uid')
-  const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
-  if ((uid !== '' && uid !== null) && autoSync) {
-    fetch('https://api.todo.uyou.org.cn/gettodo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        uid: uid
+  const route = useRoute()
+  if (route.name === 'Home') {
+    const uid = localStorage.getItem('uid')
+    const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
+    if ((uid !== '' && uid !== null) && autoSync) {
+      fetch('https://api.todo.uyou.org.cn/gettodo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          uid: uid
+        })
+      }).then(res => {
+        return res.json()
+      }).then(res => {
+        localStorage.setItem('ToDo', res.data)
+        list.value = LocalStorage('get') as ITodoList[]
       })
-    }).then(res => {
-      return res.json()
-    }).then(res => {
-      localStorage.setItem('ToDo', res.data)
-      list.value = LocalStorage('get')
-    })
+    }
   }
 })
 
