@@ -25,13 +25,13 @@
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.allTodo }}</span>
         </div>
       </div>
-      <div class="all-todo-list" :style="{backgroundColor: routeName === 'other' ? '#00000010' : ''}" @click="router.push('/other')">
+      <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allNotDo' ? '#00000010' : ''}" @click="toList('allNotDo')">
         <div>
           <span class="material-icons">circle</span>
           <span style="font-size: 14px; margin-left: 10px;">未完成</span>
         </div>
       </div>
-      <div class="all-todo-list" :style="{backgroundColor: routeName === 'other' ? '#00000010' : ''}" @click="router.push('/other')">
+      <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allDo' ? '#00000010' : ''}" @click="toList('allDo')">
         <div>
           <span class="material-icons">check_circle</span>
           <span style="font-size: 14px; margin-left: 10px;">已完成</span>
@@ -56,11 +56,21 @@ import { ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 
 const routeName = ref('')
+const routeQueryName = ref('')
 const route = useRoute()
 watchEffect(() => {
   routeName.value = route.name as unknown as string
-  console.log(routeName.value);
+  routeQueryName.value = route.query.listName as unknown as string
 })
+
+const toList = (listName: string) => {
+  router.push({
+    path: '/other',
+    query: {
+      listName
+    }
+  })
+}
 
 const isWindows = navigator.userAgent.indexOf('Win')>=0
 const listMenuColor = ref('')
