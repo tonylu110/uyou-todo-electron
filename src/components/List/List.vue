@@ -37,6 +37,7 @@ const props = defineProps({
 })
 
 const list: Ref<ITodoList[]> = ref(props.listData) as Ref<ITodoList[]>
+const listAll = ref(LocalStorage('get'))
 
 watchEffect(() => {
   list.value = props.listData as unknown as ITodoList[]
@@ -66,14 +67,17 @@ onMounted(() => {
 })
 
 const setOk = (id: number, isOk: boolean) => {
-  if (route.name === 'Home') {
-    for (let i = 0; i < list.value!.length; i++) {
-      if (list.value![i].id === id) {
-        list.value![i].ok = isOk
-      }
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id) {
+      list.value![i].ok = isOk
     }
-    saveItemSet(list.value!)
   }
+  for (let i = 0; i < listAll.value!.length; i++) {
+    if (listAll.value![i].id === id) {
+      listAll.value![i].ok = isOk
+    }
+  }
+  saveItemSet(listAll.value!)
 }
 
 const addItem = (id: number, text: string) => {
@@ -96,14 +100,17 @@ const setAddItem = () => {
 }
 
 const deleteItem = (id: number) => {
-  if (route.name === 'Home') {
-    for (let i = 0; i < list.value!.length; i++) {
-      if (list.value![i].id === id) {
-        list.value!.splice(i, 1)
-      }
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id) {
+      list.value!.splice(i, 1)
     }
-    saveItemSet(list.value!)
   }
+  for (let i = 0; i < listAll.value!.length; i++) {
+    if (listAll.value![i].id === id) {
+      listAll.value!.splice(i, 1)
+    }
+  }
+  saveItemSet(listAll.value!)
 }
 </script>
 

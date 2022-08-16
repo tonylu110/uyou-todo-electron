@@ -30,6 +30,5 @@ watchEffect(() => {
   } else if (route.query.listName === 'allDo') {
     listData.value = list.value!.filter(listData => listData.ok === true)
   }
-  console.log(listData.value);
 })
 </script>
