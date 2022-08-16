@@ -22,6 +22,7 @@
         @switchFun="setWindowSizeState"
       />
     </ItemBox>
+    <ItemButton mode="error" @click="clearData">清除数据</ItemButton>
     <ItemButton @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </ItemButton>
@@ -42,7 +43,7 @@ const ipcRenderer = require('electron').ipcRenderer
 
 const { app } = require('@electron/remote')
 
-const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
+// const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
 
 const langMenuShow = ref(false)
 
@@ -57,6 +58,11 @@ const setWindowSizeState = () => {
   saveWindowSizeState.value = !saveWindowSizeState.value
   localStorage.setItem('saveWindowSizeState', saveWindowSizeState.value + '')
   ipcRenderer.send('setWindowSizeState', saveWindowSizeState.value)
+}
+
+const clearData = () => {
+  localStorage.clear()
+  window.location.reload()
 }
 </script>
 

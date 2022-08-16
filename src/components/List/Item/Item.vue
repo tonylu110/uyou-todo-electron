@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <div class="button" @click="setOk">
+    <div class="button" @click="setOk" v-if="listName !== 'allDo'">
       <span class="material-icons">check</span>
     </div>
     <div class="delete" @click="deleteItem">
@@ -34,6 +34,7 @@ import getTime from '../../../util/getTime';
 import i18n from '../../../i18n';
 import getOkStyle from '../../../data/getOkStyle';
 import Toast from '../../Toast/Toast.vue';
+import { useRoute } from 'vue-router';
 
 const props = defineProps({
   time: Number,
@@ -49,9 +50,13 @@ const emits = defineEmits<{
 const okState = ref(props.isOk)
 const okStyle = ref(getOkStyle(okState.value))
 
+const route = useRoute()
+const listName = ref('')
+
 watchEffect(() => {
   okState.value = props.isOk
   okStyle.value = getOkStyle(props.isOk)
+  listName.value = route.query.listName as unknown as string
 })
 
 const setOk = () => {

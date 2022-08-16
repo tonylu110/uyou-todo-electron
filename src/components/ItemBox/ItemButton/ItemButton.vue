@@ -48,6 +48,10 @@ defineProps({
   &.error {
     background-color: #e5544b;
     color: white;
+
+    &:active {
+      background-color: #c95047;
+    }
   }
 
   &:deep(.lang-img) {
