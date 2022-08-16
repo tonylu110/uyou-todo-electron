@@ -1,6 +1,6 @@
 <template>
   <TabBar 
-    title=""
+    :title="i18n().accountPage.account"
     :rightImgShow="false"
     @leftClick="() => router.push('/setting')"
     :leftImgShow="false"

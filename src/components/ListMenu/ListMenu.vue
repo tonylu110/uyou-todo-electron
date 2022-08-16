@@ -2,12 +2,8 @@
   <div class="list-menu" :style="{backgroundColor: listMenuColor}">
     <div class="list">
       <span class="title">{{ i18n().accountPage.account }}</span>
-      <div class="all-todo-list" 
-        :style="{
-          backgroundColor: routeName === 'account' ? '#00000010' : '',
-          marginBottom: '17px',
-          marginTop: '12px'
-        }" 
+      <div class="account-list" 
+        :style="{backgroundColor: routeName === 'account' ? '#00000010' : ''}" 
         @click="router.push('/account')"
       >
         <div>
@@ -17,7 +13,7 @@
       </div>
       <span class="title">{{ i18n().listMenu.cate }}</span>
       <div class="all-todo-list" 
-        :style="{ backgroundColor: routeName === 'Home' ? '#00000010' : '' }" 
+        :style="{ backgroundColor: routeName === 'Home' ? '#00000010' : '', borderTop: '2px solid #00000010' }" 
         @click="router.push('/')"
       >
         <div>
@@ -135,8 +131,21 @@ if (isWindows) {
       margin-top: 10px;
       
       &:not(:last-child) {
-        margin-bottom: -12px;
+        margin-bottom: -11px;
       }
+
+      &:nth-child(odd) {
+        border-top: 0px;
+      }
+
+      &:nth-child(even) {
+        border-top: 0px;
+      }
+    }
+
+    .account-list {
+      @extend .setting-list;
+      margin-top: 12px
     }
   }
 }

@@ -64,21 +64,21 @@ const onTopWindow = () => {
   localStorage.setItem('alwaysOnTop', topState.value + '')
 }
 
-const title = ref('')
-const route = useRoute()
-watchEffect(() => {
-  switch (route.name) {
-    case 'account':
-      title.value = i18n().accountPage.account
-      break;
-    case 'setting':
-      title.value = i18n().settingTitleText
-      break;
-    default:
-      title.value = 'uyou ToDo'
-      break;
-  }
-})
+const title = ref('uyou ToDo')
+// const route = useRoute()
+// watchEffect(() => {
+//   switch (route.name) {
+//     case 'account':
+//       title.value = i18n().accountPage.account
+//       break;
+//     case 'setting':
+//       title.value = i18n().settingTitleText
+//       break;
+//     default:
+//       title.value = 'uyou ToDo'
+//       break;
+//   }
+// })
 
 const isWindows = navigator.userAgent.indexOf('Win')>=0
 const listMenuColor = ref('')

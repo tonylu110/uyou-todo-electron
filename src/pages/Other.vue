@@ -2,7 +2,7 @@
   <TabBar
     @leftClick="() => router.push('/setting')"
     leftImg="settings"
-    title=""
+    :title="title"
     :leftImgShow="false"
     :rightImgShow="false"
   />
@@ -20,6 +20,8 @@ import { useRoute } from 'vue-router';
 import LocalStorage from '../util/localStorage';
 import ITodoList from '../interface/ITodoListArray';
 
+const title = ref('')
+
 const listData = ref([]) as unknown as Ref<ITodoList[]>
 
 const route = useRoute()
@@ -27,8 +29,10 @@ const list = ref(LocalStorage('get'))
 watchEffect(() => {
   if (route.query.listName === 'allNotDo') {
     listData.value = list.value!.filter(listData => listData.ok === false)
+    title.value = '未完成'
   } else if (route.query.listName === 'allDo') {
     listData.value = list.value!.filter(listData => listData.ok === true)
+    title.value = '已完成'
   }
 })
 </script>
