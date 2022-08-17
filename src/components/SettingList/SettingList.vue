@@ -4,10 +4,10 @@
       <img src="/images/logo.png" alt="" />
       <span>uyou ToDo v{{ app.getVersion() }}</span>
     </div>
-    <!-- <Item 
+    <Item 
       :title="loginState ? i18n().myAccount : i18n().loginText" 
-      @itemFun="() => router.push('/account')" 
-    /> -->
+      @itemFun="() => router.push('/account?from=setting')" 
+    />
     <ItemBox>
       <Item 
         :title="i18n().setTopState" 
@@ -38,12 +38,13 @@ import i18n from '../../i18n';
 import Item from '../ItemBox/Item/Item.vue';
 import ItemBox from '../ItemBox/ItemBox.vue';
 import ItemButton from '../ItemBox/ItemButton/ItemButton.vue';
+import router from '../../router';
 
 const ipcRenderer = require('electron').ipcRenderer
 
 const { app } = require('@electron/remote')
 
-// const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
+const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
 
 const langMenuShow = ref(false)
 

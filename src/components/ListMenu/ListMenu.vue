@@ -3,7 +3,7 @@
     <div class="list">
       <span class="title">{{ i18n().accountPage.account }}</span>
       <div class="account-list" 
-        :style="{backgroundColor: routeName === 'account' ? '#00000010' : ''}" 
+        :style="{backgroundColor: routeName === 'account' && form !== 'setting' ? '#00000010' : ''}" 
         @click="router.push('/account')"
       >
         <div>
@@ -23,7 +23,7 @@
       </div>
       <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allNotDo' ? '#00000010' : ''}" @click="toList('allNotDo')">
         <div>
-          <span class="material-icons">circle</span>
+          <span class="material-icons">panorama_fisheye</span>
           <span style="font-size: 14px; margin-left: 10px;">未完成</span>
         </div>
       </div>
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="list">
-      <div class="setting-list" :style="{backgroundColor: routeName === 'setting' ? '#00000010' : ''}" @click="router.push('/setting')">
+      <div class="setting-list" :style="{backgroundColor: routeName === 'setting' || form === 'setting' ? '#00000010' : ''}" @click="router.push('/setting')">
         <div>
           <span class="material-icons">settings</span>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().settingTitleText }}</span>
@@ -54,9 +54,13 @@ import { useRoute } from 'vue-router';
 const routeName = ref('')
 const routeQueryName = ref('')
 const route = useRoute()
+
+const form = ref('')
+
 watchEffect(() => {
   routeName.value = route.name as unknown as string
   routeQueryName.value = route.query.listName as unknown as string
+  form.value = route.query.from as unknown as string
 })
 
 const toList = (listName: string) => {
