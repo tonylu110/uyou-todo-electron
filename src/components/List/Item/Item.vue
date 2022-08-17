@@ -11,7 +11,7 @@
         <span>{{ getTime(time!) }}</span>
         <div @click="copyText">{{ i18n().copyText }}</div>
       </div>
-      <span class="item-text" :style="okStyle">
+      <span class="item-text" :style="listName === 'allNotDo' ? '' : okStyle">
         {{ text }}
       </span>
       <!-- <div class="close-button" @click="deleteItem">
