@@ -9,7 +9,9 @@ const setLangText = '跟隨系統'
 const updateText = '新版本'
 const loginText = '未登入'
 const myAccount = '我的賬號'
-const setTopState = '保存置頂狀態'
+const setTopState = '儲存置頂狀態'
+const saveWindowSize = '儲存視窗大小'
+const clearData = '清除資料'
 const accountPage = {
     account: '賬號',
     passwd: '密碼',
@@ -32,7 +34,9 @@ const alertText = {
 
 const listMenu = {
     cate: '分類',
-    allTodo: '所有 ToDo'
+    allTodo: '所有 ToDo',
+    completed: '已完成',
+    incompleted: '未完成'
 }
 
 const firstLoadData: ITodoList[] = [
@@ -72,5 +76,7 @@ export default {
     myAccount,
     accountPage,
     listMenu,
-    setTopState
+    setTopState,
+    saveWindowSize,
+    clearData
 }

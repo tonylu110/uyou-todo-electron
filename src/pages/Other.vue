@@ -19,6 +19,7 @@ import router from '../router';
 import { useRoute } from 'vue-router';
 import LocalStorage from '../util/localStorage';
 import ITodoList from '../interface/ITodoListArray';
+import i18n from '../i18n';
 
 const title = ref('')
 
@@ -29,10 +30,10 @@ const list = ref(LocalStorage('get'))
 watchEffect(() => {
   if (route.query.listName === 'allNotDo') {
     listData.value = list.value!.filter(listData => listData.ok === false)
-    title.value = '未完成'
+    title.value = i18n().listMenu.incompleted
   } else if (route.query.listName === 'allDo') {
     listData.value = list.value!.filter(listData => listData.ok === true)
-    title.value = '已完成'
+    title.value = i18n().listMenu.completed
   }
 })
 </script>

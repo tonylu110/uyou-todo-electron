@@ -24,13 +24,13 @@
       <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allNotDo' ? '#00000010' : ''}" @click="toList('allNotDo')">
         <div>
           <span class="material-icons">panorama_fisheye</span>
-          <span style="font-size: 14px; margin-left: 10px;">未完成</span>
+          <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.incompleted }}</span>
         </div>
       </div>
       <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allDo' ? '#00000010' : ''}" @click="toList('allDo')">
         <div>
           <span class="material-icons">check_circle</span>
-          <span style="font-size: 14px; margin-left: 10px;">已完成</span>
+          <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.completed }}</span>
         </div>
       </div>
     </div>

@@ -10,6 +10,8 @@ const updateText = '新版本'
 const loginText = '未登录'
 const myAccount = '我的账号'
 const setTopState = '保存置顶状态'
+const saveWindowSize = '保存窗口大小'
+const clearData = '清除数据'
 const accountPage = {
     account: '账号',
     passwd: '密码',
@@ -27,7 +29,9 @@ const accountPage = {
 
 const listMenu = {
     cate: '分类',
-    allTodo: '所有 ToDo'
+    allTodo: '所有 ToDo',
+    completed: '已完成',
+    incompleted: '未完成'
 }
 
 const alertText = {
@@ -72,5 +76,7 @@ export default {
     myAccount,
     accountPage,
     listMenu,
-    setTopState
+    setTopState,
+    saveWindowSize,
+    clearData
 }

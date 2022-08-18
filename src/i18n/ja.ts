@@ -10,6 +10,8 @@ const updateText = '新しいバージョン'
 const loginText = 'ログインしていない'
 const myAccount = 'マイアカウント'
 const setTopState = 'トップステータスを保存'
+const saveWindowSize = 'ウィンドウサイズを保存'
+const clearData = 'データをクリア'
 const accountPage = {
     account: 'アカウント',
     passwd: 'パスワード',
@@ -27,12 +29,14 @@ const accountPage = {
 
 const alertText = {
     cancelText: 'キャンセル',
-    returnText: '確認'
+    returnText: '確認',
 }
 
 const listMenu = {
     cate: 'カテゴリ',
-    allTodo: 'すべての ToDo'
+    allTodo: 'すべての ToDo',
+    completed: '完了',
+    incompleted: '未完成'
 }
 
 const firstLoadData: ITodoList[] = [
@@ -72,5 +76,7 @@ export default {
     myAccount,
     accountPage,
     listMenu,
-    setTopState
+    setTopState,
+    saveWindowSize,
+    clearData
 }

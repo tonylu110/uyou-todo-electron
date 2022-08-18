@@ -10,6 +10,8 @@ const updateText = 'Nueva versión'
 const loginText = 'Sin iniciar sesión'
 const myAccount = 'Mi cuenta'
 const setTopState = 'Guardar Estado Superior'
+const saveWindowSize = 'Guardar Tamaño De Ventana'
+const clearData= 'Borrar Datos'
 const accountPage = {
   account: 'Cuenta',
   passwd: 'Clave',
@@ -32,7 +34,9 @@ const alertText = {
 
 const listMenu = {
   cate: 'Categorías',
-  allTodo: 'Todas las tareas pendientes'
+  allTodo: 'Todas las tareas pendientes',
+  completed: 'Terminado',
+  incompleted: 'Incompleto'
 }
 
 const firstLoadData: ITodoList[] = [
@@ -72,5 +76,7 @@ export default {
   myAccount,
   accountPage,
   listMenu,
-  setTopState
+  setTopState,
+  saveWindowSize,
+  clearData
 }

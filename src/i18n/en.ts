@@ -10,6 +10,8 @@ const updateText = 'New Version'
 const loginText = 'Not logged in'
 const myAccount = 'My Account'
 const setTopState = 'Save Top Status'
+const saveWindowSize = 'Save Window Size'
+const clearData = 'Clear Data'
 const accountPage = {
     account: 'Account',
     passwd: 'Password',
@@ -32,7 +34,9 @@ const alertText = {
 
 const listMenu = {
     cate: 'Categories',
-    allTodo: 'All ToDos'
+    allTodo: 'All ToDos',
+    completed: 'Completed',
+    incompleted: 'Incompleted'
 }
 
 const firstLoadData: ITodoList[] = [
@@ -72,5 +76,7 @@ export default {
     myAccount,
     accountPage,
     listMenu,
-    setTopState
+    setTopState,
+    saveWindowSize,
+    clearData
 }

@@ -16,13 +16,13 @@
         @switchFun="setTopState" 
       />
       <Item 
-        title="保存窗口大小"
+        :title="i18n().saveWindowSize"
         :showSwitch="true" 
         :switchState="saveWindowSizeState"
         @switchFun="setWindowSizeState"
       />
     </ItemBox>
-    <ItemButton mode="error" @click="clearData">清除数据</ItemButton>
+    <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
     <ItemButton @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </ItemButton>
