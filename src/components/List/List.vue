@@ -14,6 +14,7 @@
       @setOk="setOk"
       @deleteItem="deleteItem"
     />
+    <span v-if="list.length === 0" class="material-icons">list_alt</span>
   </div>
 </template>
 
@@ -114,7 +115,7 @@ const deleteItem = (id: number) => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .list {
   background-color: #edd9b7;
   width: calc(100vw - 300px);
@@ -124,5 +125,13 @@ const deleteItem = (id: number) => {
   align-items: center;
   overflow-y: scroll;
   padding-top: 10px;
+
+  .material-icons {
+    position: absolute;
+    top: 50%;
+    font-size: 150px;
+    transform: translateY(calc(-50% + 20px));
+    color: #00000020;
+  }
 }
 </style>
