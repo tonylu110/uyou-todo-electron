@@ -17,6 +17,7 @@
       />
       <Item
         title="软件更新" 
+        @itemFun="router.push('/update?from=setting')"
       />
     </ItemBox>
     <ItemBox>
@@ -106,7 +107,7 @@ const clearData = () => {
     background-color: #fff;
     border-radius: 7px;
     padding: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     box-shadow: 0 2px 10px #00000030;
     
     img {
