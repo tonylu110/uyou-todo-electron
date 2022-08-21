@@ -3,6 +3,7 @@ const path = require('path')
 const menuTemplate = require('./menu.js')
 const remoteMain = require('@electron/remote/main')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
+const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -11,6 +12,7 @@ remoteMain.initialize();
 let mainWindow
 
 initWindowSize()
+initSystemBar
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -21,8 +23,8 @@ function createWindow() {
     vibrancy: 'menu',
     visualEffectState: 'active',
     icon: path.join(__dirname, '../dist/logo.png'),
-    frame: false,
-    titleBarStyle: 'hiddenInset',
+    frame: systemBar,
+    titleBarStyle: systemBar ? 'default' :'hiddenInset',
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -77,6 +79,7 @@ function createWindow() {
   });
 
   windowSizeIpc()
+  systemBarIpc()
 }
 
 app.whenReady().then(() => {

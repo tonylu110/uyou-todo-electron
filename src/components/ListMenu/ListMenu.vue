@@ -1,5 +1,5 @@
 <template>
-  <div class="list-menu" :style="{backgroundColor: listMenuColor}">
+  <div class="list-menu" :style="{backgroundColor: listMenuColor, height: titleBarShow ? '100vh' : ''}">
     <div class="list">
       <span class="title">{{ i18n().accountPage.account }}</span>
       <div class="account-list" 
@@ -50,6 +50,8 @@ import i18n from '../../i18n';
 import router from '../../router';
 import { ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
+
+const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 
 const routeName = ref('')
 const routeQueryName = ref('')

@@ -57,6 +57,8 @@ window.addEventListener('resize', () => {
     width: window.innerWidth
   })
 })
+
+const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 </script>
 
 <template>
@@ -64,7 +66,7 @@ window.addEventListener('resize', () => {
     <TitleBar />
     <div class="list-in">
       <ListMenu />
-      <div class="todo-list">
+      <div class="todo-list" :style="{height: titleBarShow ? 'calc(100vh - 65px)' : ''}">
         <router-view></router-view>
         <Alert 
           v-if="alertShow" 
@@ -111,10 +113,11 @@ body {
 .black-back {
   background-color: #00000030;
   backdrop-filter: blur(10px);
-  height: calc(100% - 50px);
+  height: 100vh;
   width: calc(100vw - 300px);
-  position: absolute;
+  position: fixed;
   top: 50%;
+  right: 0;
   transform: translate(0%, -50%);
   margin-top: 25px;
 }

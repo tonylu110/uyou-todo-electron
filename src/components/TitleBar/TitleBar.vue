@@ -1,5 +1,5 @@
 <template>
-  <div class="title-bar" :style="{justifyContent: isMac ? 'flex-start' : ''}">
+  <div class="title-bar" :style="{justifyContent: isMac ? 'flex-start' : ''}" v-if="titleBarShow">
     <div 
       :class="topState ? 'on-top-button-sel button' :'on-top-button button'"
       :style="{
@@ -43,6 +43,8 @@ import firstLoad from './firstLoad';
 import i18n from '../../i18n';
 
 const isMac = navigator.userAgent.indexOf('Mac')>=0
+
+const titleBarShow = !(localStorage.getItem('systemTitle') === 'true')
 
 const ipcRenderer = require('electron').ipcRenderer
 const closeWindow = () => {

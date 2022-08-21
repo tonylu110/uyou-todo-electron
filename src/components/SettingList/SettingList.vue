@@ -22,6 +22,12 @@
     </ItemBox>
     <ItemBox>
       <Item 
+        title="使用系统标题栏" 
+        :showSwitch="true"
+        :switchState="useSystemTitleBar"
+        @switchFun="setTitleBar" 
+      />
+      <Item 
         :title="i18n().setTopState" 
         :showSwitch="true"
         :switchState="saveTopState"
@@ -39,7 +45,7 @@
       <img src="/images/lang.png" alt="" class="lang-img" />
     </ItemButton>
     <LangSet v-if="langMenuShow" />
-    <div class="black-back" v-if="langMenuShow" @click="() => langMenuShow = !langMenuShow"></div>
+    <div class="black-back"  v-if="langMenuShow" @click="() => langMenuShow = !langMenuShow"></div>
   </perfect-scrollbar>
 </template>
 
@@ -77,6 +83,13 @@ const autoUpdateState = ref(localStorage.getItem('autoUpdate') !== 'false')
 const setAutoUpdate = () => {
   autoUpdateState.value = !autoUpdateState.value
   localStorage.setItem('autoUpdate', autoUpdateState.value + '')
+}
+
+const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
+const setTitleBar = () => {
+  useSystemTitleBar.value = !useSystemTitleBar.value
+  localStorage.setItem('systemTitle', useSystemTitleBar.value + '')
+  ipcRenderer.send('setSystemBar', useSystemTitleBar.value)
 }
 
 const clearData = () => {
