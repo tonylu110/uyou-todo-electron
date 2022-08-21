@@ -12,6 +12,8 @@
       <Item
         title="自动获取更新"
         :showSwitch="true"
+        :switchState="autoUpdateState"
+        @switchFun="setAutoUpdate"
       />
       <Item
         title="软件更新" 
@@ -68,6 +70,12 @@ const setWindowSizeState = () => {
   saveWindowSizeState.value = !saveWindowSizeState.value
   localStorage.setItem('saveWindowSizeState', saveWindowSizeState.value + '')
   ipcRenderer.send('setWindowSizeState', saveWindowSizeState.value)
+}
+
+const autoUpdateState = ref(localStorage.getItem('autoUpdate') !== 'false')
+const setAutoUpdate = () => {
+  autoUpdateState.value = !autoUpdateState.value
+  localStorage.setItem('autoUpdate', autoUpdateState.value + '')
 }
 
 const clearData = () => {
