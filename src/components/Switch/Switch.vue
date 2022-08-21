@@ -37,6 +37,7 @@ const clickSwitch = () => {
   align-items: center;
   overflow: hidden;
   border: 1px solid #00000030;
+  cursor: pointer;
 
   .buttonShow {
     display: flex;

@@ -1,7 +1,7 @@
 <template>
   <div 
     class="item" 
-    :style="showSwitch ? {backgroundColor: 'white', color: 'black'} : ''"
+    :style="showSwitch ? {backgroundColor: 'white', color: 'black', cursor: 'auto'} : ''"
     @click="emits('itemFun')"
   >
     <span>{{ title }}</span>

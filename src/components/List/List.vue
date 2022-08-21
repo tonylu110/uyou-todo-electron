@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <perfect-scrollbar class="list">
     <AddItem 
       v-if="showAddItem"
       @setAddItem="setAddItem"
@@ -15,7 +15,7 @@
       @deleteItem="deleteItem"
     />
     <span v-if="list.length === 0" class="material-icons">list_alt</span>
-  </div>
+  </perfect-scrollbar>
 </template>
 
 <script setup lang="ts">

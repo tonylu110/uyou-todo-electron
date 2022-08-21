@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <perfect-scrollbar class="list">
     <Item :title="loginText" :showArrow="false" />
     <div v-if="!loginState" class="login-input">
       <input type="text" :placeholder="i18n().accountPage.account" v-model="uname">
@@ -23,7 +23,7 @@
       v-if="alertShow"
     />
     <Toast v-if="showToast" :msg="toastMsg" />
-  </div>
+  </perfect-scrollbar>
 </template>
 
 <script setup lang="ts">

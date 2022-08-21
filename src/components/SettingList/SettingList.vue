@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <perfect-scrollbar class="list">
     <div class="title-img">
       <img src="/images/logo.png" alt="" />
       <span>uyou ToDo v{{ app.getVersion() }}</span>
@@ -8,6 +8,15 @@
       :title="loginState ? i18n().myAccount : i18n().loginText" 
       @itemFun="() => router.push('/account?from=setting')" 
     />
+    <ItemBox>
+      <Item
+        title="自动获取更新"
+        :showSwitch="true"
+      />
+      <Item
+        title="软件更新" 
+      />
+    </ItemBox>
     <ItemBox>
       <Item 
         :title="i18n().setTopState" 
@@ -28,7 +37,7 @@
     </ItemButton>
     <LangSet v-if="langMenuShow" />
     <div class="black-back" v-if="langMenuShow" @click="() => langMenuShow = !langMenuShow"></div>
-  </div>
+  </perfect-scrollbar>
 </template>
 
 <script setup lang="ts">
@@ -89,7 +98,7 @@ const clearData = () => {
     background-color: #fff;
     border-radius: 7px;
     padding: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     box-shadow: 0 2px 10px #00000030;
     
     img {
