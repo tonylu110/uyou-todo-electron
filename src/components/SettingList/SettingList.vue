@@ -34,6 +34,13 @@
         @switchFun="setTopState" 
       />
       <Item 
+        v-if="titleBarShow"
+        title="置顶窗口" 
+        :showSwitch="true"
+        :switchState="topState"
+        @switchFun="onTopWindow" 
+      />
+      <Item 
         :title="i18n().saveWindowSize"
         :showSwitch="true" 
         :switchState="saveWindowSizeState"
@@ -45,6 +52,7 @@
       <img src="/images/lang.png" alt="" class="lang-img" />
     </ItemButton>
     <LangSet v-if="langMenuShow" />
+    <Toast msg="重启应用生效" v-if="toastShow" />
     <div class="black-back"  v-if="langMenuShow" @click="() => langMenuShow = !langMenuShow"></div>
   </perfect-scrollbar>
 </template>
@@ -57,10 +65,15 @@ import Item from '../ItemBox/Item/Item.vue';
 import ItemBox from '../ItemBox/ItemBox.vue';
 import ItemButton from '../ItemBox/ItemButton/ItemButton.vue';
 import router from '../../router';
+import Toast from '../Toast/Toast.vue';
+import firstLoad from '../TitleBar/firstLoad';
 
 const ipcRenderer = require('electron').ipcRenderer
 
 const { app } = require('@electron/remote')
+
+const toastShow = ref(false)
+const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 
 const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
 
@@ -90,6 +103,17 @@ const setTitleBar = () => {
   useSystemTitleBar.value = !useSystemTitleBar.value
   localStorage.setItem('systemTitle', useSystemTitleBar.value + '')
   ipcRenderer.send('setSystemBar', useSystemTitleBar.value)
+  toastShow.value = true
+  setTimeout(() => {
+    toastShow.value = false
+  }, 700);
+}
+
+const topState = ref(firstLoad())
+const onTopWindow = () => {
+  topState.value = !topState.value
+  ipcRenderer.send('window-on-top', topState.value)
+  localStorage.setItem('alwaysOnTop', topState.value + '')
 }
 
 const clearData = () => {
