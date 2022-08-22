@@ -92,7 +92,7 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
     flex-direction: row;
     
     .todo-list {
-      height: calc(100vh - 106px);
+      height: calc(100vh - 105px);
     }
   }
 }

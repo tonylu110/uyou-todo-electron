@@ -25,6 +25,11 @@ const routes = [
     path: "/update",
     name: "update",
     component: () => import("./pages/Update.vue"),
+  },
+  {
+    path: "/donate",
+    name: "donate",
+    component: () => import("./pages/Donate.vue"),
   }
 ];
 

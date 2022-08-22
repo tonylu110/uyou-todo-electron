@@ -19,6 +19,7 @@ defineProps({
   max-width: 550px;
   width: calc(100vw - 450px);
   height: 30px;
+  min-height: 30px;
   padding: 10px 15px;
   border-radius: 7px;
   box-shadow: 0 2px 10px #00000030;

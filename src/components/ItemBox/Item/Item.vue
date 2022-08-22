@@ -47,6 +47,7 @@ const emits = defineEmits<{
   position: relative;
   max-width: 550px;
   width: calc(100vw - 450px);
+  min-height: 30px;
   height: 30px;
   padding: 10px 15px;
   border-radius: 7px;

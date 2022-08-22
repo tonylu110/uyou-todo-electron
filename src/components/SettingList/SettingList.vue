@@ -1,9 +1,9 @@
 <template>
   <perfect-scrollbar class="list">
-    <div class="title-img">
+    <!-- <div class="title-img">
       <img src="/images/logo.png" alt="" />
       <span>uyou ToDo v{{ app.getVersion() }}</span>
-    </div>
+    </div> -->
     <Item 
       :title="loginState ? i18n().myAccount : i18n().loginText" 
       @itemFun="() => router.push('/account?from=setting')" 
@@ -47,6 +47,11 @@
         @switchFun="setWindowSizeState"
       />
     </ItemBox>
+    <ItemBox>
+      <Item title="前往官网" @itemFun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')"/>
+      <Item title="手机版" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')"/>
+      <Item title="捐赠" @itemFun="router.push('/donate?from=setting')"/>
+    </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
     <ItemButton @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
@@ -71,6 +76,7 @@ import firstLoad from '../TitleBar/firstLoad';
 const ipcRenderer = require('electron').ipcRenderer
 
 const { app } = require('@electron/remote')
+const { shell } = require('electron')
 
 const toastShow = ref(false)
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
