@@ -56,7 +56,7 @@ const langShow = (lang: string): boolean => {
   z-index: 1;
   border-radius: 7px;
   top: 50%;
-  transform: translate(0%, -50%);
+  transform: translate(0%, -40%);
   border: 1px solid #aaa;
 
   .box-radius {

@@ -3,30 +3,36 @@
     <div>
       <div class="title-img">
         <img src="/images/logo.png" alt="" />
-        <span>uyou ToDo v{{ app.getVersion() }}</span>
+        <span :style="{marginBottom: newVersion !== '' ? '' : '15px'}">uyou ToDo v{{ app.getVersion() }}</span>
         <span class="version" v-if="newVersion !== ''">{{ newVersion }}</span>
-      </div>
-      <div class="update-msg" v-if="updateMsg.length > 0">
-        <span v-for="(item, index) in updateMsg" :key="index">{{ item }}</span>
+        <div class="update-msg" v-if="updateMsg.length > 0">
+          <span class="update-title">更新日志：</span>
+          <ul>
+            <li v-for="(item, index) in updateMsg" :key="index">{{ item.split(' ')[1] }}</li>
+          </ul>
+        </div>
       </div>
     </div>
     <ItemButton mode="primary" @click="updateButtonCilck">{{ updateButton }}</ItemButton>
+    <Toast :msg="newVersion" v-if="toastShow" />
   </perfect-scrollbar>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, Ref, ref } from 'vue';
 import i18n from '../../i18n';
 import ItemButton from '../ItemBox/ItemButton/ItemButton.vue';
 import appVersionCode from '../../util/appVersionCode';
+import Toast from '../Toast/Toast.vue';
 
 const { app } = require('@electron/remote')
 
 const version = appVersionCode
 
-const updateMsg = ref([])
+const updateMsg: Ref<string[]> = ref([])
 const newVersion = ref('')
 const updateButton = ref('检查更新中...')
+const toastShow = ref(false)
 const getUpdate = () => {
   setTimeout(() => {
     fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
@@ -39,6 +45,10 @@ const getUpdate = () => {
       } else {
         newVersion.value = '暂无更新'
         updateButton.value = '检查更新'
+        toastShow.value = true
+        setTimeout(() => {
+          toastShow.value = false
+        }, 700);
       }
     })
   }, Math.floor(Math.random () * 900) + 100);
@@ -81,44 +91,54 @@ onMounted(() => {
     align-items: center;
     background-color: #fff;
     border-radius: 7px;
-    padding: 10px;
     margin-bottom: 10px;
     box-shadow: 0 2px 10px #00000030;
+
+    .update-msg {
+      height: auto;
+      width: calc(100vw - 470px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-top: 1px solid #00000020;
+      padding: 5px 15px;
+
+      ul {
+        width: 100%;
+        padding-left: 20px;
+
+        li {
+          font-size: 15px;
+          color: #00000090;
+          font-weight: bold;
+          margin-bottom: 10px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+      .update-title {
+        color: black;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+    }
     
     img {
       height: 100px;
+      margin: 15px 0;
     }
     
     span {
-      margin-top: 15px;
       color: #00000050;
 
       &.version {
         margin-top: 5px;
         font-size: 14px;
+        margin-bottom: 15px;
       }
-    }
-  }
-
-  .update-msg {
-    width: calc(100vw - 440px);
-    max-width: 560px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #fff;
-    border-radius: 7px;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 10px #00000030;
-
-    span {
-      display: block;
-      font-size: 15px;
-      color: #00000090;
-      font-weight: bold;
-      margin: 3px;
     }
   }
 }
