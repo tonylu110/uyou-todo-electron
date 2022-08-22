@@ -48,9 +48,9 @@
       />
     </ItemBox>
     <ItemBox>
-      <Item title="前往官网" @itemFun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')"/>
-      <Item title="手机版" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')"/>
-      <Item title="捐赠" @itemFun="router.push('/donate?from=setting')"/>
+      <Item title="前往官网" itemImg="./images/web.png" @itemFun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')"/>
+      <Item title="移动版" itemImg="./images/phone.png" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')"/>
+      <Item title="捐赠" itemImg="./images/donate.png" @itemFun="router.push('/donate?from=setting')"/>
     </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
     <ItemButton @click="() => langMenuShow = !langMenuShow">
