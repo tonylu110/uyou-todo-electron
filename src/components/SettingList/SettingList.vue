@@ -110,21 +110,21 @@ const clearData = () => {
   padding-top: 10px;
 
   .title-img {
-    width: calc(100vw - 480px);
-    max-width: 520px;
-    height: 100px;
+    width: calc(100vw - 440px);
+    max-width: 560px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #fff;
     border-radius: 7px;
-    padding: 30px;
+    padding: 10px;
     margin-bottom: 10px;
     box-shadow: 0 2px 10px #00000030;
     
     img {
-      height: 100%;
+      height: 100px;
     }
     
     span {

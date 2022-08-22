@@ -4,7 +4,7 @@
       <div class="title-img">
         <img src="/images/logo.png" alt="" />
         <span>uyou ToDo v{{ app.getVersion() }}</span>
-        <span>{{ newVersion }}</span>
+        <span class="version" v-if="newVersion !== ''">{{ newVersion }}</span>
       </div>
       <div class="update-msg" v-if="updateMsg.length > 0">
         <span v-for="(item, index) in updateMsg" :key="index">{{ item }}</span>
@@ -25,24 +25,29 @@ const { app } = require('@electron/remote')
 const version = appVersionCode
 
 const updateMsg = ref([])
-const newVersion = ref('检查更新中...')
-const updateButton = ref('检查更新')
+const newVersion = ref('')
+const updateButton = ref('检查更新中...')
 const getUpdate = () => {
-  fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
-    return res.json()
-  }).then(res => {
-    if (res[1].code > version) {
-      newVersion.value = '新版本：v' + res[1].version
-      updateMsg.value = res[1].data
-      updateButton.value = '前往更新'
-    } else {
-      newVersion.value = '暂无更新'
-    }
-  })
+  setTimeout(() => {
+    fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
+      return res.json()
+    }).then(res => {
+      if (res[1].code > version) {
+        newVersion.value = '新版本：v' + res[1].version
+        updateMsg.value = res[1].data
+        updateButton.value = '前往更新'
+      } else {
+        newVersion.value = '暂无更新'
+        updateButton.value = '检查更新'
+      }
+    })
+  }, Math.floor(Math.random () * 900) + 100);
 }
 
 const updateButtonCilck = () => {
   if (updateMsg.value.length === 0) {
+    updateButton.value = '检查更新中...'
+    newVersion.value = ''
     getUpdate()
   } else {
     window.open('https://github.com/tonylu110/uyou-todo-electron/releases')
@@ -50,7 +55,7 @@ const updateButtonCilck = () => {
 }
 
 onMounted(() => {
-  getUpdate()
+  getUpdate() 
 })
 </script>
 
@@ -88,7 +93,7 @@ onMounted(() => {
       margin-top: 15px;
       color: #00000050;
 
-      &:last-child {
+      &.version {
         margin-top: 5px;
         font-size: 14px;
       }

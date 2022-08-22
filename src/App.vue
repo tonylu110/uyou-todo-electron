@@ -82,19 +82,6 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 </template>
 
 <style lang="scss">
-::-webkit-scrollbar {
-    display: none;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#app {
-  user-select: none;
-}
-
 .list-main {
   display: flex;
   flex-direction: column;

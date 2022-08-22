@@ -24,7 +24,7 @@ function createWindow() {
     visualEffectState: 'active',
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: systemBar,
-    titleBarStyle: systemBar ? 'default' :'hiddenInset',
+    titleBarStyle: systemBar ? 'default' : 'hiddenInset',
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
