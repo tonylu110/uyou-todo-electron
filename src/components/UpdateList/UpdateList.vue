@@ -39,7 +39,7 @@ const getUpdate = () => {
       return res.json()
     }).then(res => {
       if (res[1].code > version) {
-        newVersion.value = '新版本：v' + res[1].version
+        newVersion.value = `${i18n().updateText}: v${res[1].version}`
         updateMsg.value = res[1].data
         updateButton.value = '前往更新'
       } else {
@@ -97,6 +97,7 @@ onMounted(() => {
     .update-msg {
       height: auto;
       width: calc(100vw - 470px);
+      max-width: 530px;
       display: flex;
       flex-direction: column;
       justify-content: center;
