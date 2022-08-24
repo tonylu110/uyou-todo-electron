@@ -12,6 +12,10 @@ const myAccount = '我的賬號'
 const setTopState = '儲存置頂狀態'
 const saveWindowSize = '儲存視窗大小'
 const clearData = '清除資料'
+const useSystemBar = '使用系統標題欄'
+const setTopWindow = '置頂視窗'
+const restartApp = '重啟應用生效'
+
 const accountPage = {
     account: '賬號',
     passwd: '密碼',
@@ -62,6 +66,22 @@ const firstLoadData: ITodoList[] = [
     }
 ]
 
+const update = {
+    autoUpdate: '自動獲取更新',
+    updateTitle: '軟體更新',
+    notUpdate: '暫無更新',
+    checkingUpdate: '檢查更新中...',
+    checkUpdate: '檢查更新',
+    gotoUpdate: '前往更新',
+    updateLog: '更新日誌：'
+}
+
+const otherList = {
+    toWeb: '前往官網',
+    toPhone: '移動版',
+    toDonate: '捐贈'
+}
+
 export default {
     addText,
     cancelText,
@@ -78,5 +98,10 @@ export default {
     listMenu,
     setTopState,
     saveWindowSize,
-    clearData
+    clearData,
+    update,
+    useSystemBar,
+    setTopWindow,
+    restartApp,
+    otherList
 }

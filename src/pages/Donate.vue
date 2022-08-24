@@ -1,6 +1,6 @@
 <template>
   <TabBar 
-    title="捐赠"
+    :title="i18n().otherList.toDonate"
     :rightImgShow="false"
     :leftImgShow="true"
     @leftClick="router.back()"
@@ -12,7 +12,7 @@
 import TabBar from '../components/TabBar/TabBar.vue';
 import DonateList from '../components/DonateList/DonateList.vue'
 import router from '../router';
-
+import i18n from '../i18n';
 </script>
 
 <style scoped>

@@ -10,19 +10,19 @@
     />
     <ItemBox>
       <Item
-        title="自动获取更新"
+        :title="i18n().update.autoUpdate"
         :showSwitch="true"
         :switchState="autoUpdateState"
         @switchFun="setAutoUpdate"
       />
       <Item
-        title="软件更新" 
+        :title="i18n().update.updateTitle" 
         @itemFun="router.push('/update?from=setting')"
       />
     </ItemBox>
     <ItemBox>
       <Item 
-        title="使用系统标题栏" 
+        :title="i18n().useSystemBar" 
         :showSwitch="true"
         :switchState="useSystemTitleBar"
         @switchFun="setTitleBar" 
@@ -35,7 +35,7 @@
       />
       <Item 
         v-if="titleBarShow"
-        title="置顶窗口" 
+        :title="i18n().setTopWindow" 
         :showSwitch="true"
         :switchState="topState"
         @switchFun="onTopWindow" 
@@ -48,16 +48,16 @@
       />
     </ItemBox>
     <ItemBox>
-      <Item title="前往官网" itemImg="./images/web.png" @itemFun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')"/>
-      <Item title="移动版" itemImg="./images/phone.png" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')"/>
-      <Item title="捐赠" itemImg="./images/donate.png" @itemFun="router.push('/donate?from=setting')"/>
+      <Item :title="i18n().otherList.toWeb" itemImg="./images/web.png" @itemFun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')"/>
+      <Item :title="i18n().otherList.toPhone" itemImg="./images/phone.png" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')"/>
+      <Item :title="i18n().otherList.toDonate" itemImg="./images/donate.png" @itemFun="router.push('/donate?from=setting')"/>
     </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
     <ItemButton @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </ItemButton>
     <LangSet v-if="langMenuShow" />
-    <Toast msg="重启应用生效" v-if="toastShow" />
+    <Toast :msg="i18n().restartApp" v-if="toastShow" />
     <div class="black-back"  v-if="langMenuShow" @click="() => langMenuShow = !langMenuShow"></div>
   </perfect-scrollbar>
 </template>

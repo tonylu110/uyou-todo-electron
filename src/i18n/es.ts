@@ -12,6 +12,10 @@ const myAccount = 'Mi cuenta'
 const setTopState = 'Guardar Estado Superior'
 const saveWindowSize = 'Guardar Tamaño De Ventana'
 const clearData= 'Borrar Datos'
+const useSystemBar = 'Usar La Barra De Título Del Sistema'
+const setTopWindow = 'Ventana Superior'
+const restartApp = 'Reiniciar la aplicación para que surta efecto'
+
 const accountPage = {
   account: 'Cuenta',
   passwd: 'Clave',
@@ -62,6 +66,22 @@ const firstLoadData: ITodoList[] = [
   }
 ]
 
+const update = {
+  autoUpdate: 'Obtenga Actualizaciones Automáticamente',
+  updateTitle: 'Actualización De La Aplicación',
+  notUpdate: 'No hay actualización todavía',
+  checkingUpdate: 'Comprobando actualizaciones...',
+  checkUpdate: 'Buscar actualizaciones',
+  gotoUpdate: 'Ir a actualizar',
+  updateLog: 'Registro de cambios:'
+}
+
+const otherList = {
+  toWeb: 'Ir al sitio web oficial',
+  toPhone: 'Versión móvil',
+  toDonate: 'Donar'
+}
+
 export default {
   addText,
   cancelText,
@@ -78,5 +98,10 @@ export default {
   listMenu,
   setTopState,
   saveWindowSize,
-  clearData
+  clearData,
+  update,
+  useSystemBar,
+  setTopWindow,
+  restartApp,
+  otherList
 }

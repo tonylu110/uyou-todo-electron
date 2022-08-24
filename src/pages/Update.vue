@@ -1,6 +1,6 @@
 <template>
   <TabBar 
-    title="软件更新"
+    :title="i18n().update.updateTitle"
     :rightImgShow="false"
     :leftImgShow="true"
     @leftClick="router.back()"

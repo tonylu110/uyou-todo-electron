@@ -12,6 +12,10 @@ const myAccount = '我的账号'
 const setTopState = '保存置顶状态'
 const saveWindowSize = '保存窗口大小'
 const clearData = '清除数据'
+const useSystemBar = '使用系统标题栏'
+const setTopWindow = '置顶窗口'
+const restartApp = '重启应用生效'
+
 const accountPage = {
     account: '账号',
     passwd: '密码',
@@ -62,6 +66,22 @@ const firstLoadData: ITodoList[] = [
     }
 ]
 
+const update = {
+    autoUpdate: '自动获取更新',
+    updateTitle: '软件更新',
+    notUpdate: '暂无更新',
+    checkingUpdate: '检查更新中...',
+    checkUpdate: '检查更新',
+    gotoUpdate: '前往更新',
+    updateLog: '更新日志：'
+}
+
+const otherList = {
+    toWeb: '前往官网',
+    toPhone: '移动版',
+    toDonate: '捐赠'
+}
+
 export default {
     addText,
     cancelText,
@@ -78,5 +98,10 @@ export default {
     listMenu,
     setTopState,
     saveWindowSize,
-    clearData
+    clearData,
+    update,
+    useSystemBar,
+    setTopWindow,
+    restartApp,
+    otherList
 }

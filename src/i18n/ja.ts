@@ -12,6 +12,10 @@ const myAccount = 'マイアカウント'
 const setTopState = 'トップステータスを保存'
 const saveWindowSize = 'ウィンドウサイズを保存'
 const clearData = 'データをクリア'
+const useSystemBar = 'システム タイトル バーを使用'
+const setTopWindow = 'トップ ウィンドウ'
+const restartApp = 'アプリを再起動して有効にする'
+
 const accountPage = {
     account: 'アカウント',
     passwd: 'パスワード',
@@ -62,6 +66,22 @@ const firstLoadData: ITodoList[] = [
     }
 ]
 
+const update = {
+    autoUpdate: 'アップデートを自動的に取得する',
+    updateTitle: 'アプリのアップデート',
+    notUpdate: '更新はまだありません',
+    checkingUpdate: 'アップデートの確認...',
+    checkUpdate: 'アップデートを確認',
+    gotoUpdate: '更新する',
+    updateLog: '変更ログ：'
+}
+
+const otherList = {
+    toWeb: '公式サイトへ行く',
+    toPhone: 'モバイル版',
+    toDonate: '寄付する'
+}
+
 export default {
     addText,
     cancelText,
@@ -78,5 +98,10 @@ export default {
     listMenu,
     setTopState,
     saveWindowSize,
-    clearData
+    clearData,
+    update,
+    useSystemBar,
+    setTopWindow,
+    restartApp,
+    otherList
 }

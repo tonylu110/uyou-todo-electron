@@ -6,7 +6,7 @@
         <span :style="{marginBottom: newVersion !== '' ? '' : '15px'}">uyou ToDo v{{ app.getVersion() }}</span>
         <span class="version" v-if="newVersion !== ''">{{ newVersion }}</span>
         <div class="update-msg" v-if="updateMsg.length > 0">
-          <span class="update-title">更新日志：</span>
+          <span class="update-title">{{ i18n().update.updateLog }}</span>
           <ul>
             <li v-for="(item, index) in updateMsg" :key="index">{{ item.split(' ')[1] }}</li>
           </ul>
@@ -31,7 +31,7 @@ const version = appVersionCode
 
 const updateMsg: Ref<string[]> = ref([])
 const newVersion = ref('')
-const updateButton = ref('检查更新中...')
+const updateButton = ref(i18n().update.checkingUpdate)
 const toastShow = ref(false)
 const getUpdate = () => {
   setTimeout(() => {
@@ -41,10 +41,10 @@ const getUpdate = () => {
       if (res[1].code > version) {
         newVersion.value = `${i18n().updateText}: v${res[1].version}`
         updateMsg.value = res[1].data
-        updateButton.value = '前往更新'
+        updateButton.value = i18n().update.gotoUpdate
       } else {
-        newVersion.value = '暂无更新'
-        updateButton.value = '检查更新'
+        newVersion.value = i18n().update.notUpdate
+        updateButton.value = i18n().update.checkUpdate
         toastShow.value = true
         setTimeout(() => {
           toastShow.value = false
@@ -56,7 +56,7 @@ const getUpdate = () => {
 
 const updateButtonCilck = () => {
   if (updateMsg.value.length === 0) {
-    updateButton.value = '检查更新中...'
+    updateButton.value = i18n().update.checkingUpdate
     newVersion.value = ''
     getUpdate()
   } else {

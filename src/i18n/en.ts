@@ -12,6 +12,10 @@ const myAccount = 'My Account'
 const setTopState = 'Save Top Status'
 const saveWindowSize = 'Save Window Size'
 const clearData = 'Clear Data'
+const useSystemBar = 'Use The System Title Bar'
+const setTopWindow = 'Top Window'
+const restartApp = 'Restart the app to take effect'
+
 const accountPage = {
     account: 'Account',
     passwd: 'Password',
@@ -39,6 +43,16 @@ const listMenu = {
     incompleted: 'Incompleted'
 }
 
+const update = {
+    autoUpdate: 'Get Updates Automatically',
+    updateTitle: 'App Update',
+    notUpdate: 'No update yet',
+    checkingUpdate: 'Checking for updates...',
+    checkUpdate: 'Check for updates',
+    gotoUpdate: 'Go to update',
+    updateLog: 'Changelog:'
+}
+
 const firstLoadData: ITodoList[] = [
     {
         text: 'Welcome to use uyou ToDo',
@@ -62,6 +76,12 @@ const firstLoadData: ITodoList[] = [
     }
 ]
 
+const otherList = {
+    toWeb: 'Go to the official website',
+    toPhone: 'Mobile version',
+    toDonate: 'Donate'
+}
+
 export default {
     addText,
     cancelText,
@@ -78,5 +98,10 @@ export default {
     listMenu,
     setTopState,
     saveWindowSize,
-    clearData
+    clearData,
+    update,
+    useSystemBar,
+    setTopWindow,
+    restartApp,
+    otherList
 }
