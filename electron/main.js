@@ -4,6 +4,7 @@ const menuTemplate = require('./menu.js')
 const remoteMain = require('@electron/remote/main')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
+const { initMenuBlur, menuBlur, menuBlurIpc } = require('./store/menuBlurStore')
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -11,16 +12,17 @@ remoteMain.initialize();
 
 let mainWindow
 
-initWindowSize()
-initSystemBar
-
 function createWindow() {
+  initWindowSize()
+  initSystemBar()
+  initMenuBlur()
+
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 750,
     minHeight: 600,
     minWidth: 800,
-    vibrancy: 'menu',
+    vibrancy: (menuBlur || menuBlur === undefined) ? 'sidebar' : null,
     visualEffectState: 'active',
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: systemBar,
@@ -40,7 +42,7 @@ function createWindow() {
 
   remoteMain.enable(mainWindow.webContents);
 
-  if (process.platform === 'win32') {
+  if (process.platform === 'win32' && (menuBlur || menuBlur === undefined)) {
     const { setVibrancy } = require('electron-acrylic-window')
     setVibrancy(mainWindow, {
       theme: 'light',
@@ -80,6 +82,7 @@ function createWindow() {
 
   windowSizeIpc()
   systemBarIpc()
+  menuBlurIpc()
 }
 
 app.whenReady().then(() => {

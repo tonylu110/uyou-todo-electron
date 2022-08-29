@@ -27,6 +27,12 @@
         :switchState="useSystemTitleBar"
         @switchFun="setTitleBar" 
       />
+      <Item
+        title="页面菜单毛玻璃"
+        :showSwitch="true"
+        :switchState="menuBlurState"
+        @switchFun="setMenuBlur"
+      />
       <Item 
         :title="i18n().setTopState" 
         :showSwitch="true"
@@ -125,6 +131,13 @@ const onTopWindow = () => {
 const clearData = () => {
   localStorage.clear()
   window.location.reload()
+}
+
+const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
+const setMenuBlur = () => {
+  menuBlurState.value = !menuBlurState.value
+  ipcRenderer.send('setMenuBlur', menuBlurState.value)
+  localStorage.setItem('menuBlur', menuBlurState.value + '')
 }
 </script>
 
