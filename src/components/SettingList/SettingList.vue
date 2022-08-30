@@ -28,10 +28,18 @@
         @switchFun="setTitleBar" 
       />
       <Item
+        v-if="isLinux"
         title="页面菜单毛玻璃"
         :showSwitch="true"
         :switchState="menuBlurState"
         @switchFun="setMenuBlur"
+      />
+      <Item 
+        v-if="titleBarShow && isMac"
+        title="窗口菜单"
+        :showSwitch="true"
+        :switchState="showWindowMenuState"
+        @switchFun="setWindowMenu"
       />
       <Item 
         :title="i18n().setTopState" 
@@ -83,6 +91,9 @@ const ipcRenderer = require('electron').ipcRenderer
 
 const { app } = require('@electron/remote')
 const { shell } = require('electron')
+
+const isLinux = !(process.platform === 'linux')
+const isMac = !(process.platform === 'darwin')
 
 const toastShow = ref(false)
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
@@ -138,6 +149,13 @@ const setMenuBlur = () => {
   menuBlurState.value = !menuBlurState.value
   ipcRenderer.send('setMenuBlur', menuBlurState.value)
   localStorage.setItem('menuBlur', menuBlurState.value + '')
+}
+
+const showWindowMenuState = ref(localStorage.getItem('windowMenu') === 'true')
+const setWindowMenu = () => {
+  showWindowMenuState.value = !showWindowMenuState.value
+  ipcRenderer.send('setWindowMenu', showWindowMenuState.value)
+  localStorage.setItem('windowMenu', showWindowMenuState.value + '')
 }
 </script>
 

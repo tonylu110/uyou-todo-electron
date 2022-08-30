@@ -5,6 +5,7 @@ const remoteMain = require('@electron/remote/main')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
 const { initMenuBlur, menuBlur, menuBlurIpc } = require('./store/menuBlurStore')
+const { initWindowMenu, windowMenu, windowMenuIpc } = require('./store/windowMenuStore')
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -16,6 +17,7 @@ function createWindow() {
   initWindowSize()
   initSystemBar()
   initMenuBlur()
+  initWindowMenu()
 
   mainWindow = new BrowserWindow({
     width: 1000,
@@ -83,6 +85,7 @@ function createWindow() {
   windowSizeIpc()
   systemBarIpc()
   menuBlurIpc()
+  windowMenuIpc()
 }
 
 app.whenReady().then(() => {
@@ -98,7 +101,7 @@ app.whenReady().then(() => {
 
   Menu.setApplicationMenu(null);
 
-  if (process.platform == 'darwin') {
+  if (process.platform == 'darwin' || windowMenu) {
     Menu.setApplicationMenu(appMenu)
   }
 
