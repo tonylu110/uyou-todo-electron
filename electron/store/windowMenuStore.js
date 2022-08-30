@@ -4,7 +4,7 @@ const store = new Store()
 
 const initWindowMenu = () => {
   if (store.get('windowMenu') === undefined) {
-    store.set('windowMenu', true)
+    store.set('windowMenu', false)
   }
 }
 
