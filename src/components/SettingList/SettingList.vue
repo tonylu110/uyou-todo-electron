@@ -41,6 +41,8 @@
         :switchState="showWindowMenuState"
         @switchFun="setWindowMenu"
       />
+    </ItemBox>
+    <ItemBox>
       <Item 
         :title="i18n().setTopState" 
         :showSwitch="true"
@@ -149,6 +151,10 @@ const setMenuBlur = () => {
   menuBlurState.value = !menuBlurState.value
   ipcRenderer.send('setMenuBlur', menuBlurState.value)
   localStorage.setItem('menuBlur', menuBlurState.value + '')
+  toastShow.value = true
+  setTimeout(() => {
+    toastShow.value = false
+  }, 700);
 }
 
 const showWindowMenuState = ref(localStorage.getItem('windowMenu') === 'true')
@@ -156,6 +162,10 @@ const setWindowMenu = () => {
   showWindowMenuState.value = !showWindowMenuState.value
   ipcRenderer.send('setWindowMenu', showWindowMenuState.value)
   localStorage.setItem('windowMenu', showWindowMenuState.value + '')
+  toastShow.value = true
+  setTimeout(() => {
+    toastShow.value = false
+  }, 700);
 }
 </script>
 
