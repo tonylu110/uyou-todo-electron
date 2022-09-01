@@ -15,6 +15,8 @@ const clearData = 'Clear Data'
 const useSystemBar = 'Use The System Title Bar'
 const setTopWindow = 'Top Window'
 const restartApp = 'Restart the app to take effect'
+const windowBlur = 'Page Menu Blur'
+const windowMenu = 'Window menu'
 
 const accountPage = {
     account: 'Account',
@@ -103,5 +105,7 @@ export default {
     useSystemBar,
     setTopWindow,
     restartApp,
-    otherList
+    otherList,
+    windowBlur,
+    windowMenu
 }
