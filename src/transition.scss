@@ -1,0 +1,47 @@
+.slide-left-enter-active {
+  transition: left .5s;
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.slide-left-leave-active {
+  @extend .slide-left-enter-active;
+}
+
+.slide-right-enter-active {
+  @extend .slide-left-enter-active;
+}
+
+.slide-right-leave-active {
+  @extend .slide-right-enter-active;
+}
+
+.slide-left-leave,
+.slide-left-enter-to {
+  left: 0;
+}
+
+.slide-left-leave-to {
+  z-index: 1;
+  left: -100%;
+}
+
+.slide-left-enter {
+  left: 100%;
+}
+
+.slide-right-leave,
+.slide-right-enter-to {
+  left: 0;
+}
+
+.slide-right-leave-to {
+  z-index: 1;
+  left: 100%;
+}
+
+.slide-right-enter {
+  left: -100%;
+}

@@ -1,11 +1,13 @@
 <template>
-  <TabBar 
-    :title="i18n().accountPage.account"
-    :rightImgShow="false"
-    @leftClick="() => router.back()"
-    :leftImgShow="form === 'setting'"
-  />
-  <AccountList />
+  <div class="page">
+    <TabBar 
+      :title="i18n().accountPage.account"
+      :rightImgShow="false"
+      @leftClick="() => router.back()"
+      :leftImgShow="form === 'setting'"
+    />
+    <AccountList />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +25,3 @@ watchEffect(() => {
   form.value = route.query.from as unknown as string
 })
 </script>
-
-<style scoped>
-
-</style>

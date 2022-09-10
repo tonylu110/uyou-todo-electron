@@ -21,4 +21,10 @@ body {
   #app {
     user-select: none;
   }
+
+  .page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 }

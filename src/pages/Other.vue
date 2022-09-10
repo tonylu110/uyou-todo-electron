@@ -1,14 +1,16 @@
 <template>
-  <TabBar
-    @leftClick="() => router.push('/setting')"
-    leftImg="settings"
-    :title="title"
-    :leftImgShow="false"
-    :rightImgShow="false"
-  />
-  <List
-    :listData="listData"
-  />
+  <div class="page">
+    <TabBar
+      @leftClick="() => router.push('/setting')"
+      leftImg="settings"
+      :title="title"
+      :leftImgShow="false"
+      :rightImgShow="false"
+    />
+    <List
+      :listData="listData"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
