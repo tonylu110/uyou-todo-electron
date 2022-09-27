@@ -15,8 +15,6 @@ const clearData= 'Borrar Datos'
 const useSystemBar = 'Usar La Barra De Título Del Sistema'
 const setTopWindow = 'Ventana Superior'
 const restartApp = 'Reiniciar la aplicación para que surta efecto'
-const windowBlur = 'Desenfoque De Menú De página'
-const windowMenu = 'Menú De Ventana'
 
 const accountPage = {
   account: 'Cuenta',
@@ -105,7 +103,5 @@ export default {
   useSystemBar,
   setTopWindow,
   restartApp,
-  otherList,
-  windowBlur,
-  windowMenu
+  otherList
 }

@@ -15,8 +15,6 @@ const clearData = 'データをクリア'
 const useSystemBar = 'システム タイトル バーを使用'
 const setTopWindow = 'トップ ウィンドウ'
 const restartApp = 'アプリを再起動して有効にする'
-const windowBlur = 'ページ メニューのぼかし'
-const windowMenu = 'ウィンドウ メニュー'
 
 const accountPage = {
     account: 'アカウント',
@@ -105,7 +103,5 @@ export default {
     useSystemBar,
     setTopWindow,
     restartApp,
-    otherList,
-    windowBlur,
-    windowMenu
+    otherList
 }

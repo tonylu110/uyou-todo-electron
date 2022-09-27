@@ -29,14 +29,14 @@
       />
       <Item
         v-if="isLinux"
-        :title="i18n().windowBlur"
+        title="页面菜单毛玻璃"
         :showSwitch="true"
         :switchState="menuBlurState"
         @switchFun="setMenuBlur"
       />
       <Item 
         v-if="titleBarShow && isMac"
-        :title="i18n().windowMenu"
+        title="窗口菜单"
         :showSwitch="true"
         :switchState="showWindowMenuState"
         @switchFun="setWindowMenu"

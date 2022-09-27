@@ -15,8 +15,6 @@ const clearData = '清除数据'
 const useSystemBar = '使用系统标题栏'
 const setTopWindow = '置顶窗口'
 const restartApp = '重启应用生效'
-const windowBlur = '页面菜单毛玻璃'
-const windowMenu = '窗口菜单'
 
 const accountPage = {
     account: '账号',
@@ -105,7 +103,5 @@ export default {
     useSystemBar,
     setTopWindow,
     restartApp,
-    otherList,
-    windowBlur,
-    windowMenu
+    otherList
 }
