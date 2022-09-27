@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, watchEffect } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, Ref } from 'vue';
 import i18n from './i18n';
 import TitleBar from './components/TitleBar/TitleBar.vue';
 import Alert from './components/Alert/Alert.vue';
@@ -60,16 +59,6 @@ window.addEventListener('resize', () => {
 })
 
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
-
-const transitionName = ref('')
-const route = useRoute()
-watchEffect(() => {
-  if (route.meta.index === 1) {
-    transitionName.value = 'slide-left'
-  } else {
-    transitionName.value = 'slide-rigth'
-  }
-})
 </script>
 
 <template>
@@ -78,11 +67,7 @@ watchEffect(() => {
     <div class="list-in">
       <ListMenu />
       <div class="todo-list" :style="{height: titleBarShow ? 'calc(100vh - 65px)' : ''}">
-        <router-view v-slot="{ Component }">
-          <transition :name="transitionName">
-            <component :is="Component" />
-          </transition>
-        </router-view>
+        <router-view></router-view>
         <Alert 
           v-if="alertShow" 
           :title="`${i18n().updateText} v${newVersion}`"
@@ -97,8 +82,6 @@ watchEffect(() => {
 </template>
 
 <style lang="scss">
-@import './transition.scss';
-
 .list-main {
   display: flex;
   flex-direction: column;
@@ -109,10 +92,7 @@ watchEffect(() => {
     flex-direction: row;
     
     .todo-list {
-      height: calc(100vh - 40px);
-      width: calc(100% + 2px);
-      overflow: hidden;
-      position: relative;
+      height: calc(100vh - 105px);
     }
   }
 }

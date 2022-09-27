@@ -1,18 +1,16 @@
 <template>
-  <div class="page">
-    <TabBar
-      @rightClick="() => showAddItem = true" 
-      @leftClick="() => router.push('/setting')"
-      leftImg="settings"
-      :title="i18n().listMenu.allTodo"
-      :leftImgShow="false"
-    />
-    <List
-      :showAddItem="showAddItem" 
-      @setAddItem="() => showAddItem = false"
-      :listData="listData"
-    />
-  </div>
+  <TabBar
+    @rightClick="() => showAddItem = true" 
+    @leftClick="() => router.push('/setting')"
+    leftImg="settings"
+    :title="i18n().listMenu.allTodo"
+    :leftImgShow="false"
+  />
+  <List
+    :showAddItem="showAddItem" 
+    @setAddItem="() => showAddItem = false"
+    :listData="listData"
+  />
 </template>
 
 <script setup lang="ts">

@@ -1,12 +1,10 @@
 <template>
-  <div class="page">
-    <TabBar 
-      :title="i18n().settingTitleText"
-      :rightImgShow="false"
-      :leftImgShow="false"
-    />
-    <SettingList />
-  </div>
+  <TabBar 
+    :title="i18n().settingTitleText"
+    :rightImgShow="false"
+    :leftImgShow="false"
+  />
+  <SettingList />
 </template>
 
 <script setup lang="ts">

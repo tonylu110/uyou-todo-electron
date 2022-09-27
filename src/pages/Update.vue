@@ -1,13 +1,11 @@
 <template>
-  <div class="page">
-    <TabBar 
-      :title="i18n().update.updateTitle"
-      :rightImgShow="false"
-      :leftImgShow="true"
-      @leftClick="router.back()"
-    />
-    <UpdateList />
-  </div>
+  <TabBar 
+    :title="i18n().update.updateTitle"
+    :rightImgShow="false"
+    :leftImgShow="true"
+    @leftClick="router.back()"
+  />
+  <UpdateList />
 </template>
 
 <script setup lang="ts">
