@@ -14,6 +14,7 @@
       :switchState="swichState"
       @switchFun="setAutoSync"
     />
+    <ItemButton v-if="loginState" @click="changPass">修改密码</ItemButton>
     <ItemButton v-if="loginState" mode="error" @click="logout">{{ i18n().accountPage.logout }}</ItemButton>
     <Alert
       :title="i18n().accountPage.alertTitle"
@@ -52,6 +53,10 @@ onMounted(() => {
     loginText.value = localStorage.getItem('uname')!
   }
 })
+
+const changPass = () => {
+  window.open('https://register.todo.uyou.org.cn/#/setpassword')
+}
 
 const openRegister = () => {
   window.open('https://register.todo.uyou.org.cn')
@@ -185,6 +190,7 @@ const closeAlert = () => {
     padding: 10px 15px;
     display: flex;
     flex-direction: column;
+    max-width: 550px;
 
     input {
       padding: 15px;
