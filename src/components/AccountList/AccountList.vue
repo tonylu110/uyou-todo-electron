@@ -55,7 +55,7 @@ onMounted(() => {
 })
 
 const changPass = () => {
-  window.open('https://register.todo.uyou.org.cn/#/setpassword')
+  window.open(`https://register.todo.uyou.org.cn/#/setpassword/${localStorage.getItem('uname')}`)
 }
 
 const openRegister = () => {
