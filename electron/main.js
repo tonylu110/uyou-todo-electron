@@ -24,7 +24,7 @@ function createWindow() {
     height: 750,
     minHeight: 600,
     minWidth: 800,
-    vibrancy: (menuBlur || menuBlur === undefined) ? 'sidebar' : null,
+    vibrancy: (menuBlur || menuBlur === undefined) ? 'menu' : null,
     visualEffectState: 'active',
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: systemBar,
