@@ -1,5 +1,5 @@
 <template>
-  <div class="alert">
+  <dialog :class="`alert ${dialogShow ? '' : 'hide'}`" ref="dialog">
     <div class="title">
       {{ title }}
     </div>
@@ -10,13 +10,14 @@
       <div class="cancel" v-if="cancelButtonShow" @click="emits('cancel')">{{ i18n().alertText.cancelText }}</div>
       <div class="return" :style="{width: cancelButtonShow ? '' : '100%'}" @click="emits('return')">{{ i18n().alertText.returnText}}</div>
     </div>
-  </div>
+  </dialog>
 </template>
 
 <script setup lang="ts">
+import {onMounted, Ref, ref, watchEffect} from "vue"
 import i18n from '../../i18n'
 
-defineProps({
+const props = defineProps({
   title: {
     default: 'title',
     type: String
@@ -28,6 +29,10 @@ defineProps({
   cancelButtonShow: {
     default: true,
     type: Boolean
+  },
+  dialogShow: {
+    default: false,
+    type: Boolean
   }
 })
 
@@ -35,21 +40,36 @@ const emits = defineEmits<{
   (e: 'cancel'): void,
   (e: 'return'): void
 }>()
+
+const dialog = ref(null) as unknown as Ref<HTMLDialogElement>
+
+onMounted(() => {
+  const closeAlert = () => {
+    dialog.value.close()
+  }
+
+  watchEffect(() => {
+    if (props.dialogShow) {
+      dialog.value.removeEventListener('webkitAnimationEnd', closeAlert)
+      dialog.value.showModal()
+    } else {
+      dialog.value.addEventListener('webkitAnimationEnd', closeAlert)
+    }
+  })
+})
 </script>
 
 <style lang="scss" scoped>
 .alert {
-  position: absolute;
+  padding: 0;
   z-index: 10;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   background-color: #edd9b7;
   width: 300px;
   border-radius: 9px;
   box-shadow: 0 5px 8px #594b4270;
   border: 1px solid #999;
   overflow: hidden;
+  transition: dialog;
 
   .title {
     -webkit-app-region: drag;

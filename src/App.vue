@@ -69,13 +69,12 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
       <div class="todo-list" :style="{height: titleBarShow ? 'calc(100vh - 65px)' : ''}">
         <router-view></router-view>
         <Alert 
-          v-if="alertShow" 
+          :dialogShow="alertShow"
           :title="`${i18n().updateText} v${newVersion}`"
           :body="alertMsg"
           @cancel="alertShow = false"
           @return="returnClick"
         />
-        <div class="black-back" v-if="alertShow" @click="alertShow = false"></div>
       </div>
     </div>
   </div>
@@ -95,17 +94,5 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
       height: calc(100vh - 105px);
     }
   }
-}
-
-.black-back {
-  background-color: #00000030;
-  backdrop-filter: blur(10px);
-  height: 100vh;
-  width: calc(100vw - 300px);
-  position: fixed;
-  top: 50%;
-  right: 0;
-  transform: translate(0%, -50%);
-  margin-top: 25px;
 }
 </style>

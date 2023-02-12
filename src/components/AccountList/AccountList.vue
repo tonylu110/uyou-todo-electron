@@ -19,9 +19,9 @@
     <Alert
       :title="i18n().accountPage.alertTitle"
       :body="alertMsg"
-      :cancelButtonShow="false" 
+      :cancelButtonShow="false"
+      :dialogShow="alertShow"
       @return="closeAlert"
-      v-if="alertShow"
     />
     <Toast v-if="showToast" :msg="toastMsg" />
   </perfect-scrollbar>

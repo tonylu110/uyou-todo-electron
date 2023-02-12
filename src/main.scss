@@ -2,6 +2,30 @@
   display: none;
 }
 
+dialog[open] {
+  -webkit-animation: show .3s ease normal;
+}
+@-webkit-keyframes show{
+  from {
+    transform: translateY(-70%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+dialog.hide {
+  -webkit-animation: hide .3s ease normal;
+}
+@-webkit-keyframes hide{
+  to {
+    transform: translateY(-70%);
+    opacity: 0;
+  }
+}
+
 @font-face {
   font-family: 'smartisan-t';
   src: url('../fonts/smartisan-t/Smartisan_Compact-Regular.ttf');
@@ -11,6 +35,18 @@
   font-family: 'smartisan-t';
   font-weight: bold;
   src: url('../fonts/smartisan-t/Smartisan_Compact-Bold.ttf');
+}
+
+.black-back {
+  background-color: #00000030;
+  backdrop-filter: blur(10px);
+  height: 100vh;
+  width: calc(100vw - 300px);
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translate(0%, -50%);
+  margin-top: 25px;
 }
 
 body {
