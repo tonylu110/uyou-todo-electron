@@ -19,9 +19,10 @@
     <Alert
       :title="i18n().accountPage.alertTitle"
       :body="alertMsg"
-      :cancelButtonShow="false"
+      :cancelButtonShow="isLogoutClick"
       :dialogShow="alertShow"
-      @return="closeAlert"
+      @return="returnAlert"
+      @cancel="closeAlert"
     />
     <Toast v-if="showToast" :msg="toastMsg" />
   </perfect-scrollbar>
@@ -158,15 +159,30 @@ const login = () => {
   }
 }
 
+const isLogoutClick = ref(false)
+
 const logout = () => {
-  loginText.value = i18n().loginText
-  localStorage.setItem('uname', '')
-  localStorage.setItem('uid', '')
-  loginState.value = false
+  alertShow.value = true
+  isLogoutClick.value = true
+  alertMsg.value = ['确定退出登录吗？']
 }
 
-const closeAlert = () => {
+const returnAlert = () => {
+  if (isLogoutClick.value) {
+    loginText.value = i18n().loginText
+    localStorage.setItem('uname', '')
+    localStorage.setItem('uid', '')
+    loginState.value = false
+    alertShow.value = false
+    return
+  }
   alertShow.value = false
+  isLogoutClick.value = false
+}
+
+const closeAlert = (node: HTMLDialogElement) => {
+  alertShow.value = false
+  isLogoutClick.value = false
 }
 </script>
 

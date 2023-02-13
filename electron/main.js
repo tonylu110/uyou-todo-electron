@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, screen, Menu } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Menu, shell } = require('electron')
 const path = require('path')
 const menuTemplate = require('./menu.js')
 const remoteMain = require('@electron/remote/main')
@@ -81,6 +81,10 @@ function createWindow() {
   ipcMain.on("window-on-top", (event, arg) => {
     mainWindow.setAlwaysOnTop(arg)
   });
+
+  ipcMain.on("open-url", (event, url) => {
+    shell.openExternal(url)
+  })
 
   windowSizeIpc()
   systemBarIpc()

@@ -6,6 +6,8 @@ import Alert from './components/Alert/Alert.vue';
 import ListMenu from './components/ListMenu/ListMenu.vue';
 import appVersionCode from './util/appVersionCode'
 
+const ipcRenderer = require('electron').ipcRenderer
+
 const alertShow = ref(false)
 const alertMsg: Ref<string[]> = ref([])
 const newVersion = ref('')
@@ -27,7 +29,7 @@ if (autoUpdateState) {
 
 const returnClick = () => {
   alertShow.value = false
-  window.open('https://github.com/tonylu110/uyou-todo-electron/releases')
+  ipcRenderer.send('open-url', 'https://github.com/tonylu110/uyou-todo-electron/releases')
 }
 
 // const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
@@ -50,7 +52,6 @@ const returnClick = () => {
 //   }
 // }
 
-const ipcRenderer = require('electron').ipcRenderer
 window.addEventListener('resize', () => {
   ipcRenderer.send('getWindowSize', {
     height: window.innerHeight,
@@ -72,7 +73,7 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
           :dialogShow="alertShow"
           :title="`${i18n().updateText} v${newVersion}`"
           :body="alertMsg"
-          @cancel="alertShow = false"
+          @cancel="() => alertShow = false"
           @return="returnClick"
         />
       </div>

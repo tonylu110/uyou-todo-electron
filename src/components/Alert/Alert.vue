@@ -20,7 +20,7 @@ import i18n from '../../i18n'
 const props = withDefaults(defineProps<{
   title: string
   body: Array<string>
-  cancelButtonShow: boolean
+  cancelButtonShow?: boolean
   dialogShow: boolean
 }>(), {
   title: 'title',
@@ -29,12 +29,12 @@ const props = withDefaults(defineProps<{
   dialogShow: false
 })
 
+const dialog = ref(null) as unknown as Ref<HTMLDialogElement>
+
 const emits = defineEmits<{
   (e: 'cancel'): void,
   (e: 'return'): void
 }>()
-
-const dialog = ref(null) as unknown as Ref<HTMLDialogElement>
 
 onMounted(() => {
   const closeAlert = () => {
