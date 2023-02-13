@@ -2,30 +2,6 @@
   display: none;
 }
 
-dialog[open] {
-  -webkit-animation: show .3s ease normal;
-}
-@-webkit-keyframes show{
-  from {
-    transform: translateY(-70%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0%);
-    opacity: 1;
-  }
-}
-
-dialog.hide {
-  -webkit-animation: hide .3s ease normal;
-}
-@-webkit-keyframes hide{
-  to {
-    transform: translateY(-70%);
-    opacity: 0;
-  }
-}
-
 @font-face {
   font-family: 'smartisan-t';
   src: url('../fonts/smartisan-t/Smartisan_Compact-Regular.ttf');
