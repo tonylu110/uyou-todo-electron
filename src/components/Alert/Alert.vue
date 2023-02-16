@@ -18,10 +18,10 @@ import {onMounted, Ref, ref, watchEffect} from "vue"
 import i18n from '../../i18n'
 
 const props = withDefaults(defineProps<{
-  title: string
-  body: Array<string>
+  title?: string
+  body?: Array<string>
   cancelButtonShow?: boolean
-  dialogShow: boolean
+  dialogShow?: boolean
 }>(), {
   title: 'title',
   body: () => ['1', '2'],
@@ -91,6 +91,7 @@ onMounted(() => {
     span {
       display: block;
       white-space: pre-wrap;
+      user-select: text;
     }
   }
 
@@ -117,6 +118,10 @@ onMounted(() => {
         &:active {
           background-color: #00000010;
         }
+
+        &:hover {
+          background-color: #00000005;
+        }
       }
 
       &.return {
@@ -125,6 +130,10 @@ onMounted(() => {
         &:active {
           background-color: #5985eb;
           color: white;
+        }
+
+        &:hover {
+          background-color: #00000005;
         }
       }
     }

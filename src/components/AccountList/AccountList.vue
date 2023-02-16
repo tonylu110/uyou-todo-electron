@@ -3,7 +3,7 @@
     <Item :title="loginText" :showArrow="false" />
     <div v-if="!loginState" class="login-input">
       <input type="text" :placeholder="i18n().accountPage.account" v-model="uname">
-      <input type="password" :placeholder="i18n().accountPage.passwd" v-model="passwd">
+      <input type="password" :placeholder="i18n().accountPage.passwd" v-model="passwd" @keydown.enter="login">
     </div>
     <ItemButton v-if="!loginState" @click="login" mode="primary">{{ i18n().accountPage.login }}</ItemButton>
     <ItemButton v-if="!loginState" @click="openRegister">{{ i18n().accountPage.register }}</ItemButton>
@@ -174,13 +174,14 @@ const returnAlert = () => {
     localStorage.setItem('uid', '')
     loginState.value = false
     alertShow.value = false
+    isLogoutClick.value = false
     return
   }
   alertShow.value = false
   isLogoutClick.value = false
 }
 
-const closeAlert = (node: HTMLDialogElement) => {
+const closeAlert = () => {
   alertShow.value = false
   isLogoutClick.value = false
 }
