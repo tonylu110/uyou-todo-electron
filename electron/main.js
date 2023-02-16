@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, screen, Menu, shell } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Menu, shell, nativeTheme } = require('electron')
 const path = require('path')
 const menuTemplate = require('./menu.js')
 const remoteMain = require('@electron/remote/main')
@@ -57,6 +57,9 @@ function createWindow() {
     mainWindow.setLightTheme()
     if (IS_WINDOWS_11) {
       mainWindow.setMicaEffect()
+      nativeTheme.on('updated', () => {
+        mainWindow.setLightTheme()
+      })
     }
   }
 
