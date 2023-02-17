@@ -45,22 +45,21 @@ function createWindow() {
 
   remoteMain.enable(mainWindow.webContents);
 
-  if (process.platform === 'win32' && (menuBlur || menuBlur === undefined)) {
+  mainWindow.setLightTheme()
+
+  nativeTheme.on('updated', () => {
     mainWindow.setLightTheme()
-    mainWindow.setRoundedCorner()
-    mainWindow.setCustomEffect(4, '#fff6dc', 0.6);
-  } else if (process.platform === 'win32' && !(menuBlur || menuBlur === undefined)) {
-    mainWindow.setLightTheme()
-    mainWindow.setCaptionColor('#fff6dc')
-  }
-  if (process.platform === 'win32' && (systemBar || systemBar === undefined) && (menuBlur || menuBlur === undefined)) {
-    mainWindow.setLightTheme()
+  })
+
+  if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
       mainWindow.setMicaEffect()
-      nativeTheme.on('updated', () => {
-        mainWindow.setLightTheme()
-      })
+    } else {
+      mainWindow.setRoundedCorner()
+      mainWindow.setCustomEffect(4, '#fff6dc', 0.7);
     }
+  } else {
+    mainWindow.setCaptionColor('#fff6dc')
   }
 
   mainWindow.loadURL(
@@ -113,11 +112,7 @@ app.whenReady().then(() => {
 
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height));
 
-  Menu.setApplicationMenu(null);
-
-  if (process.platform == 'darwin' || windowMenu) {
-    Menu.setApplicationMenu(appMenu)
-  }
+  Menu.setApplicationMenu(windowMenu ? appMenu : null);
 
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
