@@ -1,5 +1,5 @@
 <template>
-  <div class="title-bar">
+  <div class="title-bar" :style="{borderTopLeftRadius: isRound ? '15px' : ''}">
     <div v-if="leftImgShow" class="left-img" @click="() => emits('leftClick')">
       <span class="material-icons">{{ leftImg }}</span>
     </div>
@@ -66,6 +66,13 @@ const sync = () => {
       window.location.reload()
     })
   }
+}
+
+const isRound = ref(false)
+
+const isWindows = navigator.userAgent.indexOf('Win')>=0
+if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && localStorage.getItem('systemTitle') === 'true') {
+  isRound.value = true
 }
 </script>
 

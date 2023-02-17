@@ -6,6 +6,7 @@ const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
 const { initMenuBlur, menuBlur, menuBlurIpc } = require('./store/menuBlurStore')
 const { initWindowMenu, windowMenu, windowMenuIpc } = require('./store/windowMenuStore')
+const { PARAMS, VALUE,  MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -19,7 +20,7 @@ function createWindow() {
   initMenuBlur()
   initWindowMenu()
 
-  mainWindow = new BrowserWindow({
+  mainWindow = new MicaBrowserWindow({
     width: 1000,
     height: 750,
     minHeight: 600,
@@ -45,12 +46,18 @@ function createWindow() {
   remoteMain.enable(mainWindow.webContents);
 
   if (process.platform === 'win32' && (menuBlur || menuBlur === undefined)) {
-    const { setVibrancy } = require('electron-acrylic-window')
-    setVibrancy(mainWindow, {
-      theme: 'light',
-      effect: 'acrylic',
-      disableOnBlur: true
-    })
+    mainWindow.setLightTheme()
+    mainWindow.setRoundedCorner()
+    mainWindow.setCustomEffect(4, '#fff6dc', 0.6);
+  } else if (process.platform === 'win32' && !(menuBlur || menuBlur === undefined)) {
+    mainWindow.setLightTheme()
+    mainWindow.setCaptionColor('#fff6dc')
+  }
+  if (process.platform === 'win32' && (systemBar || systemBar === undefined) && (menuBlur || menuBlur === undefined)) {
+    mainWindow.setLightTheme()
+    if (IS_WINDOWS_11) {
+      mainWindow.setMicaEffect()
+    }
   }
 
   mainWindow.loadURL(

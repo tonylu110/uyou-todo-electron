@@ -84,8 +84,8 @@ const title = ref('uyou ToDo')
 
 const isWindows = navigator.userAgent.indexOf('Win')>=0
 const listMenuColor = ref('')
-if (isWindows) {
-  listMenuColor.value = '#fff6dc77'
+if (isWindows && localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) {
+  listMenuColor.value = '#fff6dc00'
 }
 </script>
 

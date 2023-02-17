@@ -77,7 +77,7 @@ const toList = (listName: string) => {
 const isWindows = navigator.userAgent.indexOf('Win')>=0
 const listMenuColor = ref('')
 if (isWindows && localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) {
-  listMenuColor.value = '#fff6dc77'
+  listMenuColor.value = '#fff6dc00'
 }
 </script>
 
@@ -86,7 +86,7 @@ if (isWindows && localStorage.getItem('menuBlur') === 'true' || localStorage.get
   width: 300px;
   background-color: #fff6dcaa;
   height: calc(100vh - 40px);
-  border-right: 1px solid #00000010;
+  //border-right: 1px solid #00000010;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
