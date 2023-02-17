@@ -76,7 +76,7 @@ const toList = (listName: string) => {
 
 const isWindows = navigator.userAgent.indexOf('Win')>=0
 const listMenuColor = ref('')
-if (isWindows && localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) {
+if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)) {
   listMenuColor.value = '#fff6dc00'
 }
 </script>
