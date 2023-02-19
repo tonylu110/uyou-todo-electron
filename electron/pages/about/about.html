@@ -6,18 +6,20 @@
     <title>About</title>
 </head>
 <body>
-    <div class="background">
+    <div class="background" style="display: none">
         <img src="../../../dist/logo.png" alt="">
         <span class="version"></span>
         <span class="copyright">Copyright (c) 2022-present, Anthony Lu</span>
-        <div class="close-button">
+        <div class="close-button" style="display: none">
             <img src="./close.png" alt="" class="close-img">
         </div>
     </div>
     <script>
         const ipcRenderer = require('electron').ipcRenderer
 
-        document.querySelector('.close-button').addEventListener('click', () => {
+        const closeButton = document.querySelector('.close-button')
+
+        closeButton.addEventListener('click', () => {
             ipcRenderer.send('close-about')
         })
 
@@ -25,6 +27,23 @@
         ipcRenderer.on('version', (event, version) => {
             document.querySelector('.version').innerText = `v${version}`
         })
+
+        const background = document.querySelector('.background')
+
+        const isWindows = navigator.userAgent.indexOf('Win')>=0
+        const isMac = navigator.userAgent.indexOf('Mac')>=0
+
+        if (!isWindows) {
+          background.style.backgroundColor = '#edd9b750'
+        }
+
+        if (isMac) {
+          closeButton.style.display = 'none'
+        } else {
+          closeButton.style.display = ''
+        }
+
+        background.style.display = ''
     </script>
 </body>
 </html>

@@ -1,13 +1,12 @@
-const { app, BrowserWindow, ipcMain, screen, Menu, shell } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Menu, shell, nativeTheme } = require('electron')
 const path = require('path')
 const menuTemplate = require('./menu.js')
 const remoteMain = require('@electron/remote/main')
-const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
-const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
-const { initMenuBlur, menuBlur, menuBlurIpc } = require('./store/menuBlurStore')
-const { initWindowMenu, windowMenu, windowMenuIpc } = require('./store/windowMenuStore')
-const createAboutWindowMac = require("./pages/about/aboutMac");
-const createAboutWindow = require("./pages/about/about");
+const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('../store/windowSizeStore')
+const { initSystemBar, systemBar, systemBarIpc } = require('../store/systemTitleBarStore')
+const { initMenuBlur, menuBlur, menuBlurIpc } = require('../store/menuBlurStore')
+const { initWindowMenu, windowMenu, windowMenuIpc } = require('../store/windowMenuStore')
+const createAboutWindowMac = require("./pages/aboutMac");
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -28,12 +27,12 @@ function createWindow() {
         minWidth: 800,
         vibrancy: (menuBlur || menuBlur === undefined) ? 'menu' : null,
         visualEffectState: 'active',
-        icon: path.join(__dirname, '../dist/logo.png'),
+        icon: path.join(__dirname, '../../dist/logo.png'),
         frame: systemBar,
         titleBarStyle: systemBar ? 'default' : 'hiddenInset',
         show: false,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
+            preload: path.join(__dirname, '../preload.js'),
             enableRemoteModule: true,
             nodeIntegration: true,
             contextIsolation: false
@@ -49,7 +48,7 @@ function createWindow() {
     mainWindow.loadURL(
         NODE_ENV === "development"
             ? 'http://localhost:3000'
-            : `file://${path.join(__dirname, `../dist/index.html`)}`
+            : `file://${path.join(__dirname, `../../dist/index.html`)}`
     )
 
     // mainWindow.setMaximizable(false)
@@ -57,6 +56,8 @@ function createWindow() {
     if (NODE_ENV === 'development') {
         mainWindow.webContents.openDevTools({ mode: 'detach' })
     }
+
+    nativeTheme.themeSource = "light"
 
     ipcMain.on("window-min", () => {
         mainWindow.minimize()
@@ -85,12 +86,7 @@ function createWindow() {
     windowMenuIpc()
 
     ipcMain.on('open-about', () => {
-        let aboutWindow
-        if (process.platform === 'darwin') {
-            aboutWindow = createAboutWindowMac()
-        } else {
-            aboutWindow = createAboutWindow()
-        }
+        let aboutWindow = createAboutWindowMac()
 
         ipcMain.once("close-about", () => {
             aboutWindow.close()

@@ -1,7 +1,6 @@
 const { shell, ipcMain, app} = require('electron');
 const i18n = require('./i18n');
 const createAboutWindow = require('./pages/about/about')
-const createAboutWindowMac = require('./pages/about/aboutMac')
 
 module.exports = function (app, mainWindow, height) {
   return [
@@ -11,12 +10,7 @@ module.exports = function (app, mainWindow, height) {
         {
           label: i18n(app).aboutText,
           click() {
-            let aboutWindow
-            if (process.platform === 'darwin') {
-              aboutWindow = createAboutWindowMac()
-            } else {
-              aboutWindow = createAboutWindow()
-            }
+            let aboutWindow = createAboutWindow()
 
             ipcMain.once("close-about", () => {
               aboutWindow.close()

@@ -7,7 +7,7 @@ const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleB
 const { initMenuBlur, menuBlur, menuBlurIpc } = require('./store/menuBlurStore')
 const { initWindowMenu, windowMenu, windowMenuIpc } = require('./store/windowMenuStore')
 const { PARAMS, VALUE,  MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
-const createAboutWindowMac = require("./pages/about/aboutMac");
+const createAboutWindowMac = require("./mac/pages/aboutMac");
 const createAboutWindow = require("./pages/about/about");
 
 const NODE_ENV = process.env.NODE_ENV

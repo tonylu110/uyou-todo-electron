@@ -1,6 +1,6 @@
 const path = require('path');
 const { BrowserWindow } = require("electron");
-const about = path.join(__dirname, './about.html');
+const about = path.join(__dirname, '../../pages/about/about.html');
 
 let aboutWindow
 
@@ -12,6 +12,9 @@ function createAboutWindow () {
         frame: false,
         icon: path.join(__dirname, '../../../dist/logo.png'),
         vibrancy: "menu",
+        titleBarStyle: 'hidden',
+        maximizable: false,
+        minimizable: false,
         webPreferences: {
             enableRemoteModule: true,
             nodeIntegration: true,
@@ -19,9 +22,8 @@ function createAboutWindow () {
         }
     })
 
-    aboutWindow.loadURL(about)
-
-    aboutWindow.webContents.openDevTools({ mode: 'detach' })
+    aboutWindow.setAlwaysOnTop(true)
+    aboutWindow.loadURL(`file://${about}`)
 
     return aboutWindow
 }

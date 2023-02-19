@@ -11,9 +11,9 @@
     "electron:serve": "concurrently -k \"yarn dev\" \"yarn electron\"",
     "electron:servemac": "concurrently -k \"yarn dev\" \"yarn electron:mac\"",
     "electron:build": "vite build && electron-builder",
-    "electron:buildmac": "vite build && electron-builder --config.npmRebuild=false -c.extraMetadata.main=electron/mainMac.js",
+    "electron:buildmac": "vite build && electron-builder --config.npmRebuild=false -c.extraMetadata.main=electron/mac/mainMac.js",
     "electron": "wait-on tcp:3000 && cross-env NODE_ENV=development electron .",
-    "electron:mac": "wait-on tcp:3000 && cross-env NODE_ENV=development electron ./electron/mainMac.js"
+    "electron:mac": "wait-on tcp:3000 && cross-env NODE_ENV=development electron electron/mac/mainMac.js"
   },
   "dependencies": {
     "@electron/remote": "^2.0.8",
