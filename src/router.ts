@@ -30,6 +30,11 @@ const routes = [
     path: "/donate",
     name: "donate",
     component: () => import("./pages/Settings/Donate.vue"),
+  },
+  {
+    path: "/open",
+    name: "openSource",
+    component: () => import("./pages/Settings/openSource.vue"),
   }
 ];
 

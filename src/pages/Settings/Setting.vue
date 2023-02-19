@@ -69,6 +69,7 @@
       <Item :title="i18n().otherList.toPhone" itemImg="./images/phone.png" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')"/>
       <Item :title="i18n().otherList.toDonate" itemImg="./images/donate.png" @itemFun="router.push('/donate?from=setting')"/>
     </ItemBox>
+    <Item title="开源鸣谢" @itemFun="router.push('/open')"/>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
     <ItemButton @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
