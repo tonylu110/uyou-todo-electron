@@ -25,8 +25,6 @@ function createWindow() {
     height: 750,
     minHeight: 600,
     minWidth: 800,
-    vibrancy: (menuBlur || menuBlur === undefined) ? 'menu' : null,
-    visualEffectState: 'active',
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: systemBar,
     titleBarStyle: systemBar ? 'default' : 'hiddenInset',
@@ -56,6 +54,7 @@ function createWindow() {
     }
   } else {
     mainWindow.setCaptionColor('#fff6dc')
+    mainWindow.setCustomEffect(1, '#fff6dc', 1);
   }
 
   mainWindow.loadURL(
@@ -91,21 +90,23 @@ function createWindow() {
     shell.openExternal(url)
   })
 
+  const { height } = screen.getPrimaryDisplay().workAreaSize
+  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height));
+
   windowSizeIpc()
   systemBarIpc()
   menuBlurIpc()
-  windowMenuIpc()
+  windowMenuIpc(appMenu)
 }
 
 app.whenReady().then(() => {
-  const { height } = screen.getPrimaryDisplay().workAreaSize
-
   createWindow()
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
   })
 
+  const { height } = screen.getPrimaryDisplay().workAreaSize
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height));
 
   Menu.setApplicationMenu(windowMenu ? appMenu : null);

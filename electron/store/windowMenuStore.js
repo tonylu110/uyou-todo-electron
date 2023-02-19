@@ -1,4 +1,4 @@
-const { ipcMain } = require('electron')
+const { ipcMain, Menu} = require('electron')
 const Store = require('electron-store')
 const store = new Store()
 
@@ -10,9 +10,10 @@ const initWindowMenu = () => {
 
 const windowMenu = store.get('windowMenu')
 
-const windowMenuIpc = () => {
+const windowMenuIpc = (appMenu) => {
   ipcMain.on('setWindowMenu', (event, arg) => {
     store.set('windowMenu', arg)
+    Menu.setApplicationMenu(arg ? appMenu : null);
   })
 }
 

@@ -4,7 +4,7 @@ const i18n = require('./i18n');
 module.exports = function (app, mainWindow, height) {
   return [
     {
-      label: 'uyou Todo',
+      label: 'uyou ToDo',
       submenu: [
         {
           label: i18n(app).aboutText,

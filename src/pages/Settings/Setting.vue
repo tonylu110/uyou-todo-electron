@@ -166,9 +166,5 @@ const setWindowMenu = () => {
   showWindowMenuState.value = !showWindowMenuState.value
   ipcRenderer.send('setWindowMenu', showWindowMenuState.value)
   localStorage.setItem('windowMenu', showWindowMenuState.value + '')
-  toastShow.value = true
-  setTimeout(() => {
-    toastShow.value = false
-  }, 700);
 }
 </script>
