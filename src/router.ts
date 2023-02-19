@@ -9,7 +9,7 @@ const routes = [
   {
     path: "/setting",
     name: "setting",
-    component: () => import("./pages/Setting.vue"),
+    component: () => import("./pages/Settings/Setting.vue"),
   },
   {
     path: "/account",
@@ -24,12 +24,12 @@ const routes = [
   {
     path: "/update",
     name: "update",
-    component: () => import("./pages/Update.vue"),
+    component: () => import("./pages/Settings/Update.vue"),
   },
   {
     path: "/donate",
     name: "donate",
-    component: () => import("./pages/Donate.vue"),
+    component: () => import("./pages/Settings/Donate.vue"),
   }
 ];
 

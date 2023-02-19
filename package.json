@@ -19,7 +19,7 @@
     "@electron/remote": "^2.0.8",
     "electron-store": "^8.1.0",
     "material-design-icons-iconfont": "^6.7.0",
-    "mica-electron": "^1.2.6",
+    "mica-electron": "^1.2.8",
     "moment": "^2.29.4",
     "sass": "^1.53.0",
     "vue": "^3.2.25",

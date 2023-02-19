@@ -1,5 +1,11 @@
 <template>
-  <perfect-scrollbar class="list">
+  <TabBar 
+    :title="i18n().update.updateTitle"
+    :rightImgShow="false"
+    :leftImgShow="true"
+    @leftClick="router.back()"
+  />
+  <SettingList justify="space-between">
     <div>
       <div class="title-img">
         <img src="/images/logo.png" alt="" />
@@ -15,15 +21,18 @@
     </div>
     <ItemButton mode="primary" @click="updateButtonCilck">{{ updateButton }}</ItemButton>
     <Toast :msg="newVersion" v-if="toastShow" />
-  </perfect-scrollbar>
+  </SettingList>
 </template>
 
 <script setup lang="ts">
 import { onMounted, Ref, ref } from 'vue';
+import TabBar from '../../components/TabBar/TabBar.vue';
 import i18n from '../../i18n';
-import ItemButton from '../ItemBox/ItemButton/ItemButton.vue';
+import router from '../../router';
+import SettingList from "../../components/SettingList/SettingList.vue";
+import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue';
 import appVersionCode from '../../util/appVersionCode';
-import Toast from '../Toast/Toast.vue';
+import Toast from '../../components/Toast/Toast.vue';
 
 const { app } = require('@electron/remote')
 
@@ -65,81 +74,70 @@ const updateButtonCilck = () => {
 }
 
 onMounted(() => {
-  getUpdate() 
+  getUpdate()
 })
 </script>
 
-<style scoped lang="scss">
-.list {
-  background-color: #eee;
-  width: calc(100vw - 300px);
-  height: 100%;
+<style lang="scss" scoped>
+.title-img {
+  width: calc(100vw - 400px);
+  max-width: 560px;
+  height: auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  overflow-y: scroll;
-  padding-top: 10px;
-  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 7px;
+  margin-bottom: 10px;
+  padding: 0 10px;
+  box-shadow: 0 2px 10px #00000030;
 
-  .title-img {
-    width: calc(100vw - 440px);
-    max-width: 560px;
+  .update-msg {
     height: auto;
+    width: calc(100vw - 470px);
+    max-width: 530px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 7px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 10px #00000030;
+    border-top: 1px solid #00000020;
+    padding: 5px 15px;
 
-    .update-msg {
-      height: auto;
-      width: calc(100vw - 470px);
-      max-width: 530px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      border-top: 1px solid #00000020;
-      padding: 5px 15px;
+    ul {
+      width: 100%;
+      padding-left: 20px;
 
-      ul {
-        width: 100%;
-        padding-left: 20px;
+      li {
+        font-size: 15px;
+        color: #00000090;
+        font-weight: bold;
+        margin-bottom: 10px;
 
-        li {
-          font-size: 15px;
-          color: #00000090;
-          font-weight: bold;
-          margin-bottom: 10px;
-
-          &:last-child {
-            margin-bottom: 0;
-          }
+        &:last-child {
+          margin-bottom: 0;
         }
       }
-      .update-title {
-        color: black;
-        font-size: 16px;
-        font-weight: bold;
-        margin-top: 10px;
-      }
     }
-    
-    img {
-      height: 100px;
-      margin: 15px 0;
+    .update-title {
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
     }
-    
-    span {
-      color: #00000050;
+  }
 
-      &.version {
-        margin-top: 5px;
-        font-size: 14px;
-        margin-bottom: 15px;
-      }
+  img {
+    height: 100px;
+    margin: 15px 0;
+  }
+
+  span {
+    color: #00000050;
+
+    &.version {
+      margin-top: 5px;
+      font-size: 14px;
+      margin-bottom: 15px;
     }
   }
 }
