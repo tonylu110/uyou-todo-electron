@@ -6,6 +6,8 @@ const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
 const { initMenuBlur, menuBlur, menuBlurIpc } = require('./store/menuBlurStore')
 const { initWindowMenu, windowMenu, windowMenuIpc } = require('./store/windowMenuStore')
+const createAboutWindowMac = require("./pages/about/aboutMac");
+const createAboutWindow = require("./pages/about/about");
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -81,6 +83,22 @@ function createWindow() {
     systemBarIpc()
     menuBlurIpc()
     windowMenuIpc()
+
+    ipcMain.on('open-about', () => {
+        let aboutWindow
+        if (process.platform === 'darwin') {
+            aboutWindow = createAboutWindowMac()
+        } else {
+            aboutWindow = createAboutWindow()
+        }
+
+        ipcMain.once("close-about", () => {
+            aboutWindow.close()
+        });
+        ipcMain.once("get-app-version", (event) => {
+            event.sender.send('version', app.getVersion())
+        })
+    })
 }
 
 app.whenReady().then(() => {
