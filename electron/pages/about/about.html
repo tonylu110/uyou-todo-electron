@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>About</title>
+</head>
+<body>
+    <div class="background">
+        <img src="../../../dist/logo.png" alt="">
+        <span class="version"></span>
+        <span class="copyright">Copyright (c) 2022-present, Anthony Lu</span>
+        <div class="close-button">
+            <img src="./close.png" alt="" class="close-img">
+        </div>
+    </div>
+    <script>
+        const ipcRenderer = require('electron').ipcRenderer
+
+        document.querySelector('.close-button').addEventListener('click', () => {
+            ipcRenderer.send('close-about')
+        })
+
+        ipcRenderer.send('get-app-version')
+        ipcRenderer.on('version', (event, version) => {
+            document.querySelector('.version').innerText = `v${version}`
+        })
+    </script>
+</body>
+</html>

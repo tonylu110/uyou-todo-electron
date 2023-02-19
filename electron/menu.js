@@ -1,5 +1,7 @@
-const { shell } = require('electron');
+const { shell, ipcMain, app} = require('electron');
 const i18n = require('./i18n');
+const createAboutWindow = require('./pages/about/about')
+const createAboutWindowMac = require('./pages/about/aboutMac')
 
 module.exports = function (app, mainWindow, height) {
   return [
@@ -8,7 +10,21 @@ module.exports = function (app, mainWindow, height) {
       submenu: [
         {
           label: i18n(app).aboutText,
-          role: 'about'
+          click() {
+            let aboutWindow
+            if (process.platform === 'darwin') {
+              aboutWindow = createAboutWindowMac()
+            } else {
+              aboutWindow = createAboutWindow()
+            }
+
+            ipcMain.once("close-about", () => {
+              aboutWindow.close()
+            });
+            ipcMain.once("get-app-version", (event) => {
+              event.sender.send('version', app.getVersion())
+            })
+          }
         },
         {
           label: i18n(app).gotoWebText,

@@ -69,7 +69,10 @@
       <Item :title="i18n().otherList.toPhone" itemImg="./images/phone.png" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')"/>
       <Item :title="i18n().otherList.toDonate" itemImg="./images/donate.png" @itemFun="router.push('/donate?from=setting')"/>
     </ItemBox>
-    <Item title="开源鸣谢" @itemFun="router.push('/open')"/>
+    <ItemBox>
+      <Item title="开源鸣谢" @itemFun="router.push('/open')"/>
+      <Item title="关于 uyou ToDo" @itemFun="openAboutWindow"/>
+    </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
     <ItemButton @click="() => langMenuShow = !langMenuShow">
       <img src="/images/lang.png" alt="" class="lang-img" />
@@ -166,5 +169,9 @@ const setWindowMenu = () => {
   showWindowMenuState.value = !showWindowMenuState.value
   ipcRenderer.send('setWindowMenu', showWindowMenuState.value)
   localStorage.setItem('windowMenu', showWindowMenuState.value + '')
+}
+
+const openAboutWindow = () => {
+  ipcRenderer.send('open-about')
 }
 </script>
