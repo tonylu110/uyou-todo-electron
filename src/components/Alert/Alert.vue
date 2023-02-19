@@ -116,7 +116,7 @@ onMounted(() => {
         border-right: 2px solid #00000010;
 
         &:active {
-          background-color: #00000010;
+          background-color: #00000010 !important;
         }
 
         &:hover {
@@ -128,7 +128,7 @@ onMounted(() => {
         color: #5985eb;
 
         &:active {
-          background-color: #5985eb;
+          background-color: #5985eb !important;
           color: white;
         }
 
