@@ -17,16 +17,16 @@
   },
   "dependencies": {
     "@electron/remote": "^2.0.8",
-    "electron-store": "^8.1.0",
-    "material-design-icons-iconfont": "^6.7.0",
     "mica-electron": "^1.2.8",
+    "electron-store": "^8.1.0"
+  },
+  "devDependencies": {
+    "material-design-icons-iconfont": "^6.7.0",
     "moment": "^2.29.4",
     "sass": "^1.53.0",
     "vue": "^3.2.25",
     "vue-router": "^4.1.1",
-    "vue3-perfect-scrollbar": "^1.6.0"
-  },
-  "devDependencies": {
+    "vue3-perfect-scrollbar": "^1.6.0",
     "@vitejs/plugin-vue": "^3.0.0",
     "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",
