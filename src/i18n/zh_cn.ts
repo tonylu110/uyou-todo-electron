@@ -82,6 +82,13 @@ const otherList = {
     toDonate: '捐赠'
 }
 
+const anotherSettings = {
+    menuBlur: '页面菜单毛玻璃',
+    windowMenu: '窗口菜单',
+    openSource: '开源鸣谢',
+    about: '关于 uyou ToDo'
+}
+
 export default {
     addText,
     cancelText,
@@ -103,5 +110,6 @@ export default {
     useSystemBar,
     setTopWindow,
     restartApp,
-    otherList
+    otherList,
+    anotherSettings
 }

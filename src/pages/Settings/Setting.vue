@@ -30,14 +30,14 @@
       />
       <Item
           v-if="isLinux"
-          title="页面菜单毛玻璃"
+          :title="i18n().anotherSettings.menuBlur"
           :showSwitch="true"
           :switchState="menuBlurState"
           @switchFun="setMenuBlur"
       />
       <Item
           v-if="titleBarShow && isMac"
-          title="窗口菜单"
+          :title="i18n().anotherSettings.windowMenu"
           :showSwitch="true"
           :switchState="showWindowMenuState"
           @switchFun="setWindowMenu"
@@ -70,8 +70,8 @@
       <Item :title="i18n().otherList.toDonate" itemImg="./images/donate.png" @itemFun="router.push('/donate?from=setting')"/>
     </ItemBox>
     <ItemBox>
-      <Item title="开源鸣谢" @itemFun="router.push('/open')"/>
-      <Item title="关于 uyou ToDo" @itemFun="openAboutWindow"/>
+      <Item :title="i18n().anotherSettings.openSource" @itemFun="router.push('/open')"/>
+      <Item :title="i18n().anotherSettings.about" @itemFun="openAboutWindow"/>
     </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
     <ItemButton @click="() => langMenuShow = !langMenuShow">

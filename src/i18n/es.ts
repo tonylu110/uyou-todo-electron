@@ -82,6 +82,13 @@ const otherList = {
   toDonate: 'Donar'
 }
 
+const anotherSettings = {
+  menuBlur: 'Desenfoque del menú de la lista de ventanas',
+  windowMenu: 'Menú Ventana',
+  openSource: 'Gracias código abierto',
+  about: 'Acerca de uyou ToDo'
+}
+
 export default {
   addText,
   cancelText,
@@ -103,5 +110,6 @@ export default {
   useSystemBar,
   setTopWindow,
   restartApp,
-  otherList
+  otherList,
+  anotherSettings
 }

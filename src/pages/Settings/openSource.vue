@@ -1,6 +1,6 @@
 <template>
   <TabBar
-    title="开源鸣谢"
+    :title="i18n().anotherSettings.openSource"
     :rightImgShow="false"
     :leftImgShow="true"
     @leftClick="router.back()"
@@ -29,6 +29,7 @@ import SettingList from "../../components/SettingList/SettingList.vue";
 import ItemBox from "../../components/ItemBox/ItemBox.vue";
 import Item from "../../components/ItemBox/Item/Item.vue";
 import router from "../../router";
+import i18n from "../../i18n";
 
 const ipcRenderer = require('electron').ipcRenderer
 

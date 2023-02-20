@@ -82,6 +82,13 @@ const otherList = {
     toDonate: '寄付する'
 }
 
+const anotherSettings = {
+    menuBlur: 'ウィンドウ リスト メニューのぼかし',
+    windowMenu: 'ウィンドウメニュー',
+    openSource: 'ありがとうオープンソース',
+    about: 'uyou ToDo について'
+}
+
 export default {
     addText,
     cancelText,
@@ -103,5 +110,6 @@ export default {
     useSystemBar,
     setTopWindow,
     restartApp,
-    otherList
+    otherList,
+    anotherSettings
 }

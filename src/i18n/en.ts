@@ -82,6 +82,13 @@ const otherList = {
     toDonate: 'Donate'
 }
 
+const anotherSettings = {
+    menuBlur: 'Window List Menu Blur',
+    windowMenu: 'Window Menu',
+    openSource: 'Thanks Open Source',
+    about: 'About uyou ToDo'
+}
+
 export default {
     addText,
     cancelText,
@@ -103,5 +110,6 @@ export default {
     useSystemBar,
     setTopWindow,
     restartApp,
-    otherList
+    otherList,
+    anotherSettings
 }
