@@ -46,6 +46,8 @@ import Toast from "../components/Toast/Toast.vue";
 import Item from "../components/ItemBox/Item/Item.vue";
 import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";
 
+const ipcRenderer = require('electron').ipcRenderer
+
 const form = ref('')
 const route = useRoute()
 
@@ -73,11 +75,13 @@ onMounted(() => {
 })
 
 const changPass = () => {
-  window.open(`https://register.todo.uyou.org.cn/#/setpassword/${localStorage.getItem('uname')}`)
+  // window.open(`https://register.todo.uyou.org.cn/#/setpassword/${localStorage.getItem('uname')}`)
+  ipcRenderer.send('open-register')
 }
 
 const openRegister = () => {
-  window.open('https://register.todo.uyou.org.cn')
+  // window.open('https://register.todo.uyou.org.cn')
+  ipcRenderer.send('open-register')
 }
 
 const uname = ref('')

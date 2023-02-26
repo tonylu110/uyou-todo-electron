@@ -7,8 +7,8 @@ const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleB
 const { initMenuBlur, menuBlur, menuBlurIpc } = require('./store/menuBlurStore')
 const { initWindowMenu, windowMenu, windowMenuIpc } = require('./store/windowMenuStore')
 const { PARAMS, VALUE,  MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
-const createAboutWindowMac = require("./mac/pages/aboutMac");
 const createAboutWindow = require("./pages/about/about");
+const createRegisterWindow = require("./pages/register/register")
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -29,7 +29,6 @@ function createWindow() {
     minWidth: 800,
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: systemBar,
-    titleBarStyle: systemBar ? 'default' : 'hiddenInset',
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -51,7 +50,6 @@ function createWindow() {
     if (IS_WINDOWS_11) {
       mainWindow.setMicaEffect()
     } else {
-      mainWindow.setRoundedCorner()
       mainWindow.setCustomEffect(4, '#fff6dc', 0.7);
     }
   } else {
@@ -101,18 +99,21 @@ function createWindow() {
   windowMenuIpc(appMenu)
 
   ipcMain.on('open-about', () => {
-    let aboutWindow
-    if (process.platform === 'darwin') {
-      aboutWindow = createAboutWindowMac()
-    } else {
-      aboutWindow = createAboutWindow()
-    }
+    let aboutWindow = createAboutWindow()
 
     ipcMain.once("close-about", () => {
       aboutWindow.close()
     });
     ipcMain.once("get-app-version", (event) => {
       event.sender.send('version', app.getVersion())
+    })
+  })
+
+  ipcMain.on('open-register', () => {
+    let registerWindow = createRegisterWindow()
+
+    ipcMain.once('close-register', () => {
+      registerWindow.close()
     })
   })
 }

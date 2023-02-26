@@ -2616,13 +2616,10 @@ mdn-data@2.0.4:
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.4.tgz#699b3c38ac6f1d728091a64650b65d388502fd5b"
   integrity sha512-iV3XNKw06j5Q7mi6h+9vbx23Tv7JkjEVgKHW4pimwyDGWm0OIQntJJ+u1C6mg6mK1EaTv42XQ7w76yuzH7M2cA==
 
-mica-electron@^1.2.8:
-  version "1.2.8"
-  resolved "https://registry.npmmirror.com/mica-electron/-/mica-electron-1.2.8.tgz#18143d6acd7fee260d30007bfe788545959b9f87"
-  integrity sha512-G99Z5eWMnDWZSsfCp849d73LgGxhZ0A/G/jyOIi7f9nCM6Vl3R6QLwzcRysDHc8/rms+eUapVIGL0w3C5oy+nQ==
-  dependencies:
-    electron "^22.3.0"
-    electron-rebuild "^3.2.9"
+mica-electron@^1.2.9:
+  version "1.2.9"
+  resolved "https://registry.npmmirror.com/mica-electron/-/mica-electron-1.2.9.tgz#13c878c7f8ebd7fb5f7efae02145ecc5f4d9ae95"
+  integrity sha512-5Nwnw6BXNh4Zf5P5MGX2PmDIT10ZZbQ33YQdba1Dr9ntJ0kTqjSJakrfyYGSgRo74/9N5p6lIGXdx60xJCHvew==
 
 mime-db@1.52.0:
   version "1.52.0"

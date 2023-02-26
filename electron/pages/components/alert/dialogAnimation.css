@@ -1,0 +1,51 @@
+@keyframes show{
+    from {
+        transform: scale(0.8, 0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
+
+@keyframes hide{
+    to {
+        transform: scale(0.8, 0.8);
+        opacity: 0;
+    }
+}
+
+@keyframes showDialogBackdrop{
+    from {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+    to {
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+    }
+}
+
+@keyframes hideDialogBackdrop{
+    to {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+}
+
+dialog[open] {
+    animation: show .3s ease normal;
+}
+
+dialog.hide {
+    animation: hide .3s ease normal;
+}
+
+dialog[open]::backdrop {
+    animation: showDialogBackdrop .3s forwards;
+}
+
+dialog[open].hide::backdrop {
+    animation: hideDialogBackdrop .3s;
+}
