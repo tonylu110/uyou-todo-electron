@@ -100,21 +100,23 @@ function createWindow() {
 
     ipcMain.on('open-register', () => {
         let registerWindow = createRegisterWindowMac()
+        const registerId = registerWindow.id
 
         ipcMain.once('close-register', () => {
-            registerWindow.close()
+            BrowserWindow.fromId(registerId).close()
         })
     })
 
     ipcMain.on('open-repass', (ev, uname) => {
         let repassWindow = createRepassWindowMac()
+        const repassId = repassWindow.id
 
         repassWindow.once('ready-to-show', () => {
-            repassWindow.webContents.send('account', uname)
+            BrowserWindow.fromId(repassId).webContents.send('account', uname)
         })
 
         ipcMain.once('close-repass', () => {
-            repassWindow.close()
+            BrowserWindow.fromId(repassId).close()
         })
     })
 }
