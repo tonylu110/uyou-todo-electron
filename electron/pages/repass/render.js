@@ -1,4 +1,5 @@
 import Alert from "../components/alert/alert.js";
+import { isMac } from "../util/os.js";
 
 const { createApp, reactive, ref } = require('vue')
 const ipcRenderer = require('electron').ipcRenderer
@@ -70,12 +71,13 @@ createApp({
       showAlert,
       repass,
       closeAlert,
-      alertMsg
+      alertMsg,
+      isMac
     }
   },
   template: `
-  <div class="main-area">
-    <div class="close-button" @click="closeWindow">
+  <div class="main-area" :style="{backgroundColor: isMac() ? '#edd9b750' : ''}">
+    <div class="close-button" @click="closeWindow" v-if="!isMac()">
       <img class="close-img" src="../img/close.png" alt="" srcset="">
     </div>
     <img src="../../../dist/logo.png" alt="" srcset="" class="logo">

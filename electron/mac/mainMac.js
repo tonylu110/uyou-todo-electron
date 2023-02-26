@@ -7,6 +7,8 @@ const { initSystemBar, systemBar, systemBarIpc } = require('../store/systemTitle
 const { initMenuBlur, menuBlur, menuBlurIpc } = require('../store/menuBlurStore')
 const { initWindowMenu, windowMenu, windowMenuIpc } = require('../store/windowMenuStore')
 const createAboutWindowMac = require("./pages/aboutMac");
+const createRegisterWindowMac = require("./pages/registerMac");
+const createRepassWindowMac = require("./pages/repassMac");
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -93,6 +95,26 @@ function createWindow() {
         });
         ipcMain.once("get-app-version", (event) => {
             event.sender.send('version', app.getVersion())
+        })
+    })
+
+    ipcMain.on('open-register', () => {
+        let registerWindow = createRegisterWindowMac()
+
+        ipcMain.once('close-register', () => {
+            registerWindow.close()
+        })
+    })
+
+    ipcMain.on('open-repass', (ev, uname) => {
+        let repassWindow = createRepassWindowMac()
+
+        repassWindow.once('ready-to-show', () => {
+            repassWindow.webContents.send('account', uname)
+        })
+
+        ipcMain.once('close-repass', () => {
+            repassWindow.close()
         })
     })
 }
