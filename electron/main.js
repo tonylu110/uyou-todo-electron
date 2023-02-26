@@ -9,6 +9,7 @@ const { initWindowMenu, windowMenu, windowMenuIpc } = require('./store/windowMen
 const { PARAMS, VALUE,  MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
 const createAboutWindow = require("./pages/about/about");
 const createRegisterWindow = require("./pages/register/register")
+const createRepassWindow = require('./pages/repass/repass')
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -114,6 +115,18 @@ function createWindow() {
 
     ipcMain.once('close-register', () => {
       registerWindow.close()
+    })
+  })
+
+  ipcMain.on('open-repass', (ev, uname) => {
+    let repassWindow = createRepassWindow()
+
+    repassWindow.once('ready-to-show', () => {
+      repassWindow.webContents.send('account', uname)
+    })
+
+    ipcMain.once('close-repass', () => {
+      repassWindow.close()
     })
   })
 }

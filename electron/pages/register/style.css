@@ -83,3 +83,8 @@ button {
 button:active {
     background-color: #574a40;
 }
+
+input[disabled] {
+    background-color: #ffffff30 !important;
+    color: #00000070;
+}

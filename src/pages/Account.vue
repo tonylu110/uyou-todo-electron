@@ -76,7 +76,7 @@ onMounted(() => {
 
 const changPass = () => {
   // window.open(`https://register.todo.uyou.org.cn/#/setpassword/${localStorage.getItem('uname')}`)
-  ipcRenderer.send('open-register')
+  ipcRenderer.send('open-repass', localStorage.getItem('uname'))
 }
 
 const openRegister = () => {
