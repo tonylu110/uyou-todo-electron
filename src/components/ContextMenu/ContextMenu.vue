@@ -63,7 +63,7 @@ const paste = () => {
 
 <style scoped lang="scss">
 .menu {
-  background-color: #ffffff50;
+  background-color: #ffffff70;
   position: fixed;
   z-index: 500;
   top: 0;
@@ -73,6 +73,7 @@ const paste = () => {
   box-shadow: 0 0 20px #00000040;
   overflow: hidden;
   padding: 5px;
+  border: 1px solid #ccc;
 
   .menu-line {
     height: 1px;

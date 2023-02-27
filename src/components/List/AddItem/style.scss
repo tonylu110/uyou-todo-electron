@@ -64,5 +64,9 @@
     background-color: transparent;
     font-family: 'smartisan-t';
     resize: none;
+
+    &::selection {
+      background-color: #dcc6a9;
+    }
   }
 }

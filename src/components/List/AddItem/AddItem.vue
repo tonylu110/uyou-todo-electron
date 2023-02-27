@@ -15,7 +15,8 @@
       :pos="contextMenu"
       v-if="showContextMenu"
       @paste-text="paste"
-      :show-copy="false"
+      :custom="customContextMenu"
+      @clear="text = ''"
     />
   </div>
 </template>
@@ -75,6 +76,13 @@ onMounted(() => {
     showContextMenu.value = false
   })
 })
+
+const customContextMenu = [{
+  label: '清除文本',
+  event: 'clear',
+  icon: 'backspace',
+  color: '#d6010f'
+}]
 
 const paste = (pasteText: string) => {
   text.value = pasteText
