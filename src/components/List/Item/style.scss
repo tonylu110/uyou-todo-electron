@@ -59,6 +59,7 @@
       margin-top: 10px;
       color: #6e492f;
       user-select: text;
+      pointer-events: auto;
   
       &::selection {
         background-color: #dcc6a9;

@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="item" ref="itemDom">
     <div class="button" @click="setOk" v-if="listName !== 'allDo'">
       <span class="material-icons">check</span>
     </div>
@@ -8,7 +8,7 @@
     </div>
     <div class="list-item">
       <div class="time-area">
-        <span>{{ getTime(time!) }}</span>
+        <span>{{ getTime(time) }}</span>
         <div @click="copyText">{{ i18n().copyText }}</div>
       </div>
       <span class="item-text" :style="listName === 'allNotDo' ? '' : okStyle">
@@ -26,15 +26,24 @@
       />
     </div>
   </div>
+  <ContextMenu
+    :pos="contextMenu"
+    v-if="showContextMenu"
+    :show-paste="false"
+    :custom="customContextMenu"
+    @setOk="setOk"
+    @remove="deleteItem"
+  />
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import {onMounted, Ref, ref, watchEffect} from 'vue';
 import getTime from '../../../util/getTime';
 import i18n from '../../../i18n';
 import getOkStyle from '../../../data/getOkStyle';
 import Toast from '../../Toast/Toast.vue';
 import { useRoute } from 'vue-router';
+import ContextMenu from "../../ContextMenu/ContextMenu.vue";
 
 const props = defineProps({
   time: Number,
@@ -78,6 +87,42 @@ const copyText = () => {
     }, 1000)
   })
 }
+
+const itemDom = ref(null) as unknown as Ref<HTMLElement>
+
+const showContextMenu = ref(false)
+const contextMenu = ref({
+  top: 0,
+  left: 0
+})
+
+const customContextMenu = [{
+  label: '完成 ToDo',
+  event: 'setOk',
+  icon: 'task_alt'
+}, {
+  label: '删除 ToDo',
+  event: 'remove',
+  icon: 'highlight_off',
+  color: '#d6010f'
+}]
+
+onMounted(() => {
+  itemDom.value.addEventListener('contextmenu', e => {
+    e.preventDefault()
+
+    showContextMenu.value = true
+
+    contextMenu.value = {
+      top: e.pageY,
+      left: e.pageX
+    }
+  })
+
+  document.addEventListener('click', () => {
+    showContextMenu.value = false
+  })
+})
 </script>
 
 <style lang="scss" scoped>
