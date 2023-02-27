@@ -14,7 +14,7 @@
         <div class="update-msg" v-if="updateMsg.length > 0">
           <span class="update-title">{{ i18n().update.updateLog }}</span>
           <ul>
-            <li v-for="(item, index) in updateMsg" :key="index">{{ item.split(' ')[1] }}</li>
+            <li v-for="(item, index) in updateMsg" :key="index">{{ item.slice(2) }}</li>
           </ul>
         </div>
       </div>
@@ -35,6 +35,7 @@ import appVersionCode from '../../util/appVersionCode';
 import Toast from '../../components/Toast/Toast.vue';
 
 const { app } = require('@electron/remote')
+const { ipcRenderer } = require('electron')
 
 const version = appVersionCode
 
@@ -69,7 +70,7 @@ const updateButtonCilck = () => {
     newVersion.value = ''
     getUpdate()
   } else {
-    window.open('https://github.com/tonylu110/uyou-todo-electron/releases')
+    ipcRenderer.send('open-url', 'https://github.com/tonylu110/uyou-todo-electron/releases')
   }
 }
 
