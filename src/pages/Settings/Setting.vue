@@ -29,19 +29,24 @@
           @switchFun="setTitleBar"
       />
       <Item
-          v-if="isLinux"
-          :title="i18n().anotherSettings.menuBlur"
-          :showSwitch="true"
-          :switchState="menuBlurState"
-          @switchFun="setMenuBlur"
-      />
-      <Item
           v-if="titleBarShow && isMac"
           :title="i18n().anotherSettings.windowMenu"
           :showSwitch="true"
           :switchState="showWindowMenuState"
           @switchFun="setWindowMenu"
       />
+      <Item
+          v-if="isLinux"
+          :title="i18n().anotherSettings.menuBlur"
+          :showSwitch="true"
+          :switchState="menuBlurState"
+          @switchFun="setMenuBlur"
+      />
+      <div class="item-blur item" v-if="isWin11 && menuBlurState">
+        <div @click="changeMica('mica')">Mica Effect</div>
+        <div @click="changeMica('tabbed')">Mica Tabbed</div>
+        <div @click="changeMica('acrylic')">Acrylic</div>
+      </div>
     </ItemBox>
     <ItemBox>
       <Item
@@ -97,9 +102,12 @@ const ipcRenderer = require('electron').ipcRenderer
 
 const { app } = require('@electron/remote')
 const { shell } = require('electron')
+const os = require('os')
 
 const isLinux = !(process.platform === 'linux')
 const isMac = !(process.platform === 'darwin')
+
+const isWin11 = Number(os.release().split('.')[2]) >= 22000
 
 const toastShow = ref(false)
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
@@ -169,4 +177,42 @@ const setWindowMenu = () => {
 const openAboutWindow = () => {
   ipcRenderer.send('open-about')
 }
+
+const changeMica = (effect: string) => {
+  ipcRenderer.send('changeBlur', effect)
+}
+
 </script>
+
+<style scoped lang="scss">
+.item-blur {
+  position: relative;
+  max-width: 550px;
+  width: calc(100vw - 450px);
+  min-height: 30px;
+  height: 30px;
+  padding: 10px 15px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+
+  div {
+    width: 130px;
+    margin: 0 10px;
+    text-align: center;
+    height: 2em;
+    line-height: 2em;
+    border-radius: 5px;
+    border: 1px solid #00000015;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:active {
+      background-color: #5985eb;
+      color: white;
+    }
+  }
+}
+</style>

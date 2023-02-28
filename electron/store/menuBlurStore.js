@@ -6,9 +6,13 @@ const initMenuBlur = () => {
   if (store.get('menuBlur') === undefined) {
     store.set('menuBlur', true)
   }
+  if (store.get('micaStyle') === undefined) {
+    store.set('micaStyle', 'mica')
+  }
 }
 
 const menuBlur = store.get('menuBlur')
+const micaStyle = store.get('micaStyle')
 
 const menuBlurIpc = () => {
   ipcMain.on('setMenuBlur', (event, arg) => {
@@ -19,5 +23,6 @@ const menuBlurIpc = () => {
 module.exports = {
   initMenuBlur,
   menuBlur,
-  menuBlurIpc
+  menuBlurIpc,
+  micaStyle
 }

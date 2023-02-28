@@ -1,15 +1,18 @@
 const { app, BrowserWindow, ipcMain, screen, Menu, shell } = require('electron')
+const Store = require('electron-store')
 const path = require('path')
 const menuTemplate = require('./menu.js')
 const remoteMain = require('@electron/remote/main')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
-const { initMenuBlur, menuBlur, menuBlurIpc } = require('./store/menuBlurStore')
+const { initMenuBlur, menuBlur, menuBlurIpc, micaStyle } = require('./store/menuBlurStore')
 const { initWindowMenu, windowMenu, windowMenuIpc } = require('./store/windowMenuStore')
 const { PARAMS, VALUE,  MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
 const createAboutWindow = require("./pages/about/about");
 const createRegisterWindow = require("./pages/register/register")
 const createRepassWindow = require('./pages/repass/repass')
+
+const store = new Store()
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -39,6 +42,17 @@ function createWindow() {
     }
   })
 
+  const setMicaStyle = (effect) => {
+    if (effect === 'mica') {
+      mainWindow.setMicaEffect()
+    } else if (effect === 'tabbed') {
+      mainWindow.setMicaTabbedEffect()
+    } else {
+      mainWindow.setRoundedCorner();
+      mainWindow.setCustomEffect(4, '#fff6dc', 0.7);
+    }
+  }
+
   if (windowSizeState) {
     mainWindow.setSize(windowSize.width, windowSize.height)
   }
@@ -49,7 +63,7 @@ function createWindow() {
 
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
-      mainWindow.setMicaEffect()
+      setMicaStyle(micaStyle ? micaStyle : 'mica')
     } else {
       mainWindow.setCustomEffect(4, '#fff6dc', 0.7);
     }
@@ -128,6 +142,11 @@ function createWindow() {
     ipcMain.once('close-repass', () => {
       repassWindow.close()
     })
+  })
+
+  ipcMain.on('changeBlur', (ev, effect) => {
+    setMicaStyle(effect)
+    store.set('micaStyle', effect)
   })
 }
 
