@@ -24,12 +24,13 @@
     <ItemButton v-if="loginState" mode="error" @click="logout">{{ i18n().accountPage.logout }}</ItemButton>
     <Alert
         :title="i18n().accountPage.alertTitle"
-        :body="alertMsg"
         :cancelButtonShow="isLogoutClick"
         :dialogShow="alertShow"
         @return="returnAlert"
         @cancel="closeAlert"
-    />
+    >
+      <span>{{ alertMsg[0] }}</span>
+    </Alert>
     <Toast v-if="showToast" :msg="toastMsg" />
   </SettingList>
 </template>

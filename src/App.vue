@@ -72,10 +72,13 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
         <Alert 
           :dialogShow="alertShow"
           :title="`${i18n().updateText} v${newVersion}`"
-          :body="alertMsg"
           @cancel="() => alertShow = false"
           @return="returnClick"
-        />
+        >
+          <ul>
+            <li v-for="(item, index) in alertMsg" :key="index">{{ item.slice(2) }}</li>
+          </ul>
+        </Alert>
       </div>
     </div>
   </div>

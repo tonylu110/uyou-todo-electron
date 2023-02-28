@@ -4,18 +4,20 @@
       {{ title }}
     </div>
     <div class="body" :style="{alignItems: title === i18n().accountPage.alertTitle ? 'center' : ''}">
-      <span v-for="(item, index) in body" :key="index">{{ item }}</span>
+      <slot/>
     </div>
     <div class="buttons">
       <div class="cancel" v-if="cancelButtonShow" @click="emits('cancel')">{{ i18n().alertText.cancelText }}</div>
       <div class="return" :style="{width: cancelButtonShow ? '' : '100%'}" @click="emits('return')">{{ i18n().alertText.returnText}}</div>
     </div>
+    <ContextMenu :pos="contextMenu" v-if="showContextMenu" :show-paste="false"/>
   </dialog>
 </template>
 
 <script setup lang="ts">
 import {onMounted, Ref, ref, watchEffect} from "vue"
 import i18n from '../../i18n'
+import ContextMenu from "../ContextMenu/ContextMenu.vue";
 
 const props = withDefaults(defineProps<{
   title?: string
@@ -48,6 +50,29 @@ onMounted(() => {
     } else {
       dialog.value.addEventListener('animationend', closeAlert)
     }
+  })
+})
+
+const showContextMenu = ref(false)
+const contextMenu = ref({
+  top: 0,
+  left: 0
+})
+
+onMounted(() => {
+  dialog.value.addEventListener('contextmenu', e => {
+    e.preventDefault()
+
+    showContextMenu.value = true
+
+    contextMenu.value = {
+      top: e.pageY,
+      left: e.pageX
+    }
+  })
+
+  document.addEventListener('click', () => {
+    showContextMenu.value = false
   })
 })
 </script>
@@ -88,7 +113,16 @@ onMounted(() => {
     min-height: 3em;
     justify-content: center;
 
-    span {
+    &:deep(ul) {
+      margin: 0;
+
+      li {
+        margin-left: -18px;
+        user-select: text;
+      }
+    }
+
+    &:deep(span) {
       display: block;
       white-space: pre-wrap;
       user-select: text;
