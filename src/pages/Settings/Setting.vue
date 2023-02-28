@@ -74,12 +74,10 @@
       <Item :title="i18n().anotherSettings.about" @itemFun="openAboutWindow"/>
     </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
-    <ItemButton @click="() => langMenuShow = !langMenuShow">
+    <ItemButton @click="router.push('/lang')">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </ItemButton>
-    <LangSet v-if="langMenuShow" />
     <Toast :msg="i18n().restartApp" v-if="toastShow" />
-    <div class="black-back"  v-if="langMenuShow" @click="() => langMenuShow = !langMenuShow"></div>
   </SettingList>
 </template>
 
@@ -88,7 +86,6 @@ import { ref } from 'vue';
 import TabBar from '../../components/TabBar/TabBar.vue';
 import SettingList from '../../components/SettingList/SettingList.vue';
 import i18n from '../../i18n';
-import LangSet from '../../components/SettingList/LangSet/LangSet.vue';
 import Item from '../../components/ItemBox/Item/Item.vue';
 import ItemBox from '../../components/ItemBox/ItemBox.vue';
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue';
@@ -108,8 +105,6 @@ const toastShow = ref(false)
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 
 const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
-
-const langMenuShow = ref(false)
 
 const saveTopState = ref(localStorage.getItem('saveTopState') === 'true' || localStorage.getItem('saveTopState') === null)
 const setTopState = () => {

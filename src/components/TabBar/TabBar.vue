@@ -106,6 +106,7 @@ if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.ge
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid #594b4270;
 
     & span {
       display: block;

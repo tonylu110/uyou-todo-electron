@@ -35,6 +35,11 @@ const routes = [
     path: "/open",
     name: "openSource",
     component: () => import("./pages/Settings/openSource.vue"),
+  },
+  {
+    path: "/lang",
+    name: "lang",
+    component: () => import("./pages/Settings/LangSet.vue"),
   }
 ];
 
