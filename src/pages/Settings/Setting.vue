@@ -107,7 +107,7 @@ const os = require('os')
 const isLinux = !(process.platform === 'linux')
 const isMac = !(process.platform === 'darwin')
 
-const isWin11 = Number(os.release().split('.')[2]) >= 22000
+const isWin11 = (process.platform === 'win32' && Number(os.release().split('.')[2]) >= 22000)
 
 const toastShow = ref(false)
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
