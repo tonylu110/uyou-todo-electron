@@ -76,12 +76,12 @@ onMounted(() => {
 })
 
 const customContextMenu = [{
-  label: '清除文本',
+  label: i18n().contextMenu.clearTxt,
   event: 'clear',
   icon: 'backspace',
   color: '#d6010f'
 },{
-  label: '关闭窗口',
+  label: i18n().contextMenu.closeItem,
   event: 'close',
   icon: 'highlight_off',
   color: '#d6010f'

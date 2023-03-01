@@ -28,7 +28,9 @@ const accountPage = {
     syncSuccess: 'Sync succeeded',
     syncFail: 'Sync failed',
     loginError: 'Login failed',
-    alertTitle: 'Hint'
+    alertTitle: 'Hint',
+    changPass: 'change Password',
+    logoutMsg: 'Are you sure you want to log out?'
 }
 
 const alertText = {
@@ -89,6 +91,17 @@ const anotherSettings = {
     about: 'About uyou ToDo'
 }
 
+const contextMenu = {
+    copy: 'Copy',
+    paste: 'Paste',
+    comToDo: 'Complete ToDo',
+    removeToDo: 'Delete ToDo',
+    clearTxt: 'Clear Text',
+    closeItem: 'Close Item'
+}
+
+const language = 'Language'
+
 export default {
     addText,
     cancelText,
@@ -111,5 +124,7 @@ export default {
     setTopWindow,
     restartApp,
     otherList,
-    anotherSettings
+    anotherSettings,
+    contextMenu,
+    language
 }

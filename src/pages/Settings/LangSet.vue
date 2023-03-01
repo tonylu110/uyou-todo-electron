@@ -1,6 +1,6 @@
 <template>
   <TabBar
-      title="语言"
+      :title="i18n().language"
       :rightImgShow="false"
       :leftImgShow="true"
       @leftClick="router.back()"

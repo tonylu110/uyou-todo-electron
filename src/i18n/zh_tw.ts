@@ -28,7 +28,9 @@ const accountPage = {
     syncSuccess: '同步成功',
     syncFail: '同步失敗',
     loginError: '登入失敗',
-    alertTitle: '提示'
+    alertTitle: '提示',
+    changPass: '修改密碼',
+    logoutMsg: '確定退出登入嗎？'
 }
 
 const alertText = {
@@ -89,6 +91,17 @@ const anotherSettings = {
     about: '關於 uyou ToDo'
 }
 
+const contextMenu = {
+    copy: '複製',
+    paste: '貼上',
+    comToDo: '完成 ToDo',
+    removeToDo: '刪除 ToDo',
+    clearTxt: '清除文字',
+    closeItem: '關閉視窗'
+}
+
+const language = '語言'
+
 export default {
     addText,
     cancelText,
@@ -111,5 +124,7 @@ export default {
     setTopWindow,
     restartApp,
     otherList,
-    anotherSettings
+    anotherSettings,
+    contextMenu,
+    language
 }

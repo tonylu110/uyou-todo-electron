@@ -28,7 +28,9 @@ const accountPage = {
   syncSuccess: 'Sincronización exitosa',
   syncFail: 'Sincronización fallida',
   loginError: 'error de inicio de sesion',
-  alertTitle: 'Insinuación'
+  alertTitle: 'Insinuación',
+  changPass: 'cambiar la contraseña',
+  logoutMsg: '¿Estás seguro/segura de que quieres cerrar sesión?'
 }
 
 const alertText = {
@@ -89,6 +91,17 @@ const anotherSettings = {
   about: 'Acerca de uyou ToDo'
 }
 
+const contextMenu = {
+  copy: 'Copiar',
+  paste: 'Pegar',
+  comToDo: 'Tareas completas',
+  removeToDo: 'Eliminar tareas pendientes',
+  clearTxt: 'Borrar texto',
+  closeItem: 'Cerrar artículo'
+}
+
+const language = 'Idioma'
+
 export default {
   addText,
   cancelText,
@@ -111,5 +124,7 @@ export default {
   setTopWindow,
   restartApp,
   otherList,
-  anotherSettings
+  anotherSettings,
+  contextMenu,
+  language
 }

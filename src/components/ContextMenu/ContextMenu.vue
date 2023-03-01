@@ -2,11 +2,11 @@
   <div class="menu" :style="{top: position.top + 'px', left: position.left + 'px'}">
     <div @click="copy" v-if="showCopy">
       <span class="material-icons">content_copy</span>
-      <span>复制</span>
+      <span>{{ i18n().contextMenu.copy }}</span>
     </div>
     <div @click="paste" v-if="showPaste">
       <span class="material-icons">content_paste</span>
-      <span>粘贴</span>
+      <span>{{ i18n().contextMenu.paste }}</span>
     </div>
     <span v-if="custom" class="menu-line"></span>
     <div v-if="custom" v-for="(item, index) in custom" :key="index" @click="emits(item.event)" :style="{color: item.color}">
@@ -18,6 +18,7 @@
 
 <script lang="ts" setup>
 import { watchEffect, ref } from "vue";
+import i18n from "../../i18n";
 
 const { clipboard } = require('electron')
 

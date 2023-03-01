@@ -28,7 +28,9 @@ const accountPage = {
     syncSuccess: '同期に成功しました',
     syncFail: '同期に失敗しました',
     loginError: 'ログインに失敗しました',
-    alertTitle: 'ヒント'
+    alertTitle: 'ヒント',
+    changPass: 'パスワードを変更する',
+    logoutMsg: 'ログアウトしてもよろしいですか？'
 }
 
 const alertText = {
@@ -89,6 +91,17 @@ const anotherSettings = {
     about: 'uyou ToDo について'
 }
 
+const contextMenu = {
+    copy: 'コピー',
+    paste: 'ペースト',
+    comToDo: 'ToDo を完了する',
+    removeToDo: 'ToDoを削除',
+    clearTxt: 'クリアテキスト',
+    closeItem: 'アイテムを閉じる'
+}
+
+const language = '言語'
+
 export default {
     addText,
     cancelText,
@@ -111,5 +124,7 @@ export default {
     setTopWindow,
     restartApp,
     otherList,
-    anotherSettings
+    anotherSettings,
+    contextMenu,
+    language
 }

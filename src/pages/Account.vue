@@ -20,7 +20,7 @@
         :switchState="swichState"
         @switchFun="setAutoSync"
     />
-    <ItemButton v-if="loginState" @click="changPass">修改密码</ItemButton>
+    <ItemButton v-if="loginState" @click="changPass">{{ i18n().accountPage.changPass }}</ItemButton>
     <ItemButton v-if="loginState" mode="error" @click="logout">{{ i18n().accountPage.logout }}</ItemButton>
     <Alert
         :title="i18n().accountPage.alertTitle"
@@ -186,7 +186,7 @@ const isLogoutClick = ref(false)
 const logout = () => {
   alertShow.value = true
   isLogoutClick.value = true
-  alertMsg.value = ['确定退出登录吗？']
+  alertMsg.value = [i18n().accountPage.logoutMsg]
 }
 
 const returnAlert = () => {

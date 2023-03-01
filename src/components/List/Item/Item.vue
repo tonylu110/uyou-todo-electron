@@ -97,11 +97,11 @@ const contextMenu = ref({
 })
 
 const customContextMenu = [{
-  label: '完成 ToDo',
+  label: i18n().contextMenu.comToDo,
   event: 'setOk',
   icon: 'task_alt'
 }, {
-  label: '删除 ToDo',
+  label: i18n().contextMenu.removeToDo,
   event: 'remove',
   icon: 'highlight_off',
   color: '#d6010f'
