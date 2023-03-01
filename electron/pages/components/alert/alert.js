@@ -1,3 +1,5 @@
+import i18n from "../../i18n/index.js";
+
 const { onMounted, ref, watchEffect } = require('vue')
 
 export default {
@@ -17,10 +19,17 @@ export default {
     dialogShow: {
       default: false,
       type: Boolean
-    }
+    },
+    lang: String
   },
   emit: ['cancel', 'return'],
   setup(props, { emit }) {
+    const useLang = ref()
+
+    watchEffect(() => {
+      useLang.value = props.lang
+    })
+
     const dialog = ref(null)
 
     onMounted(() => {
@@ -44,7 +53,9 @@ export default {
 
     return {
       dialog,
-      emits
+      emits,
+      i18n,
+      useLang
     }
   },
   template: `
@@ -52,13 +63,13 @@ export default {
       <div class="title">
         {{ title }}
       </div>
-      <div class="body" :style="{alignItems: title === '提示' ? 'center' : ''}">
+      <div class="body" :style="{alignItems: title === i18n(useLang).alert.hint ? 'center' : ''}">
         <span v-for="(item, index) in body" :key="index">{{ item }}</span>
       </div>
       <div class="buttons">
-        <div class="cancel" v-if="cancelButtonShow" @click="emits('cancel')">取消</div>
+        <div class="cancel" v-if="cancelButtonShow" @click="emits('cancel')">{{ i18n(useLang).alert.cancel }}</div>
         <div class="return" :style="{width: cancelButtonShow ? '' : '100%'}" @click="emits('return')">
-          确定
+          {{ i18n(useLang).alert.return }}
         </div>
       </div>
     </dialog>

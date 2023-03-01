@@ -9,6 +9,7 @@ const { initWindowMenu, windowMenu, windowMenuIpc } = require('../store/windowMe
 const createAboutWindowMac = require("./pages/aboutMac");
 const createRegisterWindowMac = require("./pages/registerMac");
 const createRepassWindowMac = require("./pages/repassMac");
+const { initLang, langIpc, lang} = require("../store/languageStore");
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -21,6 +22,7 @@ function createWindow() {
     initSystemBar()
     initMenuBlur()
     initWindowMenu()
+    initLang()
 
     mainWindow = new BrowserWindow({
         width: 1000,
@@ -86,6 +88,7 @@ function createWindow() {
     systemBarIpc()
     menuBlurIpc()
     windowMenuIpc()
+    langIpc()
 
     ipcMain.on('open-about', () => {
         let aboutWindow = createAboutWindowMac()
@@ -102,6 +105,10 @@ function createWindow() {
         let registerWindow = createRegisterWindowMac()
         const registerId = registerWindow.id
 
+        registerWindow.once('ready-to-show', () => {
+            BrowserWindow.fromId(registerId).webContents.send('lang', lang)
+        })
+
         ipcMain.once('close-register', () => {
             BrowserWindow.fromId(registerId).close()
         })
@@ -113,6 +120,7 @@ function createWindow() {
 
         repassWindow.once('ready-to-show', () => {
             BrowserWindow.fromId(repassId).webContents.send('account', uname)
+            BrowserWindow.fromId(repassId).webContents.send('lang', lang)
         })
 
         ipcMain.once('close-repass', () => {

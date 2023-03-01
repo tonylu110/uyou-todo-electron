@@ -1,5 +1,6 @@
 import Alert from "../components/alert/alert.js";
 import { isMac } from "../util/os.js";
+import i18n from "../i18n/index.js";
 
 const { createApp, reactive, ref } = require('vue')
 const ipcRenderer = require('electron').ipcRenderer
@@ -9,6 +10,11 @@ createApp({
     Alert
   },
   setup() {
+    const useLang = ref()
+    ipcRenderer.on('lang', (ev, lang) => {
+      useLang.value = lang
+    })
+
     const closeWindow = () => {
       ipcRenderer.send('close-repass')
     }
@@ -28,10 +34,10 @@ createApp({
 
     const repass = () => {
       if (formData.oldPass === '') {
-        alertMsg.value = ['请输入旧密码']
+        alertMsg.value = [i18n(useLang.value).rePassPage.plzInOldPass]
         showAlert.value = true
       } else if (formData.newPass === '') {
-        alertMsg.value = ['请输入新密码']
+        alertMsg.value = [i18n(useLang.value).rePassPage.plzInNewPass]
         showAlert.value = true
       } else {
         fetch('https://api.todo.uyou.org.cn/editpasswd', {
@@ -48,10 +54,10 @@ createApp({
           return res.json()
         }).then(res => {
           if (res.code === 200) {
-            alertMsg.value = ['修改密码成功！']
+            alertMsg.value = [i18n(useLang.value).rePassPage.setPassSuccess]
             showAlert.value = true
           } else {
-            alertMsg.value = ['修改密码失败！']
+            alertMsg.value = [i18n(useLang.value).rePassPage.setPassFail]
             showAlert.value = true
           }
         })
@@ -60,7 +66,7 @@ createApp({
 
     const closeAlert = () => {
       showAlert.value = false
-      if (alertMsg.value[0] === '修改密码成功！') {
+      if (alertMsg.value[0] === i18n(useLang.value).rePassPage.setPassSuccess) {
         closeWindow()
       }
     }
@@ -72,7 +78,9 @@ createApp({
       repass,
       closeAlert,
       alertMsg,
-      isMac
+      isMac,
+      i18n,
+      useLang
     }
   },
   template: `
@@ -82,24 +90,25 @@ createApp({
     </div>
     <img src="../../../dist/logo.png" alt="" srcset="" class="logo">
     <div class="in">
-      <span>账号：</span>
+      <span>{{ i18n(useLang).registerPage.account }}</span>
       <input type="text" disabled v-model="formData.account">
     </div>
     <div class="in">
-      <span>旧密码：</span>
+      <span>{{ i18n(useLang).rePassPage.oldPass }}</span>
       <input type="password" autofocus="autofocus" v-model="formData.oldPass">
     </div>
     <div class="in">
-      <span>新密码：</span>
+      <span>{{ i18n(useLang).rePassPage.newPass }}</span>
       <input type="password" v-model="formData.newPass">
     </div>
-    <button type="submit" @click="repass">重设密码</button>
+    <button type="submit" @click="repass">{{ i18n(useLang).rePassPage.setPass }}</button>
     <Alert 
-      title="提示"
+      :title=i18n(useLang).alert.hint
       :body="alertMsg"
       :dialog-show="showAlert"
       :cancelButtonShow="false"
       @return="closeAlert"
+      :lang="useLang"
     />
   </div>
   `

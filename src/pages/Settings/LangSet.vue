@@ -43,8 +43,11 @@ import SettingList from "../../components/SettingList/SettingList.vue";
 import router from "../../router";
 import i18n from "../../i18n";
 
+const { ipcRenderer } = require('electron')
+
 const menuClick = (lang: string) => {
   localStorage.setItem('lang', lang)
+  ipcRenderer.send('set-lang', lang)
   location.reload()
 }
 

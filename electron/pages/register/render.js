@@ -1,5 +1,6 @@
 import Alert from "../components/alert/alert.js";
 import { isMac } from "../util/os.js";
+import i18n from "../i18n/index.js";
 
 const { createApp, reactive, ref } = require('vue')
 const ipcRenderer = require('electron').ipcRenderer
@@ -9,6 +10,12 @@ createApp({
     Alert
   },
   setup() {
+    const useLang = ref()
+
+    ipcRenderer.on('lang', (ev, lang) => {
+      useLang.value = lang
+    })
+
     const closeWindow = () => {
       ipcRenderer.send('close-register')
     }
@@ -24,16 +31,16 @@ createApp({
 
     const register = () => {
       if (formData.account === '' || formData.password === '' || formData.rePassword === '') {
-        alertMsg.value = ['请输入账号和密码']
+        alertMsg.value = [i18n(useLang.value).registerPage.plzAccAndPass]
         showAlert.value = true
       } else if (!((formData.account >= 'a' && formData.account <= 'z') || (formData.account >= '0' && formData.account <= '9') || (formData.account >= 'A' && formData.account <= 'Z') || formData.account.indexOf('_') !== -1)) {
-        alertMsg.value = ['仅支持字母、数字、下划线']
+        alertMsg.value = [i18n(useLang.value).registerPage.onlyNum]
         showAlert.value = true
       } else if (formData.account.length > 10) {
-        alertMsg.value = ['账号长度不能超过10位']
+        alertMsg.value = [i18n(useLang.value).registerPage.accLen]
         showAlert.value = true
       } else if (formData.password !== formData.rePassword) {
-        alertMsg.value = ['重复密码与秘密不一致']
+        alertMsg.value = [i18n(useLang.value).registerPage.rePassError]
         showAlert.value = true
       } else {
         fetch('https://api.todo.uyou.org.cn/register', {
@@ -49,10 +56,10 @@ createApp({
           return res.json()
         }).then(res => {
           if (res.code === 200) {
-            alertMsg.value = ['注册成功！']
+            alertMsg.value = [i18n(useLang.value).registerPage.regSuccess]
             showAlert.value = true
           } else {
-            alertMsg.value = ['注册失败！']
+            alertMsg.value = [i18n(useLang.value).registerPage.regFail]
             showAlert.value = true
           }
         })
@@ -61,7 +68,7 @@ createApp({
 
     const closeAlert = () => {
       showAlert.value = false
-      if (alertMsg.value[0] === '注册成功！') {
+      if (alertMsg.value[0] === i18n(useLang.value).registerPage.regSuccess) {
         closeWindow()
       }
     }
@@ -73,7 +80,9 @@ createApp({
       register,
       closeAlert,
       alertMsg,
-      isMac
+      isMac,
+      i18n,
+      useLang
     }
   },
   template: `
@@ -83,24 +92,25 @@ createApp({
     </div>
     <img src="../../../dist/logo.png" alt="" srcset="" class="logo">
     <div class="in">
-      <span>账号：</span>
+      <span>{{ i18n(useLang).registerPage.account }}</span>
       <input type="text" autofocus="autofocus" v-model="formData.account">
     </div>
     <div class="in">
-      <span>密码：</span>
+      <span>{{ i18n(useLang).registerPage.password }}</span>
       <input type="password" v-model="formData.password">
     </div>
     <div class="in">
-      <span>重复密码：</span>
+      <span>{{ i18n(useLang).registerPage.rePass }}</span>
       <input type="password" v-model="formData.rePassword">
     </div>
-    <button type="submit" @click="register">注册</button>
+    <button type="submit" @click="register">{{ i18n(useLang).registerPage.reg }}</button>
     <Alert 
-      title="提示"
+      :title=i18n(useLang).alert.hint
       :body="alertMsg"
       :dialog-show="showAlert"
       :cancelButtonShow="false"
       @return="closeAlert"
+      :lang="useLang"
     />
   </div>
   `
