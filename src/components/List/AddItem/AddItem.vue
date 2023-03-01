@@ -2,23 +2,25 @@
   <div class="add" ref="addItemDom">
     <div class="add-time-area">
       <span>{{ moment(todoTime).format('hh:mm A') }}</span>
-      <div class="buttons">
-        <div class="ok-button" 
-          :style="{opacity: showAddButton}"
-          @click="addItem"
-        >{{ i18n().addText }}</div>
-        <div class="cancel-button" @click="showAddItem">{{ i18n().cancelText }}</div>
-      </div>
     </div>
-    <textarea class="add-item-text" rows="4" v-model="text"></textarea>
-    <ContextMenu
+    <textarea class="add-item-text" rows="3" v-model="text"></textarea>
+  </div>
+  <div class="buttons">
+    <button :style="{width: showAddButton ? '50%' : '', margin: showAddButton ? '' : '0', border: showAddButton ? '' : '0'}" class="ok-button" @click="addItem">
+      <span class="material-icons">check</span>
+    </button>
+    <button :style="{width: showAddButton ? '50%' : ''}" class="close-button" @click="showAddItem">
+      <span class="material-icons">close</span>
+    </button>
+  </div>
+  <ContextMenu
       :pos="contextMenu"
       v-if="showContextMenu"
       @paste-text="paste"
       :custom="customContextMenu"
       @clear="text = ''"
-    />
-  </div>
+      @close="showAddItem"
+  />
 </template>
 
 <script setup lang="ts">
@@ -28,15 +30,11 @@ import i18n from '../../../i18n';
 import ContextMenu from "../../ContextMenu/ContextMenu.vue";
 
 const todoTime = ref(new Date().getTime())
-const showAddButton = ref('')
+const showAddButton = ref(false)
 const text = ref('')
 
 watchEffect(() => {
-  if (text.value !== '') {
-    showAddButton.value = '1'
-  } else {
-    showAddButton.value = ''
-  }
+  showAddButton.value = text.value !== '';
 })
 
 const emits = defineEmits<{
@@ -81,6 +79,11 @@ const customContextMenu = [{
   label: '清除文本',
   event: 'clear',
   icon: 'backspace',
+  color: '#d6010f'
+},{
+  label: '关闭窗口',
+  event: 'close',
+  icon: 'highlight_off',
   color: '#d6010f'
 }]
 

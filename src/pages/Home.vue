@@ -1,6 +1,6 @@
 <template>
   <TabBar
-    @rightClick="() => showAddItem = true" 
+    @rightClick="() => showAddItem = !showAddItem"
     @leftClick="() => router.push('/setting')"
     leftImg="settings"
     :title="i18n().listMenu.allTodo"
