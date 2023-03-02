@@ -12,6 +12,7 @@ const createAboutWindow = require("./pages/about/about");
 const createRegisterWindow = require("./pages/register/register")
 const createRepassWindow = require('./pages/repass/repass')
 const { langIpc, initLang, lang} = require("./store/languageStore");
+const setMicaStyle = require('./pages/util/setMicaStyle')
 
 const store = new Store()
 
@@ -44,17 +45,6 @@ function createWindow() {
     }
   })
 
-  const setMicaStyle = (effect) => {
-    if (effect === 'mica') {
-      mainWindow.setMicaEffect()
-    } else if (effect === 'tabbed') {
-      mainWindow.setMicaTabbedEffect()
-    } else {
-      mainWindow.setRoundedCorner();
-      mainWindow.setCustomEffect(4, '#fff6dc', 0.7);
-    }
-  }
-
   if (windowSizeState) {
     mainWindow.setSize(windowSize.width, windowSize.height)
   }
@@ -65,7 +55,7 @@ function createWindow() {
 
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
-      setMicaStyle(micaStyle ? micaStyle : 'mica')
+      setMicaStyle(micaStyle ? micaStyle : 'mica', mainWindow)
     } else {
       mainWindow.setCustomEffect(4, '#fff6dc', 0.7);
     }
@@ -116,8 +106,12 @@ function createWindow() {
   windowMenuIpc(appMenu)
   langIpc()
 
+  let aboutId, regId, rePassId
+
   ipcMain.on('open-about', () => {
     let aboutWindow = createAboutWindow()
+
+    aboutId = aboutWindow.id
 
     ipcMain.once("close-about", () => {
       aboutWindow.close()
@@ -129,6 +123,8 @@ function createWindow() {
 
   ipcMain.on('open-register', () => {
     let registerWindow = createRegisterWindow()
+
+    regId = registerWindow.id
 
     registerWindow.once('ready-to-show', () => {
       registerWindow.webContents.send('lang', lang)
@@ -142,6 +138,8 @@ function createWindow() {
   ipcMain.on('open-repass', (ev, uname) => {
     let repassWindow = createRepassWindow()
 
+    rePassId = repassWindow.id
+
     repassWindow.once('ready-to-show', () => {
       repassWindow.webContents.send('account', uname)
       repassWindow.webContents.send('lang', lang)
@@ -153,7 +151,7 @@ function createWindow() {
   })
 
   ipcMain.on('changeBlur', (ev, effect) => {
-    setMicaStyle(effect)
+    setMicaStyle(effect, mainWindow)
     store.set('micaStyle', effect)
   })
 }

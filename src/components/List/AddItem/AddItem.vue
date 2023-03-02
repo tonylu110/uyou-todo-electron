@@ -6,7 +6,7 @@
     <textarea class="add-item-text" rows="3" v-model="text"></textarea>
   </div>
   <div class="buttons">
-    <button :style="{width: showAddButton ? '50%' : '', margin: showAddButton ? '' : '0', border: showAddButton ? '' : '0'}" class="ok-button" @click="addItem">
+    <button :style="{width: showAddButton ? '50%' : '', margin: showAddButton ? '' : '0 0 0 -6px'}" class="ok-button" @click="addItem">
       <span class="material-icons">check</span>
     </button>
     <button :style="{width: showAddButton ? '50%' : ''}" class="close-button" @click="showAddItem">

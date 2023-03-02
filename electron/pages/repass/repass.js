@@ -1,6 +1,8 @@
 const path = require('path');
-const { MicaBrowserWindow } = require("mica-electron");
+const { MicaBrowserWindow, IS_WINDOWS_11 } = require("mica-electron");
 const repass = path.join(__dirname, './repass.html');
+const setMicaStyle = require('../util/setMicaStyle')
+const { micaStyle, menuBlur } = require('../../store/menuBlurStore')
 
 let repassWindow
 
@@ -19,11 +21,25 @@ function createRepassWindow () {
     }
   })
 
-  repassWindow.setRoundedCorner()
-  repassWindow.setCustomEffect(4, '#edd9b7', 0.5);
+  repassWindow.setLightTheme()
+
+  if (menuBlur || menuBlur === undefined) {
+    if (IS_WINDOWS_11) {
+      setMicaStyle(micaStyle ? micaStyle : 'mica', repassWindow)
+    } else {
+      repassWindow.setCustomEffect(4, '#fff6dc', 0.7);
+    }
+  } else {
+    repassWindow.setCaptionColor('#fff6dc')
+    repassWindow.setCustomEffect(1, '#fff6dc', 1);
+  }
   repassWindow.setAlwaysOnTop(true)
 
   repassWindow.loadURL(repass)
+
+  repassWindow.once('ready-to-show', () => {
+    repassWindow.show()
+  })
 
   return repassWindow
 }
