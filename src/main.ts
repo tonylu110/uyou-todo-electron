@@ -5,8 +5,19 @@ import App from './App.vue'
 import PerfectScrollbar from 'vue3-perfect-scrollbar'
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
 import router from './router'
+import AppSimple from "./AppSimple.vue";
 
-const app = createApp(App)
+const simpleMode = localStorage.getItem('simpleMode')
+
+let app
+
+console.log(simpleMode)
+
+if (simpleMode === 'false' || simpleMode === null) {
+    app = createApp(App)
+} else {
+    app = createApp(AppSimple)
+}
 
 app.use(router)
 app.use(PerfectScrollbar)

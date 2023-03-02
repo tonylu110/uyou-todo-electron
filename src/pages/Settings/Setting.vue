@@ -9,6 +9,12 @@
         :title="loginState ? i18n().myAccount : i18n().loginText"
         @itemFun="() => router.push('/account?from=setting')"
     />
+    <Item
+      title="极简模式"
+      :show-switch="true"
+      :switch-state="simpleModeState"
+      @switch-fun="changeSimpleMode"
+    />
     <ItemBox>
       <Item
           :title="i18n().update.autoUpdate"
@@ -182,6 +188,16 @@ const changeMica = (effect: string) => {
   ipcRenderer.send('changeBlur', effect)
 }
 
+const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
+const changeSimpleMode = () => {
+  simpleModeState.value = !simpleModeState.value
+  localStorage.setItem('simpleMode', simpleModeState.value + '')
+  ipcRenderer.send('setSimple', simpleModeState.value)
+  toastShow.value = true
+  setTimeout(() => {
+    toastShow.value = false
+  }, 700);
+}
 </script>
 
 <style scoped lang="scss">

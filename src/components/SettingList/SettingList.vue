@@ -13,7 +13,7 @@ defineProps<{
 <style scoped lang="scss">
 .list {
   background-color: #eee;
-  width: calc(100vw - 300px);
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;

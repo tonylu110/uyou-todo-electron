@@ -12,6 +12,11 @@ const routes = [
     component: () => import("./pages/Settings/Setting.vue"),
   },
   {
+    path: "/setting-sim",
+    name: "settingSim",
+    component: () => import("./pages/SettingsSimple.vue"),
+  },
+  {
     path: "/account",
     name: "account",
     component: () => import("./pages/Account.vue"),

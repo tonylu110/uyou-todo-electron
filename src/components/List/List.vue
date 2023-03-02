@@ -1,7 +1,7 @@
 <template>
   <perfect-scrollbar class="list">
     <transition name="add">
-      <div v-if="showAddItem" ref="add">
+      <div v-if="showAddItem" ref="add" class="add-list">
         <AddItem
           @setAddItem="setAddItem"
           @addItem="addItem"
@@ -121,13 +121,16 @@ const deleteItem = (id: number) => {
 <style scoped lang="scss">
 .list {
   background-color: #edd9b7;
-  width: calc(100vw - 300px);
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
   padding-top: 10px;
+
+  .add-list {
+    width: calc(100% - 20px);
+  }
 
   .material-icons {
     position: absolute;

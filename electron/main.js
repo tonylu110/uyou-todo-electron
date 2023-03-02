@@ -13,6 +13,7 @@ const createRegisterWindow = require("./pages/register/register")
 const createRepassWindow = require('./pages/repass/repass')
 const { langIpc, initLang, lang} = require("./store/languageStore");
 const setMicaStyle = require('./pages/util/setMicaStyle')
+const { initSim, simple, simpleIpc } = require('./store/simpleModeStore')
 
 const store = new Store()
 
@@ -28,12 +29,15 @@ function createWindow() {
   initMenuBlur()
   initWindowMenu()
   initLang()
+  initSim()
 
   mainWindow = new MicaBrowserWindow({
-    width: 1000,
-    height: 750,
+    width: simple ? 350 : 1000,
+    height: simple ? 700 : 750,
     minHeight: 600,
-    minWidth: 800,
+    minWidth: simple ? 350 : 800,
+    maxWidth: simple ? 400 : null,
+    maximizable: !simple,
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: systemBar,
     show: false,
@@ -105,6 +109,7 @@ function createWindow() {
   menuBlurIpc()
   windowMenuIpc(appMenu)
   langIpc()
+  simpleIpc()
 
   let aboutId, regId, rePassId
 

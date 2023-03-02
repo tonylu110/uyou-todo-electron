@@ -1,6 +1,6 @@
 .add {
   position: relative;
-  width: calc(100vw - 340px);
+  width: calc(100% - 20px);
   background-color: #f6f2e9;
   height: auto;
   padding: 10px;
@@ -13,7 +13,7 @@
     margin-left: -10px;
     margin-top: -10px;
     padding: 5px 10px;
-    width: calc(100vw - 340px);
+    width: 100%;
     border-radius: 5px 5px 0 0;
     display: flex;
     flex-direction: row;
@@ -30,8 +30,8 @@
     margin-top: 10px;
     color: #6e492f;
     border: 0;
-    max-width: calc(100vw - 340px);
-    min-width: calc(100vw - 340px);
+    max-width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
     outline: none;
     background-color: transparent;
     font-family: 'smartisan-t';
@@ -45,7 +45,7 @@
 }
 
 .buttons {
-  width: calc(100vw - 319px);
+  width: 100%;
   margin-bottom: 10px;
   display: flex;
   align-items: center;

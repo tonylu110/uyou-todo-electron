@@ -1,7 +1,12 @@
 <template>
   <div 
     class="item" 
-    :style="showSwitch ? {backgroundColor: 'white', color: 'black', cursor: 'auto'} : ''"
+    :style="{
+      backgroundColor: showSwitch ? 'white' : '',
+      color: showSwitch ? 'black' : '',
+      cursor: showSwitch ?  'auto' : '',
+      width: simpleMode ? 'calc(100% - 50px)' : ''
+    }"
     @click="emits('itemFun')"
   >
     <div>
@@ -45,6 +50,8 @@ const emits = defineEmits<{
   (e: 'switchFun'): void,
   (e: 'itemFun'): void
 }>()
+
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
 
 <style scoped lang="scss">

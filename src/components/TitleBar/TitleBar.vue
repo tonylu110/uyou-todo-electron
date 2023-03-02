@@ -1,5 +1,5 @@
 <template>
-  <div class="title-bar" :style="{justifyContent: isMac ? 'flex-start' : ''}" v-if="titleBarShow">
+  <div class="title-bar" :style="{justifyContent: isMac ? 'flex-start' : '', width: simpleMode ? '100vw' : '', marginLeft: simpleMode ? '0' : ''}" v-if="titleBarShow">
     <div 
       :class="topState ? 'on-top-button-sel button' :'on-top-button button'"
       :style="{
@@ -8,10 +8,10 @@
       }"  
       @click="onTopWindow"
     >
-      <img :src="isMac ? './images/top.png' : (topState ? './images/top.png' : './images/top-black.png')" alt="">
+      <img :src="isMac || simpleMode ? './images/top.png' : (topState ? './images/top.png' : './images/top-black.png')" alt="">
     </div>
     <span class="title-text">
-      {{ title }}
+      {{ simpleMode ? '' : title }}
     </span>
     <!-- <div v-if="isMac" class="close-button-mac button" @click="closeWindow">
       <span class="material-icons">close</span>
@@ -25,14 +25,14 @@
     <div v-if="!isMac" class="min-button button" @click="minWindow">
       <span class="material-icons" style="color: white;">horizontal_rule</span>
     </div>
-    <div v-if="!isMac" class="min-button button" @click="maxWindow">
+    <div v-if="!isMac && !simpleMode" class="min-button button" @click="maxWindow">
       <span class="material-icons" style="color: white;">check_box_outline_blank</span>
     </div>
     <div v-if="!isMac" class="close-button button" @click="closeWindow">
       <span class="material-icons">close</span>
     </div>
-    <div class="list-menu-color" :style="{backgroundColor: listMenuColor}"></div>
-    <div class="list-menu-drag"></div>
+    <div class="list-menu-color" :style="{backgroundColor: listMenuColor}" v-if="!simpleMode"></div>
+    <div class="list-menu-drag" v-if="!simpleMode"></div>
   </div>
 </template>
 
@@ -87,6 +87,8 @@ const listMenuColor = ref('')
 if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)) {
   listMenuColor.value = '#fff6dc00'
 }
+
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
 
 <style lang="scss" scoped>

@@ -1,10 +1,10 @@
 <template>
   <TabBar
     @rightClick="() => showAddItem = !showAddItem"
-    @leftClick="() => router.push('/setting')"
+    @leftClick="() => router.push('/setting-sim')"
     leftImg="settings"
-    :title="i18n().listMenu.allTodo"
-    :leftImgShow="false"
+    :title="simpleMode ? 'uyou ToDo' : i18n().listMenu.allTodo"
+    :leftImgShow="simpleMode"
   />
   <List
     :showAddItem="showAddItem" 
@@ -28,4 +28,5 @@ const showAddItem = ref(false)
 firstLoad()
 
 const listData = LocalStorage('get') as ITodoList[]
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>

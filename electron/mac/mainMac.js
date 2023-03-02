@@ -10,6 +10,7 @@ const createAboutWindowMac = require("./pages/aboutMac");
 const createRegisterWindowMac = require("./pages/registerMac");
 const createRepassWindowMac = require("./pages/repassMac");
 const { initLang, langIpc, lang} = require("../store/languageStore");
+const { initSim, simple, simpleIpc } = require('../store/simpleModeStore')
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -23,12 +24,15 @@ function createWindow() {
     initMenuBlur()
     initWindowMenu()
     initLang()
+    initSim()
 
     mainWindow = new BrowserWindow({
-        width: 1000,
-        height: 750,
+        width: simple ? 350 : 1000,
+        height: simple ? 700 : 750,
         minHeight: 600,
-        minWidth: 800,
+        minWidth: simple ? 350 : 800,
+        maxWidth: simple ? 400 : null,
+        maximizable: !simple,
         vibrancy: (menuBlur || menuBlur === undefined) ? 'menu' : null,
         visualEffectState: 'active',
         icon: path.join(__dirname, '../../dist/logo.png'),
@@ -89,6 +93,7 @@ function createWindow() {
     menuBlurIpc()
     windowMenuIpc()
     langIpc()
+    simpleIpc()
 
     ipcMain.on('open-about', () => {
         let aboutWindow = createAboutWindowMac()

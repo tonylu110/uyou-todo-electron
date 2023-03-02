@@ -80,7 +80,6 @@ if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.ge
 .title-bar {
   position: relative;
   height: 55px;
-  width: calc(100vw - 300px);
   background-color: #7a695c;
   display: flex;
   flex-direction: row;

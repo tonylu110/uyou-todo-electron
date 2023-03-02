@@ -95,6 +95,7 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
     flex-direction: row;
     
     .todo-list {
+      width: calc(100vw - 300px);
       height: calc(100vh - 105px);
     }
   }
