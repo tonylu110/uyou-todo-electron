@@ -1,10 +1,13 @@
 <template>
   <perfect-scrollbar class="list">
-    <AddItem 
-      v-if="showAddItem"
-      @setAddItem="setAddItem"
-      @addItem="addItem"
-    />
+    <transition name="add">
+      <div v-if="showAddItem" ref="add">
+        <AddItem
+          @setAddItem="setAddItem"
+          @addItem="addItem"
+        />
+      </div>
+    </transition>
     <Item 
       v-for="(item, index) in list"
       :key="index"
@@ -133,5 +136,20 @@ const deleteItem = (id: number) => {
     transform: translateY(calc(-50% + 20px));
     color: #00000020;
   }
+}
+
+.add-enter-from,
+.add-leave-to {
+  margin-top: calc(-114px - 4rem);
+}
+
+.add-enter-to,
+.add-leave-from {
+  margin-top: 0;
+}
+
+.add-enter-active,
+.add-leave-active {
+  transition: margin .3s;
 }
 </style>
