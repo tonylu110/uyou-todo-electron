@@ -55,10 +55,9 @@ function createWindow() {
 
   remoteMain.enable(mainWindow.webContents);
 
-  mainWindow.setLightTheme()
-
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
+      mainWindow.setLightTheme()
       setMicaStyle(micaStyle ? micaStyle : 'mica', mainWindow)
     } else {
       mainWindow.setCustomEffect(4, '#fff6dc', 0.7);

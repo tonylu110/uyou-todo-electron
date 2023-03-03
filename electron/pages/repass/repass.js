@@ -21,10 +21,9 @@ function createRepassWindow () {
     }
   })
 
-  repassWindow.setLightTheme()
-
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
+      repassWindow.setLightTheme()
       setMicaStyle(micaStyle ? micaStyle : 'mica', repassWindow)
     } else {
       repassWindow.setCustomEffect(4, '#fff6dc', 0.7);

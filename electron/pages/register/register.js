@@ -22,10 +22,9 @@ function createRegisterWindow () {
     }
   })
 
-  registerWindow.setLightTheme()
-
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
+      registerWindow.setLightTheme()
       setMicaStyle(micaStyle ? micaStyle : 'mica', registerWindow)
     } else {
       registerWindow.setCustomEffect(4, '#fff6dc', 0.7);
