@@ -11,8 +11,6 @@ const simpleMode = localStorage.getItem('simpleMode')
 
 let app
 
-console.log(simpleMode)
-
 if (simpleMode === 'false' || simpleMode === null) {
     app = createApp(App)
 } else {

@@ -6,29 +6,29 @@
       @leftClick="router.back()"
   />
   <SettingList>
-    <div class="item-box">
+    <div class="item-box" :style="{width: simpleMode ? 'calc(100% - 20px)' : ''}">
       <div class="box-radius">
-        <div @click="() => menuClick('withSystem')" :class="langShow('withSystem') ? 'select' : ''">
+        <div @click="() => menuClick('withSystem')" :class="langShow('withSystem') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>{{ i18n().setLangText }}</span>
           <span v-if="langShow('withSystem')" class="material-icons">check</span>
         </div>
-        <div @click="() => menuClick('en')" :class="langShow('en') ? 'select' : ''">
+        <div @click="() => menuClick('en')" :class="langShow('en') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>English</span>
           <span v-if="langShow('en')" class="material-icons">check</span>
         </div>
-        <div @click="() => menuClick('es')" :class="langShow('es') ? 'select' : ''">
+        <div @click="() => menuClick('es')" :class="langShow('es') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>Español</span>
           <span v-if="langShow('es')" class="material-icons">check</span>
         </div>
-        <div @click="() => menuClick('zh-cn')" :class="langShow('zh-cn') ? 'select' : ''">
+        <div @click="() => menuClick('zh-cn')" :class="langShow('zh-cn') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>中文（简体）</span>
           <span v-if="langShow('zh-cn')" class="material-icons">check</span>
         </div>
-        <div @click="() => menuClick('zh-tw')" :class="langShow('zh-tw') ? 'select' : ''">
+        <div @click="() => menuClick('zh-tw')" :class="langShow('zh-tw') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>中文（繁體）</span>
           <span v-if="langShow('zh-tw')" class="material-icons">check</span>
         </div>
-        <div @click="() => menuClick('ja')" :class="langShow('ja') ? 'select' : ''">
+        <div @click="() => menuClick('ja')" :class="langShow('ja') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>日本語</span>
           <span v-if="langShow('ja')" class="material-icons">check</span>
         </div>
@@ -55,6 +55,8 @@ const langShow = (lang: string): boolean => {
   const langLocal = localStorage.getItem('lang')
   return (lang === 'withSystem' && langLocal === null) || lang === langLocal;
 }
+
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
 
 <style scoped lang="scss">

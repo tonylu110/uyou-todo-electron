@@ -1,5 +1,5 @@
 <template>
-  <perfect-scrollbar class="list" :style="{justifyContent: justify}">
+  <perfect-scrollbar class="list" :style="{justifyContent: justify, backgroundColor: simpleMode ? 'transparent' : ''}">
     <slot></slot>
   </perfect-scrollbar>
 </template>
@@ -8,6 +8,8 @@
 defineProps<{
   justify?: string
 }>()
+
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
 
 <style scoped lang="scss">

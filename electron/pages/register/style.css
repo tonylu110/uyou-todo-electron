@@ -61,10 +61,10 @@
 
 .main-area .in input {
     padding: 10px;
-    border: none;
     outline: none;
     border-radius: 5px;
     background-color: #ffffff90;
+    border: 2px solid #00000010;
     -webkit-app-region: no-drag;
 }
 

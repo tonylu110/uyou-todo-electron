@@ -1,5 +1,5 @@
 <template>
-  <div :class="'item-button ' + mode">
+  <div :class="'item-button ' + mode" :style="{width: simpleMode ? 'calc(100% - 50px)' : ''}">
     <slot>button</slot>
   </div>
 </template>
@@ -11,6 +11,8 @@ defineProps({
     type: String
   }
 })
+
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
 
 <style lang="scss" scoped>

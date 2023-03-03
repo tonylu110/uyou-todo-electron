@@ -7,7 +7,7 @@
   />
   <SettingList>
     <Item :title="loginText" :showArrow="false" />
-    <div v-if="!loginState" class="login-input">
+    <div v-if="!loginState" class="login-input" :style="{width: simpleMode ? 'calc(100% - 50px)' : ''}">
       <input type="text" :placeholder="i18n().accountPage.account" v-model="uname">
       <input type="password" :placeholder="i18n().accountPage.passwd" v-model="passwd" @keydown.enter="login">
     </div>
@@ -48,6 +48,8 @@ import Item from "../components/ItemBox/Item/Item.vue";
 import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";
 
 const ipcRenderer = require('electron').ipcRenderer
+
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
 const form = ref('')
 const route = useRoute()

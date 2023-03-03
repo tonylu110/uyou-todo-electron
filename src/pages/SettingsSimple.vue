@@ -6,11 +6,33 @@
   />
   <setting-list>
     <Item
-        title="极简模式"
-        :show-switch="true"
-        :switch-state="simpleModeState"
-        @switch-fun="changeSimpleMode"
+      :title="loginState ? i18n().myAccount : i18n().loginText"
+      @item-fun="() => router.push('/account?from=setting')"
     />
+    <Item
+      title="极简模式"
+      :show-switch="true"
+      :switch-state="simpleModeState"
+      @switch-fun="changeSimpleMode"
+    />
+    <ItemBox>
+      <Item
+        :title="i18n().useSystemBar"
+        :show-switch="true"
+        :switch-state="useSystemTitleBar"
+        @switch-fun="setTitleBar"
+      />
+      <Item
+        :title="i18n().setTopWindow"
+        :showSwitch="true"
+        :switchState="topState"
+        @switchFun="onTopWindow"
+      />
+    </ItemBox>
+    <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
+    <ItemButton @click="router.push('/lang')">
+      <img src="/images/lang.png" alt="" class="lang-img" />
+    </ItemButton>
     <Toast :msg="i18n().restartApp" v-if="toastShow" />
   </setting-list>
 </template>
@@ -24,9 +46,14 @@ import SettingList from "../components/SettingList/SettingList.vue";
 import Item from "../components/ItemBox/Item/Item.vue";
 import { ref } from "vue";
 import Toast from "../components/Toast/Toast.vue";
+import ItemBox from "../components/ItemBox/ItemBox.vue";
+import firstLoad from "../components/TitleBar/firstLoad";
+import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";
 const { ipcRenderer } = require("electron");
 
 const toastShow = ref(false)
+
+const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
 
 const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
 const changeSimpleMode = () => {
@@ -37,6 +64,29 @@ const changeSimpleMode = () => {
   setTimeout(() => {
     toastShow.value = false
   }, 700);
+}
+
+const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
+const setTitleBar = () => {
+  useSystemTitleBar.value = !useSystemTitleBar.value
+  localStorage.setItem('systemTitle', useSystemTitleBar.value + '')
+  ipcRenderer.send('setSystemBar', useSystemTitleBar.value)
+  toastShow.value = true
+  setTimeout(() => {
+    toastShow.value = false
+  }, 700);
+}
+
+const topState = ref(firstLoad())
+const onTopWindow = () => {
+  topState.value = !topState.value
+  ipcRenderer.send('window-on-top', topState.value)
+  localStorage.setItem('alwaysOnTop', topState.value + '')
+}
+
+const clearData = () => {
+  localStorage.clear()
+  window.location.reload()
 }
 </script>
 

@@ -65,7 +65,7 @@ function createWindow() {
     }
   } else {
     mainWindow.setCaptionColor('#fff6dc')
-    mainWindow.setCustomEffect(1, '#fff6dc', 1);
+    mainWindow.setCustomEffect(1, simple ? '#eeeeee' : '#fff6dc', 1);
   }
 
   mainWindow.loadURL(
