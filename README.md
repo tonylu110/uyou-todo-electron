@@ -5,14 +5,16 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
 ## Run and build
 
 - run in development mode
-    ``` 
-    yarn
-    yarn electron:serve
-    ```
-- build
-  ```
+  ```bash 
   yarn
-  yarn electron:build
+  yarn electron:serve // run in Windows
+  yarn electron:servemac // run in mac
+  ```
+- build
+  ```bash
+  yarn
+  yarn electron:build // build for Windows
+  yarn electron:buildmac // build for mac 
   ```
 
 ## Preview
@@ -20,3 +22,4 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
 ![](./demo/demo2.png)
 ![](./demo/demo3.png)
 ![](./demo/demo4.png)
+![](./demo/demo5.png)
