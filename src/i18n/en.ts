@@ -4,7 +4,7 @@ const addText = 'Add'
 const cancelText = 'Cancel'
 const copyText = 'Copy'
 const copyToast = 'Copy successfully'
-const settingTitleText = 'Setting'
+const settingTitleText = 'Settings'
 const setLangText = 'Auto'
 const updateText = 'New Version'
 const loginText = 'Not logged in'
@@ -88,7 +88,8 @@ const anotherSettings = {
     menuBlur: 'Window List Menu Blur',
     windowMenu: 'Window Menu',
     openSource: 'Thanks Open Source',
-    about: 'About uyou ToDo'
+    about: 'About uyou ToDo',
+    simple: 'Simple Mode'
 }
 
 const contextMenu = {
@@ -97,7 +98,8 @@ const contextMenu = {
     comToDo: 'Complete ToDo',
     removeToDo: 'Delete ToDo',
     clearTxt: 'Clear Text',
-    closeItem: 'Close Item'
+    closeItem: 'Close Item',
+    undoTodo: 'Undo Completed'
 }
 
 const language = 'Language'

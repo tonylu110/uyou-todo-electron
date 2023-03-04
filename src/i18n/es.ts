@@ -88,7 +88,8 @@ const anotherSettings = {
   menuBlur: 'Desenfoque del menú de la lista de ventanas',
   windowMenu: 'Menú Ventana',
   openSource: 'Gracias código abierto',
-  about: 'Acerca de uyou ToDo'
+  about: 'Acerca de uyou ToDo',
+  simple: 'Modo simple'
 }
 
 const contextMenu = {
@@ -97,7 +98,8 @@ const contextMenu = {
   comToDo: 'Tareas completas',
   removeToDo: 'Eliminar tareas pendientes',
   clearTxt: 'Borrar texto',
-  closeItem: 'Cerrar artículo'
+  closeItem: 'Cerrar artículo',
+  undoTodo: 'Deshacer completado'
 }
 
 const language = 'Idioma'

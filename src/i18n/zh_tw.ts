@@ -88,7 +88,8 @@ const anotherSettings = {
     menuBlur: '頁面菜單毛玻璃',
     windowMenu: '窗口菜單',
     openSource: '開源鳴謝',
-    about: '關於 uyou ToDo'
+    about: '關於 uyou ToDo',
+    simple: '簡易模式'
 }
 
 const contextMenu = {
@@ -97,7 +98,8 @@ const contextMenu = {
     comToDo: '完成 ToDo',
     removeToDo: '刪除 ToDo',
     clearTxt: '清除文字',
-    closeItem: '關閉視窗'
+    closeItem: '關閉視窗',
+    undoTodo: '撤銷完成'
 }
 
 const language = '語言'

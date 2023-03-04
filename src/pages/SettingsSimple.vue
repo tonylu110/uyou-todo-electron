@@ -10,7 +10,7 @@
       @item-fun="() => router.push('/account?from=setting')"
     />
     <Item
-      title="极简模式"
+      :title="i18n().anotherSettings.simple"
       :show-switch="true"
       :switch-state="simpleModeState"
       @switch-fun="changeSimpleMode"

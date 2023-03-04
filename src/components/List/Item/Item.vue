@@ -98,7 +98,7 @@ const contextMenu = ref({
 })
 
 const customContextMenu = reactive([{
-  label: okState.value ? '取消完成' : i18n().contextMenu.comToDo,
+  label: okState.value ? i18n().contextMenu.undoTodo : i18n().contextMenu.comToDo,
   event: 'setOk',
   icon: okState.value ? 'panorama_fisheye' : 'task_alt'
 }, {
@@ -110,7 +110,7 @@ const customContextMenu = reactive([{
 
 watchEffect(() => {
   customContextMenu[0] = {
-    label: okState.value ? '取消完成' : i18n().contextMenu.comToDo,
+    label: okState.value ? i18n().contextMenu.undoTodo : i18n().contextMenu.comToDo,
     event: 'setOk',
     icon: okState.value ? 'panorama_fisheye' : 'task_alt'
   }

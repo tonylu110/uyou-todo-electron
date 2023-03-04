@@ -88,16 +88,18 @@ const anotherSettings = {
     menuBlur: 'ウィンドウ リスト メニューのぼかし',
     windowMenu: 'ウィンドウメニュー',
     openSource: 'ありがとうオープンソース',
-    about: 'uyou ToDo について'
+    about: 'uyou ToDo について',
+    simple: 'シンプルモード'
 }
 
 const contextMenu = {
     copy: 'コピー',
     paste: 'ペースト',
     comToDo: 'ToDo を完了する',
-    removeToDo: 'ToDoを削除',
+    removeToDo: 'ToDo を削除',
     clearTxt: 'クリアテキスト',
-    closeItem: 'アイテムを閉じる'
+    closeItem: 'アイテムを閉じる',
+    undoTodo: '取り消し完了'
 }
 
 const language = '言語'

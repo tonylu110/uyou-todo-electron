@@ -10,7 +10,7 @@
         @itemFun="() => router.push('/account?from=setting')"
     />
     <Item
-      title="极简模式"
+      :title="i18n().anotherSettings.simple"
       :show-switch="true"
       :switch-state="simpleModeState"
       @switch-fun="changeSimpleMode"
@@ -85,7 +85,7 @@
       <Item :title="i18n().anotherSettings.about" @itemFun="openAboutWindow"/>
     </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
-    <ItemButton @click="router.push('/lang')">
+    <ItemButton @click="router.push('/lang?from=setting')">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </ItemButton>
     <Toast :msg="i18n().restartApp" v-if="toastShow" />
