@@ -28,6 +28,13 @@
         :switchState="topState"
         @switchFun="onTopWindow"
       />
+      <Item
+        v-if="isLinux"
+        :title="i18n().anotherSettings.menuBlur"
+        :showSwitch="true"
+        :switchState="menuBlurState"
+        @switchFun="setMenuBlur"
+      />
     </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
     <ItemButton @click="router.push('/lang')">
@@ -49,7 +56,10 @@ import Toast from "../components/Toast/Toast.vue";
 import ItemBox from "../components/ItemBox/ItemBox.vue";
 import firstLoad from "../components/TitleBar/firstLoad";
 import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";
+
 const { ipcRenderer } = require("electron");
+
+const isLinux = !(process.platform === 'linux')
 
 const toastShow = ref(false)
 
@@ -82,6 +92,17 @@ const onTopWindow = () => {
   topState.value = !topState.value
   ipcRenderer.send('window-on-top', topState.value)
   localStorage.setItem('alwaysOnTop', topState.value + '')
+}
+
+const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
+const setMenuBlur = () => {
+  menuBlurState.value = !menuBlurState.value
+  ipcRenderer.send('setMenuBlur', menuBlurState.value)
+  localStorage.setItem('menuBlur', menuBlurState.value + '')
+  toastShow.value = true
+  setTimeout(() => {
+    toastShow.value = false
+  }, 700);
 }
 
 const clearData = () => {
