@@ -33,6 +33,7 @@
     :custom="customContextMenu"
     @setOk="setOk"
     @remove="deleteItem"
+    :text="props.text"
   />
 </template>
 

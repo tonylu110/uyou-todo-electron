@@ -47,9 +47,17 @@ watchEffect(() => {
   position.value = props.pos
 })
 
+const textProp = ref(props.text)
+watchEffect(() => {
+  textProp.value = props.text!
+})
 const copy = () => {
   const copyText = window.getSelection()!.toString()
-  clipboard.writeText(copyText)
+  if (copyText) {
+    clipboard.writeText(copyText)
+  } else {
+    clipboard.writeText(textProp.value)
+  }
 }
 
 const emits = defineEmits<{
