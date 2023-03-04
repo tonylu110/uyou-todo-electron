@@ -38,6 +38,7 @@ function createWindow() {
         icon: path.join(__dirname, '../../dist/logo.png'),
         frame: systemBar,
         titleBarStyle: systemBar ? 'default' : 'hiddenInset',
+        trafficLightPosition: { x: 10, y: simple ? 13 : 10 },
         show: false,
         webPreferences: {
             preload: path.join(__dirname, '../preload.js'),
