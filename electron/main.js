@@ -60,7 +60,7 @@ function createWindow() {
       mainWindow.setLightTheme()
       setMicaStyle(micaStyle ? micaStyle : 'mica', mainWindow)
     } else {
-      mainWindow.setCustomEffect(4, '#fff6dc', 0.7);
+      mainWindow.setCustomEffect(4, simple ? '#eeeeee' : '#fff6dc', 0.7);
     }
   } else {
     mainWindow.setCaptionColor('#fff6dc')
