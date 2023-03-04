@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, Ref, ref, watchEffect} from 'vue';
+import {onMounted, reactive, Ref, ref, watchEffect} from 'vue';
 import getTime from '../../../util/getTime';
 import i18n from '../../../i18n';
 import getOkStyle from '../../../data/getOkStyle';
@@ -45,11 +45,11 @@ import Toast from '../../Toast/Toast.vue';
 import { useRoute } from 'vue-router';
 import ContextMenu from "../../ContextMenu/ContextMenu.vue";
 
-const props = defineProps({
-  time: Number,
-  text: String,
-  isOk: Boolean,
-})
+const props = defineProps<{
+  time: number,
+  text: string,
+  isOk: boolean
+}>()
 
 const emits = defineEmits<{
   (e: 'setOk', id: number, isOk: boolean): void,
@@ -96,16 +96,24 @@ const contextMenu = ref({
   left: 0
 })
 
-const customContextMenu = [{
-  label: i18n().contextMenu.comToDo,
+const customContextMenu = reactive([{
+  label: okState.value ? '取消完成' : i18n().contextMenu.comToDo,
   event: 'setOk',
-  icon: 'task_alt'
+  icon: okState.value ? 'panorama_fisheye' : 'task_alt'
 }, {
   label: i18n().contextMenu.removeToDo,
   event: 'remove',
   icon: 'highlight_off',
   color: '#d6010f'
-}]
+}])
+
+watchEffect(() => {
+  customContextMenu[0] = {
+    label: okState.value ? '取消完成' : i18n().contextMenu.comToDo,
+    event: 'setOk',
+    icon: okState.value ? 'panorama_fisheye' : 'task_alt'
+  }
+})
 
 onMounted(() => {
   itemDom.value.addEventListener('contextmenu', e => {

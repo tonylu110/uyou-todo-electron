@@ -9,7 +9,7 @@
       <span>{{ i18n().contextMenu.paste }}</span>
     </div>
     <span v-if="custom" class="menu-line"></span>
-    <div v-if="custom" v-for="(item, index) in custom" :key="index" @click="emits(item.event)" :style="{color: item.color}">
+    <div v-if="custom" v-for="(item, index) in customMenu" :key="index" @click="emits(item.event)" :style="{color: item.color}">
       <span class="material-icons" v-if="item.icon">{{ item.icon }}</span>
       <span>{{ item.label }}</span>
     </div>
@@ -60,6 +60,11 @@ const paste = () => {
   const pasteText = clipboard.readText()
   emits('pasteText', pasteText)
 }
+
+const customMenu = ref(props.custom)
+watchEffect(() => {
+  customMenu.value = props.custom
+})
 </script>
 
 <style scoped lang="scss">
