@@ -25,16 +25,16 @@
         :msg="i18n().copyToast"
       />
     </div>
+    <ContextMenu
+      :pos="contextMenu"
+      v-if="showContextMenu"
+      :show-paste="false"
+      :custom="customContextMenu"
+      @setOk="setOk"
+      @remove="deleteItem"
+      :text="props.text"
+    />
   </div>
-  <ContextMenu
-    :pos="contextMenu"
-    v-if="showContextMenu"
-    :show-paste="false"
-    :custom="customContextMenu"
-    @setOk="setOk"
-    @remove="deleteItem"
-    :text="props.text"
-  />
 </template>
 
 <script setup lang="ts">

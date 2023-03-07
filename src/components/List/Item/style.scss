@@ -61,6 +61,7 @@
       color: #6e492f;
       user-select: text;
       pointer-events: auto;
+      transition: .3s;
   
       &::selection {
         background-color: #dcc6a9;

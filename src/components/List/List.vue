@@ -8,15 +8,18 @@
         />
       </div>
     </transition>
-    <Item 
-      v-for="(item, index) in list"
-      :key="index"
-      :text="item.text"
-      :time="item.id" 
-      :isOk="item.ok"
-      @setOk="setOk"
-      @deleteItem="deleteItem"
-    />
+    <transition-group name="item">
+      <Item
+        v-for="item in list"
+        :key="item.id"
+        :text="item.text"
+        :time="item.id"
+        :isOk="item.ok"
+        @setOk="setOk"
+        @deleteItem="deleteItem"
+        ref="item"
+      />
+    </transition-group>
     <span v-if="list.length === 0" class="material-icons">list_alt</span>
   </perfect-scrollbar>
 </template>
@@ -154,5 +157,24 @@ const deleteItem = (id: number) => {
 .add-enter-active,
 .add-leave-active {
   transition: margin .3s;
+}
+
+.item-leave-to {
+  transform: translate(-120%);
+}
+
+.item-enter-from,
+.item-enter-to,
+.item-leave-from {
+  transform: translateX(0);
+}
+
+.item-enter-active,
+.item-leave-active {
+  transition: transform .4s;
+}
+
+.item-move {
+  transition: all .5s;
 }
 </style>
