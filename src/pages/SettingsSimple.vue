@@ -9,12 +9,20 @@
       :title="loginState ? i18n().myAccount : i18n().loginText"
       @item-fun="() => router.push('/account?from=setting')"
     />
-    <Item
-      :title="i18n().anotherSettings.simple"
-      :show-switch="true"
-      :switch-state="simpleModeState"
-      @switch-fun="changeSimpleMode"
-    />
+    <ItemBox>
+      <Item
+        :title="i18n().anotherSettings.simple"
+        :show-switch="true"
+        :switch-state="simpleModeState"
+        @switch-fun="changeSimpleMode"
+      />
+      <Item
+        title="回车添加 ToDo"
+        :show-switch="true"
+        :switch-state="enterAddState"
+        @switch-fun="enterAdd"
+      />
+    </ItemBox>
     <ItemBox>
       <Item
         :title="i18n().useSystemBar"
@@ -108,6 +116,12 @@ const setMenuBlur = () => {
 const clearData = () => {
   localStorage.clear()
   window.location.reload()
+}
+
+const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
+const enterAdd = () => {
+  enterAddState.value = !enterAddState.value
+  localStorage.setItem('enterAdd', enterAddState.value + '')
 }
 </script>
 

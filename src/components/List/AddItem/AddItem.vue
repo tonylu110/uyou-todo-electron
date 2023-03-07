@@ -3,7 +3,7 @@
     <div class="add-time-area">
       <span>{{ moment(todoTime).format('hh:mm A') }}</span>
     </div>
-    <textarea class="add-item-text" rows="3" v-model="text"></textarea>
+    <textarea class="add-item-text" rows="3" v-model="text" @keydown.enter="keyEnter"></textarea>
   </div>
   <div class="buttons">
     <button :style="{width: showAddButton ? '50%' : '', margin: showAddButton ? '' : '0 0 0 -6px'}" class="ok-button" @click="addItem">
@@ -89,6 +89,12 @@ const customContextMenu = [{
 
 const paste = (pasteText: string) => {
   text.value = pasteText
+}
+
+const keyEnter = () => {
+  if (localStorage.getItem('enterAdd') === 'true') {
+    addItem()
+  }
 }
 </script>
 
