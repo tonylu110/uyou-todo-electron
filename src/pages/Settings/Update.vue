@@ -4,14 +4,15 @@
     :rightImgShow="false"
     :leftImgShow="true"
     @leftClick="router.back()"
+    :bg-color="simpleMode ? 'light' : ''"
   />
   <SettingList justify="space-between">
-    <div>
-      <div class="title-img">
+    <div :style="{width: simpleMode ? '100%' : ''}" class="box">
+      <div class="title-img" :style="{width: simpleMode ? 'calc(100% - 40px)' : ''}">
         <img src="/images/logo.png" alt="" />
         <span :style="{marginBottom: newVersion !== '' ? '' : '15px'}">uyou ToDo v{{ app.getVersion() }}</span>
         <span class="version" v-if="newVersion !== ''">{{ newVersion }}</span>
-        <div class="update-msg" v-if="updateMsg.length > 0">
+        <div class="update-msg" v-if="updateMsg.length > 0" :style="{width: simpleMode ? 'calc(100% - 10px)' : ''}">
           <span class="update-title">{{ i18n().update.updateLog }}</span>
           <ul>
             <li v-for="(item, index) in updateMsg" :key="index">{{ item.slice(2) }}</li>
@@ -77,6 +78,8 @@ const updateButtonCilck = () => {
 onMounted(() => {
   getUpdate()
 })
+
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
 
 <style lang="scss" scoped>
@@ -141,5 +144,11 @@ onMounted(() => {
       margin-bottom: 15px;
     }
   }
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

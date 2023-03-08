@@ -1,9 +1,16 @@
 <template>
-  <div class="title-bar" :style="{borderTopLeftRadius: isRound ? '15px' : ''}">
-    <div v-if="leftImgShow" class="left-img" @click="() => emits('leftClick')">
-      <span class="material-icons" :style="{fontWeight: leftImg === 'settings' ? 'lighter' : ''}">{{ leftImg }}</span>
+  <div
+    class="title-bar"
+    :style="{
+      borderTopLeftRadius: isRound ? '15px' : '',
+      backgroundColor: bgColor === 'light' ? 'white' : '',
+      boxShadow: bgColor === 'light' ? '0 5px 10px #00000030' : ''
+    }"
+  >
+    <div v-if="leftImgShow" class="left-img" @click="() => emits('leftClick')" :style="{border: bgColor === 'light' ? '1px solid #00000020' : ''}">
+      <span class="material-icons" :style="{fontWeight: leftImg === 'settings' ? 'lighter' : '', color: bgColor === 'light' ? '#555' : ''}">{{ leftImg }}</span>
     </div>
-    <span>{{ title }}</span>
+    <span :style="{color: bgColor === 'light' ? '#555' : ''}">{{ title }}</span>
     <div v-if="rightImgShow" class="right-img" @click="() => emits('rightClick')">
       <span class="material-icons">add_circle_outline</span>
     </div>
@@ -16,23 +23,18 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
-defineProps({
-  title: {
-    default: 'uyou ToDo',
-    type: String
-  },
-  leftImgShow: {
-    default: true,
-    type: Boolean
-  },
-  rightImgShow: {
-    default: true,
-    type: Boolean
-  },
-  leftImg: {
-    default: 'arrow_back',
-    tyoe: String
-  }
+withDefaults(defineProps<{
+  title?: string,
+  leftImgShow?: boolean,
+  rightImgShow?: boolean,
+  leftImg?: string,
+  bgColor?: string
+}>(), {
+  title: 'uyou ToDo',
+  leftImgShow: true,
+  rightImgShow: true,
+  leftImg: 'arrow_back',
+  bgColor: 'default'
 })
 
 const emits = defineEmits<{

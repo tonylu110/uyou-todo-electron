@@ -3,11 +3,16 @@
     :title="i18n().settingTitleText"
     :right-img-show="false"
     @left-click="router.back()"
+    bg-color="light"
   />
   <setting-list>
     <Item
       :title="loginState ? i18n().myAccount : i18n().loginText"
       @item-fun="() => router.push('/account?from=setting')"
+    />
+    <Item
+      :title="i18n().update.updateTitle"
+      @item-fun="router.push('/update?from=setting')"
     />
     <ItemBox>
       <Item
@@ -45,7 +50,7 @@
       />
     </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
-    <ItemButton @click="router.push('/lang')">
+    <ItemButton @click="router.push('/lang?from=setting')">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </ItemButton>
     <Toast :msg="i18n().restartApp" v-if="toastShow" />
@@ -124,7 +129,3 @@ const enterAdd = () => {
   localStorage.setItem('enterAdd', enterAddState.value + '')
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>

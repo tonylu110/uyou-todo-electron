@@ -4,6 +4,7 @@
       :rightImgShow="false"
       :leftImgShow="true"
       @leftClick="router.back()"
+      :bg-color="simpleMode ? 'light' : ''"
   />
   <SettingList>
     <div class="item-box" :style="{width: simpleMode ? 'calc(100% - 20px)' : ''}">

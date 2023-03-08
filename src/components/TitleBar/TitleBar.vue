@@ -1,5 +1,15 @@
 <template>
-  <div class="title-bar" :style="{justifyContent: isMac ? 'flex-start' : '', width: simpleMode ? '100vw' : '', marginLeft: simpleMode ? '0' : ''}" v-if="titleBarShow">
+  <div
+    class="title-bar"
+    :style="{
+      justifyContent: isMac ? 'flex-start' : '',
+      width: simpleMode ? '100vw' : '',
+      marginLeft: simpleMode ? '0' : '',
+      backgroundColor: (routeName === 'settingSim' || form === 'setting') && simpleMode ? 'white' : '',
+      borderBottom: (routeName === 'settingSim' || form === 'setting') && simpleMode ? '1px solid #00000020' : ''
+    }"
+    v-if="titleBarShow"
+  >
     <div 
       :class="topState ? 'on-top-button-sel button' :'on-top-button button'"
       :style="{
@@ -8,7 +18,7 @@
       }"  
       @click="onTopWindow"
     >
-      <img :src="isMac || simpleMode ? './images/top.png' : (topState ? './images/top.png' : './images/top-black.png')" alt="">
+      <img :src="isMac || (simpleMode && (routeName !== 'settingSim' && form !== 'setting')) ? './images/top.png' : (topState ? './images/top.png' : './images/top-black.png')" alt="">
     </div>
     <span class="title-text">
       {{ simpleMode ? '' : title }}
@@ -23,7 +33,7 @@
       <span class="material-icons">check_box_outline_blank</span>
     </div> -->
     <div v-if="!isMac" class="min-button button" @click="minWindow">
-      <span class="material-icons" style="color: white;">horizontal_rule</span>
+      <span class="material-icons" :style="{color: (routeName === 'settingSim' || form === 'setting') && simpleMode ? '#555' : 'white'}">horizontal_rule</span>
     </div>
     <div v-if="!isMac && !simpleMode" class="min-button button" @click="maxWindow">
       <span class="material-icons" style="color: white;">check_box_outline_blank</span>
@@ -89,6 +99,18 @@ if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.ge
 }
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
+
+const routeName = ref('')
+const routeQueryName = ref('')
+const route = useRoute()
+
+const form = ref('')
+
+watchEffect(() => {
+  routeName.value = route.name as unknown as string
+  routeQueryName.value = route.query.listName as unknown as string
+  form.value = route.query.from as unknown as string
+})
 </script>
 
 <style lang="scss" scoped>

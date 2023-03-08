@@ -4,6 +4,7 @@
     :rightImgShow="false"
     @leftClick="() => router.back()"
     :leftImgShow="form === 'setting'"
+    :bg-color="simpleMode ? 'light' : ''"
   />
   <SettingList>
     <Item :title="loginText" :showArrow="false" />
