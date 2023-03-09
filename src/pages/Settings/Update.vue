@@ -4,7 +4,7 @@
     :rightImgShow="false"
     :leftImgShow="true"
     @leftClick="router.back()"
-    :bg-color="simpleMode ? 'light' : ''"
+    bg-color="light"
   />
   <SettingList justify="space-between">
     <div :style="{width: simpleMode ? '100%' : ''}" class="box">

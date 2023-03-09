@@ -4,6 +4,7 @@
     :rightImgShow="false"
     :leftImgShow="true"
     @leftClick="router.back()"
+    bg-color="light"
   />
   <SettingList>
     <ItemBox>

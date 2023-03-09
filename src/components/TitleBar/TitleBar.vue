@@ -5,8 +5,8 @@
       justifyContent: isMac ? 'flex-start' : '',
       width: simpleMode ? '100vw' : '',
       marginLeft: simpleMode ? '0' : '',
-      backgroundColor: (routeName === 'settingSim' || form === 'setting') && simpleMode ? 'white' : '',
-      borderBottom: (routeName === 'settingSim' || form === 'setting') && simpleMode ? '1px solid #00000020' : ''
+      backgroundColor: routeLight ? 'white' : '',
+      borderBottom: routeLight ? '1px solid #00000020' : ''
     }"
     v-if="titleBarShow"
   >
@@ -20,7 +20,7 @@
     >
       <img :src="isMac || (simpleMode && (routeName !== 'settingSim' && form !== 'setting')) ? './images/top.png' : (topState ? './images/top.png' : './images/top-black.png')" alt="">
     </div>
-    <span class="title-text">
+    <span class="title-text" :style="{color: routeLight ? '#555' : 'white'}">
       {{ simpleMode ? '' : title }}
     </span>
     <!-- <div v-if="isMac" class="close-button-mac button" @click="closeWindow">
@@ -33,10 +33,10 @@
       <span class="material-icons">check_box_outline_blank</span>
     </div> -->
     <div v-if="!isMac" class="min-button button" @click="minWindow">
-      <span class="material-icons" :style="{color: (routeName === 'settingSim' || form === 'setting') && simpleMode ? '#555' : 'white'}">horizontal_rule</span>
+      <span class="material-icons" :style="{color: routeLight ? '#555' : 'white'}">horizontal_rule</span>
     </div>
     <div v-if="!isMac && !simpleMode" class="min-button button" @click="maxWindow">
-      <span class="material-icons" style="color: white;">check_box_outline_blank</span>
+      <span class="material-icons" :style="{color: routeLight ? '#555' : 'white'}">check_box_outline_blank</span>
     </div>
     <div v-if="!isMac" class="close-button button" @click="closeWindow">
       <span class="material-icons">close</span>
@@ -106,10 +106,13 @@ const route = useRoute()
 
 const form = ref('')
 
+const routeLight = ref(false)
+
 watchEffect(() => {
   routeName.value = route.name as unknown as string
   routeQueryName.value = route.query.listName as unknown as string
   form.value = route.query.from as unknown as string
+  routeLight.value = routeName.value === 'settingSim' || form.value === 'setting' || routeName.value === 'setting' || routeName.value === 'account'
 })
 </script>
 

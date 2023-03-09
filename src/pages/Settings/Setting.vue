@@ -3,6 +3,7 @@
     :title="i18n().settingTitleText"
     :rightImgShow="false"
     :leftImgShow="false"
+    bg-color="light"
   />
   <SettingList>
     <Item
@@ -89,7 +90,7 @@
       <Item :title="i18n().otherList.toDonate" itemImg="./images/donate.png" @itemFun="router.push('/donate?from=setting')"/>
     </ItemBox>
     <ItemBox>
-      <Item :title="i18n().anotherSettings.openSource" @itemFun="router.push('/open')"/>
+      <Item :title="i18n().anotherSettings.openSource" @itemFun="router.push('/open?from=setting')"/>
       <Item :title="i18n().anotherSettings.about" @itemFun="openAboutWindow"/>
     </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>

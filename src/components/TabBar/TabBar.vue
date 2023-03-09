@@ -4,7 +4,7 @@
     :style="{
       borderTopLeftRadius: isRound ? '15px' : '',
       backgroundColor: bgColor === 'light' ? 'white' : '',
-      boxShadow: bgColor === 'light' ? '0 5px 10px #00000030' : ''
+      boxShadow: bgColor === 'light' ? '0 5px 7px #00000020' : ''
     }"
   >
     <div v-if="leftImgShow" class="left-img" @click="() => emits('leftClick')" :style="{border: bgColor === 'light' ? '1px solid #00000020' : ''}">
