@@ -8,7 +8,7 @@
         />
       </div>
     </transition>
-    <transition-group name="item">
+    <transition-group :name="routeName === 'Home' ? 'item' : 'other'">
       <Item
         v-for="item in list"
         :key="item.id"
@@ -119,6 +119,11 @@ const deleteItem = (id: number) => {
   }
   saveItemSet(listAll.value!)
 }
+
+const routeName = ref(route.name)
+watchEffect(() => {
+  routeName.value = route.name
+})
 </script>
 
 <style scoped lang="scss">
