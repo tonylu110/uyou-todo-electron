@@ -18,7 +18,7 @@
         @switch-fun="changeSimpleMode"
       />
       <Item
-        title="回车添加 ToDo"
+        :title="i18n().anotherSettings.enterToAdd"
         :show-switch="true"
         :switch-state="enterAddState"
         @switch-fun="enterAdd"

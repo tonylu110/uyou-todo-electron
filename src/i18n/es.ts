@@ -89,7 +89,8 @@ const anotherSettings = {
   windowMenu: 'Menú Ventana',
   openSource: 'Gracias código abierto',
   about: 'Acerca de uyou ToDo',
-  simple: 'Modo simple'
+  simple: 'Modo simple',
+  enterToAdd: 'Ingrese para agregar ToDo'
 }
 
 const contextMenu = {

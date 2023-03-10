@@ -89,7 +89,8 @@ const anotherSettings = {
     windowMenu: '窗口菜单',
     openSource: '开源鸣谢',
     about: '关于 uyou ToDo',
-    simple: '简易模式'
+    simple: '简易模式',
+    enterToAdd: '回车添加 ToDo'
 }
 
 const contextMenu = {

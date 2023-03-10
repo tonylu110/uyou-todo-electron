@@ -89,7 +89,8 @@ const anotherSettings = {
     windowMenu: 'ウィンドウメニュー',
     openSource: 'ありがとうオープンソース',
     about: 'uyou ToDo について',
-    simple: 'シンプルモード'
+    simple: 'シンプルモード',
+    enterToAdd: '入力して ToDo を追加'
 }
 
 const contextMenu = {
