@@ -53,10 +53,11 @@
     "linux": {
       "icon": "./logo.png",
       "target": [
-        "deb",
-        "rpm",
+        "snap",
+        "flatpak",
         "AppImage"
-      ]
+      ],
+      "category": "Utility"
     },
     "nsis": {
       "oneClick": false,

@@ -1,5 +1,5 @@
 <template>
-  <perfect-scrollbar class="list" :style="{justifyContent: justify, backgroundColor: simpleMode ? (isMac ? '#eeeeee90' : 'transparent') : ''}">
+  <perfect-scrollbar class="list" :style="{justifyContent: justify, backgroundColor: simpleMode ? (!isWin ? '#eeeeee90' : 'transparent') : ''}">
     <slot></slot>
   </perfect-scrollbar>
 </template>
@@ -11,7 +11,7 @@ defineProps<{
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
-const isMac = navigator.userAgent.indexOf('Mac')>=0
+const isWin = navigator.userAgent.indexOf('Win')>=0
 </script>
 
 <style scoped lang="scss">

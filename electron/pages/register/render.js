@@ -1,5 +1,5 @@
 import Alert from "../components/alert/alert.js";
-import { isMac } from "../util/os.js";
+import { isMac, isWindow } from "../util/os.js";
 import i18n from "../i18n/index.js";
 
 const { createApp, reactive, ref } = require('vue')
@@ -82,11 +82,12 @@ createApp({
       alertMsg,
       isMac,
       i18n,
-      useLang
+      useLang,
+      isWindow
     }
   },
   template: `
-  <div class="main-area" :style="{backgroundColor: isMac() ? '#edd9b750' : ''}">
+  <div class="main-area" :style="{backgroundColor: !isWindow() ? '#edd9b750' : ''}">
     <div class="close-button" @click="closeWindow" v-if="!isMac()">
       <img class="close-img" src="../img/close.png" alt="" srcset="">
     </div>
