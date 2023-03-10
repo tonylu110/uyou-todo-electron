@@ -18,7 +18,7 @@
       }"  
       @click="onTopWindow"
     >
-      <img :src="isMac || (simpleMode && (routeName !== 'settingSim' && form !== 'setting')) ? './images/top.png' : (topState ? './images/top.png' : './images/top-black.png')" alt="">
+      <img :src="(isMac && !simpleMode && !routeLight) || (simpleMode && (routeName !== 'settingSim' && form !== 'setting')) ? './images/top.png' : (topState ? './images/top.png' : './images/top-black.png')" alt="">
     </div>
     <span class="title-text" :style="{color: routeLight ? '#555' : 'white'}">
       {{ simpleMode ? '' : title }}
