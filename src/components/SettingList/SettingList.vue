@@ -18,7 +18,7 @@ const isWin = navigator.userAgent.indexOf('Win')>=0
 .list {
   background-color: #eee;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 65px);
   display: flex;
   flex-direction: column;
   align-items: center;

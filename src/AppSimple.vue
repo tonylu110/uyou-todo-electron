@@ -1,7 +1,7 @@
 <template>
   <div class="app-main">
     <title-bar/>
-    <div class="app-list" :style="{height: titleBarShow ? 'calc(100vh - 65px)' : ''}">
+    <div class="app-list" :style="{height: titleBarShow ? '100vh' : ''}">
       <router-view></router-view>
     </div>
   </div>
@@ -16,6 +16,7 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 <style scoped lang="scss">
 .app-list {
   width: 100vw;
-  height: calc(100vh - 106px);
+  height: calc(100vh - 41px);
+  overflow: hidden;
 }
 </style>

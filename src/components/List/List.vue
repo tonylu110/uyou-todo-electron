@@ -129,7 +129,7 @@ watchEffect(() => {
 <style scoped lang="scss">
 .list {
   background-color: #edd9b7;
-  height: 100%;
+  height: calc(100% - 65px);
   display: flex;
   flex-direction: column;
   align-items: center;

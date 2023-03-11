@@ -1,7 +1,7 @@
 {
   "name": "uyoutodo",
   "private": false,
-  "version": "1.2.2",
+  "version": "1.2.3",
   "main": "electron/main.js",
   "author": "Anthony Lu <taruruchan0@gmail.com>",
   "scripts": {
@@ -22,12 +22,12 @@
     "vue": "^3.2.25"
   },
   "devDependencies": {
+    "@electron/rebuild": "^3.2.10",
     "@vitejs/plugin-vue": "^3.0.0",
     "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",
     "electron": "^22.3.0",
     "electron-builder": "^23.6.0",
-    "electron-rebuild": "^3.2.9",
     "material-design-icons-iconfont": "^6.7.0",
     "moment": "^2.29.4",
     "sass": "^1.53.0",
@@ -45,7 +45,16 @@
     "mac": {
       "category": "public.app-category.utilities",
       "icon": "./logo.icns",
-      "darkModeSupport": false
+      "darkModeSupport": false,
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
     },
     "win": {
       "icon": "./logo.ico"

@@ -67,7 +67,7 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
     <TitleBar />
     <div class="list-in">
       <ListMenu />
-      <div class="todo-list" :style="{height: titleBarShow ? 'calc(100vh - 65px)' : ''}">
+      <div class="todo-list" :style="{height: titleBarShow ? '100vh' : ''}">
         <router-view></router-view>
         <Alert 
           :dialogShow="alertShow"
@@ -96,7 +96,8 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
     
     .todo-list {
       width: calc(100vw - 300px);
-      height: calc(100vh - 105px);
+      height: calc(100vh - 40px);
+      overflow: hidden;
     }
   }
 }
