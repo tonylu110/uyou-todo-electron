@@ -100,7 +100,7 @@ function createWindow() {
     shell.openExternal(url)
   })
 
-  const { height } = screen.getPrimaryDisplay().workAreaSize
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height));
 
   windowSizeIpc()
@@ -157,6 +157,14 @@ function createWindow() {
   ipcMain.on('changeBlur', (ev, effect) => {
     setMicaStyle(effect, mainWindow)
     store.set('micaStyle', effect)
+  })
+
+  const winX = (width - mainWindow.getSize()[0]) / 2
+  const winY = (height - mainWindow.getSize()[1]) / 2
+  mainWindow.setPosition(store.get('window-pos') ? store.get('window-pos')[0] : winX, store.get('window-pos') ? store.get('window-pos')[1] : winY)
+
+  mainWindow.on('move', () => {
+    store.set('window-pos', mainWindow.getPosition())
   })
 }
 
