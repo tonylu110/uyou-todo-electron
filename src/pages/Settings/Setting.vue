@@ -51,7 +51,7 @@
           @switchFun="setWindowMenu"
       />
       <Item
-          v-if="isLinux"
+          v-if="(isLinux && isWindows10OrAfter) || !isMac"
           :title="i18n().anotherSettings.menuBlur"
           :showSwitch="true"
           :switchState="menuBlurState"
@@ -119,6 +119,7 @@ const { app } = require('@electron/remote')
 const { shell } = require('electron')
 const os = require('os')
 
+const isWindows10OrAfter = os.release().split('.')[2] > 15063
 const isLinux = !(process.platform === 'linux')
 const isMac = !(process.platform === 'darwin')
 

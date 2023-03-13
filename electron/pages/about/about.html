@@ -15,6 +15,7 @@
         </div>
     </div>
     <script>
+        const os = require("os");
         const ipcRenderer = require('electron').ipcRenderer
 
         const closeButton = document.querySelector('.close-button')
@@ -32,8 +33,9 @@
 
         const isWindows = navigator.userAgent.indexOf('Win')>=0
         const isMac = navigator.userAgent.indexOf('Mac')>=0
+        const isWindows10OrAfter = os.release().split('.')[2] > 15063
 
-        if (!isWindows) {
+        if (!isWindows || !isWindows10OrAfter) {
           background.style.backgroundColor = '#edd9b750'
         }
 

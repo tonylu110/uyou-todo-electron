@@ -4,6 +4,7 @@ import i18n from "../i18n/index.js";
 
 const { createApp, reactive, ref } = require('vue')
 const ipcRenderer = require('electron').ipcRenderer
+const os = require('os')
 
 createApp({
   components: {
@@ -73,6 +74,8 @@ createApp({
       }
     }
 
+    const isWindows10OrAfter = os.release().split('.')[2] > 15063
+
     return {
       closeWindow,
       formData,
@@ -83,11 +86,12 @@ createApp({
       isMac,
       i18n,
       useLang,
-      isWindow
+      isWindow,
+      isWindows10OrAfter
     }
   },
   template: `
-  <div class="main-area" :style="{backgroundColor: !isWindow() ? '#edd9b750' : ''}">
+  <div class="main-area" :style="{backgroundColor: !isWindow() || !isWindows10OrAfter ? '#edd9b750' : ''}">
     <div class="close-button" @click="closeWindow" v-if="!isMac()">
       <img class="close-img" src="../img/close.png" alt="" srcset="">
     </div>

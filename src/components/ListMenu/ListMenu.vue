@@ -51,6 +51,8 @@ import router from '../../router';
 import { ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 
+const os = require("os")
+
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 
 const routeName = ref('')
@@ -76,7 +78,8 @@ const toList = (listName: string) => {
 
 const isWindows = navigator.userAgent.indexOf('Win')>=0
 const listMenuColor = ref('')
-if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)) {
+const isWindows10OrAfter = os.release().split('.')[2] > 15063
+if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && isWindows10OrAfter) {
   listMenuColor.value = '#fff6dc00'
 }
 </script>

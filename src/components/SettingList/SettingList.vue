@@ -1,10 +1,12 @@
 <template>
-  <perfect-scrollbar class="list" :style="{justifyContent: justify, backgroundColor: simpleMode ? (!isWin ? '#eeeeee90' : 'transparent') : ''}">
+  <perfect-scrollbar class="list" :style="{justifyContent: justify, backgroundColor: simpleMode ? (!isWin || !isWindows10OrAfter ? '#eeeeee90' : 'transparent') : ''}">
     <slot></slot>
   </perfect-scrollbar>
 </template>
 
 <script setup lang="ts">
+const os = require("os");
+
 defineProps<{
   justify?: string
 }>()
@@ -12,6 +14,7 @@ defineProps<{
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
 const isWin = navigator.userAgent.indexOf('Win')>=0
+const isWindows10OrAfter = os.release().split('.')[2] > 15063
 </script>
 
 <style scoped lang="scss">

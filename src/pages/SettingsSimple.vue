@@ -42,7 +42,7 @@
         @switchFun="onTopWindow"
       />
       <Item
-        v-if="isLinux"
+        v-if="(isLinux && isWindows10OrAfter) || isMac"
         :title="i18n().anotherSettings.menuBlur"
         :showSwitch="true"
         :switchState="menuBlurState"
@@ -71,8 +71,11 @@ import firstLoad from "../components/TitleBar/firstLoad";
 import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";
 
 const { ipcRenderer } = require("electron");
+const os = require('os')
 
 const isLinux = !(process.platform === 'linux')
+const isWindows10OrAfter = os.release().split('.')[2] > 15063
+const isMac = process.platform === 'darwin'
 
 const toastShow = ref(false)
 

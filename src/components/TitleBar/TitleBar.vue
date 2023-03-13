@@ -52,6 +52,8 @@ import { useRoute } from 'vue-router';
 import firstLoad from './firstLoad';
 import i18n from '../../i18n';
 
+const os = require('os')
+
 const isMac = navigator.userAgent.indexOf('Mac')>=0
 
 const titleBarShow = !(localStorage.getItem('systemTitle') === 'true')
@@ -93,8 +95,9 @@ const title = ref('uyou ToDo')
 // })
 
 const isWindows = navigator.userAgent.indexOf('Win')>=0
+const isWindows10OrAfter = os.release().split('.')[2] > 15063
 const listMenuColor = ref('')
-if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)) {
+if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && isWindows10OrAfter) {
   listMenuColor.value = '#fff6dc00'
 }
 
