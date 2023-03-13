@@ -24,6 +24,8 @@ remoteMain.initialize();
 let mainWindow
 
 function createWindow() {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize
+
   initWindowSize()
   initSystemBar()
   initMenuBlur()
@@ -37,6 +39,8 @@ function createWindow() {
     minHeight: 600,
     minWidth: simple ? 350 : 800,
     maxWidth: simple ? 400 : null,
+    x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000))/2,
+    y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750))/2,
     maximizable: !simple,
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: systemBar,
@@ -100,7 +104,6 @@ function createWindow() {
     shell.openExternal(url)
   })
 
-  const { width, height } = screen.getPrimaryDisplay().workAreaSize
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height));
 
   windowSizeIpc()
@@ -164,10 +167,6 @@ function createWindow() {
       openAtLogin: isAutoStart
     })
   })
-
-  const winX = (width - mainWindow.getSize()[0]) / 2
-  const winY = (height - mainWindow.getSize()[1]) / 2
-  mainWindow.setPosition(store.get('window-pos') ? store.get('window-pos')[0] : winX, store.get('window-pos') ? store.get('window-pos')[1] : winY)
 
   mainWindow.on('move', () => {
     store.set('window-pos', mainWindow.getPosition())
