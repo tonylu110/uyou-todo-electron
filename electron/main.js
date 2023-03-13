@@ -159,6 +159,12 @@ function createWindow() {
     store.set('micaStyle', effect)
   })
 
+  ipcMain.on('setAutoStart', (ev, isAutoStart) => {
+    app.setLoginItemSettings({
+      openAtLogin: isAutoStart
+    })
+  })
+
   const winX = (width - mainWindow.getSize()[0]) / 2
   const winY = (height - mainWindow.getSize()[1]) / 2
   mainWindow.setPosition(store.get('window-pos') ? store.get('window-pos')[0] : winX, store.get('window-pos') ? store.get('window-pos')[1] : winY)

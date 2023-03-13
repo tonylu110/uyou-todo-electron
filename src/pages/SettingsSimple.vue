@@ -27,6 +27,13 @@
         :switch-state="enterAddState"
         @switch-fun="enterAdd"
       />
+      <Item
+        v-if="isLinux"
+        title="开机自启"
+        :show-switch="true"
+        :switch-state="autoStartState"
+        @switch-fun="setAutoStart"
+      />
     </ItemBox>
     <ItemBox>
       <Item
@@ -130,5 +137,12 @@ const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
 const enterAdd = () => {
   enterAddState.value = !enterAddState.value
   localStorage.setItem('enterAdd', enterAddState.value + '')
+}
+
+const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
+const setAutoStart = () => {
+  autoStartState.value = !autoStartState.value
+  localStorage.setItem('autoStart', autoStartState.value + '')
+  ipcRenderer.send('setAutoStart', autoStartState.value)
 }
 </script>

@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, screen, Menu, shell, nativeTheme } = require('electron')
 const path = require('path')
+const Store = require('electron-store')
 const menuTemplate = require('./menu.js')
 const remoteMain = require('@electron/remote/main')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('../store/windowSizeStore')
@@ -11,6 +12,8 @@ const createRegisterWindowMac = require("./pages/registerMac");
 const createRepassWindowMac = require("./pages/repassMac");
 const { initLang, langIpc, lang} = require("../store/languageStore");
 const { initSim, simple, simpleIpc } = require('../store/simpleModeStore')
+
+const store = new Store()
 
 const NODE_ENV = process.env.NODE_ENV
 
@@ -133,6 +136,25 @@ function createWindow() {
             BrowserWindow.fromId(repassId).close()
         })
     })
+
+    ipcMain.on('setAutoStart', (ev, isAutoStart) => {
+        app.setLoginItemSettings({
+            openAtLogin: isAutoStart
+        })
+    })
+
+    const canSaveWindowPos = process.platform === 'darwin' || process.platform === 'linux'
+    if (canSaveWindowPos) {
+        const { width, height } = screen.getPrimaryDisplay().workAreaSize
+
+        const winX = (width - mainWindow.getSize()[0]) / 2
+        const winY = (height - mainWindow.getSize()[1]) / 2
+        mainWindow.setPosition(store.get('window-pos') ? store.get('window-pos')[0] : winX, store.get('window-pos') ? store.get('window-pos')[1] : winY)
+
+        mainWindow.on('move', () => {
+            store.set('window-pos', mainWindow.getPosition())
+        })
+    }
 }
 
 app.whenReady().then(() => {
