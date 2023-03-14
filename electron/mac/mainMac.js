@@ -22,6 +22,7 @@ remoteMain.initialize();
 let mainWindow
 
 function createWindow() {
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize
     initWindowSize()
     initSystemBar()
     initMenuBlur()
@@ -36,6 +37,8 @@ function createWindow() {
         minWidth: simple ? 350 : 800,
         maxWidth: simple ? 400 : null,
         maximizable: !simple,
+        x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000))/2,
+        y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750))/2,
         vibrancy: (menuBlur || menuBlur === undefined) ? 'menu' : null,
         visualEffectState: 'active',
         icon: path.join(__dirname, '../../dist/logo.png'),
@@ -143,18 +146,9 @@ function createWindow() {
         })
     })
 
-    const canSaveWindowPos = process.platform === 'darwin' || process.platform === 'linux'
-    if (canSaveWindowPos) {
-        const { width, height } = screen.getPrimaryDisplay().workAreaSize
-
-        const winX = (width - mainWindow.getSize()[0]) / 2
-        const winY = (height - mainWindow.getSize()[1]) / 2
-        mainWindow.setPosition(store.get('window-pos') ? store.get('window-pos')[0] : winX, store.get('window-pos') ? store.get('window-pos')[1] : winY)
-
-        mainWindow.on('move', () => {
-            store.set('window-pos', mainWindow.getPosition())
-        })
-    }
+    mainWindow.on('move', () => {
+        store.set('window-pos', mainWindow.getPosition())
+    })
 }
 
 app.whenReady().then(() => {
