@@ -25,7 +25,7 @@
       />
       <Item
         v-if="isLinux"
-        title="开机自启"
+        :title="i18n().anotherSettings.autoStart"
         :show-switch="true"
         :switch-state="autoStartState"
         @switch-fun="setAutoStart"

@@ -90,7 +90,8 @@ const anotherSettings = {
     openSource: '開源鳴謝',
     about: '關於 uyou ToDo',
     simple: '簡易模式',
-    enterToAdd: '回車新增 ToDo'
+    enterToAdd: '回車新增 ToDo',
+    autoStart: '開機自啟'
 }
 
 const contextMenu = {

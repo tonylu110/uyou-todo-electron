@@ -90,7 +90,8 @@ const anotherSettings = {
   openSource: 'Gracias código abierto',
   about: 'Acerca de uyou ToDo',
   simple: 'Modo simple',
-  enterToAdd: 'Ingrese para agregar ToDo'
+  enterToAdd: 'Ingrese para agregar ToDo',
+  autoStart: 'Abrir con sistema'
 }
 
 const contextMenu = {

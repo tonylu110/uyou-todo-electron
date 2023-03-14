@@ -90,7 +90,8 @@ const anotherSettings = {
     openSource: 'ありがとうオープンソース',
     about: 'uyou ToDo について',
     simple: 'シンプルモード',
-    enterToAdd: '入力して ToDo を追加'
+    enterToAdd: '入力して ToDo を追加',
+    autoStart: 'システムで開く'
 }
 
 const contextMenu = {
