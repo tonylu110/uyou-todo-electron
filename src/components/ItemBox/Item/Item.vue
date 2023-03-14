@@ -94,6 +94,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
       overflow: hidden;
       text-overflow: ellipsis;
       width: calc(100vw - 515px);
+      max-width: 550px;
     }
   }
   
