@@ -12,7 +12,7 @@
     <div>
       <div class="img-back" v-if="itemImg"></div>
       <img v-if="itemImg" :src="itemImg" alt="">
-      <span>{{ title }}</span>
+      <span :style="{width: simpleMode ? 'calc(100vw - 115px)' : ''}">{{ title }}</span>
     </div>
     <Switch 
       v-if="showSwitch"
@@ -88,6 +88,13 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
       margin-right: 22.5px;
       margin-left: -2.5px;
     }
+
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: calc(100vw - 515px);
+    }
   }
   
   .img-back {
@@ -107,6 +114,8 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
   .material-icons {
     font-size: 18px;
+    position: absolute;
+    right: 15px;
   }
 }
 </style>
