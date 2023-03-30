@@ -1,8 +1,8 @@
 const path = require('path');
 const { MicaBrowserWindow, IS_WINDOWS_11 } = require("mica-electron");
-const about = path.join(__dirname, './about.html');
 const { micaStyle, menuBlur } = require('../../store/menuBlurStore')
 const setMicaStyle = require('../util/setMicaStyle')
+const NODE_ENV = process.env.NODE_ENV
 
 let aboutWindow
 
@@ -35,7 +35,11 @@ function createAboutWindow () {
     }
     aboutWindow.setAlwaysOnTop(true)
 
-    aboutWindow.loadURL(about)
+    aboutWindow.loadURL(
+        NODE_ENV === "development"
+          ? 'http://localhost:3000/#/about?isWin=true'
+          : `file://${path.join(__dirname, `../dist/index.html#/about?isWin=true`)}`
+      )
 
     aboutWindow.once('ready-to-show', () => {
         aboutWindow.show()

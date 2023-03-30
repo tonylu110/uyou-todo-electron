@@ -45,6 +45,13 @@ const routes = [
     path: "/lang",
     name: "lang",
     component: () => import("./pages/Settings/LangSet.vue"),
+  },
+  {
+    path: "/about",
+    name: "about",
+    components: {
+      isWindow: () => import("./windows/About.vue")
+    },
   }
 ];
 

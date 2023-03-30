@@ -1,6 +1,6 @@
 const path = require('path');
 const { BrowserWindow } = require("electron");
-const about = path.join(__dirname, '../../pages/about/about.html');
+const NODE_ENV = process.env.NODE_ENV
 
 let aboutWindow
 
@@ -23,7 +23,11 @@ function createAboutWindow () {
     })
 
     aboutWindow.setAlwaysOnTop(true)
-    aboutWindow.loadURL(`file://${about}`)
+    aboutWindow.loadURL(
+        NODE_ENV === "development"
+          ? 'http://localhost:3000/#/about?isWin=true'
+          : `file://${path.join(__dirname, `../../../dist/index.html#/about?isWin=true`)}`
+      )
 
     return aboutWindow
 }
