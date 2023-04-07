@@ -106,6 +106,19 @@ const contextMenu = {
 
 const language = '语言'
 
+const registerPage = {
+    account: '账号：',
+    password: '密码：',
+    rePass: '重复密码：',
+    reg: '注册',
+    plzAccAndPass: '请输入账号和密码',
+    onlyNum: '仅支持字母、数字、下划线',
+    accLen: '账号长度不能超过10位',
+    rePassError: '重复密码与秘密不一致',
+    regSuccess: '注册成功！',
+    regFail: '注册失败！'
+}
+
 export default {
     addText,
     cancelText,
@@ -130,5 +143,6 @@ export default {
     otherList,
     anotherSettings,
     contextMenu,
-    language
+    language,
+    registerPage
 }

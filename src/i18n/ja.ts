@@ -106,6 +106,19 @@ const contextMenu = {
 
 const language = '言語'
 
+const registerPage = {
+    account: 'アカウント：',
+    password: 'パスワード：',
+    rePass: 'パスワードを再度入力してください：',
+    reg: '登録',
+    plzAccAndPass: 'アカウントとパスワードを入力してください',
+    onlyNum: '文字、数字、およびアンダースコアのみがサポートされています',
+    accLen: 'アカウントの長さは 10 文字を超えることはできません',
+    rePassError: '繰り返しパスワードがシークレットと一致しませんt',
+    regSuccess: '登録完了！',
+    regFail: '登録に失敗しました！'
+}
+
 export default {
     addText,
     cancelText,
@@ -130,5 +143,6 @@ export default {
     otherList,
     anotherSettings,
     contextMenu,
-    language
+    language,
+    registerPage
 }

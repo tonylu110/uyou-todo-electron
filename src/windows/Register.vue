@@ -3,6 +3,7 @@ import Alert from '../components/Alert/Alert.vue'
 import { reactive, ref } from "vue";
 import CloseButton from '../components/CloseButton/CLoseButton.vue';
 import { isMac, isWindow } from "../util/os";
+import i18n from "../i18n";
 
 const { ipcRenderer } = require("electron");
 const os = require("os");
@@ -24,16 +25,16 @@ const alertMsg = ref('')
 
 const register = () => {
   if (formData.account === '' || formData.password === '' || formData.rePassword === '') {
-    alertMsg.value = '请输入账号和密码'
+    alertMsg.value = i18n().registerPage.plzAccAndPass
     showAlert.value = true
   } else if (!((formData.account >= 'a' && formData.account <= 'z') || (formData.account >= '0' && formData.account <= '9') || (formData.account >= 'A' && formData.account <= 'Z') || formData.account.indexOf('_') !== -1)) {
-    alertMsg.value = '仅支持数字和字母'
+    alertMsg.value = i18n().registerPage.onlyNum
     showAlert.value = true
   } else if (formData.account.length > 10) {
-    alertMsg.value = '账号长度小于10'
+    alertMsg.value = i18n().registerPage.accLen
     showAlert.value = true
   } else if (formData.password !== formData.rePassword) {
-    alertMsg.value = '密码不一致'
+    alertMsg.value = i18n().registerPage.rePassError
     showAlert.value = true
   } else {
     fetch('https://api.todo.uyou.org.cn/register', {
@@ -49,10 +50,10 @@ const register = () => {
       return res.json()
     }).then(res => {
       if (res.code === 200) {
-        alertMsg.value = '注册成功'
+        alertMsg.value = i18n().registerPage.regSuccess
         showAlert.value = true
       } else {
-        alertMsg.value = '注册失败'
+        alertMsg.value = i18n().registerPage.regFail
         showAlert.value = true
       }
     })
@@ -61,7 +62,7 @@ const register = () => {
 
 const closeAlert = () => {
   showAlert.value = false
-  if (alertMsg.value === '注册成功') {
+  if (alertMsg.value === i18n().registerPage.regSuccess) {
     closeWindow()
   }
 }
@@ -73,20 +74,20 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
   <div class="main-area" :style="{backgroundColor: !isWindow() || !isWindows10OrAfter ? '#edd9b750' : ''}">
     <img src="/logo.png" alt="" srcset="" class="logo">
     <div class="in">
-      <span>账号：</span>
+      <span>{{ i18n().registerPage.account }}</span>
       <input type="text" autofocus="autofocus" v-model="formData.account">
     </div>
     <div class="in">
-      <span>密码：</span>
+      <span>{{ i18n().registerPage.password }}</span>
       <input type="password" v-model="formData.password">
     </div>
     <div class="in">
-      <span>重复密码：</span>
+      <span>{{ i18n().registerPage.rePass }}</span>
       <input type="password" v-model="formData.rePassword">
     </div>
-    <button type="submit" @click="register">注册</button>
+    <button type="submit" @click="register">{{ i18n().registerPage.reg }}</button>
     <Alert
-      title="提示"
+      :title="i18n().accountPage.alertTitle"
       :dialog-show="showAlert"
       :cancelButtonShow="false"
       @return="closeAlert"

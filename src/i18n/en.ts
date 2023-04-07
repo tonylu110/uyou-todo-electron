@@ -106,6 +106,19 @@ const contextMenu = {
 
 const language = 'Language'
 
+const registerPage = {
+    account: 'Account: ',
+    password: 'Password: ',
+    rePass: 'Repeat password: ',
+    reg: 'Register',
+    plzAccAndPass: 'Please enter account and password',
+    onlyNum: 'Only letters, numbers, and underscores are supported',
+    accLen: 'Account length cannot exceed 10 characters',
+    rePassError: 'Repeat password does not match secret',
+    regSuccess: 'Registration success!',
+    regFail: 'Registration failed!'
+}
+
 export default {
     addText,
     cancelText,
@@ -130,5 +143,6 @@ export default {
     otherList,
     anotherSettings,
     contextMenu,
-    language
+    language,
+    registerPage
 }
