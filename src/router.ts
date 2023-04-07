@@ -51,7 +51,14 @@ const routes = [
     name: "about",
     components: {
       isWindow: () => import("./windows/About.vue")
-    },
+    }
+  },
+  {
+    path: "/register",
+    name: "register",
+    components: {
+      isWindow: () => import("./windows/Register.vue")
+    }
   }
 ];
 

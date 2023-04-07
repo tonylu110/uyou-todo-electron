@@ -1,0 +1,61 @@
+.main-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  -webkit-app-region: drag;
+
+  .logo {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+
+  .in {
+    padding: 7px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    span {
+      display: flex;
+      width: 100px;
+      justify-content: right;
+      font-size: 20px;
+      color: #7a695c;
+      white-space: pre;
+    }
+
+    input {
+      padding: 10px;
+      outline: none;
+      border-radius: 5px;
+      background-color: #ffffff90;
+      border: 2px solid #00000010;
+      -webkit-app-region: no-drag;
+
+      &[disabled] {
+        background-color: #ffffff30 !important;
+        color: #00000070;
+      }
+    }
+  }
+
+  button {
+    -webkit-app-region: no-drag;
+    margin-top: 10px;
+    padding: 5px 20px;
+    background-color: #7a695c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:active {
+      background-color: #574a40;
+    }
+  }
+}

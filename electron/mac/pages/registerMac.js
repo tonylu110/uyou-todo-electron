@@ -1,6 +1,6 @@
 const path = require('path');
 const { BrowserWindow } = require("electron");
-const about = path.join(__dirname, '../../pages/register/register.html');
+const NODE_ENV = process.env.NODE_ENV
 
 let registerWindow
 
@@ -23,7 +23,13 @@ function createRegisterWindow () {
   })
 
   registerWindow.setAlwaysOnTop(true)
-  registerWindow.loadURL(`file://${about}`)
+  if (NODE_ENV === "development") {
+    registerWindow.loadURL('http://localhost:3000/#/register?isWin=true')
+  } else {
+    registerWindow.loadFile(path.join(__dirname, `../../../dist/index.html`), {
+      hash: '/register?isWin=true'
+    })
+  }
 
   return registerWindow
 }
