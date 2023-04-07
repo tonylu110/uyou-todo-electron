@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, Ref, watchEffect } from 'vue';
+import { ref, Ref } from 'vue';
 import i18n from './i18n';
 import TitleBar from './components/TitleBar/TitleBar.vue';
 import Alert from './components/Alert/Alert.vue';
 import ListMenu from './components/ListMenu/ListMenu.vue';
 import appVersionCode from './util/appVersionCode'
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const ipcRenderer = require('electron').ipcRenderer
 
@@ -63,9 +63,10 @@ window.addEventListener('resize', () => {
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 
 const route = useRoute()
-const isWinDow = ref(route.query.isWin === 'true')
+const router = useRouter()
+const isWinDow = ref(true)
 
-watchEffect(() => {
+router.isReady().then(() => {
   isWinDow.value = route.query.isWin === 'true'
 })
 </script>

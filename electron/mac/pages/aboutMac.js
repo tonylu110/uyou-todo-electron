@@ -23,11 +23,14 @@ function createAboutWindow () {
     })
 
     aboutWindow.setAlwaysOnTop(true)
-    aboutWindow.loadURL(
-        NODE_ENV === "development"
-          ? 'http://localhost:3000/#/about?isWin=true'
-          : `file://${path.join(__dirname, `../../../dist/index.html#/about?isWin=true`)}`
-      )
+    
+    if (NODE_ENV === "development") {
+        aboutWindow.loadURL('http://localhost:3000/#/about?isWin=true')
+    } else {
+        aboutWindow.loadFile(path.join(__dirname, `../../../dist/index.html`), {
+            hash: '/about?isWin=true'
+        })
+    }
 
     return aboutWindow
 }
