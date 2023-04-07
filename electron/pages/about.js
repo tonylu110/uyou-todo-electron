@@ -1,7 +1,7 @@
 const path = require('path');
 const { MicaBrowserWindow, IS_WINDOWS_11 } = require("mica-electron");
-const { micaStyle, menuBlur } = require('../../store/menuBlurStore')
-const setMicaStyle = require('../util/setMicaStyle')
+const { micaStyle, menuBlur } = require('../store/menuBlurStore')
+const setMicaStyle = require('./util/setMicaStyle')
 const NODE_ENV = process.env.NODE_ENV
 
 let aboutWindow
@@ -12,7 +12,7 @@ function createAboutWindow () {
         height: 350,
         resizable: false,
         frame: false,
-        icon: path.join(__dirname, '../../../dist/logo.png'),
+        icon: path.join(__dirname, '../../dist/logo.png'),
         background: '#00000000',
         show: false,
         webPreferences: {
@@ -38,7 +38,7 @@ function createAboutWindow () {
     if (NODE_ENV === "development") {
         aboutWindow.loadURL('http://localhost:3000/#/about?isWin=true')
     } else {
-        aboutWindow.loadFile(path.join(__dirname, `../../../dist/index.html`), {
+        aboutWindow.loadFile(path.join(__dirname, `../../dist/index.html`), {
             hash: '/about?isWin=true'
         })
     }

@@ -1,7 +1,7 @@
 const path = require('path');
 const { MicaBrowserWindow, IS_WINDOWS_11 } = require("mica-electron");
-const setMicaStyle = require('../util/setMicaStyle')
-const { micaStyle, menuBlur } = require('../../store/menuBlurStore')
+const setMicaStyle = require('./util/setMicaStyle')
+const { micaStyle, menuBlur } = require('../store/menuBlurStore')
 const NODE_ENV = process.env.NODE_ENV
 
 let registerWindow
@@ -12,7 +12,7 @@ function createRegisterWindow () {
     height: 600,
     resizable: false,
     frame: false,
-    icon: path.join(__dirname, '../../../dist/logo.png'),
+    icon: path.join(__dirname, '../../dist/logo.png'),
     background: '#00000000',
     show: false,
     webPreferences: {
@@ -38,7 +38,7 @@ function createRegisterWindow () {
   if (NODE_ENV === "development") {
     registerWindow.loadURL('http://localhost:3000/#/register?isWin=true')
   } else {
-    registerWindow.loadFile(path.join(__dirname, `../../../dist/index.html`), {
+    registerWindow.loadFile(path.join(__dirname, `../../dist/index.html`), {
       hash: '/register?isWin=true'
     })
   }

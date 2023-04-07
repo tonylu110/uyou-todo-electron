@@ -1,6 +1,6 @@
 const { shell, ipcMain, app} = require('electron');
 const i18n = require('./i18n');
-const createAboutWindow = require('./pages/about/about')
+const createAboutWindow = require('./pages/about')
 
 module.exports = function (app, mainWindow, height) {
   return [

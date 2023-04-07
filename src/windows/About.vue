@@ -2,13 +2,13 @@
 import { ref } from 'vue';
 import CloseButton from '../components/CloseButton/CLoseButton.vue';
 
-const ipcRenderer = require('electron').ipcRenderer
+const { ipcRenderer, IpcRendererEvent } = require('electron')
 const os = require("os");
 
 const versionShow = ref('')
 
 ipcRenderer.send('get-app-version')
-ipcRenderer.on('version', (event: () => void, version: string) => {
+ipcRenderer.on('version', (event: typeof IpcRendererEvent, version: string) => {
     versionShow.value = version
 })
 
