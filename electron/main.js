@@ -10,7 +10,7 @@ const { initWindowMenu, windowMenu, windowMenuIpc } = require('./store/windowMen
 const { PARAMS, VALUE,  MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
 const createAboutWindow = require("./pages/about");
 const createRegisterWindow = require("./pages/register")
-const createRepassWindow = require('./pages/repass/repass')
+const createRepassWindow = require('./pages/repass')
 const { langIpc, initLang, lang} = require("./store/languageStore");
 const setMicaStyle = require('./pages/util/setMicaStyle')
 const { initSim, simple, simpleIpc } = require('./store/simpleModeStore')
@@ -143,7 +143,7 @@ function createWindow() {
   })
 
   ipcMain.on('open-repass', (ev, uname) => {
-    let repassWindow = createRepassWindow()
+    let repassWindow = createRepassWindow(uname)
 
     rePassId = repassWindow.id
 

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
-import CloseButton from '../components/CloseButton/CLoseButton.vue';
+import CloseButton from '../components/CloseButton/CloseButton.vue';
 
 const { ipcRenderer, IpcRendererEvent } = require('electron')
 const os = require("os");

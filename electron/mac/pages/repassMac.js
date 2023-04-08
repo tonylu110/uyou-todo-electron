@@ -1,10 +1,10 @@
 const path = require('path');
 const { BrowserWindow } = require("electron");
-const repass = path.join(__dirname, '../../pages/repass/repass.html');
+const NODE_ENV = process.env.NODE_ENV
 
 let repassWindow
 
-function createRepassWindow () {
+function createRepassWindow (uname) {
   repassWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -23,7 +23,13 @@ function createRepassWindow () {
   })
 
   repassWindow.setAlwaysOnTop(true)
-  repassWindow.loadURL(`file://${repass}`)
+  if (NODE_ENV === "development") {
+    repassWindow.loadURL(`http://localhost:3000/#/repass?isWin=true&account=${uname}`)
+  } else {
+    repassWindow.loadFile(path.join(__dirname, `../../../dist/index.html`), {
+      hash: `/repass?isWin=true&account=${uname}`
+    })
+  }
 
   return repassWindow
 }

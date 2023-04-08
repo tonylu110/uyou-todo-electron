@@ -119,6 +119,16 @@ const registerPage = {
     regFail: 'Registration failed!'
 }
 
+const rePassPage = {
+    oldPass: 'Old Password: ',
+    newPass: 'New Password: ',
+    setPass: 'Reset Password',
+    plzInOldPass: 'Please enter old password',
+    plzInNewPass: 'Please enter a new password',
+    setPassSuccess: 'Success to change password!',
+    setPassFail: 'Failed to change password!'
+}
+
 export default {
     addText,
     cancelText,
@@ -144,5 +154,6 @@ export default {
     anotherSettings,
     contextMenu,
     language,
-    registerPage
+    registerPage,
+    rePassPage
 }

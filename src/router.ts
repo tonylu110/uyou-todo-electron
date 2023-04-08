@@ -59,6 +59,13 @@ const routes = [
     components: {
       isWindow: () => import("./windows/Register.vue")
     }
+  },
+  {
+    path: "/repass",
+    name: "repass",
+    components: {
+      isWindow: () => import("./windows/Repass.vue")
+    }
   }
 ];
 

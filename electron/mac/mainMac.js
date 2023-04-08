@@ -127,7 +127,7 @@ function createWindow() {
     })
 
     ipcMain.on('open-repass', (ev, uname) => {
-        let repassWindow = createRepassWindowMac()
+        let repassWindow = createRepassWindowMac(uname)
         const repassId = repassWindow.id
 
         repassWindow.once('ready-to-show', () => {
