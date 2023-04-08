@@ -1,19 +1,22 @@
 <template>
   <div
-    :class="`toast ${center ? '' : 'an'} ${simpleMode ? 'simple' : ''}`"
-    :style="{
-      top: center ? '50%' : '',
-      left: center ? '50%' : 'calc(50% + 150px)',
-      transform: center ? 'translateX(-50%) translateY(-50%)' : 'translateX(-50%)',
-      position: center ? 'absolute' : 'fixed'
-    }"
+    p-7px
+    rounded-5px
+    font-bold
+    c="#996b3d" bg="#fff6dc" shadow-xl
+    animate-duration-300 animate-fill-mode-forwards animate-ease
+    :top="center ? '50%' : ''"
+    :left="simpleMode ? '50%' : (center ? '50%' : 'calc(50% + 150px)')"
+    :translate="center ? '-50%' : '-x-50%'"
+    :position="center ? 'absolute' : 'fixed'"
+    :class="center ? '' : 'animate-toastShow'"
   >
     {{ msg }}
   </div>
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   msg: string
   center?: boolean
 }>(), {
@@ -22,32 +25,3 @@ withDefaults(defineProps<{
 
 const simpleMode = window.innerWidth < 800
 </script>
-
-<style scoped lang="scss">
-@keyframes toastShow {
-  0% {
-    bottom: calc(-1rem - 20px);
-  }
-  100% {
-    bottom: 50px;
-  }
-}
-
-.toast {
-  background-color: #fff6dc;
-  padding: 7px;
-  border-radius: 5px;
-  color: #996b3d;
-  box-shadow: 0 2px 5px #7a695c90;
-  font-weight: bold;
-
-  &.an {
-    animation: toastShow .3s;
-    animation-fill-mode: forwards;
-  }
-
-  &.simple {
-    left: 50% !important;
-  }
-}
-</style>

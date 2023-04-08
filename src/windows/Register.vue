@@ -91,7 +91,6 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
       :dialog-show="showAlert"
       :cancelButtonShow="false"
       @return="closeAlert"
-      :lang="useLang"
     >
       {{ alertMsg }}
     </Alert>

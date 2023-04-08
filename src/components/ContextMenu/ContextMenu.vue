@@ -31,10 +31,10 @@ const props = withDefaults(defineProps<{
   showCopy?: boolean,
   showPaste?: boolean,
   custom?: Array<{
-    label: string,
-    event: string,
-    icon: string,
-    color: string
+    label?: string,
+    event?: string,
+    icon?: string,
+    color?: string
   }>
 }>(), {
   showCopy: true,

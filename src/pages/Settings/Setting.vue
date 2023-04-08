@@ -7,8 +7,13 @@
   />
   <SettingList>
     <Item
-        :title="loginState ? i18n().myAccount : i18n().loginText"
-        @itemFun="() => router.push('/account?from=setting')"
+      v-if="NODE_ENV === 'development'"
+      title="UnoCss dev"
+      @item-fun="openUrl('http://localhost:3000/__unocss')"
+    />
+    <Item
+      :title="loginState ? i18n().myAccount : i18n().loginText"
+      @itemFun="() => router.push('/account?from=setting')"
     />
     <ItemBox>
       <Item
@@ -122,7 +127,7 @@ import firstLoad from "../../components/TitleBar/firstLoad";
 
 const ipcRenderer = require('electron').ipcRenderer
 
-const { app } = require('@electron/remote')
+const NODE_ENV = process.env.NODE_ENV
 const { shell } = require('electron')
 const os = require('os')
 
@@ -227,6 +232,10 @@ const setAutoStart = () => {
   autoStartState.value = !autoStartState.value
   localStorage.setItem('autoStart', autoStartState.value + '')
   ipcRenderer.send('setAutoStart', autoStartState.value)
+}
+
+const openUrl = (url: string) => {
+  window.open(url)
 }
 </script>
 
