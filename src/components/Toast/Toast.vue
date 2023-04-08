@@ -47,7 +47,7 @@ const simpleMode = window.innerWidth < 800
   }
 
   &.simple {
-    left: 50%;
+    left: 50% !important;
   }
 }
 </style>
