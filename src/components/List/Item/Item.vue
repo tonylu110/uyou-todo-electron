@@ -23,6 +23,7 @@
       <Toast
         v-if="showToast"
         :msg="i18n().copyToast"
+        :center="true"
       />
     </div>
     <ContextMenu
