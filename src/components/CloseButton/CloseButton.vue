@@ -8,11 +8,13 @@ const close = () => {
     ipcRenderer.send(`close-${(route.name as unknown as string)}`)
 }
 </script>
+
 <template>
     <div class="close-button" @click="close">
         <span class="material-icons">close</span>
     </div>
 </template>
+
 <style lang="scss" scoped>
 .close-button {
     position: fixed;

@@ -17,6 +17,7 @@ const isMac = navigator.userAgent.indexOf('Mac') >= 0
 const isWindows10OrAfter = os.release().split('.')[2] > 15063
 const backgroundColor = !isWindows || !isWindows10OrAfter ? '#edd9b750' : '#ffffff00'
 </script>
+
 <template>
     <div class="background">
         <img src="/logo.png" alt="">
@@ -25,6 +26,7 @@ const backgroundColor = !isWindows || !isWindows10OrAfter ? '#edd9b750' : '#ffff
         <close-button v-if="!isMac"/>
     </div>
 </template>
+
 <style lang="scss" scoped>
 .background {
     -webkit-app-region: drag;

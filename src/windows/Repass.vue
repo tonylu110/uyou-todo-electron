@@ -75,7 +75,7 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
     </div>
     <div class="in">
       <span>{{ i18n().rePassPage.oldPass }}</span>
-      <input type="password" autofocus="autofocus" v-model="formData.oldPass">
+      <input type="password" autofocus="true" v-model="formData.oldPass">
     </div>
     <div class="in">
       <span>{{ i18n().rePassPage.newPass }}</span>

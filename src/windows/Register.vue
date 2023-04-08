@@ -75,7 +75,7 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
     <img src="/logo.png" alt="" srcset="" class="logo">
     <div class="in">
       <span>{{ i18n().registerPage.account }}</span>
-      <input type="text" autofocus="autofocus" v-model="formData.account">
+      <input type="text" autofocus="true" v-model="formData.account">
     </div>
     <div class="in">
       <span>{{ i18n().registerPage.password }}</span>
