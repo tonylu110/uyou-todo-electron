@@ -10,7 +10,6 @@ const { initWindowMenu, windowMenu, windowMenuIpc } = require('../store/windowMe
 const createAboutWindowMac = require("./pages/aboutMac");
 const createRegisterWindowMac = require("./pages/registerMac");
 const createRepassWindowMac = require("./pages/repassMac");
-const { initLang, langIpc, lang} = require("../store/languageStore");
 const { initSim, simple, simpleIpc } = require('../store/simpleModeStore')
 
 const store = new Store()
@@ -27,7 +26,6 @@ function createWindow() {
     initSystemBar()
     initMenuBlur()
     initWindowMenu()
-    initLang()
     initSim()
 
     mainWindow = new BrowserWindow({
@@ -99,7 +97,6 @@ function createWindow() {
     systemBarIpc()
     menuBlurIpc()
     windowMenuIpc()
-    langIpc()
     simpleIpc()
 
     ipcMain.on('open-about', () => {
@@ -117,10 +114,6 @@ function createWindow() {
         let registerWindow = createRegisterWindowMac()
         const registerId = registerWindow.id
 
-        registerWindow.once('ready-to-show', () => {
-            BrowserWindow.fromId(registerId).webContents.send('lang', lang)
-        })
-
         ipcMain.once('close-register', () => {
             BrowserWindow.fromId(registerId).close()
         })
@@ -129,11 +122,6 @@ function createWindow() {
     ipcMain.on('open-repass', (ev, uname) => {
         let repassWindow = createRepassWindowMac(uname)
         const repassId = repassWindow.id
-
-        repassWindow.once('ready-to-show', () => {
-            BrowserWindow.fromId(repassId).webContents.send('account', uname)
-            BrowserWindow.fromId(repassId).webContents.send('lang', lang)
-        })
 
         ipcMain.once('close-repass', () => {
             BrowserWindow.fromId(repassId).close()

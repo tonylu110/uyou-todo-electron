@@ -48,7 +48,6 @@ const { ipcRenderer } = require('electron')
 
 const menuClick = (lang: string) => {
   localStorage.setItem('lang', lang)
-  ipcRenderer.send('set-lang', lang)
   location.reload()
 }
 

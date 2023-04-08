@@ -11,7 +11,6 @@ const { PARAMS, VALUE,  MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-elect
 const createAboutWindow = require("./pages/about");
 const createRegisterWindow = require("./pages/register")
 const createRepassWindow = require('./pages/repass')
-const { langIpc, initLang, lang} = require("./store/languageStore");
 const setMicaStyle = require('./pages/util/setMicaStyle')
 const { initSim, simple, simpleIpc } = require('./store/simpleModeStore')
 
@@ -30,7 +29,6 @@ function createWindow() {
   initSystemBar()
   initMenuBlur()
   initWindowMenu()
-  initLang()
   initSim()
 
   mainWindow = new MicaBrowserWindow({
@@ -110,7 +108,6 @@ function createWindow() {
   systemBarIpc()
   menuBlurIpc()
   windowMenuIpc(appMenu)
-  langIpc()
   simpleIpc()
 
   let aboutId, regId, rePassId
@@ -133,10 +130,6 @@ function createWindow() {
 
     regId = registerWindow.id
 
-    registerWindow.once('ready-to-show', () => {
-      registerWindow.webContents.send('lang', lang)
-    })
-
     ipcMain.once('close-register', () => {
       registerWindow.close()
     })
@@ -146,11 +139,6 @@ function createWindow() {
     let repassWindow = createRepassWindow(uname)
 
     rePassId = repassWindow.id
-
-    repassWindow.once('ready-to-show', () => {
-      repassWindow.webContents.send('account', uname)
-      repassWindow.webContents.send('lang', lang)
-    })
 
     ipcMain.once('close-repass', () => {
       repassWindow.close()
