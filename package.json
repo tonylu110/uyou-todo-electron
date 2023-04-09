@@ -23,6 +23,8 @@
   },
   "devDependencies": {
     "@electron/rebuild": "^3.2.10",
+    "@iconify-json/mdi": "^1.1.50",
+    "@unocss/preset-icons": "^0.50.8",
     "@vitejs/plugin-vue": "^3.0.0",
     "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",

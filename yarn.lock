@@ -121,7 +121,14 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
-"@iconify/types@^2.0.0":
+"@iconify-json/mdi@^1.1.50":
+  version "1.1.50"
+  resolved "https://registry.npmmirror.com/@iconify-json/mdi/-/mdi-1.1.50.tgz#05d4b1ace36ce5df1699da19c2f0042917780918"
+  integrity sha512-SgbT5w5eHCdOG74ZWPz7HlTGk6VsifIJhNi6lAsxj/5Nlqt6Cz4LlQmSa9eecU9p075Jub2aAx/o7YI+GCahRQ==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify/types@*", "@iconify/types@^2.0.0":
   version "2.0.0"
   resolved "https://registry.npmmirror.com/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"
   integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
@@ -438,6 +445,11 @@
   resolved "https://registry.npmmirror.com/@unocss/core/-/core-0.50.7.tgz#d4959100b8bc1e3183faafa8e96161150bf5ba8d"
   integrity sha512-kkZ8uFVOhALBJ7w4u99r7eyGtSiSTmeqNZyYGdJPv+6IVjA5AIe2Dyc5BvlYXLndEW2JTpjlGZ9yfUCqjgtj5g==
 
+"@unocss/core@0.50.8":
+  version "0.50.8"
+  resolved "https://registry.npmmirror.com/@unocss/core/-/core-0.50.8.tgz#4e1bdfb38c5797e086f7601c24cd90591af443f8"
+  integrity sha512-rWmyeNE0Na8dJPDynLVar0X22qMHFNhO+/F2FZDpG4tubTavXJJo9uvhZr/D381kiWxt+XZ38y6EAD4UMdBqMA==
+
 "@unocss/inspector@0.50.7":
   version "0.50.7"
   resolved "https://registry.npmmirror.com/@unocss/inspector/-/inspector-0.50.7.tgz#435f9f8413d4b4ff238c0d8a4a08f1e8863939c0"
@@ -472,6 +484,15 @@
   dependencies:
     "@iconify/utils" "^2.1.5"
     "@unocss/core" "0.50.7"
+    ofetch "^1.0.1"
+
+"@unocss/preset-icons@^0.50.8":
+  version "0.50.8"
+  resolved "https://registry.npmmirror.com/@unocss/preset-icons/-/preset-icons-0.50.8.tgz#2a83e311000464dc7796e42ce96ee394f96f7bf2"
+  integrity sha512-tQ05aP7ZRRP39+egB16gFMK6fkEdS8ob4rJeqUG6vEXiiAFWVbotI/NbHQapqk3wRthmyI3d9rUtxClJ2micvw==
+  dependencies:
+    "@iconify/utils" "^2.1.5"
+    "@unocss/core" "0.50.8"
     ofetch "^1.0.1"
 
 "@unocss/preset-mini@0.50.7":
