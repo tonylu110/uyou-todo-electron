@@ -9,29 +9,29 @@
   <SettingList>
     <div class="item-box" :style="{width: simpleMode ? 'calc(100% - 20px)' : ''}">
       <div class="box-radius">
-        <div @click="() => menuClick('withSystem')" :class="langShow('withSystem') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" @click="() => menuClick('withSystem')" :class="langShow('withSystem') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>{{ i18n().setLangText }}</span>
-          <span v-if="langShow('withSystem')" class="material-icons">check</span>
+          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('withSystem')"></div>
         </div>
-        <div @click="() => menuClick('en')" :class="langShow('en') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" @click="() => menuClick('en')" :class="langShow('en') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>English</span>
-          <span v-if="langShow('en')" class="material-icons">check</span>
+          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('en')"></div>
         </div>
-        <div @click="() => menuClick('es')" :class="langShow('es') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" @click="() => menuClick('es')" :class="langShow('es') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>Español</span>
-          <span v-if="langShow('es')" class="material-icons">check</span>
+          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('es')"></div>
         </div>
-        <div @click="() => menuClick('zh-cn')" :class="langShow('zh-cn') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" @click="() => menuClick('zh-cn')" :class="langShow('zh-cn') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>中文（简体）</span>
-          <span v-if="langShow('zh-cn')" class="material-icons">check</span>
+          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('zh-cn')"></div>
         </div>
-        <div @click="() => menuClick('zh-tw')" :class="langShow('zh-tw') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" @click="() => menuClick('zh-tw')" :class="langShow('zh-tw') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>中文（繁體）</span>
-          <span v-if="langShow('zh-tw')" class="material-icons">check</span>
+          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('zh-tw')"></div>
         </div>
-        <div @click="() => menuClick('ja')" :class="langShow('ja') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" @click="() => menuClick('ja')" :class="langShow('ja') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
           <span>日本語</span>
-          <span v-if="langShow('ja')" class="material-icons">check</span>
+          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('ja')"></div>
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
     border-radius: 7px;
     overflow: hidden;
 
-    div {
+    .item {
       position: relative;
       max-width: 550px;
       width: calc(100vw - 450px);
@@ -91,14 +91,6 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
       &:active {
         background-color: #5985eb;
         color: white;
-      }
-
-      &:active .material-icons {
-        color: white !important;
-      }
-
-      .material-icons {
-        color: #5985eb;
       }
     }
   }

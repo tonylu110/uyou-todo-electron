@@ -8,8 +8,6 @@ import i18n from "../i18n";
 const { ipcRenderer } = require("electron");
 const os = require("os");
 
-const useLang = ref()
-
 const formData = reactive({
   account: '',
   password: '',

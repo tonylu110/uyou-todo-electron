@@ -7,7 +7,7 @@
         @click="router.push('/account')"
       >
         <div>
-          <span class="material-icons">account_circle</span>
+          <div i-mdi:account-circle text-18px c="#00000090"></div>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().myAccount }}</span>
         </div>
       </div>
@@ -17,19 +17,19 @@
         @click="router.push('/')"
       >
         <div>
-          <span class="material-icons">list_alt</span>
+          <div i-mdi:list-box-outline text-18px c="#00000090"></div>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.allTodo }}</span>
         </div>
       </div>
       <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allNotDo' ? '#00000010' : ''}" @click="toList('allNotDo')">
         <div>
-          <span class="material-icons">panorama_fisheye</span>
+          <div i-mdi:circle-outline text-18px c="#00000090"></div>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.incompleted }}</span>
         </div>
       </div>
       <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allDo' ? '#00000010' : ''}" @click="toList('allDo')">
         <div>
-          <span class="material-icons">check_circle</span>
+          <div i-mdi:checkbox-marked-circle text-18px c="#00000090"></div>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.completed }}</span>
         </div>
       </div>
@@ -37,7 +37,7 @@
     <div class="list">
       <div class="setting-list" :style="{backgroundColor: routeName === 'setting' || form === 'setting' ? '#00000010' : ''}" @click="router.push('/setting')">
         <div>
-          <span class="material-icons">settings</span>
+          <div i-mdi:cog text-18px c="#00000090"></div>
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().settingTitleText }}</span>
         </div>
       </div>

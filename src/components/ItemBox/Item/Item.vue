@@ -19,7 +19,7 @@
       :swichState="switchState"
       @switch="emits('switchFun')"
     />
-    <span v-if="showArrow && !showSwitch" class="material-icons">arrow_forward_ios</span>
+    <div i-mdi:chevron-right text-24px absolute right-15px v-if="showArrow && !showSwitch"></div>
   </div>
 </template>
 
@@ -111,12 +111,6 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
   &:active .img-back {
     background-color: transparent;
     border: none;
-  }
-
-  .material-icons {
-    font-size: 18px;
-    position: absolute;
-    right: 15px;
   }
 }
 </style>

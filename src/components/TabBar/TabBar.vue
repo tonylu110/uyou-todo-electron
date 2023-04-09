@@ -7,15 +7,19 @@
       boxShadow: bgColor === 'light' ? '0 1px 10px #00000020' : ''
     }"
   >
-    <div v-if="leftImgShow" class="left-img" @click="() => emits('leftClick')" :style="{border: bgColor === 'light' ? '1px solid #00000020' : ''}">
-      <span class="material-icons" :style="{fontWeight: leftImg === 'settings' ? 'lighter' : '', color: bgColor === 'light' ? '#555' : ''}">{{ leftImg }}</span>
+    <div v-if="leftImgShow" class="box left-img" @click="() => emits('leftClick')" :style="{border: bgColor === 'light' ? '1px solid #00000020' : ''}">
+      <div
+        :class="leftImg === 'back' ? 'i-mdi:arrow-left' : 'i-mdi:cog'" 
+        text-22px c-white
+        :c="bgColor === 'light' ? '#555' : ''"
+      ></div>
     </div>
     <span :style="{color: bgColor === 'light' ? '#555' : ''}">{{ title }}</span>
-    <div v-if="rightImgShow" class="right-img" @click="() => emits('rightClick')">
-      <span class="material-icons">add_circle_outline</span>
+    <div v-if="rightImgShow" class="box right-img" @click="() => emits('rightClick')">
+      <div i-mdi:plus-circle-outline text-22px c-white></div>
     </div>
-    <div v-if="syncImgShow && rightImgShow" class="sync-img" @click="sync">
-      <span class="material-icons">cloud_sync</span>
+    <div v-if="syncImgShow && rightImgShow" class="box sync-img" @click="sync">
+      <div i-mdi:cloud-sync text-22px c-white></div>
     </div>
   </div>
 </template>
@@ -33,7 +37,7 @@ withDefaults(defineProps<{
   title: 'uyou ToDo',
   leftImgShow: true,
   rightImgShow: true,
-  leftImg: 'arrow_back',
+  leftImg: 'back',
   bgColor: 'default'
 })
 
@@ -96,7 +100,7 @@ if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.ge
     font-weight: bold;
   }
 
-  div {
+  .box {
     position: absolute;
     border-radius: 5px;
     width: 22px;

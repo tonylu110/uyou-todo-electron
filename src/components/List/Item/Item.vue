@@ -1,10 +1,10 @@
 <template>
   <div class="item" ref="itemDom">
     <div class="button" @click="setOk" v-if="listName !== 'allDo'">
-      <span class="material-icons">check</span>
+      <div i-mdi:check-bold text-24px c-white></div>
     </div>
     <div class="delete" @click="deleteItem">
-      <span class="material-icons">close</span>
+      <div i-mdi:close-thick text-24px c-white></div>
     </div>
     <div class="list-item">
       <div class="time-area">
@@ -14,12 +14,6 @@
       <span class="item-text" :style="listName === 'allNotDo' ? '' : okStyle">
         {{ text }}
       </span>
-      <!-- <div class="close-button" @click="deleteItem">
-        <span class="material-icons">close</span>
-      </div>
-      <div class="ok-button" @click="setOk">
-        <span class="material-icons">check</span>
-      </div> -->
       <Toast
         v-if="showToast"
         :msg="i18n().copyToast"
@@ -101,11 +95,11 @@ const contextMenu = ref({
 const customContextMenu = reactive([{
   label: okState.value ? i18n().contextMenu.undoTodo : i18n().contextMenu.comToDo,
   event: 'setOk',
-  icon: okState.value ? 'panorama_fisheye' : 'task_alt'
+  icon: okState.value ? 'i-mdi:checkbox-blank-circle-outline' : 'i-mdi:checkbox-marked-circle-outline'
 }, {
   label: i18n().contextMenu.removeToDo,
   event: 'remove',
-  icon: 'highlight_off',
+  icon: 'i-mdi:close-circle-outline',
   color: '#d6010f'
 }])
 
@@ -113,7 +107,7 @@ watchEffect(() => {
   customContextMenu[0] = {
     label: okState.value ? i18n().contextMenu.undoTodo : i18n().contextMenu.comToDo,
     event: 'setOk',
-    icon: okState.value ? 'panorama_fisheye' : 'task_alt'
+    icon: okState.value ? 'i-mdi:checkbox-blank-circle-outline' : 'i-mdi:checkbox-marked-circle-outline'
   }
 })
 

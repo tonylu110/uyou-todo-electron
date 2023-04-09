@@ -20,7 +20,12 @@
         ref="item"
       />
     </transition-group>
-    <span v-if="list.length === 0" class="material-icons">list_alt</span>
+    <div 
+      i-mdi:list-box-outline 
+      top="50%" translate="y-[calc(-50%-20px)]" absolute 
+      text-150px c="#7a695c50"
+      v-if="list.length === 0"
+    ></div>
   </perfect-scrollbar>
 </template>
 
@@ -138,14 +143,6 @@ watchEffect(() => {
 
   .add-list {
     width: calc(100% - 20px);
-  }
-
-  .material-icons {
-    position: absolute;
-    top: 50%;
-    font-size: 150px;
-    transform: translateY(calc(-50% + 20px));
-    color: #00000020;
   }
 }
 

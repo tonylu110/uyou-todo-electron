@@ -7,10 +7,10 @@
   </div>
   <div class="buttons">
     <button :style="{width: showAddButton ? '50%' : '', margin: showAddButton ? '' : '0 0 0 -6px'}" class="ok-button" @click="addItem">
-      <span class="material-icons">check</span>
+      <div i-mdi:check-bold text-24px></div>
     </button>
     <button :style="{width: showAddButton ? '50%' : ''}" class="close-button" @click="showAddItem">
-      <span class="material-icons">close</span>
+      <div i-mdi:close-thick text-24px></div>
     </button>
   </div>
   <ContextMenu
@@ -78,12 +78,12 @@ onMounted(() => {
 const customContextMenu = [{
   label: i18n().contextMenu.clearTxt,
   event: 'clear',
-  icon: 'backspace',
+  icon: 'i-mdi:backspace',
   color: '#d6010f'
 },{
   label: i18n().contextMenu.closeItem,
   event: 'close',
-  icon: 'highlight_off',
+  icon: 'i-mdi:close-circle-outline',
   color: '#d6010f'
 }]
 

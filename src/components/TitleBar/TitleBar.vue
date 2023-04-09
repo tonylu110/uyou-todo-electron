@@ -23,23 +23,14 @@
     <span class="title-text" :style="{color: routeLight ? '#555' : 'white'}">
       {{ simpleMode ? '' : title }}
     </span>
-    <!-- <div v-if="isMac" class="close-button-mac button" @click="closeWindow">
-      <span class="material-icons">close</span>
-    </div>
-    <div v-if="isMac" class="min-button-mac button" @click="minWindow">
-      <span class="material-icons">horizontal_rule</span>
-    </div>
-    <div v-if="isMac" class="min-button-mac button max" @click="maxWindow">
-      <span class="material-icons">check_box_outline_blank</span>
-    </div> -->
     <div v-if="!isMac" class="min-button button" @click="minWindow">
-      <span class="material-icons" :style="{color: routeLight ? '#555' : 'white'}">horizontal_rule</span>
+      <div i-mdi:minus :c="routeLight ? '#555' : 'white'" text-12px></div>
     </div>
     <div v-if="!isMac && !simpleMode" class="min-button button" @click="maxWindow">
-      <span class="material-icons" :style="{color: routeLight ? '#555' : 'white'}">check_box_outline_blank</span>
+      <div i-mdi:checkbox-blank-outline :c="routeLight ? '#555' : 'white'" text-12px></div>
     </div>
     <div v-if="!isMac" class="close-button button" @click="closeWindow">
-      <span class="material-icons">close</span>
+      <div i-mdi:close-thick c-white text-12px></div>
     </div>
     <div class="list-menu-color" :style="{backgroundColor: listMenuColor}" v-if="!simpleMode"></div>
     <div class="list-menu-drag" v-if="!simpleMode"></div>

@@ -1,5 +1,4 @@
 import 'virtual:uno.css'
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import './main.scss'
 import { createApp } from 'vue'
 import App from './App.vue'

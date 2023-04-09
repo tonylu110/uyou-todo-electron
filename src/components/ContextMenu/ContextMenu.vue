@@ -1,16 +1,16 @@
 <template>
   <div class="menu" :style="{top: position.top + 'px', left: position.left + 'px'}">
-    <div @click="copy" v-if="showCopy">
-      <span class="material-icons">content_copy</span>
+    <div @click="copy" v-if="showCopy" class="img">
+      <div i-mdi:content-copy text-14px mr-5px></div>
       <span>{{ i18n().contextMenu.copy }}</span>
     </div>
-    <div @click="paste" v-if="showPaste">
-      <span class="material-icons">content_paste</span>
+    <div @click="paste" v-if="showPaste" class="img">
+      <div i-mdi:content-paste text-14px mr-5px></div>
       <span>{{ i18n().contextMenu.paste }}</span>
     </div>
     <span v-if="custom" class="menu-line"></span>
-    <div v-if="custom" v-for="(item, index) in customMenu" :key="index" @click="emits(item.event)" :style="{color: item.color}">
-      <span class="material-icons" v-if="item.icon">{{ item.icon }}</span>
+    <div class="img" v-if="custom" v-for="(item, index) in customMenu" :key="index" @click="emits(item.event)" :style="{color: item.color}">
+      <div :class="item.icon" text-14px mr-5px v-if="item.icon"></div>
       <span>{{ item.label }}</span>
     </div>
   </div>
@@ -98,7 +98,7 @@ watchEffect(() => {
     margin: 5px 0;
   }
 
-  div {
+  .img {
     padding: 8px 12px;
     color: #555;
     font-weight: bold;
@@ -106,12 +106,6 @@ watchEffect(() => {
     font-size: 14px;
     display: flex;
     align-items: center;
-
-    .material-icons {
-      font-size: 14px;
-      font-weight: bold;
-      margin-right: 5px;
-    }
 
     &:hover {
       background-color: #00000010;
