@@ -7,15 +7,63 @@
     bg-color="light"
   />
   <SettingList justify="space-between">
-    <div :style="{width: simpleMode ? '100%' : ''}" class="box">
-      <div class="title-img" :style="{width: simpleMode ? 'calc(100% - 40px)' : ''}">
-        <img src="/images/logo.png" alt="" />
-        <span :style="{marginBottom: newVersion !== '' ? '' : '15px'}">uyou ToDo v{{ app.getVersion() }}</span>
-        <span class="version" v-if="newVersion !== ''">{{ newVersion }}</span>
-        <div class="update-msg" v-if="updateMsg.length > 0" :style="{width: simpleMode ? 'calc(100% - 10px)' : ''}">
-          <span class="update-title">{{ i18n().update.updateLog }}</span>
-          <ul>
-            <li v-for="(item, index) in updateMsg" :key="index">{{ item.slice(2) }}</li>
+    <div 
+      flex justify-center items-center
+      :w="simpleMode ? '100%' : ''"
+    >
+      <div 
+        :w="simpleMode ? '[calc(100%-40px)]' : '[calc(100vw-400px)]'" max-w-560px h-auto
+        flex="~ col" justify-center items-center
+        bg-white
+        rounded-7px
+        mb-10px
+        p="x-10px y-0"
+        shadow-item
+      >
+        <img
+          h-100px
+          m="x-0 y-15px"
+          src="/images/logo.png" 
+          alt="" 
+        />
+        <span 
+          :mb="newVersion ? '' : '15px'"
+          c="#00000050"
+          font-bold
+        >
+          uyou ToDo v{{ app.getVersion() }}
+        </span>
+        <span 
+          c="#00000050"
+          mt-5px text-14px mb-15px
+          font-bold
+          v-if="newVersion !== ''"
+        >
+          {{ newVersion }}
+        </span>
+        <div  
+          :w="simpleMode ? '[calc(100%-10px)]' : '[calc(100vw-470px)]'"
+          h-auto max-w-530px
+          flex="~ col" justify-center
+          border-t="1px solid #00000020"
+          p="y-5px x-15px"
+          v-if="updateMsg.length > 0" 
+        >
+          <span 
+            c-black text-16px font-bold
+            mt-10px
+          > 
+            {{ i18n().update.updateLog }}
+          </span>
+          <ul w="100%" pl-20px>
+            <li
+              text-15px c="#00000090" font-bold
+              mb="10px"
+              v-for="(item, index) in updateMsg" 
+              :key="index"
+            >
+              {{ item.slice(2) }}
+            </li>
           </ul>
         </div>
       </div>
@@ -81,74 +129,3 @@ onMounted(() => {
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
-
-<style lang="scss" scoped>
-.title-img {
-  width: calc(100vw - 400px);
-  max-width: 560px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 7px;
-  margin-bottom: 10px;
-  padding: 0 10px;
-  box-shadow: 0 2px 10px #00000030;
-
-  .update-msg {
-    height: auto;
-    width: calc(100vw - 470px);
-    max-width: 530px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-top: 1px solid #00000020;
-    padding: 5px 15px;
-
-    ul {
-      width: 100%;
-      padding-left: 20px;
-
-      li {
-        font-size: 15px;
-        color: #00000090;
-        font-weight: bold;
-        margin-bottom: 10px;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-    .update-title {
-      color: black;
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-  }
-
-  img {
-    height: 100px;
-    margin: 15px 0;
-  }
-
-  span {
-    color: #00000050;
-
-    &.version {
-      margin-top: 5px;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-  }
-}
-
-.box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>
