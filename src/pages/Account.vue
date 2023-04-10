@@ -8,9 +8,30 @@
   />
   <SettingList>
     <Item :title="loginText" :showArrow="false" />
-    <div v-if="!loginState" class="login-input" :style="{width: simpleMode ? 'calc(100% - 50px)' : ''}">
-      <input type="text" :placeholder="i18n().accountPage.account" v-model="uname">
-      <input type="password" :placeholder="i18n().accountPage.passwd" v-model="passwd" @keydown.enter="login">
+    <div 
+      mb-10px rounded-7px shadow-item p="x-15px y-10px"
+      :w="simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'"
+      bg-white
+      flex="~ col" max-w-550px
+      v-if="!loginState" 
+    >
+      <input 
+        p-15px m="x-0 y-5px"
+        border="1.5px solid #00000020"
+        bg="#00000010" rounded-5px outline-primary
+        type="text" 
+        :placeholder="i18n().accountPage.account" 
+        v-model="uname"
+      >
+      <input 
+        p-15px m="x-0 y-5px"
+        border="1.5px solid #00000020"
+        bg="#00000010" rounded-5px outline-primary
+        type="password" 
+        :placeholder="i18n().accountPage.passwd" 
+        v-model="passwd" 
+        @keydown.enter="login"
+      >
     </div>
     <ItemButton v-if="!loginState" @click="login" mode="primary">{{ i18n().accountPage.login }}</ItemButton>
     <ItemButton v-if="!loginState" @click="openRegister">{{ i18n().accountPage.register }}</ItemButton>
@@ -211,25 +232,3 @@ const closeAlert = () => {
   isLogoutClick.value = false
 }
 </script>
-
-<style lang="scss" scoped>
-.login-input {
-  margin-bottom: 10px;
-  background-color: white;
-  border-radius: 7px;
-  box-shadow: 0 2px 10px #00000030;
-  width: calc(100vw - 450px);
-  padding: 10px 15px;
-  display: flex;
-  flex-direction: column;
-  max-width: 550px;
-
-  input {
-    padding: 15px;
-    margin: 5px 0px;
-    border: 1.5px solid #00000020;
-    background-color: #00000010;
-    border-radius: 5px;
-  }
-}
-</style>

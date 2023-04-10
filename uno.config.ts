@@ -29,6 +29,10 @@ export default defineConfig({
           }
         }`
       }
+    },
+    colors: {
+      primary: '#5985eb',
+      error: '#e5544b'
     }
   }
 })
