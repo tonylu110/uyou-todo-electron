@@ -7,9 +7,21 @@
     bg-color="light"
   />
   <SettingList>
-    <div class="title-img">
-      <img src="/images/donate/alipay.png" alt="">
-      <img src="/images/donate/wechatpay.png" alt="">
+    <div 
+      w="[calc(100vw-460px)]" p-20px mb-10px max-w-540px h-auto
+      flex="~ wrap" justify-center items-center
+      bg-white rounded-7px shadow-item
+    >
+      <img 
+        w-250px p-10px
+        src="/images/donate/alipay.png" 
+        alt=""
+      >
+      <img
+        w-250px p-10px 
+        src="/images/donate/wechatpay.png" 
+        alt=""
+      >
     </div>
   </SettingList>
 </template>
@@ -20,26 +32,3 @@ import router from '../../router';
 import i18n from '../../i18n';
 import SettingList from "../../components/SettingList/SettingList.vue";
 </script>
-
-<style lang="scss" scoped>
-.title-img {
-  width: calc(100vw - 460px);
-  padding: 20px;
-  max-width: 540px;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 7px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 10px #00000030;
-
-  img {
-    width: 250px;
-    padding: 10px;
-  }
-}
-</style>
