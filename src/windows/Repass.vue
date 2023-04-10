@@ -67,21 +67,77 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
 </script>
 
 <template>
-  <div class="main-area" :style="{backgroundColor: !isWindow() || !isWindows10OrAfter ? '#edd9b750' : ''}">
-    <img src="/logo.png" alt="" srcset="" class="logo">
-    <div class="in">
-      <span>{{ i18n().registerPage.account }}</span>
-      <input type="text" disabled v-model="formData.account">
+  <div 
+    :bg="(!isWindow() || !isWindows10OrAfter) ? '#edd9b750' : 'transparent'"
+    flex="~ col" justify-center items-center
+    w-screen h-screen drag
+  >
+    <img 
+      w-150px h-150px mb-20px
+      src="/logo.png" 
+      alt=""
+    >
+    <div p-7px flex items-center>
+      <span
+        flex justify-content-right w-100px
+        text-20px c="#7a695c" whitespace-pre
+      >
+        {{ i18n().registerPage.account }}
+      </span>
+      <input 
+        no-drag 
+        p-10px 
+        outline-none rounded-5px bg="#ffffff30"
+        border="2px solid #00000010"
+        c="#00000070"
+        type="text" 
+        disabled 
+        v-model="formData.account"
+      >
     </div>
-    <div class="in">
-      <span>{{ i18n().rePassPage.oldPass }}</span>
-      <input type="password" autofocus="true" v-model="formData.oldPass">
+    <div p-7px flex items-center>
+      <span
+        flex justify-content-right w-100px
+        text-20px c="#7a695c" whitespace-pre
+      >
+        {{ i18n().rePassPage.oldPass }}
+      </span>
+      <input
+        no-drag 
+        p-10px 
+        outline-none rounded-5px bg="#ffffff90"
+        border="2px solid #00000010" 
+        type="password" 
+        autofocus="true" 
+        v-model="formData.oldPass"
+      >
     </div>
-    <div class="in">
-      <span>{{ i18n().rePassPage.newPass }}</span>
-      <input type="password" v-model="formData.newPass">
+    <div p-7px flex items-center>
+      <span
+        flex justify-content-right w-100px
+        text-20px c="#7a695c" whitespace-pre
+      >
+        {{ i18n().rePassPage.newPass }}
+      </span>
+      <input
+        no-drag 
+        p-10px 
+        outline-none rounded-5px bg="#ffffff90"
+        border="2px solid #00000010" 
+        type="password" 
+        v-model="formData.newPass"
+      >
     </div>
-    <button type="submit" @click="repass">{{ i18n().rePassPage.setPass }}</button>
+    <button 
+      no-drag
+      mt-10px p="x-20px y-5px" rounded-5px
+      bg="#7a695c active:#574a40" c-white border-none
+      text-18px cursor-pointer
+      type="submit" 
+      @click="repass"
+    >
+      {{ i18n().rePassPage.setPass }}
+    </button>
     <Alert
       :title=i18n().accountPage.alertTitle
       :dialog-show="showAlert"
@@ -93,7 +149,3 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
     <close-button v-if="!isMac()"/>
   </div>
 </template>
-
-<style scoped lang="scss">
-@import "./scss/register.scss";
-</style>

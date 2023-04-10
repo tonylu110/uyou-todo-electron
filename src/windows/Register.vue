@@ -77,7 +77,7 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
     <img 
       w-150px h-150px mb-20px
       src="/logo.png" 
-      alt="" class="logo"
+      alt=""
     >
     <div p-7px flex items-center>
       <span 
