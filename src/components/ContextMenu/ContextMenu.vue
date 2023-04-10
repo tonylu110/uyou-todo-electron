@@ -61,7 +61,8 @@ const copy = () => {
 }
 
 const emits = defineEmits<{
-  (e: 'pasteText' | string | undefined, text?: string): void
+  (e: 'pasteText', text: string): void
+  (e: string | undefined): void
 }>()
 
 const paste = () => {

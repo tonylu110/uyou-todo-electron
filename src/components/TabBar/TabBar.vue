@@ -9,7 +9,7 @@
   >
     <div v-if="leftImgShow" class="box left-img" @click="() => emits('leftClick')" :style="{border: bgColor === 'light' ? '1px solid #00000020' : ''}">
       <div
-        :class="leftImg === 'back' ? 'i-mdi:arrow-left' : 'i-mdi:cog'" 
+        :class="leftImg" 
         text-22px c-white
         :c="bgColor === 'light' ? '#555' : ''"
       ></div>
@@ -37,7 +37,7 @@ withDefaults(defineProps<{
   title: 'uyou ToDo',
   leftImgShow: true,
   rightImgShow: true,
-  leftImg: 'back',
+  leftImg: 'i-mdi:chevron-left',
   bgColor: 'default'
 })
 

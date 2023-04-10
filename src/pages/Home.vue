@@ -2,7 +2,7 @@
   <TabBar
     @rightClick="() => showAddItem = !showAddItem"
     @leftClick="() => router.push('/setting-sim')"
-    leftImg="settings"
+    leftImg="i-mdi:cog"
     :title="simpleMode ? 'uyou ToDo' : i18n().listMenu.allTodo"
     :leftImgShow="simpleMode"
   />

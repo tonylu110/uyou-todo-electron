@@ -15,7 +15,7 @@ export default defineConfig({
     ['no-drag', { '-webkit-app-region': "no-drag" }],
     ['drag', { '-webkit-app-region': "drag" }],
     ['shadow-item', { 'box-shadow': '0 2px 10px #00000030' }],
-    [/^justify-(.+)$/, ([, name]) => ({'justify-content': name})]
+    [/^justify-content-(.+)$/, ([, name]) => ({'justify-content': name})]
   ],
   theme: {
     animation: {

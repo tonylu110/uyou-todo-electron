@@ -81,7 +81,7 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
     >
     <div p-7px flex items-center>
       <span 
-        flex justify-right w-100px
+        flex justify-content-right w-100px
         text-20px c="#7a695c" whitespace-pre
       >
         {{ i18n().registerPage.account }}
@@ -98,7 +98,7 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
     </div>
     <div p-7px flex items-center>
       <span
-        flex justify-right w-100px
+        flex justify-content-right w-100px
         text-20px c="#7a695c" whitespace-pre
       >
         {{ i18n().registerPage.password }}
@@ -114,7 +114,7 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
     </div>
     <div p-7px flex items-center>
       <span
-        flex justify-right w-100px
+        flex justify-content-right w-100px
         text-20px c="#7a695c" whitespace-pre
       >
         {{ i18n().registerPage.rePass }}
