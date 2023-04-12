@@ -1,4 +1,5 @@
 import { defineConfig, presetAttributify, presetUno, presetIcons } from 'unocss'
+import transformerAttributifyJsx from '@unocss/transformer-attributify-jsx'
 
 export default defineConfig({
   presets: [
@@ -10,6 +11,9 @@ export default defineConfig({
     }),
     presetAttributify(), 
     presetUno()
+  ],
+  transformers: [
+    transformerAttributifyJsx()
   ],
   rules: [
     ['no-drag', { '-webkit-app-region': "no-drag" }],

@@ -14,7 +14,7 @@
         :c="bgColor === 'light' ? '#555' : ''"
       ></div>
     </div>
-    <span :style="{color: bgColor === 'light' ? '#555' : ''}">{{ title }}</span>
+    <span :style="{color: bgColor === 'light' ? '#555' : '', maxWidth: simpleMode ? 'calc(100vw - 140px)' : ''}">{{ title }}</span>
     <div v-if="rightImgShow" class="box right-img" @click="() => emits('rightClick')">
       <div i-mdi:plus-circle-outline text-22px c-white></div>
     </div>
@@ -80,6 +80,8 @@ const isWindows = navigator.userAgent.indexOf('Win')>=0
 if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && localStorage.getItem('systemTitle') === 'true' && !(localStorage.getItem('simpleMode') === 'true')) {
   isRound.value = true
 }
+
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
 
 <style lang="scss" scoped>
@@ -95,6 +97,9 @@ if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.ge
   z-index: 10;
 
   span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: white;
     font-size: 20px;
     font-weight: bold;

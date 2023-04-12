@@ -50,7 +50,7 @@ const routes = [
     path: "/about",
     name: "about",
     components: {
-      isWindow: () => import("./windows/About.vue")
+      isWindow: () => import("./windows/About.tsx")
     }
   },
   {
