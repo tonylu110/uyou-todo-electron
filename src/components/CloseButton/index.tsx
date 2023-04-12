@@ -13,7 +13,7 @@ export default defineComponent({
     return () => (
       <div
         fixed right="7.5px" top="7.5px"
-        bg="#e5544b hover:#c95047 active:#99362f"
+        bg="error-d hover:error-h active:error-a"
         h-20px w-50px
         flex items-center justify-center
         rounded-5px 

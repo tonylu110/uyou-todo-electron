@@ -18,7 +18,7 @@
       <input 
         p-15px m="x-0 y-5px"
         border="1.5px solid #00000020"
-        bg="#00000010" rounded-5px outline-primary
+        bg="#00000010" rounded-5px outline-primary-d
         type="text" 
         :placeholder="i18n().accountPage.account" 
         v-model="uname"
@@ -26,7 +26,7 @@
       <input 
         p-15px m="x-0 y-5px"
         border="1.5px solid #00000020"
-        bg="#00000010" rounded-5px outline-primary
+        bg="#00000010" rounded-5px outline-primary-d
         type="password" 
         :placeholder="i18n().accountPage.passwd" 
         v-model="passwd" 

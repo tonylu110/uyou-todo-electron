@@ -10,15 +10,15 @@ export default defineComponent({
     const versionShow = ref('')
 
     ipcRenderer.send('get-app-version')
-    ipcRenderer.on('version', (event: typeof IpcRendererEvent, version: string) => {
+    ipcRenderer.on('version', (_event: typeof IpcRendererEvent, version: string) => {
       versionShow.value = version
     })
 
-    const isWindows10OrAfter = os.release().split('.')[2] > 15063
+    const isWindows10OrAfter = isWindow() && os.release().split('.')[2] > 15063
 
     return () => (
       <div
-        drag bg={(isWindow() || isWindows10OrAfter) ? '#edd9b750' : 'transparent'}
+        drag bg={isWindows10OrAfter ? 'transparent' : '#edd9b750'}
         flex="~ col" justify-center items-center
         w-screen h-screen
       >

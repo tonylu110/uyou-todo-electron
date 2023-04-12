@@ -40,8 +40,15 @@ export default defineConfig({
       }
     },
     colors: {
-      primary: '#5985eb',
-      error: '#e5544b'
+      primary: {
+        d: '#5985eb',
+        a: '#4e6fbb'
+      },
+      error: {
+        d: '#e5544b',
+        h: '#c95047',
+        a: '#99362f'
+      }
     }
   }
 })
