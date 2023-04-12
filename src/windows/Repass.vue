@@ -2,7 +2,7 @@
 import Alert from '../components/Alert/Alert.vue'
 import { isWindow, isMac } from "../util/os";
 import i18n from "../i18n";
-import CloseButton from "../components/CloseButton/CloseButton.vue";
+import CloseButton from "../components/CloseButton";
 import { reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 

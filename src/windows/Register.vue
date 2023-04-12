@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Alert from '../components/Alert/Alert.vue'
 import { reactive, ref } from "vue";
-import CloseButton from '../components/CloseButton/CloseButton.vue';
+import CloseButton from '../components/CloseButton';
 import { isMac, isWindow } from "../util/os";
 import i18n from "../i18n";
 

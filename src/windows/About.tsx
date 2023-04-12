@@ -1,6 +1,6 @@
 import { defineComponent, ref } from "vue"
 import { isWindow, isMac } from "../util/os"
-import CloseButton from '../components/CloseButton/CloseButton.vue'
+import CloseButton from '../components/CloseButton'
 
 export default defineComponent({
   setup() {
