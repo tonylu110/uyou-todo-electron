@@ -41,7 +41,7 @@
 import {onMounted, reactive, Ref, ref, watchEffect} from 'vue';
 import getTime from '../../../util/getTime';
 import i18n from '../../../i18n';
-import Toast from '../../Toast/Toast.vue';
+import Toast from '../../Toast';
 import { useRoute } from 'vue-router';
 import ContextMenu from "../../ContextMenu/ContextMenu.vue";
 

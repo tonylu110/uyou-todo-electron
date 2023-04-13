@@ -72,7 +72,7 @@ import router from "../router";
 import SettingList from "../components/SettingList/SettingList.vue";
 import Item from "../components/ItemBox/Item/Item.vue";
 import { ref } from "vue";
-import Toast from "../components/Toast/Toast.vue";
+import Toast from "../components/Toast";
 import ItemBox from "../components/ItemBox/ItemBox.vue";
 import firstLoad from "../components/TitleBar/firstLoad";
 import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";

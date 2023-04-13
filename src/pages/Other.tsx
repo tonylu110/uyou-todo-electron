@@ -1,7 +1,6 @@
 import { Ref, defineComponent, ref, watchEffect } from "vue";
 import TabBar from '../components/TabBar/TabBar.vue';
 import List from '../components/List/List.vue';
-import router from '../router';
 import { useRoute } from 'vue-router';
 import LocalStorage from '../util/localStorage';
 import ITodoList from '../interface/ITodoListArray';
@@ -29,7 +28,6 @@ export default defineComponent({
     return () => (
       <>
         <TabBar
-          onLeftClick={() => router.push('/setting')}
           title={title.value}
           leftImgShow={false}
           rightImgShow={false}

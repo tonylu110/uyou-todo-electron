@@ -122,7 +122,7 @@ import Item from '../../components/ItemBox/Item/Item.vue';
 import ItemBox from '../../components/ItemBox/ItemBox.vue';
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue';
 import router from '../../router';
-import Toast from '../../components/Toast/Toast.vue';
+import Toast from '../../components/Toast';
 import firstLoad from "../../components/TitleBar/firstLoad";
 
 const ipcRenderer = require('electron').ipcRenderer

@@ -81,7 +81,7 @@ import router from '../../router';
 import SettingList from "../../components/SettingList/SettingList.vue";
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue';
 import appVersionCode from '../../util/appVersionCode';
-import Toast from '../../components/Toast/Toast.vue';
+import Toast from '../../components/Toast';
 
 const { app } = require('@electron/remote')
 const { ipcRenderer } = require('electron')
