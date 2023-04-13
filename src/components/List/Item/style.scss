@@ -56,20 +56,6 @@
       }
     }
   
-    .item-text {
-      display: block;
-      margin-top: 10px;
-      color: #6e492f;
-      user-select: text;
-      pointer-events: auto;
-      white-space:pre-wrap;
-      transition: .3s;
-  
-      &::selection {
-        background-color: #dcc6a9;
-      }
-    }
-  
     .close-button {
       position: absolute;
       top: -7px;

@@ -11,7 +11,12 @@
         <span>{{ getTime(time) }}</span>
         <div @click="copyText">{{ i18n().copyText }}</div>
       </div>
-      <span class="item-text" :style="listName === 'allNotDo' ? '' : okStyle">
+      <span 
+        block mt-10px :c="listName === 'allNotDo' ? '#6e492f' : (okState ? '#cebfae' : '#6e492f')" 
+        select-text pointer-events-auto whitespace-pre-wrap
+        transition-300 bg="selection:#dcc6a9"
+        :line="listName === 'allNotDo' ? '' : (okState ? 'through' : '')"
+      >
         {{ text }}
       </span>
       <Toast
@@ -36,7 +41,6 @@
 import {onMounted, reactive, Ref, ref, watchEffect} from 'vue';
 import getTime from '../../../util/getTime';
 import i18n from '../../../i18n';
-import getOkStyle from '../../../data/getOkStyle';
 import Toast from '../../Toast/Toast.vue';
 import { useRoute } from 'vue-router';
 import ContextMenu from "../../ContextMenu/ContextMenu.vue";
@@ -53,20 +57,17 @@ const emits = defineEmits<{
 }>()
 
 const okState = ref(props.isOk)
-const okStyle = ref(getOkStyle(okState.value))
 
 const route = useRoute()
 const listName = ref('')
 
 watchEffect(() => {
   okState.value = props.isOk
-  okStyle.value = getOkStyle(props.isOk)
   listName.value = route.query.listName as unknown as string
 })
 
 const setOk = () => {
   okState.value = !okState.value
-  okStyle.value = getOkStyle(okState.value)
   emits('setOk', props.time!, okState.value)
 }
 
