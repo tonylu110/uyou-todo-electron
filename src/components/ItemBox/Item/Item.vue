@@ -24,26 +24,19 @@
 </template>
 
 <script setup lang="ts">
-import Switch from '../../Switch/Switch.vue';
+import Switch from '../../Switch';
 
-defineProps({
-  switchState: {
-    default: true,
-    type: Boolean
-  },
-  title: {
-    default: 'title',
-    type: String
-  },
-  showSwitch: {
-    default: false,
-    type: Boolean
-  },
-  showArrow: {
-    default: true,
-    type: Boolean
-  },
-  itemImg: String
+withDefaults(defineProps<{
+  switchState?: boolean
+  title: string
+  showSwitch?: boolean
+  showArrow?: boolean
+  itemImg?: string
+}>(), {
+  switchState: true,
+  title: 'title',
+  showSwitch: false,
+  showArrow: true
 })
 
 const emits = defineEmits<{
