@@ -1,3 +1,5 @@
+const os = require('os')
+
 export const isMac = () => {
     return /Mac/.test(navigator.userAgent)
 }
@@ -8,4 +10,8 @@ export const isWindow = () => {
 
 export const isLinux = () => {
     return /Linux/.test(navigator.userAgent)
+}
+
+export const isWindows10OrAfter = () => {
+    return isWindow() && os.release().split('.')[2] > 15063
 }

@@ -2,7 +2,7 @@
 import Alert from '../components/Alert/Alert.vue'
 import { reactive, ref } from "vue";
 import CloseButton from '../components/CloseButton';
-import { isMac, isWindow } from "../util/os";
+import { isMac, isWindows10OrAfter } from "../util/os";
 import i18n from "../i18n";
 
 const { ipcRenderer } = require("electron");
@@ -64,13 +64,11 @@ const closeAlert = () => {
     closeWindow()
   }
 }
-
-const isWindows10OrAfter = os.release().split('.')[2] > 15063
 </script>
 
 <template>
   <div 
-    :bg="(!isWindow() || !isWindows10OrAfter) ? '#edd9b750' : 'transparent'"
+    :bg="isWindows10OrAfter() ? 'transparent' : '#edd9b750'"
     flex="~ col" justify-center items-center
     w-screen h-screen drag
   >

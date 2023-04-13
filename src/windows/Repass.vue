@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Alert from '../components/Alert/Alert.vue'
-import { isWindow, isMac } from "../util/os";
+import { isWindows10OrAfter, isMac } from "../util/os";
 import i18n from "../i18n";
 import CloseButton from "../components/CloseButton";
 import { reactive, ref } from "vue";
@@ -62,13 +62,11 @@ const closeAlert = () => {
     closeWindow()
   }
 }
-
-const isWindows10OrAfter = os.release().split('.')[2] > 15063
 </script>
 
 <template>
   <div 
-    :bg="(!isWindow() || !isWindows10OrAfter) ? '#edd9b750' : 'transparent'"
+    :bg="isWindows10OrAfter() ? 'transparent' : '#edd9b750'"
     flex="~ col" justify-center items-center
     w-screen h-screen drag
   >
