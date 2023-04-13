@@ -96,7 +96,7 @@ const changeSimpleMode = () => {
   toastShow.value = true
   setTimeout(() => {
     toastShow.value = false
-  }, 700);
+  }, 1000);
 }
 
 const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
@@ -107,7 +107,7 @@ const setTitleBar = () => {
   toastShow.value = true
   setTimeout(() => {
     toastShow.value = false
-  }, 700);
+  }, 1000);
 }
 
 const topState = ref(firstLoad())
@@ -125,7 +125,7 @@ const setMenuBlur = () => {
   toastShow.value = true
   setTimeout(() => {
     toastShow.value = false
-  }, 700);
+  }, 1000);
 }
 
 const clearData = () => {

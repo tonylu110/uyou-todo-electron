@@ -161,12 +161,12 @@ const login = () => {
                 toastMsg.value = i18n().accountPage.syncSuccess
                 setTimeout(() => {
                   showToast.value = false
-                }, 500)
+                }, 1000)
               } else {
                 toastMsg.value = i18n().accountPage.syncFail
                 setTimeout(() => {
                   showToast.value = false
-                }, 500)
+                }, 1000)
               }
             })
           } else {
@@ -186,13 +186,13 @@ const login = () => {
                 toastMsg.value = i18n().accountPage.syncSuccess
                 setTimeout(() => {
                   showToast.value = false
-                }, 500)
+                }, 1000)
                 localStorage.setItem('ToDo', res.data)
               } else {
                 toastMsg.value = i18n().accountPage.syncFail
                 setTimeout(() => {
                   showToast.value = false
-                }, 500)
+                }, 1000)
               }
             })
           }

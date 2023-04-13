@@ -169,7 +169,7 @@ const setTitleBar = () => {
   toastShow.value = true
   setTimeout(() => {
     toastShow.value = false
-  }, 700);
+  }, 1000);
 }
 
 const topState = ref(firstLoad())
@@ -192,7 +192,7 @@ const setMenuBlur = () => {
   toastShow.value = true
   setTimeout(() => {
     toastShow.value = false
-  }, 700);
+  }, 1000);
 }
 
 const showWindowMenuState = ref(localStorage.getItem('windowMenu') === 'true')
@@ -218,7 +218,7 @@ const changeSimpleMode = () => {
   toastShow.value = true
   setTimeout(() => {
     toastShow.value = false
-  }, 700);
+  }, 1000);
 }
 
 const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')

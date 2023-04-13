@@ -107,7 +107,7 @@ const getUpdate = () => {
         toastShow.value = true
         setTimeout(() => {
           toastShow.value = false
-        }, 700);
+        }, 1000);
       }
     })
   }, Math.floor(Math.random () * 900) + 100);
