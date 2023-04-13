@@ -24,7 +24,7 @@ const routes = [
   {
     path: "/other",
     name: "other",
-    component: () => import("./pages/Other.vue"),
+    component: () => import("./pages/Other.tsx"),
   },
   {
     path: "/update",
