@@ -6,7 +6,7 @@
     @leftClick="router.back()"
     bg-color="light"
   />
-  <SettingList justify="space-between">
+  <SettingList justify="between">
     <div 
       flex justify-center items-center
       :w="simpleMode ? '100%' : ''"
@@ -78,7 +78,7 @@ import { onMounted, Ref, ref } from 'vue';
 import TabBar from '../../components/TabBar/TabBar.vue';
 import i18n from '../../i18n';
 import router from '../../router';
-import SettingList from "../../components/SettingList/SettingList.vue";
+import SettingList from "../../components/SettingList";
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue';
 import appVersionCode from '../../util/appVersionCode';
 import Toast from '../../components/Toast';

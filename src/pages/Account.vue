@@ -63,7 +63,7 @@ import router from '../router';
 import TabBar from '../components/TabBar/TabBar.vue';
 import i18n from '../i18n';
 import { useRoute } from 'vue-router';
-import SettingList from "../components/SettingList/SettingList.vue";
+import SettingList from "../components/SettingList";
 import Alert from "../components/Alert/Alert.vue";
 import Toast from "../components/Toast";
 import Item from "../components/ItemBox/Item/Item.vue";

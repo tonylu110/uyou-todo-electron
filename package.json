@@ -39,7 +39,7 @@
     "vue": "^3.2.47",
     "vue-router": "^4.1.1",
     "vue-tsc": "^0.39.5",
-    "vue3-perfect-scrollbar": "^1.6.0",
+    "vue3-perfect-scrollbar": "^1.6.1",
     "wait-on": "^6.0.1"
   },
   "build": {

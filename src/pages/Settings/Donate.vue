@@ -30,5 +30,5 @@
 import TabBar from '../../components/TabBar/TabBar.vue';
 import router from '../../router';
 import i18n from '../../i18n';
-import SettingList from "../../components/SettingList/SettingList.vue";
+import SettingList from "../../components/SettingList";
 </script>

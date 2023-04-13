@@ -69,7 +69,7 @@
 import TabBar from "../components/TabBar/TabBar.vue";
 import i18n from "../i18n";
 import router from "../router";
-import SettingList from "../components/SettingList/SettingList.vue";
+import SettingList from "../components/SettingList";
 import Item from "../components/ItemBox/Item/Item.vue";
 import { ref } from "vue";
 import Toast from "../components/Toast";

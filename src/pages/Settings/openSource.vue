@@ -26,7 +26,7 @@
 
 <script lang="ts" setup>
 import TabBar from "../../components/TabBar/TabBar.vue";
-import SettingList from "../../components/SettingList/SettingList.vue";
+import SettingList from "../../components/SettingList";
 import ItemBox from "../../components/ItemBox/ItemBox.vue";
 import Item from "../../components/ItemBox/Item/Item.vue";
 import router from "../../router";
