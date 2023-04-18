@@ -10,6 +10,7 @@ const { initWindowMenu, windowMenu, windowMenuIpc } = require('../store/windowMe
 const createAboutWindowMac = require("./pages/aboutMac");
 const createRegisterWindowMac = require("./pages/registerMac");
 const createRepassWindowMac = require("./pages/repassMac");
+const createLogoffWindowMac = require("./pages/logoffMac");
 const { initSim, simple, simpleIpc } = require('../store/simpleModeStore')
 
 const store = new Store()
@@ -35,8 +36,8 @@ function createWindow() {
         minWidth: simple ? 350 : 800,
         maxWidth: simple ? 400 : null,
         maximizable: !simple,
-        x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000))/2,
-        y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750))/2,
+        x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000)) / 2,
+        y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750)) / 2,
         vibrancy: (menuBlur || menuBlur === undefined) ? 'menu' : null,
         visualEffectState: 'active',
         icon: path.join(__dirname, '../../dist/logo.png'),
@@ -125,6 +126,15 @@ function createWindow() {
 
         ipcMain.once('close-repass', () => {
             BrowserWindow.fromId(repassId).close()
+        })
+    })
+
+    ipcMain.on('open-logoff', (ev, uname) => {
+        let logoffWindow = createLogoffWindowMac(uname)
+        const logoffId = logoffWindow.id
+
+        ipcMain.once('close-logoff', () => {
+            BrowserWindow.fromId(logoffId).close()
         })
     })
 

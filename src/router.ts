@@ -66,6 +66,13 @@ const routes = [
     components: {
       isWindow: () => import("./windows/Repass.vue")
     }
+  },
+  {
+    path: "/logoff",
+    name: "logoff",
+    components: {
+      isWindow: () => import("./windows/Logoff.tsx")
+    }
   }
 ];
 

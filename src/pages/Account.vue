@@ -43,6 +43,7 @@
         @switchFun="setAutoSync"
     />
     <ItemButton v-if="loginState" @click="changPass">{{ i18n().accountPage.changPass }}</ItemButton>
+    <ItemButton v-if="loginState" @click="openLogoff">log off</ItemButton>
     <ItemButton v-if="loginState" mode="error" @click="logout">{{ i18n().accountPage.logout }}</ItemButton>
     <Alert
         :title="i18n().accountPage.alertTitle"
@@ -230,5 +231,9 @@ const returnAlert = () => {
 const closeAlert = () => {
   alertShow.value = false
   isLogoutClick.value = false
+}
+
+const openLogoff = () => {
+  ipcRenderer.send('open-logoff', localStorage.getItem('uname'))
 }
 </script>

@@ -11,6 +11,7 @@ const { PARAMS, VALUE,  MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-elect
 const createAboutWindow = require("./pages/about");
 const createRegisterWindow = require("./pages/register")
 const createRepassWindow = require('./pages/repass')
+const createLogoffWindow = require('./pages/logoff')
 const setMicaStyle = require('./pages/util/setMicaStyle')
 const { initSim, simple, simpleIpc } = require('./store/simpleModeStore')
 
@@ -142,6 +143,14 @@ function createWindow() {
 
     ipcMain.once('close-repass', () => {
       repassWindow.close()
+    })
+  })
+
+  ipcMain.on('open-logoff', (ev, uname) => {
+    let logoffWindow = createLogoffWindow(uname)
+
+    ipcMain.once('close-logoff', () => {
+      logoffWindow.close()
     })
   })
 
