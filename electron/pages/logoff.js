@@ -47,6 +47,8 @@ function createLogoffWindow (uname) {
     logoffWindow.show()
   })
 
+  logoffWindow.webContents.openDevTools({ mode: 'detach' })
+
   return logoffWindow
 }
 

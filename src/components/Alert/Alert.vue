@@ -6,7 +6,7 @@
     <div class="body" :style="{alignItems: title === i18n().accountPage.alertTitle ? 'center' : ''}">
       <slot/>
     </div>
-    <div class="buttons">
+    <div class="buttons" no-drag>
       <div class="cancel" v-if="cancelButtonShow" @click="emits('cancel')">{{ i18n().alertText.cancelText }}</div>
       <div class="return" :style="{width: cancelButtonShow ? '' : '100%'}" @click="emits('return')">{{ i18n().alertText.returnText}}</div>
     </div>
@@ -126,6 +126,7 @@ onMounted(() => {
       display: block;
       white-space: pre-wrap;
       user-select: text;
+      text-align: center;
     }
   }
 
