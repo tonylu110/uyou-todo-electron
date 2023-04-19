@@ -6,6 +6,18 @@
     bg-color="light"
   />
   <setting-list>
+    <ItemBox v-if="isDev">
+      <Item
+        title="UnoCss dev"
+        @item-fun="openUrl('http://localhost:3000/__unocss')"
+      />
+      <Item 
+        title="Show router url"
+        :show-switch="true"
+        @switch-fun="showRouterUrl"
+        :switch-state="routerUrlState"
+      />
+    </ItemBox>
     <Item
       :title="loginState ? i18n().myAccount : i18n().loginText"
       @item-fun="() => router.push('/account?from=setting')"
@@ -76,6 +88,8 @@ import Toast from "../components/Toast";
 import ItemBox from "../components/ItemBox/ItemBox.vue";
 import firstLoad from "../components/TitleBar/firstLoad";
 import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";
+import emitter from "../util/bus";
+import isDev from "../util/mode";
 
 const { ipcRenderer } = require("electron");
 const os = require('os')
@@ -144,5 +158,16 @@ const setAutoStart = () => {
   autoStartState.value = !autoStartState.value
   localStorage.setItem('autoStart', autoStartState.value + '')
   ipcRenderer.send('setAutoStart', autoStartState.value)
+}
+
+const openUrl = (url: string) => {
+  window.open(url)
+}
+
+const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
+const showRouterUrl = () => {
+  routerUrlState.value = !routerUrlState.value
+  emitter.emit('routerShow', routerUrlState.value)
+  localStorage.setItem('routerUrl', routerUrlState.value + '')
 }
 </script>

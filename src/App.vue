@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
+import { ref, Ref, onBeforeUnmount } from 'vue';
 import i18n from './i18n';
 import TitleBar from './components/TitleBar/TitleBar.vue';
 import Alert from './components/Alert/Alert.vue';
 import ListMenu from './components/ListMenu/ListMenu.vue';
 import appVersionCode from './util/appVersionCode'
 import { useRoute, useRouter } from 'vue-router';
+import RouterUrl from './components/RouterUrl'
+import emitter from './util/bus';
+import isDev from './util/mode';
 
 const ipcRenderer = require('electron').ipcRenderer
 
@@ -69,9 +72,20 @@ const isWinDow = ref(true)
 router.isReady().then(() => {
   isWinDow.value = route.query.isWin === 'true'
 })
+
+const routerShow = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
+ 
+emitter.on('routerShow', (data: unknown) => {
+  routerShow.value = (data as boolean)
+})
+ 
+onBeforeUnmount(() => {
+  emitter.off('routerShow')
+})
 </script>
 
 <template>
+  <router-url v-if="routerShow"/>
   <router-view name="isWindow"></router-view>
   <div class="list-main" v-if="!isWinDow">
     <TitleBar />

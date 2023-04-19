@@ -1,4 +1,5 @@
 <template>
+  <router-url v-if="routerShow" />
   <router-view name="isWindow"></router-view>
   <div class="app-main" v-if="!isWinDow">
     <title-bar/>
@@ -11,7 +12,10 @@
 <script setup lang="ts">
 import TitleBar from "./components/TitleBar/TitleBar.vue";
 import { useRoute, useRouter } from "vue-router";
-import { ref } from "vue";
+import { onBeforeUnmount, ref } from "vue";
+import RouterUrl from "./components/RouterUrl";
+import emitter from "./util/bus";
+import isDev from "./util/mode";
 
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 
@@ -21,6 +25,16 @@ const isWinDow = ref(true)
 
 router.isReady().then(() => {
   isWinDow.value = route.query.isWin === 'true'
+})
+
+const routerShow = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
+ 
+emitter.on('routerShow', (data: unknown) => {
+  routerShow.value = (data as boolean)
+})
+ 
+onBeforeUnmount(() => {
+  emitter.off('routerShow')
 })
 </script>
 
