@@ -22,6 +22,8 @@
   },
   "devDependencies": {
     "@electron/rebuild": "^3.2.10",
+    "@iconify-json/fluent": "^1.1.19",
+    "@iconify-json/fluent-emoji-high-contrast": "^1.1.9",
     "@iconify-json/mdi": "^1.1.50",
     "@unocss/preset-icons": "^0.50.8",
     "@unocss/transformer-attributify-jsx": "^0.51.4",

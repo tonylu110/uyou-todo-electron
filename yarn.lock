@@ -385,6 +385,20 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
+"@iconify-json/fluent-emoji-high-contrast@^1.1.9":
+  version "1.1.9"
+  resolved "https://registry.npmmirror.com/@iconify-json/fluent-emoji-high-contrast/-/fluent-emoji-high-contrast-1.1.9.tgz#4142f3091e642b4eb4705198a3f71128e88ce007"
+  integrity sha512-s3S26pZW/9QDSzQa2Gqm324d05cyXkwM9hz4tDl1u1t2L2g2iH3qBQUeE77ZeYXNB9i8uwK9xWmBB7qz/+0TNQ==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify-json/fluent@^1.1.19":
+  version "1.1.19"
+  resolved "https://registry.npmmirror.com/@iconify-json/fluent/-/fluent-1.1.19.tgz#a100f6839a1e9da7ff98fcc50b372dbe0bf31e8e"
+  integrity sha512-kjJ7EF2mQNJGIHwENpL3kADekSRXmEps/t1h3Ff2iWujWvWthFcYtBgYvCaRrcL/fz7GVBfXXMYW79vh+11rgw==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify-json/mdi@^1.1.50":
   version "1.1.50"
   resolved "https://registry.npmmirror.com/@iconify-json/mdi/-/mdi-1.1.50.tgz#05d4b1ace36ce5df1699da19c2f0042917780918"

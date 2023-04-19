@@ -24,10 +24,10 @@
       {{ simpleMode ? '' : title }}
     </span>
     <div v-if="!isMac" class="min-button button" @click="minWindow">
-      <div i-mdi:minus :c="routeLight ? '#555' : 'white'" text-12px></div>
+      <div i-fluent-emoji-high-contrast:minus :c="routeLight ? '#777' : 'white'" text-10px></div>
     </div>
     <div v-if="!isMac && !simpleMode" class="min-button button" @click="maxWindow">
-      <div i-mdi:checkbox-blank-outline :c="routeLight ? '#555' : 'white'" text-12px></div>
+      <div i-fluent:checkbox-unchecked-12-filled :c="routeLight ? '#777' : 'white'" text-14px></div>
     </div>
     <div v-if="!isMac" class="close-button button" @click="closeWindow">
       <div i-mdi:close-thick c-white text-12px></div>
