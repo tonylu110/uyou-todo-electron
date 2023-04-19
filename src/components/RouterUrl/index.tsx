@@ -21,12 +21,12 @@ export default defineComponent({
       const bodyDOM = body.value as unknown as HTMLElement
 
       const dragWindow = (ev: MouseEvent) => {
+        bodyDOM.style.transform = 'translate(0px)'
         bodyDOM.style.top = ev.clientY - y.value + 'px'
         bodyDOM.style.left = ev.clientX - x.value + 'px'
       }
 
       const mouseMove = (ev: MouseEvent) => {
-        bodyDOM.style.transform = 'translate(0px)'
         x.value = ev.offsetX
         y.value = ev.offsetY
         bodyDOM.addEventListener('mousemove', dragWindow)
@@ -46,7 +46,7 @@ export default defineComponent({
         flex="~ col" items-center
         ref={body}
       >
-        <div>{route.fullPath} [name: {route.name}]</div>
+        <div>{route.fullPath} - <span c-primary-d>[name: {route.name}]</span></div>
         <div flex mt-10px>
           <input 
             p-10px outline-primary-d mr-10px
