@@ -1,9 +1,12 @@
 <template>
   <router-url v-if="routerShow" />
   <router-view name="isWindow"></router-view>
-  <div class="app-main" v-if="!isWinDow">
+  <div v-if="!isWinDow">
     <title-bar/>
-    <div class="app-list" :style="{height: titleBarShow ? '100vh' : ''}">
+    <div 
+      w-screen overflow-hidden
+      :h="titleBarShow ? 'screen' : '[calc(100vh-41px)]'"
+    >
       <router-view></router-view>
     </div>
   </div>
@@ -37,11 +40,3 @@ onBeforeUnmount(() => {
   emitter.off('routerShow')
 })
 </script>
-
-<style scoped lang="scss">
-.app-list {
-  width: 100vw;
-  height: calc(100vh - 41px);
-  overflow: hidden;
-}
-</style>

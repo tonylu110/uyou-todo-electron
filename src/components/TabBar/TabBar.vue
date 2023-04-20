@@ -11,7 +11,7 @@
       <div
         :class="leftImg" 
         text-22px c-white
-        :c="bgColor === 'light' ? '#555' : ''"
+        :c="bgColor === 'light' ? '#777' : ''"
       ></div>
     </div>
     <span :style="{color: bgColor === 'light' ? '#555' : '', maxWidth: simpleMode ? 'calc(100vw - 140px)' : ''}">{{ title }}</span>
@@ -19,7 +19,7 @@
       <div i-mdi:plus-circle-outline text-22px c-white></div>
     </div>
     <div v-if="syncImgShow && rightImgShow" class="box sync-img" @click="sync">
-      <div i-mdi:cloud-sync text-22px c-white></div>
+      <div i-fluent:cloud-sync-24-filled text-22px c-white></div>
     </div>
   </div>
 </template>
@@ -37,7 +37,7 @@ withDefaults(defineProps<{
   title: 'uyou ToDo',
   leftImgShow: true,
   rightImgShow: true,
-  leftImg: 'i-mdi:chevron-left',
+  leftImg: 'i-fluent:chevron-left-16-filled',
   bgColor: 'default'
 })
 
