@@ -1,5 +1,6 @@
 import { defineComponent, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import emitter from "../../util/bus";
 
 export default defineComponent({
   setup() {
@@ -38,6 +39,11 @@ export default defineComponent({
       })
     })
 
+    const close = () => {
+      emitter.emit('routerShow', false)
+      localStorage.setItem('routerUrl', 'false')
+    }
+
     return () => (
       <div
         fixed top="50px" left="50%" translate="x-[-50%]"
@@ -61,6 +67,15 @@ export default defineComponent({
           >
             GO
           </button>
+        </div>
+        <div 
+          absolute top-5px right-5px 
+          bg="black/5 active:black/15 hover:black/10" rounded-24 p-5px
+          flex justify-center items-center
+          cursor-pointer
+          onClick={close}
+        >
+          <div i-mdi:close-thick c="black/30" text-12px ml-1px></div>
         </div>
       </div>
     )

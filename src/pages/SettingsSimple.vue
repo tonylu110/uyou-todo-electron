@@ -170,4 +170,7 @@ const showRouterUrl = () => {
   emitter.emit('routerShow', routerUrlState.value)
   localStorage.setItem('routerUrl', routerUrlState.value + '')
 }
+emitter.on('routerShow', (data: unknown) => {
+  routerUrlState.value = (data as boolean)
+})
 </script>
