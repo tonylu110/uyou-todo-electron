@@ -33,6 +33,53 @@
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.completed }}</span>
         </div>
       </div>
+      <div
+        flex items-center justify-center
+        p-x-20px p-y-10px w="259px"
+        cursor-pointer border="b-2px t-0 l-0 r-0 solid #00000010" 
+        mt="10px"
+        v-if="showAdd"
+      >
+        <div w="100%" flex items-center>
+          <input 
+            w="100%" text-12px rounded-5px p-5px
+            bg="black/5" border-none outline-none
+            autofocus="true"
+            type="text"
+            v-model="cateTitle"
+          >
+          <div 
+            flex justify-center items-center 
+            bg="black/5 hover:black/10 active:black/15" 
+            h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '0px'"
+            :m="cateTitle !== '' ? 'x-8px' : 'l-8px'" rounded-5px
+            transition="300 width margin"
+          >
+            <div i-mdi:check-bold c="#777"></div>
+          </div>
+          <div 
+            flex justify-center items-center 
+            bg="black/5 hover:black/10 active:black/15" 
+            h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '[calc(1em+12px)]'"
+            rounded-5px transition="300 width margin"
+            @click="showAdd = false"
+          >
+            <div i-mdi:close-thick c="#777"></div>
+          </div>
+        </div>
+      </div>
+      <div 
+        flex items-center justify-center
+        p-x-20px p-y-10px w="259px"
+        cursor-pointer border="b-2px t-0 l-0 r-0 solid #00000010" 
+        bg="active:#00000010 hover:#00000005"
+        :mt="showAdd ? '' : '10px'"
+        @click="showAdd = !showAdd"
+      >
+        <div>
+          <div i-fluent:add-12-filled text-18px c="#00000090"></div>
+        </div>
+      </div>
     </div>
     <div class="list">
       <div class="setting-list" :style="{backgroundColor: routeName === 'setting' || form === 'setting' ? '#00000010' : ''}" @click="router.push('/setting')">
@@ -82,6 +129,9 @@ const isWindows10OrAfter = os.release().split('.')[2] > 15063
 if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && isWindows10OrAfter) {
   listMenuColor.value = '#fff6dc00'
 }
+
+const showAdd = ref(false)
+const cateTitle = ref('')
 </script>
 
 <style scoped lang="scss">
