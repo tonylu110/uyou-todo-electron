@@ -129,7 +129,11 @@ const onTopWindow = () => {
   topState.value = !topState.value
   ipcRenderer.send('window-on-top', topState.value)
   localStorage.setItem('alwaysOnTop', topState.value + '')
+  emitter.emit('topWindow', topState.value)
 }
+emitter.on('topWindow', (data: unknown) => {
+  topState.value = (data as boolean)
+})
 
 const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
 const setMenuBlur = () => {
