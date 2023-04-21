@@ -1,0 +1,73 @@
+.list-menu {
+  width: 300px;
+  background-color: #fff6dcaa;
+  height: calc(100vh - 40px);
+  //border-right: 1px solid #00000010;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 10;
+
+  .list {
+    .title {
+      display: block;
+      margin: 10px 0 0 20px;
+      font-weight: bold;
+      color: #00000090;
+    }
+
+    .setting-list {
+      padding: 10px 20px;
+      width: 259px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      border-top: 2px solid #00000010;
+      border-bottom: 2px solid #00000010;
+
+      div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      span {
+        color: #00000090;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      &:hover {
+        background-color: #00000005;
+      }
+
+      &:active {
+        background-color: #00000010;
+      }
+    }
+
+    .all-todo-list {
+      @extend .setting-list;
+      margin-top: 10px;
+      
+      &:not(:last-child) {
+        margin-bottom: -11px;
+      }
+
+      &:nth-child(odd) {
+        border-top: 0px;
+      }
+
+      &:nth-child(even) {
+        border-top: 0px;
+      }
+    }
+
+    .account-list {
+      @extend .setting-list;
+      margin-top: 12px
+    }
+  }
+}

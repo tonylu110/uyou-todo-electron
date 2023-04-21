@@ -33,6 +33,27 @@
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.completed }}</span>
         </div>
       </div>
+      <div 
+        v-for="item in cateList"
+        class="all-todo-list" 
+        :style="{backgroundColor: routeQueryName === item.id + '' ? '#00000010' : ''}" 
+        @click="toList(item.id + '')"
+        :key="item.id"
+      >
+        <div>
+          <div i-mdi:star-circle-outline text-18px c="#00000090"></div>
+          <span style="font-size: 14px; margin-left: 10px;">{{ item.title }}</span>
+        </div>
+        <div 
+          flex justify-center items-center 
+          bg="black/5 hover:black/10 active:black/15" 
+          h="[calc(1em+8px)]" w="[calc(1em+8px)]"
+          rounded-5px transition="300 width margin"
+          @click.stop="delCate(item.id)"
+        >
+          <div i-mdi:close-thick c="#777"></div>
+        </div>
+      </div>
       <div
         flex items-center justify-center
         p-x-20px p-y-10px w="259px"
@@ -54,6 +75,7 @@
             h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '0px'"
             :m="cateTitle !== '' ? 'x-8px' : 'l-8px'" rounded-5px
             transition="300 width margin"
+            @click="addCate"
           >
             <div i-mdi:check-bold c="#777"></div>
           </div>
@@ -95,7 +117,7 @@
 <script setup lang="ts">
 import i18n from '../../i18n';
 import router from '../../router';
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, reactive } from 'vue';
 import { useRoute } from 'vue-router';
 
 const os = require("os")
@@ -132,80 +154,28 @@ if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.ge
 
 const showAdd = ref(false)
 const cateTitle = ref('')
-</script>
-
-<style scoped lang="scss">
-.list-menu {
-  width: 300px;
-  background-color: #fff6dcaa;
-  height: calc(100vh - 40px);
-  //border-right: 1px solid #00000010;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 10;
-
-  .list {
-    .title {
-      display: block;
-      margin: 10px 0 0 20px;
-      font-weight: bold;
-      color: #00000090;
-    }
-
-    .setting-list {
-      padding: 10px 20px;
-      width: 259px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      border-top: 2px solid #00000010;
-      border-bottom: 2px solid #00000010;
-
-      div {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-      }
-
-      span {
-        color: #00000090;
-        font-size: 18px;
-        font-weight: bold;
-      }
-
-      &:hover {
-        background-color: #00000005;
-      }
-
-      &:active {
-        background-color: #00000010;
-      }
-    }
-
-    .all-todo-list {
-      @extend .setting-list;
-      margin-top: 10px;
-      
-      &:not(:last-child) {
-        margin-bottom: -11px;
-      }
-
-      &:nth-child(odd) {
-        border-top: 0px;
-      }
-
-      &:nth-child(even) {
-        border-top: 0px;
-      }
-    }
-
-    .account-list {
-      @extend .setting-list;
-      margin-top: 12px
+interface cateItem {
+  id: number
+  title: string
+}
+const cateList: cateItem[] = reactive([])
+const addCate = () => {
+  cateList.push({
+    id: new Date().getTime(),
+    title: cateTitle.value
+  })
+  showAdd.value = false
+  cateTitle.value = ''
+}
+const delCate = (id: number) => {
+  for (let i = 0; i < cateList.length; i++) {
+    if (cateList[i].id === id) {
+      cateList.splice(i, 1)
     }
   }
 }
+</script>
+
+<style scoped lang="scss">
+@import './style.scss';
 </style>
