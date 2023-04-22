@@ -47,11 +47,11 @@
         <div 
           flex justify-center items-center 
           bg="black/5 hover:black/10 active:black/15" 
-          h="[calc(1em+8px)]" w="[calc(1em+8px)]"
-          rounded-5px transition="300 width margin"
+          h="18px" w="18px"
+          rounded-xl transition="300 width margin"
           @click.stop="delCate(item.id)"
         >
-          <div i-mdi:close-thick c="#777"></div>
+          <div i-mdi:close-thick c="#777" text-12px></div>
         </div>
       </div>
       <div
@@ -158,12 +158,16 @@ interface cateItem {
   id: number
   title: string
 }
-const cateList: cateItem[] = reactive([])
+const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
+const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
 const addCate = () => {
   cateList.push({
     id: new Date().getTime(),
     title: cateTitle.value
   })
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList
+  }))
   showAdd.value = false
   cateTitle.value = ''
 }
@@ -173,6 +177,9 @@ const delCate = (id: number) => {
       cateList.splice(i, 1)
     }
   }
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList
+  }))
 }
 </script>
 
