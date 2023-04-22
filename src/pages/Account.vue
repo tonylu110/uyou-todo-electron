@@ -198,6 +198,63 @@ const login = () => {
             })
           }
         })
+        fetch(`https://api.todo.uyou.org.cn/todocateexist?uid=${res._id}`).then(res => {
+          return res.json()
+        }).then(res => {
+          const uid = localStorage.getItem('uid')
+          const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
+          if (res.code === 200) {
+            fetch('https://api.todo.uyou.org.cn/addtodocate', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                uid: uid,
+                data: localCateList
+              })
+            }).then(res => {
+              return res.json()
+            }).then(res => {
+              if (res.code === 200) {
+                toastMsg.value = i18n().accountPage.syncSuccess
+                setTimeout(() => {
+                  showToast.value = false
+                }, 1000)
+              } else {
+                toastMsg.value = i18n().accountPage.syncFail
+                setTimeout(() => {
+                  showToast.value = false
+                }, 1000)
+              }
+            })
+          } else {
+            fetch('https://api.todo.uyou.org.cn/gettodocate', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                uid: uid
+              })
+            }).then(res => {
+              return res.json()
+            }).then(res => {
+              if (res._id) {
+                toastMsg.value = i18n().accountPage.syncSuccess
+                setTimeout(() => {
+                  showToast.value = false
+                }, 1000)
+                localStorage.setItem('cate', res.data)
+              } else {
+                toastMsg.value = i18n().accountPage.syncFail
+                setTimeout(() => {
+                  showToast.value = false
+                }, 1000)
+              }
+            })
+          }
+        })
       } else {
         alertMsg.value = [i18n().accountPage.loginError]
         alertShow.value = true

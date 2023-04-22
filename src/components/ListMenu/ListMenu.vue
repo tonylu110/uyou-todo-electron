@@ -117,8 +117,9 @@
 <script setup lang="ts">
 import i18n from '../../i18n';
 import router from '../../router';
-import { ref, watchEffect, reactive } from 'vue';
+import { ref, watchEffect, reactive, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import changeCate from './changCate';
 
 const os = require("os")
 
@@ -160,6 +161,36 @@ interface cateItem {
 }
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
+onMounted(() => {
+  const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
+  const uid = localStorage.getItem('uid')
+  if (autoSync) {
+    fetch('https://api.todo.uyou.org.cn/gettodocate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        uid: uid
+      })
+    }).then(res => {
+      return res.json()
+    }).then(res => {
+      if (res._id) {
+        cateList.length = 0
+        JSON.parse(JSON.parse(res.data)).data.forEach((item: cateItem) => {
+          cateList.push(item)
+        });
+        localStorage.setItem('cate', JSON.parse(res.data))
+      }
+    })
+  } else {
+    cateList.length = 0
+    JSON.parse(localCateList!).data.forEach((item: cateItem) => {
+      cateList.push(item)
+    })
+  }
+})
 const addCate = () => {
   cateList.push({
     id: new Date().getTime(),
@@ -168,6 +199,12 @@ const addCate = () => {
   localStorage.setItem('cate', JSON.stringify({
     data: cateList
   }))
+  changeCate({
+    uid: localStorage.getItem('uid')!,
+    data: JSON.stringify({
+      data: cateList
+    })
+  })
   showAdd.value = false
   cateTitle.value = ''
 }
@@ -180,6 +217,12 @@ const delCate = (id: number) => {
   localStorage.setItem('cate', JSON.stringify({
     data: cateList
   }))
+  changeCate({
+    uid: localStorage.getItem('uid')!,
+    data: JSON.stringify({
+      data: cateList
+    })
+  })
 }
 </script>
 

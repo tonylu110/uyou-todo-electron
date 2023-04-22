@@ -22,6 +22,8 @@ export default defineComponent({
       } else if (route.query.listName === 'allDo') {
         listData.value = list.value!.filter(listData => listData.ok === true)
         title.value = i18n().listMenu.completed
+      } else {
+        listData.value = listData.value!.filter(listData => listData.cate === route.query.listName)
       }
     })
 
