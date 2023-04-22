@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router';
 import LocalStorage from '../util/localStorage';
 import ITodoList from '../interface/ITodoListArray';
 import i18n from '../i18n';
+import { cateItem } from "../components/ListMenu/ICateItem";
 
 export default defineComponent({
   setup() {
@@ -15,6 +16,8 @@ export default defineComponent({
     const route = useRoute()
     const list = ref(LocalStorage('get'))
 
+    const showAddItem = ref(false)
+
     watchEffect(() => {
       if (route.query.listName === 'allNotDo') {
         listData.value = list.value!.filter(listData => listData.ok === false)
@@ -23,7 +26,9 @@ export default defineComponent({
         listData.value = list.value!.filter(listData => listData.ok === true)
         title.value = i18n().listMenu.completed
       } else {
-        listData.value = listData.value!.filter(listData => listData.cate === route.query.listName)
+        listData.value = list.value!.filter(listData => listData.cate === route.query.listName)
+        const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
+        title.value = JSON.parse(localCateList!).data.filter((cate: cateItem) => cate.id + '' === route.query.listName )[0].title
       }
     })
 
@@ -32,9 +37,14 @@ export default defineComponent({
         <TabBar
           title={title.value}
           leftImgShow={false}
-          rightImgShow={false}
+          rightImgShow={route.query.listName !== 'allNotDo' && route.query.listName !== 'allDo'}
+          onRightClick={() => showAddItem.value = !showAddItem.value}
         />
-        <List listData={listData.value} />
+        <List 
+          showAddItem={showAddItem.value}
+          listData={listData.value}
+          onSetAddItem={() => showAddItem.value = false}
+        />
       </>
     )
   }

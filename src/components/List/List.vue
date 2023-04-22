@@ -94,13 +94,25 @@ const setOk = (id: number, isOk: boolean) => {
 
 const addItem = (id: number, text: string) => {
   emits('setAddItem')
-  const item: ITodoList = {
-    text: text,
-    id: id,
-    ok: false
+  if (route.query.listName) {
+    const item: ITodoList = {
+      text: text,
+      id: id,
+      ok: false,
+      cate: route.query.listName + ''
+    }
+    list.value!.unshift(item)
+    listAll.value!.unshift(item)
+    saveItemSet(listAll.value!)
+  } else {
+    const item: ITodoList = {
+      text: text,
+      id: id,
+      ok: false
+    }
+    list.value!.unshift(item)
+    saveItemSet(list.value!)
   }
-  list.value!.unshift(item)
-  saveItemSet(list.value!)
 }
 
 const emits = defineEmits<{
