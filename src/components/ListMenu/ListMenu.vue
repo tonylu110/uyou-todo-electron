@@ -11,97 +11,99 @@
           <span style="font-size: 14px; margin-left: 10px;">{{ i18n().myAccount }}</span>
         </div>
       </div>
-      <span class="title">{{ i18n().listMenu.cate }}</span>
-      <div class="all-todo-list" 
-        :style="{ backgroundColor: routeName === 'Home' ? '#00000010' : '', borderTop: '2px solid #00000010' }" 
-        @click="router.push('/')"
-      >
-        <div>
-          <div i-mdi:list-box-outline text-18px c="#00000090"></div>
-          <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.allTodo }}</span>
+      <span class="title" mb="!10px">{{ i18n().listMenu.cate }}</span>
+      <perfect-scrollbar class="cate" @ps-scroll-y="onScroll" ref="cateListRef" :shadow="ps === 0 ? '' : 'inner'">
+        <div class="all-todo-list" 
+          :style="{ backgroundColor: routeName === 'Home' ? '#00000010' : '', borderTop: '2px solid #00000010' }" 
+          @click="router.push('/')"
+        >
+          <div>
+            <div i-mdi:list-box-outline text-18px c="#00000090"></div>
+            <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.allTodo }}</span>
+          </div>
         </div>
-      </div>
-      <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allNotDo' ? '#00000010' : ''}" @click="toList('allNotDo')">
-        <div>
-          <div i-mdi:circle-outline text-18px c="#00000090"></div>
-          <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.incompleted }}</span>
+        <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allNotDo' ? '#00000010' : ''}" @click="toList('allNotDo')">
+          <div>
+            <div i-mdi:circle-outline text-18px c="#00000090"></div>
+            <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.incompleted }}</span>
+          </div>
         </div>
-      </div>
-      <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allDo' ? '#00000010' : ''}" @click="toList('allDo')">
-        <div>
-          <div i-mdi:checkbox-marked-circle text-18px c="#00000090"></div>
-          <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.completed }}</span>
-        </div>
-      </div>
-      <div 
-        v-for="item in cateList"
-        class="all-todo-list" 
-        :style="{backgroundColor: routeQueryName === item.id + '' ? '#00000010' : ''}" 
-        @click="toList(item.id + '')"
-        :key="item.id"
-      >
-        <div>
-          <div i-mdi:star-circle-outline text-18px c="#00000090"></div>
-          <span style="font-size: 14px; margin-left: 10px;">{{ item.title }}</span>
+        <div class="all-todo-list" :style="{backgroundColor: routeQueryName === 'allDo' ? '#00000010' : ''}" @click="toList('allDo')">
+          <div>
+            <div i-mdi:checkbox-marked-circle text-18px c="#00000090"></div>
+            <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.completed }}</span>
+          </div>
         </div>
         <div 
-          flex justify-center items-center 
-          bg="black/5 hover:black/10 active:black/15" 
-          h="18px" w="18px"
-          rounded-xl transition="300 width margin"
-          @click.stop="delCate(item.id)"
+          v-for="item in cateList"
+          class="all-todo-list" 
+          :style="{backgroundColor: routeQueryName === item.id + '' ? '#00000010' : ''}" 
+          @click="toList(item.id + '')"
+          :key="item.id"
         >
-          <div i-mdi:close-thick c="#777" text-12px></div>
-        </div>
-      </div>
-      <div
-        flex items-center justify-center
-        p-x-20px p-y-10px w="259px"
-        cursor-pointer border="b-2px t-0 l-0 r-0 solid #00000010" 
-        mt="10px"
-        v-if="showAdd"
-      >
-        <div w="100%" flex items-center>
-          <input 
-            w="100%" text-12px rounded-5px p-5px
-            bg="black/5" border-none outline-none
-            autofocus="true"
-            type="text"
-            v-model="cateTitle"
-          >
-          <div 
-            flex justify-center items-center 
-            bg="black/5 hover:black/10 active:black/15" 
-            h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '0px'"
-            :m="cateTitle !== '' ? 'x-8px' : 'l-8px'" rounded-5px
-            transition="300 width margin"
-            @click="addCate"
-          >
-            <div i-mdi:check-bold c="#777"></div>
+          <div>
+            <div i-mdi:star-circle-outline text-18px c="#00000090"></div>
+            <span style="font-size: 14px; margin-left: 10px;">{{ item.title }}</span>
           </div>
           <div 
             flex justify-center items-center 
             bg="black/5 hover:black/10 active:black/15" 
-            h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '[calc(1em+12px)]'"
-            rounded-5px transition="300 width margin"
-            @click="showAdd = false"
+            h="18px" w="18px"
+            rounded-xl transition="300 width margin"
+            @click.stop="delCate(item.id)"
           >
-            <div i-mdi:close-thick c="#777"></div>
+            <div i-mdi:close-thick c="#777" text-12px></div>
           </div>
         </div>
-      </div>
-      <div 
-        flex items-center justify-center
-        p-x-20px p-y-10px w="259px"
-        cursor-pointer border="b-2px t-0 l-0 r-0 solid #00000010" 
-        bg="active:#00000010 hover:#00000005"
-        :mt="showAdd ? '' : '10px'"
-        @click="showAdd = !showAdd"
-      >
-        <div>
-          <div i-fluent:add-12-filled text-18px c="#00000090"></div>
+        <div
+          flex items-center justify-center
+          p-x-20px p-y-10px w="259px"
+          cursor-pointer border="b-2px t-0 l-0 r-0 solid #00000010" 
+          mt="10px"
+          v-if="showAdd"
+        >
+          <div w="100%" flex items-center>
+            <input 
+              w="100%" text-12px rounded-5px p-5px
+              bg="black/5" border-none outline-none
+              autofocus="true"
+              type="text"
+              v-model="cateTitle"
+            >
+            <div 
+              flex justify-center items-center 
+              bg="black/5 hover:black/10 active:black/15" 
+              h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '0px'"
+              :m="cateTitle !== '' ? 'x-8px' : 'l-8px'" rounded-5px
+              transition="300 width margin"
+              @click="addCate"
+            >
+              <div i-mdi:check-bold c="#777"></div>
+            </div>
+            <div 
+              flex justify-center items-center 
+              bg="black/5 hover:black/10 active:black/15" 
+              h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '[calc(1em+12px)]'"
+              rounded-5px transition="300 width margin"
+              @click="showAdd = false"
+            >
+              <div i-mdi:close-thick c="#777"></div>
+            </div>
+          </div>
         </div>
-      </div>
+        <div 
+          flex items-center justify-center
+          p-x-20px p-y-10px w="259px"
+          cursor-pointer border="b-2px t-0 l-0 r-0 solid #00000010" 
+          bg="active:#00000010 hover:#00000005"
+          :mt="showAdd ? '' : '10px'"
+          @click="showAddFn"
+        >
+          <div>
+            <div i-fluent:add-12-filled text-18px c="#00000090"></div>
+          </div>
+        </div>
+      </perfect-scrollbar>
     </div>
     <div class="list">
       <div class="setting-list" :style="{backgroundColor: routeName === 'setting' || form === 'setting' ? '#00000010' : ''}" @click="router.push('/setting')">
@@ -117,7 +119,7 @@
 <script setup lang="ts">
 import i18n from '../../i18n';
 import router from '../../router';
-import { ref, watchEffect, reactive, onMounted } from 'vue';
+import { ref, watchEffect, reactive, onMounted, Ref } from 'vue';
 import { useRoute } from 'vue-router';
 import changeCate from './changCate';
 import { cateItem } from './ICateItem';
@@ -159,6 +161,16 @@ const showAdd = ref(false)
 const cateTitle = ref('')
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
+const cateListRef = ref(null) as unknown as Ref<{ $el: HTMLAreaElement, ps: { scrollbarYTop: number } }>
+const ps = ref(0)
+const showAddFn = () => {
+  showAdd.value = !showAdd.value
+}
+const onScroll = () => {
+  ps.value = cateListRef.value.ps.scrollbarYTop
+  console.log(cateListRef.value.ps.scrollbarYTop);
+  
+}
 onMounted(() => {
   const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
   const uid = localStorage.getItem('uid')
@@ -204,6 +216,7 @@ onMounted(() => {
     })
   }
 })
+
 const addCate = () => {
   cateList.push({
     id: new Date().getTime(),
@@ -212,12 +225,14 @@ const addCate = () => {
   localStorage.setItem('cate', JSON.stringify({
     data: cateList
   }))
-  changeCate({
-    uid: localStorage.getItem('uid')!,
-    data: {
-      data: cateList
-    }
-  })
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList
+      }
+    })
+  }
   showAdd.value = false
   cateTitle.value = ''
 }
@@ -230,12 +245,14 @@ const delCate = (id: number) => {
   localStorage.setItem('cate', JSON.stringify({
     data: cateList
   }))
-  changeCate({
-    uid: localStorage.getItem('uid')!,
-    data: {
-      data: cateList
-    }
-  })
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList
+      }
+    })
+  }
 }
 
 emitter.on('setCate', (data) => {
