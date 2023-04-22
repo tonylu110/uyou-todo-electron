@@ -1,6 +1,10 @@
+import { cateItem } from "./ICateItem"
+
 interface todoCateModel {
   uid: string
-  data: string
+  data: {
+    data: cateItem[]
+  }
 }
 
 export default (todoCate: todoCateModel) => {

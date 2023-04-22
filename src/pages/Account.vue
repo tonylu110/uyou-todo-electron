@@ -69,6 +69,7 @@ import Alert from "../components/Alert/Alert.vue";
 import Toast from "../components/Toast";
 import Item from "../components/ItemBox/Item/Item.vue";
 import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";
+import emitter from '../util/bus';
 
 const ipcRenderer = require('electron').ipcRenderer
 
@@ -246,6 +247,7 @@ const login = () => {
                   showToast.value = false
                 }, 1000)
                 localStorage.setItem('cate', res.data)
+                emitter.emit('setCate', res.data)
               } else {
                 toastMsg.value = i18n().accountPage.syncFail
                 setTimeout(() => {

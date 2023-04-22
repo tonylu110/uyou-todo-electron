@@ -120,6 +120,8 @@ import router from '../../router';
 import { ref, watchEffect, reactive, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import changeCate from './changCate';
+import { cateItem } from './ICateItem';
+import emitter from '../../util/bus';
 
 const os = require("os")
 
@@ -155,16 +157,12 @@ if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.ge
 
 const showAdd = ref(false)
 const cateTitle = ref('')
-interface cateItem {
-  id: number
-  title: string
-}
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
 onMounted(() => {
   const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
   const uid = localStorage.getItem('uid')
-  if (autoSync) {
+  if ((uid !== '' && uid !== null) && autoSync) {
     fetch('https://api.todo.uyou.org.cn/gettodocate', {
       method: 'POST',
       headers: {
@@ -178,10 +176,25 @@ onMounted(() => {
     }).then(res => {
       if (res._id) {
         cateList.length = 0
-        JSON.parse(JSON.parse(res.data)).data.forEach((item: cateItem) => {
+        JSON.parse(res.data).data.forEach((item: cateItem) => {
           cateList.push(item)
         });
-        localStorage.setItem('cate', JSON.parse(res.data))
+        localStorage.setItem('cate', JSON.stringify({ data: cateList }))
+      } else {
+        fetch('https://api.todo.uyou.org.cn/addtodocate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            uid: uid,
+            data: localCateList
+          })
+        }).then(res => {
+          return res.json()
+        }).then(res => {
+          console.log(res);
+        })
       }
     })
   } else {
@@ -201,9 +214,9 @@ const addCate = () => {
   }))
   changeCate({
     uid: localStorage.getItem('uid')!,
-    data: JSON.stringify({
+    data: {
       data: cateList
-    })
+    }
   })
   showAdd.value = false
   cateTitle.value = ''
@@ -219,11 +232,18 @@ const delCate = (id: number) => {
   }))
   changeCate({
     uid: localStorage.getItem('uid')!,
-    data: JSON.stringify({
+    data: {
       data: cateList
-    })
+    }
   })
 }
+
+emitter.on('setCate', (data) => {
+  cateList.length = 0
+  JSON.parse((data as string)).data.forEach((item: cateItem) => {
+    cateList.push(item)
+  })
+})
 </script>
 
 <style scoped lang="scss">
