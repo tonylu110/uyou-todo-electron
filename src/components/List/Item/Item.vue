@@ -9,7 +9,35 @@
     <div class="list-item">
       <div class="time-area">
         <span>{{ getTime(time) }}</span>
-        <div @click="copyText">{{ i18n().copyText }}</div>
+        <div @click="moreShow = !moreShow" class="c-button">
+          <div i-fluent:more-28-filled text-14px></div>
+        </div>
+        <div
+          absolute right-5px top-30px text-14px
+          bg="white/50" backdrop-blur-10px p-10px
+          rounded-5px z-1 shadow-item cursor-pointer
+          pointer-events-auto
+          v-if="moreShow"
+          @click="moreShow = !moreShow"
+        >
+          <div 
+            p-5px c="black/70" 
+            bg="hover:black/5 active:black/10" rounded-5px 
+            @click="copyText"
+          >
+            {{ i18n().copyText }}
+          </div>
+          <div 
+            p-5px flex items-center 
+            c="black/70" bg="hover:black/5 active:black/10" 
+            rounded-5px 
+            v-for="cate in cateList" :key="cate.id"
+            @click="moveCate(time, cate.id)"
+          >
+            {{ cate.title }}
+            <div i-mdi:chevron-right c="black/70"></div>
+          </div>
+        </div>
       </div>
       <span 
         block mt-10px :c="listName === 'allNotDo' ? '#6e492f' : (okState ? '#cebfae' : '#6e492f')" 
@@ -44,6 +72,7 @@ import i18n from '../../../i18n';
 import Toast from '../../Toast';
 import { useRoute } from 'vue-router';
 import ContextMenu from "../../ContextMenu/ContextMenu.vue";
+import { cateItem } from '../../ListMenu/ICateItem';
 
 const props = defineProps<{
   time: number,
@@ -53,7 +82,8 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   (e: 'setOk', id: number, isOk: boolean): void,
-  (e: 'deleteItem', id: number): void
+  (e: 'deleteItem', id: number): void,
+  (e: 'setCate', id: number, cateId: number): void
 }>()
 
 const okState = ref(props.isOk)
@@ -84,6 +114,7 @@ const copyText = () => {
     }, 1000)
   })
 }
+const moreShow = ref(false)
 
 const itemDom = ref(null) as unknown as Ref<HTMLElement>
 
@@ -128,6 +159,59 @@ onMounted(() => {
     showContextMenu.value = false
   })
 })
+
+const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
+const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
+
+onMounted(() => {
+  const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
+  const uid = localStorage.getItem('uid')
+  if ((uid !== '' && uid !== null) && autoSync) {
+    fetch('https://api.todo.uyou.org.cn/gettodocate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        uid: uid
+      })
+    }).then(res => {
+      return res.json()
+    }).then(res => {
+      if (res._id) {
+        cateList.length = 0
+        JSON.parse(res.data).data.forEach((item: cateItem) => {
+          cateList.push(item)
+        });
+        localStorage.setItem('cate', JSON.stringify({ data: cateList }))
+      } else {
+        fetch('https://api.todo.uyou.org.cn/addtodocate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            uid: uid,
+            data: localCateList
+          })
+        }).then(res => {
+          return res.json()
+        }).then(res => {
+          console.log(res);
+        })
+      }
+    })
+  } else {
+    cateList.length = 0
+    JSON.parse(localCateList!).data.forEach((item: cateItem) => {
+      cateList.push(item)
+    })
+  }
+})
+
+const moveCate = (id: number, cateId: number) => {
+  emits('setCate', id, cateId)
+}
 </script>
 
 <style lang="scss" scoped>

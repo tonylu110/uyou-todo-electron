@@ -17,6 +17,7 @@
         :isOk="item.ok"
         @setOk="setOk"
         @deleteItem="deleteItem"
+        @set-cate="setCate"
         ref="item"
       />
     </transition-group>
@@ -141,6 +142,20 @@ const routeName = ref(route.name)
 watchEffect(() => {
   routeName.value = route.name
 })
+
+const setCate = (id: number, cateId: number) => {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id) {
+      list.value![i].cate = cateId + ''
+    }
+  }
+  for (let i = 0; i < listAll.value!.length; i++) {
+    if (listAll.value![i].id === id) {
+      listAll.value![i].cate = cateId + ''
+    }
+  }
+  saveItemSet(listAll.value!)
+}
 </script>
 
 <style scoped lang="scss">
