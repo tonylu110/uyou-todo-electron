@@ -1,7 +1,7 @@
 import { Ref, defineComponent, ref, watchEffect } from "vue";
 import TabBar from '../components/TabBar/TabBar.vue';
 import List from '../components/List/List.vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import LocalStorage from '../util/localStorage';
 import ITodoList from '../interface/ITodoListArray';
 import i18n from '../i18n';
@@ -14,6 +14,7 @@ export default defineComponent({
     const listData: Ref<ITodoList[]> = ref([])
 
     const route = useRoute()
+    const router = useRouter()
     const list = ref(LocalStorage('get'))
 
     const showAddItem = ref(false)
@@ -32,13 +33,18 @@ export default defineComponent({
       }
     })
 
+    const simpleMode = localStorage.getItem('simpleMode') === 'true'
+
     return () => (
       <>
         <TabBar
+          leftImg="i-mdi:cog"
           title={title.value}
-          leftImgShow={false}
+          leftImgShow={simpleMode}
           rightImgShow={route.query.listName !== 'allNotDo' && route.query.listName !== 'allDo'}
           onRightClick={() => showAddItem.value = !showAddItem.value}
+          onLeftClick={() => router.push('/setting-sim')}
+          showMore={simpleMode}
         />
         <List 
           showAddItem={showAddItem.value}

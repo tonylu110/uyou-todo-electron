@@ -14,7 +14,19 @@
         :c="bgColor === 'light' ? '#777' : ''"
       ></div>
     </div>
-    <span :style="{color: bgColor === 'light' ? '#555' : '', maxWidth: simpleMode ? 'calc(100vw - 140px)' : ''}">{{ title }}</span>
+    <div relative>
+      <span :style="{color: bgColor === 'light' ? '#555' : '', maxWidth: simpleMode ? 'calc(100vw - 140px)' : ''}">{{ title }}</span>
+      <div 
+        absolute top-0 text-20px font-bold
+        flex w="[calc(100%+20px)]" items-center
+        c-transparent cursor-pointer
+        v-if="showMore"
+        @click="showListFn"
+      >
+        {{ title }}
+        <div i-mdi:menu-down text-20px c-white vertical-baseline></div>
+      </div>
+    </div>
     <div v-if="rightImgShow" class="box right-img" @click="() => emits('rightClick')">
       <div i-mdi:plus-circle-outline text-22px c-white></div>
     </div>
@@ -22,23 +34,27 @@
       <div i-fluent:cloud-sync-24-filled text-22px c-white></div>
     </div>
   </div>
+  <cate-menu v-if="showList && simpleMode" @click-menu="showListFn"/>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import CateMenu from '../CateMenu/CateMenu.vue'
 
 withDefaults(defineProps<{
   title?: string,
   leftImgShow?: boolean,
   rightImgShow?: boolean,
   leftImg?: string,
-  bgColor?: string
+  bgColor?: string,
+  showMore?: boolean
 }>(), {
   title: 'uyou ToDo',
   leftImgShow: true,
   rightImgShow: true,
   leftImg: 'i-fluent:chevron-left-16-filled',
-  bgColor: 'default'
+  bgColor: 'default',
+  showMore: false
 })
 
 const emits = defineEmits<{
@@ -82,6 +98,11 @@ if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.ge
 }
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
+
+const showList = ref(false)
+const showListFn = () => {
+  showList.value = !showList.value
+}
 </script>
 
 <style lang="scss" scoped>

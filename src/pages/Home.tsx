@@ -24,6 +24,7 @@ export default defineComponent({
           leftImg="i-mdi:cog"
           title={simpleMode ? 'uyou ToDo' : i18n().listMenu.allTodo}
           leftImgShow={simpleMode}
+          showMore={simpleMode}
         />
         <List
           showAddItem={showAddItem.value}
