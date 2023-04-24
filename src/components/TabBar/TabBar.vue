@@ -24,7 +24,8 @@
         @click="showListFn"
       >
         {{ title }}
-        <div i-mdi:menu-down text-20px c-white vertical-baseline></div>
+        <div i-mdi:menu-up text-20px c-white vertical-baseline v-if="showList && simpleMode"></div>
+        <div i-mdi:menu-down text-20px c-white vertical-baseline v-else></div>
       </div>
     </div>
     <div v-if="rightImgShow" class="box right-img" @click="() => emits('rightClick')">

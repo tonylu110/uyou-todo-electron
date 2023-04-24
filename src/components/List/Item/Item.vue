@@ -9,16 +9,18 @@
     <div class="list-item">
       <div class="time-area">
         <span>{{ getTime(time) }}</span>
-        <div @click="moreShow = !moreShow" class="c-button">
+        <div @click="showMore(false)" class="c-button">
           <div i-fluent:more-28-filled text-14px></div>
         </div>
         <div
-          absolute right-5px top-30px text-14px
+          absolute right-0 text-14px
+          :top="moreMenuIsBottom ? '' : '0'" :bottom="moreMenuIsBottom ? '0' : ''"
           bg="white/50" backdrop-blur-10px p-10px
           rounded-5px z-1 shadow-item cursor-pointer
           pointer-events-auto
           v-if="moreShow"
-          @click="moreShow = !moreShow"
+          @click="showMore(true)"
+          ref="moreDom"
         >
           <div 
             p-5px c="black/70" 
@@ -36,6 +38,12 @@
           >
             {{ cate.title }}
             <div i-mdi:chevron-right c="black/70"></div>
+          </div>
+          <div 
+            p-5px c="black/70" 
+            bg="hover:black/5 active:black/10" rounded-5px 
+          >
+            {{ i18n().cancelText }}
           </div>
         </div>
       </div>
@@ -117,6 +125,7 @@ const copyText = () => {
 const moreShow = ref(false)
 
 const itemDom = ref(null) as unknown as Ref<HTMLElement>
+const moreDom = ref(null) as unknown as Ref<HTMLElement>
 
 const showContextMenu = ref(false)
 const contextMenu = ref({
@@ -211,6 +220,20 @@ onMounted(() => {
 
 const moveCate = (id: number, cateId: number) => {
   emits('setCate', id, cateId)
+}
+
+const moreMenuIsBottom = ref(false)
+const showMore = (isCancel: boolean) => {
+  moreShow.value = !moreShow.value
+  setTimeout(() => {
+    if (!isCancel) {
+      const itemTopHeight = itemDom.value.offsetTop
+      const windowHeight = window.innerHeight
+      const itemHeight = itemDom.value.offsetHeight
+      const moreHeight = moreDom.value.offsetHeight
+      moreMenuIsBottom.value = (windowHeight - itemTopHeight - itemHeight) < moreHeight
+    }
+  }, 0);
 }
 </script>
 

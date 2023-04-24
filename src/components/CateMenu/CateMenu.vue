@@ -71,9 +71,9 @@ const emits = defineEmits<{
 <template>
   <div 
     fixed top-95px z-2 cursor-pointer
-    bg="#fff6dc" w-screen
-    flex="~ col" items-center
-    shadow-item c="black/50" font-bold
+    bg="#fff6dc80" w-screen p-y-10px
+    flex="~ col" items-center backdrop-blur-7px
+    shadow-item c="black/50" font-bold rounded-b-10px
     @click="emits('clickMenu')"
     class="list"
   >
@@ -83,6 +83,20 @@ const emits = defineEmits<{
       @click="router.push('/')"
     >
       {{ i18n().listMenu.allTodo }}
+    </div>
+    <div 
+      p-10px text-18px
+      bg="hover:black/5 active:black/10" w-screen text-center
+      @click="toList('allDo')"
+    >
+      {{ i18n().listMenu.completed }}
+    </div>
+    <div 
+      p-10px text-18px
+      bg="hover:black/5 active:black/10" w-screen text-center
+      @click="toList('allNotDo')"
+    >
+      {{ i18n().listMenu.incompleted }}
     </div>
     <div
       p-10px w-screen text-center text-18px
@@ -121,7 +135,7 @@ const emits = defineEmits<{
 }
 
 .list {
-  animation: showList .5s forwards;
+  animation: showList .5s linear forwards;
   overflow: hidden;
 }
 
