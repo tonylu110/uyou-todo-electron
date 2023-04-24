@@ -9,6 +9,7 @@ import { useRoute, useRouter } from 'vue-router';
 import RouterUrl from './components/RouterUrl'
 import emitter from './util/bus';
 import isDev from './util/mode';
+import getCateList from './util/getCateList';
 
 const ipcRenderer = require('electron').ipcRenderer
 
@@ -30,6 +31,8 @@ if (autoUpdateState) {
     }
   })
 }
+
+getCateList()
 
 const returnClick = () => {
   alertShow.value = false

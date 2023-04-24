@@ -171,51 +171,6 @@ const onScroll = () => {
   console.log(cateListRef.value.ps.scrollbarYTop);
   
 }
-onMounted(() => {
-  const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
-  const uid = localStorage.getItem('uid')
-  if ((uid !== '' && uid !== null) && autoSync) {
-    fetch('https://api.todo.uyou.org.cn/gettodocate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        uid: uid
-      })
-    }).then(res => {
-      return res.json()
-    }).then(res => {
-      if (res._id) {
-        cateList.length = 0
-        JSON.parse(res.data).data.forEach((item: cateItem) => {
-          cateList.push(item)
-        });
-        localStorage.setItem('cate', JSON.stringify({ data: cateList }))
-      } else {
-        fetch('https://api.todo.uyou.org.cn/addtodocate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            uid: uid,
-            data: localCateList
-          })
-        }).then(res => {
-          return res.json()
-        }).then(res => {
-          console.log(res);
-        })
-      }
-    })
-  } else {
-    cateList.length = 0
-    JSON.parse(localCateList!).data.forEach((item: cateItem) => {
-      cateList.push(item)
-    })
-  }
-})
 
 const addCate = () => {
   cateList.push({
@@ -223,6 +178,9 @@ const addCate = () => {
     title: cateTitle.value
   })
   localStorage.setItem('cate', JSON.stringify({
+    data: cateList
+  }))
+  emitter.emit('setCate', JSON.stringify({
     data: cateList
   }))
   if (localStorage.getItem('uid')) {
@@ -243,6 +201,9 @@ const delCate = (id: number) => {
     }
   }
   localStorage.setItem('cate', JSON.stringify({
+    data: cateList
+  }))
+  emitter.emit('setCate', JSON.stringify({
     data: cateList
   }))
   if (localStorage.getItem('uid')) {

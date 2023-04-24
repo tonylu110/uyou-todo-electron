@@ -81,6 +81,7 @@ import Toast from '../../Toast';
 import { useRoute } from 'vue-router';
 import ContextMenu from "../../ContextMenu/ContextMenu.vue";
 import { cateItem } from '../../ListMenu/ICateItem';
+import emitter from '../../../util/bus';
 
 const props = defineProps<{
   time: number,
@@ -172,50 +173,11 @@ onMounted(() => {
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
 
-onMounted(() => {
-  const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
-  const uid = localStorage.getItem('uid')
-  if ((uid !== '' && uid !== null) && autoSync) {
-    fetch('https://api.todo.uyou.org.cn/gettodocate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        uid: uid
-      })
-    }).then(res => {
-      return res.json()
-    }).then(res => {
-      if (res._id) {
-        cateList.length = 0
-        JSON.parse(res.data).data.forEach((item: cateItem) => {
-          cateList.push(item)
-        });
-        localStorage.setItem('cate', JSON.stringify({ data: cateList }))
-      } else {
-        fetch('https://api.todo.uyou.org.cn/addtodocate', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            uid: uid,
-            data: localCateList
-          })
-        }).then(res => {
-          return res.json()
-        }).then(res => {
-          console.log(res);
-        })
-      }
-    })
-  } else {
-    cateList.length = 0
-    JSON.parse(localCateList!).data.forEach((item: cateItem) => {
-      cateList.push(item)
-    })
-  }
+emitter.on('setCate', (data) => {
+  cateList.length = 0
+  JSON.parse((data as string)).data.forEach((item: cateItem) => {
+    cateList.push(item)
+  })
 })
 
 const moveCate = (id: number, cateId: number) => {
