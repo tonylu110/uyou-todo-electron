@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
+import { reactive } from 'vue';
 import { cateItem } from '../ListMenu/ICateItem';
 import i18n from '../../i18n';
 import { useRouter } from 'vue-router';

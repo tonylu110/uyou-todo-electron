@@ -15,10 +15,11 @@
 <script setup lang="ts">
 import TitleBar from "./components/TitleBar/TitleBar.vue";
 import { useRoute, useRouter } from "vue-router";
-import { onBeforeUnmount, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import RouterUrl from "./components/RouterUrl";
 import emitter from "./util/bus";
 import isDev from "./util/mode";
+import getCateList from "./util/getCateList";
 
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 
@@ -38,5 +39,11 @@ emitter.on('routerShow', (data: unknown) => {
  
 onBeforeUnmount(() => {
   emitter.off('routerShow')
+})
+
+onMounted(() => {
+  setTimeout(() => {
+    getCateList()
+  }, 0)
 })
 </script>

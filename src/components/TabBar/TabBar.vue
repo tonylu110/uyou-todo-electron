@@ -41,6 +41,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import CateMenu from '../CateMenu/CateMenu.vue'
+import getCateList from '../../util/getCateList';
 
 withDefaults(defineProps<{
   title?: string,
@@ -88,6 +89,7 @@ const sync = () => {
       localStorage.setItem('ToDo', res.data)
       window.location.reload()
     })
+    getCateList()
   }
 }
 

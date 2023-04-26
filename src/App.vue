@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, onBeforeUnmount } from 'vue';
+import { ref, Ref, onBeforeUnmount, onMounted } from 'vue';
 import i18n from './i18n';
 import TitleBar from './components/TitleBar/TitleBar.vue';
 import Alert from './components/Alert/Alert.vue';
@@ -32,7 +32,11 @@ if (autoUpdateState) {
   })
 }
 
-getCateList()
+onMounted(() => {
+  setTimeout(() => {
+    getCateList()
+  }, 0)
+})
 
 const returnClick = () => {
   alertShow.value = false
