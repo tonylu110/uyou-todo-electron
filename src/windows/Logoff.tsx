@@ -3,6 +3,7 @@ import { useRoute } from "vue-router";
 import CloseButton from "../components/CloseButton";
 import Alert from "../components/Alert/Alert.vue";
 import { isMac } from "../util/os";
+import i18n from "../i18n";
 
 export default defineComponent({
   setup() {
@@ -19,7 +20,7 @@ export default defineComponent({
 
     const logoff = () => {
       if (!formData.passwd) {
-        dialogText.value = 'plz input password'
+        dialogText.value = i18n().registerPage.plzAccAndPass
         showDialog.value = true
         return
       }
@@ -60,20 +61,20 @@ export default defineComponent({
                 return res.json()
               }).then(res => {
                 if (res.code === 200) {
-                  dialogText.value = 'log off success'
+                  dialogText.value = i18n().logoffPage.success
                   showDialog.value = true
                 } else {
-                  dialogText.value = 'log off fail'
+                  dialogText.value = i18n().logoffPage.fail
                   showDialog.value = true
                 }
               })
             } else {
-              dialogText.value = 'log off fail'
+              dialogText.value = i18n().logoffPage.fail
               showDialog.value = true
             }
           })
         } else {
-          dialogText.value = 'password donn\'t ture'
+          dialogText.value = i18n().logoffPage.passNotTrue
           showDialog.value = true
         }
       })
@@ -81,7 +82,7 @@ export default defineComponent({
 
     const closeDialog = () => {
       showDialog.value = false
-      if (dialogText.value === 'log off success') {
+      if (dialogText.value === i18n().logoffPage.success) {
         ipcRenderer.send('close-logoff')
       }
     }
@@ -96,7 +97,7 @@ export default defineComponent({
           flex="~ col" justify-center items-center
         >
           <div flex="~ row" items-center justify-center>
-            <span w-25 flex justify-content-right>Account: </span>
+            <span w-25 flex justify-content-right>{i18n().registerPage.account}</span>
             <input
               no-drag outline-primary-d
               mb-10px p-10px rounded-5px border="2px solid black/10"
@@ -106,7 +107,7 @@ export default defineComponent({
             />
           </div>
           <div flex="~ row" items-center justify-center>
-            <span w-25 flex justify-content-right>password: </span>
+            <span w-25 flex justify-content-right>{i18n().registerPage.password}</span>
             <input
               no-drag outline-primary-d
               mb-10px p-10px rounded-5px border="2px solid black/10"
@@ -120,7 +121,7 @@ export default defineComponent({
             border-none p-10px rounded-5px
             onClick={logoff}
           >
-            log Off
+            {i18n().logoffPage.logoff}
           </button>
         </div>
         <Alert

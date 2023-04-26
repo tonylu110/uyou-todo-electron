@@ -129,6 +129,13 @@ const rePassPage = {
     setPassFail: 'パスワードの変更に失敗しました!'
 }
 
+const logoffPage = {
+    logoff: 'ログオフ',
+    success: 'ログオフ成功',
+    fail: 'ログオフ失敗',
+    passNotTrue: 'パスワードが正しくありません'
+}
+
 export default {
     addText,
     cancelText,
@@ -155,5 +162,6 @@ export default {
     contextMenu,
     language,
     registerPage,
-    rePassPage
+    rePassPage,
+    logoffPage
 }

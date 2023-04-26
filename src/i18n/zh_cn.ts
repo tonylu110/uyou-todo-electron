@@ -129,6 +129,13 @@ const rePassPage = {
     setPassFail: '修改密码失败！'
 }
 
+const logoffPage = {
+    logoff: '注销账号',
+    success: '注销成功',
+    fail: '注销失败',
+    passNotTrue: '密码不正确'
+}
+
 export default {
     addText,
     cancelText,
@@ -155,5 +162,6 @@ export default {
     contextMenu,
     language,
     registerPage,
-    rePassPage
+    rePassPage,
+    logoffPage
 }

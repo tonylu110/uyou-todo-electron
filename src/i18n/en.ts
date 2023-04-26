@@ -129,6 +129,13 @@ const rePassPage = {
     setPassFail: 'Failed to change password!'
 }
 
+const logoffPage = {
+    logoff: 'Log Off',
+    success: 'Log off success',
+    fail: 'Log off fail',
+    passNotTrue: 'password is not true'
+}
+
 export default {
     addText,
     cancelText,
@@ -155,5 +162,6 @@ export default {
     contextMenu,
     language,
     registerPage,
-    rePassPage
+    rePassPage,
+    logoffPage
 }

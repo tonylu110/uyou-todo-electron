@@ -129,6 +129,13 @@ const rePassPage = {
   setPassFail: '¡Error al cambiar la contraseña!'
 }
 
+const logoffPage = {
+  logoff: 'Desconectarse',
+  success: 'Cerrar sesión con éxito',
+  fail: 'Error al cerrar sesión',
+  passNotTrue: 'la contraseña no es verdadera'
+}
+
 export default {
   addText,
   cancelText,
@@ -155,5 +162,6 @@ export default {
   contextMenu,
   language,
   registerPage,
-  rePassPage
+  rePassPage,
+  logoffPage
 }
