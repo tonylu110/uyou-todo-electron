@@ -43,7 +43,7 @@
         @switchFun="setAutoSync"
     />
     <ItemButton v-if="loginState" @click="changPass">{{ i18n().accountPage.changPass }}</ItemButton>
-    <ItemButton v-if="loginState" @click="openLogoff">{{ i18n().logoff }}</ItemButton>
+    <ItemButton v-if="loginState" @click="openLogoff">{{ i18n().logoffPage.logoff }}</ItemButton>
     <ItemButton v-if="loginState" mode="error" @click="logout">{{ i18n().accountPage.logout }}</ItemButton>
     <Alert
         :title="i18n().accountPage.alertTitle"

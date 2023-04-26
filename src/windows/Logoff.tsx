@@ -61,8 +61,25 @@ export default defineComponent({
                 return res.json()
               }).then(res => {
                 if (res.code === 200) {
-                  dialogText.value = i18n().logoffPage.success
-                  showDialog.value = true
+                  fetch('https://api.todo.uyou.org.cn/deltodocate', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      uid: res.data.uid
+                    })
+                  }).then(res => {
+                    return res.json()
+                  }).then(res => {
+                    if (res.code === 200) {
+                      dialogText.value = i18n().logoffPage.success
+                      showDialog.value = true
+                    } else {
+                      dialogText.value = i18n().logoffPage.fail
+                      showDialog.value = true
+                    }
+                  })
                 } else {
                   dialogText.value = i18n().logoffPage.fail
                   showDialog.value = true
@@ -128,6 +145,7 @@ export default defineComponent({
           dialogShow={showDialog.value}
           cancelButtonShow={false}
           onReturn={closeDialog}
+          title={i18n().accountPage.alertTitle}
         >
           <span>{dialogText.value}</span>
         </Alert>
