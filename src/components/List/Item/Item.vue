@@ -9,8 +9,14 @@
     <div class="list-item">
       <div class="time-area">
         <span>{{ getTime(time) }}</span>
-        <div @click="showMore(false)" class="c-button">
-          <div i-fluent:more-28-filled text-14px></div>
+        <div flex>
+          <div @click="textWrap = !textWrap" class="c-button">
+            <div i-fluent:chevron-up-12-filled text-14px v-if="textWrap"></div>
+            <div i-fluent:chevron-down-12-filled text-14px v-else></div>
+          </div>
+          <div @click="showMore(false)" class="c-button" ml="8px">
+            <div i-fluent:more-28-filled text-14px></div>
+          </div>
         </div>
         <div
           absolute right-0 text-14px
@@ -49,8 +55,9 @@
       </div>
       <span 
         block mt-10px :c="listName === 'allNotDo' ? '#6e492f' : (okState ? '#cebfae' : '#6e492f')" 
-        select-text pointer-events-auto whitespace-pre-wrap
+        select-text pointer-events-auto
         transition-300 bg="selection:#dcc6a9"
+        overflow-hidden text-ellipsis :whitespace="textWrap ? 'pre-wrap' : 'nowrap'"
         :line="listName === 'allNotDo' ? '' : (okState ? 'through' : '')"
       >
         {{ text }}
@@ -197,6 +204,8 @@ const showMore = (isCancel: boolean) => {
     }
   }, 0);
 }
+
+const textWrap = ref(localStorage.getItem('textWrap') === 'true')
 </script>
 
 <style lang="scss" scoped>

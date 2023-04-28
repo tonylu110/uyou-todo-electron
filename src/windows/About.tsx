@@ -28,12 +28,12 @@ export default defineComponent({
           src="./logo.png" 
           alt="" 
         />
-        <span c="#7a695c" font-bold text-24px>v{versionShow.value}</span>
+        <span c="#7a695c" font-bold text-24px>uyou ToDo v{versionShow.value}</span>
         <span 
           block mt-15px 
           text-14px c="#7a695c" font-bold
         >
-          Copyright (c) 2022-present, Anthony Lu
+          Copyright (c) 2022-Present, Anthony Lu
         </span>
         {!isMac() ? <CloseButton/> : null}
       </div>
