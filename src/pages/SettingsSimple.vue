@@ -46,6 +46,12 @@
         :switch-state="autoStartState"
         @switch-fun="setAutoStart"
       />
+      <Item
+        title="item text wrap"
+        :show-switch="true"
+        :switch-state="textWrapState"
+        @switch-fun="setTextWrap"
+      />
     </ItemBox>
     <ItemBox>
       <Item
@@ -177,4 +183,10 @@ const showRouterUrl = () => {
 emitter.on('routerShow', (data: unknown) => {
   routerUrlState.value = (data as boolean)
 })
+
+const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
+const setTextWrap = () => {
+  textWrapState.value = !textWrapState.value
+  localStorage.setItem('textWrap', textWrapState.value + '')
+}
 </script>

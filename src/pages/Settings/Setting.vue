@@ -24,6 +24,18 @@
     />
     <ItemBox>
       <Item
+        :title="i18n().update.autoUpdate"
+        :show-switch="true"
+        :switch-state="autoUpdateState"
+        @switch-fun="setAutoUpdate"
+      />
+      <Item
+        :title="i18n().update.updateTitle"
+        @item-fun="router.push('/update?from=setting')"
+      />
+    </ItemBox>
+    <ItemBox>
+      <Item
         :title="i18n().anotherSettings.simple"
         :show-switch="true"
         :switch-state="simpleModeState"
@@ -47,18 +59,6 @@
         :show-switch="true"
         :switch-state="textWrapState"
         @switch-fun="setTextWrap"
-      />
-    </ItemBox>
-    <ItemBox>
-      <Item
-          :title="i18n().update.autoUpdate"
-          :showSwitch="true"
-          :switchState="autoUpdateState"
-          @switchFun="setAutoUpdate"
-      />
-      <Item
-          :title="i18n().update.updateTitle"
-          @itemFun="router.push('/update?from=setting')"
       />
     </ItemBox>
     <ItemBox>
