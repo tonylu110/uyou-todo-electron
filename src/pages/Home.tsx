@@ -25,6 +25,7 @@ export default defineComponent({
           title={simpleMode ? 'uyou ToDo' : i18n().listMenu.allTodo}
           leftImgShow={simpleMode}
           showMore={simpleMode}
+          showWrap={true}
         />
         <List
           showAddItem={showAddItem.value}

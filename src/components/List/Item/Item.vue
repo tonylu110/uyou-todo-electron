@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, reactive, Ref, ref, watchEffect} from 'vue';
+import { onBeforeUnmount, onMounted, reactive, Ref, ref, watchEffect } from 'vue';
 import getTime from '../../../util/getTime';
 import i18n from '../../../i18n';
 import Toast from '../../Toast';
@@ -206,6 +206,13 @@ const showMore = (isCancel: boolean) => {
 }
 
 const textWrap = ref(localStorage.getItem('textWrap') === 'true')
+
+emitter.on('showWrap', () => {
+  textWrap.value = !textWrap.value
+})
+onBeforeUnmount(() => {
+  emitter.off('showWrap')
+})
 </script>
 
 <style lang="scss" scoped>

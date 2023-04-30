@@ -45,6 +45,7 @@ export default defineComponent({
           onRightClick={() => showAddItem.value = !showAddItem.value}
           onLeftClick={() => router.push('/setting-sim')}
           showMore={simpleMode}
+          showWrap={true}
         />
         <List 
           showAddItem={showAddItem.value}

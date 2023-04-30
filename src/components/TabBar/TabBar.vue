@@ -14,6 +14,14 @@
         :c="bgColor === 'light' ? '#777' : ''"
       ></div>
     </div>
+    <div 
+      :left="leftImgShow ? '47px' : '10px'"
+      v-if="showWrap" 
+      class="box" 
+      @click="showWrapFn"
+    >
+      <div i-fluent:chevron-up-down-16-filled text-22px c-white></div>
+    </div>
     <div relative>
       <span :style="{color: bgColor === 'light' ? '#555' : '', maxWidth: simpleMode ? 'calc(100vw - 140px)' : ''}">{{ title }}</span>
       <div 
@@ -42,6 +50,7 @@
 import { onMounted, ref } from 'vue';
 import CateMenu from '../CateMenu/CateMenu.vue'
 import getCateList from '../../util/getCateList';
+import emitter from '../../util/bus';
 
 withDefaults(defineProps<{
   title?: string,
@@ -49,14 +58,16 @@ withDefaults(defineProps<{
   rightImgShow?: boolean,
   leftImg?: string,
   bgColor?: string,
-  showMore?: boolean
+  showMore?: boolean,
+  showWrap?: boolean
 }>(), {
   title: 'uyou ToDo',
   leftImgShow: true,
   rightImgShow: true,
   leftImg: 'i-fluent:chevron-left-16-filled',
   bgColor: 'default',
-  showMore: false
+  showMore: false,
+  showWrap: false
 })
 
 const emits = defineEmits<{
@@ -105,6 +116,10 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
 const showList = ref(false)
 const showListFn = () => {
   showList.value = !showList.value
+}
+
+const showWrapFn = () => {
+  emitter.emit('showWrap')
 }
 </script>
 
