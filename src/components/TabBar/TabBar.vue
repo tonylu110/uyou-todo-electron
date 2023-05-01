@@ -20,7 +20,7 @@
       class="box" 
       @click="showWrapFn"
     >
-      <div i-fluent:chevron-up-down-16-filled text-22px c-white></div>
+      <div i-ph:caret-up-down-fill text-20px c-white></div>
     </div>
     <div relative>
       <span :style="{color: bgColor === 'light' ? '#555' : '', maxWidth: simpleMode ? 'calc(100vw - 140px)' : ''}">{{ title }}</span>
@@ -37,7 +37,7 @@
       </div>
     </div>
     <div v-if="rightImgShow" class="box right-img" @click="() => emits('rightClick')">
-      <div i-mdi:plus-circle-outline text-22px c-white></div>
+      <div i-mdi:pencil-plus text-20px c-white></div>
     </div>
     <div v-if="syncImgShow && rightImgShow" class="box sync-img" @click="sync">
       <div i-fluent:cloud-sync-24-filled text-22px c-white></div>
