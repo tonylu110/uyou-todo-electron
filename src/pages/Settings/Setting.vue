@@ -127,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onBeforeUnmount } from 'vue';
 import TabBar from '../../components/TabBar/TabBar.vue';
 import SettingList from '../../components/SettingList';
 import i18n from '../../i18n';
@@ -140,7 +140,6 @@ import firstLoad from "../../components/TitleBar/firstLoad";
 import emitter from "../../util/bus"
 import isDev from '../../util/mode';
 import setSwitchFn from '../../util/setSwitchFn';
-import { onBeforeUnmount } from 'vue';
 
 const ipcRenderer = require('electron').ipcRenderer
 

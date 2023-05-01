@@ -31,26 +31,26 @@
         :title="i18n().anotherSettings.simple"
         :show-switch="true"
         :switch-state="simpleModeState"
-        @switch-fun="changeSimpleMode"
+        @switch-fun="setSwitchFn('simpleMode', !simpleModeState, () => simpleModeState = !simpleModeState, 'setSimple', true)"
       />
       <Item
         :title="i18n().anotherSettings.enterToAdd"
         :show-switch="true"
         :switch-state="enterAddState"
-        @switch-fun="enterAdd"
+        @switch-fun="setSwitchFn('enterAdd', !enterAddState, () => enterAddState = !enterAddState)"
       />
       <Item
         v-if="isLinux"
         :title="i18n().anotherSettings.autoStart"
         :show-switch="true"
         :switch-state="autoStartState"
-        @switch-fun="setAutoStart"
+        @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
       />
       <Item
         title="item text wrap"
         :show-switch="true"
         :switch-state="textWrapState"
-        @switch-fun="setTextWrap"
+        @switch-fun="setSwitchFn('routerUrl', !textWrapState, () => textWrapState = !textWrapState)"
       />
     </ItemBox>
     <ItemBox>
@@ -58,20 +58,23 @@
         :title="i18n().useSystemBar"
         :show-switch="true"
         :switch-state="useSystemTitleBar"
-        @switch-fun="setTitleBar"
+        @switch-fun="setSwitchFn('systemTitle', !useSystemTitleBar, () => useSystemTitleBar = !useSystemTitleBar, 'setSystemBar', true)"
       />
       <Item
         :title="i18n().setTopWindow"
-        :showSwitch="true"
-        :switchState="topState"
-        @switchFun="onTopWindow"
+        :show-switch="true"
+        :switch-state="topState"
+        @switch-fun="setSwitchFn('alwaysOnTop', !topState, () => {
+          topState = !topState
+          emitter.emit('topWindow', topState)
+        }, 'window-on-top')"
       />
       <Item
         v-if="(isLinux && isWindows10OrAfter) || isMac"
         :title="i18n().anotherSettings.menuBlur"
         :showSwitch="true"
         :switchState="menuBlurState"
-        @switchFun="setMenuBlur"
+        @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', true)"
       />
     </ItemBox>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
@@ -89,15 +92,15 @@ import i18n from "../i18n";
 import router from "../router";
 import SettingList from "../components/SettingList";
 import Item from "../components/ItemBox/Item/Item.vue";
-import { ref } from "vue";
+import { onBeforeUnmount, ref } from "vue";
 import Toast from "../components/Toast";
 import ItemBox from "../components/ItemBox/ItemBox.vue";
 import firstLoad from "../components/TitleBar/firstLoad";
 import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";
 import emitter from "../util/bus";
 import isDev from "../util/mode";
+import setSwitchFn from "../util/setSwitchFn";
 
-const { ipcRenderer } = require("electron");
 const os = require('os')
 
 const isLinux = !(process.platform === 'linux')
@@ -109,84 +112,37 @@ const toastShow = ref(false)
 const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
 
 const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
-const changeSimpleMode = () => {
-  simpleModeState.value = !simpleModeState.value
-  localStorage.setItem('simpleMode', simpleModeState.value + '')
-  ipcRenderer.send('setSimple', simpleModeState.value)
-  toastShow.value = true
-  setTimeout(() => {
-    toastShow.value = false
-  }, 1000);
-}
-
 const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
-const setTitleBar = () => {
-  useSystemTitleBar.value = !useSystemTitleBar.value
-  localStorage.setItem('systemTitle', useSystemTitleBar.value + '')
-  ipcRenderer.send('setSystemBar', useSystemTitleBar.value)
-  toastShow.value = true
-  setTimeout(() => {
-    toastShow.value = false
-  }, 1000);
-}
-
 const topState = ref(firstLoad())
-const onTopWindow = () => {
-  topState.value = !topState.value
-  ipcRenderer.send('window-on-top', topState.value)
-  localStorage.setItem('alwaysOnTop', topState.value + '')
-  emitter.emit('topWindow', topState.value)
-}
+const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
+const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
+const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
+const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
+
 emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
 })
-
-const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
-const setMenuBlur = () => {
-  menuBlurState.value = !menuBlurState.value
-  ipcRenderer.send('setMenuBlur', menuBlurState.value)
-  localStorage.setItem('menuBlur', menuBlurState.value + '')
-  toastShow.value = true
-  setTimeout(() => {
-    toastShow.value = false
-  }, 1000);
-}
-
+emitter.on('routerShow', (data: unknown) => {
+  routerUrlState.value = (data as boolean)
+})
+emitter.on('toastShow', (data: unknown) => {
+  toastShow.value = (data as boolean)
+})
 const clearData = () => {
   localStorage.clear()
   window.location.reload()
 }
-
-const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
-const enterAdd = () => {
-  enterAddState.value = !enterAddState.value
-  localStorage.setItem('enterAdd', enterAddState.value + '')
-}
-
-const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
-const setAutoStart = () => {
-  autoStartState.value = !autoStartState.value
-  localStorage.setItem('autoStart', autoStartState.value + '')
-  ipcRenderer.send('setAutoStart', autoStartState.value)
-}
-
 const openUrl = (url: string) => {
   window.open(url)
 }
-
 const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
 const showRouterUrl = () => {
   routerUrlState.value = !routerUrlState.value
   emitter.emit('routerShow', routerUrlState.value)
   localStorage.setItem('routerUrl', routerUrlState.value + '')
 }
-emitter.on('routerShow', (data: unknown) => {
-  routerUrlState.value = (data as boolean)
+onBeforeUnmount(() => {
+  emitter.off('routerShow')
+  emitter.off('toastShow')
 })
-
-const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
-const setTextWrap = () => {
-  textWrapState.value = !textWrapState.value
-  localStorage.setItem('textWrap', textWrapState.value + '')
-}
 </script>

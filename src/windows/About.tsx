@@ -33,7 +33,7 @@ export default defineComponent({
           block mt-15px 
           text-14px c="#7a695c" font-bold
         >
-          Copyright (c) 2022-Present, Anthony Lu
+          Copyright (c) 2022-2023, Anthony Lu
         </span>
         {!isMac() ? <CloseButton/> : null}
       </div>
