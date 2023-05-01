@@ -9,8 +9,41 @@
       </div>
     </transition>
     <transition-group :name="routeName === 'Home' ? 'item' : 'other'">
+      <div 
+        bg="#fff6dc" mr="100%" translate="x-[50%]" w-auto whitespace-nowrap ml-20px
+        mb-10px p-x-10px p-y-5px rounded-5px c="#6e492f" font-bold
+        flex items-center
+        key="in"
+        v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo'"
+      >
+        <div i-mdi:circle-outline text-18px mr-10px></div>
+        {{ i18n().listMenu.incompleted }}
+      </div>
       <Item
         v-for="item in list"
+        v-show="!item.ok"
+        :key="item.id"
+        :text="item.text"
+        :time="item.id"
+        :isOk="item.ok"
+        @setOk="setOk"
+        @deleteItem="deleteItem"
+        @set-cate="setCate"
+        ref="item"
+      />
+      <div 
+        bg="#fff6dc" mr="100%" translate="x-[50%]" whitespace-nowrap ml-20px
+        mb-10px p-x-10px p-y-5px rounded-5px c="#6e492f" font-bold
+        flex items-center
+        key="do"
+        v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo'"
+      >
+        <div i-mdi:checkbox-marked-circle text-18px mr-10px></div>
+        {{ i18n().listMenu.completed }}
+      </div>
+      <Item
+        v-for="item in list"
+        v-show="item.ok"
         :key="item.id"
         :text="item.text"
         :time="item.id"
@@ -38,6 +71,7 @@ import saveItemSet from './saveItemSet'
 import AddItem from './AddItem/AddItem.vue';
 import ITodoList from '../../interface/ITodoListArray';
 import { useRoute } from 'vue-router';
+import i18n from '../../i18n';
 
 const route = useRoute()
 
