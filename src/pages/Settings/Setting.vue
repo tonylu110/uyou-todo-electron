@@ -27,7 +27,7 @@
         :title="i18n().update.autoUpdate"
         :show-switch="true"
         :switch-state="autoUpdateState"
-        @switch-fun="setAutoUpdate"
+        @switch-fun="setSwitchFn('autoUpdate', !autoStartState, () => autoStartState = !autoStartState)"
       />
       <Item
         :title="i18n().update.updateTitle"
@@ -39,48 +39,48 @@
         :title="i18n().anotherSettings.simple"
         :show-switch="true"
         :switch-state="simpleModeState"
-        @switch-fun="changeSimpleMode"
+        @switch-fun="setSwitchFn('simpleMode', !simpleModeState, () => simpleModeState = !simpleModeState, 'setSimple', true)"
       />
       <Item
         :title="i18n().anotherSettings.enterToAdd"
         :show-switch="true"
         :switch-state="enterAddState"
-        @switch-fun="enterAdd"
+        @switch-fun="setSwitchFn('enterAdd', !enterAddState, () => enterAddState = !enterAddState)"
       />
       <Item
         v-if="isLinux"
         :title="i18n().anotherSettings.autoStart"
         :show-switch="true"
         :switch-state="autoStartState"
-        @switch-fun="setAutoStart"
+        @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
       />
       <Item
         title="item text wrap"
         :show-switch="true"
         :switch-state="textWrapState"
-        @switch-fun="setTextWrap"
+        @switch-fun="setSwitchFn('routerUrl', !textWrapState, () => textWrapState = !textWrapState)"
       />
     </ItemBox>
     <ItemBox>
       <Item
-          :title="i18n().useSystemBar"
-          :showSwitch="true"
-          :switchState="useSystemTitleBar"
-          @switchFun="setTitleBar"
+        :title="i18n().useSystemBar"
+        :show-switch="true"
+        :switch-state="useSystemTitleBar"
+        @switch-fun="setSwitchFn('systemTitle', !useSystemTitleBar, () => useSystemTitleBar = !useSystemTitleBar, 'setSystemBar', true)"
       />
       <Item
-          v-if="titleBarShow && isMac"
-          :title="i18n().anotherSettings.windowMenu"
-          :showSwitch="true"
-          :switchState="showWindowMenuState"
-          @switchFun="setWindowMenu"
+        v-if="titleBarShow && isMac"
+        :title="i18n().anotherSettings.windowMenu"
+        :show-switch="true"
+        :switch-state="showWindowMenuState"
+        @switch-fun="setSwitchFn('windowMenu', !showWindowMenuState, () => showWindowMenuState = !showWindowMenuState, 'setWindowMenu')"
       />
       <Item
-          v-if="(isLinux && isWindows10OrAfter) || !isMac"
-          :title="i18n().anotherSettings.menuBlur"
-          :showSwitch="true"
-          :switchState="menuBlurState"
-          @switchFun="setMenuBlur"
+        v-if="(isLinux && isWindows10OrAfter) || !isMac"
+        :title="i18n().anotherSettings.menuBlur"
+        :show-switch="true"
+        :switch-state="menuBlurState"
+        @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', true)"
       />
       <div class="item-blur item" v-if="isWin11 && menuBlurState">
         <div @click="changeMica('mica')">Mica Effect</div>
@@ -90,23 +90,23 @@
     </ItemBox>
     <ItemBox>
       <Item
-          :title="i18n().setTopState"
-          :showSwitch="true"
-          :switchState="saveTopState"
-          @switchFun="setTopState"
+        :title="i18n().setTopState"
+        :show-switch="true"
+        :switch-state="saveTopState"
+        @switch-fun="setSwitchFn('saveTopState', !saveTopState, () => saveTopState = !saveTopState)"
       />
       <Item
-          v-if="titleBarShow"
-          :title="i18n().setTopWindow"
-          :showSwitch="true"
-          :switchState="topState"
-          @switchFun="onTopWindow"
+        v-if="titleBarShow"
+        :title="i18n().setTopWindow"
+        :show-switch="true"
+        :switch-state="topState"
+        @switch-fun="setSwitchFn('alwaysOnTop', !topState, () => topState = !topState, 'window-on-top')"
       />
       <Item
-          :title="i18n().saveWindowSize"
-          :showSwitch="true"
-          :switchState="saveWindowSizeState"
-          @switchFun="setWindowSizeState"
+        :title="i18n().saveWindowSize"
+        :show-switch="true"
+        :switch-state="saveWindowSizeState"
+        @switch-fun="setSwitchFn('saveWindowSizeState', !saveWindowSizeState, () => saveWindowSizeState = !saveWindowSizeState, 'setWindowSizeState')"
       />
     </ItemBox>
     <ItemBox>
@@ -139,6 +139,8 @@ import Toast from '../../components/Toast';
 import firstLoad from "../../components/TitleBar/firstLoad";
 import emitter from "../../util/bus"
 import isDev from '../../util/mode';
+import setSwitchFn from '../../util/setSwitchFn';
+import { onBeforeUnmount } from 'vue';
 
 const ipcRenderer = require('electron').ipcRenderer
 
@@ -157,101 +159,16 @@ const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
 
 const saveTopState = ref(localStorage.getItem('saveTopState') === 'true' || localStorage.getItem('saveTopState') === null)
-const setTopState = () => {
-  saveTopState.value = !saveTopState.value
-  localStorage.setItem('saveTopState', saveTopState.value + '')
-}
-
 const saveWindowSizeState = ref(localStorage.getItem('saveWindowSizeState') === 'true')
-const setWindowSizeState = () => {
-  saveWindowSizeState.value = !saveWindowSizeState.value
-  localStorage.setItem('saveWindowSizeState', saveWindowSizeState.value + '')
-  ipcRenderer.send('setWindowSizeState', saveWindowSizeState.value)
-}
-
 const autoUpdateState = ref(localStorage.getItem('autoUpdate') !== 'false')
-const setAutoUpdate = () => {
-  autoUpdateState.value = !autoUpdateState.value
-  localStorage.setItem('autoUpdate', autoUpdateState.value + '')
-}
-
 const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
-const setTitleBar = () => {
-  useSystemTitleBar.value = !useSystemTitleBar.value
-  localStorage.setItem('systemTitle', useSystemTitleBar.value + '')
-  ipcRenderer.send('setSystemBar', useSystemTitleBar.value)
-  toastShow.value = true
-  setTimeout(() => {
-    toastShow.value = false
-  }, 1000);
-}
-
 const topState = ref(firstLoad())
-const onTopWindow = () => {
-  topState.value = !topState.value
-  ipcRenderer.send('window-on-top', topState.value)
-  localStorage.setItem('alwaysOnTop', topState.value + '')
-}
-
-const clearData = () => {
-  localStorage.clear()
-  window.location.reload()
-}
-
 const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
-const setMenuBlur = () => {
-  menuBlurState.value = !menuBlurState.value
-  ipcRenderer.send('setMenuBlur', menuBlurState.value)
-  localStorage.setItem('menuBlur', menuBlurState.value + '')
-  toastShow.value = true
-  setTimeout(() => {
-    toastShow.value = false
-  }, 1000);
-}
-
 const showWindowMenuState = ref(localStorage.getItem('windowMenu') === 'true')
-const setWindowMenu = () => {
-  showWindowMenuState.value = !showWindowMenuState.value
-  ipcRenderer.send('setWindowMenu', showWindowMenuState.value)
-  localStorage.setItem('windowMenu', showWindowMenuState.value + '')
-}
-
-const openAboutWindow = () => {
-  ipcRenderer.send('open-about')
-}
-
-const changeMica = (effect: string) => {
-  ipcRenderer.send('changeBlur', effect)
-}
-
 const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
-const changeSimpleMode = () => {
-  simpleModeState.value = !simpleModeState.value
-  localStorage.setItem('simpleMode', simpleModeState.value + '')
-  ipcRenderer.send('setSimple', simpleModeState.value)
-  toastShow.value = true
-  setTimeout(() => {
-    toastShow.value = false
-  }, 1000);
-}
-
 const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
-const enterAdd = () => {
-  enterAddState.value = !enterAddState.value
-  localStorage.setItem('enterAdd', enterAddState.value + '')
-}
-
 const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
-const setAutoStart = () => {
-  autoStartState.value = !autoStartState.value
-  localStorage.setItem('autoStart', autoStartState.value + '')
-  ipcRenderer.send('setAutoStart', autoStartState.value)
-}
-
-const openUrl = (url: string) => {
-  window.open(url)
-}
-
+const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
 const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
 const showRouterUrl = () => {
   routerUrlState.value = !routerUrlState.value
@@ -261,12 +178,27 @@ const showRouterUrl = () => {
 emitter.on('routerShow', (data: unknown) => {
   routerUrlState.value = (data as boolean)
 })
-
-const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
-const setTextWrap = () => {
-  textWrapState.value = !textWrapState.value
-  localStorage.setItem('textWrap', textWrapState.value + '')
+emitter.on('toastShow', (data: unknown) => {
+  toastShow.value = (data as boolean)
+})
+const clearData = () => {
+  localStorage.clear()
+  window.location.reload()
 }
+const openAboutWindow = () => {
+  ipcRenderer.send('open-about')
+}
+const changeMica = (effect: string) => {
+  ipcRenderer.send('changeBlur', effect)
+}
+const openUrl = (url: string) => {
+  window.open(url)
+}
+
+onBeforeUnmount(() => {
+  emitter.off('routerShow')
+  emitter.off('toastShow')
+})
 </script>
 
 <style scoped lang="scss">
