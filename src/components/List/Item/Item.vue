@@ -35,6 +35,7 @@
           >
             {{ i18n().copyText }}
           </div>
+          <div h-1px bg="black/10" my-5px></div>
           <div 
             p-5px flex items-center 
             c="black/70" bg="hover:black/5 active:black/10" 
@@ -45,6 +46,7 @@
             {{ cate.title }}
             <div i-mdi:chevron-right c="black/70"></div>
           </div>
+          <div h-1px bg="black/10" my-5px></div>
           <div 
             p-5px c="black/70" 
             bg="hover:black/5 active:black/10" rounded-5px 

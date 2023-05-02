@@ -199,7 +199,7 @@ const setCate = (id: number, cateId: number) => {
   saveItemSet(listAll.value!)
 }
 
-const showNotDo = ref(localStorage.getItem('notDoShow') === 'true')
+const showNotDo = ref(localStorage.getItem('notDoShow') === 'true' || localStorage.getItem('notDoShow') === null)
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
 
