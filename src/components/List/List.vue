@@ -8,17 +8,20 @@
         />
       </div>
     </transition>
-    <transition-group :name="routeName === 'Home' ? 'item' : 'other'">
-      <div 
-        bg="#fff6dc" mr="100%" translate="x-[50%]" w-auto whitespace-nowrap ml-20px
-        mb-10px p-x-10px p-y-5px rounded-5px c="#6e492f" font-bold
-        flex items-center
-        key="in"
-        v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo'"
-      >
-        <div i-mdi:circle-outline text-18px mr-10px></div>
-        {{ i18n().listMenu.incompleted }}
-      </div>
+    <transition-group :name="routeName === 'Home' ? 'item' : 'other'" v-if="routeName === 'Home' || route.query.listName === 'allDo' || route.query.listName === 'allNotDo'">
+      <Item
+        v-for="item in list"
+        :key="item.id"
+        :text="item.text"
+        :time="item.id"
+        :isOk="item.ok"
+        @setOk="setOk"
+        @deleteItem="deleteItem"
+        @set-cate="setCate"
+        ref="item"
+      />
+    </transition-group>
+    <template name="other" v-else>
       <Item
         v-for="item in list"
         v-show="!item.ok"
@@ -32,28 +35,32 @@
         ref="item"
       />
       <div 
-        bg="#fff6dc" mr="100%" translate="x-[50%]" whitespace-nowrap ml-20px
+        bg="#fff6dc hover:#f3ebd3 active:#eae2ca" 
+        :translate="simpleMode ? 'x-[calc(-50vw+50%+10px)]' : 'x-[calc(((-100vw+300px)/2)+50%+10px)]'" whitespace-nowrap
         mb-10px p-x-10px p-y-5px rounded-5px c="#6e492f" font-bold
-        flex items-center
-        key="do"
+        flex items-center cursor-pointer shadow="sm black/30"
         v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo'"
+        @click="setSwitchFn('notDoShow', !showNotDo, () => showNotDo = !showNotDo)"
       >
-        <div i-mdi:checkbox-marked-circle text-18px mr-10px></div>
+        <div i-mdi:checkbox-marked-circle text-18px mr-5px></div>
         {{ i18n().listMenu.completed }}
+        <div i-fluent:chevron-down-12-filled text-18px ml-5px :rotate="showNotDo ? '0' : '-90'" transition-300></div>
       </div>
-      <Item
-        v-for="item in list"
-        v-show="item.ok"
-        :key="item.id"
-        :text="item.text"
-        :time="item.id"
-        :isOk="item.ok"
-        @setOk="setOk"
-        @deleteItem="deleteItem"
-        @set-cate="setCate"
-        ref="item"
-      />
-    </transition-group>
+      <template v-if="showNotDo">
+        <Item
+          v-for="item in list"
+          v-show="item.ok"
+          :key="item.id"
+          :text="item.text"
+          :time="item.id"
+          :isOk="item.ok"
+          @setOk="setOk"
+          @deleteItem="deleteItem"
+          @set-cate="setCate"
+          ref="item"
+        />
+      </template>
+    </template>
     <div 
       i-mdi:list-box-outline 
       top="50%" translate="y-[calc(-50%-20px)]" absolute 
@@ -72,6 +79,7 @@ import AddItem from './AddItem/AddItem.vue';
 import ITodoList from '../../interface/ITodoListArray';
 import { useRoute } from 'vue-router';
 import i18n from '../../i18n';
+import setSwitchFn from '../../util/setSwitchFn';
 
 const route = useRoute()
 
@@ -190,6 +198,9 @@ const setCate = (id: number, cateId: number) => {
   }
   saveItemSet(listAll.value!)
 }
+
+const showNotDo = ref(localStorage.getItem('notDoShow') === 'true')
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
 
 <style scoped lang="scss">
