@@ -21,7 +21,7 @@
   }
 
   .button {
-    margin-top: 2px;
+    margin-top: 1px;
     height: 20px;
     width: 50px;
     display: flex;
@@ -64,7 +64,7 @@
     }
 
     &.min-button {
-      border: 0.5px solid #594b4270;
+      border: 1px solid #594b4270;
       color: #00000090;
 
       &:hover {
