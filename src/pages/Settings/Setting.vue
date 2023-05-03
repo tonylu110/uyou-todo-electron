@@ -109,6 +109,7 @@
         @switch-fun="setSwitchFn('saveWindowSizeState', !saveWindowSizeState, () => saveWindowSizeState = !saveWindowSizeState, 'setWindowSizeState')"
       />
     </ItemBox>
+    <Item title="Laboratory" @item-fun="router.push('/lab?from=setting')" v-if="isInDev"/>
     <ItemBox>
       <Item :title="i18n().otherList.toWeb" itemImg="./images/web.png" @itemFun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')"/>
       <Item :title="i18n().otherList.toPhone" itemImg="./images/phone.png" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')"/>
@@ -198,6 +199,8 @@ onBeforeUnmount(() => {
   emitter.off('routerShow')
   emitter.off('toastShow')
 })
+
+const isInDev = localStorage.getItem('isInDev') === 'true'
 </script>
 
 <style scoped lang="scss">

@@ -73,6 +73,11 @@ const routes = [
     components: {
       isWindow: () => import("./windows/Logoff.tsx")
     }
+  },
+  {
+    path: "/lab",
+    name: "lab",
+    component: () => import("./pages/Laboratory"),
   }
 ];
 

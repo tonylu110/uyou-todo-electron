@@ -13,9 +13,9 @@
     <div 
       :class="topState ? 'on-top-button-sel button' :'on-top-button button'"
       :style="{
-        left: isMac ? '' : '7.5px',
+        left: isMac ? '' : '10px',
         right: isMac ? '0' : '',
-        border: (form === 'setting' || routeName === 'setting' || routeName === 'settingSim') && topState ? '' : '1px solid #00000020'
+        border: (form === 'setting' || routeName === 'setting' || routeName === 'account' || routeName === 'settingSim') && topState ? '' : '1px solid #00000020'
       }"  
       @click="onTopWindow"
     >
@@ -24,10 +24,10 @@
     <span class="title-text" :style="{color: routeLight ? '#555' : 'white'}">
       {{ simpleMode ? '' : title }}
     </span>
-    <div v-if="!isMac" class="min-button button" @click="minWindow" :style="{border: form === 'setting' || routeName === 'settingSim' || routeName === 'setting' ? '1px solid #00000020' : ''}">
+    <div v-if="!isMac" class="min-button button" @click="minWindow" :style="{border: form === 'setting' || routeName === 'account' || routeName === 'settingSim' || routeName === 'setting' ? '1px solid #00000020' : ''}">
       <div i-fluent-emoji-high-contrast:minus :c="routeLight ? '#777' : 'white'" text-10px></div>
     </div>
-    <div v-if="!isMac && !simpleMode" class="min-button button" @click="maxWindow" :style="{border: form === 'setting' || routeName === 'setting' ? '1px solid #00000020' : ''}">
+    <div v-if="!isMac && !simpleMode" class="min-button button" @click="maxWindow" :style="{border: form === 'setting' || routeName === 'account' || routeName === 'setting' ? '1px solid #00000020' : ''}">
       <div i-fluent:checkbox-unchecked-12-filled :c="routeLight ? '#777' : 'white'" text-14px></div>
     </div>
     <div v-if="!isMac" class="close-button button" @click="closeWindow">

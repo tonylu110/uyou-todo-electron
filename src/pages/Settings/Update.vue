@@ -25,6 +25,7 @@
           m="x-0 y-15px"
           src="/images/logo.png" 
           alt="" 
+          @click="toDevMode"
         />
         <span 
           :mb="newVersion ? '' : '15px'"
@@ -120,6 +121,20 @@ const updateButtonCilck = () => {
     getUpdate()
   } else {
     ipcRenderer.send('open-url', 'https://github.com/tonylu110/uyou-todo-electron/releases')
+  }
+}
+
+const isInDev = localStorage.getItem('isInDev') === 'true'
+const clickNum = ref(0)
+const toDevMode = () => {
+  clickNum.value++
+  if ((clickNum.value > 4) || isInDev) {
+    newVersion.value = 'opened dev!!!'
+    localStorage.setItem('isInDev', 'true')
+    toastShow.value = true
+    setTimeout(() => {
+      toastShow.value = false
+    }, 1000);
   }
 }
 

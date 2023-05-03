@@ -46,7 +46,7 @@
         {{ i18n().listMenu.completed }}
         <div 
           ml-5px text-10px
-          rounded-20px bg="#6e492f" c-white 
+          rounded-20px bg="#6e492f" c="#fff6dc" 
           w-1rem h-1rem font-normal
           flex items-center justify-center
         >

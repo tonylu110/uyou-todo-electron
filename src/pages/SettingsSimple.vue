@@ -77,6 +77,7 @@
         @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', true)"
       />
     </ItemBox>
+    <Item title="Laboratory" @item-fun="router.push('/lab?from=setting')" v-if="isInDev"/>
     <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
     <ItemButton @click="router.push('/lang?from=setting')">
       <img src="/images/lang.png" alt="" class="lang-img" />
@@ -145,4 +146,6 @@ onBeforeUnmount(() => {
   emitter.off('routerShow')
   emitter.off('toastShow')
 })
+
+const isInDev = localStorage.getItem('isInDev') === 'true'
 </script>

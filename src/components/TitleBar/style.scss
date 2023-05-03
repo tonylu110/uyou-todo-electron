@@ -27,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 7.5px;
+    margin-right: 10px;
     border-radius: 5px;
     -webkit-app-region: no-drag;
     cursor: pointer;
@@ -78,7 +78,7 @@
 
     &.close-button-mac {
       @extend .close-button;
-      margin-left: 7.5px;
+      margin-left: 10px;
       width: 20px;
       left: 0;
       position: absolute
