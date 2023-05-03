@@ -42,9 +42,16 @@
         v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo'"
         @click="setSwitchFn('notDoShow', !showNotDo, () => showNotDo = !showNotDo)"
       >
-        <div i-mdi:checkbox-marked-circle text-18px mr-5px></div>
+        <div i-fluent:caret-down-12-filled text-18px mr-5px :rotate="showNotDo ? '0' : '-90'" transition-300></div>
         {{ i18n().listMenu.completed }}
-        <div i-fluent:chevron-down-12-filled text-18px ml-5px :rotate="showNotDo ? '0' : '-90'" transition-300></div>
+        <div 
+          ml-5px text-10px
+          rounded-20px bg="#6e492f" c-white 
+          w-1rem h-1rem font-normal
+          flex items-center justify-center
+        >
+          {{ list!.filter(listData => listData.ok === true).length }}
+        </div>
       </div>
       <template v-if="showNotDo">
         <Item
