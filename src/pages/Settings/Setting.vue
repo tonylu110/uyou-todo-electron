@@ -27,7 +27,7 @@
         :title="i18n().update.autoUpdate"
         :show-switch="true"
         :switch-state="autoUpdateState"
-        @switch-fun="setSwitchFn('autoUpdate', !autoStartState, () => autoStartState = !autoStartState)"
+        @switch-fun="setSwitchFn('autoUpdate', !autoUpdateState, () => autoUpdateState = !autoUpdateState)"
       />
       <Item
         :title="i18n().update.updateTitle"

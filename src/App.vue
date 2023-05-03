@@ -4,7 +4,7 @@ import i18n from './i18n';
 import TitleBar from './components/TitleBar/TitleBar.vue';
 import Alert from './components/Alert/Alert.vue';
 import ListMenu from './components/ListMenu/ListMenu.vue';
-import appVersionCode from './util/appVersionCode'
+import { versionCode } from './util/appVersionCode'
 import { useRoute, useRouter } from 'vue-router';
 import RouterUrl from './components/RouterUrl'
 import emitter from './util/bus';
@@ -17,7 +17,7 @@ const alertShow = ref(false)
 const alertMsg: Ref<string[]> = ref([])
 const newVersion = ref('')
 
-const version = appVersionCode
+const version = versionCode
 const autoUpdateState = localStorage.getItem('autoUpdate') !== 'false'
 
 if (autoUpdateState) {

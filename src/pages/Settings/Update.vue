@@ -80,13 +80,13 @@ import i18n from '../../i18n';
 import router from '../../router';
 import SettingList from "../../components/SettingList";
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue';
-import appVersionCode from '../../util/appVersionCode';
+import { versionCode } from '../../util/appVersionCode';
 import Toast from '../../components/Toast';
 
 const { app } = require('@electron/remote')
 const { ipcRenderer } = require('electron')
 
-const version = appVersionCode
+const version = versionCode
 
 const updateMsg: Ref<string[]> = ref([])
 const newVersion = ref('')

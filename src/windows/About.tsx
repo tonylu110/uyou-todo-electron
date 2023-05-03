@@ -1,18 +1,11 @@
-import { defineComponent, ref } from "vue"
+import { defineComponent } from "vue"
 import { isWindow, isMac } from "../util/os"
 import CloseButton from '../components/CloseButton'
+import { versionText } from "../util/appVersionCode"
 
 export default defineComponent({
   setup() {
-    const { ipcRenderer, IpcRendererEvent } = require('electron')
     const os = require("os")
-
-    const versionShow = ref('')
-
-    ipcRenderer.send('get-app-version')
-    ipcRenderer.on('version', (_event: typeof IpcRendererEvent, version: string) => {
-      versionShow.value = version
-    })
 
     const isWindows10OrAfter = isWindow() && os.release().split('.')[2] > 15063
 
@@ -28,7 +21,7 @@ export default defineComponent({
           src="./logo.png" 
           alt="" 
         />
-        <span c="#7a695c" font-bold text-24px>uyou ToDo v{versionShow.value}</span>
+        <span c="#7a695c" font-bold text-24px>uyou ToDo v{versionText}</span>
         <span 
           block mt-15px 
           text-14px c="#7a695c" font-bold

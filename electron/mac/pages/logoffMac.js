@@ -31,6 +31,8 @@ function createLogoffWindow (uname) {
     })
   }
 
+  require("@electron/remote/main").enable(logoffWindow.webContents)
+
   return logoffWindow
 }
 

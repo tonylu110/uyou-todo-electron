@@ -31,6 +31,8 @@ function createRegisterWindow () {
     })
   }
 
+  require("@electron/remote/main").enable(registerWindow.webContents)
+
   return registerWindow
 }
 

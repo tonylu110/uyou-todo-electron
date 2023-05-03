@@ -32,6 +32,8 @@ function createAboutWindow () {
         })
     }
 
+    require("@electron/remote/main").enable(aboutWindow.webContents)
+
     return aboutWindow
 }
 

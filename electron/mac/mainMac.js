@@ -106,9 +106,6 @@ function createWindow() {
         ipcMain.once("close-about", () => {
             aboutWindow.close()
         });
-        ipcMain.once("get-app-version", (event) => {
-            event.sender.send('version', app.getVersion())
-        })
     })
 
     ipcMain.on('open-register', () => {

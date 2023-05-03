@@ -43,6 +43,8 @@ function createRegisterWindow () {
     })
   }
 
+  require("@electron/remote/main").enable(registerWindow.webContents)
+
   registerWindow.once('ready-to-show', () => {
     registerWindow.show()
   })

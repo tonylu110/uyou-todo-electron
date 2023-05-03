@@ -43,6 +43,8 @@ function createAboutWindow () {
         })
     }
 
+    require("@electron/remote/main").enable(aboutWindow.webContents)
+
     aboutWindow.once('ready-to-show', () => {
         aboutWindow.show()
     })

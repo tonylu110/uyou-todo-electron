@@ -31,6 +31,8 @@ function createRepassWindow (uname) {
     })
   }
 
+  require("@electron/remote/main").enable(repassWindow.webContents)
+
   return repassWindow
 }
 

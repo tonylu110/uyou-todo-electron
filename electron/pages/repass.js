@@ -43,6 +43,8 @@ function createRepassWindow (uname) {
     })
   }
 
+  require("@electron/remote/main").enable(repassWindow.webContents)
+
   repassWindow.once('ready-to-show', () => {
     repassWindow.show()
   })
