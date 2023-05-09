@@ -13,7 +13,7 @@
     <div 
       :class="topState ? 'on-top-button-sel button' :'on-top-button button'"
       :style="{
-        left: isMac ? '' : '10px',
+        left: isMac ? '' : '9px',
         right: isMac ? '0' : '',
         border: (form === 'setting' || routeName === 'setting' || routeName === 'account' || routeName === 'settingSim') && topState ? '' : '1px solid #00000020'
       }"  
