@@ -39,7 +39,7 @@
         :title="i18n().anotherSettings.simple"
         :show-switch="true"
         :switch-state="simpleModeState"
-        @switch-fun="setSwitchFn('simpleMode', !simpleModeState, () => simpleModeState = !simpleModeState, 'setSimple', true)"
+        @switch-fun="setSwitchFn('simpleMode', !simpleModeState, () => simpleModeState = !simpleModeState, 'setSimple', i18n().restartApp)"
       />
       <Item
         :title="i18n().anotherSettings.enterToAdd"
@@ -66,7 +66,7 @@
         :title="i18n().useSystemBar"
         :show-switch="true"
         :switch-state="useSystemTitleBar"
-        @switch-fun="setSwitchFn('systemTitle', !useSystemTitleBar, () => useSystemTitleBar = !useSystemTitleBar, 'setSystemBar', true)"
+        @switch-fun="setSwitchFn('systemTitle', !useSystemTitleBar, () => useSystemTitleBar = !useSystemTitleBar, 'setSystemBar', i18n().restartApp)"
       />
       <Item
         v-if="titleBarShow && isMac"
@@ -80,7 +80,7 @@
         :title="i18n().anotherSettings.menuBlur"
         :show-switch="true"
         :switch-state="menuBlurState"
-        @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', true)"
+        @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', i18n().restartApp)"
       />
       <div class="item-blur item" v-if="isWin11 && menuBlurState">
         <div @click="changeMica('mica')">Mica Effect</div>
@@ -123,7 +123,6 @@
     <ItemButton @click="router.push('/lang?from=setting')">
       <img src="/images/lang.png" alt="" class="lang-img" />
     </ItemButton>
-    <Toast :msg="i18n().restartApp" v-if="toastShow" />
   </SettingList>
 </template>
 
@@ -136,7 +135,6 @@ import Item from '../../components/ItemBox/Item/Item.vue';
 import ItemBox from '../../components/ItemBox/ItemBox.vue';
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue';
 import router from '../../router';
-import Toast from '../../components/Toast';
 import firstLoad from "../../components/TitleBar/firstLoad";
 import emitter from "../../util/bus"
 import isDev from '../../util/mode';
@@ -153,7 +151,6 @@ const isMac = !(process.platform === 'darwin')
 
 const isWin11 = (process.platform === 'win32' && Number(os.release().split('.')[2]) >= 22000)
 
-const toastShow = ref(false)
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 
 const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
@@ -177,9 +174,6 @@ const showRouterUrl = () => {
 }
 emitter.on('routerShow', (data: unknown) => {
   routerUrlState.value = (data as boolean)
-})
-emitter.on('toastShow', (data: unknown) => {
-  toastShow.value = (data as boolean)
 })
 const clearData = () => {
   localStorage.clear()

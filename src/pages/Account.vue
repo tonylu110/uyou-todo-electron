@@ -54,7 +54,6 @@
     >
       <span>{{ alertMsg[0] }}</span>
     </Alert>
-    <Toast v-if="showToast" :msg="toastMsg" />
   </SettingList>
 </template>
 
@@ -66,10 +65,10 @@ import i18n from '../i18n';
 import { useRoute } from 'vue-router';
 import SettingList from "../components/SettingList";
 import Alert from "../components/Alert/Alert.vue";
-import Toast from "../components/Toast";
 import Item from "../components/ItemBox/Item/Item.vue";
 import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";
 import emitter from '../util/bus';
+import { createToast } from '../components/Toast';
 
 const ipcRenderer = require('electron').ipcRenderer
 
@@ -115,8 +114,6 @@ const uname = ref('')
 const passwd = ref('')
 const alertMsg = ref([''])
 const alertShow = ref(false)
-const showToast = ref(false)
-const toastMsg = ref('')
 const login = () => {
   if (uname.value === '' || passwd.value === '') {
     alertMsg.value = [i18n().accountPage.alertNoAnP]
@@ -139,8 +136,7 @@ const login = () => {
         localStorage.setItem('uname', uname.value)
         localStorage.setItem('uid', res._id)
         loginState.value = true
-        toastMsg.value = i18n().accountPage.syncData
-        showToast.value = true
+        createToast({msg: i18n().accountPage.syncData})
         fetch(`https://api.todo.uyou.org.cn/todoexist?uid=${res._id}`).then(res => {
           return res.json()
         }).then(res => {
@@ -160,15 +156,9 @@ const login = () => {
               return res.json()
             }).then(res => {
               if (res.code === 200) {
-                toastMsg.value = i18n().accountPage.syncSuccess
-                setTimeout(() => {
-                  showToast.value = false
-                }, 1000)
+                createToast({msg: i18n().accountPage.syncSuccess})
               } else {
-                toastMsg.value = i18n().accountPage.syncFail
-                setTimeout(() => {
-                  showToast.value = false
-                }, 1000)
+                createToast({msg: i18n().accountPage.syncFail})
               }
             })
           } else {
@@ -185,16 +175,10 @@ const login = () => {
               return res.json()
             }).then(res => {
               if (res._id) {
-                toastMsg.value = i18n().accountPage.syncSuccess
-                setTimeout(() => {
-                  showToast.value = false
-                }, 1000)
+                createToast({msg: i18n().accountPage.syncSuccess})
                 localStorage.setItem('ToDo', res.data)
               } else {
-                toastMsg.value = i18n().accountPage.syncFail
-                setTimeout(() => {
-                  showToast.value = false
-                }, 1000)
+                createToast({msg: i18n().accountPage.syncFail})
               }
             })
           }
@@ -218,15 +202,9 @@ const login = () => {
               return res.json()
             }).then(res => {
               if (res.code === 200) {
-                toastMsg.value = i18n().accountPage.syncSuccess
-                setTimeout(() => {
-                  showToast.value = false
-                }, 1000)
+                createToast({msg: i18n().accountPage.syncSuccess})
               } else {
-                toastMsg.value = i18n().accountPage.syncFail
-                setTimeout(() => {
-                  showToast.value = false
-                }, 1000)
+                createToast({msg: i18n().accountPage.syncFail})
               }
             })
           } else {
@@ -242,17 +220,11 @@ const login = () => {
               return res.json()
             }).then(res => {
               if (res._id) {
-                toastMsg.value = i18n().accountPage.syncSuccess
-                setTimeout(() => {
-                  showToast.value = false
-                }, 1000)
+                createToast({msg: i18n().accountPage.syncSuccess})
                 localStorage.setItem('cate', res.data)
                 emitter.emit('setCate', res.data)
               } else {
-                toastMsg.value = i18n().accountPage.syncFail
-                setTimeout(() => {
-                  showToast.value = false
-                }, 1000)
+                createToast({msg: i18n().accountPage.syncFail})
               }
             })
           }

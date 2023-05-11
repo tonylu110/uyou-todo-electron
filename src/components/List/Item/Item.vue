@@ -64,11 +64,6 @@
       >
         {{ text }}
       </span>
-      <Toast
-        v-if="showToast"
-        :msg="i18n().copyToast"
-        :center="true"
-      />
     </div>
     <ContextMenu
       :pos="contextMenu"
@@ -86,11 +81,11 @@
 import { onBeforeUnmount, onMounted, reactive, Ref, ref, watchEffect } from 'vue';
 import getTime from '../../../util/getTime';
 import i18n from '../../../i18n';
-import Toast from '../../Toast';
 import { useRoute } from 'vue-router';
 import ContextMenu from "../../ContextMenu/ContextMenu.vue";
 import { cateItem } from '../../ListMenu/ICateItem';
 import emitter from '../../../util/bus';
+import { createToast } from '../../Toast';
 
 const props = defineProps<{
   time: number,
@@ -123,13 +118,9 @@ const deleteItem = () => {
   emits('deleteItem', props.time!)
 }
 
-const showToast = ref(false)
 const copyText = () => {
   navigator.clipboard.writeText(props.text!).then(() => {
-    showToast.value = true
-    setTimeout(() => {
-      showToast.value = false
-    }, 1000)
+    createToast({msg: i18n().copyToast, center: true}, itemDom.value)
   })
 }
 const moreShow = ref(false)

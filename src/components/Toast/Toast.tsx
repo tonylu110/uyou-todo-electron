@@ -1,6 +1,6 @@
 import { defineComponent } from "vue";
 
-interface IProps {
+export interface IProps {
   msg: string
   center?: boolean
 }
@@ -20,7 +20,7 @@ export default defineComponent({
         p-7px
         rounded-5px
         font-bold
-        c="#996b3d" bg="#fff6dc" shadow-xl
+        c="#996b3d" bg="#fff6dc" shadow="md black/20"
         animate-duration-300 animate-fill-mode-forwards animate-ease
         top={props.center ? '50%' : ''}
         left={props.center ? '50%' : (simpleMode ? '50%' : '[calc(50%+150px)]')}

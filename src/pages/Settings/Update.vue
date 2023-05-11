@@ -70,7 +70,6 @@
       </div>
     </div>
     <ItemButton mode="primary" @click="updateButtonCilck">{{ updateButton }}</ItemButton>
-    <Toast :msg="newVersion" v-if="toastShow" />
   </SettingList>
 </template>
 
@@ -82,7 +81,7 @@ import router from '../../router';
 import SettingList from "../../components/SettingList";
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue';
 import { versionCode } from '../../util/appVersionCode';
-import Toast from '../../components/Toast';
+import { createToast } from '../../components/Toast';
 
 const { app } = require('@electron/remote')
 const { ipcRenderer } = require('electron')
@@ -92,7 +91,6 @@ const version = versionCode
 const updateMsg: Ref<string[]> = ref([])
 const newVersion = ref('')
 const updateButton = ref(i18n().update.checkingUpdate)
-const toastShow = ref(false)
 const getUpdate = () => {
   setTimeout(() => {
     fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
@@ -105,10 +103,7 @@ const getUpdate = () => {
       } else {
         newVersion.value = i18n().update.notUpdate
         updateButton.value = i18n().update.checkUpdate
-        toastShow.value = true
-        setTimeout(() => {
-          toastShow.value = false
-        }, 1000);
+        createToast({msg: newVersion.value})
       }
     })
   }, Math.floor(Math.random () * 900) + 100);
@@ -131,10 +126,7 @@ const toDevMode = () => {
   if ((clickNum.value > 4) || isInDev) {
     newVersion.value = 'opened dev!!!'
     localStorage.setItem('isInDev', 'true')
-    toastShow.value = true
-    setTimeout(() => {
-      toastShow.value = false
-    }, 1000);
+    createToast({msg: newVersion.value})
   }
 }
 
