@@ -47,7 +47,7 @@
         @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
       />
       <Item
-        title="item text wrap"
+        :title="i18n().anotherSettings.itemWrap"
         :show-switch="true"
         :switch-state="textWrapState"
         @switch-fun="setSwitchFn('routerUrl', !textWrapState, () => textWrapState = !textWrapState)"

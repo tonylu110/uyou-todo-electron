@@ -91,7 +91,8 @@ const anotherSettings = {
     about: 'uyou ToDo について',
     simple: 'シンプルモード',
     enterToAdd: '入力して ToDo を追加',
-    autoStart: 'システムで開く'
+    autoStart: 'システムで開く',
+    itemWrap: 'ToDo デフォルトオープン'
 }
 
 const contextMenu = {

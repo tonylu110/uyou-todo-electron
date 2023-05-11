@@ -91,7 +91,8 @@ const anotherSettings = {
     about: 'About uyou ToDo',
     simple: 'Simple Mode',
     enterToAdd: 'Enter to add ToDo',
-    autoStart: 'Open With System'
+    autoStart: 'Open With System',
+    itemWrap: 'ToDo default open'
 }
 
 const contextMenu = {

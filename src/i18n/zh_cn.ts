@@ -91,7 +91,8 @@ const anotherSettings = {
     about: '关于 uyou ToDo',
     simple: '简易模式',
     enterToAdd: '回车添加 ToDo',
-    autoStart: '开机自启'
+    autoStart: '开机自启',
+    itemWrap: 'ToDo 默认展开'
 }
 
 const contextMenu = {
