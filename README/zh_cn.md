@@ -6,13 +6,13 @@
 
 - 开发运行
     ``` 
-    yarn
-    yarn electron:serve
+    pnpm i
+    pnpm electron:serve
     ```
 - 编译
   ```
-  yarn
-  yarn electron:build
+  pnpm i
+  pnpm electron:build
   ```
 
 ## 预览

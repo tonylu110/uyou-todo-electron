@@ -6,9 +6,9 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
 
 - run in development mode
   ```bash 
-  yarn
-  yarn electron:serve // run in Windows
-  yarn electron:servemac // run in mac
+  pnpm i
+  pnpm electron:serve // run in Windows
+  pnpm electron:servemac // run in mac
   ```
 - build
   ```bash
