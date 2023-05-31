@@ -14,6 +14,15 @@
       <span class="title" mb="!10px">{{ i18n().listMenu.cate }}</span>
       <perfect-scrollbar class="cate" @ps-scroll-y="onScroll" ref="cateListRef" :shadow="ps === 0 ? '' : 'inner'">
         <div class="all-todo-list" 
+          :style="{ backgroundColor: routeQueryName === 'today' ? '#00000010' : '', borderTop: '2px solid #00000010' }" 
+          @click="toList('today')"
+        >
+          <div>
+            <div i-mdi:weather-sunny text-18px c="#00000090"></div>
+            <span style="font-size: 14px; margin-left: 10px;">Today</span>
+          </div>
+        </div>
+        <div class="all-todo-list" 
           :style="{ backgroundColor: routeName === 'Home' ? '#00000010' : '', borderTop: '2px solid #00000010' }" 
           @click="router.push('/')"
         >

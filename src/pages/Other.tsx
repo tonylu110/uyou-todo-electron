@@ -26,6 +26,9 @@ export default defineComponent({
       } else if (route.query.listName === 'allDo') {
         listData.value = list.value!.filter(listData => listData.ok === true)
         title.value = i18n().listMenu.completed
+      } else if (route.query.listName === 'today') {
+        listData.value = list.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString())
+        title.value = i18n().listMenu.completed
       } else {
         listData.value = list.value!.filter(listData => listData.cate === route.query.listName)
         const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
