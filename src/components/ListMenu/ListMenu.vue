@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="all-todo-list" 
-          :style="{ backgroundColor: routeName === 'Home' ? '#00000010' : '', borderTop: '2px solid #00000010' }" 
+          :style="{ backgroundColor: routeName === 'Home' ? '#00000010' : '' }" 
           @click="router.push('/')"
         >
           <div>

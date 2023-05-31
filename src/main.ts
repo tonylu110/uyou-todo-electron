@@ -1,6 +1,6 @@
 import 'virtual:uno.css'
 import './main.scss'
-import { createApp } from 'vue'
+import { createApp, ref } from 'vue'
 import App from './App.vue'
 import PerfectScrollbar from 'vue3-perfect-scrollbar'
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
@@ -20,3 +20,10 @@ if (simpleMode === 'false' || simpleMode === null) {
 app.use(router)
 app.use(PerfectScrollbar)
 app.mount('#app')
+
+const startRoute = ref(localStorage.getItem('start') ? localStorage.getItem('start')! : 'home')
+if (startRoute.value === 'home')
+  startRoute.value = '/'
+else 
+  startRoute.value = '/other?listName=today'
+router.push(startRoute.value)

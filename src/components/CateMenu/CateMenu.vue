@@ -42,6 +42,13 @@ const emits = defineEmits<{
     <div 
       p-10px text-18px
       bg="hover:black/5 active:black/10" w-screen text-center
+      @click="toList('today')"
+    >
+      Today
+    </div>
+    <div 
+      p-10px text-18px
+      bg="hover:black/5 active:black/10" w-screen text-center
       @click="router.push('/')"
     >
       {{ i18n().listMenu.allTodo }}

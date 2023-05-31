@@ -42,6 +42,14 @@
         @switch-fun="setSwitchFn('simpleMode', !simpleModeState, () => simpleModeState = !simpleModeState, 'setSimple', i18n().restartApp)"
       />
       <Item
+        title="start page"
+        :show-list-box="true"
+        :list-box-title="startPage"
+        :list="startPageList"
+        @home="setStartPage('home')"
+        @today="setStartPage('today')"
+      />
+      <Item
         :title="i18n().anotherSettings.enterToAdd"
         :show-switch="true"
         :switch-state="enterAddState"
@@ -127,7 +135,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeUnmount } from 'vue';
+import { ref, onBeforeUnmount, Ref } from 'vue';
 import TabBar from '../../components/TabBar/TabBar.vue';
 import SettingList from '../../components/SettingList';
 import i18n from '../../i18n';
@@ -195,6 +203,22 @@ onBeforeUnmount(() => {
 })
 
 const isInDev = localStorage.getItem('isInDev') === 'true'
+
+const startPage = ref(localStorage.getItem('start') ? localStorage.getItem('start') : 'home') as unknown as Ref<string>
+const startPageList = [
+  {
+    title: 'home',
+    fn: 'home'
+  },
+  {
+    title: 'today',
+    fn: 'today'
+  }
+]
+const setStartPage = (StartPage: string) => {
+  localStorage.setItem('start', StartPage)
+  startPage.value = StartPage
+} 
 </script>
 
 <style scoped lang="scss">

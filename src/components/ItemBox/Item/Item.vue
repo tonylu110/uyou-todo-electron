@@ -2,9 +2,9 @@
   <div 
     class="item" 
     :style="{
-      backgroundColor: showSwitch ? 'white' : '',
-      color: showSwitch ? 'black' : '',
-      cursor: showSwitch ?  'auto' : '',
+      backgroundColor: showSwitch || showListBox ? 'white' : '',
+      color: showSwitch || showListBox ? 'black' : '',
+      cursor: showSwitch || showListBox ?  'auto' : '',
       width: simpleMode ? 'calc(100% - 50px)' : ''
     }"
     @click="emits('itemFun')"
@@ -19,11 +19,40 @@
       :swichState="switchState"
       @switch="emits('switchFun')"
     />
-    <div i-mdi:chevron-right text-24px absolute right-15px v-if="showArrow && !showSwitch"></div>
+    <div
+      border="1px solid black/10" right-15px relative
+      p="x-10px y-5px" rounded-5px bg="active:black/10"
+      cursor-pointer
+      v-if="showListBox"
+      @click="showList = !showList"
+    >
+      <div w="!fit" flex justify-center items-center>
+        {{ listBoxTitle }}
+        <div i-mdi:chevron-down ml-5px></div>
+      </div>
+      <div 
+        absolute right-0 bg-white top-0
+        flex="~ !col" justify-center items-center
+        shadow="md black/10" z-10 p-10px
+        rounded-7px
+        v-if="showList"
+      >
+        <div 
+          p="x-15px y-10px" bg="active:black/10 hover:black/5" rounded-5px
+          v-for="(item, index) in list" 
+          :key="index" 
+          @click="emits(item.fn)"
+        >
+          {{ item.title }}
+        </div>
+      </div>
+    </div>
+    <div i-mdi:chevron-right text-24px absolute right-15px v-if="showArrow && !showSwitch && !showListBox"></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import Switch from '../../Switch';
 
 withDefaults(defineProps<{
@@ -32,19 +61,30 @@ withDefaults(defineProps<{
   showSwitch?: boolean
   showArrow?: boolean
   itemImg?: string
+  showListBox?: boolean,
+  listBoxTitle?: string,
+  list?: {
+    title: string
+    fn: string
+  }[]
 }>(), {
   switchState: true,
   title: 'title',
   showSwitch: false,
-  showArrow: true
+  showArrow: true,
+  showListBox: false,
+  listBoxTitle: 'item'
 })
 
 const emits = defineEmits<{
-  (e: 'switchFun'): void,
+  (e: 'switchFun'): void
   (e: 'itemFun'): void
+  (e: string): void
 }>()
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
+
+const showList = ref(false)
 </script>
 
 <style scoped lang="scss">
