@@ -128,7 +128,7 @@
 <script setup lang="ts">
 import i18n from '../../i18n';
 import router from '../../router';
-import { ref, watchEffect, reactive, onMounted, Ref } from 'vue';
+import { ref, watchEffect, reactive, Ref } from 'vue';
 import { useRoute } from 'vue-router';
 import changeCate from './changCate';
 import { cateItem } from './ICateItem';

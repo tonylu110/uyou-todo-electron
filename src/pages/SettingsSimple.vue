@@ -86,7 +86,6 @@
 </template>
 
 <script setup lang="ts">
-
 import TabBar from "../components/TabBar/TabBar.vue";
 import i18n from "../i18n";
 import router from "../router";
