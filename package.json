@@ -18,10 +18,10 @@
   "dependencies": {
     "@electron/remote": "^2.0.8",
     "electron-store": "^8.1.0",
-    "mica-electron": "^1.3.2"
+    "mica-electron": "^1.4.5"
   },
   "devDependencies": {
-    "@electron/rebuild": "^3.2.10",
+    "@electron/rebuild": "^3.2.13",
     "@iconify-json/fluent": "^1.1.19",
     "@iconify-json/fluent-emoji-high-contrast": "^1.1.9",
     "@iconify-json/mdi": "^1.1.50",
@@ -33,8 +33,8 @@
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",
-    "electron": "^22.3.0",
-    "electron-builder": "^23.6.0",
+    "electron": "^25.1.1",
+    "electron-builder": "^24.4.0",
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
     "sass": "^1.53.0",
