@@ -22,15 +22,15 @@
     }
 
     .setting-list {
-      padding: 10px 20px;
-      width: 259px;
-      margin-bottom: 20px;
+      padding: 10px;
+      width: 260px;
+      margin-left: 10px;
+      margin-bottom: 3px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-radius: 7px;
       cursor: pointer;
-      border-top: 2px solid #00000010;
-      border-bottom: 2px solid #00000010;
 
       div {
         display: flex;
@@ -43,35 +43,10 @@
         font-size: 18px;
         font-weight: bold;
       }
-
-      &:hover {
-        background-color: #00000005;
-      }
-
-      &:active {
-        background-color: #00000010;
-      }
     }
 
     .all-todo-list {
       @extend .setting-list;
-      margin-top: 10px;
-      
-      &:first-child {
-        margin-top: 0;
-      }
-
-      &:not(:last-child) {
-        margin-bottom: -11px;
-      }
-
-      &:nth-child(odd) {
-        border-top: 0px;
-      }
-
-      &:nth-child(even) {
-        border-top: 0px;
-      }
     }
 
     .account-list {

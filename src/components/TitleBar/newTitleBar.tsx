@@ -1,13 +1,15 @@
 import { defineComponent, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import emitter from '../../util/bus'
-import { isMac } from '../../util/os'
+import { isMac, isWindow } from '../../util/os'
 import firstLoad from './firstLoad'
 
 export default defineComponent({
   setup() {
     // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
     const ipcRenderer = require('electron').ipcRenderer
+    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+    const os = require('node:os')
 
     const route = useRoute()
 
@@ -27,14 +29,19 @@ export default defineComponent({
       isLight.value = (data as boolean)
     })
 
+    const isWindows10OrAfter = os.release().split('.')[2] > 15063
+    const listMenuColor = ref(false)
+    if (isWindow() && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && isWindows10OrAfter)
+      listMenuColor.value = true
+
     return () => (
       <div
         drag w-300px h-40px
         flex items-center
-        bg={isMac() ? '#fff6dcaa' : ''}
+        bg={isMac() ? '#fff6dcaa' : listMenuColor.value ? 'transparent' : '#fff6dcaa'}
       >
-        {isMac() ? 
-        <div
+        {isMac()
+          ? <div
           no-drag
           cursor-pointer p-6px
           w-13px h-13px rounded-full
@@ -44,14 +51,13 @@ export default defineComponent({
           class="group"
           onClick={onTopWindow}
         >
-          <div 
+          <div
             i-fluent:pin-48-filled
             c={route.name === 'Home' || route.name === 'other' ? 'white' : topState.value ? 'group-hover:white group-active:white white' : '#555'}
             text-13px text-center
           ></div>
-        </div> 
-        : 
-        <div
+        </div>
+          : <div
           bg={topState.value ? 'error-d hover:error-h active:error-a' : 'hover:black/10 active:black/20'}
           w-50px h-20px no-drag
           flex items-center justify-center

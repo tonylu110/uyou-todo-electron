@@ -50,7 +50,6 @@ function showAddFn() {
 }
 function onScroll() {
   ps.value = cateListRef.value.ps.scrollbarYTop
-  console.log(cateListRef.value.ps.scrollbarYTop)
 }
 
 function addCate() {
@@ -109,75 +108,120 @@ emitter.on('setCate', (data) => {
     <div class="list">
       <span class="title">{{ i18n().accountPage.account }}</span>
       <div
-        class="account-list"
-        :style="{ backgroundColor: routeName === 'account' && form !== 'setting' ? '#00000010' : '' }"
+        class="account-list group"
+        mb="!20px"
+        :bg="routeName === 'account' && form !== 'setting' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
         @click="router.push('/account')"
       >
         <div>
-          <div i-mdi:account-circle text-18px c="#00000090" />
-          <span style="font-size: 14px; margin-left: 10px;">{{ i18n().myAccount }}</span>
+          <div
+            i-mdi:account-circle text-18px
+            :c="routeName === 'account' && form !== 'setting' ? 'white group-hover:white' : 'group-hover:white #00000090'"
+          />
+          <span
+            style="font-size: 14px; margin-left: 10px;"
+            :c="routeName === 'account' && form !== 'setting' ? '!white group-hover:!white' : 'group-hover:!white'"
+          >{{ i18n().myAccount }}</span>
         </div>
       </div>
       <span class="title" mb="!10px">{{ i18n().listMenu.cate }}</span>
       <perfect-scrollbar ref="cateListRef" class="cate" :shadow="ps === 0 ? '' : 'inner'" @ps-scroll-y="onScroll">
         <div
-          class="all-todo-list"
-          :style="{ backgroundColor: routeQueryName === 'today' ? '#00000010' : '', borderTop: '2px solid #00000010' }"
+          class="all-todo-list group"
+          :bg="routeQueryName === 'today' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
           @click="toList('today')"
         >
           <div>
-            <div i-mdi:weather-sunny text-18px c="#00000090" />
-            <span style="font-size: 14px; margin-left: 10px;">Today</span>
+            <div
+              i-mdi:weather-sunny text-18px
+              :c="routeQueryName === 'today' ? 'white group-hover:white' : 'group-hover:white #00000090'"
+            />
+            <span
+              style="font-size: 14px; margin-left: 10px;"
+              :c="routeQueryName === 'today' ? '!white group-hover:!white' : 'group-hover:!white'"
+            >Today</span>
           </div>
         </div>
         <div
-          class="all-todo-list"
-          :style="{ backgroundColor: routeName === 'Home' ? '#00000010' : '' }"
+          class="all-todo-list group"
+          :bg="routeName === 'Home' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
           @click="router.push('/')"
         >
           <div>
-            <div i-mdi:list-box-outline text-18px c="#00000090" />
-            <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.allTodo }}</span>
+            <div
+              i-mdi:list-box-outline text-18px
+              :c="routeName === 'Home' ? 'white group-hover:white' : 'group-hover:white #00000090'"
+            />
+            <span
+              style="font-size: 14px; margin-left: 10px;"
+              :c="routeName === 'Home' ? '!white group-hover:!white' : 'group-hover:!white'"
+            >{{ i18n().listMenu.allTodo }}</span>
           </div>
         </div>
-        <div class="all-todo-list" :style="{ backgroundColor: routeQueryName === 'allNotDo' ? '#00000010' : '' }" @click="toList('allNotDo')">
+        <div
+          class="all-todo-list group"
+          :bg="routeQueryName === 'allNotDo' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
+          @click="toList('allNotDo')"
+        >
           <div>
-            <div i-mdi:circle-outline text-18px c="#00000090" />
-            <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.incompleted }}</span>
+            <div
+              i-mdi:circle-outline text-18px
+              :c="routeQueryName === 'allNotDo' ? 'white group-hover:white' : 'group-hover:white #00000090'"
+            />
+            <span
+              style="font-size: 14px; margin-left: 10px;"
+              :c="routeQueryName === 'allNotDo' ? '!white group-hover:!white' : 'group-hover:!white'"
+            >{{ i18n().listMenu.incompleted }}</span>
           </div>
         </div>
-        <div class="all-todo-list" :style="{ backgroundColor: routeQueryName === 'allDo' ? '#00000010' : '' }" @click="toList('allDo')">
+        <div
+          class="all-todo-list group"
+          :bg="routeQueryName === 'allDo' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
+          @click="toList('allDo')"
+        >
           <div>
-            <div i-mdi:checkbox-marked-circle text-18px c="#00000090" />
-            <span style="font-size: 14px; margin-left: 10px;">{{ i18n().listMenu.completed }}</span>
+            <div
+              i-mdi:checkbox-marked-circle text-18px
+              :c="routeQueryName === 'allDo' ? 'white group-hover:white' : 'group-hover:white #00000090'"
+            />
+            <span
+              style="font-size: 14px; margin-left: 10px;"
+              :c="routeQueryName === 'allDo' ? '!white group-hover:!white' : 'group-hover:!white'"
+            >{{ i18n().listMenu.completed }}</span>
           </div>
         </div>
         <div
           v-for="item in cateList"
           :key="item.id"
-          class="all-todo-list"
-          :style="{ backgroundColor: routeQueryName === `${item.id}` ? '#00000010' : '' }"
+          class="all-todo-list group"
+          :bg="routeQueryName === `${item.id}` ? 'primary-d hover:primary-a' : 'hover:primary-d'"
           @click="toList(`${item.id}`)"
         >
           <div>
-            <div i-mdi:star-circle-outline text-18px c="#00000090" />
-            <span style="font-size: 14px; margin-left: 10px;">{{ item.title }}</span>
+            <div
+              i-mdi:star-circle-outline text-18px
+              :c="routeQueryName === `${item.id}` ? 'white group-hover:white' : 'group-hover:white #00000090'"
+            />
+            <span
+              style="font-size: 14px; margin-left: 10px;"
+              :c="routeQueryName === `${item.id}` ? '!white group-hover:!white' : 'group-hover:!white'"
+            >{{ item.title }}</span>
           </div>
           <div
             flex justify-center items-center
-            bg="black/5 hover:black/10 active:black/15"
+            :bg="routeQueryName === `${item.id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'"
             h="18px" w="18px"
             rounded-xl transition="300 width margin"
             @click.stop="delCate(item.id)"
           >
-            <div i-mdi:close-thick c="#777" text-12px />
+            <div i-mdi:close-thick :c="routeQueryName === `${item.id}` ? 'white' : '#777 group-hover:white'" text-12px />
           </div>
         </div>
         <div
           v-if="showAdd" flex items-center
-          justify-center p-x-20px p-y-10px
-          w="259px" cursor-pointer
-          border="b-2px t-0 l-0 r-0 solid #00000010"
+          justify-center p-10px ml-10px
+          w="260px" cursor-pointer mb-5px
+          bg="black/5" rounded-7px
           mt="10px"
         >
           <div w="100%" flex items-center>
@@ -212,7 +256,7 @@ emitter.on('setCate', (data) => {
         <div
           flex items-center justify-center
           p-x-20px p-y-10px w="259px"
-          cursor-pointer border="b-2px t-0 l-0 r-0 solid #00000010"
+          cursor-pointer
           bg="active:#00000010 hover:#00000005"
           :mt="showAdd ? '' : '10px'"
           @click="showAddFn"
@@ -224,10 +268,21 @@ emitter.on('setCate', (data) => {
       </perfect-scrollbar>
     </div>
     <div class="list">
-      <div class="setting-list" :style="{ backgroundColor: routeName === 'setting' || form === 'setting' ? '#00000010' : '' }" @click="router.push('/setting')">
+      <div
+        mb="!20px"
+        class="setting-list group"
+        :bg="routeName === 'setting' || form === 'setting' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
+        @click="router.push('/setting')"
+      >
         <div>
-          <div i-mdi:cog text-18px c="#00000090" />
-          <span style="font-size: 14px; margin-left: 10px;">{{ i18n().settingTitleText }}</span>
+          <div
+            i-mdi:cog text-18px
+            :c="routeName === 'setting' || form === 'setting' ? 'white group-hover:white' : 'group-hover:white #00000090'"
+          />
+          <span
+            :c="routeName === 'setting' || form === 'setting' ? '!white group-hover:!white' : 'group-hover:!white'"
+            style="font-size: 14px; margin-left: 10px;"
+          >{{ i18n().settingTitleText }}</span>
         </div>
       </div>
     </div>

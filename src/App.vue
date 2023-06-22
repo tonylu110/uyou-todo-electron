@@ -99,6 +99,12 @@ emitter.on('routerShow', (data: unknown) => {
 onBeforeUnmount(() => {
   emitter.off('routerShow')
 })
+
+const isRound = ref(false)
+
+const isWindows = navigator.userAgent.includes('Win')
+if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && localStorage.getItem('systemTitle') === 'true' && !(localStorage.getItem('simpleMode') === 'true'))
+  isRound.value = true
 </script>
 
 <template>
@@ -110,7 +116,10 @@ onBeforeUnmount(() => {
         <TitleBar v-if="!systemTitleShow" />
         <ListMenu />
       </div>
-      <div class="todo-list">
+      <div
+        class="todo-list"
+        :rounded="isRound ? 'tl-15px' : ''"
+      >
         <router-view />
         <Alert
           :dialog-show="alertShow"
