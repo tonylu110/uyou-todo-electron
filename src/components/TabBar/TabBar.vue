@@ -6,6 +6,7 @@ import getCateList from '../../util/getCateList'
 import emitter from '../../util/bus'
 import Alert from '../Alert/Alert.vue'
 import i18n from '../../i18n'
+import { isMac } from '../../util/os'
 
 withDefaults(defineProps<{
   title?: string
@@ -129,7 +130,7 @@ ipcRenderer.on('useKeyAddItem', () => {
     </div>
     <div
       v-if="rightImgShow"
-      :right="simpleMode || systemTitleShow ? '' : '!80px'"
+      :right="simpleMode || systemTitleShow ? '' : isMac() ? '!50px' : '!80px'"
       class="box right-img"
       @click="() => emits('rightClick')"
     >
@@ -137,14 +138,14 @@ ipcRenderer.on('useKeyAddItem', () => {
     </div>
     <div
       v-if="syncImgShow && rightImgShow"
-      :right="simpleMode || systemTitleShow ? '' : '!116px'"
+      :right="simpleMode || systemTitleShow ? '' : isMac() ? '!86px' : '!116px'"
       class="box sync-img"
       @click="sync"
     >
       <div i-fluent:cloud-sync-24-filled text-22px c-white />
     </div>
     <div
-      v-if="!simpleMode && !systemTitleShow" flex no-drag absolute
+      v-if="(!simpleMode && !systemTitleShow) && !isMac()" flex no-drag absolute
       right-14px
     >
       <div

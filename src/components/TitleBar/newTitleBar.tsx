@@ -1,11 +1,15 @@
 import { defineComponent, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import emitter from '../../util/bus'
+import { isMac } from '../../util/os'
 import firstLoad from './firstLoad'
 
 export default defineComponent({
   setup() {
     // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
     const ipcRenderer = require('electron').ipcRenderer
+
+    const route = useRoute()
 
     const topState = ref(firstLoad())
     const onTopWindow = () => {
@@ -25,9 +29,28 @@ export default defineComponent({
 
     return () => (
       <div
-        drag w-230px h-40px
+        drag w-300px h-40px
         flex items-center
+        bg={isMac() ? '#fff6dcaa' : ''}
       >
+        {isMac() ? 
+        <div
+          no-drag
+          cursor-pointer p-6px
+          w-13px h-13px rounded-full
+          bg={topState.value ? 'error-d hover:error-h active:error-a' : 'black/10 hover:black/20 active:black/30'}
+          fixed right-14px top-15px z-100
+          flex justify-center items-center
+          class="group"
+          onClick={onTopWindow}
+        >
+          <div 
+            i-fluent:pin-48-filled
+            c={route.name === 'Home' || route.name === 'other' ? 'white' : topState.value ? 'group-hover:white group-active:white white' : '#555'}
+            text-13px text-center
+          ></div>
+        </div> 
+        : 
         <div
           bg={topState.value ? 'error-d hover:error-h active:error-a' : 'hover:black/10 active:black/20'}
           w-50px h-20px no-drag
@@ -37,7 +60,7 @@ export default defineComponent({
           onClick={onTopWindow}
         >
           <div i-fluent:pin-48-filled text-14px c={topState.value ? 'white' : '#555'}></div>
-        </div>
+        </div>}
       </div>
     )
   },
