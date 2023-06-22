@@ -1,6 +1,6 @@
 <template>
   <div
-    class="title-bar"
+    :class="`title-bar ${simpleMode ? '' : 'drag'}`"
     :style="{
       borderTopLeftRadius: isRound ? '15px' : '',
       backgroundColor: bgColor === 'light' ? 'white' : '',
@@ -36,11 +36,52 @@
         <div i-mdi:menu-down text-20px c-white vertical-baseline v-else></div>
       </div>
     </div>
-    <div v-if="rightImgShow" class="box right-img" @click="() => emits('rightClick')">
+    <div 
+      :right="simpleMode ? '' : '!80px'"
+      v-if="rightImgShow" 
+      class="box right-img" 
+      @click="() => emits('rightClick')"
+    >
       <div i-mdi:pencil-plus text-20px c-white></div>
     </div>
-    <div v-if="syncImgShow && rightImgShow" class="box sync-img" @click="sync">
+    <div 
+      :right="simpleMode ? '' : '!116px'"
+      v-if="syncImgShow && rightImgShow" 
+      class="box sync-img" 
+      @click="sync"
+    >
       <div i-fluent:cloud-sync-24-filled text-22px c-white></div>
+    </div>
+    <div 
+      flex no-drag absolute right-14px
+      v-if="!simpleMode"
+    >
+      <div
+        cursor-pointer p-7px mr-7px
+        w-11px h-11px rounded-full
+        bg="black/10 hover:black/20 active:black/30" 
+        class="group"
+        @click="() => ipcRenderer.send('window-min')"
+      >
+        <div 
+          i-fluent-emoji-high-contrast:minus block
+          :c="route.name === 'Home' || route.name === 'other' ? 'white' : '#555'"
+          text-11px text-center
+        ></div>
+      </div>
+      <div
+        cursor-pointer p-6px
+        w-13px h-13px rounded-full
+        bg="black/10 hover:error-d active:error-a" 
+        class="group"
+        @click="() => ipcRenderer.send('window-close')"
+      >
+        <div 
+          i-mdi:close-thick block
+          :c="route.name === 'Home' || route.name === 'other' ? 'white' : '#555 group-hover:white group-active:white'"
+          text-13px text-center
+        ></div>
+      </div>
     </div>
   </div>
   <cate-menu v-if="showList && simpleMode" @click-menu="showListFn"/>
@@ -51,6 +92,9 @@ import { onMounted, ref } from 'vue';
 import CateMenu from '../CateMenu/CateMenu.vue'
 import getCateList from '../../util/getCateList';
 import emitter from '../../util/bus';
+import { useRoute } from 'vue-router';
+
+const ipcRenderer = require('electron').ipcRenderer
 
 withDefaults(defineProps<{
   title?: string,
@@ -83,6 +127,8 @@ onMounted(() => {
     syncImgShow.value = true
   }
 })
+
+const route = useRoute()
 
 const sync = () => {
   if (syncImgShow.value) {
@@ -156,6 +202,7 @@ const showWrapFn = () => {
     justify-content: center;
     align-items: center;
     border: 1px solid #594b4270;
+    -webkit-app-region: no-drag;
 
     & span {
       display: block;

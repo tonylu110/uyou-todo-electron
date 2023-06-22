@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, Ref, onBeforeUnmount, onMounted } from 'vue';
 import i18n from './i18n';
-import TitleBar from './components/TitleBar/TitleBar.vue';
+import TitleBar from './components/TitleBar/newTitleBar';
 import Alert from './components/Alert/Alert.vue';
 import ListMenu from './components/ListMenu/ListMenu.vue';
 import { versionCode } from './util/appVersionCode'
@@ -95,10 +95,12 @@ onBeforeUnmount(() => {
   <router-url v-if="routerShow"/>
   <router-view name="isWindow"></router-view>
   <div class="list-main" v-if="!isWinDow">
-    <TitleBar />
     <div class="list-in">
-      <ListMenu />
-      <div class="todo-list" :style="{height: titleBarShow ? '100vh' : ''}">
+      <div>
+        <TitleBar />
+        <ListMenu />
+      </div>
+      <div class="todo-list">
         <router-view></router-view>
         <Alert 
           :dialogShow="alertShow"
@@ -127,7 +129,7 @@ onBeforeUnmount(() => {
     
     .todo-list {
       width: calc(100vw - 300px);
-      height: calc(100vh - 40px);
+      height: 100vh;
       overflow: hidden;
     }
   }

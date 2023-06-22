@@ -92,6 +92,7 @@ onMounted(() => {
   transition: dialog;
   user-select: none;
   color: #00000090;
+  outline: none;
 
   .title {
     -webkit-app-region: drag;

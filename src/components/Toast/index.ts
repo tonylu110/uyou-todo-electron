@@ -17,6 +17,4 @@ export const createToast = ({ msg, center }: IProps, node?: Element) => {
     else
       document.body.removeChild(container)
   }, 1000);
-
-  console.log(node);
 }
