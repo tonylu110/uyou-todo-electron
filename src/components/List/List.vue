@@ -152,8 +152,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
     </transition-group>
     <template v-else name="other">
       <Item
-        v-for="item in list"
-        v-show="!item.ok"
+        v-for="item in list.filter(listData => listData.ok === false)"
         :key="item.id"
         ref="item"
         :text="item.text"
@@ -164,9 +163,9 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
         @set-cate="setCate"
       />
       <div
-        bg="#fff6dc hover:#f3ebd3 active:#eae2ca"
-        :translate="simpleMode ? 'x-[calc(-50vw+50%+10px)]' : 'x-[calc(((-100vw+300px)/2)+50%+10px)]'" whitespace-nowrap
-        mb-10px v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo'" p-x-10px p-y-5px rounded-5px c="#6e492f"
+        v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo' && list.filter(listData => listData.ok === true).length > 0"
+        bg="#fff6dc hover:#f3ebd3 active:#eae2ca" :translate="simpleMode ? 'x-[calc(-50vw+50%+10px)]' : 'x-[calc(((-100vw+300px)/2)+50%+10px)]'"
+        whitespace-nowrap mb-10px p-x-10px p-y-5px rounded-5px c="#6e492f"
         font-bold flex items-center cursor-pointer
         shadow="sm black/30"
         @click="setSwitchFn('notDoShow', !showNotDo, () => showNotDo = !showNotDo)"
@@ -184,8 +183,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
       </div>
       <template v-if="showNotDo">
         <Item
-          v-for="item in list"
-          v-show="item.ok"
+          v-for="item in list.filter(listData => listData.ok === true)"
           :key="item.id"
           ref="item"
           :text="item.text"
