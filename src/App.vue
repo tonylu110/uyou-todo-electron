@@ -78,6 +78,14 @@ const isWinDow = ref(true)
 
 router.isReady().then(() => {
   isWinDow.value = route.query.isWin === 'true'
+  if (!isWinDow.value) {
+    const startRoute = ref(localStorage.getItem('start') ? localStorage.getItem('start')! : 'home')
+    if (startRoute.value === 'home')
+      startRoute.value = '/'
+    else 
+      startRoute.value = '/other?listName=today'
+    router.push(startRoute.value)
+  }
 })
 
 const routerShow = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)

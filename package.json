@@ -21,7 +21,6 @@
     "mica-electron": "^1.4.5"
   },
   "devDependencies": {
-    "@electron/rebuild": "^3.2.13",
     "@iconify-json/fluent": "^1.1.19",
     "@iconify-json/fluent-emoji-high-contrast": "^1.1.9",
     "@iconify-json/mdi": "^1.1.50",
