@@ -83,6 +83,10 @@ function showWrapFn() {
 }
 
 const dialogShow = ref(false)
+
+ipcRenderer.on('useKeyAddItem', () => {
+  emits('rightClick')
+})
 </script>
 
 <template>

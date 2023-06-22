@@ -1,5 +1,5 @@
 const path = require('node:path')
-const { app, BrowserWindow, ipcMain, screen, Menu, shell, nativeTheme } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Menu, shell, nativeTheme, globalShortcut } = require('electron')
 const Store = require('electron-store')
 const remoteMain = require('@electron/remote/main')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('../store/windowSizeStore')
@@ -91,6 +91,17 @@ function createWindow() {
     shell.openExternal(url)
   })
 
+  ipcMain.on('setAddItemCut', (event, use) => {
+    if (use) {
+      globalShortcut.register('Alt+A', () => {
+        mainWindow.webContents.send('useKeyAddItem')
+      })
+    }
+    else {
+      globalShortcut.unregister('Alt+A')
+    }
+  })
+
   windowSizeIpc()
   systemBarIpc()
   menuBlurIpc()
@@ -156,7 +167,7 @@ app.whenReady().then(() => {
 
   Menu.setApplicationMenu(null)
 
-  if (process.platform == 'darwin' || windowMenu)
+  if (process.platform === 'darwin' || windowMenu)
     Menu.setApplicationMenu(appMenu)
 
   app.on('activate', () => {

@@ -1,8 +1,8 @@
 const path = require('node:path')
-const { app, BrowserWindow, ipcMain, screen, Menu, shell } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Menu, shell, globalShortcut } = require('electron')
 const Store = require('electron-store')
 const remoteMain = require('@electron/remote/main')
-const { PARAMS, VALUE, MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
+const { MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
 const menuTemplate = require('./menu.js')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
@@ -103,6 +103,17 @@ function createWindow() {
   })
 
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
+
+  ipcMain.on('setAddItemCut', (event, use) => {
+    if (use) {
+      globalShortcut.register('Alt+A', () => {
+        mainWindow.webContents.send('useKeyAddItem')
+      })
+    }
+    else {
+      globalShortcut.unregister('Alt+A')
+    }
+  })
 
   windowSizeIpc()
   systemBarIpc()

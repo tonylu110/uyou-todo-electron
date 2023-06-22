@@ -58,25 +58,29 @@ const showList = ref(false)
     <div
       v-if="showListBox" border="1px solid black/10" right-15px
       relative p="x-10px y-5px" rounded-5px
-      bg="active:black/10"
+      bg="active:primary-d"
       cursor-pointer
+      class="group"
       @click="showList = !showList"
     >
-      <div w="!fit" flex justify-center items-center>
+      <div w="!fit" flex justify-center items-center group-active:c-white>
         {{ listBoxTitle }}
-        <div i-mdi:chevron-down ml-5px />
+        <div v-if="showList" i-mdi:chevron-up ml-5px group-active:c-white />
+        <div v-else i-mdi:chevron-down ml-5px group-active:c-white />
       </div>
       <div
-        absolute right-0 v-if="showList" bg-white
-        top-0 flex="~ !col" justify-center
-        items-center shadow="md black/10" z-10
-        p-10px
+        v-if="showList"
+        absolute right-0 bg-white
+        top-35px flex="~ !col" justify-center
+        items-center shadow="xl black/20" z-10
+        p-10px border="1px solid black/5"
         rounded-7px
       >
         <div
-          v-for="(item, index) in list" :key="index" p="x-15px y-10px"
-          bg="active:black/10 hover:black/5"
-          rounded-5px
+          v-for="(item, index) in list" :key="index"
+          p="x-20px y-10px"
+          bg="active:primary-a hover:primary-d"
+          rounded-5px c="hover:white active:white"
           @click="emits(item.fn)"
         >
           {{ item.title }}

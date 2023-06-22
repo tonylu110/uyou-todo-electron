@@ -12,6 +12,7 @@ import emitter from '../util/bus'
 import isDev from '../util/mode'
 import setSwitchFn from '../util/setSwitchFn'
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const os = require('node:os')
 
 const isLinux = !(process.platform === 'linux')
@@ -32,6 +33,7 @@ emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
 })
 emitter.on('routerShow', (data: unknown) => {
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
   routerUrlState.value = (data as boolean)
 })
 function clearData() {

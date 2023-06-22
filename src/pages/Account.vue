@@ -11,6 +11,7 @@ import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
 import emitter from '../util/bus'
 import { createToast } from '../components/Toast'
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
@@ -219,7 +220,7 @@ function openLogoff() {
     :right-img-show="false"
     :left-img-show="form === 'setting'"
     bg-color="light"
-    @leftClick="() => router.back()"
+    @left-click="() => router.back()"
   />
   <SettingList>
     <Item :title="loginText" :show-arrow="false" />
@@ -259,7 +260,7 @@ function openLogoff() {
       :title="i18n().accountPage.autoSync"
       :show-switch="true"
       :switch-state="swichState"
-      @switchFun="setAutoSync"
+      @switch-fun="setAutoSync"
     />
     <ItemButton v-if="loginState" @click="changPass">
       {{ i18n().accountPage.changPass }}

@@ -5,6 +5,7 @@ import { versionText } from '../util/appVersionCode'
 
 export default defineComponent({
   setup() {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
     const os = require('node:os')
 
     const isWindows10OrAfter = isWindow() && os.release().split('.')[2] > 15063
