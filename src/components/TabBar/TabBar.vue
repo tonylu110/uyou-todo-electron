@@ -37,7 +37,7 @@
       </div>
     </div>
     <div 
-      :right="simpleMode ? '' : '!80px'"
+      :right="simpleMode || systemTitleShow ? '' : '!80px'"
       v-if="rightImgShow" 
       class="box right-img" 
       @click="() => emits('rightClick')"
@@ -45,7 +45,7 @@
       <div i-mdi:pencil-plus text-20px c-white></div>
     </div>
     <div 
-      :right="simpleMode ? '' : '!116px'"
+      :right="simpleMode || systemTitleShow ? '' : '!116px'"
       v-if="syncImgShow && rightImgShow" 
       class="box sync-img" 
       @click="sync"
@@ -54,7 +54,7 @@
     </div>
     <div 
       flex no-drag absolute right-14px
-      v-if="!simpleMode"
+      v-if="!simpleMode && !systemTitleShow"
     >
       <div
         cursor-pointer p-7px mr-7px
@@ -95,6 +95,7 @@ import emitter from '../../util/bus';
 import { useRoute } from 'vue-router';
 
 const ipcRenderer = require('electron').ipcRenderer
+const systemTitleShow = localStorage.getItem('systemTitle') === 'true'
 
 withDefaults(defineProps<{
   title?: string,

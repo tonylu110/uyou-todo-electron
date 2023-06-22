@@ -42,7 +42,6 @@
 import { ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import firstLoad from './firstLoad';
-import i18n from '../../i18n';
 import emitter from '../../util/bus';
 
 const os = require('os')

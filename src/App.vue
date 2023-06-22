@@ -70,7 +70,7 @@ window.addEventListener('resize', () => {
   })
 })
 
-const titleBarShow = localStorage.getItem('systemTitle') === 'true'
+const systemTitleShow = localStorage.getItem('systemTitle') === 'true'
 
 const route = useRoute()
 const router = useRouter()
@@ -97,7 +97,7 @@ onBeforeUnmount(() => {
   <div class="list-main" v-if="!isWinDow">
     <div class="list-in">
       <div>
-        <TitleBar />
+        <TitleBar v-if="!systemTitleShow" />
         <ListMenu />
       </div>
       <div class="todo-list">
