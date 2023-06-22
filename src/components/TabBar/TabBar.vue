@@ -74,7 +74,7 @@
         w-13px h-13px rounded-full
         bg="black/10 hover:error-d active:error-a" 
         class="group"
-        @click="() => ipcRenderer.send('window-close')"
+        @click="dialogShow = true"
       >
         <div 
           i-mdi:close-thick block
@@ -85,6 +85,14 @@
     </div>
   </div>
   <cate-menu v-if="showList && simpleMode" @click-menu="showListFn"/>
+  <alert 
+    :dialog-show="dialogShow"
+    :title="i18n().accountPage.alertTitle"
+    @cancel="dialogShow = false"
+    @return="() => ipcRenderer.send('window-close')"
+  >
+    <span>Do you want to close uyou ToDo</span>
+  </alert>
 </template>
 
 <script setup lang="ts">
@@ -93,6 +101,8 @@ import CateMenu from '../CateMenu/CateMenu.vue'
 import getCateList from '../../util/getCateList';
 import emitter from '../../util/bus';
 import { useRoute } from 'vue-router';
+import Alert from '../Alert/Alert.vue';
+import i18n from '../../i18n';
 
 const ipcRenderer = require('electron').ipcRenderer
 const systemTitleShow = localStorage.getItem('systemTitle') === 'true'
@@ -168,6 +178,8 @@ const showListFn = () => {
 const showWrapFn = () => {
   emitter.emit('showWrap')
 }
+
+const dialogShow = ref(false)
 </script>
 
 <style lang="scss" scoped>
