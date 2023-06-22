@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
 import CateMenu from '../CateMenu/CateMenu.vue'
 import getCateList from '../../util/getCateList'
 import emitter from '../../util/bus'
-import Alert from '../Alert/Alert.vue'
-import i18n from '../../i18n'
 import { isMac } from '../../util/os'
+import windowButtons from './windowButtons'
 
 withDefaults(defineProps<{
   title?: string
@@ -44,8 +42,6 @@ onMounted(() => {
     syncImgShow.value = true
 })
 
-const route = useRoute()
-
 function sync() {
   if (syncImgShow.value) {
     fetch('https://api.todo.uyou.org.cn/gettodo', {
@@ -82,8 +78,6 @@ function showListFn() {
 function showWrapFn() {
   emitter.emit('showWrap')
 }
-
-const dialogShow = ref(false)
 
 ipcRenderer.on('useKeyAddItem', () => {
   emits('rightClick')
@@ -144,47 +138,9 @@ ipcRenderer.on('useKeyAddItem', () => {
     >
       <div i-fluent:cloud-sync-24-filled text-22px c-white />
     </div>
-    <div
-      v-if="(!simpleMode && !systemTitleShow) && !isMac()" flex no-drag absolute
-      right-14px
-    >
-      <div
-        cursor-pointer p-7px mr-7px
-        w-11px h-11px rounded-full
-        bg="black/10 hover:black/20 active:black/30"
-        class="group"
-        @click="() => ipcRenderer.send('window-min')"
-      >
-        <div
-          i-fluent-emoji-high-contrast:minus block
-          :c="route.name === 'Home' || route.name === 'other' ? 'white' : '#555'"
-          text-11px text-center
-        />
-      </div>
-      <div
-        cursor-pointer p-6px
-        w-13px h-13px rounded-full
-        bg="black/10 hover:error-d active:error-a"
-        class="group"
-        @click="dialogShow = true"
-      >
-        <div
-          i-mdi:close-thick block
-          :c="route.name === 'Home' || route.name === 'other' ? 'white' : '#555 group-hover:white group-active:white'"
-          text-13px text-center
-        />
-      </div>
-    </div>
+    <window-buttons v-if="(!simpleMode && !systemTitleShow) && !isMac()" />
   </div>
   <CateMenu v-if="showList && simpleMode" @click-menu="showListFn" />
-  <Alert
-    :dialog-show="dialogShow"
-    :title="i18n().accountPage.alertTitle"
-    @cancel="dialogShow = false"
-    @return="() => ipcRenderer.send('window-close')"
-  >
-    <span>Do you want to close uyou ToDo</span>
-  </Alert>
 </template>
 
 <style lang="scss" scoped>
