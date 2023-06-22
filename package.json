@@ -1,9 +1,9 @@
 {
   "name": "uyoutodo",
-  "private": false,
   "version": "1.3.2",
-  "main": "electron/main.js",
+  "private": false,
   "author": "Anthony Lu <taruruchan0@gmail.com>",
+  "main": "electron/main.js",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -13,7 +13,9 @@
     "electron:build": "vite build && electron-builder",
     "electron:buildmac": "vite build && electron-builder --config.npmRebuild=false -c.extraMetadata.main=electron/mac/mainMac.js",
     "electron": "wait-on tcp:3000 && cross-env NODE_ENV=development electron .",
-    "electron:mac": "wait-on tcp:3000 && cross-env NODE_ENV=development electron electron/mac/mainMac.js"
+    "electron:mac": "wait-on tcp:3000 && cross-env NODE_ENV=development electron electron/mac/mainMac.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@electron/remote": "^2.0.8",
@@ -21,6 +23,7 @@
     "mica-electron": "^1.4.5"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.39.5",
     "@iconify-json/fluent": "^1.1.19",
     "@iconify-json/fluent-emoji-high-contrast": "^1.1.9",
     "@iconify-json/mdi": "^1.1.50",
@@ -34,6 +37,7 @@
     "cross-env": "^7.0.3",
     "electron": "^25.1.1",
     "electron-builder": "^24.4.0",
+    "eslint": "^8.43.0",
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
     "sass": "^1.53.0",

@@ -1,4 +1,4 @@
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 
 interface IProps {
   swichState: boolean
@@ -7,8 +7,8 @@ interface IProps {
 export default defineComponent({
   props: {
     swichState: {
-      default: true
-    }
+      default: true,
+    },
   },
   emits: ['switch'],
   setup(props: IProps, { emit }) {
@@ -24,9 +24,9 @@ export default defineComponent({
           flex items-center justify-between
           ml=".575em"
         >
-          <div 
+          <div
             translate={props.swichState ? '' : 'x-[-1.75em]'}
-            w-8px h-8px rounded-5px 
+            w-8px h-8px rounded-5px
             bg-primary-d border="1px solid primary-d"
             transition-transform-300
           ></div>
@@ -40,12 +40,12 @@ export default defineComponent({
           ></div>
           <div
             translate={props.swichState ? '' : 'x-[-1.75em]'}
-            w-8px h-8px rounded-5px 
+            w-8px h-8px rounded-5px
             bg="#eee" border="1px solid #ccc"
             transition-transform-300 ml=".65em"
           ></div>
         </div>
       </div>
     )
-  }
+  },
 })

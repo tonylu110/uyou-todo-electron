@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
-import { cateItem } from '../ListMenu/ICateItem';
-import i18n from '../../i18n';
-import { useRouter } from 'vue-router';
-import emitter from '../../util/bus';
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import type { cateItem } from '../ListMenu/ICateItem'
+import i18n from '../../i18n'
+import emitter from '../../util/bus'
 
+const emits = defineEmits<{
+  (e: 'clickMenu'): void
+}>()
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
 
@@ -16,51 +19,47 @@ emitter.on('setCate', (data) => {
 })
 
 const router = useRouter()
-const toList = (listName: string) => {
+function toList(listName: string) {
   router.push({
     path: '/other',
     query: {
-      listName
-    }
+      listName,
+    },
   })
 }
-
-const emits = defineEmits<{
-  (e: 'clickMenu'): void
-}>()
 </script>
 
 <template>
-  <div 
+  <div
     fixed top-95px z-2 cursor-pointer
     bg="#fff6dc80" w-screen p-y-10px
     flex="~ col" items-center backdrop-blur-7px
     shadow-item c="black/50" font-bold rounded-b-10px
-    @click="emits('clickMenu')"
     class="list"
+    @click="emits('clickMenu')"
   >
-    <div 
+    <div
       p-10px text-18px
       bg="hover:black/5 active:black/10" w-screen text-center
       @click="toList('today')"
     >
       Today
     </div>
-    <div 
+    <div
       p-10px text-18px
       bg="hover:black/5 active:black/10" w-screen text-center
       @click="router.push('/')"
     >
       {{ i18n().listMenu.allTodo }}
     </div>
-    <div 
+    <div
       p-10px text-18px
       bg="hover:black/5 active:black/10" w-screen text-center
       @click="toList('allDo')"
     >
       {{ i18n().listMenu.completed }}
     </div>
-    <div 
+    <div
       p-10px text-18px
       bg="hover:black/5 active:black/10" w-screen text-center
       @click="toList('allNotDo')"
@@ -68,11 +67,11 @@ const emits = defineEmits<{
       {{ i18n().listMenu.incompleted }}
     </div>
     <div
-      p-10px w-screen text-center text-18px
+      v-for="cate in cateList" :key="cate.id" p-10px w-screen
+      text-center
+      text-18px
       bg="hover:black/5 active:black/10"
-      v-for="cate in cateList" 
-      :key="cate.id"
-      @click="toList(cate.id + '')"
+      @click="toList(`${cate.id}`)"
     >
       {{ cate.title }}
     </div>
@@ -81,7 +80,7 @@ const emits = defineEmits<{
     class="black" bg-black
     w-screen h-screen fixed
     z-1
-  ></div>
+  />
 </template>
 
 <style scoped>

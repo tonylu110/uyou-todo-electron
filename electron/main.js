@@ -1,15 +1,15 @@
+const path = require('node:path')
 const { app, BrowserWindow, ipcMain, screen, Menu, shell } = require('electron')
 const Store = require('electron-store')
-const path = require('path')
-const menuTemplate = require('./menu.js')
 const remoteMain = require('@electron/remote/main')
+const { PARAMS, VALUE, MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
+const menuTemplate = require('./menu.js')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
 const { initMenuBlur, menuBlur, menuBlurIpc, micaStyle } = require('./store/menuBlurStore')
 const { initWindowMenu, windowMenu, windowMenuIpc } = require('./store/windowMenuStore')
-const { PARAMS, VALUE,  MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
-const createAboutWindow = require("./pages/about");
-const createRegisterWindow = require("./pages/register")
+const createAboutWindow = require('./pages/about')
+const createRegisterWindow = require('./pages/register')
 const createRepassWindow = require('./pages/repass')
 const createLogoffWindow = require('./pages/logoff')
 const setMicaStyle = require('./pages/util/setMicaStyle')
@@ -19,7 +19,7 @@ const store = new Store()
 
 const NODE_ENV = process.env.NODE_ENV
 
-remoteMain.initialize();
+remoteMain.initialize()
 
 let mainWindow
 
@@ -38,8 +38,8 @@ function createWindow() {
     minHeight: 600,
     minWidth: simple ? 350 : 800,
     maxWidth: simple ? 400 : null,
-    x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000))/2,
-    y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750))/2,
+    x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000)) / 2,
+    y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750)) / 2,
     maximizable: !simple,
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: systemBar,
@@ -48,62 +48,61 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       enableRemoteModule: true,
       nodeIntegration: true,
-      contextIsolation: false
-    }
+      contextIsolation: false,
+    },
   })
 
-  if (windowSizeState) {
+  if (windowSizeState)
     mainWindow.setSize(windowSize.width, windowSize.height)
-  }
 
-  remoteMain.enable(mainWindow.webContents);
+  remoteMain.enable(mainWindow.webContents)
 
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
       mainWindow.setLightTheme()
-      setMicaStyle(micaStyle ? micaStyle : 'mica', mainWindow)
-    } else {
-      mainWindow.setCustomEffect(4, simple ? '#eeeeee' : '#fff6dc', 0.7);
+      setMicaStyle(micaStyle || 'mica', mainWindow)
     }
-  } else {
+    else {
+      mainWindow.setCustomEffect(4, simple ? '#eeeeee' : '#fff6dc', 0.7)
+    }
+  }
+  else {
     mainWindow.setCaptionColor('#fff6dc')
-    mainWindow.setCustomEffect(1, simple ? '#eeeeee' : '#fff6dc', 1);
+    mainWindow.setCustomEffect(1, simple ? '#eeeeee' : '#fff6dc', 1)
   }
 
   mainWindow.loadURL(
-    NODE_ENV === "development"
+    NODE_ENV === 'development'
       ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, `../dist/index.html`)}`
+      : `file://${path.join(__dirname, '../dist/index.html')}`,
   )
 
   // mainWindow.setMaximizable(false)
 
-  if (NODE_ENV === 'development') {
+  if (NODE_ENV === 'development')
     mainWindow.webContents.openDevTools({ mode: 'detach' })
-  }
 
-  ipcMain.on("window-min", () => {
+  ipcMain.on('window-min', () => {
     mainWindow.minimize()
-  });
-  ipcMain.on("window-max", () => {
-    if (mainWindow.isMaximized()) {
-      mainWindow.unmaximize();
-    } else {
-      mainWindow.maximize();
-    }
-  });
-  ipcMain.on("window-close", () => {
-    app.quit();
-  });
-  ipcMain.on("window-on-top", (event, arg) => {
+  })
+  ipcMain.on('window-max', () => {
+    if (mainWindow.isMaximized())
+      mainWindow.unmaximize()
+    else
+      mainWindow.maximize()
+  })
+  ipcMain.on('window-close', () => {
+    app.quit()
+  })
+  ipcMain.on('window-on-top', (event, arg) => {
     mainWindow.setAlwaysOnTop(arg)
-  });
+  })
 
-  ipcMain.on("open-url", (event, url) => {
+  ipcMain.on('open-url', (event, url) => {
     shell.openExternal(url)
   })
 
-  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height));
+  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
 
   windowSizeIpc()
   systemBarIpc()
@@ -114,17 +113,17 @@ function createWindow() {
   let aboutId, regId, rePassId
 
   ipcMain.on('open-about', () => {
-    let aboutWindow = createAboutWindow()
+    const aboutWindow = createAboutWindow()
 
     aboutId = aboutWindow.id
 
-    ipcMain.once("close-about", () => {
+    ipcMain.once('close-about', () => {
       aboutWindow.close()
-    });
+    })
   })
 
   ipcMain.on('open-register', () => {
-    let registerWindow = createRegisterWindow()
+    const registerWindow = createRegisterWindow()
 
     regId = registerWindow.id
 
@@ -134,7 +133,7 @@ function createWindow() {
   })
 
   ipcMain.on('open-repass', (ev, uname) => {
-    let repassWindow = createRepassWindow(uname)
+    const repassWindow = createRepassWindow(uname)
 
     rePassId = repassWindow.id
 
@@ -144,7 +143,7 @@ function createWindow() {
   })
 
   ipcMain.on('open-logoff', (ev, uname) => {
-    let logoffWindow = createLogoffWindow(uname)
+    const logoffWindow = createLogoffWindow(uname)
 
     ipcMain.once('close-logoff', () => {
       logoffWindow.close()
@@ -158,7 +157,7 @@ function createWindow() {
 
   ipcMain.on('setAutoStart', (ev, isAutoStart) => {
     app.setLoginItemSettings({
-      openAtLogin: isAutoStart
+      openAtLogin: isAutoStart,
     })
   })
 
@@ -175,15 +174,17 @@ app.whenReady().then(() => {
   })
 
   const { height } = screen.getPrimaryDisplay().workAreaSize
-  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height));
+  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
 
-  Menu.setApplicationMenu(windowMenu ? appMenu : null);
+  Menu.setApplicationMenu(windowMenu ? appMenu : null)
 
-  app.on('activate', function () {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0)
+      createWindow()
   })
 })
 
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit()
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin')
+    app.quit()
 })

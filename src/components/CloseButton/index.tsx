@@ -1,5 +1,5 @@
-import { defineComponent } from "vue";
-import { useRoute } from "vue-router";
+import { defineComponent } from 'vue'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
   setup() {
@@ -16,7 +16,7 @@ export default defineComponent({
         bg="error-d hover:error-h active:error-a"
         h-20px w-50px
         flex items-center justify-center
-        rounded-5px 
+        rounded-5px
         no-drag
         cursor-pointer
         c-white
@@ -26,5 +26,5 @@ export default defineComponent({
         <div i-mdi:close-thick c-white text-12px ml-1px></div>
       </div>
     )
-  }
+  },
 })

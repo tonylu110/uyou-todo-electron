@@ -1,10 +1,10 @@
-import ITodoList from "../../interface/ITodoListArray"
-import IToDoListData from "../../interface/IToDoListData"
-import LocalStorage from "../../util/localStorage"
+import type ITodoList from '../../interface/ITodoListArray'
+import type IToDoListData from '../../interface/IToDoListData'
+import LocalStorage from '../../util/localStorage'
 
-const saveItemSet = (list: ITodoList[]) => {
+function saveItemSet(list: ITodoList[]) {
   const localStorageSetTodoList: IToDoListData = {
-    data: list
+    data: list,
   }
   LocalStorage('set', localStorageSetTodoList)
   const uid = localStorage.getItem('uid')
@@ -12,16 +12,16 @@ const saveItemSet = (list: ITodoList[]) => {
     fetch('https://api.todo.uyou.org.cn/edittodo', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        uid: uid,
-        data: JSON.stringify(localStorageSetTodoList)
-      })
-    }).then(res => {
+        uid,
+        data: JSON.stringify(localStorageSetTodoList),
+      }),
+    }).then((res) => {
       return res.json()
-    }).then(res => {
-      console.log(res);
+    }).then((res) => {
+      console.log(res)
     })
   }
 }

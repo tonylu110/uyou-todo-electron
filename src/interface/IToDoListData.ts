@@ -1,4 +1,4 @@
-import ITodoList from "./ITodoListArray";
+import type ITodoList from './ITodoListArray'
 
 interface IToDoListData {
   data: ITodoList[]

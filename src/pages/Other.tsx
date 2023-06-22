@@ -1,11 +1,12 @@
-import { Ref, defineComponent, ref, watchEffect } from "vue";
-import TabBar from '../components/TabBar/TabBar.vue';
-import List from '../components/List/List.vue';
-import { useRoute, useRouter } from 'vue-router';
-import LocalStorage from '../util/localStorage';
-import ITodoList from '../interface/ITodoListArray';
-import i18n from '../i18n';
-import { cateItem } from "../components/ListMenu/ICateItem";
+import type { Ref } from 'vue'
+import { defineComponent, ref, watchEffect } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import TabBar from '../components/TabBar/TabBar.vue'
+import List from '../components/List/List.vue'
+import LocalStorage from '../util/localStorage'
+import type ITodoList from '../interface/ITodoListArray'
+import i18n from '../i18n'
+import type { cateItem } from '../components/ListMenu/ICateItem'
 
 export default defineComponent({
   setup() {
@@ -23,16 +24,19 @@ export default defineComponent({
       if (route.query.listName === 'allNotDo') {
         listData.value = list.value!.filter(listData => listData.ok === false)
         title.value = i18n().listMenu.incompleted
-      } else if (route.query.listName === 'allDo') {
+      }
+      else if (route.query.listName === 'allDo') {
         listData.value = list.value!.filter(listData => listData.ok === true)
         title.value = i18n().listMenu.completed
-      } else if (route.query.listName === 'today') {
+      }
+      else if (route.query.listName === 'today') {
         listData.value = list.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString())
         title.value = 'Today'
-      } else {
+      }
+      else {
         listData.value = list.value!.filter(listData => listData.cate === route.query.listName)
         const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
-        title.value = JSON.parse(localCateList!).data.filter((cate: cateItem) => cate.id + '' === route.query.listName )[0].title
+        title.value = JSON.parse(localCateList!).data.filter((cate: cateItem) => `${cate.id}` === route.query.listName)[0].title
       }
     })
 
@@ -50,12 +54,12 @@ export default defineComponent({
           showMore={simpleMode}
           showWrap={true}
         />
-        <List 
+        <List
           showAddItem={showAddItem.value}
           listData={listData.value}
           onSetAddItem={() => showAddItem.value = false}
         />
       </>
     )
-  }
+  },
 })

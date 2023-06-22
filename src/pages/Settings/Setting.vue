@@ -1,8 +1,96 @@
+<script setup lang="ts">
+import type { Ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
+import TabBar from '../../components/TabBar/TabBar.vue'
+import SettingList from '../../components/SettingList'
+import i18n from '../../i18n'
+import Item from '../../components/ItemBox/Item/Item.vue'
+import ItemBox from '../../components/ItemBox/ItemBox.vue'
+import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
+import router from '../../router'
+import firstLoad from '../../components/TitleBar/firstLoad'
+import emitter from '../../util/bus'
+import isDev from '../../util/mode'
+import setSwitchFn from '../../util/setSwitchFn'
+
+const ipcRenderer = require('electron').ipcRenderer
+
+const { shell } = require('electron')
+const os = require('node:os')
+
+const isWindows10OrAfter = os.release().split('.')[2] > 15063
+const isLinux = !(process.platform === 'linux')
+const isMac = !(process.platform === 'darwin')
+
+const isWin11 = (process.platform === 'win32' && Number(os.release().split('.')[2]) >= 22000)
+
+const titleBarShow = localStorage.getItem('systemTitle') === 'true'
+
+const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
+
+const saveTopState = ref(localStorage.getItem('saveTopState') === 'true' || localStorage.getItem('saveTopState') === null)
+const saveWindowSizeState = ref(localStorage.getItem('saveWindowSizeState') === 'true')
+const autoUpdateState = ref(localStorage.getItem('autoUpdate') !== 'false')
+const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
+const topState = ref(firstLoad())
+const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
+const showWindowMenuState = ref(localStorage.getItem('windowMenu') === 'true')
+const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
+const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
+const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
+const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
+const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
+function showRouterUrl() {
+  routerUrlState.value = !routerUrlState.value
+  emitter.emit('routerShow', routerUrlState.value)
+  localStorage.setItem('routerUrl', `${routerUrlState.value}`)
+}
+emitter.on('routerShow', (data: unknown) => {
+  routerUrlState.value = (data as boolean)
+})
+function clearData() {
+  localStorage.clear()
+  window.location.reload()
+}
+function openAboutWindow() {
+  ipcRenderer.send('open-about')
+}
+function changeMica(effect: string) {
+  ipcRenderer.send('changeBlur', effect)
+}
+function openUrl(url: string) {
+  window.open(url)
+}
+
+onBeforeUnmount(() => {
+  emitter.off('routerShow')
+  emitter.off('toastShow')
+})
+
+const isInDev = localStorage.getItem('isInDev') === 'true'
+
+const startPage = ref(localStorage.getItem('start') ? localStorage.getItem('start') : 'home') as unknown as Ref<string>
+const startPageList = [
+  {
+    title: 'home',
+    fn: 'home',
+  },
+  {
+    title: 'today',
+    fn: 'today',
+  },
+]
+function setStartPage(StartPage: string) {
+  localStorage.setItem('start', StartPage)
+  startPage.value = StartPage
+}
+</script>
+
 <template>
-  <TabBar 
+  <TabBar
     :title="i18n().settingTitleText"
-    :rightImgShow="false"
-    :leftImgShow="false"
+    :right-img-show="false"
+    :left-img-show="false"
     bg-color="light"
   />
   <SettingList>
@@ -11,11 +99,11 @@
         title="UnoCss dev"
         @item-fun="openUrl('http://localhost:3000/__unocss')"
       />
-      <Item 
+      <Item
         title="Show router url"
         :show-switch="true"
-        @switch-fun="showRouterUrl"
         :switch-state="routerUrlState"
+        @switch-fun="showRouterUrl"
       />
     </ItemBox>
     <Item
@@ -90,10 +178,16 @@
         :switch-state="menuBlurState"
         @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', i18n().restartApp)"
       />
-      <div class="item-blur item" v-if="isWin11 && menuBlurState">
-        <div @click="changeMica('mica')">Mica Effect</div>
-        <div @click="changeMica('tabbed')">Mica Tabbed</div>
-        <div @click="changeMica('acrylic')">Acrylic</div>
+      <div v-if="isWin11 && menuBlurState" class="item-blur item">
+        <div @click="changeMica('mica')">
+          Mica Effect
+        </div>
+        <div @click="changeMica('tabbed')">
+          Mica Tabbed
+        </div>
+        <div @click="changeMica('acrylic')">
+          Acrylic
+        </div>
       </div>
     </ItemBox>
     <ItemBox>
@@ -117,109 +211,24 @@
         @switch-fun="setSwitchFn('saveWindowSizeState', !saveWindowSizeState, () => saveWindowSizeState = !saveWindowSizeState, 'setWindowSizeState')"
       />
     </ItemBox>
-    <Item title="Laboratory" @item-fun="router.push('/lab?from=setting')" v-if="isInDev"/>
+    <Item v-if="isInDev" title="Laboratory" @item-fun="router.push('/lab?from=setting')" />
     <ItemBox>
-      <Item :title="i18n().otherList.toWeb" itemImg="./images/web.png" @itemFun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')"/>
-      <Item :title="i18n().otherList.toPhone" itemImg="./images/phone.png" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')"/>
-      <Item :title="i18n().otherList.toDonate" itemImg="./images/donate.png" @itemFun="router.push('/donate?from=setting')"/>
+      <Item :title="i18n().otherList.toWeb" item-img="./images/web.png" @itemFun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')" />
+      <Item :title="i18n().otherList.toPhone" item-img="./images/phone.png" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')" />
+      <Item :title="i18n().otherList.toDonate" item-img="./images/donate.png" @itemFun="router.push('/donate?from=setting')" />
     </ItemBox>
     <ItemBox>
-      <Item :title="i18n().anotherSettings.openSource" @itemFun="router.push('/open?from=setting')"/>
-      <Item :title="i18n().anotherSettings.about" @itemFun="openAboutWindow"/>
+      <Item :title="i18n().anotherSettings.openSource" @itemFun="router.push('/open?from=setting')" />
+      <Item :title="i18n().anotherSettings.about" @itemFun="openAboutWindow" />
     </ItemBox>
-    <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
+    <ItemButton mode="error" @click="clearData">
+      {{ i18n().clearData }}
+    </ItemButton>
     <ItemButton @click="router.push('/lang?from=setting')">
-      <img src="/images/lang.png" alt="" class="lang-img" />
+      <img src="/images/lang.png" alt="" class="lang-img">
     </ItemButton>
   </SettingList>
 </template>
-
-<script setup lang="ts">
-import { ref, onBeforeUnmount, Ref } from 'vue';
-import TabBar from '../../components/TabBar/TabBar.vue';
-import SettingList from '../../components/SettingList';
-import i18n from '../../i18n';
-import Item from '../../components/ItemBox/Item/Item.vue';
-import ItemBox from '../../components/ItemBox/ItemBox.vue';
-import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue';
-import router from '../../router';
-import firstLoad from "../../components/TitleBar/firstLoad";
-import emitter from "../../util/bus"
-import isDev from '../../util/mode';
-import setSwitchFn from '../../util/setSwitchFn';
-
-const ipcRenderer = require('electron').ipcRenderer
-
-const { shell } = require('electron')
-const os = require('os')
-
-const isWindows10OrAfter = os.release().split('.')[2] > 15063
-const isLinux = !(process.platform === 'linux')
-const isMac = !(process.platform === 'darwin')
-
-const isWin11 = (process.platform === 'win32' && Number(os.release().split('.')[2]) >= 22000)
-
-const titleBarShow = localStorage.getItem('systemTitle') === 'true'
-
-const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
-
-const saveTopState = ref(localStorage.getItem('saveTopState') === 'true' || localStorage.getItem('saveTopState') === null)
-const saveWindowSizeState = ref(localStorage.getItem('saveWindowSizeState') === 'true')
-const autoUpdateState = ref(localStorage.getItem('autoUpdate') !== 'false')
-const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
-const topState = ref(firstLoad())
-const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
-const showWindowMenuState = ref(localStorage.getItem('windowMenu') === 'true')
-const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
-const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
-const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
-const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
-const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
-const showRouterUrl = () => {
-  routerUrlState.value = !routerUrlState.value
-  emitter.emit('routerShow', routerUrlState.value)
-  localStorage.setItem('routerUrl', routerUrlState.value + '')
-}
-emitter.on('routerShow', (data: unknown) => {
-  routerUrlState.value = (data as boolean)
-})
-const clearData = () => {
-  localStorage.clear()
-  window.location.reload()
-}
-const openAboutWindow = () => {
-  ipcRenderer.send('open-about')
-}
-const changeMica = (effect: string) => {
-  ipcRenderer.send('changeBlur', effect)
-}
-const openUrl = (url: string) => {
-  window.open(url)
-}
-
-onBeforeUnmount(() => {
-  emitter.off('routerShow')
-  emitter.off('toastShow')
-})
-
-const isInDev = localStorage.getItem('isInDev') === 'true'
-
-const startPage = ref(localStorage.getItem('start') ? localStorage.getItem('start') : 'home') as unknown as Ref<string>
-const startPageList = [
-  {
-    title: 'home',
-    fn: 'home'
-  },
-  {
-    title: 'today',
-    fn: 'today'
-  }
-]
-const setStartPage = (StartPage: string) => {
-  localStorage.setItem('start', StartPage)
-  startPage.value = StartPage
-} 
-</script>
 
 <style scoped lang="scss">
 .item-blur {

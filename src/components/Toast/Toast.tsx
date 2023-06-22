@@ -1,4 +1,4 @@
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 
 export interface IProps {
   msg: string
@@ -8,9 +8,9 @@ export interface IProps {
 export default defineComponent({
   props: {
     msg: {
-      default: 'toast'
+      default: 'toast',
     },
-    center: Boolean
+    center: Boolean,
   },
   setup(props: IProps) {
     const simpleMode = window.innerWidth < 800
@@ -31,5 +31,5 @@ export default defineComponent({
         { props.msg }
       </div>
     )
-  }
+  },
 })

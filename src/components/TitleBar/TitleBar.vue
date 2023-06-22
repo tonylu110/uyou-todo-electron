@@ -1,73 +1,34 @@
-<template>
-  <div
-    class="title-bar"
-    :style="{
-      justifyContent: isMac ? 'flex-start' : '',
-      width: simpleMode ? '100vw' : '',
-      marginLeft: simpleMode ? '0' : '',
-      backgroundColor: routeLight ? 'white' : '',
-      borderBottom: routeLight ? '1px solid #00000020' : ''
-    }"
-    v-if="titleBarShow"
-  >
-    <div 
-      :class="topState ? 'on-top-button-sel button' :'on-top-button button'"
-      :style="{
-        left: isMac ? '' : '9px',
-        right: isMac ? '0' : '',
-        border: (form === 'setting' || routeName === 'setting' || routeName === 'account' || routeName === 'settingSim') && topState ? '' : '1px solid #00000020'
-      }"  
-      @click="onTopWindow"
-    >
-      <div i-fluent:pin-48-filled text-14px :c="(isMac && !simpleMode && !routeLight) || (simpleMode && (routeName !== 'settingSim' && form !== 'setting')) ? 'white' : (topState ? 'white' : '#777')"></div>
-    </div>
-    <span class="title-text" :style="{color: routeLight ? '#555' : 'white'}">
-      {{ simpleMode ? '' : title }}
-    </span>
-    <div v-if="!isMac" class="min-button button" @click="minWindow" :style="{border: form === 'setting' || routeName === 'account' || routeName === 'settingSim' || routeName === 'setting' ? '1px solid #00000020' : ''}">
-      <div i-fluent-emoji-high-contrast:minus :c="routeLight ? '#777' : 'white'" text-10px></div>
-    </div>
-    <div v-if="!isMac && !simpleMode" class="min-button button" @click="maxWindow" :style="{border: form === 'setting' || routeName === 'account' || routeName === 'setting' ? '1px solid #00000020' : ''}">
-      <div i-fluent:checkbox-unchecked-12-filled :c="routeLight ? '#777' : 'white'" text-14px></div>
-    </div>
-    <div v-if="!isMac" class="close-button button" @click="closeWindow">
-      <div i-mdi:close-thick c-white text-12px></div>
-    </div>
-    <div class="list-menu-color" :style="{backgroundColor: listMenuColor}" v-if="!simpleMode"></div>
-    <div class="list-menu-drag" v-if="!simpleMode"></div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
-import { useRoute } from 'vue-router';
-import firstLoad from './firstLoad';
-import emitter from '../../util/bus';
+import { ref, watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
+import emitter from '../../util/bus'
+import firstLoad from './firstLoad'
 
-const os = require('os')
+const os = require('node:os')
 
-const isMac = navigator.userAgent.indexOf('Mac')>=0
+const isMac = navigator.userAgent.includes('Mac')
 
 const titleBarShow = !(localStorage.getItem('systemTitle') === 'true')
 
 const ipcRenderer = require('electron').ipcRenderer
-const closeWindow = () => {
-  ipcRenderer.send("window-close")
+
+function closeWindow() {
+  ipcRenderer.send('window-close')
 }
 
-const minWindow = () => {
-  ipcRenderer.send("window-min")
+function minWindow() {
+  ipcRenderer.send('window-min')
 }
 
-const maxWindow = () => {
-  ipcRenderer.send("window-max")
+function maxWindow() {
+  ipcRenderer.send('window-max')
 }
 
 const topState = ref(firstLoad())
-const onTopWindow = () => {
+function onTopWindow() {
   topState.value = !topState.value
   ipcRenderer.send('window-on-top', topState.value)
-  localStorage.setItem('alwaysOnTop', topState.value + '')
+  localStorage.setItem('alwaysOnTop', `${topState.value}`)
   emitter.emit('topWindow', topState.value)
 }
 emitter.on('topWindow', (data: unknown) => {
@@ -90,12 +51,11 @@ const title = ref('uyou ToDo')
 //   }
 // })
 
-const isWindows = navigator.userAgent.indexOf('Win')>=0
+const isWindows = navigator.userAgent.includes('Win')
 const isWindows10OrAfter = os.release().split('.')[2] > 15063
 const listMenuColor = ref('')
-if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && isWindows10OrAfter) {
+if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && isWindows10OrAfter)
   listMenuColor.value = '#fff6dc00'
-}
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
@@ -114,6 +74,46 @@ watchEffect(() => {
   routeLight.value = routeName.value === 'settingSim' || form.value === 'setting' || routeName.value === 'setting' || routeName.value === 'account'
 })
 </script>
+
+<template>
+  <div
+    v-if="titleBarShow"
+    class="title-bar"
+    :style="{
+      justifyContent: isMac ? 'flex-start' : '',
+      width: simpleMode ? '100vw' : '',
+      marginLeft: simpleMode ? '0' : '',
+      backgroundColor: routeLight ? 'white' : '',
+      borderBottom: routeLight ? '1px solid #00000020' : '',
+    }"
+  >
+    <div
+      :class="topState ? 'on-top-button-sel button' : 'on-top-button button'"
+      :style="{
+        left: isMac ? '' : '9px',
+        right: isMac ? '0' : '',
+        border: (form === 'setting' || routeName === 'setting' || routeName === 'account' || routeName === 'settingSim') && topState ? '' : '1px solid #00000020',
+      }"
+      @click="onTopWindow"
+    >
+      <div i-fluent:pin-48-filled text-14px :c="(isMac && !simpleMode && !routeLight) || (simpleMode && (routeName !== 'settingSim' && form !== 'setting')) ? 'white' : (topState ? 'white' : '#777')" />
+    </div>
+    <span class="title-text" :style="{ color: routeLight ? '#555' : 'white' }">
+      {{ simpleMode ? '' : title }}
+    </span>
+    <div v-if="!isMac" class="min-button button" :style="{ border: form === 'setting' || routeName === 'account' || routeName === 'settingSim' || routeName === 'setting' ? '1px solid #00000020' : '' }" @click="minWindow">
+      <div i-fluent-emoji-high-contrast:minus :c="routeLight ? '#777' : 'white'" text-10px />
+    </div>
+    <div v-if="!isMac && !simpleMode" class="min-button button" :style="{ border: form === 'setting' || routeName === 'account' || routeName === 'setting' ? '1px solid #00000020' : '' }" @click="maxWindow">
+      <div i-fluent:checkbox-unchecked-12-filled :c="routeLight ? '#777' : 'white'" text-14px />
+    </div>
+    <div v-if="!isMac" class="close-button button" @click="closeWindow">
+      <div i-mdi:close-thick c-white text-12px />
+    </div>
+    <div v-if="!simpleMode" class="list-menu-color" :style="{ backgroundColor: listMenuColor }" />
+    <div v-if="!simpleMode" class="list-menu-drag" />
+  </div>
+</template>
 
 <style lang="scss" scoped>
 @import './style.scss';

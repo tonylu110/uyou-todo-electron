@@ -1,23 +1,23 @@
-<template>
-  <div class="item-box" :style="{width: simpleMode ? 'calc(100% - 20px)' : ''}">
-    <div class="box-radius">
-      <slot />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
 const itemWidth = simpleMode ? 'calc(100% - 30px)' : 'calc(100vw - 450px)'
 </script>
 
+<template>
+  <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }">
+    <div class="box-radius">
+      <slot />
+    </div>
+  </div>
+</template>
+
 <style lang="scss" scoped>
 .item-box {
   margin-bottom: 10px;
   box-shadow: 0 2px 10px #00000030;
   border-radius: 7px;
-  
+
   .box-radius {
     border-radius: 7px;
     overflow: hidden;

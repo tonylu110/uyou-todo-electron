@@ -1,17 +1,17 @@
-const os = require('os')
+const os = require('node:os')
 
-export const isMac = () => {
-    return /Mac/.test(navigator.userAgent)
+export function isMac() {
+  return /Mac/.test(navigator.userAgent)
 }
 
-export const isWindow = () => {
-    return /Windows/.test(navigator.userAgent)
+export function isWindow() {
+  return /Windows/.test(navigator.userAgent)
 }
 
-export const isLinux = () => {
-    return /Linux/.test(navigator.userAgent)
+export function isLinux() {
+  return /Linux/.test(navigator.userAgent)
 }
 
-export const isWindows10OrAfter = () => {
-    return isWindow() && os.release().split('.')[2] > 15063
+export function isWindows10OrAfter() {
+  return isWindow() && os.release().split('.')[2] > 15063
 }

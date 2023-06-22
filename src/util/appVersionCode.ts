@@ -1,4 +1,5 @@
 const { app } = require('@electron/remote')
+
 const versionCodeArr: Array<number> = app.getVersion().split('.')
 
 const devCode = 131

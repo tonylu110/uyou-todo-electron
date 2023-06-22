@@ -1,6 +1,6 @@
-import { defineComponent, renderSlot } from "vue";
-import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
-import { isWindows10OrAfter } from "../../util/os";
+import { defineComponent, renderSlot } from 'vue'
+import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
+import { isWindows10OrAfter } from '../../util/os'
 
 export default defineComponent({
   props: ['justify'],
@@ -17,5 +17,5 @@ export default defineComponent({
         { renderSlot(slots, 'default') }
       </PerfectScrollbar>
     )
-  }
+  },
 })

@@ -1,5 +1,5 @@
-import { cateItem } from "../components/ListMenu/ICateItem"
-import emitter from "./bus"
+import type { cateItem } from '../components/ListMenu/ICateItem'
+import emitter from './bus'
 
 export default () => {
   const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
@@ -11,39 +11,41 @@ export default () => {
     fetch('https://api.todo.uyou.org.cn/gettodocate', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        uid: uid
-      })
-    }).then(res => {
+        uid,
+      }),
+    }).then((res) => {
       return res.json()
-    }).then(res => {
+    }).then((res) => {
       if (res._id) {
         cateList.length = 0
         JSON.parse(res.data).data.forEach((item: cateItem) => {
           cateList.push(item)
-        });
+        })
         localStorage.setItem('cate', JSON.stringify({ data: cateList }))
         emitter.emit('setCate', res.data)
-      } else {
+      }
+      else {
         fetch('https://api.todo.uyou.org.cn/addtodocate', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            uid: uid,
-            data: localCateList
-          })
-        }).then(res => {
+            uid,
+            data: localCateList,
+          }),
+        }).then((res) => {
           return res.json()
-        }).then(res => {
-          console.log(res);
+        }).then((res) => {
+          console.log(res)
         })
       }
     })
-  } else {
+  }
+  else {
     emitter.emit('setCate', localCateList)
   }
 }

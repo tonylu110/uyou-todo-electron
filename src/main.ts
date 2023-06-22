@@ -1,22 +1,20 @@
 import 'virtual:uno.css'
 import './main.scss'
-import { createApp, ref } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue'
 import PerfectScrollbar from 'vue3-perfect-scrollbar'
+import App from './App.vue'
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
 import router from './router'
-import AppSimple from "./AppSimple.vue";
-import { useRoute } from 'vue-router'
+import AppSimple from './AppSimple.vue'
 
 const simpleMode = localStorage.getItem('simpleMode')
 
 let app
 
-if (simpleMode === 'false' || simpleMode === null) {
-    app = createApp(App)
-} else {
-    app = createApp(AppSimple)
-}
+if (simpleMode === 'false' || simpleMode === null)
+  app = createApp(App)
+else
+  app = createApp(AppSimple)
 
 app.use(router)
 app.use(PerfectScrollbar)

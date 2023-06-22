@@ -7,13 +7,13 @@ import VueDevTools from 'vite-plugin-vue-devtools'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './',
-  plugins: [ 
+  plugins: [
     VueDevTools(),
     vue(),
     vueJsx(),
-    UnoCSS()
+    UnoCSS(),
   ],
   server: {
-    port: 3000
-  }
+    port: 3000,
+  },
 })

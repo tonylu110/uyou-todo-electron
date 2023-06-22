@@ -1,63 +1,63 @@
+<script lang="ts" setup>
+import TabBar from '../../components/TabBar/TabBar.vue'
+import SettingList from '../../components/SettingList'
+import router from '../../router'
+import i18n from '../../i18n'
+
+const { ipcRenderer } = require('electron')
+
+function menuClick(lang: string) {
+  localStorage.setItem('lang', lang)
+  location.reload()
+}
+
+function langShow(lang: string): boolean {
+  const langLocal = localStorage.getItem('lang')
+  return (lang === 'withSystem' && langLocal === null) || lang === langLocal
+}
+
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
+</script>
+
 <template>
   <TabBar
-      :title="i18n().language"
-      :rightImgShow="false"
-      :leftImgShow="true"
-      @leftClick="router.back()"
-      bg-color="light"
+    :title="i18n().language"
+    :right-img-show="false"
+    :left-img-show="true"
+    bg-color="light"
+    @leftClick="router.back()"
   />
   <SettingList>
-    <div class="item-box" :style="{width: simpleMode ? 'calc(100% - 20px)' : ''}">
+    <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }">
       <div class="box-radius">
-        <div class="item" @click="() => menuClick('withSystem')" :class="langShow('withSystem') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" :class="langShow('withSystem') ? 'select' : ''" :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }" @click="() => menuClick('withSystem')">
           <span>{{ i18n().setLangText }}</span>
-          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('withSystem')"></div>
+          <div v-if="langShow('withSystem')" i-mdi:check text-24px c="#5985eb" />
         </div>
-        <div class="item" @click="() => menuClick('en')" :class="langShow('en') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" :class="langShow('en') ? 'select' : ''" :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }" @click="() => menuClick('en')">
           <span>English</span>
-          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('en')"></div>
+          <div v-if="langShow('en')" i-mdi:check text-24px c="#5985eb" />
         </div>
-        <div class="item" @click="() => menuClick('es')" :class="langShow('es') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" :class="langShow('es') ? 'select' : ''" :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }" @click="() => menuClick('es')">
           <span>Español</span>
-          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('es')"></div>
+          <div v-if="langShow('es')" i-mdi:check text-24px c="#5985eb" />
         </div>
-        <div class="item" @click="() => menuClick('zh-cn')" :class="langShow('zh-cn') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" :class="langShow('zh-cn') ? 'select' : ''" :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }" @click="() => menuClick('zh-cn')">
           <span>中文（简体）</span>
-          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('zh-cn')"></div>
+          <div v-if="langShow('zh-cn')" i-mdi:check text-24px c="#5985eb" />
         </div>
-        <div class="item" @click="() => menuClick('zh-tw')" :class="langShow('zh-tw') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" :class="langShow('zh-tw') ? 'select' : ''" :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }" @click="() => menuClick('zh-tw')">
           <span>中文（繁體）</span>
-          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('zh-tw')"></div>
+          <div v-if="langShow('zh-tw')" i-mdi:check text-24px c="#5985eb" />
         </div>
-        <div class="item" @click="() => menuClick('ja')" :class="langShow('ja') ? 'select' : ''" :style="{width: simpleMode ? 'calc(100% - 30px)' : ''}">
+        <div class="item" :class="langShow('ja') ? 'select' : ''" :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }" @click="() => menuClick('ja')">
           <span>日本語</span>
-          <div i-mdi:check text-24px c="#5985eb" v-if="langShow('ja')"></div>
+          <div v-if="langShow('ja')" i-mdi:check text-24px c="#5985eb" />
         </div>
       </div>
     </div>
   </SettingList>
 </template>
-
-<script lang="ts" setup>
-import TabBar from "../../components/TabBar/TabBar.vue";
-import SettingList from "../../components/SettingList";
-import router from "../../router";
-import i18n from "../../i18n";
-
-const { ipcRenderer } = require('electron')
-
-const menuClick = (lang: string) => {
-  localStorage.setItem('lang', lang)
-  location.reload()
-}
-
-const langShow = (lang: string): boolean => {
-  const langLocal = localStorage.getItem('lang')
-  return (lang === 'withSystem' && langLocal === null) || lang === langLocal;
-}
-
-const simpleMode = localStorage.getItem('simpleMode') === 'true'
-</script>
 
 <style scoped lang="scss">
 .item-box {

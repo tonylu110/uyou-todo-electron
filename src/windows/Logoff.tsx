@@ -1,9 +1,9 @@
-import { defineComponent, reactive, ref } from "vue";
-import { useRoute } from "vue-router";
-import CloseButton from "../components/CloseButton";
-import Alert from "../components/Alert/Alert.vue";
-import { isMac } from "../util/os";
-import i18n from "../i18n";
+import { defineComponent, reactive, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import CloseButton from '../components/CloseButton'
+import Alert from '../components/Alert/Alert.vue'
+import { isMac } from '../util/os'
+import i18n from '../i18n'
 
 export default defineComponent({
   setup() {
@@ -12,7 +12,7 @@ export default defineComponent({
 
     const formData = reactive({
       account: route.query.account,
-      passwd: ''
+      passwd: '',
     })
 
     const showDialog = ref(false)
@@ -27,70 +27,74 @@ export default defineComponent({
       fetch('https://api.todo.uyou.org.cn/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           uname: formData.account,
-          passwd: formData.passwd
-        })
-      }).then(res => {
+          passwd: formData.passwd,
+        }),
+      }).then((res) => {
         return res.json()
-      }).then(res => {
+      }).then((res) => {
         if (res._id) {
           fetch('https://api.todo.uyou.org.cn/admin/deluser', {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              _id: res._id
-            })
-          }).then(res => {
+              _id: res._id,
+            }),
+          }).then((res) => {
             return res.json()
-          }).then(res => {
+          }).then((res) => {
             if (res.code === 200) {
               fetch('https://api.todo.uyou.org.cn/deltodo', {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                  uid: res.data._id
-                })
-              }).then(res => {
+                  uid: res.data._id,
+                }),
+              }).then((res) => {
                 return res.json()
-              }).then(res => {
+              }).then((res) => {
                 if (res.code === 200) {
                   fetch('https://api.todo.uyou.org.cn/deltodocate', {
                     method: 'POST',
                     headers: {
-                      'Content-Type': 'application/json'
+                      'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                      uid: res.data.uid
-                    })
-                  }).then(res => {
+                      uid: res.data.uid,
+                    }),
+                  }).then((res) => {
                     return res.json()
-                  }).then(res => {
+                  }).then((res) => {
                     if (res.code === 200) {
                       dialogText.value = i18n().logoffPage.success
                       showDialog.value = true
-                    } else {
+                    }
+                    else {
                       dialogText.value = i18n().logoffPage.fail
                       showDialog.value = true
                     }
                   })
-                } else {
+                }
+                else {
                   dialogText.value = i18n().logoffPage.fail
                   showDialog.value = true
                 }
               })
-            } else {
+            }
+            else {
               dialogText.value = i18n().logoffPage.fail
               showDialog.value = true
             }
           })
-        } else {
+        }
+        else {
           dialogText.value = i18n().logoffPage.passNotTrue
           showDialog.value = true
         }
@@ -99,9 +103,8 @@ export default defineComponent({
 
     const closeDialog = () => {
       showDialog.value = false
-      if (dialogText.value === i18n().logoffPage.success) {
+      if (dialogText.value === i18n().logoffPage.success)
         ipcRenderer.send('close-logoff')
-      }
     }
 
     return () => (
@@ -152,5 +155,5 @@ export default defineComponent({
         {isMac() ? null : <CloseButton />}
       </div>
     )
-  }
+  },
 })

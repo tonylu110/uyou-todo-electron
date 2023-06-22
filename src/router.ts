@@ -1,89 +1,89 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: () => import("./pages/Home.tsx"),
+    path: '/',
+    name: 'Home',
+    component: () => import('./pages/Home.tsx'),
   },
   {
-    path: "/setting",
-    name: "setting",
-    component: () => import("./pages/Settings/Setting.vue"),
+    path: '/setting',
+    name: 'setting',
+    component: () => import('./pages/Settings/Setting.vue'),
   },
   {
-    path: "/setting-sim",
-    name: "settingSim",
-    component: () => import("./pages/SettingsSimple.vue"),
+    path: '/setting-sim',
+    name: 'settingSim',
+    component: () => import('./pages/SettingsSimple.vue'),
   },
   {
-    path: "/account",
-    name: "account",
-    component: () => import("./pages/Account.vue"),
+    path: '/account',
+    name: 'account',
+    component: () => import('./pages/Account.vue'),
   },
   {
-    path: "/other",
-    name: "other",
-    component: () => import("./pages/Other.tsx"),
+    path: '/other',
+    name: 'other',
+    component: () => import('./pages/Other.tsx'),
   },
   {
-    path: "/update",
-    name: "update",
-    component: () => import("./pages/Settings/Update.vue"),
+    path: '/update',
+    name: 'update',
+    component: () => import('./pages/Settings/Update.vue'),
   },
   {
-    path: "/donate",
-    name: "donate",
-    component: () => import("./pages/Settings/Donate.vue"),
+    path: '/donate',
+    name: 'donate',
+    component: () => import('./pages/Settings/Donate.vue'),
   },
   {
-    path: "/open",
-    name: "openSource",
-    component: () => import("./pages/Settings/openSource.vue"),
+    path: '/open',
+    name: 'openSource',
+    component: () => import('./pages/Settings/openSource.vue'),
   },
   {
-    path: "/lang",
-    name: "lang",
-    component: () => import("./pages/Settings/LangSet.vue"),
+    path: '/lang',
+    name: 'lang',
+    component: () => import('./pages/Settings/LangSet.vue'),
   },
   {
-    path: "/about",
-    name: "about",
+    path: '/about',
+    name: 'about',
     components: {
-      isWindow: () => import("./windows/About.tsx")
-    }
+      isWindow: () => import('./windows/About.tsx'),
+    },
   },
   {
-    path: "/register",
-    name: "register",
+    path: '/register',
+    name: 'register',
     components: {
-      isWindow: () => import("./windows/Register.vue")
-    }
+      isWindow: () => import('./windows/Register.vue'),
+    },
   },
   {
-    path: "/repass",
-    name: "repass",
+    path: '/repass',
+    name: 'repass',
     components: {
-      isWindow: () => import("./windows/Repass.vue")
-    }
+      isWindow: () => import('./windows/Repass.vue'),
+    },
   },
   {
-    path: "/logoff",
-    name: "logoff",
+    path: '/logoff',
+    name: 'logoff',
     components: {
-      isWindow: () => import("./windows/Logoff.tsx")
-    }
+      isWindow: () => import('./windows/Logoff.tsx'),
+    },
   },
   {
-    path: "/lab",
-    name: "lab",
-    component: () => import("./pages/Laboratory"),
-  }
-];
+    path: '/lab',
+    name: 'lab',
+    component: () => import('./pages/Laboratory'),
+  },
+]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-});
+})
 
-export default router;
+export default router

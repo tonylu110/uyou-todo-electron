@@ -1,56 +1,61 @@
 <script lang="ts" setup>
+import { reactive, ref } from 'vue'
 import Alert from '../components/Alert/Alert.vue'
-import { reactive, ref } from "vue";
-import CloseButton from '../components/CloseButton';
-import { isMac, isWindows10OrAfter } from "../util/os";
-import i18n from "../i18n";
+import CloseButton from '../components/CloseButton'
+import { isMac, isWindows10OrAfter } from '../util/os'
+import i18n from '../i18n'
 
-const { ipcRenderer } = require("electron");
-const os = require("os");
+const os = require('node:os')
+const { ipcRenderer } = require('electron')
 
 const formData = reactive({
   account: '',
   password: '',
-  rePassword: ''
+  rePassword: '',
 })
 
-const closeWindow = () => {
+function closeWindow() {
   ipcRenderer.send('close-register')
 }
 
 const showAlert = ref(false)
 const alertMsg = ref('')
 
-const register = () => {
+function register() {
   if (formData.account === '' || formData.password === '' || formData.rePassword === '') {
     alertMsg.value = i18n().registerPage.plzAccAndPass
     showAlert.value = true
-  } else if (!((formData.account >= 'a' && formData.account <= 'z') || (formData.account >= '0' && formData.account <= '9') || (formData.account >= 'A' && formData.account <= 'Z') || formData.account.indexOf('_') !== -1)) {
+  }
+  else if (!((formData.account >= 'a' && formData.account <= 'z') || (formData.account >= '0' && formData.account <= '9') || (formData.account >= 'A' && formData.account <= 'Z') || formData.account.includes('_'))) {
     alertMsg.value = i18n().registerPage.onlyNum
     showAlert.value = true
-  } else if (formData.account.length > 10) {
+  }
+  else if (formData.account.length > 10) {
     alertMsg.value = i18n().registerPage.accLen
     showAlert.value = true
-  } else if (formData.password !== formData.rePassword) {
+  }
+  else if (formData.password !== formData.rePassword) {
     alertMsg.value = i18n().registerPage.rePassError
     showAlert.value = true
-  } else {
+  }
+  else {
     fetch('https://api.todo.uyou.org.cn/register', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         uname: formData.account,
-        passwd: formData.password
-      })
-    }).then(res => {
+        passwd: formData.password,
+      }),
+    }).then((res) => {
       return res.json()
-    }).then(res => {
+    }).then((res) => {
       if (res.code === 200) {
         alertMsg.value = i18n().registerPage.regSuccess
         showAlert.value = true
-      } else {
+      }
+      else {
         alertMsg.value = i18n().registerPage.regFail
         showAlert.value = true
       }
@@ -58,40 +63,39 @@ const register = () => {
   }
 }
 
-const closeAlert = () => {
+function closeAlert() {
   showAlert.value = false
-  if (alertMsg.value === i18n().registerPage.regSuccess) {
+  if (alertMsg.value === i18n().registerPage.regSuccess)
     closeWindow()
-  }
 }
 </script>
 
 <template>
-  <div 
+  <div
     :bg="isWindows10OrAfter() ? 'transparent' : '#edd9b750'"
     flex="~ col" justify-center items-center
     w-screen h-screen drag
   >
-    <img 
+    <img
       w-150px h-150px mb-20px
-      src="/logo.png" 
+      src="/logo.png"
       alt=""
     >
     <div p-7px flex items-center>
-      <span 
+      <span
         flex justify-content-right w-100px
         text-20px c="#7a695c" whitespace-pre
       >
         {{ i18n().registerPage.account }}
       </span>
       <input
-        no-drag 
-        p-10px 
-        outline-none rounded-5px bg="#ffffff90"
-        border="2px solid #00000010"
-        type="text" 
-        autofocus="true" 
         v-model="formData.account"
+        no-drag
+        p-10px outline-none rounded-5px
+        bg="#ffffff90"
+        border="2px solid #00000010"
+        type="text"
+        autofocus="true"
       >
     </div>
     <div p-7px flex items-center>
@@ -101,13 +105,13 @@ const closeAlert = () => {
       >
         {{ i18n().registerPage.password }}
       </span>
-      <input 
-        no-drag 
-        p-10px 
-        outline-none rounded-5px bg="#ffffff90"
-        border="2px solid #00000010"
-        type="password" 
+      <input
         v-model="formData.password"
+        no-drag
+        p-10px outline-none rounded-5px
+        bg="#ffffff90"
+        border="2px solid #00000010"
+        type="password"
       >
     </div>
     <div p-7px flex items-center>
@@ -117,21 +121,21 @@ const closeAlert = () => {
       >
         {{ i18n().registerPage.rePass }}
       </span>
-      <input 
-        no-drag 
-        p-10px
-        outline-none rounded-5px bg="#ffffff90"
-        border="2px solid #00000010"
-        type="password" 
+      <input
         v-model="formData.rePassword"
+        no-drag
+        p-10px outline-none rounded-5px
+        bg="#ffffff90"
+        border="2px solid #00000010"
+        type="password"
       >
     </div>
-    <button 
+    <button
       no-drag
       mt-10px p="x-20px y-5px" rounded-5px
       bg="#7a695c active:#574a40" c-white border-none
       text-18px cursor-pointer
-      type="submit" 
+      type="submit"
       @click="register"
     >
       {{ i18n().registerPage.reg }}
@@ -139,11 +143,11 @@ const closeAlert = () => {
     <Alert
       :title="i18n().accountPage.alertTitle"
       :dialog-show="showAlert"
-      :cancelButtonShow="false"
+      :cancel-button-show="false"
       @return="closeAlert"
     >
       {{ alertMsg }}
     </Alert>
-    <close-button v-if="!isMac()"/>
+    <CloseButton v-if="!isMac()" />
   </div>
 </template>

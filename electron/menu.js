@@ -1,5 +1,5 @@
-const { shell, ipcMain, app} = require('electron');
-const i18n = require('./i18n');
+const { shell, ipcMain, app } = require('electron')
+const i18n = require('./i18n')
 const createAboutWindow = require('./pages/about')
 
 module.exports = function (app, mainWindow, height) {
@@ -10,33 +10,33 @@ module.exports = function (app, mainWindow, height) {
         {
           label: i18n(app).aboutText,
           click() {
-            let aboutWindow = createAboutWindow()
+            const aboutWindow = createAboutWindow()
 
-            ipcMain.once("close-about", () => {
+            ipcMain.once('close-about', () => {
               aboutWindow.close()
-            });
-            ipcMain.once("get-app-version", (event) => {
+            })
+            ipcMain.once('get-app-version', (event) => {
               event.sender.send('version', app.getVersion())
             })
-          }
+          },
         },
         {
           label: i18n(app).gotoWebText,
           click() {
-            shell.openExternal('http://uyoutodo.uyou.org.cn');
-          }
+            shell.openExternal('http://uyoutodo.uyou.org.cn')
+          },
         },
         {
-          type: 'separator'
+          type: 'separator',
         },
         {
           label: i18n(app).quitText,
           accelerator: 'CmdOrCtrl+Q',
           click() {
             app.quit()
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     {
       label: i18n(app).labelWindowText,
@@ -61,16 +61,16 @@ module.exports = function (app, mainWindow, height) {
           accelerator: 'CmdOrCtrl+Shift+S',
         },
         {
-          type: 'separator'
+          type: 'separator',
         },
         {
           label: i18n(app).resetWindowText,
           click() {
             mainWindow.setSize(1000, 750)
           },
-          accelerator: 'CmdOrCtrl+R'
-        }
-      ]
-    }
-  ];
+          accelerator: 'CmdOrCtrl+R',
+        },
+      ],
+    },
+  ]
 }

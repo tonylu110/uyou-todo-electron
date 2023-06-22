@@ -1,19 +1,19 @@
-<template>
-  <div :class="'item-button ' + mode" :style="{width: simpleMode ? 'calc(100% - 50px)' : ''}">
-    <slot>button</slot>
-  </div>
-</template>
-
 <script setup lang="ts">
 defineProps({
   mode: {
     default: '',
-    type: String
-  }
+    type: String,
+  },
 })
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
+
+<template>
+  <div :class="`item-button ${mode}`" :style="{ width: simpleMode ? 'calc(100% - 50px)' : '' }">
+    <slot>button</slot>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .item-button {

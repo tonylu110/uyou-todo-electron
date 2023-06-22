@@ -1,15 +1,17 @@
-const firstLoad = () => {
+function firstLoad() {
   let alwaysOnTop: boolean
-  if (localStorage.getItem('alwaysOnTop') === 'true') {
+  if (localStorage.getItem('alwaysOnTop') === 'true')
     alwaysOnTop = true
-  } else {
+  else
     alwaysOnTop = false
-  }
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
   const ipcRenderer = require('electron').ipcRenderer
   if (localStorage.getItem('saveTopState') !== 'false') {
     ipcRenderer.send('window-on-top', alwaysOnTop)
     return alwaysOnTop
-  } else {
+  }
+  else {
     return false
   }
 }

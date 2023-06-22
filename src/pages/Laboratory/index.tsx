@@ -1,7 +1,7 @@
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import TabBar from '../../components/TabBar/TabBar.vue'
-import SettingList from "../../components/SettingList";
-import { useRouter } from "vue-router";
+import SettingList from '../../components/SettingList'
 import Item from '../../components/ItemBox/Item/Item.vue'
 
 export default defineComponent({
@@ -22,7 +22,7 @@ export default defineComponent({
 
     return () => (
       <>
-        <TabBar 
+        <TabBar
           title="Laboratory"
           rightImgShow={false}
           leftImgShow={true}
@@ -42,5 +42,5 @@ export default defineComponent({
         </SettingList>
       </>
     )
-  }
+  },
 })

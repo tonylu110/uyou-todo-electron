@@ -1,8 +1,9 @@
-import { createVNode, render } from "vue"
-import Toast, { IProps } from "./Toast"
+import { createVNode, render } from 'vue'
+import type { IProps } from './Toast'
+import Toast from './Toast'
 
-export const createToast = ({ msg, center }: IProps, node?: Element) => {
-  const vm = createVNode(Toast, {msg, center})
+export function createToast({ msg, center }: IProps, node?: Element) {
+  const vm = createVNode(Toast, { msg, center })
   const container = document.createElement('div')
   render(vm, container)
 
@@ -16,5 +17,5 @@ export const createToast = ({ msg, center }: IProps, node?: Element) => {
       node.removeChild(container)
     else
       document.body.removeChild(container)
-  }, 1000);
+  }, 1000)
 }

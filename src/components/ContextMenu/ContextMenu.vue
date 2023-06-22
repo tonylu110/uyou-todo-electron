@@ -1,45 +1,32 @@
-<template>
-  <div class="menu" :style="{top: position.top + 'px', left: position.left + 'px'}">
-    <div @click="copy" v-if="showCopy" class="img">
-      <div i-mdi:content-copy text-14px mr-5px></div>
-      <span>{{ i18n().contextMenu.copy }}</span>
-    </div>
-    <div @click="paste" v-if="showPaste" class="img">
-      <div i-mdi:content-paste text-14px mr-5px></div>
-      <span>{{ i18n().contextMenu.paste }}</span>
-    </div>
-    <span v-if="custom" class="menu-line"></span>
-    <div class="img" v-if="custom" v-for="(item, index) in customMenu" :key="index" @click="emits(item.event)" :style="{color: item.color}">
-      <div :class="item.icon" text-14px mr-5px v-if="item.icon"></div>
-      <span>{{ item.label }}</span>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import { watchEffect, ref } from "vue";
-import i18n from "../../i18n";
-
-const { clipboard } = require('electron')
+import { ref, watchEffect } from 'vue'
+import i18n from '../../i18n'
 
 const props = withDefaults(defineProps<{
   pos: {
-    top: number,
+    top: number
     left: number
-  },
-  text?: string,
-  showCopy?: boolean,
-  showPaste?: boolean,
+  }
+  text?: string
+  showCopy?: boolean
+  showPaste?: boolean
   custom?: Array<{
-    label?: string,
-    event?: string,
-    icon?: string,
+    label?: string
+    event?: string
+    icon?: string
     color?: string
   }>
 }>(), {
   showCopy: true,
-  showPaste: true
+  showPaste: true,
 })
+
+const emits = defineEmits<{
+  (e: 'pasteText', text: string): void
+  (e: string | undefined): void
+}>()
+
+const { clipboard } = require('electron')
 
 const position = ref()
 
@@ -51,21 +38,15 @@ const textProp = ref(props.text)
 watchEffect(() => {
   textProp.value = props.text!
 })
-const copy = () => {
+function copy() {
   const copyText = window.getSelection()!.toString()
-  if (copyText) {
+  if (copyText)
     clipboard.writeText(copyText)
-  } else {
+  else
     clipboard.writeText(textProp.value)
-  }
 }
 
-const emits = defineEmits<{
-  (e: 'pasteText', text: string): void
-  (e: string | undefined): void
-}>()
-
-const paste = () => {
+function paste() {
   const pasteText = clipboard.readText()
   emits('pasteText', pasteText)
 }
@@ -75,6 +56,24 @@ watchEffect(() => {
   customMenu.value = props.custom
 })
 </script>
+
+<template>
+  <div class="menu" :style="{ top: `${position.top}px`, left: `${position.left}px` }">
+    <div v-if="showCopy" class="img" @click="copy">
+      <div i-mdi:content-copy text-14px mr-5px />
+      <span>{{ i18n().contextMenu.copy }}</span>
+    </div>
+    <div v-if="showPaste" class="img" @click="paste">
+      <div i-mdi:content-paste text-14px mr-5px />
+      <span>{{ i18n().contextMenu.paste }}</span>
+    </div>
+    <span v-if="custom" class="menu-line" />
+    <div v-for="(item, index) in customMenu" v-if="custom" :key="index" class="img" :style="{ color: item.color }" @click="emits(item.event)">
+      <div v-if="item.icon" :class="item.icon" text-14px mr-5px />
+      <span>{{ item.label }}</span>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .menu {

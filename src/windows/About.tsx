@@ -1,11 +1,11 @@
-import { defineComponent } from "vue"
-import { isWindow, isMac } from "../util/os"
+import { defineComponent } from 'vue'
+import { isMac, isWindow } from '../util/os'
 import CloseButton from '../components/CloseButton'
-import { versionText } from "../util/appVersionCode"
+import { versionText } from '../util/appVersionCode'
 
 export default defineComponent({
   setup() {
-    const os = require("os")
+    const os = require('node:os')
 
     const isWindows10OrAfter = isWindow() && os.release().split('.')[2] > 15063
 
@@ -15,15 +15,15 @@ export default defineComponent({
         flex="~ col" justify-center items-center
         w-screen h-screen
       >
-        <img 
+        <img
           w-130px h-130px
           mb-30px
-          src="./logo.png" 
-          alt="" 
+          src="./logo.png"
+          alt=""
         />
         <span c="#7a695c" font-bold text-24px>uyou ToDo v{versionText}</span>
-        <span 
-          block mt-15px 
+        <span
+          block mt-15px
           text-14px c="#7a695c" font-bold
         >
           Copyright (c) 2022-2023, Anthony Lu
@@ -31,5 +31,5 @@ export default defineComponent({
         {!isMac() ? <CloseButton/> : null}
       </div>
     )
-  }
+  },
 })

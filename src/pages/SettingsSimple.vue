@@ -1,21 +1,78 @@
+<script setup lang="ts">
+import { onBeforeUnmount, ref } from 'vue'
+import TabBar from '../components/TabBar/TabBar.vue'
+import i18n from '../i18n'
+import router from '../router'
+import SettingList from '../components/SettingList'
+import Item from '../components/ItemBox/Item/Item.vue'
+import ItemBox from '../components/ItemBox/ItemBox.vue'
+import firstLoad from '../components/TitleBar/firstLoad'
+import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
+import emitter from '../util/bus'
+import isDev from '../util/mode'
+import setSwitchFn from '../util/setSwitchFn'
+
+const os = require('node:os')
+
+const isLinux = !(process.platform === 'linux')
+const isWindows10OrAfter = os.release().split('.')[2] > 15063
+const isMac = process.platform === 'darwin'
+
+const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
+
+const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
+const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
+const topState = ref(firstLoad())
+const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
+const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
+const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
+const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
+
+emitter.on('topWindow', (data: unknown) => {
+  topState.value = (data as boolean)
+})
+emitter.on('routerShow', (data: unknown) => {
+  routerUrlState.value = (data as boolean)
+})
+function clearData() {
+  localStorage.clear()
+  window.location.reload()
+}
+function openUrl(url: string) {
+  window.open(url)
+}
+const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
+function showRouterUrl() {
+  routerUrlState.value = !routerUrlState.value
+  emitter.emit('routerShow', routerUrlState.value)
+  localStorage.setItem('routerUrl', `${routerUrlState.value}`)
+}
+onBeforeUnmount(() => {
+  emitter.off('routerShow')
+  emitter.off('toastShow')
+})
+
+const isInDev = localStorage.getItem('isInDev') === 'true'
+</script>
+
 <template>
-  <tab-bar
+  <TabBar
     :title="i18n().settingTitleText"
     :right-img-show="false"
-    @left-click="router.back()"
     bg-color="light"
+    @left-click="router.back()"
   />
-  <setting-list>
+  <SettingList>
     <ItemBox v-if="isDev">
       <Item
         title="UnoCss dev"
         @item-fun="openUrl('http://localhost:3000/__unocss')"
       />
-      <Item 
+      <Item
         title="Show router url"
         :show-switch="true"
-        @switch-fun="showRouterUrl"
         :switch-state="routerUrlState"
+        @switch-fun="showRouterUrl"
       />
     </ItemBox>
     <Item
@@ -72,72 +129,17 @@
       <Item
         v-if="(isLinux && isWindows10OrAfter) || isMac"
         :title="i18n().anotherSettings.menuBlur"
-        :showSwitch="true"
-        :switchState="menuBlurState"
+        :show-switch="true"
+        :switch-state="menuBlurState"
         @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', i18n().restartApp)"
       />
     </ItemBox>
-    <Item title="Laboratory" @item-fun="router.push('/lab?from=setting')" v-if="isInDev"/>
-    <ItemButton mode="error" @click="clearData">{{ i18n().clearData }}</ItemButton>
-    <ItemButton @click="router.push('/lang?from=setting')">
-      <img src="/images/lang.png" alt="" class="lang-img" />
+    <Item v-if="isInDev" title="Laboratory" @item-fun="router.push('/lab?from=setting')" />
+    <ItemButton mode="error" @click="clearData">
+      {{ i18n().clearData }}
     </ItemButton>
-  </setting-list>
+    <ItemButton @click="router.push('/lang?from=setting')">
+      <img src="/images/lang.png" alt="" class="lang-img">
+    </ItemButton>
+  </SettingList>
 </template>
-
-<script setup lang="ts">
-import TabBar from "../components/TabBar/TabBar.vue";
-import i18n from "../i18n";
-import router from "../router";
-import SettingList from "../components/SettingList";
-import Item from "../components/ItemBox/Item/Item.vue";
-import { onBeforeUnmount, ref } from "vue";
-import ItemBox from "../components/ItemBox/ItemBox.vue";
-import firstLoad from "../components/TitleBar/firstLoad";
-import ItemButton from "../components/ItemBox/ItemButton/ItemButton.vue";
-import emitter from "../util/bus";
-import isDev from "../util/mode";
-import setSwitchFn from "../util/setSwitchFn";
-
-const os = require('os')
-
-const isLinux = !(process.platform === 'linux')
-const isWindows10OrAfter = os.release().split('.')[2] > 15063
-const isMac = process.platform === 'darwin'
-
-const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
-
-const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
-const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
-const topState = ref(firstLoad())
-const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
-const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
-const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
-const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
-
-emitter.on('topWindow', (data: unknown) => {
-  topState.value = (data as boolean)
-})
-emitter.on('routerShow', (data: unknown) => {
-  routerUrlState.value = (data as boolean)
-})
-const clearData = () => {
-  localStorage.clear()
-  window.location.reload()
-}
-const openUrl = (url: string) => {
-  window.open(url)
-}
-const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
-const showRouterUrl = () => {
-  routerUrlState.value = !routerUrlState.value
-  emitter.emit('routerShow', routerUrlState.value)
-  localStorage.setItem('routerUrl', routerUrlState.value + '')
-}
-onBeforeUnmount(() => {
-  emitter.off('routerShow')
-  emitter.off('toastShow')
-})
-
-const isInDev = localStorage.getItem('isInDev') === 'true'
-</script>

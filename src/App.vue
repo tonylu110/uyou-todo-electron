@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { ref, Ref, onBeforeUnmount, onMounted } from 'vue';
-import i18n from './i18n';
-import TitleBar from './components/TitleBar/newTitleBar';
-import Alert from './components/Alert/Alert.vue';
-import ListMenu from './components/ListMenu/ListMenu.vue';
+import type { Ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import i18n from './i18n'
+import TitleBar from './components/TitleBar/newTitleBar'
+import Alert from './components/Alert/Alert.vue'
+import ListMenu from './components/ListMenu/ListMenu.vue'
 import { versionCode } from './util/appVersionCode'
-import { useRoute, useRouter } from 'vue-router';
 import RouterUrl from './components/RouterUrl'
-import emitter from './util/bus';
-import isDev from './util/mode';
-import getCateList from './util/getCateList';
+import emitter from './util/bus'
+import isDev from './util/mode'
+import getCateList from './util/getCateList'
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
 
 const alertShow = ref(false)
@@ -21,9 +23,9 @@ const version = versionCode
 const autoUpdateState = localStorage.getItem('autoUpdate') !== 'false'
 
 if (autoUpdateState) {
-  fetch('https://api.todo.uyou.org.cn/update/get').then(res => {
+  fetch('https://api.todo.uyou.org.cn/update/get').then((res) => {
     return res.json()
-  }).then(res => {
+  }).then((res) => {
     if (res[1].code > version) {
       newVersion.value = res[1].version
       alertMsg.value = res[1].data
@@ -38,7 +40,7 @@ onMounted(() => {
   }, 0)
 })
 
-const returnClick = () => {
+function returnClick() {
   alertShow.value = false
   ipcRenderer.send('open-url', 'https://github.com/tonylu110/uyou-todo-electron/releases')
 }
@@ -66,7 +68,7 @@ const returnClick = () => {
 window.addEventListener('resize', () => {
   ipcRenderer.send('getWindowSize', {
     height: window.innerHeight,
-    width: window.innerWidth
+    width: window.innerWidth,
   })
 })
 
@@ -82,42 +84,44 @@ router.isReady().then(() => {
     const startRoute = ref(localStorage.getItem('start') ? localStorage.getItem('start')! : 'home')
     if (startRoute.value === 'home')
       startRoute.value = '/'
-    else 
+    else
       startRoute.value = '/other?listName=today'
     router.push(startRoute.value)
   }
 })
 
 const routerShow = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
- 
+
 emitter.on('routerShow', (data: unknown) => {
   routerShow.value = (data as boolean)
 })
- 
+
 onBeforeUnmount(() => {
   emitter.off('routerShow')
 })
 </script>
 
 <template>
-  <router-url v-if="routerShow"/>
-  <router-view name="isWindow"></router-view>
-  <div class="list-main" v-if="!isWinDow">
+  <RouterUrl v-if="routerShow" />
+  <router-view name="isWindow" />
+  <div v-if="!isWinDow" class="list-main">
     <div class="list-in">
       <div>
         <TitleBar v-if="!systemTitleShow" />
         <ListMenu />
       </div>
       <div class="todo-list">
-        <router-view></router-view>
-        <Alert 
-          :dialogShow="alertShow"
+        <router-view />
+        <Alert
+          :dialog-show="alertShow"
           :title="`${i18n().updateText} v${newVersion}`"
           @cancel="() => alertShow = false"
           @return="returnClick"
         >
           <ul>
-            <li v-for="(item, index) in alertMsg" :key="index">{{ item.slice(2) }}</li>
+            <li v-for="(item, index) in alertMsg" :key="index">
+              {{ item.slice(2) }}
+            </li>
           </ul>
         </Alert>
       </div>
@@ -134,7 +138,7 @@ onBeforeUnmount(() => {
   .list-in {
     display: flex;
     flex-direction: row;
-    
+
     .todo-list {
       width: calc(100vw - 300px);
       height: 100vh;

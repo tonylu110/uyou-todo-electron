@@ -1,23 +1,8 @@
-<template>
-  <dialog :class="`alert ${dialogShow ? '' : 'hide'}`" ref="dialog">
-    <div class="title">
-      {{ title }}
-    </div>
-    <div class="body" :style="{alignItems: title === i18n().accountPage.alertTitle ? 'center' : ''}">
-      <slot/>
-    </div>
-    <div class="buttons" no-drag>
-      <div class="cancel" v-if="cancelButtonShow" @click="emits('cancel')">{{ i18n().alertText.cancelText }}</div>
-      <div class="return" :style="{width: cancelButtonShow ? '' : '100%'}" @click="emits('return')">{{ i18n().alertText.returnText}}</div>
-    </div>
-    <ContextMenu :pos="contextMenu" v-if="showContextMenu" :show-paste="false"/>
-  </dialog>
-</template>
-
 <script setup lang="ts">
-import {onMounted, Ref, ref, watchEffect} from "vue"
+import type { Ref } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 import i18n from '../../i18n'
-import ContextMenu from "../ContextMenu/ContextMenu.vue";
+import ContextMenu from '../ContextMenu/ContextMenu.vue'
 
 const props = withDefaults(defineProps<{
   title?: string
@@ -28,15 +13,15 @@ const props = withDefaults(defineProps<{
   title: 'title',
   body: () => ['1', '2'],
   cancelButtonShow: true,
-  dialogShow: false
+  dialogShow: false,
 })
 
-const dialog = ref(null) as unknown as Ref<HTMLDialogElement>
-
 const emits = defineEmits<{
-  (e: 'cancel'): void,
+  (e: 'cancel'): void
   (e: 'return'): void
 }>()
+
+const dialog = ref(null) as unknown as Ref<HTMLDialogElement>
 
 onMounted(() => {
   const closeAlert = () => {
@@ -47,7 +32,8 @@ onMounted(() => {
     if (props.dialogShow) {
       dialog.value.removeEventListener('animationend', closeAlert)
       dialog.value.showModal()
-    } else {
+    }
+    else {
       dialog.value.addEventListener('animationend', closeAlert)
     }
   })
@@ -56,18 +42,18 @@ onMounted(() => {
 const showContextMenu = ref(false)
 const contextMenu = ref({
   top: 0,
-  left: 0
+  left: 0,
 })
 
 onMounted(() => {
-  dialog.value.addEventListener('contextmenu', e => {
+  dialog.value.addEventListener('contextmenu', (e) => {
     e.preventDefault()
 
     showContextMenu.value = true
 
     contextMenu.value = {
       top: e.pageY,
-      left: e.pageX
+      left: e.pageX,
     }
   })
 
@@ -76,6 +62,26 @@ onMounted(() => {
   })
 })
 </script>
+
+<template>
+  <dialog ref="dialog" :class="`alert ${dialogShow ? '' : 'hide'}`">
+    <div class="title">
+      {{ title }}
+    </div>
+    <div class="body" :style="{ alignItems: title === i18n().accountPage.alertTitle ? 'center' : '' }">
+      <slot />
+    </div>
+    <div class="buttons" no-drag>
+      <div v-if="cancelButtonShow" class="cancel" @click="emits('cancel')">
+        {{ i18n().alertText.cancelText }}
+      </div>
+      <div class="return" :style="{ width: cancelButtonShow ? '' : '100%' }" @click="emits('return')">
+        {{ i18n().alertText.returnText }}
+      </div>
+    </div>
+    <ContextMenu v-if="showContextMenu" :pos="contextMenu" :show-paste="false" />
+  </dialog>
+</template>
 
 <style lang="scss" scoped>
 @import "dialogAnimation.scss";
