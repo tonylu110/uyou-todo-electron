@@ -13,10 +13,10 @@ import emitter from '../../util/bus'
 import isDev from '../../util/mode'
 import setSwitchFn from '../../util/setSwitchFn'
 
-const ipcRenderer = require('electron').ipcRenderer
-
-const { shell } = require('electron')
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const os = require('node:os')
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+const { ipcRenderer, shell } = require('electron')
 
 const isWindows10OrAfter = os.release().split('.')[2] > 15063
 const isLinux = !(process.platform === 'linux')
@@ -69,20 +69,20 @@ onBeforeUnmount(() => {
 
 const isInDev = localStorage.getItem('isInDev') === 'true'
 
-const startPage = ref(localStorage.getItem('start') ? localStorage.getItem('start') : 'home') as unknown as Ref<string>
 const startPageList = [
   {
-    title: 'home',
+    title: 'All ToDos',
     fn: 'home',
   },
   {
-    title: 'today',
+    title: 'My Day',
     fn: 'today',
   },
 ]
+const startPage = ref(localStorage.getItem('start') ? startPageList.filter(item => item.fn === localStorage.getItem('start'))[0].title : 'All ToDo') as unknown as Ref<string>
 function setStartPage(StartPage: string) {
   localStorage.setItem('start', StartPage)
-  startPage.value = StartPage
+  startPage.value = startPageList.filter(item => item.fn === StartPage)[0].title
 }
 </script>
 
@@ -108,7 +108,7 @@ function setStartPage(StartPage: string) {
     </ItemBox>
     <Item
       :title="loginState ? i18n().myAccount : i18n().loginText"
-      @itemFun="() => router.push('/account?from=setting')"
+      @item-fun="() => router.push('/account?from=setting')"
     />
     <ItemBox>
       <Item
@@ -213,13 +213,13 @@ function setStartPage(StartPage: string) {
     </ItemBox>
     <Item v-if="isInDev" title="Laboratory" @item-fun="router.push('/lab?from=setting')" />
     <ItemBox>
-      <Item :title="i18n().otherList.toWeb" item-img="./images/web.png" @itemFun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')" />
-      <Item :title="i18n().otherList.toPhone" item-img="./images/phone.png" @itemFun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')" />
-      <Item :title="i18n().otherList.toDonate" item-img="./images/donate.png" @itemFun="router.push('/donate?from=setting')" />
+      <Item :title="i18n().otherList.toWeb" item-img="./images/web.png" @item-fun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')" />
+      <Item :title="i18n().otherList.toPhone" item-img="./images/phone.png" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')" />
+      <Item :title="i18n().otherList.toDonate" item-img="./images/donate.png" @item-fun="router.push('/donate?from=setting')" />
     </ItemBox>
     <ItemBox>
-      <Item :title="i18n().anotherSettings.openSource" @itemFun="router.push('/open?from=setting')" />
-      <Item :title="i18n().anotherSettings.about" @itemFun="openAboutWindow" />
+      <Item :title="i18n().anotherSettings.openSource" @item-fun="router.push('/open?from=setting')" />
+      <Item :title="i18n().anotherSettings.about" @item-fun="openAboutWindow" />
     </ItemBox>
     <ItemButton mode="error" @click="clearData">
       {{ i18n().clearData }}

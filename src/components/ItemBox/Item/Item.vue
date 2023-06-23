@@ -56,10 +56,11 @@ const showList = ref(false)
       @switch="emits('switchFun')"
     />
     <div
-      v-if="showListBox" border="1px solid black/10" right-15px
-      relative p="x-10px y-5px" rounded-5px
+      v-if="showListBox"
+      border="1px solid black/10" right-7px
+      absolute p="x-10px y-5px" rounded-5px
       bg="active:primary-d"
-      cursor-pointer
+      cursor-pointer whitespace-nowrap
       class="group"
       @click="showList = !showList"
     >
@@ -74,11 +75,11 @@ const showList = ref(false)
         top-35px flex="~ !col" justify-center
         items-center shadow="xl black/20" z-10
         p-10px border="1px solid black/5"
-        rounded-7px
+        rounded-7px whitespace-nowrap
       >
         <div
           v-for="(item, index) in list" :key="index"
-          p="x-20px y-10px"
+          p="x-20px y-10px" w="[calc(100%-40px)]"
           bg="active:primary-a hover:primary-d"
           rounded-5px c="hover:white active:white"
           @click="emits(item.fn)"
