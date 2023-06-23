@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router'
 import i18n from '../../i18n'
 import router from '../../router'
 import emitter from '../../util/bus'
+import { isMac } from '../../util/os'
 import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
 
@@ -107,7 +108,7 @@ emitter.on('setCate', (data) => {
 <template>
   <div class="list-menu" :style="{ backgroundColor: listMenuColor, height: titleBarShow ? '100vh' : '' }">
     <div class="list">
-      <span class="title">{{ i18n().accountPage.account }}</span>
+      <span class="title" :mt="isMac() ? '' : '!15px'">{{ i18n().accountPage.account }}</span>
       <div
         class="account-list group"
         mb="!20px"
@@ -258,7 +259,7 @@ emitter.on('setCate', (data) => {
           flex items-center justify-center
           p-10px w="260px" ml-10px h-18px
           cursor-pointer rounded-7px
-          bg="active:#00000010 hover:#00000005 black/5"
+          bg="active:#00000010 hover:black/10 black/5"
           :mt="showAdd ? '' : '10px'"
           @click="showAddFn"
         >

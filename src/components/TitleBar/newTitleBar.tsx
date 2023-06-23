@@ -58,14 +58,14 @@ export default defineComponent({
           ></div>
         </div>
           : <div
-          bg={topState.value ? 'error-d hover:error-h active:error-a' : 'hover:black/10 active:black/20'}
-          w-50px h-20px no-drag
+          bg={topState.value ? 'error-d hover:error-h active:error-a' : 'black/10 hover:black/20 active:black/30'}
+          w-13px h-13px rounded-full
+          no-drag p-6px mt-12px
           flex items-center justify-center
-          ml-10px cursor-pointer rounded-5px
-          border={topState.value ? '1px solid error-d hover:error-h active:error-a' : (isLight.value ? '1px solid #594b4230' : '1px solid #594b4230')}
+          ml-16px cursor-pointer rounded-5px
           onClick={onTopWindow}
         >
-          <div i-fluent:pin-48-filled text-14px c={topState.value ? 'white' : '#555'}></div>
+          <div i-fluent:pin-12-filled text-13px c={topState.value ? 'white' : '#555'}></div>
         </div>}
       </div>
     )
