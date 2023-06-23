@@ -15,6 +15,7 @@ const clearData = 'Clear Data'
 const useSystemBar = 'Use The System Title Bar'
 const setTopWindow = 'Top Window'
 const restartApp = 'Restart the app to take effect'
+const closeWindow = 'Do you want to close uyou ToDo?'
 
 const accountPage = {
   account: 'Account',
@@ -137,6 +138,12 @@ const logoffPage = {
   passNotTrue: 'password is not true',
 }
 
+const startPage = {
+  today: 'My Today',
+  allTodos: 'All ToDos',
+  startPage: 'Start Page',
+}
+
 export default {
   addText,
   cancelText,
@@ -165,4 +172,6 @@ export default {
   registerPage,
   rePassPage,
   logoffPage,
+  startPage,
+  closeWindow,
 }

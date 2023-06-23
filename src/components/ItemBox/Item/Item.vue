@@ -73,7 +73,7 @@ const showList = ref(false)
         v-if="showList"
         absolute right-0 bg-white
         top-35px flex="~ !col" justify-center
-        items-center shadow="xl black/20" z-10
+        items-center shadow="md black/20" z-10
         p-10px border="1px solid black/5"
         rounded-7px whitespace-nowrap
       >

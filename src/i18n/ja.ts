@@ -15,6 +15,7 @@ const clearData = 'データをクリア'
 const useSystemBar = 'システム タイトル バーを使用'
 const setTopWindow = 'トップ ウィンドウ'
 const restartApp = 'アプリを再起動して有効にする'
+const closeWindow = 'uyou ToDo をオフにしますか?'
 
 const accountPage = {
   account: 'アカウント',
@@ -137,6 +138,12 @@ const logoffPage = {
   passNotTrue: 'パスワードが正しくありません',
 }
 
+const startPage = {
+  today: '私の今日',
+  allTodos: 'すべての ToDo',
+  startPage: 'スタートページ',
+}
+
 export default {
   addText,
   cancelText,
@@ -165,4 +172,6 @@ export default {
   registerPage,
   rePassPage,
   logoffPage,
+  startPage,
+  closeWindow,
 }

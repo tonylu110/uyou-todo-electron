@@ -51,7 +51,7 @@ export default defineComponent({
           onCancel={() => dialogShow.value = false}
           onReturn={() => ipcRenderer.send('window-close')}
         >
-          <span>Do you want to close uyou ToDo</span>
+          <span>{i18n().closeWindow}</span>
         </Alert>
       </>
     )

@@ -71,11 +71,11 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
 
 const startPageList = [
   {
-    title: 'All ToDos',
+    title: i18n().startPage.allTodos,
     fn: 'home',
   },
   {
-    title: 'My Day',
+    title: i18n().startPage.today,
     fn: 'today',
   },
 ]
@@ -130,7 +130,7 @@ function setStartPage(StartPage: string) {
         @switch-fun="setSwitchFn('simpleMode', !simpleModeState, () => simpleModeState = !simpleModeState, 'setSimple', i18n().restartApp)"
       />
       <Item
-        title="start page"
+        :title="i18n().startPage.startPage"
         :show-list-box="true"
         :list-box-title="startPage"
         :list="startPageList"

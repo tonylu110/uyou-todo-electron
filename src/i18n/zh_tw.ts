@@ -15,6 +15,7 @@ const clearData = '清除資料'
 const useSystemBar = '使用系統標題欄'
 const setTopWindow = '置頂視窗'
 const restartApp = '重啟應用生效'
+const closeWindow = '你想要關閉 uyou ToDo 嗎？'
 
 const accountPage = {
   account: '賬號',
@@ -137,6 +138,12 @@ const logoffPage = {
   passNotTrue: '密碼不正確',
 }
 
+const startPage = {
+  today: '我的一天',
+  allTodos: '所有 ToDo',
+  startPage: '啟動頁',
+}
+
 export default {
   addText,
   cancelText,
@@ -165,4 +172,6 @@ export default {
   registerPage,
   rePassPage,
   logoffPage,
+  startPage,
+  closeWindow,
 }

@@ -15,6 +15,7 @@ const clearData = 'Borrar Datos'
 const useSystemBar = 'Usar La Barra De Título Del Sistema'
 const setTopWindow = 'Ventana Superior'
 const restartApp = 'Reiniciar la aplicación para que surta efecto'
+const closeWindow = '¿Quieres cerrar uyou ToDo?'
 
 const accountPage = {
   account: 'Cuenta',
@@ -137,6 +138,12 @@ const logoffPage = {
   passNotTrue: 'la contraseña no es verdadera',
 }
 
+const startPage = {
+  today: 'Mi Hoy',
+  allTodos: 'Todas las tareas pendientes',
+  startPage: 'Página de inicio',
+}
+
 export default {
   addText,
   cancelText,
@@ -165,4 +172,6 @@ export default {
   registerPage,
   rePassPage,
   logoffPage,
+  startPage,
+  closeWindow,
 }

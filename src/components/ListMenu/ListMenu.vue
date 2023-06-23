@@ -141,7 +141,7 @@ emitter.on('setCate', (data) => {
             <span
               style="font-size: 14px; margin-left: 10px;"
               :c="routeQueryName === 'today' ? '!white group-hover:!white' : 'group-hover:!white'"
-            >Today</span>
+            >{{ i18n().startPage.today }}</span>
           </div>
         </div>
         <div
