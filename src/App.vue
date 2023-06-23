@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import i18n from './i18n'
 import TitleBar from './components/TitleBar/newTitleBar'
@@ -98,6 +98,7 @@ emitter.on('routerShow', (data: unknown) => {
 
 onBeforeUnmount(() => {
   emitter.off('routerShow')
+  emitter.off('setNewFloatUi')
 })
 
 const isRound = ref(false)
@@ -105,6 +106,31 @@ const isRound = ref(false)
 const isWindows = navigator.userAgent.includes('Win')
 if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && localStorage.getItem('systemTitle') === 'true' && !(localStorage.getItem('simpleMode') === 'true'))
   isRound.value = true
+
+const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
+const floatWidth = ref('calc(100vw - 300px)')
+const floatHeight = ref('100vh')
+const floatY = ref('translateY(0px)')
+const floatBorder = ref('none')
+
+emitter.on('setNewFloatUi', () => {
+  newFloatUi.value = !newFloatUi.value
+})
+
+watchEffect(() => {
+  if (newFloatUi.value) {
+    floatWidth.value = 'calc(100vw - 310px)'
+    floatHeight.value = 'calc(100vh - 20px)'
+    floatY.value = 'translateY(10px)'
+    floatBorder.value = '1px solid #00000010'
+  }
+  else {
+    floatWidth.value = 'calc(100vw - 30px)'
+    floatHeight.value = '100vh'
+    floatY.value = 'translateY(0px)'
+    floatBorder.value = 'none'
+  }
+})
 </script>
 
 <template>
@@ -118,7 +144,7 @@ if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.ge
       </div>
       <div
         class="todo-list"
-        :rounded="isRound ? 'tl-15px' : ''"
+        :rounded="isRound ? 'tl-15px' : newFloatUi ? '7px' : ''"
       >
         <router-view />
         <Alert
@@ -149,9 +175,11 @@ if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.ge
     flex-direction: row;
 
     .todo-list {
-      width: calc(100vw - 300px);
-      height: 100vh;
+      transform: v-bind(floatY);
+      width: v-bind(floatWidth);
+      height: v-bind(floatHeight);
       overflow: hidden;
+      border: v-bind(floatBorder);
     }
   }
 }

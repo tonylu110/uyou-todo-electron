@@ -4,6 +4,7 @@ import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import setSwitchFn from '../../util/setSwitchFn'
+import emitter from '../../util/bus'
 
 export default defineComponent({
   setup() {
@@ -23,6 +24,8 @@ export default defineComponent({
 
     const keyToAdd = ref(localStorage.getItem('ketToAdd') === 'true')
 
+    const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
+
     const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
     return () => (
@@ -40,6 +43,15 @@ export default defineComponent({
             showSwitch={true}
             switchState={opLab.value}
             onSwitchFun={openLab}
+          />
+          <Item
+            title="⚠️ new float ui - Only for Default mode"
+            showSwitch={true}
+            switchState={newFloatUi.value}
+            onSwitchFun={() => setSwitchFn('newFloatUi', !newFloatUi.value, () => {
+              newFloatUi.value = !newFloatUi.value
+              emitter.emit('setNewFloatUi')
+            })}
           />
           <Item
             title="⚠️ add ToDo item use shortcut"
