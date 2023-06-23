@@ -79,7 +79,7 @@ const startPageList = [
     fn: 'today',
   },
 ]
-const startPage = ref(localStorage.getItem('start') ? startPageList.filter(item => item.fn === localStorage.getItem('start'))[0].title : 'All ToDo') as unknown as Ref<string>
+const startPage = ref(localStorage.getItem('start') ? startPageList.filter(item => item.fn === localStorage.getItem('start'))[0].title : i18n().startPage.allTodos) as unknown as Ref<string>
 function setStartPage(StartPage: string) {
   localStorage.setItem('start', StartPage)
   startPage.value = startPageList.filter(item => item.fn === StartPage)[0].title
