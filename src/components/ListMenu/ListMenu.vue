@@ -8,6 +8,7 @@ import emitter from '../../util/bus'
 import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const os = require('node:os')
 
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
@@ -255,14 +256,14 @@ emitter.on('setCate', (data) => {
         </div>
         <div
           flex items-center justify-center
-          p-x-20px p-y-10px w="259px"
-          cursor-pointer
-          bg="active:#00000010 hover:#00000005"
+          p-10px w="260px" ml-10px h-18px
+          cursor-pointer rounded-7px
+          bg="active:#00000010 hover:#00000005 black/5"
           :mt="showAdd ? '' : '10px'"
           @click="showAddFn"
         >
           <div>
-            <div i-fluent:add-12-filled text-18px c="#00000090" />
+            <div i-fluent:add-12-filled block text-18px text-center c="#00000090" />
           </div>
         </div>
       </perfect-scrollbar>
