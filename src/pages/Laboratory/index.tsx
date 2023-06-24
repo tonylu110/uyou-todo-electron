@@ -8,8 +8,6 @@ import emitter from '../../util/bus'
 
 export default defineComponent({
   setup() {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-    const ipcRenderer = require('electron').ipcRenderer
     const router = useRouter()
 
     const back = () => {
@@ -57,10 +55,7 @@ export default defineComponent({
             title="⚠️ add ToDo item use shortcut"
             showSwitch={true}
             switchState={keyToAdd.value}
-            onSwitchFun={() => setSwitchFn('ketToAdd', !keyToAdd.value, () => {
-              keyToAdd.value = !keyToAdd.value
-              ipcRenderer.send('setAddItemCut', keyToAdd.value)
-            })}
+            onSwitchFun={() => setSwitchFn('ketToAdd', !keyToAdd.value, () => keyToAdd.value = !keyToAdd.value, 'setAddItemCut')}
           />
           <div text-gray-700 max-w-550px w={simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'} mb-10px select-text>
             ⚠️ This page contains experimental features, may be unstable, and may be removed at any time, for experience only
