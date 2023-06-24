@@ -31,7 +31,11 @@ export default defineComponent({
       }
       else if (route.query.listName === 'today') {
         listData.value = list.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString())
-        title.value = 'Today'
+        title.value = i18n().startPage.today
+      }
+      else if (route.query.listName === 'star') {
+        listData.value = list.value!.filter(listData => listData.star === true)
+        title.value = 'Star ToDos'
       }
       else {
         listData.value = list.value!.filter(listData => listData.cate === route.query.listName)
@@ -48,7 +52,7 @@ export default defineComponent({
           leftImg="i-mdi:cog"
           title={title.value}
           leftImgShow={simpleMode}
-          rightImgShow={route.query.listName !== 'allNotDo' && route.query.listName !== 'allDo'}
+          rightImgShow={route.query.listName !== 'allNotDo' && route.query.listName !== 'allDo' && route.query.listName !== 'star'}
           onRightClick={() => showAddItem.value = !showAddItem.value}
           onLeftClick={() => router.push('/setting-sim')}
           showMore={simpleMode}

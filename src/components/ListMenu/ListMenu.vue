@@ -146,6 +146,22 @@ emitter.on('setCate', (data) => {
         </div>
         <div
           class="all-todo-list group"
+          :bg="routeQueryName === 'star' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
+          @click="toList('star')"
+        >
+          <div>
+            <div
+              i-fluent:star-12-regular text-18px
+              :c="routeQueryName === 'star' ? 'white group-hover:white' : 'group-hover:white #00000090'"
+            />
+            <span
+              style="font-size: 14px; margin-left: 10px;"
+              :c="routeQueryName === 'star' ? '!white group-hover:!white' : 'group-hover:!white'"
+            >Star ToDos</span>
+          </div>
+        </div>
+        <div
+          class="all-todo-list group"
           :bg="routeName === 'Home' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
           @click="router.push('/')"
         >
