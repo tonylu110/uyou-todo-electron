@@ -13,15 +13,18 @@ const props = defineProps<{
   time: number
   text: string
   isOk: boolean
+  isStar: boolean | undefined
 }>()
 
 const emits = defineEmits<{
   (e: 'setOk', id: number, isOk: boolean): void
   (e: 'deleteItem', id: number): void
   (e: 'setCate', id: number, cateId: number): void
+  (e: 'setStar', id: number, star: boolean): void
 }>()
 
 const okState = ref(props.isOk)
+const starState = ref(props.isStar)
 
 const route = useRoute()
 const listName = ref('')
@@ -42,6 +45,7 @@ function deleteItem() {
 
 function copyText() {
   navigator.clipboard.writeText(props.text!).then(() => {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     createToast({ msg: i18n().copyToast, center: true }, itemDom.value)
   })
 }
@@ -122,6 +126,11 @@ function showMore(isCancel: boolean) {
 
 const textWrap = ref(localStorage.getItem('textWrap') === 'true')
 
+function setStar() {
+  starState.value = !starState.value
+  emits('setStar', props.time, starState.value)
+}
+
 emitter.on('showWrap', () => {
   textWrap.value = !textWrap.value
 })
@@ -140,7 +149,20 @@ onBeforeUnmount(() => {
     </div>
     <div class="list-item">
       <div class="time-area">
-        <span>{{ getTime(time) }}</span>
+        <div flex items-center>
+          <span mr-7px>{{ getTime(time) }}</span>
+          <div
+            v-if="starState"
+            i-ph:star-fill text-14px c="#6e492f" pointer-events-auto cursor-pointer
+            @click="setStar"
+          />
+          <div
+            v-else
+            i-ph:star-bold text-14px c="#6e492f" cursor-pointer
+            opacity-0 transition hover:opacity-100 pointer-events-auto
+            @click="setStar"
+          />
+        </div>
         <div flex>
           <div class="c-button" @click="textWrap = !textWrap">
             <div v-if="textWrap" i-fluent:chevron-up-12-filled text-14px />
@@ -151,9 +173,9 @@ onBeforeUnmount(() => {
           </div>
         </div>
         <div
-          absolute right-0 text-14px
-          :top="moreMenuIsBottom ? '' : '0'" v-if="moreShow"
-          :bottom="moreMenuIsBottom ? '0' : ''" ref="moreDom" bg="white/50"
+          v-if="moreShow" ref="moreDom" absolute
+          right-0 text-14px
+          :top="moreMenuIsBottom ? '' : '0'" :bottom="moreMenuIsBottom ? '0' : ''" bg="white/50"
           backdrop-blur-10px p-10px rounded-5px z-1
           shadow-item
           cursor-pointer
@@ -203,7 +225,7 @@ onBeforeUnmount(() => {
       :show-paste="false"
       :custom="customContextMenu"
       :text="props.text"
-      @setOk="setOk"
+      @set-ok="setOk"
       @remove="deleteItem"
     />
   </div>

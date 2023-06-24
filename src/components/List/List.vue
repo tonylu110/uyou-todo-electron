@@ -123,6 +123,18 @@ function setCate(id: number, cateId: number) {
   saveItemSet(listAll.value!)
 }
 
+function setStar(id: number, star: boolean) {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id)
+      list.value![i].star = star
+  }
+  for (let i = 0; i < listAll.value!.length; i++) {
+    if (listAll.value![i].id === id)
+      listAll.value![i].star = star
+  }
+  saveItemSet(listAll.value!)
+}
+
 const showNotDo = ref(localStorage.getItem('notDoShow') === 'true' || localStorage.getItem('notDoShow') === null)
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
@@ -132,8 +144,8 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
     <transition name="add">
       <div v-if="showAddItem" ref="add" class="add-list">
         <AddItem
-          @setAddItem="setAddItem"
-          @addItem="addItem"
+          @set-add-item="setAddItem"
+          @add-item="addItem"
         />
       </div>
     </transition>
@@ -145,9 +157,11 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
         :text="item.text"
         :time="item.id"
         :is-ok="item.ok"
-        @setOk="setOk"
-        @deleteItem="deleteItem"
+        :is-star="item.star"
+        @set-ok="setOk"
+        @delete-item="deleteItem"
         @set-cate="setCate"
+        @set-star="setStar"
       />
     </transition-group>
     <template v-else name="other">
@@ -158,9 +172,11 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
         :text="item.text"
         :time="item.id"
         :is-ok="item.ok"
-        @setOk="setOk"
-        @deleteItem="deleteItem"
+        :is-star="item.star"
+        @set-ok="setOk"
+        @delete-item="deleteItem"
         @set-cate="setCate"
+        @set-star="setStar"
       />
       <div
         v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo' && list.filter(listData => listData.ok === true).length > 0"
@@ -189,9 +205,11 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
           :text="item.text"
           :time="item.id"
           :is-ok="item.ok"
-          @setOk="setOk"
-          @deleteItem="deleteItem"
+          :is-star="item.star"
+          @set-ok="setOk"
+          @delete-item="deleteItem"
           @set-cate="setCate"
+          @set-star="setStar"
         />
       </template>
     </template>
