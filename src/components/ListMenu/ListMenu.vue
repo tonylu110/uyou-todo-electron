@@ -6,6 +6,7 @@ import i18n from '../../i18n'
 import router from '../../router'
 import emitter from '../../util/bus'
 import { isMac } from '../../util/os'
+import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
 import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
 
@@ -103,6 +104,31 @@ emitter.on('setCate', (data) => {
     cateList.push(item)
   })
 })
+
+const showList: Ref<ListItems> = ref(localStorage.getItem('listMenuItem')
+  ? JSON.parse(localStorage.getItem('listMenuItem')!) as ListItems
+  : {
+      today: {
+        name: i18n().startPage.today,
+        show: true,
+      },
+      star: {
+        name: 'Star ToDos',
+        show: true,
+      },
+      allDo: {
+        name: i18n().listMenu.completed,
+        show: true,
+      },
+      allNotDo: {
+        name: i18n().listMenu.incompleted,
+        show: true,
+      },
+    })
+
+emitter.on('setListItem', (data) => {
+  showList.value = (data as ListItems)
+})
 </script>
 
 <template>
@@ -129,6 +155,7 @@ emitter.on('setCate', (data) => {
       <span class="title" mb="!10px">{{ i18n().listMenu.cate }}</span>
       <perfect-scrollbar ref="cateListRef" class="cate" :shadow="ps === 0 ? '' : 'inner'" @ps-scroll-y="onScroll">
         <div
+          v-if="showList.today.show"
           class="all-todo-list group"
           :bg="routeQueryName === 'today' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
           @click="toList('today')"
@@ -145,6 +172,7 @@ emitter.on('setCate', (data) => {
           </div>
         </div>
         <div
+          v-if="showList.star.show"
           class="all-todo-list group"
           :bg="routeQueryName === 'star' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
           @click="toList('star')"
@@ -177,6 +205,7 @@ emitter.on('setCate', (data) => {
           </div>
         </div>
         <div
+          v-if="showList.allNotDo.show"
           class="all-todo-list group"
           :bg="routeQueryName === 'allNotDo' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
           @click="toList('allNotDo')"
@@ -193,6 +222,7 @@ emitter.on('setCate', (data) => {
           </div>
         </div>
         <div
+          v-if="showList.allDo.show"
           class="all-todo-list group"
           :bg="routeQueryName === 'allDo' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
           @click="toList('allDo')"

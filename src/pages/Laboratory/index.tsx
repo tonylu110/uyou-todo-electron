@@ -5,6 +5,7 @@ import SettingList from '../../components/SettingList'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import setSwitchFn from '../../util/setSwitchFn'
 import emitter from '../../util/bus'
+import ItemBox from '../../components/ItemBox/ItemBox.vue'
 
 export default defineComponent({
   setup() {
@@ -42,15 +43,18 @@ export default defineComponent({
             switchState={opLab.value}
             onSwitchFun={openLab}
           />
-          <Item
-            title="⚠️ new float ui - Only for Default mode"
-            showSwitch={true}
-            switchState={newFloatUi.value}
-            onSwitchFun={() => setSwitchFn('newFloatUi', !newFloatUi.value, () => {
-              newFloatUi.value = !newFloatUi.value
-              emitter.emit('setNewFloatUi')
-            })}
-          />
+          <ItemBox>
+            <Item
+              title="⚠️ new float ui - Only for Default mode"
+              showSwitch={true}
+              switchState={newFloatUi.value}
+              onSwitchFun={() => setSwitchFn('newFloatUi', !newFloatUi.value, () => {
+                newFloatUi.value = !newFloatUi.value
+                emitter.emit('setNewFloatUi')
+              })}
+            />
+            <Item title='⚠️ set whitch item in siderbar' onItemFun={() => router.push('/setListItem?from=setting')}/>
+          </ItemBox>
           <Item
             title="⚠️ add ToDo item use shortcut"
             showSwitch={true}

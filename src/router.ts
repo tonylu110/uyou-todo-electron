@@ -79,6 +79,11 @@ const routes = [
     name: 'lab',
     component: () => import('./pages/Laboratory'),
   },
+  {
+    path: '/setListItem',
+    name: 'setListItem',
+    component: () => import('./pages/Laboratory/showListItem'),
+  },
 ]
 
 const router = createRouter({
