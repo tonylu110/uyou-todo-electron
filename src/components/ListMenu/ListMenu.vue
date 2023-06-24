@@ -109,22 +109,23 @@ const showList: Ref<ListItems> = ref(localStorage.getItem('listMenuItem')
   ? JSON.parse(localStorage.getItem('listMenuItem')!) as ListItems
   : {
       today: {
-        name: i18n().startPage.today,
+        name: 'today',
         show: true,
       },
       star: {
-        name: 'Star ToDos',
+        name: 'star',
         show: true,
       },
       allDo: {
-        name: i18n().listMenu.completed,
+        name: 'completed',
         show: true,
       },
       allNotDo: {
-        name: i18n().listMenu.incompleted,
+        name: 'incompleted',
         show: true,
       },
-    })
+    } as ListItems,
+)
 
 emitter.on('setListItem', (data) => {
   showList.value = (data as ListItems)

@@ -1,10 +1,9 @@
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import TabBar from '../../../components/TabBar/TabBar.vue'
 import SettingList from '../../../components/SettingList'
 import ItemBox from '../../../components/ItemBox/ItemBox.vue'
 import Item from '../../../components/ItemBox/Item/Item.vue'
-import i18n from '../../../i18n'
 import emitter from '../../../util/bus'
 import type ListItems from './ListItems'
 
@@ -12,26 +11,36 @@ export default defineComponent({
   setup() {
     const router = useRouter()
 
-    const showList: ListItems = reactive(localStorage.getItem('listMenuItem')
+    const showList = reactive(localStorage.getItem('listMenuItem')
       ? JSON.parse(localStorage.getItem('listMenuItem')!) as ListItems
       : {
           today: {
-            name: i18n().startPage.today,
+            name: 'today',
             show: true,
           },
           star: {
-            name: 'Star ToDos',
+            name: 'star',
             show: true,
           },
           allDo: {
-            name: i18n().listMenu.completed,
+            name: 'completed',
             show: true,
           },
           allNotDo: {
-            name: i18n().listMenu.incompleted,
+            name: 'incompleted',
             show: true,
           },
-        })
+        } as ListItems,
+    )
+
+    const showAll = ref(Object.keys(showList).map(key => showList[key as keyof ListItems].show).every(t => t))
+
+    watch(
+      showList,
+      (newValue) => {
+        showAll.value = Object.keys(newValue).map(key => newValue[key as keyof ListItems].show).every(t => t)
+      },
+    )
 
     return () => (
       <>
@@ -43,6 +52,18 @@ export default defineComponent({
           bg-color="light"
         />
         <SettingList>
+          <Item
+            title='show All'
+            showSwitch={true}
+            switchState={showAll.value}
+            onSwitchFun={() => {
+              Object.keys(showList).forEach((key) => {
+                showList[key as keyof ListItems].show = !showAll.value
+              })
+              localStorage.setItem('listMenuItem', JSON.stringify(showList))
+              emitter.emit('setListItem', showList)
+            }}
+          />
           <ItemBox>
             {Object.keys(showList).map(key =>
             <Item
