@@ -138,7 +138,7 @@ ipcRenderer.on('useKeyAddItem', () => {
     >
       <div i-fluent:cloud-sync-24-filled text-22px c-white />
     </div>
-    <window-buttons v-if="(!simpleMode && !systemTitleShow) && !isMac()" />
+    <window-buttons v-if="!simpleMode && !systemTitleShow" />
   </div>
   <CateMenu v-if="showList && simpleMode" @click-menu="showListFn" />
 </template>

@@ -10,9 +10,6 @@ import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
 import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-const os = require('node:os')
-
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 
 const routeName = ref('')
@@ -36,11 +33,7 @@ function toList(listName: string) {
   })
 }
 
-const isWindows = navigator.userAgent.includes('Win')
-const listMenuColor = ref('')
-const isWindows10OrAfter = os.release().split('.')[2] > 15063
-if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && isWindows10OrAfter)
-  listMenuColor.value = '#fff6dc00'
+const listMenuColor = ref('#00000000')
 
 const showAdd = ref(false)
 const cateTitle = ref('')

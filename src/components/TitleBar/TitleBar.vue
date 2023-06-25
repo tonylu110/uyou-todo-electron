@@ -90,8 +90,8 @@ watchEffect(() => {
   >
     <div
       :bg="topState ? 'error-d hover:error-h active:error-a' : 'black/10 hover:black/20 active:black/30'"
-      w-13px h-13px rounded-full
-      no-drag p-6px absolute left-12px
+      w-13px h-13px rounded-full :right="isMac ? '12px' : ''"
+      no-drag p-6px absolute :left="isMac ? '' : '12px'"
       flex items-center justify-center
       cursor-pointer rounded-5px mt-5px
       @click="onTopWindow"
