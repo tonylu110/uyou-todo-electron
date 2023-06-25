@@ -4,12 +4,14 @@ import { useRoute } from 'vue-router'
 import emitter from '../../util/bus'
 import firstLoad from './firstLoad'
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const os = require('node:os')
 
 const isMac = navigator.userAgent.includes('Mac')
 
 const titleBarShow = !(localStorage.getItem('systemTitle') === 'true')
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
 
 function closeWindow() {
@@ -20,9 +22,9 @@ function minWindow() {
   ipcRenderer.send('window-min')
 }
 
-function maxWindow() {
-  ipcRenderer.send('window-max')
-}
+// function maxWindow() {
+//   ipcRenderer.send('window-max')
+// }
 
 const topState = ref(firstLoad())
 function onTopWindow() {
@@ -35,7 +37,7 @@ emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
 })
 
-const title = ref('uyou ToDo')
+// const title = ref('uyou ToDo')
 // const route = useRoute()
 // watchEffect(() => {
 //   switch (route.name) {
@@ -79,36 +81,48 @@ watchEffect(() => {
   <div
     v-if="titleBarShow"
     class="title-bar"
+    bg-transparent
     :style="{
       justifyContent: isMac ? 'flex-start' : '',
       width: simpleMode ? '100vw' : '',
       marginLeft: simpleMode ? '0' : '',
-      backgroundColor: routeLight ? 'white' : '',
-      borderBottom: routeLight ? '1px solid #00000020' : '',
     }"
   >
     <div
-      :class="topState ? 'on-top-button-sel button' : 'on-top-button button'"
-      :style="{
-        left: isMac ? '' : '9px',
-        right: isMac ? '0' : '',
-        border: (form === 'setting' || routeName === 'setting' || routeName === 'account' || routeName === 'settingSim') && topState ? '' : '1px solid #00000020',
-      }"
+      :bg="topState ? 'error-d hover:error-h active:error-a' : 'black/10 hover:black/20 active:black/30'"
+      w-13px h-13px rounded-full
+      no-drag p-6px absolute left-12px
+      flex items-center justify-center
+      cursor-pointer rounded-5px mt-5px
       @click="onTopWindow"
     >
-      <div i-fluent:pin-48-filled text-14px :c="(isMac && !simpleMode && !routeLight) || (simpleMode && (routeName !== 'settingSim' && form !== 'setting')) ? 'white' : (topState ? 'white' : '#777')" />
+      <div i-fluent:pin-12-filled text-13px :c="topState ? 'white' : '#555'" />
     </div>
-    <span class="title-text" :style="{ color: routeLight ? '#555' : 'white' }">
-      {{ simpleMode ? '' : title }}
-    </span>
-    <div v-if="!isMac" class="min-button button" :style="{ border: form === 'setting' || routeName === 'account' || routeName === 'settingSim' || routeName === 'setting' ? '1px solid #00000020' : '' }" @click="minWindow">
-      <div i-fluent-emoji-high-contrast:minus :c="routeLight ? '#777' : 'white'" text-10px />
+    <!-- <span class="title-text" c="!#555" mt-5px>
+      {{ title }}
+    </span> -->
+    <div
+      v-if="!isMac"
+      bg="black/10 hover:black/20 active:black/30"
+      w-13px h-13px rounded-full
+      no-drag p-6px absolute right-42px
+      flex items-center justify-center
+      cursor-pointer rounded-5px mt-5px
+      @click="minWindow"
+    >
+      <div i-mdi:minus-thick text-13px c="#555" />
     </div>
-    <div v-if="!isMac && !simpleMode" class="min-button button" :style="{ border: form === 'setting' || routeName === 'account' || routeName === 'setting' ? '1px solid #00000020' : '' }" @click="maxWindow">
-      <div i-fluent:checkbox-unchecked-12-filled :c="routeLight ? '#777' : 'white'" text-14px />
-    </div>
-    <div v-if="!isMac" class="close-button button" @click="closeWindow">
-      <div i-mdi:close-thick c-white text-12px />
+    <div
+      v-if="!isMac"
+      bg="black/10 hover:error-d active:error-a"
+      w-13px h-13px rounded-full
+      no-drag p-6px absolute right-12px
+      flex items-center justify-center
+      cursor-pointer rounded-5px mt-5px
+      class="group"
+      @click="closeWindow"
+    >
+      <div i-mdi:close-thick text-13px c="#555 group-hover:white" />
     </div>
     <div v-if="!simpleMode" class="list-menu-color" :style="{ backgroundColor: listMenuColor }" />
     <div v-if="!simpleMode" class="list-menu-drag" />

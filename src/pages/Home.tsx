@@ -22,7 +22,7 @@ export default defineComponent({
           onRightClick={() => showAddItem.value = !showAddItem.value}
           onLeftClick={() => router.push('/setting-sim')}
           leftImg="i-mdi:cog"
-          title={simpleMode ? 'uyou ToDo' : i18n().listMenu.allTodo}
+          title={i18n().listMenu.allTodo}
           leftImgShow={simpleMode}
           showMore={simpleMode}
           showWrap={true}

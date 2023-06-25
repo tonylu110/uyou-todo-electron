@@ -32,7 +32,7 @@ function toList(listName: string) {
 <template>
   <div
     fixed top-95px z-2 cursor-pointer
-    bg="#fff6dc80" w-screen p-y-10px
+    bg="#fff6dc80" w="[calc(100vw-20px)]" p-y-10px
     flex="~ col" items-center backdrop-blur-7px
     shadow-item c="black/50" font-bold rounded-b-10px
     class="list"
@@ -40,34 +40,34 @@ function toList(listName: string) {
   >
     <div
       p-10px text-18px
-      bg="hover:black/5 active:black/10" w-screen text-center
+      bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
       @click="toList('today')"
     >
-      Today
+      {{ i18n().startPage.today }}
     </div>
     <div
       p-10px text-18px
-      bg="hover:black/5 active:black/10" w-screen text-center
+      bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
       @click="router.push('/')"
     >
       {{ i18n().listMenu.allTodo }}
     </div>
     <div
       p-10px text-18px
-      bg="hover:black/5 active:black/10" w-screen text-center
+      bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
       @click="toList('allDo')"
     >
       {{ i18n().listMenu.completed }}
     </div>
     <div
       p-10px text-18px
-      bg="hover:black/5 active:black/10" w-screen text-center
+      bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
       @click="toList('allNotDo')"
     >
       {{ i18n().listMenu.incompleted }}
     </div>
     <div
-      v-for="cate in cateList" :key="cate.id" p-10px w-screen
+      v-for="cate in cateList" :key="cate.id" p-10px w="[calc(100vw-20px)]"
       text-center
       text-18px
       bg="hover:black/5 active:black/10"
@@ -77,8 +77,8 @@ function toList(listName: string) {
     </div>
   </div>
   <div
-    class="black" bg-black
-    w-screen h-screen fixed
+    class="black" bg-black rounded-7px
+    w="[calc(100vw-20px)]" h="[calc(100vh-110px)]" fixed
     z-1
   />
 </template>

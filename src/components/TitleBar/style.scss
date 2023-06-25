@@ -1,10 +1,8 @@
 .title-bar {
   -webkit-app-region: drag;
-  background-color: #7a695c;
   width: calc(100vw - 300px);
   margin-left: 300px;
   height: 40px;
-  border-bottom: 1px solid #594b4270;
   display: flex;
   flex-direction: row;
   align-items: center;

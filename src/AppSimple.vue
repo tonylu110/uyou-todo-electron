@@ -40,8 +40,8 @@ onMounted(() => {
   <div v-if="!isWinDow">
     <TitleBar />
     <div
-      w-screen overflow-hidden
-      :h="titleBarShow ? 'screen' : '[calc(100vh-41px)]'"
+      overflow-hidden w="[calc(100vw-20px)]" ml-10px rounded-7px mt-5px
+      :h="titleBarShow ? '[calc(100vh-15px)]' : '[calc(100vh-55px)]'" border="1px solid black/10"
     >
       <router-view />
     </div>

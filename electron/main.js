@@ -33,10 +33,10 @@ function createWindow() {
   initSim()
 
   mainWindow = new MicaBrowserWindow({
-    width: simple ? 350 : 1000,
+    width: simple ? 370 : 1000,
     height: simple ? 700 : 750,
     minHeight: 600,
-    minWidth: simple ? 350 : 800,
+    minWidth: simple ? 370 : 800,
     maxWidth: simple ? 400 : null,
     x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000)) / 2,
     y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750)) / 2,
@@ -63,12 +63,12 @@ function createWindow() {
       setMicaStyle(micaStyle || 'mica', mainWindow)
     }
     else {
-      mainWindow.setCustomEffect(4, simple ? '#eeeeee' : '#fff6dc', 0.7)
+      mainWindow.setCustomEffect(4, simple ? '#fff' : '#fff6dc', 0.7)
     }
   }
   else {
     mainWindow.setCaptionColor('#fff6dc')
-    mainWindow.setCustomEffect(1, simple ? '#eeeeee' : '#fff6dc', 1)
+    mainWindow.setCustomEffect(1, simple ? '#fff' : '#fff6dc', 1)
   }
 
   mainWindow.loadURL(
