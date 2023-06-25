@@ -1,16 +1,12 @@
-const { simple } = require('../../store/simpleModeStore')
-
 function setMicaStyle(effect, windowPro) {
-  if (effect === 'mica') {
+  if (effect === 'mica')
     windowPro.setMicaEffect()
-  }
-  else if (effect === 'tabbed') {
+
+  else if (effect === 'tabbed')
     windowPro.setMicaTabbedEffect()
-  }
-  else {
-    windowPro.setRoundedCorner()
-    windowPro.setCustomEffect(4, simple ? '#eeeeee' : '#fff6dc', 0.7)
-  }
+
+  else
+    windowPro.setCustomEffect(4, '#eee', 0.4)
 }
 
 module.exports = setMicaStyle

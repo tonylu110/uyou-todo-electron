@@ -63,12 +63,12 @@ function createWindow() {
       setMicaStyle(micaStyle || 'mica', mainWindow)
     }
     else {
-      mainWindow.setCustomEffect(4, simple ? '#fff' : '#fff6dc', 0.7)
+      mainWindow.setCustomEffect(4, '#eee', 0.4)
     }
   }
   else {
-    mainWindow.setCaptionColor('#fff6dc')
-    mainWindow.setCustomEffect(1, simple ? '#fff' : '#fff6dc', 1)
+    mainWindow.setCaptionColor('#eee')
+    mainWindow.setCustomEffect(4, '#eee', 0.4)
   }
 
   mainWindow.loadURL(
