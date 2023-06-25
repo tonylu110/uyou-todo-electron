@@ -7,8 +7,6 @@ export default defineComponent({
   setup() {
     // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
     const ipcRenderer = require('electron').ipcRenderer
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-    const os = require('node:os')
 
     const topState = ref(firstLoad())
     const onTopWindow = () => {
@@ -26,9 +24,8 @@ export default defineComponent({
       isLight.value = (data as boolean)
     })
 
-    const isWindows10OrAfter = os.release().split('.')[2] > 15063
     const listMenuColor = ref(false)
-    if (isWindow() && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && isWindows10OrAfter)
+    if (isWindow() && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null))
       listMenuColor.value = true
 
     return () => (

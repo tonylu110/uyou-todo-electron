@@ -122,13 +122,13 @@ watchEffect(() => {
     floatWidth.value = 'calc(100vw - 310px)'
     floatHeight.value = 'calc(100vh - 20px)'
     floatY.value = 'translateY(10px)'
-    floatBorder.value = '1px solid #00000010'
+    floatBorder.value = '1px solid rgba(0, 0, 0, 0.1)'
   }
   else {
     floatWidth.value = 'calc(100vw - 30px)'
     floatHeight.value = '100vh'
     floatY.value = 'translateY(0px)'
-    floatBorder.value = 'none'
+    floatBorder.value = ''
   }
 })
 </script>
@@ -145,6 +145,7 @@ watchEffect(() => {
       <div
         class="todo-list"
         :rounded="isRound ? 'tl-15px' : newFloatUi ? '7px' : ''"
+        :border-l="newFloatUi ? '' : '!1px !solid !black/10'"
       >
         <router-view />
         <Alert
