@@ -32,7 +32,7 @@ export default defineComponent({
       <div
         drag w-300px h-40px
         flex items-center z-200
-        bg={isMac() ? '#fff6dc00' : listMenuColor.value ? 'transparent' : '#fff6dcaa'}
+        bg="transparent"
       >
         {isMac()
           ? null

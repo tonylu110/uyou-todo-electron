@@ -2,7 +2,7 @@ const path = require('node:path')
 const { app, BrowserWindow, ipcMain, screen, Menu, shell, globalShortcut } = require('electron')
 const Store = require('electron-store')
 const remoteMain = require('@electron/remote/main')
-const { MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
+const { VALUE, MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
 const menuTemplate = require('./menu.js')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
@@ -63,12 +63,12 @@ function createWindow() {
       setMicaStyle(micaStyle || 'mica', mainWindow)
     }
     else {
-      mainWindow.setCustomEffect(4, '#eee', 0.4)
+      mainWindow.setCustomEffect(4, VALUE.COLOR.WHITE, 0.4)
     }
   }
   else {
-    mainWindow.setCaptionColor('#eee')
-    mainWindow.setCustomEffect(4, '#eee', 0.4)
+    mainWindow.setLightTheme()
+    mainWindow.setBackgroundColor('#fff')
   }
 
   mainWindow.loadURL(
