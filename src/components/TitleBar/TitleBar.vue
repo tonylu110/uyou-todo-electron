@@ -2,6 +2,7 @@
 import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import emitter from '../../util/bus'
+import { closeWindow, minWindow, topWindow } from '../../util/windowApi'
 import firstLoad from './firstLoad'
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
@@ -11,25 +12,10 @@ const isMac = navigator.userAgent.includes('Mac')
 
 const titleBarShow = !(localStorage.getItem('systemTitle') === 'true')
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-const ipcRenderer = require('electron').ipcRenderer
-
-function closeWindow() {
-  ipcRenderer.send('window-close')
-}
-
-function minWindow() {
-  ipcRenderer.send('window-min')
-}
-
-// function maxWindow() {
-//   ipcRenderer.send('window-max')
-// }
-
 const topState = ref(firstLoad())
 function onTopWindow() {
   topState.value = !topState.value
-  ipcRenderer.send('window-on-top', topState.value)
+  topWindow(topState.value)
   localStorage.setItem('alwaysOnTop', `${topState.value}`)
   emitter.emit('topWindow', topState.value)
 }

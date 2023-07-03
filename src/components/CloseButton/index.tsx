@@ -1,15 +1,10 @@
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
+import { closeWindow } from '../../util/windowApi'
 
 export default defineComponent({
   setup() {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-    const ipcRenderer = require('electron').ipcRenderer
     const route = useRoute()
-
-    const close = () => {
-      ipcRenderer.send(`close-${(route.name as unknown as string)}`)
-    }
 
     return () => (
       <div
@@ -19,7 +14,7 @@ export default defineComponent({
         no-drag cursor-pointer c-white z-1
         w-13px h-13px p-6px rounded-full
         className="group"
-        onclick={close}
+        onclick={() => closeWindow(route.name as unknown as string)}
       >
         <div i-mdi:close-thick c="#555 group-hover:white group-active:white" text-13px></div>
       </div>

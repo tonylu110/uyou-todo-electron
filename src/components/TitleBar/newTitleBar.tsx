@@ -1,17 +1,15 @@
 import { defineComponent, ref } from 'vue'
 import emitter from '../../util/bus'
 import { isMac, isWindow } from '../../util/os'
+import { topWindow } from '../../util/windowApi'
 import firstLoad from './firstLoad'
 
 export default defineComponent({
   setup() {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-    const ipcRenderer = require('electron').ipcRenderer
-
     const topState = ref(firstLoad())
     const onTopWindow = () => {
       topState.value = !topState.value
-      ipcRenderer.send('window-on-top', topState.value)
+      topWindow(topState.value)
       localStorage.setItem('alwaysOnTop', `${topState.value}`)
       emitter.emit('topWindow', topState.value)
     }

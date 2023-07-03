@@ -4,12 +4,10 @@ import i18n from '../../../i18n'
 import { isMac } from '../../../util/os'
 import Alert from '../../Alert/Alert.vue'
 import firstLoad from '../../TitleBar/firstLoad'
+import { closeWindow, minWindow, topWindow } from '../../../util/windowApi'
 
 export default defineComponent({
   setup() {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-    const ipcRenderer = require('electron').ipcRenderer
-
     const route = useRoute()
 
     const dialogShow = ref(false)
@@ -17,7 +15,7 @@ export default defineComponent({
     const topState = ref(firstLoad())
     const onTopWindow = () => {
       topState.value = !topState.value
-      ipcRenderer.send('window-on-top', topState.value)
+      topWindow(topState.value)
       localStorage.setItem('alwaysOnTop', `${topState.value}`)
     }
 
@@ -48,7 +46,7 @@ export default defineComponent({
                 w-13px h-13px rounded-full
                 bg="black/10 hover:black/20 active:black/30"
                 class="group"
-                onClick={() => ipcRenderer.send('window-min')}
+                onClick={() => minWindow()}
               >
                 <div
                   i-mdi:minus-thick block
@@ -75,7 +73,7 @@ export default defineComponent({
           dialogShow={dialogShow.value}
           title={i18n().accountPage.alertTitle}
           onCancel={() => dialogShow.value = false}
-          onReturn={() => ipcRenderer.send('window-close')}
+          onReturn={() => closeWindow()}
         >
           <span>{i18n().closeWindow}</span>
         </Alert>
