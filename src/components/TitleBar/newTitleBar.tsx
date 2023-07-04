@@ -26,9 +26,14 @@ export default defineComponent({
     if (isWindow() && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null))
       listMenuColor.value = true
 
+    const menuShort = ref(window.innerWidth < 750)
+    emitter.on('menuClose', (data) => {
+      menuShort.value = data as boolean
+    })
+
     return () => (
       <div
-        drag w-300px h-40px
+        drag w={menuShort.value ? '58px' : '300px'} h-40px
         flex items-center z-200
         bg="transparent"
       >

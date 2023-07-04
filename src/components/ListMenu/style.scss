@@ -1,5 +1,4 @@
 .list-menu {
-  width: 300px;
   background-color: #fff6dcaa;
   height: calc(100vh - 40px);
   //border-right: 1px solid #00000010;
@@ -7,6 +6,7 @@
   flex-direction: column;
   justify-content: space-between;
   z-index: 10;
+  transition: width .2s;
 
   .list {
     .title {
@@ -23,7 +23,8 @@
 
     .setting-list {
       padding: 10px;
-      width: 260px;
+      overflow-x: hidden;
+      width: calc(100% - 40px);
       margin-left: 10px;
       margin-bottom: 3px;
       display: flex;
@@ -42,6 +43,7 @@
         color: #00000090;
         font-size: 18px;
         font-weight: bold;
+        white-space: nowrap;
       }
     }
 
@@ -51,7 +53,8 @@
 
     .account-list {
       @extend .setting-list;
-      margin-top: 12px
+      margin-top: 12px;
+      transition: margin .2s;
     }
   }
 }

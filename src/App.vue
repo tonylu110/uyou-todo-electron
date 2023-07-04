@@ -119,17 +119,21 @@ emitter.on('setNewFloatUi', () => {
 
 watchEffect(() => {
   if (newFloatUi.value) {
-    floatWidth.value = 'calc(100vw - 310px)'
+    floatWidth.value = '10px'
     floatHeight.value = 'calc(100vh - 20px)'
     floatY.value = 'translateY(10px)'
     floatBorder.value = '1px solid rgba(0, 0, 0, 0.1)'
   }
   else {
-    floatWidth.value = 'calc(100vw - 30px)'
+    floatWidth.value = 'auto'
     floatHeight.value = '100vh'
     floatY.value = 'translateY(0px)'
     floatBorder.value = ''
   }
+})
+
+window.addEventListener('resize', () => {
+  emitter.emit('menuClose', window.innerWidth < 750)
 })
 </script>
 
@@ -176,8 +180,9 @@ watchEffect(() => {
     flex-direction: row;
 
     .todo-list {
+      flex: 1;
       transform: v-bind(floatY);
-      width: v-bind(floatWidth);
+      margin-right: v-bind(floatWidth);
       height: v-bind(floatHeight);
       overflow: hidden;
       border: v-bind(floatBorder);

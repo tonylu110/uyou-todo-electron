@@ -32,6 +32,11 @@ const emits = defineEmits<{
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
 const showList = ref(false)
+
+const minWidth = ref(window.innerWidth < 750)
+window.addEventListener('resize', () => {
+  minWidth.value = window.innerWidth < 750
+})
 </script>
 
 <template>
@@ -41,14 +46,15 @@ const showList = ref(false)
       backgroundColor: showSwitch || showListBox ? 'white' : '',
       color: showSwitch || showListBox ? 'black' : '',
       cursor: showSwitch || showListBox ? 'auto' : '',
-      width: simpleMode ? 'calc(100% - 50px)' : '',
+      width: simpleMode ? 'calc(100% - 50px)' : (minWidth ? 'calc(100vw - 108px)' : ''),
     }"
+    :max-w="!simpleMode && minWidth ? '' : '550px'"
     @click="emits('itemFun')"
   >
     <div>
       <div v-if="itemImg" class="img-back" />
       <img v-if="itemImg" :src="itemImg" alt="">
-      <span :style="{ width: simpleMode ? 'calc(100vw - 115px)' : '' }">{{ title }}</span>
+      <span :style="{ width: simpleMode ? 'calc(100vw - 115px)' : (minWidth ? 'calc(100vw - 165px)' : '') }">{{ title }}</span>
     </div>
     <Switch
       v-if="showSwitch"
@@ -95,7 +101,6 @@ const showList = ref(false)
 <style scoped lang="scss">
 .item {
   position: relative;
-  max-width: 550px;
   width: calc(100vw - 450px);
   min-height: 30px;
   height: 30px;

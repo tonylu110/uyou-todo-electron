@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { reactive, ref, watchEffect } from 'vue'
+import { reactive, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import i18n from '../../i18n'
 import router from '../../router'
@@ -123,15 +123,36 @@ const showList: Ref<ListItems> = ref(localStorage.getItem('listMenuItem')
 emitter.on('setListItem', (data) => {
   showList.value = (data as ListItems)
 })
+
+const menuShort = ref(window.innerWidth < 750)
+watch(menuShort, () => {
+  emitter.emit('menuClose', menuShort.value)
+})
+emitter.on('menuClose', (data) => {
+  menuShort.value = data as boolean
+})
 </script>
 
 <template>
-  <div class="list-menu" :style="{ backgroundColor: listMenuColor, height: titleBarShow ? '100vh' : '' }">
+  <div
+    class="list-menu"
+    :w="menuShort ? '58px' : '300px'"
+    :style="{ backgroundColor: listMenuColor, height: titleBarShow ? '100vh' : '' }"
+  >
+    <div
+      m="l-13px t-8px" rounded-5px
+      bg="hover:black/10 active:black/20"
+      p-5px w-20px
+      @click="menuShort = !menuShort"
+    >
+      <div i-ph:list-bold text-20px block c="black/56" />
+    </div>
     <div class="list">
-      <span class="title" :mt="isMac() ? '' : '!15px'">{{ i18n().accountPage.account }}</span>
+      <span v-if="!menuShort" class="title" :mt="isMac() ? '' : '!10px'">{{ i18n().accountPage.account }}</span>
       <div
         class="account-list group"
-        mb="!20px"
+        :mt="menuShort ? '!-70px' : ''"
+        :mb="menuShort ? '' : '!10px'"
         :bg="routeName === 'account' && form !== 'setting' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
         @click="router.push('/account')"
       >
@@ -146,7 +167,7 @@ emitter.on('setListItem', (data) => {
           >{{ i18n().myAccount }}</span>
         </div>
       </div>
-      <span class="title" mb="!10px">{{ i18n().listMenu.cate }}</span>
+      <span v-if="!menuShort" class="title" mb="!10px">{{ i18n().listMenu.cate }}</span>
       <perfect-scrollbar ref="cateListRef" class="cate" :shadow="ps === 0 ? '' : 'inner'" @ps-scroll-y="onScroll">
         <div
           v-if="showList.today.show"
@@ -296,9 +317,10 @@ emitter.on('setListItem', (data) => {
           </div>
         </div>
         <div
-          flex items-center justify-center
-          p-10px w="260px" ml-10px h-18px
-          cursor-pointer rounded-7px
+          v-if="!menuShort" flex items-center
+          justify-center p-10px w="260px" ml-10px
+          h-18px cursor-pointer
+          rounded-7px
           bg="active:#00000010 hover:black/10 black/5"
           :mt="showAdd ? '' : '10px'"
           @click="showAddFn"

@@ -8,8 +8,11 @@ import SettingList from '../../components/SettingList'
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
 import { versionCode } from '../../util/appVersionCode'
 import { createToast } from '../../components/Toast'
+import emitter from '../../util/bus'
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const { app } = require('@electron/remote')
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const { ipcRenderer } = require('electron')
 
 const version = versionCode
@@ -63,6 +66,11 @@ onMounted(() => {
 })
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
+
+const menuShort = ref(window.innerWidth < 750)
+emitter.on('menuClose', (data) => {
+  menuShort.value = data as boolean
+})
 </script>
 
 <template>
@@ -71,7 +79,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
     :right-img-show="false"
     :left-img-show="true"
     bg-color="light"
-    @leftClick="router.back()"
+    @left-click="router.back()"
   />
   <SettingList justify="between">
     <div
@@ -79,7 +87,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
       :w="simpleMode ? '100%' : ''"
     >
       <div
-        :w="simpleMode ? '[calc(100%-40px)]' : '[calc(100vw-400px)]'" max-w-560px h-auto
+        :w="simpleMode ? '[calc(100%-40px)]' : (menuShort ? '[calc(100vw-98px)]' : '[calc(100vw-400px)]')" max-w-560px h-auto
         flex="~ col" justify-center items-center
         bg-white
         rounded-7px

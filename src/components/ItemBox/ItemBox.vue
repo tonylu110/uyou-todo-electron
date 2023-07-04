@@ -1,11 +1,18 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue'
+
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
-const itemWidth = simpleMode ? 'calc(100% - 30px)' : 'calc(100vw - 450px)'
+const minWidth = ref(window.innerWidth < 750)
+window.addEventListener('resize', () => {
+  minWidth.value = window.innerWidth < 750
+})
+
+const itemWidth = computed(() => simpleMode ? 'calc(100% - 30px)' : (minWidth.value ? 'calc(100vw - 108px)' : 'calc(100vw - 450px)'))
 </script>
 
 <template>
-  <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }">
+  <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : (minWidth ? 'calc(100vw - 78px)' : '') }">
     <div class="box-radius">
       <slot />
     </div>

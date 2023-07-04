@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 defineProps({
   mode: {
     default: '',
@@ -7,10 +9,19 @@ defineProps({
 })
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
+
+const minWidth = ref(window.innerWidth < 750)
+window.addEventListener('resize', () => {
+  minWidth.value = window.innerWidth < 750
+})
 </script>
 
 <template>
-  <div :class="`item-button ${mode}`" :style="{ width: simpleMode ? 'calc(100% - 50px)' : '' }">
+  <div
+    :class="`item-button ${mode}`"
+    :style="{ width: simpleMode ? 'calc(100% - 50px)' : (minWidth ? 'calc(100vw - 108px)' : '') }"
+    :max-w="!simpleMode && minWidth ? '' : '550px'"
+  >
     <slot>button</slot>
   </div>
 </template>
@@ -18,7 +29,6 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
 <style lang="scss" scoped>
 .item-button {
   position: relative;
-  max-width: 550px;
   width: calc(100vw - 450px);
   height: 30px;
   min-height: 30px;

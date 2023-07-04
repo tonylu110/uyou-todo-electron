@@ -84,6 +84,11 @@ function setStartPage(StartPage: string) {
   localStorage.setItem('start', StartPage)
   startPage.value = startPageList.filter(item => item.fn === StartPage)[0].title
 }
+
+const minWidth = ref(window.innerWidth < 750)
+window.addEventListener('resize', () => {
+  minWidth.value = window.innerWidth < 750
+})
 </script>
 
 <template>
@@ -178,7 +183,7 @@ function setStartPage(StartPage: string) {
         :switch-state="menuBlurState"
         @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', i18n().restartApp)"
       />
-      <div v-if="isWin11 && menuBlurState" class="item-blur item">
+      <div v-if="isWin11 && menuBlurState" class="item-blur item" :max-w="minWidth ? '' : '550px'">
         <div @click="changeMica('mica')">
           Mica Effect
         </div>
@@ -233,7 +238,6 @@ function setStartPage(StartPage: string) {
 <style scoped lang="scss">
 .item-blur {
   position: relative;
-  max-width: 550px;
   width: calc(100vw - 450px);
   min-height: 30px;
   height: 30px;
