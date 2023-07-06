@@ -135,14 +135,14 @@ emitter.on('menuClose', (data) => {
 
 <template>
   <div
-    class="list-menu"
+    class="list-menu drag"
     :w="menuShort ? '58px' : '300px'"
     :style="{ backgroundColor: listMenuColor, height: titleBarShow ? '100vh' : '' }"
   >
     <div
       m="l-13px t-8px" rounded-5px
       bg="hover:black/10 active:black/20"
-      p-5px w-20px
+      p-5px w-20px no-drag
       @click="menuShort = !menuShort"
     >
       <div i-ph:list-bold text-20px block c="black/56" />
