@@ -1,11 +1,16 @@
-import { renderSlot } from 'vue'
+import { renderSlot, useSlots } from 'vue'
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 
 const SettingList: SetupFC = () => {
-  const slots = defineSlots<{}>()
+  defineSlots<{
+    default: () => any
+  }>()
+
   const props = defineProps<{
     justify?: string
   }>()
+
+  const slots = useSlots()
 
   return () => (
     <PerfectScrollbar

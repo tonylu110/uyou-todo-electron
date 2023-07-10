@@ -1,4 +1,4 @@
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 import TabBar from '../components/TabBar/TabBar.vue'
 import List from '../components/List/List.vue'
 import router from '../router'
@@ -7,32 +7,32 @@ import LocalStorage from '../util/localStorage'
 import type ITodoList from '../interface/ITodoListArray'
 import i18n from '../i18n'
 
-export default defineComponent({
-  setup() {
-    const showAddItem = ref(false)
+const Home: SetupFC = () => {
+  const showAddItem = ref(false)
 
-    firstLoad()
+  firstLoad()
 
-    const listData = LocalStorage('get') as ITodoList[]
-    const simpleMode = localStorage.getItem('simpleMode') === 'true'
+  const listData = LocalStorage('get') as ITodoList[]
+  const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
-    return () => (
-      <>
-        <TabBar
-          onRightClick={() => showAddItem.value = !showAddItem.value}
-          onLeftClick={() => router.push('/setting-sim')}
-          leftImg="i-mdi:cog"
-          title={i18n().listMenu.allTodo}
-          leftImgShow={simpleMode}
-          showMore={simpleMode}
-          showWrap={true}
-        />
-        <List
-          showAddItem={showAddItem.value}
-          listData={listData}
-          onSetAddItem={() => showAddItem.value = false}
-        />
-      </>
-    )
-  },
-})
+  return () => (
+    <>
+      <TabBar
+        onRightClick={() => showAddItem.value = !showAddItem.value}
+        onLeftClick={() => router.push('/setting-sim')}
+        leftImg="i-mdi:cog"
+        title={i18n().listMenu.allTodo}
+        leftImgShow={simpleMode}
+        showMore={simpleMode}
+        showWrap={true}
+      />
+      <List
+        showAddItem={showAddItem.value}
+        listData={listData}
+        onSetAddItem={() => showAddItem.value = false}
+      />
+    </>
+  )
+}
+
+export default Home

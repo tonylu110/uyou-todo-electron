@@ -6,7 +6,7 @@ const Switch: SetupFC = () => {
   })
 
   const emit = defineEmits<{
-    (e: 'switch'): void
+    switch: []
   }>()
 
   return () => (
