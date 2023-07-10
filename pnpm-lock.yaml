@@ -79,8 +79,8 @@ devDependencies:
     specifier: ^4.3.9
     version: registry.npmmirror.com/vite@4.3.9(@types/node@18.16.0)(sass@1.54.3)
   vite-plugin-vue-devtools:
-    specifier: ^0.4.11
-    version: registry.npmmirror.com/vite-plugin-vue-devtools@0.4.11(@types/node@18.16.0)(pug@3.0.2)(vite@4.3.9)(vue@3.3.4)
+    specifier: ^0.5.0
+    version: registry.npmmirror.com/vite-plugin-vue-devtools@0.5.0(@types/node@18.16.0)(pug@3.0.2)(vite@4.3.9)(vue@3.3.4)
   vue:
     specifier: ^3.3.4
     version: registry.npmmirror.com/vue@3.3.4
@@ -7401,6 +7401,15 @@ packages:
       brace-expansion: registry.npmmirror.com/brace-expansion@2.0.1
     dev: true
 
+  registry.npmmirror.com/minimatch@9.0.3:
+    resolution: {integrity: sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/minimatch/-/minimatch-9.0.3.tgz}
+    name: minimatch
+    version: 9.0.3
+    engines: {node: '>=16 || 14 >=14.17'}
+    dependencies:
+      brace-expansion: registry.npmmirror.com/brace-expansion@2.0.1
+    dev: true
+
   registry.npmmirror.com/minimist@1.2.6:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/minimist/-/minimist-1.2.6.tgz}
     name: minimist
@@ -9410,14 +9419,14 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmmirror.com/vite-plugin-vue-devtools@0.4.11(@types/node@18.16.0)(pug@3.0.2)(vite@4.3.9)(vue@3.3.4):
-    resolution: {integrity: sha512-UCcrXmTLCS6u4izkh1KfbMgNLGV+v2haXsffYu7l9XNt42deMPPj+ReiMqtpZPW6mJbvUPpDgSIH4K7ii7dw1g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-vue-devtools/-/vite-plugin-vue-devtools-0.4.11.tgz}
-    id: registry.npmmirror.com/vite-plugin-vue-devtools/0.4.11
+  registry.npmmirror.com/vite-plugin-vue-devtools@0.5.0(@types/node@18.16.0)(pug@3.0.2)(vite@4.3.9)(vue@3.3.4):
+    resolution: {integrity: sha512-LClwcrlbGyTHmq9aVbjatvH+PENQJkdyX/qbZP7kF8xgFb3LPntEHCKphDW+oXS3e7ExKEOZXIgtrjE3Quop+A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-vue-devtools/-/vite-plugin-vue-devtools-0.5.0.tgz}
+    id: registry.npmmirror.com/vite-plugin-vue-devtools/0.5.0
     name: vite-plugin-vue-devtools
-    version: 0.4.11
-    engines: {node: '>=14'}
+    version: 0.5.0
+    engines: {node: '>=v14'}
     peerDependencies:
-      vite: ^3.0.0-0 || ^4.0.0-0
+      vite: ^3.1.0 || ^4.0.0-0
     dependencies:
       '@vueuse/core': registry.npmmirror.com/@vueuse/core@10.2.1(vue@3.3.4)
       '@vueuse/integrations': registry.npmmirror.com/@vueuse/integrations@10.2.1(vue@3.3.4)
@@ -9426,7 +9435,7 @@ packages:
       birpc: registry.npmmirror.com/birpc@0.2.12
       execa: registry.npmmirror.com/execa@7.1.1
       json-editor-vue: registry.npmmirror.com/json-editor-vue@0.10.6(vanilla-jsoneditor@0.17.8)(vue@3.3.4)
-      minimatch: registry.npmmirror.com/minimatch@9.0.2
+      minimatch: registry.npmmirror.com/minimatch@9.0.3
       nanoid: registry.npmmirror.com/nanoid@4.0.2
       sirv: registry.npmmirror.com/sirv@2.0.3
       splitpanes: registry.npmmirror.com/splitpanes@3.1.5
@@ -9435,7 +9444,7 @@ packages:
       vite-hot-client: registry.npmmirror.com/vite-hot-client@0.2.1(vite@4.3.9)
       vite-plugin-inspect: registry.npmmirror.com/vite-plugin-inspect@0.7.32(vite@4.3.9)
       vite-plugin-vue-inspector: registry.npmmirror.com/vite-plugin-vue-inspector@3.4.2(vite@4.3.9)
-      vue-router: registry.npmmirror.com/vue-router@4.2.2(vue@3.3.4)
+      vue-router: registry.npmmirror.com/vue-router@4.2.4(vue@3.3.4)
       vuedraggable: registry.npmmirror.com/vuedraggable@4.1.0(vue@3.3.4)
       xterm: registry.npmmirror.com/xterm@5.2.1
       xterm-addon-fit: registry.npmmirror.com/xterm-addon-fit@0.7.0(xterm@5.2.1)
@@ -9622,6 +9631,18 @@ packages:
     id: registry.npmmirror.com/vue-router/4.2.2
     name: vue-router
     version: 4.2.2
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': registry.npmmirror.com/@vue/devtools-api@6.5.0
+      vue: registry.npmmirror.com/vue@3.3.4
+    dev: true
+
+  registry.npmmirror.com/vue-router@4.2.4(vue@3.3.4):
+    resolution: {integrity: sha512-9PISkmaCO02OzPVOMq2w82ilty6+xJmQrarYZDkjZBfl4RvYAlt4PKnEX21oW4KTtWfa9OuO/b3qk1Od3AEdCQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-4.2.4.tgz}
+    id: registry.npmmirror.com/vue-router/4.2.4
+    name: vue-router
+    version: 4.2.4
     peerDependencies:
       vue: ^3.2.0
     dependencies:

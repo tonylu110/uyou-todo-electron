@@ -137,6 +137,13 @@ watchEffect(() => {
 window.addEventListener('resize', () => {
   emitter.emit('menuClose', window.innerWidth < 750)
 })
+
+if (isDev) {
+  onMounted(() => {
+    document.querySelector('.vue-devtools-frame')?.classList.add('no-drag')
+    document.querySelector('.vue-devtools-button-panel')?.classList.add('no-drag')
+  })
+}
 </script>
 
 <template>

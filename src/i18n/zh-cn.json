@@ -35,13 +35,19 @@
     "cate": "分类",
     "allTodo": "所有 ToDo",
     "completed": "已完成",
-    "incompleted": "未完成"
+    "incompleted": "未完成",
+    "star": "加星 ToDo"
   },
   "alertText": {
     "cancelText": "取消",
     "returnText": "确定"
   },
-  "firstLoadData": ["欢迎使用 uyou ToDo", "将鼠标移至 ToDo 项的左边，完成 ToDo", "将鼠标移至 ToDo 项的右边，删除 ToDo", "将鼠标移至 ToDo 标题栏右上角，复制 ToDo 内容"],
+  "firstLoadData": [
+    "欢迎使用 uyou ToDo",
+    "将鼠标移至 ToDo 项的左边，完成 ToDo",
+    "将鼠标移至 ToDo 项的右边，删除 ToDo",
+    "将鼠标移至 ToDo 标题栏右上角，复制 ToDo 内容"
+  ],
   "update": {
     "autoUpdate": "自动获取更新",
     "updateTitle": "软件更新",

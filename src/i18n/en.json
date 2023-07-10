@@ -31,17 +31,23 @@
     "changPass": "change Password",
     "logoutMsg": "Are you sure you want to log out?"
   },
- "listMenu": {
+  "listMenu": {
     "cate": "Categories",
     "allTodo": "All ToDos",
     "completed": "Completed",
-    "incompleted": "Incompleted"
+    "incompleted": "Incompleted",
+    "star": "Starred ToDos"
   },
   "alertText": {
     "cancelText": "Cancel",
     "returnText": "Confirm"
   },
-  "firstLoadData": ["Welcome to use uyou ToDo", "Move the mouse to the left of the ToDo item to complete the ToDo", "Move the mouse to the right of the ToDo item to delete the ToDo", "Move the mouse to the top right corner of the ToDo title bar to copy the ToDo content"],
+  "firstLoadData": [
+    "Welcome to use uyou ToDo",
+    "Move the mouse to the left of the ToDo item to complete the ToDo",
+    "Move the mouse to the right of the ToDo item to delete the ToDo",
+    "Move the mouse to the top right corner of the ToDo title bar to copy the ToDo content"
+  ],
   "update": {
     "autoUpdate": "Get Updates Automatically",
     "updateTitle": "App Update",

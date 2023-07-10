@@ -31,17 +31,23 @@
     "changPass": "修改密碼",
     "logoutMsg": "確定退出登入嗎？"
   },
- "listMenu": {
+  "listMenu": {
     "cate": "分類",
     "allTodo": "所有 ToDo",
     "completed": "已完成",
-    "incompleted": "未完成"
+    "incompleted": "未完成",
+    "star": "加星 ToDo"
   },
   "alertText": {
     "cancelText": "取消",
     "returnText": "確定"
   },
-  "firstLoadData": ["歡迎使用 uyou ToDo", "將滑鼠移至 ToDo 項的左邊，完成 ToDo", "將滑鼠移至 ToDo 項的右邊，刪除 ToDo", "將滑鼠移至 ToDo 標題欄右上角，複製 ToDo 內容"],
+  "firstLoadData": [
+    "歡迎使用 uyou ToDo",
+    "將滑鼠移至 ToDo 項的左邊，完成 ToDo",
+    "將滑鼠移至 ToDo 項的右邊，刪除 ToDo",
+    "將滑鼠移至 ToDo 標題欄右上角，複製 ToDo 內容"
+  ],
   "update": {
     "autoUpdate": "自動獲取更新",
     "updateTitle": "軟體更新",

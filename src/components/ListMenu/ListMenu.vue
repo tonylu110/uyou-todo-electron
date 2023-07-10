@@ -202,7 +202,7 @@ emitter.on('menuClose', (data) => {
             <span
               style="font-size: 14px; margin-left: 10px;"
               :c="routeQueryName === 'star' ? '!white group-hover:!white' : 'group-hover:!white'"
-            >Star ToDos</span>
+            >{{ $t('listMenu.star') }}</span>
           </div>
         </div>
         <div
