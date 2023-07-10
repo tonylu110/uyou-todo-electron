@@ -1,21 +1,14 @@
-import { defineComponent } from 'vue'
+const Toast: SetupFC = () => {
+  const props = withDefaults(defineProps<{
+    msg: string
+    center?: boolean
+  }>(), {
+    msg: 'toast',
+  })
 
-export interface IProps {
-  msg: string
-  center?: boolean
-}
+  const simpleMode = window.innerWidth < 800
 
-export default defineComponent({
-  props: {
-    msg: {
-      default: 'toast',
-    },
-    center: Boolean,
-  },
-  setup(props: IProps) {
-    const simpleMode = window.innerWidth < 800
-
-    return () => (
+  return () => (
       <div
         p-7px
         rounded-5px
@@ -30,6 +23,7 @@ export default defineComponent({
       >
         { props.msg }
       </div>
-    )
-  },
-})
+  )
+}
+
+export default Toast
