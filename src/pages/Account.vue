@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { onMounted, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import router from '../router'
 import TabBar from '../components/TabBar/TabBar.vue'
-import i18n from '../i18n'
 import SettingList from '../components/SettingList'
 import Alert from '../components/Alert/Alert.vue'
 import Item from '../components/ItemBox/Item/Item.vue'
 import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
 import emitter from '../util/bus'
 import { createToast } from '../components/Toast'
+
+const { t } = useI18n()
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
@@ -36,7 +38,7 @@ const loginState = ref(localStorage.getItem('uid') !== '' && localStorage.getIte
 
 onMounted(() => {
   if (!loginState.value)
-    loginText.value = i18n().loginText
+    loginText.value = t('loginText')
   else
     loginText.value = localStorage.getItem('uname')!
 })
@@ -57,7 +59,7 @@ const alertMsg = ref([''])
 const alertShow = ref(false)
 function login() {
   if (uname.value === '' || passwd.value === '') {
-    alertMsg.value = [i18n().accountPage.alertNoAnP]
+    alertMsg.value = [t('accountPage.alertNoAnP')]
     alertShow.value = true
   }
   else {
@@ -78,7 +80,7 @@ function login() {
         localStorage.setItem('uname', uname.value)
         localStorage.setItem('uid', res._id)
         loginState.value = true
-        createToast({ msg: i18n().accountPage.syncData })
+        createToast({ msg: t('accountPage.syncData') })
         fetch(`https://api.todo.uyou.org.cn/todoexist?uid=${res._id}`).then((res) => {
           return res.json()
         }).then((res) => {
@@ -98,9 +100,9 @@ function login() {
               return res.json()
             }).then((res) => {
               if (res.code === 200)
-                createToast({ msg: i18n().accountPage.syncSuccess })
+                createToast({ msg: t('accountPage.syncSuccess') })
               else
-                createToast({ msg: i18n().accountPage.syncFail })
+                createToast({ msg: t('accountPage.syncFail') })
             })
           }
           else {
@@ -117,11 +119,11 @@ function login() {
               return res.json()
             }).then((res) => {
               if (res._id) {
-                createToast({ msg: i18n().accountPage.syncSuccess })
+                createToast({ msg: t('accountPage.syncSuccess') })
                 localStorage.setItem('ToDo', res.data)
               }
               else {
-                createToast({ msg: i18n().accountPage.syncFail })
+                createToast({ msg: t('accountPage.syncFail') })
               }
             })
           }
@@ -145,9 +147,9 @@ function login() {
               return res.json()
             }).then((res) => {
               if (res.code === 200)
-                createToast({ msg: i18n().accountPage.syncSuccess })
+                createToast({ msg: t('accountPage.syncSuccess') })
               else
-                createToast({ msg: i18n().accountPage.syncFail })
+                createToast({ msg: t('accountPage.syncFail') })
             })
           }
           else {
@@ -163,19 +165,19 @@ function login() {
               return res.json()
             }).then((res) => {
               if (res._id) {
-                createToast({ msg: i18n().accountPage.syncSuccess })
+                createToast({ msg: t('accountPage.syncSuccess') })
                 localStorage.setItem('cate', res.data)
                 emitter.emit('setCate', res.data)
               }
               else {
-                createToast({ msg: i18n().accountPage.syncFail })
+                createToast({ msg: t('accountPage.syncFail') })
               }
             })
           }
         })
       }
       else {
-        alertMsg.value = [i18n().accountPage.loginError]
+        alertMsg.value = [t('accountPage.loginError')]
         alertShow.value = true
       }
     })
@@ -187,12 +189,12 @@ const isLogoutClick = ref(false)
 function logout() {
   alertShow.value = true
   isLogoutClick.value = true
-  alertMsg.value = [i18n().accountPage.logoutMsg]
+  alertMsg.value = [t('accountPage.logoutMsg')]
 }
 
 function returnAlert() {
   if (isLogoutClick.value) {
-    loginText.value = i18n().loginText
+    loginText.value = t('loginText')
     localStorage.setItem('uname', '')
     localStorage.setItem('uid', '')
     loginState.value = false
@@ -216,7 +218,7 @@ function openLogoff() {
 
 <template>
   <TabBar
-    :title="i18n().accountPage.account"
+    :title="t('accountPage.account')"
     :right-img-show="false"
     :left-img-show="form === 'setting'"
     bg-color="light"
@@ -237,7 +239,7 @@ function openLogoff() {
         border="1.5px solid #00000020" bg="#00000010" rounded-5px
         outline-primary-d
         type="text"
-        :placeholder="i18n().accountPage.account"
+        :placeholder="t('accountPage.account')"
       >
       <input
         v-model="passwd" p-15px
@@ -245,34 +247,34 @@ function openLogoff() {
         border="1.5px solid #00000020" bg="#00000010" rounded-5px
         outline-primary-d
         type="password"
-        :placeholder="i18n().accountPage.passwd"
+        :placeholder="t('accountPage.passwd')"
         @keydown.enter="login"
       >
     </div>
     <ItemButton v-if="!loginState" mode="primary" @click="login">
-      {{ i18n().accountPage.login }}
+      {{ t('accountPage.login') }}
     </ItemButton>
     <ItemButton v-if="!loginState" @click="openRegister">
-      {{ i18n().accountPage.register }}
+      {{ t('accountPage.register') }}
     </ItemButton>
     <Item
       v-if="loginState"
-      :title="i18n().accountPage.autoSync"
+      :title="t('accountPage.autoSync')"
       :show-switch="true"
       :switch-state="swichState"
       @switch-fun="setAutoSync"
     />
     <ItemButton v-if="loginState" @click="changPass">
-      {{ i18n().accountPage.changPass }}
+      {{ t('accountPage.changPass') }}
     </ItemButton>
     <ItemButton v-if="loginState" @click="openLogoff">
-      {{ i18n().logoffPage.logoff }}
+      {{ t('logoffPage.logoff') }}
     </ItemButton>
     <ItemButton v-if="loginState" mode="error" @click="logout">
-      {{ i18n().accountPage.logout }}
+      {{ t('accountPage.logout') }}
     </ItemButton>
     <Alert
-      :title="i18n().accountPage.alertTitle"
+      :title="t('accountPage.alertTitle')"
       :cancel-button-show="isLogoutClick"
       :dialog-show="alertShow"
       @return="returnAlert"

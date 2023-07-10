@@ -1,10 +1,12 @@
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import ItemBox from '../../components/ItemBox/ItemBox.vue'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import router from '../../router'
-import i18n from '../../i18n'
+
+const { t } = useI18n()
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
@@ -16,7 +18,7 @@ function openUrlInBrowser(url: string) {
 
 <template>
   <TabBar
-    :title="i18n().anotherSettings.openSource"
+    :title="t('anotherSettings.openSource')"
     :right-img-show="false"
     :left-img-show="true"
     bg-color="light"

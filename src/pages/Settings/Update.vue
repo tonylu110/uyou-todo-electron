@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import TabBar from '../../components/TabBar/TabBar.vue'
-import i18n from '../../i18n'
 import router from '../../router'
 import SettingList from '../../components/SettingList'
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
 import { versionCode } from '../../util/appVersionCode'
 import { createToast } from '../../components/Toast'
 import emitter from '../../util/bus'
+
+const { t } = useI18n()
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const { app } = require('@electron/remote')
@@ -19,20 +21,20 @@ const version = versionCode
 
 const updateMsg: Ref<string[]> = ref([])
 const newVersion = ref('')
-const updateButton = ref(i18n().update.checkingUpdate)
+const updateButton = ref(t('update.checkingUpdate'))
 function getUpdate() {
   setTimeout(() => {
     fetch('https://api.todo.uyou.org.cn/update/get').then((res) => {
       return res.json()
     }).then((res) => {
       if (res[1].code > version) {
-        newVersion.value = `${i18n().updateText}: v${res[1].version}`
+        newVersion.value = `${t('updateText')}: v${res[1].version}`
         updateMsg.value = res[1].data
-        updateButton.value = i18n().update.gotoUpdate
+        updateButton.value = t('update.gotoUpdate')
       }
       else {
-        newVersion.value = i18n().update.notUpdate
-        updateButton.value = i18n().update.checkUpdate
+        newVersion.value = t('update.notUpdate')
+        updateButton.value = t('update.checkUpdate')
         createToast({ msg: newVersion.value })
       }
     })
@@ -41,7 +43,7 @@ function getUpdate() {
 
 function updateButtonCilck() {
   if (updateMsg.value.length === 0) {
-    updateButton.value = i18n().update.checkingUpdate
+    updateButton.value = t('update.checkingUpdate')
     newVersion.value = ''
     getUpdate()
   }
@@ -75,7 +77,7 @@ emitter.on('menuClose', (data) => {
 
 <template>
   <TabBar
-    :title="i18n().update.updateTitle"
+    :title="t('update.updateTitle')"
     :right-img-show="false"
     :left-img-show="true"
     bg-color="light"
@@ -129,7 +131,7 @@ emitter.on('menuClose', (data) => {
             c-black text-16px font-bold
             mt-10px
           >
-            {{ i18n().update.updateLog }}
+            {{ t('update.updateLog') }}
           </span>
           <ul w="100%" pl-20px>
             <li

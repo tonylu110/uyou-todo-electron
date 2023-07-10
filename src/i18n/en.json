@@ -1,0 +1,111 @@
+{
+  "addText": "Add",
+  "cancelText": "Cancel",
+  "copyText": "Copy",
+  "copyToast": "Copy successfully",
+  "settingTitleText": "Settings",
+  "setLangText": "Auto",
+  "updateText": "New Version",
+  "loginText": "Not logged in",
+  "myAccount": "My Account",
+  "setTopState": "Save Top Status",
+  "saveWindowSize": "Save Window Size",
+  "clearData": "Clear Data",
+  "useSystemBar": "Use The System Title Bar",
+  "setTopWindow": "Top Window",
+  "restartApp": "Restart the app to take effect",
+  "closeWindow": "Do you want to close uyou ToDo?",
+  "accountPage": {
+    "account": "Account",
+    "passwd": "Password",
+    "login": "Log in",
+    "register": "Register",
+    "autoSync": "Automatic sync",
+    "logout": "Log out",
+    "alertNoAnP": "Please enter account and password",
+    "syncData": "Synchronous Data",
+    "syncSuccess": "Sync succeeded",
+    "syncFail": "Sync failed",
+    "loginError": "Login failed",
+    "alertTitle": "Hint",
+    "changPass": "change Password",
+    "logoutMsg": "Are you sure you want to log out?"
+  },
+ "listMenu": {
+    "cate": "Categories",
+    "allTodo": "All ToDos",
+    "completed": "Completed",
+    "incompleted": "Incompleted"
+  },
+  "alertText": {
+    "cancelText": "Cancel",
+    "returnText": "Confirm"
+  },
+  "firstLoadData": ["Welcome to use uyou ToDo", "Move the mouse to the left of the ToDo item to complete the ToDo", "Move the mouse to the right of the ToDo item to delete the ToDo", "Move the mouse to the top right corner of the ToDo title bar to copy the ToDo content"],
+  "update": {
+    "autoUpdate": "Get Updates Automatically",
+    "updateTitle": "App Update",
+    "notUpdate": "No update yet",
+    "checkingUpdate": "Checking for updates...",
+    "checkUpdate": "Check for updates",
+    "gotoUpdate": "Go to update",
+    "updateLog": "Changelog:"
+  },
+  "otherList": {
+    "toWeb": "Go to the official website",
+    "toPhone": "Mobile version",
+    "toDonate": "Donate"
+  },
+  "anotherSettings": {
+    "menuBlur": "Window List Menu Blur",
+    "windowMenu": "Window Menu",
+    "openSource": "Thanks Open Source",
+    "about": "About uyou ToDo",
+    "simple": "Simple Mode",
+    "enterToAdd": "Enter to add ToDo",
+    "autoStart": "Open With System",
+    "itemWrap": "ToDo default open"
+  },
+  "contextMenu": {
+    "copy": "Copy",
+    "paste": "Paste",
+    "comToDo": "Complete ToDo",
+    "removeToDo": "Delete ToDo",
+    "clearTxt": "Clear Text",
+    "closeItem": "Close Item",
+    "undoTodo": "Undo Completed"
+  },
+  "language": "Language",
+  "registerPage": {
+    "account": "Account: ",
+    "password": "Password: ",
+    "rePass": "Repeat password: ",
+    "reg": "Register",
+    "plzAccAndPass": "Please enter account and password",
+    "onlyNum": "Only letters, numbers, and underscores are supported",
+    "accLen": "Account length cannot exceed 10 characters",
+    "rePassError": "Repeat password does not match secret",
+    "regSuccess": "Registration success!",
+    "regFail": "Registration failed!"
+  },
+  "rePassPage": {
+    "oldPass": "Old Password: ",
+    "newPass": "New Password: ",
+    "setPass": "Reset Password",
+    "plzInOldPass": "Please enter old password",
+    "plzInNewPass": "Please enter a new password",
+    "setPassSuccess": "Success to change password!",
+    "setPassFail": "Failed to change password!"
+  },
+  "logoffPage": {
+    "logoff": "Log Off",
+    "success": "Log off success",
+    "fail": "Log off fail",
+    "passNotTrue": "password is not true"
+  },
+  "startPage": {
+    "today": "My Today",
+    "allTodos": "All ToDos",
+    "startPage": "Start Page"
+  }
+}

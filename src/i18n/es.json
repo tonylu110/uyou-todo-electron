@@ -1,0 +1,116 @@
+{
+  "addText": "Agregar",
+  "cancelText": "Cancelar",
+  "copyText": "Copiar",
+  "copyToast": "Copiado correctamente",
+  "settingTitleText": "Ajustes",
+  "setLangText": "Automático",
+  "updateText": "Nueva versión",
+  "loginText": "Sin iniciar sesión",
+  "myAccount": "Mi cuenta",
+  "setTopState": "Guardar Estado Superior",
+  "saveWindowSize": "Guardar Tamaño De Ventana",
+  "clearData": "Borrar Datos",
+  "useSystemBar": "Usar La Barra De Título Del Sistema",
+  "setTopWindow": "Ventana Superior",
+  "restartApp": "Reiniciar la aplicación para que surta efecto",
+  "closeWindow": "¿Quieres cerrar uyou ToDo?",
+  "accountPage": {
+     "account": "Cuenta",
+     "passwd": "Clave",
+     "login": "Iniciar sesión",
+     "register": "Registro",
+     "autoSync": "Sincronización automática",
+     "logout": "Cerrar sesión",
+     "alertNoAnP": "Por favor ingrese cuenta y contraseña",
+     "syncData": "Datos sincrónicos",
+     "syncSuccess": "Sincronización exitosa",
+     "syncFail": "Sincronización fallida",
+     "loginError": "error de inicio de sesion",
+     "alertTitle": "Insinuación",
+     "changPass": "cambiar la contraseña",
+     "logoutMsg": "¿Estás seguro/segura de que quieres cerrar sesión?"
+  },
+  "alertText": {
+     "cancelText": "Cancelar",
+     "returnText": "Confirmar"
+  },
+  "listMenu": {
+     "cate": "Categorías",
+     "allTodo": "Todas las tareas pendientes",
+     "completed": "Terminado",
+     "incompleted": "Incompleto"
+  },
+  "firstLoadData": [
+     "Bienvenido a utilizar uyou ToDo",
+     "Mueva el mouse a la izquierda del elemento ToDo para completar el ToDo",
+     "Mueva el mouse a la derecha del elemento ToDo para eliminar el ToDo",
+     "Mueva el ratón a la esquina superior derecha de la barra de título de ToDo para copiar el contenido de ToDo"
+  ],
+  "update": {
+     "autoUpdate": "Obtenga Actualizaciones Automáticamente",
+     "updateTitle": "Actualización De La Aplicación",
+     "notUpdate": "No hay actualización todavía",
+     "checkingUpdate": "Comprobando actualizaciones...",
+     "checkUpdate": "Buscar actualizaciones",
+     "gotoUpdate": "Ir a actualizar",
+     "updateLog": "Registro de cambios:"
+  },
+  "otherList": {
+     "toWeb": "Ir al sitio web oficial",
+     "toPhone": "Versión móvil",
+     "toDonate": "Donar"
+  },
+  "anotherSettings": {
+     "menuBlur": "Desenfoque del menú de la lista de ventanas",
+     "windowMenu": "Menú Ventana",
+     "openSource": "Gracias código abierto",
+     "about": "Acerca de uyou ToDo",
+     "simple": "Modo simple",
+     "enterToAdd": "Ingrese para agregar ToDo",
+     "autoStart": "Abrir con sistema",
+     "itemWrap": "ToDo abierto por defecto"
+  },
+  "contextMenu": {
+     "copy": "Copiar",
+     "paste": "Pegar",
+     "comToDo": "Tareas completas",
+     "removeToDo": "Eliminar tareas pendientes",
+     "clearTxt": "Borrar texto",
+     "closeItem": "Cerrar artículo",
+     "undoTodo": "Deshacer completado"
+  },
+  "language": "Idioma",
+  "registerPage": {
+     "account": "Cuenta: ",
+     "password": "Contraseña: ",
+     "rePass": "Repita la contraseña: ",
+     "reg": "Registro",
+     "plzAccAndPass": "Por favor ingrese cuenta y contraseña",
+     "onlyNum": "Solo se admiten letras, números y guiones bajos",
+     "accLen": "La longitud de la cuenta no puede exceder los 10 caracteres",
+     "rePassError": "Repetir la contraseña no coincide con el secreto",
+     "regSuccess": "¡Registración exitosa!",
+     "regFail": "¡Registro fallido!"
+  },
+  "rePassPage": {
+     "oldPass": "Contraseña anterior: ",
+     "newPass": "Nueva contraseña: ",
+     "setPass": "Restablecer la contraseña",
+     "plzInOldPass": "Por favor ingrese la contraseña anterior",
+     "plzInNewPass": "Por favor ingrese una nueva contraseña",
+     "setPassSuccess": "¡Éxito en el cambio de contraseña!",
+     "setPassFail": "¡Error al cambiar la contraseña!"
+  },
+  "logoffPage": {
+     "logoff": "Desconectarse",
+     "success": "Cerrar sesión con éxito",
+     "fail": "Error al cerrar sesión",
+     "passNotTrue": "la contraseña no es verdadera"
+  },
+  "startPage": {
+     "today": "Mi Hoy",
+     "allTodos": "Todas las tareas pendientes",
+     "startPage": "Página de inicio"
+  }
+}

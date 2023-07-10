@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import Alert from '../components/Alert/Alert.vue'
 import CloseButton from '../components/CloseButton'
 import { isMac, isWindows10OrAfter } from '../util/os'
-import i18n from '../i18n'
 
-const os = require('node:os')
+const { t } = useI18n()
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const { ipcRenderer } = require('electron')
 
 const formData = reactive({
@@ -23,19 +25,19 @@ const alertMsg = ref('')
 
 function register() {
   if (formData.account === '' || formData.password === '' || formData.rePassword === '') {
-    alertMsg.value = i18n().registerPage.plzAccAndPass
+    alertMsg.value = t('registerPage.plzAccAndPass')
     showAlert.value = true
   }
   else if (!((formData.account >= 'a' && formData.account <= 'z') || (formData.account >= '0' && formData.account <= '9') || (formData.account >= 'A' && formData.account <= 'Z') || formData.account.includes('_'))) {
-    alertMsg.value = i18n().registerPage.onlyNum
+    alertMsg.value = t('registerPage.onlyNum')
     showAlert.value = true
   }
   else if (formData.account.length > 10) {
-    alertMsg.value = i18n().registerPage.accLen
+    alertMsg.value = t('registerPage.accLen')
     showAlert.value = true
   }
   else if (formData.password !== formData.rePassword) {
-    alertMsg.value = i18n().registerPage.rePassError
+    alertMsg.value = t('registerPage.rePassError')
     showAlert.value = true
   }
   else {
@@ -52,11 +54,11 @@ function register() {
       return res.json()
     }).then((res) => {
       if (res.code === 200) {
-        alertMsg.value = i18n().registerPage.regSuccess
+        alertMsg.value = t('registerPage.regSuccess')
         showAlert.value = true
       }
       else {
-        alertMsg.value = i18n().registerPage.regFail
+        alertMsg.value = t('registerPage.regFail')
         showAlert.value = true
       }
     })
@@ -65,7 +67,7 @@ function register() {
 
 function closeAlert() {
   showAlert.value = false
-  if (alertMsg.value === i18n().registerPage.regSuccess)
+  if (alertMsg.value === t('registerPage.regSuccess'))
     closeWindow()
 }
 </script>
@@ -86,7 +88,7 @@ function closeAlert() {
         flex justify-content-right w-100px
         text-20px c="#7a695c" whitespace-pre
       >
-        {{ i18n().registerPage.account }}
+        {{ t('registerPage.account') }}
       </span>
       <input
         v-model="formData.account"
@@ -103,7 +105,7 @@ function closeAlert() {
         flex justify-content-right w-100px
         text-20px c="#7a695c" whitespace-pre
       >
-        {{ i18n().registerPage.password }}
+        {{ t('registerPage.password') }}
       </span>
       <input
         v-model="formData.password"
@@ -119,7 +121,7 @@ function closeAlert() {
         flex justify-content-right w-100px
         text-20px c="#7a695c" whitespace-pre
       >
-        {{ i18n().registerPage.rePass }}
+        {{ t('registerPage.rePass') }}
       </span>
       <input
         v-model="formData.rePassword"
@@ -138,10 +140,10 @@ function closeAlert() {
       type="submit"
       @click="register"
     >
-      {{ i18n().registerPage.reg }}
+      {{ t('registerPage.reg') }}
     </button>
     <Alert
-      :title="i18n().accountPage.alertTitle"
+      :title="t('accountPage.alertTitle')"
       :dialog-show="showAlert"
       :cancel-button-show="false"
       @return="closeAlert"

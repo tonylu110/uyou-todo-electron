@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { onMounted, ref, watchEffect } from 'vue'
-import i18n from '../../i18n'
+import { useI18n } from 'vue-i18n'
 import ContextMenu from '../ContextMenu/ContextMenu.vue'
 
 const props = withDefaults(defineProps<{
@@ -20,6 +20,8 @@ const emits = defineEmits<{
   (e: 'cancel'): void
   (e: 'return'): void
 }>()
+
+const { t } = useI18n()
 
 const dialog = ref(null) as unknown as Ref<HTMLDialogElement>
 
@@ -68,15 +70,15 @@ onMounted(() => {
     <div class="title">
       {{ title }}
     </div>
-    <div class="body" :style="{ alignItems: title === i18n().accountPage.alertTitle ? 'center' : '' }">
+    <div class="body" :style="{ alignItems: title === t('accountPage.alertTitle') ? 'center' : '' }">
       <slot />
     </div>
     <div class="buttons" no-drag>
       <div v-if="cancelButtonShow" class="cancel" @click="emits('cancel')">
-        {{ i18n().alertText.cancelText }}
+        {{ t('alertText.cancelText') }}
       </div>
       <div class="return" :style="{ width: cancelButtonShow ? '' : '100%' }" @click="emits('return')">
-        {{ i18n().alertText.returnText }}
+        {{ t('alertText.returnText') }}
       </div>
     </div>
     <ContextMenu v-if="showContextMenu" :pos="contextMenu" :show-paste="false" />

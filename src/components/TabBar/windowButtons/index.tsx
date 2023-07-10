@@ -1,12 +1,14 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-import i18n from '../../../i18n'
+import { useI18n } from 'vue-i18n'
 import { isMac } from '../../../util/os'
 import Alert from '../../Alert/Alert.vue'
 import firstLoad from '../../TitleBar/firstLoad'
 import { closeWindow, minWindow, topWindow } from '../../../util/windowApi'
 
 const WindowButtons: SetupFC = () => {
+  const { t } = useI18n()
+
   const route = useRoute()
 
   const dialogShow = ref(false)
@@ -70,11 +72,11 @@ const WindowButtons: SetupFC = () => {
       </div>
       <Alert
         dialogShow={dialogShow.value}
-        title={i18n().accountPage.alertTitle}
+        title={t('accountPage.alertTitle')}
         onCancel={() => dialogShow.value = false}
         onReturn={() => closeWindow()}
       >
-        <span>{i18n().closeWindow}</span>
+        <span>{t('closeWindow')}</span>
       </Alert>
     </>
   )

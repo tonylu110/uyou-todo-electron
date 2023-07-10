@@ -2,9 +2,9 @@
 import type { Ref } from 'vue'
 import { onMounted, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import LocalStorage from '../../util/localStorage'
 import type ITodoList from '../../interface/ITodoListArray'
-import i18n from '../../i18n'
 import setSwitchFn from '../../util/setSwitchFn'
 import Item from './Item/Item.vue'
 import saveItemSet from './saveItemSet'
@@ -21,6 +21,8 @@ const props = defineProps({
 const emits = defineEmits<{
   (e: 'setAddItem'): void
 }>()
+
+const { t } = useI18n()
 
 const route = useRoute()
 
@@ -187,7 +189,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
         @click="setSwitchFn('notDoShow', !showNotDo, () => showNotDo = !showNotDo)"
       >
         <div i-fluent:caret-down-12-filled text-18px mr-5px :rotate="showNotDo ? '0' : '-90'" transition-300 />
-        {{ i18n().listMenu.completed }}
+        {{ t('listMenu.completed') }}
         <div
           ml-5px text-10px
           rounded-20px bg="#6e492f" c="#fff6dc"

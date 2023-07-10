@@ -2,13 +2,16 @@
 import type { Ref } from 'vue'
 import { onMounted, ref, watchEffect } from 'vue'
 import moment from 'moment'
-import i18n from '../../../i18n'
+import { useI18n } from 'vue-i18n'
 import ContextMenu from '../../ContextMenu/ContextMenu.vue'
 
 const emits = defineEmits<{
   (e: 'setAddItem'): void
   (e: 'addItem', id: number, text: string): void
 }>()
+
+const { t } = useI18n()
+
 const todoTime = ref(new Date().getTime())
 const showAddButton = ref(false)
 const text = ref('')
@@ -51,12 +54,12 @@ onMounted(() => {
 })
 
 const customContextMenu = [{
-  label: i18n().contextMenu.clearTxt,
+  label: t('contextMenu.clearTxt'),
   event: 'clear',
   icon: 'i-mdi:backspace',
   color: '#d6010f',
 }, {
-  label: i18n().contextMenu.closeItem,
+  label: t('contextMenu.closeItem'),
   event: 'close',
   icon: 'i-mdi:close-circle-outline',
   color: '#d6010f',

@@ -2,8 +2,8 @@
 import type { Ref } from 'vue'
 import { onBeforeUnmount, onMounted, reactive, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import getTime from '../../../util/getTime'
-import i18n from '../../../i18n'
 import ContextMenu from '../../ContextMenu/ContextMenu.vue'
 import type { cateItem } from '../../ListMenu/ICateItem'
 import emitter from '../../../util/bus'
@@ -22,6 +22,8 @@ const emits = defineEmits<{
   (e: 'setCate', id: number, cateId: number): void
   (e: 'setStar', id: number, star: boolean): void
 }>()
+
+const { t } = useI18n()
 
 const okState = ref(props.isOk)
 const starState = ref(props.isStar)
@@ -46,7 +48,7 @@ function deleteItem() {
 function copyText() {
   navigator.clipboard.writeText(props.text!).then(() => {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    createToast({ msg: i18n().copyToast, center: true }, itemDom.value)
+    createToast({ msg: t('copyToast'), center: true }, itemDom.value)
   })
 }
 const moreShow = ref(false)
@@ -61,11 +63,11 @@ const contextMenu = ref({
 })
 
 const customContextMenu = reactive([{
-  label: okState.value ? i18n().contextMenu.undoTodo : i18n().contextMenu.comToDo,
+  label: okState.value ? t('contextMenu.undoTodo') : t('contextMenu.comToDo'),
   event: 'setOk',
   icon: okState.value ? 'i-mdi:checkbox-blank-circle-outline' : 'i-mdi:checkbox-marked-circle-outline',
 }, {
-  label: i18n().contextMenu.removeToDo,
+  label: t('contextMenu.removeToDo'),
   event: 'remove',
   icon: 'i-mdi:close-circle-outline',
   color: '#d6010f',
@@ -73,7 +75,7 @@ const customContextMenu = reactive([{
 
 watchEffect(() => {
   customContextMenu[0] = {
-    label: okState.value ? i18n().contextMenu.undoTodo : i18n().contextMenu.comToDo,
+    label: okState.value ? t('contextMenu.undoTodo') : t('contextMenu.comToDo'),
     event: 'setOk',
     icon: okState.value ? 'i-mdi:checkbox-blank-circle-outline' : 'i-mdi:checkbox-marked-circle-outline',
   }
@@ -187,7 +189,7 @@ onBeforeUnmount(() => {
             bg="hover:black/5 active:black/10" rounded-5px
             @click="copyText"
           >
-            {{ i18n().copyText }}
+            {{ t('copyText') }}
           </div>
           <div h-1px bg="black/10" my-5px />
           <div
@@ -205,7 +207,7 @@ onBeforeUnmount(() => {
             p-5px c="black/70"
             bg="hover:black/5 active:black/10" rounded-5px
           >
-            {{ i18n().cancelText }}
+            {{ t('cancelText') }}
           </div>
         </div>
       </div>

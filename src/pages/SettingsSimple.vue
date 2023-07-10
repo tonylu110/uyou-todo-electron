@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import TabBar from '../components/TabBar/TabBar.vue'
-import i18n from '../i18n'
 import router from '../router'
 import SettingList from '../components/SettingList'
 import Item from '../components/ItemBox/Item/Item.vue'
@@ -11,6 +11,8 @@ import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
 import emitter from '../util/bus'
 import isDev from '../util/mode'
 import setSwitchFn from '../util/setSwitchFn'
+
+const { t } = useI18n()
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const os = require('node:os')
@@ -59,7 +61,7 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
 
 <template>
   <TabBar
-    :title="i18n().settingTitleText"
+    :title="t('settingTitleText')"
     :right-img-show="false"
     bg-color="light"
     @left-click="router.back()"
@@ -78,35 +80,35 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
       />
     </ItemBox>
     <Item
-      :title="loginState ? i18n().myAccount : i18n().loginText"
+      :title="loginState ? t('myAccount') : t('loginText')"
       @item-fun="() => router.push('/account?from=setting')"
     />
     <Item
-      :title="i18n().update.updateTitle"
+      :title="t('update.updateTitle')"
       @item-fun="router.push('/update?from=setting')"
     />
     <ItemBox>
       <Item
-        :title="i18n().anotherSettings.simple"
+        :title="t('anotherSettings.simple')"
         :show-switch="true"
         :switch-state="simpleModeState"
-        @switch-fun="setSwitchFn('simpleMode', !simpleModeState, () => simpleModeState = !simpleModeState, 'setSimple', i18n().restartApp)"
+        @switch-fun="setSwitchFn('simpleMode', !simpleModeState, () => simpleModeState = !simpleModeState, 'setSimple', t('restartApp'))"
       />
       <Item
-        :title="i18n().anotherSettings.enterToAdd"
+        :title="t('anotherSettings.enterToAdd')"
         :show-switch="true"
         :switch-state="enterAddState"
         @switch-fun="setSwitchFn('enterAdd', !enterAddState, () => enterAddState = !enterAddState)"
       />
       <Item
         v-if="isLinux"
-        :title="i18n().anotherSettings.autoStart"
+        :title="t('anotherSettings.autoStart')"
         :show-switch="true"
         :switch-state="autoStartState"
         @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
       />
       <Item
-        :title="i18n().anotherSettings.itemWrap"
+        :title="t('anotherSettings.itemWrap')"
         :show-switch="true"
         :switch-state="textWrapState"
         @switch-fun="setSwitchFn('routerUrl', !textWrapState, () => textWrapState = !textWrapState)"
@@ -114,13 +116,13 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
     </ItemBox>
     <ItemBox>
       <Item
-        :title="i18n().useSystemBar"
+        :title="t('useSystemBar')"
         :show-switch="true"
         :switch-state="useSystemTitleBar"
-        @switch-fun="setSwitchFn('systemTitle', !useSystemTitleBar, () => useSystemTitleBar = !useSystemTitleBar, 'setSystemBar', i18n().restartApp)"
+        @switch-fun="setSwitchFn('systemTitle', !useSystemTitleBar, () => useSystemTitleBar = !useSystemTitleBar, 'setSystemBar', t('restartApp'))"
       />
       <Item
-        :title="i18n().setTopWindow"
+        :title="t('setTopWindow')"
         :show-switch="true"
         :switch-state="topState"
         @switch-fun="setSwitchFn('alwaysOnTop', !topState, () => {
@@ -130,15 +132,15 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
       />
       <Item
         v-if="(isLinux && isWindows10OrAfter) || isMac"
-        :title="i18n().anotherSettings.menuBlur"
+        :title="t('anotherSettings.menuBlur')"
         :show-switch="true"
         :switch-state="menuBlurState"
-        @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', i18n().restartApp)"
+        @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', t('restartApp'))"
       />
     </ItemBox>
     <Item v-if="isInDev" title="Laboratory" @item-fun="router.push('/lab?from=setting')" />
     <ItemButton mode="error" @click="clearData">
-      {{ i18n().clearData }}
+      {{ t('clearData') }}
     </ItemButton>
     <ItemButton @click="router.push('/lang?from=setting')">
       <img src="/images/lang.png" alt="" class="lang-img">

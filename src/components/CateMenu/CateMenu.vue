@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import type { cateItem } from '../ListMenu/ICateItem'
-import i18n from '../../i18n'
 import emitter from '../../util/bus'
 
 const emits = defineEmits<{
   (e: 'clickMenu'): void
 }>()
+
+const { t } = useI18n()
+
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
 
@@ -43,28 +46,28 @@ function toList(listName: string) {
       bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
       @click="toList('today')"
     >
-      {{ i18n().startPage.today }}
+      {{ t('startPage.today') }}
     </div>
     <div
       p-10px text-18px
       bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
       @click="router.push('/')"
     >
-      {{ i18n().listMenu.allTodo }}
+      {{ t('listMenu.allTodo') }}
     </div>
     <div
       p-10px text-18px
       bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
       @click="toList('allDo')"
     >
-      {{ i18n().listMenu.completed }}
+      {{ t('listMenu.completed') }}
     </div>
     <div
       p-10px text-18px
       bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
       @click="toList('allNotDo')"
     >
-      {{ i18n().listMenu.incompleted }}
+      {{ t('listMenu.incompleted') }}
     </div>
     <div
       v-for="cate in cateList" :key="cate.id" p-10px w="[calc(100vw-20px)]"

@@ -1,14 +1,17 @@
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import router from '../../router'
-import i18n from '../../i18n'
 
-const { ipcRenderer } = require('electron')
+const { t, locale } = useI18n()
 
 function menuClick(lang: string) {
   localStorage.setItem('lang', lang)
-  location.reload()
+  if (lang === 'withSystem')
+    locale.value = navigator.language.toLowerCase()
+  else
+    locale.value = lang
 }
 
 function langShow(lang: string): boolean {
@@ -21,20 +24,20 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
 <template>
   <TabBar
-    :title="i18n().language"
+    :title="t('language')"
     :right-img-show="false"
     :left-img-show="true"
     bg-color="light"
-    @leftClick="router.back()"
+    @left-click="router.back()"
   />
   <SettingList>
     <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }">
       <div class="box-radius">
         <div class="item" :class="langShow('withSystem') ? 'select' : ''" :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }" @click="() => menuClick('withSystem')">
-          <span>{{ i18n().setLangText }}</span>
+          <span>{{ t('setLangText') }}</span>
           <div v-if="langShow('withSystem')" i-mdi:check text-24px c="#5985eb" />
         </div>
-        <div class="item" :class="langShow('en') ? 'select' : ''" :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }" @click="() => menuClick('en')">
+        <div class="item" :class="langShow('en-us') ? 'select' : ''" :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }" @click="() => menuClick('en')">
           <span>English</span>
           <div v-if="langShow('en')" i-mdi:check text-24px c="#5985eb" />
         </div>

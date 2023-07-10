@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import Alert from '../components/Alert/Alert.vue'
 import { isMac, isWindows10OrAfter } from '../util/os'
-import i18n from '../i18n'
 import CloseButton from '../components/CloseButton'
 
-const os = require('node:os')
+const { t } = useI18n()
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const { ipcRenderer } = require('electron')
 
 const route = useRoute()
@@ -26,11 +28,11 @@ const alertMsg = ref('')
 
 function repass() {
   if (formData.oldPass === '') {
-    alertMsg.value = i18n().rePassPage.plzInOldPass
+    alertMsg.value = t('rePassPage.plzInOldPass')
     showAlert.value = true
   }
   else if (formData.newPass === '') {
-    alertMsg.value = i18n().rePassPage.plzInNewPass
+    alertMsg.value = t('rePassPage.plzInNewPass')
     showAlert.value = true
   }
   else {
@@ -48,11 +50,11 @@ function repass() {
       return res.json()
     }).then((res) => {
       if (res.code === 200) {
-        alertMsg.value = i18n().rePassPage.setPassSuccess
+        alertMsg.value = t('rePassPage.setPassSuccess')
         showAlert.value = true
       }
       else {
-        alertMsg.value = i18n().rePassPage.setPassFail
+        alertMsg.value = t('rePassPage.setPassFail')
         showAlert.value = true
       }
     })
@@ -61,7 +63,7 @@ function repass() {
 
 function closeAlert() {
   showAlert.value = false
-  if (alertMsg.value === i18n().rePassPage.setPassSuccess)
+  if (alertMsg.value === t('rePassPage.setPassSuccess'))
     closeWindow()
 }
 </script>
@@ -82,7 +84,7 @@ function closeAlert() {
         flex justify-content-right w-100px
         text-20px c="#7a695c" whitespace-pre
       >
-        {{ i18n().registerPage.account }}
+        {{ t('accountPage.account') }}
       </span>
       <input
         v-model="formData.account"
@@ -100,7 +102,7 @@ function closeAlert() {
         flex justify-content-right w-100px
         text-20px c="#7a695c" whitespace-pre
       >
-        {{ i18n().rePassPage.oldPass }}
+        {{ t('rePassPage.oldPass') }}
       </span>
       <input
         v-model="formData.oldPass"
@@ -117,7 +119,7 @@ function closeAlert() {
         flex justify-content-right w-100px
         text-20px c="#7a695c" whitespace-pre
       >
-        {{ i18n().rePassPage.newPass }}
+        {{ t('rePassPage.newPass') }}
       </span>
       <input
         v-model="formData.newPass"
@@ -136,10 +138,10 @@ function closeAlert() {
       type="submit"
       @click="repass"
     >
-      {{ i18n().rePassPage.setPass }}
+      {{ t('rePassPage.setPass') }}
     </button>
     <Alert
-      :title="i18n().accountPage.alertTitle"
+      :title="t('accountPage.alertTitle')"
       :dialog-show="showAlert"
       :cancel-button-show="false"
       @return="closeAlert"

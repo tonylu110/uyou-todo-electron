@@ -1,0 +1,111 @@
+{
+  "addText": "添加",
+  "cancelText": "取消",
+  "copyText": "复制",
+  "copyToast": "复制成功",
+  "settingTitleText": "设置",
+  "setLangText": "跟随系统",
+  "updateText": "新版本",
+  "loginText": "未登录",
+  "myAccount": "我的账号",
+  "setTopState": "保存置顶状态",
+  "saveWindowSize": "保存窗口大小",
+  "clearData": "清除数据",
+  "useSystemBar": "使用系统标题栏",
+  "setTopWindow": "置顶窗口",
+  "restartApp": "重启应用生效",
+  "closeWindow": "你想要关闭 uyou ToDo 吗？",
+  "accountPage": {
+    "account": "账号",
+    "passwd": "密码",
+    "login": "登录",
+    "register": "注册",
+    "autoSync": "自动同步",
+    "logout": "退出登录",
+    "alertNoAnP": "请输入账号和密码",
+    "syncData": "同步数据",
+    "syncSuccess": "同步成功",
+    "syncFail": "同步失败",
+    "loginError": "登录失败",
+    "alertTitle": "提示",
+    "changPass": "修改密码",
+    "logoutMsg": "确定退出登录吗？"
+  },
+  "listMenu": {
+    "cate": "分类",
+    "allTodo": "所有 ToDo",
+    "completed": "已完成",
+    "incompleted": "未完成"
+  },
+  "alertText": {
+    "cancelText": "取消",
+    "returnText": "确定"
+  },
+  "firstLoadData": ["欢迎使用 uyou ToDo", "将鼠标移至 ToDo 项的左边，完成 ToDo", "将鼠标移至 ToDo 项的右边，删除 ToDo", "将鼠标移至 ToDo 标题栏右上角，复制 ToDo 内容"],
+  "update": {
+    "autoUpdate": "自动获取更新",
+    "updateTitle": "软件更新",
+    "notUpdate": "暂无更新",
+    "checkingUpdate": "检查更新中...",
+    "checkUpdate": "检查更新",
+    "gotoUpdate": "前往更新",
+    "updateLog": "更新日志："
+  },
+  "otherList": {
+    "toWeb": "前往官网",
+    "toPhone": "移动版",
+    "toDonate": "捐赠"
+  },
+  "anotherSettings": {
+    "menuBlur": "页面菜单毛玻璃",
+    "windowMenu": "窗口菜单",
+    "openSource": "开源鸣谢",
+    "about": "关于 uyou ToDo",
+    "simple": "简易模式",
+    "enterToAdd": "回车添加 ToDo",
+    "autoStart": "开机自启",
+    "itemWrap": "ToDo 默认展开"
+  },
+  "contextMenu": {
+    "copy": "复制",
+    "paste": "粘贴",
+    "comToDo": "完成 ToDo",
+    "removeToDo": "删除 ToDo",
+    "clearTxt": "清除文本",
+    "closeItem": "关闭窗口",
+    "undoTodo": "取消完成"
+  },
+  "language": "语言",
+  "registerPage": {
+    "account": "账号：",
+    "password": "密码：",
+    "rePass": "重复密码：",
+    "reg": "注册",
+    "plzAccAndPass": "请输入账号和密码",
+    "onlyNum": "仅支持字母、数字、下划线",
+    "accLen": "账号长度不能超过10位",
+    "rePassError": "重复密码与秘密不一致",
+    "regSuccess": "注册成功！",
+    "regFail": "注册失败！"
+  },
+  "rePassPage": {
+    "oldPass": "旧密码：",
+    "newPass": "新密码：",
+    "setPass": "重设密码",
+    "plzInOldPass": "请输入旧密码",
+    "plzInNewPass": "请输入新密码",
+    "setPassSuccess": "修改密码成功！",
+    "setPassFail": "修改密码失败！"
+  },
+  "logoffPage": {
+    "logoff": "注销账号",
+    "success": "注销成功",
+    "fail": "注销失败",
+    "passNotTrue": "密码不正确"
+  },
+  "startPage": {
+    "today": "我的一天",
+    "allTodos": "所有 ToDo",
+    "startPage": "启动页"
+  }
+}

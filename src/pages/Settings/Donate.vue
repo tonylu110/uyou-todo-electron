@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import router from '../../router'
-import i18n from '../../i18n'
 import SettingList from '../../components/SettingList'
 import emitter from '../../util/bus'
+
+const { t } = useI18n()
 
 const menuShort = ref(window.innerWidth < 750)
 emitter.on('menuClose', (data) => {
@@ -14,7 +16,7 @@ emitter.on('menuClose', (data) => {
 
 <template>
   <TabBar
-    :title="i18n().otherList.toDonate"
+    :title="t('otherList.toDonate')"
     :right-img-show="false"
     :left-img-show="true"
     bg-color="light"

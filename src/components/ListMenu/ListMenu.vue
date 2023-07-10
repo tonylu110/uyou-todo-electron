@@ -2,13 +2,15 @@
 import type { Ref } from 'vue'
 import { reactive, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
-import i18n from '../../i18n'
+import { useI18n } from 'vue-i18n'
 import router from '../../router'
 import emitter from '../../util/bus'
 import { isMac } from '../../util/os'
 import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
 import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
+
+const { t } = useI18n()
 
 const titleBarShow = localStorage.getItem('systemTitle') === 'true'
 
@@ -148,7 +150,7 @@ emitter.on('menuClose', (data) => {
       <div i-ph:list-bold text-20px block c="black/56" />
     </div>
     <div class="list">
-      <span v-if="!menuShort" class="title" :mt="isMac() ? '' : '!10px'">{{ i18n().accountPage.account }}</span>
+      <span v-if="!menuShort" class="title" :mt="isMac() ? '' : '!10px'">{{ t('accountPage.account') }}</span>
       <div
         class="account-list group"
         :mt="menuShort ? '!-70px' : ''"
@@ -164,10 +166,10 @@ emitter.on('menuClose', (data) => {
           <span
             style="font-size: 14px; margin-left: 10px;"
             :c="routeName === 'account' && form !== 'setting' ? '!white group-hover:!white' : 'group-hover:!white'"
-          >{{ i18n().myAccount }}</span>
+          >{{ t('myAccount') }}</span>
         </div>
       </div>
-      <span v-if="!menuShort" class="title" mb="!10px">{{ i18n().listMenu.cate }}</span>
+      <span v-if="!menuShort" class="title" mb="!10px">{{ t('listMenu.cate') }}</span>
       <perfect-scrollbar ref="cateListRef" class="cate" :shadow="ps === 0 ? '' : 'inner'" @ps-scroll-y="onScroll">
         <div
           v-if="showList.today.show"
@@ -183,7 +185,7 @@ emitter.on('menuClose', (data) => {
             <span
               style="font-size: 14px; margin-left: 10px;"
               :c="routeQueryName === 'today' ? '!white group-hover:!white' : 'group-hover:!white'"
-            >{{ i18n().startPage.today }}</span>
+            >{{ t('startPage.today') }}</span>
           </div>
         </div>
         <div
@@ -216,7 +218,7 @@ emitter.on('menuClose', (data) => {
             <span
               style="font-size: 14px; margin-left: 10px;"
               :c="routeName === 'Home' ? '!white group-hover:!white' : 'group-hover:!white'"
-            >{{ i18n().listMenu.allTodo }}</span>
+            >{{ t('listMenu.allTodo') }}</span>
           </div>
         </div>
         <div
@@ -233,7 +235,7 @@ emitter.on('menuClose', (data) => {
             <span
               style="font-size: 14px; margin-left: 10px;"
               :c="routeQueryName === 'allNotDo' ? '!white group-hover:!white' : 'group-hover:!white'"
-            >{{ i18n().listMenu.incompleted }}</span>
+            >{{ t('listMenu.incompleted') }}</span>
           </div>
         </div>
         <div
@@ -250,7 +252,7 @@ emitter.on('menuClose', (data) => {
             <span
               style="font-size: 14px; margin-left: 10px;"
               :c="routeQueryName === 'allDo' ? '!white group-hover:!white' : 'group-hover:!white'"
-            >{{ i18n().listMenu.completed }}</span>
+            >{{ t('listMenu.completed') }}</span>
           </div>
         </div>
         <div
@@ -346,7 +348,7 @@ emitter.on('menuClose', (data) => {
           <span
             :c="routeName === 'setting' || form === 'setting' ? '!white group-hover:!white' : 'group-hover:!white'"
             style="font-size: 14px; margin-left: 10px;"
-          >{{ i18n().settingTitleText }}</span>
+          >{{ t('settingTitleText') }}</span>
         </div>
       </div>
     </div>

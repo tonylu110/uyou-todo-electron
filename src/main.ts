@@ -6,6 +6,7 @@ import App from './App.vue'
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
 import router from './router'
 import AppSimple from './AppSimple.vue'
+import i18n from './i18n'
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
@@ -20,6 +21,7 @@ else
   app = createApp(AppSimple)
 
 app.use(router)
+app.use(i18n)
 app.use(PerfectScrollbar)
 app.mount('#app')
 

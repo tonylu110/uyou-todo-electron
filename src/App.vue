@@ -2,7 +2,7 @@
 import type { Ref } from 'vue'
 import { onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import i18n from './i18n'
+import { useI18n } from 'vue-i18n'
 import TitleBar from './components/TitleBar/newTitleBar'
 import Alert from './components/Alert/Alert.vue'
 import ListMenu from './components/ListMenu/ListMenu.vue'
@@ -11,6 +11,8 @@ import RouterUrl from './components/RouterUrl'
 import emitter from './util/bus'
 import isDev from './util/mode'
 import getCateList from './util/getCateList'
+
+const { t } = useI18n()
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
@@ -154,7 +156,7 @@ window.addEventListener('resize', () => {
         <router-view />
         <Alert
           :dialog-show="alertShow"
-          :title="`${i18n().updateText} v${newVersion}`"
+          :title="`${t('updateText')} v${newVersion}`"
           @cancel="() => alertShow = false"
           @return="returnClick"
         >

@@ -1,13 +1,14 @@
 import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import CloseButton from '../components/CloseButton'
 import Alert from '../components/Alert/Alert.vue'
 import { isMac } from '../util/os'
-import i18n from '../i18n'
 import { closeWindow } from '../util/windowApi'
 
 const Logoff: SetupFC = () => {
-  // const ipcRenderer = require('electron').ipcRenderer
+  const { t } = useI18n()
+
   const route = useRoute()
 
   const formData = reactive({
@@ -20,7 +21,7 @@ const Logoff: SetupFC = () => {
 
   const logoff = () => {
     if (!formData.passwd) {
-      dialogText.value = i18n().registerPage.plzAccAndPass
+      dialogText.value = t('registerPage.plzAccAndPass')
       showDialog.value = true
       return
     }
@@ -73,29 +74,29 @@ const Logoff: SetupFC = () => {
                   return res.json()
                 }).then((res) => {
                   if (res.code === 200) {
-                    dialogText.value = i18n().logoffPage.success
+                    dialogText.value = t('logoffPage.success')
                     showDialog.value = true
                   }
                   else {
-                    dialogText.value = i18n().logoffPage.fail
+                    dialogText.value = t('logoffPage.fail')
                     showDialog.value = true
                   }
                 })
               }
               else {
-                dialogText.value = i18n().logoffPage.fail
+                dialogText.value = t('logoffPage.fail')
                 showDialog.value = true
               }
             })
           }
           else {
-            dialogText.value = i18n().logoffPage.fail
+            dialogText.value = t('logoffPage.fail')
             showDialog.value = true
           }
         })
       }
       else {
-        dialogText.value = i18n().logoffPage.passNotTrue
+        dialogText.value = t('logoffPage.passNotTrue')
         showDialog.value = true
       }
     })
@@ -103,7 +104,7 @@ const Logoff: SetupFC = () => {
 
   const closeDialog = () => {
     showDialog.value = false
-    if (dialogText.value === i18n().logoffPage.success)
+    if (dialogText.value === t('logoffPage.success'))
       closeWindow('logoff')
   }
 
@@ -117,7 +118,7 @@ const Logoff: SetupFC = () => {
         flex="~ col" justify-center items-center
       >
         <div flex="~ row" items-center justify-center>
-          <span w-25 flex justify-content-right>{i18n().registerPage.account}</span>
+          <span w-25 flex justify-content-right>{t('registerPage.account')}</span>
           <input
             no-drag outline-primary-d
             mb-10px p-10px rounded-5px border="2px solid black/10"
@@ -127,7 +128,7 @@ const Logoff: SetupFC = () => {
           />
         </div>
         <div flex="~ row" items-center justify-center>
-          <span w-25 flex justify-content-right>{i18n().registerPage.password}</span>
+          <span w-25 flex justify-content-right>{t('registerPage.password')}</span>
           <input
             no-drag outline-primary-d
             mb-10px p-10px rounded-5px border="2px solid black/10"
@@ -141,14 +142,14 @@ const Logoff: SetupFC = () => {
           border-none p-10px rounded-5px
           onClick={logoff}
         >
-          {i18n().logoffPage.logoff}
+          {t('logoffPage.logoff')}
         </button>
       </div>
       <Alert
         dialogShow={showDialog.value}
         cancelButtonShow={false}
         onReturn={closeDialog}
-        title={i18n().accountPage.alertTitle}
+        title={t('accountPage.alertTitle')}
       >
         <span>{dialogText.value}</span>
       </Alert>

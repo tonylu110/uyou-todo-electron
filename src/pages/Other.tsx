@@ -1,14 +1,16 @@
 import type { Ref } from 'vue'
 import { ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import TabBar from '../components/TabBar/TabBar.vue'
 import List from '../components/List/List.vue'
 import LocalStorage from '../util/localStorage'
 import type ITodoList from '../interface/ITodoListArray'
-import i18n from '../i18n'
 import type { cateItem } from '../components/ListMenu/ICateItem'
 
 const Other: SetupFC = () => {
+  const { t } = useI18n()
+
   const title = ref('')
 
   const listData: Ref<ITodoList[]> = ref([])
@@ -22,15 +24,15 @@ const Other: SetupFC = () => {
   watchEffect(() => {
     if (route.query.listName === 'allNotDo') {
       listData.value = list.value!.filter(listData => listData.ok === false)
-      title.value = i18n().listMenu.incompleted
+      title.value = t('listMenu.incompleted')
     }
     else if (route.query.listName === 'allDo') {
       listData.value = list.value!.filter(listData => listData.ok === true)
-      title.value = i18n().listMenu.completed
+      title.value = t('listMenu.completed')
     }
     else if (route.query.listName === 'today') {
       listData.value = list.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString())
-      title.value = i18n().startPage.today
+      title.value = t('startPage.today')
     }
     else if (route.query.listName === 'star') {
       listData.value = list.value!.filter(listData => listData.star === true)
