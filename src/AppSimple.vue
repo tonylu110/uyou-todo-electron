@@ -31,13 +31,13 @@ onMounted(() => {
   }, 0)
 })
 
-const isBlur = localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null
+const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
 </script>
 
 <template>
   <RouterUrl v-if="routerShow" />
   <router-view name="isWindow" />
-  <div v-if="!isWinDow" :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? '#eee' : ''">
+  <div v-if="!isWinDow" :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? '#e5e5e5' : ''">
     <div overflow-hidden w-100vw h-100vh>
       <router-view />
     </div>

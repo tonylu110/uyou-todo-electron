@@ -31,7 +31,7 @@ function createWindow() {
 
   mainWindow = new BrowserWindow({
     width: simple ? 350 : 1000,
-    height: simple ? 700 : 750,
+    height: 750,
     minHeight: 600,
     minWidth: simple ? 350 : 400,
     maxWidth: simple ? 400 : null,

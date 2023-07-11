@@ -34,7 +34,7 @@ function createWindow() {
 
   mainWindow = new MicaBrowserWindow({
     width: simple ? 370 : 1000,
-    height: simple ? 700 : 750,
+    height: 750,
     minHeight: 600,
     minWidth: simple ? 370 : 400,
     maxWidth: simple ? 400 : null,

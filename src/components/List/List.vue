@@ -227,7 +227,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
 <style scoped lang="scss">
 .list {
   background-color: #edd9b7;
-  height: calc(100% - 95px);
+  height: calc(100% - 105px);
   display: flex;
   flex-direction: column;
   align-items: center;

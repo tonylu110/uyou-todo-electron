@@ -146,13 +146,13 @@ if (isDev) {
   })
 }
 
-const isBlur = localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null
+const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
 </script>
 
 <template>
   <RouterUrl v-if="routerShow" />
   <router-view name="isWindow" />
-  <div v-if="!isWinDow" class="list-main" :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? '#eee' : ''">
+  <div v-if="!isWinDow" class="list-main" :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? '#e5e5e5' : ''">
     <div class="list-in">
       <div>
         <TitleBar v-if="!systemTitleShow" />

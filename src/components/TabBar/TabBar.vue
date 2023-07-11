@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import CateMenu from '../CateMenu/CateMenu.vue'
 import getCateList from '../../util/getCateList'
 import emitter from '../../util/bus'
+import { isLinux, isWindows10OrAfter } from '../../util/os'
 import windowButtons from './windowButtons'
 
 withDefaults(defineProps<{
@@ -81,21 +82,23 @@ function showWrapFn() {
 ipcRenderer.on('useKeyAddItem', () => {
   emits('rightClick')
 })
+
+const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
 </script>
 
 <template>
   <div
     class="title-bar"
-    bg="white/60" drag
+    :bg="isBlur ? 'white/50' : 'white/80'" drag
     :style="{
       borderTopLeftRadius: isRound ? '15px' : '',
     }"
   >
-    <div :ml="leftImgShow || showWrap ? '12px' : '20px'" flex="~ col-reverse">
-      <div relative>
+    <div :ml="leftImgShow || showWrap ? '15px' : '20px'" flex="~ col-reverse">
+      <div relative :mb="leftImgShow || showWrap ? '' : '20px'">
         <span
           :style="{ color: bgColor === 'light' ? '#555' : '', maxWidth: simpleMode ? 'calc(100vw - 140px)' : '' }"
-          :text="leftImgShow || showWrap ? '20px' : '30px'"
+          :text="leftImgShow || showWrap ? '20px' : '40px'"
         >{{ title }}</span>
         <div
           v-if="showMore" absolute top-0 text-20px
@@ -109,7 +112,7 @@ ipcRenderer.on('useKeyAddItem', () => {
           <div v-else i-mdi:menu-down text-20px c-white vertical-baseline />
         </div>
       </div>
-      <div :h="leftImgShow || showWrap ? '' : '20px'" flex mb-5px>
+      <div :h="leftImgShow || showWrap ? '' : '30px'" flex mb-10px>
         <div
           v-if="leftImgShow"
           bg="black/10 hover:black/20" mr-10px
@@ -131,11 +134,11 @@ ipcRenderer.on('useKeyAddItem', () => {
         </div>
       </div>
     </div>
-    <div flex="~ col" items-end mr-12px>
+    <div flex="~ col" items-end mr-15px>
       <div :h="!systemTitleShow ? '' : '26px'">
         <window-buttons v-if="!systemTitleShow" />
       </div>
-      <div flex mt-7px :h="rightImgShow ? '' : '30px'">
+      <div flex mt-12px :h="rightImgShow ? '' : '30px'">
         <div
           v-if="rightImgShow"
           bg="black/10 hover:black/20"
@@ -161,7 +164,7 @@ ipcRenderer.on('useKeyAddItem', () => {
 <style lang="scss" scoped>
 .title-bar {
   position: relative;
-  height: 85px;
+  height: 95px;
   display: flex;
   flex-direction: row;
   align-items: center;

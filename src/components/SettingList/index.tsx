@@ -1,5 +1,6 @@
 import { renderSlot, useSlots } from 'vue'
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
+import { isLinux, isWindows10OrAfter } from '../../util/os'
 
 const SettingList: SetupFC = () => {
   defineSlots<{
@@ -12,11 +13,13 @@ const SettingList: SetupFC = () => {
 
   const slots = useSlots()
 
+  const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
+
   return () => (
     <PerfectScrollbar
       justify={props.justify}
-      bg="white/60"
-      w="100%" h="[calc(100%-95px)]" pt-10px
+      bg={isBlur ? 'white/50' : 'white/80'}
+      w="100%" h="[calc(100%-105px)]" pt-10px
       flex="~ col" items-center overflow-y-scroll
     >
       { renderSlot(slots, 'default') }
