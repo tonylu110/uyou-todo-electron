@@ -3,7 +3,6 @@ import { onMounted, ref } from 'vue'
 import CateMenu from '../CateMenu/CateMenu.vue'
 import getCateList from '../../util/getCateList'
 import emitter from '../../util/bus'
-import { isMac } from '../../util/os'
 import windowButtons from './windowButtons'
 
 withDefaults(defineProps<{
@@ -19,7 +18,7 @@ withDefaults(defineProps<{
   leftImgShow: true,
   rightImgShow: true,
   leftImg: 'i-fluent:chevron-left-16-filled',
-  bgColor: 'default',
+  bgColor: 'light',
   showMore: false,
   showWrap: false,
 })
@@ -86,59 +85,75 @@ ipcRenderer.on('useKeyAddItem', () => {
 
 <template>
   <div
-    :class="`title-bar ${simpleMode ? '' : 'drag'}`"
+    class="title-bar"
+    bg="white/60" drag
     :style="{
       borderTopLeftRadius: isRound ? '15px' : '',
-      backgroundColor: bgColor === 'light' ? 'white' : '',
-      boxShadow: bgColor === 'light' ? '0 1px 10px #00000020' : '',
     }"
   >
-    <div v-if="leftImgShow" class="box left-img" :style="{ border: bgColor === 'light' ? '1px solid #00000020' : '' }" @click="() => emits('leftClick')">
-      <div
-        :class="leftImg"
-        text-22px c-white
-        :c="bgColor === 'light' ? '#777' : ''"
-      />
-    </div>
-    <div
-      v-if="showWrap"
-      :left="leftImgShow ? '47px' : '10px'"
-      class="box"
-      @click="showWrapFn"
-    >
-      <div i-ph:caret-up-down-fill text-20px c-white />
-    </div>
-    <div relative>
-      <span :style="{ color: bgColor === 'light' ? '#555' : '', maxWidth: simpleMode ? 'calc(100vw - 140px)' : '' }">{{ title }}</span>
-      <div
-        v-if="showMore" absolute top-0 text-20px
-        font-bold flex w="[calc(100%+20px)]"
-        items-center c-transparent
-        cursor-pointer
-        @click="showListFn"
-      >
-        {{ title }}
-        <div v-if="showList && simpleMode" i-mdi:menu-up text-20px c-white vertical-baseline />
-        <div v-else i-mdi:menu-down text-20px c-white vertical-baseline />
+    <div :ml="leftImgShow || showWrap ? '12px' : '20px'" flex="~ col-reverse">
+      <div relative>
+        <span
+          :style="{ color: bgColor === 'light' ? '#555' : '', maxWidth: simpleMode ? 'calc(100vw - 140px)' : '' }"
+          :text="leftImgShow || showWrap ? '20px' : '30px'"
+        >{{ title }}</span>
+        <div
+          v-if="showMore" absolute top-0 text-20px
+          font-bold flex w="[calc(100%+20px)]"
+          items-center c-transparent
+          cursor-pointer
+          @click="showListFn"
+        >
+          {{ title }}
+          <div v-if="showList && simpleMode" i-mdi:menu-up text-20px c-white vertical-baseline />
+          <div v-else i-mdi:menu-down text-20px c-white vertical-baseline />
+        </div>
+      </div>
+      <div :h="leftImgShow || showWrap ? '' : '20px'" flex mb-5px>
+        <div
+          v-if="leftImgShow"
+          bg="black/10 hover:black/20" mr-10px
+          p-5px w-20px rounded-5px no-drag cursor-pointer
+          @click="() => emits('leftClick')"
+        >
+          <div
+            :class="leftImg"
+            text-20px c="#777" block
+          />
+        </div>
+        <div
+          v-if="showWrap"
+          bg="black/10 hover:black/20"
+          p-5px w-20px rounded-5px no-drag cursor-pointer
+          @click="showWrapFn"
+        >
+          <div i-ph:caret-up-down-fill text-20px c="#777" block />
+        </div>
       </div>
     </div>
-    <div
-      v-if="rightImgShow"
-      :right="simpleMode || systemTitleShow ? '' : isMac() ? '!50px' : '!80px'"
-      class="box right-img"
-      @click="() => emits('rightClick')"
-    >
-      <div i-mdi:pencil-plus text-20px c-white />
+    <div flex="~ col" items-end mr-12px>
+      <div :h="!systemTitleShow ? '' : '26px'">
+        <window-buttons v-if="!systemTitleShow" />
+      </div>
+      <div flex mt-7px :h="rightImgShow ? '' : '30px'">
+        <div
+          v-if="rightImgShow"
+          bg="black/10 hover:black/20"
+          p-5px w-20px rounded-5px no-drag cursor-pointer
+          @click="() => emits('rightClick')"
+        >
+          <div i-mdi:pencil-plus text-20px c="#777" block />
+        </div>
+        <div
+          v-if="syncImgShow && rightImgShow"
+          bg="black/10 hover:black/20" ml-10px
+          p-5px w-20px rounded-5px no-drag cursor-pointer
+          @click="sync"
+        >
+          <div i-fluent:cloud-sync-24-filled text-20px c="#777" block />
+        </div>
+      </div>
     </div>
-    <div
-      v-if="syncImgShow && rightImgShow"
-      :right="simpleMode || systemTitleShow ? '' : isMac() ? '!86px' : '!116px'"
-      class="box sync-img"
-      @click="sync"
-    >
-      <div i-fluent:cloud-sync-24-filled text-22px c-white />
-    </div>
-    <window-buttons v-if="!simpleMode && !systemTitleShow" />
   </div>
   <CateMenu v-if="showList && simpleMode" @click-menu="showListFn" />
 </template>
@@ -146,13 +161,11 @@ ipcRenderer.on('useKeyAddItem', () => {
 <style lang="scss" scoped>
 .title-bar {
   position: relative;
-  height: 55px;
-  background-color: #7a695c;
+  height: 85px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 3px 5px #594b4270;
+  justify-content: space-between;
   z-index: 10;
 
   span {
@@ -160,7 +173,6 @@ ipcRenderer.on('useKeyAddItem', () => {
     overflow: hidden;
     text-overflow: ellipsis;
     color: white;
-    font-size: 20px;
     font-weight: bold;
   }
 

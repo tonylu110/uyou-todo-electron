@@ -65,7 +65,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
 <style scoped lang="scss">
 .item-box {
   margin-bottom: 10px;
-  box-shadow: 0 2px 10px #00000030;
+  border: 1px solid #00000015;
   border-radius: 7px;
 
   .box-radius {

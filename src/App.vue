@@ -11,6 +11,7 @@ import RouterUrl from './components/RouterUrl'
 import emitter from './util/bus'
 import isDev from './util/mode'
 import getCateList from './util/getCateList'
+import { isLinux, isWindows10OrAfter } from './util/os'
 
 const { t } = useI18n()
 
@@ -128,8 +129,8 @@ watchEffect(() => {
   }
   else {
     floatWidth.value = 'auto'
-    floatHeight.value = '100vh'
-    floatY.value = 'translateY(0px)'
+    floatHeight.value = isRound.value ? 'calc(100vh - 10px)' : '100vh'
+    floatY.value = isRound.value ? 'translateY(9px)' : 'translateY(0px)'
     floatBorder.value = ''
   }
 })
@@ -144,12 +145,14 @@ if (isDev) {
     document.querySelector('.vue-devtools-button-panel')?.classList.add('no-drag')
   })
 }
+
+const isBlur = localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null
 </script>
 
 <template>
   <RouterUrl v-if="routerShow" />
   <router-view name="isWindow" />
-  <div v-if="!isWinDow" class="list-main">
+  <div v-if="!isWinDow" class="list-main" :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? '#eee' : ''">
     <div class="list-in">
       <div>
         <TitleBar v-if="!systemTitleShow" />
@@ -159,6 +162,7 @@ if (isDev) {
         class="todo-list"
         :rounded="isRound ? 'tl-15px' : newFloatUi ? '7px' : ''"
         :border-l="newFloatUi ? '' : '!1px !solid !black/10'"
+        :border-t="isRound ? '!1px !solid !black/10' : ''"
       >
         <router-view />
         <Alert

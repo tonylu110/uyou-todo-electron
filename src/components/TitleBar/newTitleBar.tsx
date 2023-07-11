@@ -34,7 +34,7 @@ const newTitleBar: SetupFC = () => {
     <div
       drag w={menuShort.value ? '58px' : '300px'} h-40px
       flex items-center z-200
-      bg="transparent"
+      bg="transparent" transition-width-200
     >
       {isMac()
         ? null

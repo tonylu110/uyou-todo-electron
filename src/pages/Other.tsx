@@ -36,7 +36,7 @@ const Other: SetupFC = () => {
     }
     else if (route.query.listName === 'star') {
       listData.value = list.value!.filter(listData => listData.star === true)
-      title.value = 'Star ToDos'
+      title.value = t('listMenu.star')
     }
     else {
       listData.value = list.value!.filter(listData => listData.cate === route.query.listName)
@@ -56,7 +56,7 @@ const Other: SetupFC = () => {
         rightImgShow={route.query.listName !== 'allNotDo' && route.query.listName !== 'allDo' && route.query.listName !== 'star'}
         onRightClick={() => showAddItem.value = !showAddItem.value}
         onLeftClick={() => router.push('/setting-sim')}
-        showMore={simpleMode}
+        showMore={true}
         showWrap={true}
       />
       <List

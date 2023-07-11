@@ -42,6 +42,9 @@ devDependencies:
   '@vitejs/plugin-vue-jsx':
     specifier: ^3.0.1
     version: 3.0.1(vite@4.3.9)(vue@3.3.4)
+  '@vueuse/core':
+    specifier: ^10.2.1
+    version: registry.npmmirror.com/@vueuse/core@10.2.1(vue@3.3.4)
   concurrently:
     specifier: ^7.2.2
     version: 7.3.0
@@ -74,7 +77,7 @@ devDependencies:
     version: registry.npmmirror.com/unocss@0.53.4(postcss@8.4.23)(vite@4.3.9)
   unplugin-vue-macros:
     specifier: ^2.3.5
-    version: registry.npmmirror.com/unplugin-vue-macros@2.3.5(vite@4.3.9)(vue@3.3.4)
+    version: registry.npmmirror.com/unplugin-vue-macros@2.3.5(@vueuse/core@10.2.1)(vite@4.3.9)(vue@3.3.4)
   vite:
     specifier: ^4.3.9
     version: registry.npmmirror.com/vite@4.3.9(@types/node@18.16.0)(sass@1.54.3)
@@ -3174,7 +3177,7 @@ packages:
       vue: registry.npmmirror.com/vue@3.3.4
     dev: true
 
-  registry.npmmirror.com/@vue-macros/define-models@1.0.9(vue@3.3.4):
+  registry.npmmirror.com/@vue-macros/define-models@1.0.9(@vueuse/core@10.2.1)(vue@3.3.4):
     resolution: {integrity: sha512-VAt13N/wuiluo4wWXhDjp6mgomXe632WpFuGLI8UqnKR+fRMWPlaHJEx6JMFCYw40qCkx2E1JnQ1H083aRP0mw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue-macros/define-models/-/define-models-1.0.9.tgz}
     id: registry.npmmirror.com/@vue-macros/define-models/1.0.9
     name: '@vue-macros/define-models'
@@ -3187,6 +3190,7 @@ packages:
         optional: true
     dependencies:
       '@vue-macros/common': registry.npmmirror.com/@vue-macros/common@1.5.0(rollup@3.26.2)(vue@3.3.4)
+      '@vueuse/core': registry.npmmirror.com/@vueuse/core@10.2.1(vue@3.3.4)
       ast-walker-scope: registry.npmmirror.com/ast-walker-scope@0.4.2
       unplugin: registry.npmmirror.com/unplugin@1.3.2
     transitivePeerDependencies:
@@ -9250,7 +9254,7 @@ packages:
       - vue
     dev: true
 
-  registry.npmmirror.com/unplugin-vue-macros@2.3.5(vite@4.3.9)(vue@3.3.4):
+  registry.npmmirror.com/unplugin-vue-macros@2.3.5(@vueuse/core@10.2.1)(vite@4.3.9)(vue@3.3.4):
     resolution: {integrity: sha512-Isv/+d83Vzv37CFSxGhlD40lF0eiPi3PnWa39BogVZBdTk3JyIXFMSKqd+3kVTv2ALkzNYhkOktcjM/6RjQX8A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/unplugin-vue-macros/-/unplugin-vue-macros-2.3.5.tgz}
     id: registry.npmmirror.com/unplugin-vue-macros/2.3.5
     name: unplugin-vue-macros
@@ -9263,7 +9267,7 @@ packages:
       '@vue-macros/chain-call': registry.npmmirror.com/@vue-macros/chain-call@0.0.4(vue@3.3.4)
       '@vue-macros/common': registry.npmmirror.com/@vue-macros/common@1.5.0(rollup@3.26.2)(vue@3.3.4)
       '@vue-macros/define-emit': registry.npmmirror.com/@vue-macros/define-emit@0.1.9(vue@3.3.4)
-      '@vue-macros/define-models': registry.npmmirror.com/@vue-macros/define-models@1.0.9(vue@3.3.4)
+      '@vue-macros/define-models': registry.npmmirror.com/@vue-macros/define-models@1.0.9(@vueuse/core@10.2.1)(vue@3.3.4)
       '@vue-macros/define-prop': registry.npmmirror.com/@vue-macros/define-prop@0.1.11(vue@3.3.4)
       '@vue-macros/define-props': registry.npmmirror.com/@vue-macros/define-props@1.0.12(@vue-macros/reactivity-transform@0.3.14)(vue@3.3.4)
       '@vue-macros/define-props-refs': registry.npmmirror.com/@vue-macros/define-props-refs@1.1.3(vue@3.3.4)

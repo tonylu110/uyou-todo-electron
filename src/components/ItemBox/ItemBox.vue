@@ -22,7 +22,7 @@ const itemWidth = computed(() => simpleMode ? 'calc(100% - 30px)' : (minWidth.va
 <style lang="scss" scoped>
 .item-box {
   margin-bottom: 10px;
-  box-shadow: 0 2px 10px #00000030;
+  border: 1px solid #00000015;
   border-radius: 7px;
 
   .box-radius {
@@ -34,6 +34,9 @@ const itemWidth = computed(() => simpleMode ? 'calc(100% - 30px)' : (minWidth.va
       margin-bottom: 0;
       border-radius: 0;
       border-bottom: 1px solid #00000015;
+      border-top: 0px;
+      border-left: 0px;
+      border-right: 0px;
       width: v-bind(itemWidth) !important;
 
       &:last-child {

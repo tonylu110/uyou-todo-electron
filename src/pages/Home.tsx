@@ -25,7 +25,7 @@ const Home: SetupFC = () => {
         leftImg="i-mdi:cog"
         title={t('listMenu.allTodo')}
         leftImgShow={simpleMode}
-        showMore={simpleMode}
+        showMore={true}
         showWrap={true}
       />
       <List

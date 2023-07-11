@@ -33,7 +33,7 @@ function createWindow() {
     width: simple ? 350 : 1000,
     height: simple ? 700 : 750,
     minHeight: 600,
-    minWidth: simple ? 350 : 467,
+    minWidth: simple ? 350 : 400,
     maxWidth: simple ? 400 : null,
     maximizable: !simple,
     x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000)) / 2,

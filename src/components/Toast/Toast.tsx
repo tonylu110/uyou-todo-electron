@@ -10,10 +10,8 @@ const Toast: SetupFC = () => {
 
   return () => (
       <div
-        p-7px
-        rounded-5px
-        font-bold
-        c="#996b3d" bg="#fff6dc" shadow="md black/20"
+        p="y-7px x-21px" rounded-full font-bold border="1px solid #00000015"
+        c="#777" bg="white/80" shadow="md black/10"
         animate-duration-300 animate-fill-mode-forwards animate-ease
         top={props.center ? '50%' : ''}
         left={props.center ? '50%' : (simpleMode ? '50%' : '[calc(50%+150px)]')}

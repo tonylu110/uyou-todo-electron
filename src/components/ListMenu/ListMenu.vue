@@ -133,6 +133,8 @@ watch(menuShort, () => {
 emitter.on('menuClose', (data) => {
   menuShort.value = data as boolean
 })
+
+const systemBarShow = localStorage.getItem('systemTitle') === 'true'
 </script>
 
 <template>
@@ -150,10 +152,10 @@ emitter.on('menuClose', (data) => {
       <div i-ph:list-bold text-20px block c="black/56" />
     </div>
     <div class="list">
-      <span v-if="!menuShort" class="title" :mt="isMac() ? '' : '!10px'">{{ t('accountPage.account') }}</span>
+      <span v-if="!menuShort" class="title" :mt="isMac() ? '' : (systemBarShow ? '!-30px' : '!10px')">{{ t('accountPage.account') }}</span>
       <div
         class="account-list group"
-        :mt="menuShort ? '!-70px' : ''"
+        :mt="menuShort ? (systemBarShow ? '!-110px' : '!-70px') : ''"
         :mb="menuShort ? '' : '!10px'"
         :bg="routeName === 'account' && form !== 'setting' ? 'primary-d hover:primary-a' : 'hover:primary-d'"
         @click="router.push('/account')"

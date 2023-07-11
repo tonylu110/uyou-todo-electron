@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import TitleBar from './components/TitleBar/TitleBar.vue'
 import RouterUrl from './components/RouterUrl'
 import emitter from './util/bus'
 import isDev from './util/mode'
 import getCateList from './util/getCateList'
-
-const titleBarShow = localStorage.getItem('systemTitle') === 'true'
+import { isLinux, isWindows10OrAfter } from './util/os'
 
 const route = useRoute()
 const router = useRouter()
@@ -32,17 +30,15 @@ onMounted(() => {
     getCateList()
   }, 0)
 })
+
+const isBlur = localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null
 </script>
 
 <template>
   <RouterUrl v-if="routerShow" />
   <router-view name="isWindow" />
-  <div v-if="!isWinDow">
-    <TitleBar />
-    <div
-      overflow-hidden w="[calc(100vw-20px)]" ml-10px rounded-7px mt-5px
-      :h="titleBarShow ? '[calc(100vh-15px)]' : '[calc(100vh-55px)]'" border="1px solid black/10"
-    >
+  <div v-if="!isWinDow" :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? '#eee' : ''">
+    <div overflow-hidden w-100vw h-100vh>
       <router-view />
     </div>
   </div>

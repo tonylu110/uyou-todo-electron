@@ -34,7 +34,7 @@ window.addEventListener('resize', () => {
   min-height: 30px;
   padding: 10px 15px;
   border-radius: 7px;
-  box-shadow: 0 2px 10px #00000030;
+  border: 1px solid #00000020;
   background-color: white;
   cursor: pointer;
   margin-bottom: 10px;
@@ -52,6 +52,7 @@ window.addEventListener('resize', () => {
   &.primary {
     background-color: #5985eb;
     color: white;
+    border: none;
 
     &:active {
       background-color: #4e6fbb;
@@ -61,6 +62,7 @@ window.addEventListener('resize', () => {
   &.error {
     background-color: #e5544b;
     color: white;
+    border: none;
 
     &:active {
       background-color: #c95047;

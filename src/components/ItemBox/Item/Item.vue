@@ -106,7 +106,7 @@ window.addEventListener('resize', () => {
   height: 30px;
   padding: 10px 15px;
   border-radius: 7px;
-  box-shadow: 0 2px 10px #00000030;
+  border: 1px solid #00000020;
   background-color: white;
   cursor: pointer;
   margin-bottom: 10px;

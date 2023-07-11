@@ -91,11 +91,8 @@ emitter.on('menuClose', (data) => {
       <div
         :w="simpleMode ? '[calc(100%-40px)]' : (menuShort ? '[calc(100vw-98px)]' : '[calc(100vw-400px)]')" max-w-560px h-auto
         flex="~ col" justify-center items-center
-        bg-white
-        rounded-7px
-        mb-10px
-        p="x-10px y-0"
-        shadow-item
+        bg-white border="1px solid #00000020"
+        rounded-7px mb-10px p="x-10px y-0"
       >
         <img
           h-100px
