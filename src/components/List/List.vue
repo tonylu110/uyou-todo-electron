@@ -6,6 +6,7 @@ import { useI18n } from 'vue-i18n'
 import LocalStorage from '../../util/localStorage'
 import type ITodoList from '../../interface/ITodoListArray'
 import setSwitchFn from '../../util/setSwitchFn'
+import { isLinux, isWindows10OrAfter } from '../../util/os'
 import Item from './Item/Item.vue'
 import saveItemSet from './saveItemSet'
 import AddItem from './AddItem/AddItem.vue'
@@ -139,6 +140,8 @@ function setStar(id: number, star: boolean) {
 
 const showNotDo = ref(localStorage.getItem('notDoShow') === 'true' || localStorage.getItem('notDoShow') === null)
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
+const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
+const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
 </script>
 
 <template>
@@ -226,7 +229,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
 <style scoped lang="scss">
 .list {
-  background-color: #edd9b7;
+  background-color: v-bind(bgColor);
   height: calc(100% - 105px);
   display: flex;
   flex-direction: column;

@@ -5,7 +5,6 @@
   height: auto;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 1px 5px #7a695c50;
   margin-bottom: 10px;
 
   .add-time-area {
@@ -54,7 +53,7 @@
   border-radius: 7px;
 
   button {
-    border: 3px solid white;
+    border: 3px solid #eee;
     color: white;
     border-radius: 7px;
     display: flex;
@@ -63,7 +62,6 @@
     padding: 5px 0;
     transition: width .3s, margin .4s;
     cursor: pointer;
-    box-shadow: inset 1px 1px 10px #00000030;
 
     &.ok-button {
       background-color: #00b600;

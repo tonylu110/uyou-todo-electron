@@ -76,7 +76,7 @@ function keyEnter() {
 </script>
 
 <template>
-  <div ref="addItemDom" class="add">
+  <div ref="addItemDom" class="add" shadow="sm black/20">
     <div class="add-time-area">
       <span>{{ moment(todoTime).format('hh:mm A') }}</span>
     </div>

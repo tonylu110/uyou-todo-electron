@@ -149,7 +149,7 @@ onBeforeUnmount(() => {
     <div class="delete" @click="deleteItem">
       <div i-mdi:close-thick text-24px c-white />
     </div>
-    <div class="list-item">
+    <div class="list-item" shadow="sm black/20">
       <div class="time-area">
         <div flex items-center>
           <span mr-7px>{{ getTime(time) }}</span>
