@@ -24,7 +24,7 @@ function createRepassWindow(uname) {
 
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
-      repassWindow.setLightTheme()
+      repassWindow.setAutoTheme()
       setMicaStyle(micaStyle || 'mica', repassWindow)
     }
     else {

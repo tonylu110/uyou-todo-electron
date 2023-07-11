@@ -56,7 +56,7 @@ const Laboratory: SetupFC = () => {
           switchState={keyToAdd.value}
           onSwitchFun={() => setSwitchFn('ketToAdd', !keyToAdd.value, () => keyToAdd.value = !keyToAdd.value, 'setAddItemCut')}
         />
-        <div text-gray-700 max-w-550px w={simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'} mb-10px select-text>
+        <div c="#333 dark:#bbb" max-w-550px w={simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'} mb-10px select-text>
           ⚠️ This page contains experimental features, may be unstable, and may be removed at any time, for experience only
         </div>
       </SettingList>

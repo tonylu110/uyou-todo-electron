@@ -11,6 +11,7 @@ import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
 import emitter from '../util/bus'
 import isDev from '../util/mode'
 import setSwitchFn from '../util/setSwitchFn'
+import ColorChange from '../components/SettingList/ColorChange'
 
 const { t } = useI18n()
 
@@ -79,6 +80,7 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
         @switch-fun="showRouterUrl"
       />
     </ItemBox>
+    <ColorChange />
     <Item
       :title="loginState ? t('myAccount') : t('loginText')"
       @item-fun="() => router.push('/account?from=setting')"

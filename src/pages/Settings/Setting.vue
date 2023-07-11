@@ -12,6 +12,7 @@ import firstLoad from '../../components/TitleBar/firstLoad'
 import emitter from '../../util/bus'
 import isDev from '../../util/mode'
 import setSwitchFn from '../../util/setSwitchFn'
+import ColorChange from '../../components/SettingList/ColorChange'
 
 const { t } = useI18n()
 
@@ -113,6 +114,7 @@ window.addEventListener('resize', () => {
         @switch-fun="showRouterUrl"
       />
     </ItemBox>
+    <ColorChange />
     <Item
       :title="loginState ? t('myAccount') : t('loginText')"
       @item-fun="() => router.push('/account?from=setting')"
@@ -185,14 +187,31 @@ window.addEventListener('resize', () => {
         :switch-state="menuBlurState"
         @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', t('restartApp'))"
       />
-      <div v-if="isWin11 && menuBlurState" class="item-blur item" :max-w="minWidth ? '' : '550px'">
-        <div @click="changeMica('mica')">
+      <div
+        v-if="isWin11 && menuBlurState"
+        class="item-blur item"
+        :max-w="minWidth ? '' : '550px'"
+        bg="white dark:#999/10"
+      >
+        <div
+          c="black dark:#bbb active:white"
+          bg="active:primary-d dark:active:primary-a"
+          @click="changeMica('mica')"
+        >
           Mica Effect
         </div>
-        <div @click="changeMica('tabbed')">
+        <div
+          c="black dark:#bbb active:white"
+          bg="active:primary-d dark:active:primary-a"
+          @click="changeMica('tabbed')"
+        >
           Mica Tabbed
         </div>
-        <div @click="changeMica('acrylic')">
+        <div
+          c="black dark:#bbb active:white"
+          bg="active:primary-d dark:active:primary-a"
+          @click="changeMica('acrylic')"
+        >
           Acrylic
         </div>
       </div>
@@ -244,11 +263,9 @@ window.addEventListener('resize', () => {
   min-height: 30px;
   height: 30px;
   padding: 10px 15px;
-  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #333;
 
   div {
     width: 130px;
@@ -260,11 +277,6 @@ window.addEventListener('resize', () => {
     border: 1px solid #00000015;
     cursor: pointer;
     font-size: 14px;
-
-    &:active {
-      background-color: #5985eb;
-      color: white;
-    }
   }
 }
 </style>

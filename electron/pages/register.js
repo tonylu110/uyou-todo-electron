@@ -25,7 +25,7 @@ function createRegisterWindow() {
 
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
-      registerWindow.setLightTheme()
+      registerWindow.setAutoTheme()
       setMicaStyle(micaStyle || 'mica', registerWindow)
     }
     else {

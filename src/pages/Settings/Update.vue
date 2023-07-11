@@ -91,7 +91,7 @@ emitter.on('menuClose', (data) => {
       <div
         :w="simpleMode ? '[calc(100%-40px)]' : (menuShort ? '[calc(100vw-98px)]' : '[calc(100vw-400px)]')" max-w-560px h-auto
         flex="~ col" justify-center items-center
-        bg-white border="1px solid #00000020"
+        bg="white dark:#999/10" border="1px solid #00000020"
         rounded-7px mb-10px p="x-10px y-0"
       >
         <img
@@ -103,14 +103,14 @@ emitter.on('menuClose', (data) => {
         >
         <span
           :mb="newVersion ? '' : '15px'"
-          c="#00000050"
+          c="#00000050 dark:#bbb"
           font-bold
         >
           uyou ToDo v{{ app.getVersion() }}
         </span>
         <span
           v-if="newVersion !== ''"
-          c="#00000050" mt-5px text-14px
+          c="#00000050 dark:#bbb" mt-5px text-14px
           mb-15px
           font-bold
         >
@@ -121,11 +121,11 @@ emitter.on('menuClose', (data) => {
           :w="simpleMode ? '[calc(100%-10px)]' : '[calc(100vw-470px)]'" h-auto
           max-w-530px flex="~ col"
           justify-center
-          border-t="1px solid #00000020"
+          border-t="1px solid #00000020 dark:#999/20"
           p="y-5px x-15px"
         >
           <span
-            c-black text-16px font-bold
+            c="black dark:#bbb" text-16px font-bold
             mt-10px
           >
             {{ t('update.updateLog') }}
@@ -133,7 +133,7 @@ emitter.on('menuClose', (data) => {
           <ul w="100%" pl-20px>
             <li
               v-for="(item, index) in updateMsg" :key="index" text-15px
-              c="#00000090"
+              c="#00000090 dark:#bbb"
               font-bold
               mb="10px"
             >

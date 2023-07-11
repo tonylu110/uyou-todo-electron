@@ -25,7 +25,7 @@ function createLogoffWindow(uname) {
 
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
-      logoffWindow.setLightTheme()
+      logoffWindow.setAutoTheme()
       setMicaStyle(micaStyle || 'mica', logoffWindow)
     }
     else {

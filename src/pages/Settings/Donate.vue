@@ -26,7 +26,7 @@ emitter.on('menuClose', (data) => {
     <div
       :w="menuShort ? '[calc(100vw-118px)]' : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px h-auto
       flex="~ wrap" justify-center items-center
-      bg-white rounded-7px border="1px solid #00000020"
+      bg="white dark:#999/10" rounded-7px border="1px solid #00000020"
     >
       <img
         w-250px p-10px

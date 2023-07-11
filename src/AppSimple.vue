@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { usePreferredDark } from '@vueuse/core'
 import RouterUrl from './components/RouterUrl'
 import emitter from './util/bus'
 import isDev from './util/mode'
@@ -31,13 +32,19 @@ onMounted(() => {
   }, 0)
 })
 
+const isDark = usePreferredDark()
+
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
 </script>
 
 <template>
   <RouterUrl v-if="routerShow" />
   <router-view name="isWindow" />
-  <div v-if="!isWinDow" :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? '#e5e5e5' : ''">
+  <div
+    v-if="!isWinDow"
+    :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? (isDark ? 'black' : '#e5e5e5') : ''"
+    :class="isDark ? 'dark' : ''"
+  >
     <div overflow-hidden w-100vw h-100vh>
       <router-view />
     </div>

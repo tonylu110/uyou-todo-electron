@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { onMounted, ref, watchEffect } from 'vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { usePreferredDark } from '@vueuse/core'
 import ContextMenu from '../ContextMenu/ContextMenu.vue'
 
 const props = withDefaults(defineProps<{
@@ -63,18 +64,39 @@ onMounted(() => {
     showContextMenu.value = false
   })
 })
+
+const isDark = usePreferredDark()
+
+const primaryColor = computed(() => isDark.value ? '#4e6fbb' : '#5985eb')
 </script>
 
 <template>
-  <dialog ref="dialog" :class="`alert ${dialogShow ? '' : 'hide'}`">
-    <div class="title">
+  <dialog
+    ref="dialog"
+    :class="`alert ${dialogShow ? '' : 'hide'}`"
+    bg="white dark:#333"
+    border="1px solid #999 dark:black/10"
+  >
+    <div
+      class="title"
+      c="#333 dark:#bbb"
+    >
       {{ title }}
     </div>
-    <div class="body" :style="{ alignItems: title === t('accountPage.alertTitle') ? 'center' : '' }">
+    <div
+      class="body"
+      :style="{ alignItems: title === t('accountPage.alertTitle') ? 'center' : '' }"
+      c="#333 dark:#bbb"
+    >
       <slot />
     </div>
     <div class="buttons" no-drag>
-      <div v-if="cancelButtonShow" class="cancel" @click="emits('cancel')">
+      <div
+        v-if="cancelButtonShow"
+        class="cancel"
+        c="#333 dark:#bbb"
+        @click="emits('cancel')"
+      >
         {{ t('alertText.cancelText') }}
       </div>
       <div class="return" :style="{ width: cancelButtonShow ? '' : '100%' }" @click="emits('return')">
@@ -91,15 +113,12 @@ onMounted(() => {
 .alert {
   padding: 0;
   z-index: 10;
-  background-color: white;
   width: 300px;
   border-radius: 9px;
   box-shadow: 0 5px 20px #00000050;
-  border: 1px solid #999;
   overflow: hidden;
   transition: dialog;
   user-select: none;
-  color: #00000090;
   outline: none;
 
   .title {
@@ -169,10 +188,10 @@ onMounted(() => {
       }
 
       &.return {
-        color: #5985eb;
+        color: v-bind(primaryColor);
 
         &:active {
-          background-color: #5985eb !important;
+          background-color: v-bind(primaryColor) !important;
           color: white;
         }
 

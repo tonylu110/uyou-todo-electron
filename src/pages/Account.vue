@@ -227,25 +227,25 @@ function openLogoff() {
   <SettingList>
     <Item :title="loginText" :show-arrow="false" />
     <div
-      v-if="!loginState" mb-10px rounded-7px shadow-item
-      p="x-15px y-10px"
+      v-if="!loginState" mb-10px rounded-7px
+      p="x-15px y-10px" border="1px solid #00000020"
       :w="simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'"
-      bg-white flex="~ col"
+      bg="white dark:#999/10" flex="~ col"
       max-w-550px
     >
       <input
         v-model="uname" p-15px
-        m="x-0 y-5px"
+        m="x-0 y-5px" c="black dark:#bbb"
         border="1.5px solid #00000020" bg="#00000010" rounded-5px
-        outline-primary-d
+        outline="primary-d dark:primary-a"
         type="text"
         :placeholder="t('accountPage.account')"
       >
       <input
         v-model="passwd" p-15px
-        m="x-0 y-5px"
+        m="x-0 y-5px" c="black dark:#bbb"
         border="1.5px solid #00000020" bg="#00000010" rounded-5px
-        outline-primary-d
+        outline="primary-d dark:primary-a"
         type="password"
         :placeholder="t('accountPage.passwd')"
         @keydown.enter="login"

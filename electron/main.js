@@ -1,8 +1,8 @@
 const path = require('node:path')
-const { app, BrowserWindow, ipcMain, screen, Menu, shell, globalShortcut } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Menu, shell, globalShortcut, nativeTheme } = require('electron')
 const Store = require('electron-store')
 const remoteMain = require('@electron/remote/main')
-const { VALUE, MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
+const { MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
 const menuTemplate = require('./menu.js')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
@@ -59,15 +59,14 @@ function createWindow() {
 
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
-      mainWindow.setLightTheme()
+      mainWindow.setAutoTheme()
       setMicaStyle(micaStyle || 'mica', mainWindow)
     }
     else {
-      mainWindow.setCustomEffect(4, VALUE.COLOR.WHITE, 0.4)
+      mainWindow.setAcrylic()
     }
   }
   else {
-    mainWindow.setLightTheme()
     mainWindow.setBackgroundColor('#fff')
   }
 
@@ -170,6 +169,10 @@ function createWindow() {
     app.setLoginItemSettings({
       openAtLogin: isAutoStart,
     })
+  })
+
+  ipcMain.on('colorMode', (ev, color) => {
+    nativeTheme.themeSource = color
   })
 
   mainWindow.on('move', () => {

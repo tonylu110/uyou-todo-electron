@@ -25,7 +25,7 @@ function createAboutWindow() {
 
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
-      aboutWindow.setLightTheme()
+      aboutWindow.setAutoTheme()
       setMicaStyle(micaStyle || 'mica', aboutWindow)
     }
     else {

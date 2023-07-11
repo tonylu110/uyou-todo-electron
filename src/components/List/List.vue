@@ -145,7 +145,7 @@ const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
 </script>
 
 <template>
-  <perfect-scrollbar class="list">
+  <perfect-scrollbar class="list" :bg="isBlur ? 'dark:!#333/50' : 'dark:!#333/80'">
     <transition name="add">
       <div v-if="showAddItem" ref="add" class="add-list">
         <AddItem

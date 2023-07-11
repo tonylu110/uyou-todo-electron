@@ -43,7 +43,10 @@ const WindowButtons: SetupFC = () => {
                 ? <div
                     cursor-pointer p-6px mr-7px
                     w-13px h-13px rounded-full
-                    bg={topState.value ? 'error-d hover:error-h active:error-a' : 'black/10 hover:black/20 active:black/30'}
+                    bg={topState.value
+                      ? 'error-d hover:error-h active:error-a dark:error-h dark:hover:error-a dark:active:error-d'
+                      : 'black/10 hover:black/20 active:black/30 dark:#999/10 dark:hover:#999/20 dark:active:#999/30'
+                    }
                     flex justify-center items-center
                     class="group"
                     onClick={onTopWindow}
@@ -58,13 +61,13 @@ const WindowButtons: SetupFC = () => {
               <div
                 cursor-pointer p-6px mr-7px
                 w-13px h-13px rounded-full
-                bg="black/10 hover:black/20 active:black/30"
+                bg="black/10 hover:black/20 active:black/30 dark:#999/10 dark:hover:#999/20 dark:active:#999/30"
                 class="group"
                 onClick={() => minWindow()}
               >
                 <div
                   i-mdi:minus-thick block
-                  c="#555"
+                  c="#555 dark:#bbb"
                   text-13px text-center
                 />
               </div>
@@ -74,13 +77,13 @@ const WindowButtons: SetupFC = () => {
                   : <div
                       cursor-pointer p-6px mr-7px
                       w-13px h-13px rounded-full
-                      bg="black/10 hover:black/20 active:black/30"
+                      bg="black/10 hover:black/20 active:black/30 dark:#999/10 dark:hover:#999/20 dark:active:#999/30"
                       class="group"
                       onClick={() => maxWindow()}
                     >
                       <div
                         i-fluent:checkbox-unchecked-12-filled block
-                        c="#555"
+                        c="#555 dark:#bbb"
                         text-13px text-center
                       />
                     </div>
@@ -88,13 +91,13 @@ const WindowButtons: SetupFC = () => {
               <div
                 cursor-pointer p-6px
                 w-13px h-13px rounded-full
-                bg="black/10 hover:error-d active:error-a"
+                bg="black/10 hover:error-d active:error-a dark:#999/10 dark:active:error-d dark:hover:error-h"
                 class="group"
                 onClick={() => dialogShow.value = true}
               >
                 <div
                   i-mdi:close-thick block
-                  c="#555 group-hover:white group-active:white"
+                  c="#555 group-hover:white group-active:white dark:#bbb"
                   text-13px text-center
                 />
               </div>

@@ -3,6 +3,7 @@ import type { Ref } from 'vue'
 import { onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { usePreferredDark } from '@vueuse/core'
 import TitleBar from './components/TitleBar/newTitleBar'
 import Alert from './components/Alert/Alert.vue'
 import ListMenu from './components/ListMenu/ListMenu.vue'
@@ -139,6 +140,8 @@ window.addEventListener('resize', () => {
   emitter.emit('menuClose', window.innerWidth < 750)
 })
 
+const isDark = usePreferredDark()
+
 if (isDev) {
   onMounted(() => {
     document.querySelector('.vue-devtools-frame')?.classList.add('no-drag')
@@ -152,7 +155,11 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
 <template>
   <RouterUrl v-if="routerShow" />
   <router-view name="isWindow" />
-  <div v-if="!isWinDow" class="list-main" :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? '#e5e5e5' : ''">
+  <div
+    v-if="!isWinDow" class="list-main"
+    :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? (isDark ? 'black' : '#e5e5e5') : (isDark ? '#111/50' : '')"
+    :class="isDark ? 'dark list-main' : 'list-main'"
+  >
     <div class="list-in">
       <div>
         <TitleBar v-if="!systemTitleShow" />

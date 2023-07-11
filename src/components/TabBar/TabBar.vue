@@ -89,7 +89,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
 <template>
   <div
     class="title-bar"
-    :bg="isBlur ? 'white/50' : 'white/80'" drag
+    :bg="isBlur ? 'white/50 dark:#333/50' : 'white/80 dark:#333/80'" drag
     :style="{
       borderTopLeftRadius: isRound ? '15px' : '',
     }"
@@ -97,11 +97,12 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
     <div :ml="leftImgShow || showWrap ? '15px' : '20px'" flex="~ col-reverse">
       <div relative :mb="leftImgShow || showWrap ? '' : '20px'">
         <span
-          :style="{ color: bgColor === 'light' ? '#555' : '', maxWidth: simpleMode ? 'calc(100vw - 140px)' : '' }"
+          :style="{ maxWidth: simpleMode ? 'calc(100vw - 140px)' : '' }"
           :text="leftImgShow || showWrap ? '20px' : '40px'"
+          c="#555 dark:#bbb"
         >{{ title }}</span>
         <div
-          v-if="showMore" absolute top-0 text-20px
+          v-if="false" absolute top-0 text-20px
           font-bold flex w="[calc(100%+20px)]"
           items-center c-transparent
           cursor-pointer
@@ -115,22 +116,22 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
       <div :h="leftImgShow || showWrap ? '' : '30px'" flex mb-10px>
         <div
           v-if="leftImgShow"
-          bg="black/10 hover:black/20" mr-10px
+          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20" mr-10px
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="() => emits('leftClick')"
         >
           <div
             :class="leftImg"
-            text-20px c="#777" block
+            text-20px c="#777 dark:#bbb" block
           />
         </div>
         <div
           v-if="showWrap"
-          bg="black/10 hover:black/20"
+          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="showWrapFn"
         >
-          <div i-ph:caret-up-down-fill text-20px c="#777" block />
+          <div i-ph:caret-up-down-fill text-20px c="#777 dark:#bbb" block />
         </div>
       </div>
     </div>
@@ -141,19 +142,19 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
       <div flex mt-12px :h="rightImgShow ? '' : '30px'">
         <div
           v-if="rightImgShow"
-          bg="black/10 hover:black/20"
+          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="() => emits('rightClick')"
         >
-          <div i-mdi:pencil-plus text-20px c="#777" block />
+          <div i-mdi:pencil-plus text-20px c="#777 dark:#bbb" block />
         </div>
         <div
           v-if="syncImgShow && rightImgShow"
-          bg="black/10 hover:black/20" ml-10px
+          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20" ml-10px
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="sync"
         >
-          <div i-fluent:cloud-sync-24-filled text-20px c="#777" block />
+          <div i-fluent:cloud-sync-24-filled text-20px c="#777 dark:#bbb" block />
         </div>
       </div>
     </div>
@@ -175,7 +176,6 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: white;
     font-weight: bold;
   }
 

@@ -15,6 +15,9 @@ const simpleMode = localStorage.getItem('simpleMode')
 
 let app
 
+const colorMode = localStorage.getItem('colorMode') ? localStorage.getItem('colorMode') : 'system'
+ipcRenderer.send('colorMode', colorMode)
+
 if (simpleMode === 'false' || simpleMode === null)
   app = createApp(App)
 else

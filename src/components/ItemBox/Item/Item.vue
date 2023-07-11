@@ -41,20 +41,23 @@ window.addEventListener('resize', () => {
 
 <template>
   <div
-    class="item"
+    class="item group"
     :style="{
-      backgroundColor: showSwitch || showListBox ? 'white' : '',
-      color: showSwitch || showListBox ? 'black' : '',
       cursor: showSwitch || showListBox ? 'auto' : '',
       width: simpleMode ? 'calc(100% - 50px)' : (minWidth ? 'calc(100vw - 108px)' : ''),
     }"
     :max-w="!simpleMode && minWidth ? '' : '550px'"
+    :bg="showSwitch || showListBox ? 'white dark:#999/10' : 'white dark:#999/10 active:primary-d dark:active:primary-a'"
+    :c="showSwitch || showListBox ? 'black dark:#bbb' : 'black dark:#bbb'"
     @click="emits('itemFun')"
   >
     <div>
       <div v-if="itemImg" class="img-back" />
       <img v-if="itemImg" :src="itemImg" alt="">
-      <span :style="{ width: simpleMode ? 'calc(100vw - 115px)' : (minWidth ? 'calc(100vw - 165px)' : '') }">{{ title }}</span>
+      <span
+        :style="{ width: simpleMode ? 'calc(100vw - 115px)' : (minWidth ? 'calc(100vw - 165px)' : '') }"
+        :c="showSwitch || showListBox ? '' : 'group-active:white'"
+      >{{ title }}</span>
     </div>
     <Switch
       v-if="showSwitch"
@@ -77,7 +80,7 @@ window.addEventListener('resize', () => {
       </div>
       <div
         v-if="showList"
-        absolute right-0 bg-white
+        absolute right-0 bg="white dark:#333"
         top-35px flex="~ !col" justify-center
         items-center shadow="md black/20" z-10
         p-10px border="1px solid black/5"
@@ -86,7 +89,7 @@ window.addEventListener('resize', () => {
         <div
           v-for="(item, index) in list" :key="index"
           p="x-20px y-10px" w="[calc(100%-40px)]"
-          bg="active:primary-a hover:primary-d"
+          bg="active:primary-a hover:primary-d dark:hover:primary-a"
           rounded-5px c="hover:white active:white"
           @click="emits(item.fn)"
         >
@@ -94,7 +97,7 @@ window.addEventListener('resize', () => {
         </div>
       </div>
     </div>
-    <div v-if="showArrow && !showSwitch && !showListBox" i-mdi:chevron-right text-24px absolute right-15px />
+    <div v-if="showArrow && !showSwitch && !showListBox" i-mdi:chevron-right text-24px absolute right-15px group-active:c-white />
   </div>
 </template>
 
@@ -107,18 +110,11 @@ window.addEventListener('resize', () => {
   padding: 10px 15px;
   border-radius: 7px;
   border: 1px solid #00000020;
-  background-color: white;
   cursor: pointer;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #333;
-
-  &:active {
-    background-color: #5985eb;
-    color: white;
-  }
 
   div {
     display: flex;
