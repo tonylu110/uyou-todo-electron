@@ -114,7 +114,7 @@ window.addEventListener('resize', () => {
         @switch-fun="showRouterUrl"
       />
     </ItemBox>
-    <ColorChange />
+    <ColorChange v-if="(isLinux && isWindows10OrAfter) || !isMac" />
     <Item
       :title="loginState ? t('myAccount') : t('loginText')"
       @item-fun="() => router.push('/account?from=setting')"

@@ -12,7 +12,7 @@ import RouterUrl from './components/RouterUrl'
 import emitter from './util/bus'
 import isDev from './util/mode'
 import getCateList from './util/getCateList'
-import { isLinux, isWindows10OrAfter } from './util/os'
+import { isLinux, isMac, isWindows10OrAfter } from './util/os'
 
 const { t } = useI18n()
 
@@ -150,6 +150,11 @@ if (isDev) {
 }
 
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+const Store = require('electron-store')
+
+const store = new Store()
 </script>
 
 <template>
@@ -157,7 +162,13 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
   <router-view name="isWindow" />
   <div
     v-if="!isWinDow" class="list-main"
-    :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? (isDark ? 'black' : '#e5e5e5') : (isDark ? '#111/50' : '')"
+    :bg="(isLinux() || !isWindows10OrAfter() || !isBlur)
+      ? (isDark
+        ? 'black'
+        : '#e5e5e5')
+      : ((isDark && store.get('micaStyle') === 'acrylic') || isMac()
+        ? '#111/50'
+        : '')"
     :class="isDark ? 'dark list-main' : 'list-main'"
   >
     <div class="list-in">

@@ -20,6 +20,7 @@ const store = new Store()
 const NODE_ENV = process.env.NODE_ENV
 
 remoteMain.initialize()
+Store.initRenderer()
 
 let mainWindow
 
@@ -58,13 +59,10 @@ function createWindow() {
   remoteMain.enable(mainWindow.webContents)
 
   if (menuBlur || menuBlur === undefined) {
-    if (IS_WINDOWS_11) {
-      mainWindow.setAutoTheme()
+    if (IS_WINDOWS_11)
       setMicaStyle(micaStyle || 'mica', mainWindow)
-    }
-    else {
+    else
       mainWindow.setAcrylic()
-    }
   }
   else {
     mainWindow.setBackgroundColor('#fff')
@@ -173,6 +171,12 @@ function createWindow() {
 
   ipcMain.on('colorMode', (ev, color) => {
     nativeTheme.themeSource = color
+    if (color === 'system')
+      mainWindow.setAutoTheme()
+    else if (color === 'light')
+      mainWindow.setLightTheme()
+    else
+      mainWindow.setDarkTheme()
   })
 
   mainWindow.on('move', () => {
