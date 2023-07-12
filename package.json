@@ -20,7 +20,7 @@
   "dependencies": {
     "@electron/remote": "^2.0.10",
     "electron-store": "^8.1.0",
-    "mica-electron": "^1.4.7"
+    "mica-electron": "^1.4.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.5",

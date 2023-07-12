@@ -28,6 +28,7 @@ function openUrlInBrowser(url: string) {
     <ItemBox>
       <Item title="electron" @item-fun="openUrlInBrowser('https://github.com/electron')" />
       <Item title="vue" @item-fun="openUrlInBrowser('https://github.com/vuejs')" />
+      <Item title="vueuse" @item-fun="openUrlInBrowser('https://github.com/vueuse')" />
       <Item title="vite" @item-fun="openUrlInBrowser('https://github.com/vitejs')" />
       <Item title="TypeScript" @item-fun="openUrlInBrowser('https://github.com/microsoft/TypeScript')" />
       <Item title="sass" @item-fun="openUrlInBrowser('https://github.com/sass')" />

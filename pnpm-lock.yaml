@@ -8,8 +8,8 @@ dependencies:
     specifier: ^8.1.0
     version: 8.1.0
   mica-electron:
-    specifier: ^1.4.7
-    version: registry.npmmirror.com/mica-electron@1.4.7
+    specifier: ^1.4.8
+    version: registry.npmmirror.com/mica-electron@1.4.8
 
 devDependencies:
   '@antfu/eslint-config':
@@ -7289,10 +7289,10 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  registry.npmmirror.com/mica-electron@1.4.7:
-    resolution: {integrity: sha512-sI3nJLfdWD/7u2TYIL/d5rj/lKMZt1aVtrTRM7SoMQTKRKf5K1RHM7mPDmDT5c+dVZRKWisS6NE9jVt1cVlM5g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/mica-electron/-/mica-electron-1.4.7.tgz}
+  registry.npmmirror.com/mica-electron@1.4.8:
+    resolution: {integrity: sha512-82mcUfx4Jy8oC1niYcR2uuaTaKYoI32y2UwlHX1+nH1nQGFsG83ZoHqfLfgWUi4S52pwegSNs01CA78EVKkzKg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/mica-electron/-/mica-electron-1.4.8.tgz}
     name: mica-electron
-    version: 1.4.7
+    version: 1.4.8
     dev: false
 
   registry.npmmirror.com/micromark@2.11.4:
