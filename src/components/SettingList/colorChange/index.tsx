@@ -27,14 +27,14 @@ const ColorChange: SetupFC = () => {
     >
       <div
         bg={colorMode.value === 'system' ? 'primary-d dark:primary-a' : ''}
-        w-87px h-59px border="1px solid #00000020"
-        rounded-5px
-        flex justify-center items-center
+        w={simpleMode ? '98px' : '87px'} h={simpleMode ? '69px' : '59px'}
+        border="1px solid #00000020" rounded-5px
+        flex justify-center items-center cursor-pointer
         onClick={() => setColor('system')}
       >
         <div
-          w="72px" bg-white h="44px"
-          rounded-3px overflow-hidden
+          w={simpleMode ? '82px' : '72px'} h={simpleMode ? '54px' : '44px'}
+          rounded-3px overflow-hidden bg-white
           border="1px solid #666"
         >
           <div w="50%" h="100%" bg="#333"/>
@@ -42,27 +42,27 @@ const ColorChange: SetupFC = () => {
       </div>
       <div
         bg={colorMode.value === 'light' ? 'primary-d dark:primary-a' : ''}
-        w-87px h-59px border="1px solid #00000020"
-        ml-10px rounded-5px
-        flex justify-center items-center
+        w={simpleMode ? '98px' : '87px'} h={simpleMode ? '69px' : '59px'}
+        border="1px solid #00000020" ml-10px rounded-5px
+        flex justify-center items-center cursor-pointer
         onClick={() => setColor('light')}
       >
         <div
-          w="72px" bg-white h="44px"
-          rounded-3px overflow-hidden
+          w={simpleMode ? '82px' : '72px'} h={simpleMode ? '54px' : '44px'}
+          rounded-3px overflow-hidden bg-white
           border="1px solid black/10"
         />
       </div>
       <div
         bg={colorMode.value === 'dark' ? 'primary-d dark:primary-a' : ''}
-        w-87px h-59px border="1px solid #00000020"
-        ml-10px rounded-5px
-        flex justify-center items-center
+        w={simpleMode ? '98px' : '87px'} h={simpleMode ? '69px' : '59px'}
+        border="1px solid #00000020" ml-10px rounded-5px
+        flex justify-center items-center cursor-pointer
         onClick={() => setColor('dark')}
       >
         <div
-          w="72px" bg="#333" h="44px"
-          rounded-3px overflow-hidden
+          w={simpleMode ? '82px' : '72px'} h={simpleMode ? '54px' : '44px'}
+          rounded-3px overflow-hidden bg="#333"
           border="1px solid black/10"
         />
       </div>

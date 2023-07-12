@@ -171,12 +171,14 @@ function createWindow() {
 
   ipcMain.on('colorMode', (ev, color) => {
     nativeTheme.themeSource = color
-    if (color === 'system')
-      mainWindow.setAutoTheme()
-    else if (color === 'light')
-      mainWindow.setLightTheme()
-    else
-      mainWindow.setDarkTheme()
+    if (IS_WINDOWS_11) {
+      if (color === 'system')
+        mainWindow.setAutoTheme()
+      else if (color === 'light')
+        mainWindow.setLightTheme()
+      else
+        mainWindow.setDarkTheme()
+    }
   })
 
   mainWindow.on('move', () => {

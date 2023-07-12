@@ -53,7 +53,7 @@ const WindowButtons: SetupFC = () => {
                   >
                     <div
                       i-fluent:pin-48-filled
-                      c={topState.value ? 'group-hover:white group-active:white white' : '#555'}
+                      c={topState.value ? 'group-hover:white group-active:white white' : '#555 dark:#bbb'}
                       text-13px text-center
                     ></div>
                   </div>
