@@ -20,7 +20,7 @@ const ColorChange: SetupFC = () => {
 
   return () => (
     <div
-      bg="white dark:#999/10" flex
+      bg="white dark:#999/10" flex="~ wrap gap-10px"
       rounded-7px mb-10px p-15px max-w-550px
       w={simpleMode ? '[calc(100%-50px)]' : (minWidth.value ? '[calc(100vw-108px)]' : '[calc(100vw-450px)]')}
       border="1px solid #00000020"
@@ -43,7 +43,7 @@ const ColorChange: SetupFC = () => {
       <div
         bg={colorMode.value === 'light' ? 'primary-d dark:primary-a' : ''}
         w={simpleMode ? '98px' : '87px'} h={simpleMode ? '69px' : '59px'}
-        border="1px solid #00000020" ml-10px rounded-5px
+        border="1px solid #00000020" rounded-5px
         flex justify-center items-center cursor-pointer
         onClick={() => setColor('light')}
       >
@@ -56,7 +56,7 @@ const ColorChange: SetupFC = () => {
       <div
         bg={colorMode.value === 'dark' ? 'primary-d dark:primary-a' : ''}
         w={simpleMode ? '98px' : '87px'} h={simpleMode ? '69px' : '59px'}
-        border="1px solid #00000020" ml-10px rounded-5px
+        border="1px solid #00000020" rounded-5px
         flex justify-center items-center cursor-pointer
         onClick={() => setColor('dark')}
       >

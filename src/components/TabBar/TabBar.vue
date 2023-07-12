@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import CateMenu from '../CateMenu/CateMenu.vue'
 import getCateList from '../../util/getCateList'
 import emitter from '../../util/bus'
@@ -18,7 +19,7 @@ withDefaults(defineProps<{
   title: 'uyou ToDo',
   leftImgShow: true,
   rightImgShow: true,
-  leftImg: 'i-fluent:chevron-left-16-filled',
+  leftImg: 'i-ph:caret-left-fill',
   bgColor: 'light',
   showMore: false,
   showWrap: false,
@@ -28,6 +29,9 @@ const emits = defineEmits<{
   (e: 'rightClick'): void
   (e: 'leftClick'): void
 }>()
+
+const router = useRouter()
+const route = useRoute()
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
@@ -122,8 +126,16 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
         >
           <div
             :class="leftImg"
-            text-20px c="#777 dark:#bbb" block
+            text-20px c="#555 dark:#bbb" block
           />
+        </div>
+        <div
+          v-if="route.name !== 'Home' && simpleMode"
+          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
+          p-5px w-20px rounded-5px no-drag cursor-pointer
+          @click="router.push('/')"
+        >
+          <div i-mdi:home text-20px c="#555 dark:#bbb" block />
         </div>
         <div
           v-if="showWrap"
@@ -131,7 +143,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="showWrapFn"
         >
-          <div i-ph:caret-up-down-fill text-20px c="#777 dark:#bbb" block />
+          <div i-ph:caret-up-down-fill text-20px c="#555 dark:#bbb" block />
         </div>
       </div>
     </div>
@@ -146,7 +158,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="() => emits('rightClick')"
         >
-          <div i-mdi:pencil-plus text-20px c="#777 dark:#bbb" block />
+          <div i-mdi:pencil-plus text-20px c="#555 dark:#bbb" block />
         </div>
         <div
           v-if="syncImgShow && rightImgShow"
@@ -154,7 +166,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="sync"
         >
-          <div i-fluent:cloud-sync-24-filled text-20px c="#777 dark:#bbb" block />
+          <div i-fluent:cloud-sync-24-filled text-20px c="#555 dark:#bbb" block />
         </div>
       </div>
     </div>

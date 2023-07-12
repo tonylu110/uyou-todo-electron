@@ -36,8 +36,8 @@ function createWindow() {
   mainWindow = new MicaBrowserWindow({
     width: simple ? 370 : 1000,
     height: 750,
-    minHeight: 600,
-    minWidth: simple ? 370 : 400,
+    minHeight: simple ? 500 : 600,
+    minWidth: simple ? 290 : 400,
     maxWidth: simple ? 400 : null,
     x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000)) / 2,
     y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750)) / 2,
