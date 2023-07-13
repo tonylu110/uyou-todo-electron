@@ -106,7 +106,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
           c="#555 dark:#bbb"
         >{{ title }}</span>
         <div
-          v-if="simpleMode" absolute top-0 text-20px
+          v-if="simpleMode && (route.name === 'Home' || route.name === 'other')" absolute top-0 text-20px
           font-bold flex w="[calc(100%+20px)]"
           items-center c-transparent
           cursor-pointer no-drag
@@ -193,46 +193,6 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: bold;
-  }
-
-  .box {
-    position: absolute;
-    border-radius: 5px;
-    width: 22px;
-    height: 22px;
-    padding: 4px;
-    cursor: pointer;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #594b4270;
-    -webkit-app-region: no-drag;
-
-    & span {
-      display: block;
-      font-size: 22px;
-    }
-
-    &:hover {
-      background-color: #00000010;
-    }
-
-    &:active {
-      background-color: #00000020;
-    }
-
-    &.left-img {
-      left: 10px;
-    }
-
-    &.right-img {
-      right: 10px;
-    }
-
-    &.sync-img {
-      right: 47px;
-    }
   }
 }
 </style>

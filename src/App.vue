@@ -12,7 +12,7 @@ import RouterUrl from './components/RouterUrl'
 import emitter from './util/bus'
 import isDev from './util/mode'
 import getCateList from './util/getCateList'
-import { isLinux, isMac, isWindows10OrAfter } from './util/os'
+import { isLinux, isWindows10OrAfter } from './util/os'
 
 const { t } = useI18n()
 

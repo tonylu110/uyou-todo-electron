@@ -84,6 +84,11 @@ const routes = [
     name: 'setListItem',
     component: () => import('./pages/Laboratory/showListItem'),
   },
+  {
+    path: '/fontSet',
+    name: 'fontSet',
+    component: () => import('./pages/Laboratory/FontSet'),
+  },
 ]
 
 const router = createRouter({

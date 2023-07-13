@@ -51,6 +51,10 @@ const Laboratory: SetupFC = () => {
           <Item title='⚠️ set whitch item in siderbar' onItemFun={() => router.push('/setListItem?from=setting')}/>
         </ItemBox>
         <Item
+          title='⚠️ set font'
+          onItemFun={() => router.push('/fontSet?from=setting')}
+        />
+        <Item
           title="⚠️ add ToDo item use shortcut"
           showSwitch={true}
           switchState={keyToAdd.value}

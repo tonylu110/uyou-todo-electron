@@ -12,7 +12,7 @@ import firstLoad from '../../components/TitleBar/firstLoad'
 import emitter from '../../util/bus'
 import isDev from '../../util/mode'
 import setSwitchFn from '../../util/setSwitchFn'
-import ColorChange from '../../components/SettingList/ColorChange'
+import ColorChange from '../../components/SettingList/colorChange'
 
 const { t } = useI18n()
 
