@@ -222,7 +222,7 @@ const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
       v-if="list.length === 0"
       i-mdi:list-box-outline top="50%" translate="y-[calc(-50%-20px)]"
       absolute text-150px
-      c="#7a695c50"
+      c="black/10"
     />
   </perfect-scrollbar>
 </template>

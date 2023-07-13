@@ -106,15 +106,15 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
           c="#555 dark:#bbb"
         >{{ title }}</span>
         <div
-          v-if="false" absolute top-0 text-20px
+          v-if="simpleMode" absolute top-0 text-20px
           font-bold flex w="[calc(100%+20px)]"
           items-center c-transparent
-          cursor-pointer
+          cursor-pointer no-drag
           @click="showListFn"
         >
           {{ title }}
-          <div v-if="showList && simpleMode" i-mdi:menu-up text-20px c-white vertical-baseline />
-          <div v-else i-mdi:menu-down text-20px c-white vertical-baseline />
+          <div v-if="showList && simpleMode" i-mdi:menu-up text-20px c="#555 dark:#bbb" vertical-baseline />
+          <div v-else i-mdi:menu-down text-20px c="#555 dark:#bbb" vertical-baseline />
         </div>
       </div>
       <div
@@ -136,7 +136,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
         <div
           v-if="route.name !== 'Home' && simpleMode"
           bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
-          p-5px w-20px rounded-5px no-drag cursor-pointer
+          p-5px w-20px rounded-5px no-drag cursor-pointer mr-10px
           @click="router.push('/')"
         >
           <div i-mdi:home text-20px c="#555 dark:#bbb" block />
