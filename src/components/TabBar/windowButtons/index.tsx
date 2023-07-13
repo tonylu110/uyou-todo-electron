@@ -27,14 +27,20 @@ const WindowButtons: SetupFC = () => {
           ? <div
               cursor-pointer p-6px
               w-13px h-13px rounded-full
-              bg={topState.value ? 'error-d hover:error-h active:error-a' : 'black/10 hover:black/20 active:black/30'}
+              bg={topState.value
+                ? 'error-d hover:error-h active:error-a dark:error-h dark:hover:error-a dark:active:error-d'
+                : 'black/10 hover:black/20 active:black/30 dark:#999/10 dark:hover:#999/20 dark:active:#999/30'
+              }
               flex justify-center items-center
               class="group"
               onClick={onTopWindow}
             >
               <div
                 i-fluent:pin-48-filled
-                c={topState.value ? 'group-hover:white group-active:white white' : '#555'}
+                c={topState.value
+                  ? 'group-hover:white group-active:white white'
+                  : '#555 dark:#bbb'
+                }
                 text-13px text-center
               ></div>
             </div>

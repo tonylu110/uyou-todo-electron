@@ -80,7 +80,7 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
         @switch-fun="showRouterUrl"
       />
     </ItemBox>
-    <ColorChange v-if="(isLinux && isWindows10OrAfter) || !isMac" />
+    <ColorChange v-if="(isLinux && isWindows10OrAfter) || isMac" />
     <Item
       :title="loginState ? t('myAccount') : t('loginText')"
       @item-fun="() => router.push('/account?from=setting')"

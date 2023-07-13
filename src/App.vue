@@ -162,11 +162,11 @@ const store = new Store()
   <router-view name="isWindow" />
   <div
     v-if="!isWinDow" class="list-main"
-    :bg="(isLinux() || !isWindows10OrAfter() || !isBlur)
+    :bg="!isBlur
       ? (isDark
         ? 'black'
         : '#e5e5e5')
-      : ((isDark && store.get('micaStyle') === 'acrylic') || isMac()
+      : ((isDark && store.get('micaStyle') === 'acrylic')
         ? '#111/50'
         : '')"
     :class="isDark ? 'dark list-main' : 'list-main'"

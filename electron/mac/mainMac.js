@@ -43,7 +43,7 @@ function createWindow() {
     icon: path.join(__dirname, '../../dist/logo.png'),
     frame: systemBar,
     titleBarStyle: systemBar ? 'default' : 'hiddenInset',
-    trafficLightPosition: { x: 10, y: simple ? 13 : 10 },
+    trafficLightPosition: { x: 15, y: simple ? 20 : 15 },
     show: false,
     webPreferences: {
       preload: path.join(__dirname, '../preload.js'),
@@ -68,8 +68,6 @@ function createWindow() {
 
   if (NODE_ENV === 'development')
     mainWindow.webContents.openDevTools({ mode: 'detach' })
-
-  nativeTheme.themeSource = 'light'
 
   ipcMain.on('window-min', () => {
     mainWindow.minimize()
@@ -147,6 +145,10 @@ function createWindow() {
     app.setLoginItemSettings({
       openAtLogin: isAutoStart,
     })
+  })
+
+  ipcMain.on('colorMode', (ev, color) => {
+    nativeTheme.themeSource = color
   })
 
   mainWindow.on('move', () => {

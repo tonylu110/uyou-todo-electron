@@ -42,7 +42,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
   <router-view name="isWindow" />
   <div
     v-if="!isWinDow"
-    :bg="isLinux() || !isWindows10OrAfter() || !isBlur ? (isDark ? 'black' : '#e5e5e5') : ''"
+    :bg="!isBlur ? (isDark ? 'black' : '#e5e5e5') : ''"
     :class="isDark ? 'dark' : ''"
   >
     <div overflow-hidden w-100vw h-100vh>

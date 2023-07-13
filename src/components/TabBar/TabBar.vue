@@ -4,7 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import CateMenu from '../CateMenu/CateMenu.vue'
 import getCateList from '../../util/getCateList'
 import emitter from '../../util/bus'
-import { isLinux, isWindows10OrAfter } from '../../util/os'
+import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'
 import windowButtons from './windowButtons'
 
 withDefaults(defineProps<{
@@ -117,7 +117,11 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
           <div v-else i-mdi:menu-down text-20px c-white vertical-baseline />
         </div>
       </div>
-      <div :h="leftImgShow || showWrap ? '' : '30px'" flex mb-10px>
+      <div
+        :h="leftImgShow || showWrap ? '' : '30px'" flex
+        :mb="isMac() && simpleMode ? '15px' : '10px'"
+        :ml="isMac() && simpleMode ? '65px' : ''"
+      >
         <div
           v-if="leftImgShow"
           bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20" mr-10px
