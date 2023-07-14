@@ -24,17 +24,10 @@ function createAboutWindow() {
   })
 
   if (menuBlur || menuBlur === undefined) {
-    if (IS_WINDOWS_11) {
-      aboutWindow.setAutoTheme()
+    if (IS_WINDOWS_11)
       setMicaStyle(micaStyle || 'mica', aboutWindow)
-    }
-    else {
-      aboutWindow.setCustomEffect(4, '#fff6dc', 0.7)
-    }
-  }
-  else {
-    aboutWindow.setCaptionColor('#fff6dc')
-    aboutWindow.setCustomEffect(1, '#fff6dc', 1)
+    else
+      aboutWindow.setAcrylic()
   }
   aboutWindow.setAlwaysOnTop(true)
 

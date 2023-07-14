@@ -24,17 +24,10 @@ function createLogoffWindow(uname) {
   })
 
   if (menuBlur || menuBlur === undefined) {
-    if (IS_WINDOWS_11) {
-      logoffWindow.setAutoTheme()
+    if (IS_WINDOWS_11)
       setMicaStyle(micaStyle || 'mica', logoffWindow)
-    }
-    else {
-      logoffWindow.setCustomEffect(4, '#fff6dc', 0.7)
-    }
-  }
-  else {
-    logoffWindow.setCaptionColor('#fff6dc')
-    logoffWindow.setCustomEffect(1, '#fff6dc', 1)
+    else
+      logoffWindow.setAcrylic()
   }
   logoffWindow.setAlwaysOnTop(true)
 
