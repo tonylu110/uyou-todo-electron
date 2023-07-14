@@ -103,6 +103,8 @@ function login() {
                 createToast({ msg: t('accountPage.syncSuccess') })
               else
                 createToast({ msg: t('accountPage.syncFail') })
+
+              emitter.emit('setLoginText', uname.value)
             })
           }
           else {
@@ -121,6 +123,7 @@ function login() {
               if (res._id) {
                 createToast({ msg: t('accountPage.syncSuccess') })
                 localStorage.setItem('ToDo', res.data)
+                emitter.emit('setLoginText', uname.value)
               }
               else {
                 createToast({ msg: t('accountPage.syncFail') })
@@ -150,6 +153,8 @@ function login() {
                 createToast({ msg: t('accountPage.syncSuccess') })
               else
                 createToast({ msg: t('accountPage.syncFail') })
+
+              emitter.emit('setLoginText', uname.value)
             })
           }
           else {
@@ -168,6 +173,7 @@ function login() {
                 createToast({ msg: t('accountPage.syncSuccess') })
                 localStorage.setItem('cate', res.data)
                 emitter.emit('setCate', res.data)
+                emitter.emit('setLoginText', uname.value)
               }
               else {
                 createToast({ msg: t('accountPage.syncFail') })
@@ -200,6 +206,7 @@ function returnAlert() {
     loginState.value = false
     alertShow.value = false
     isLogoutClick.value = false
+    emitter.emit('setLoginText', t('loginText'))
     return
   }
   alertShow.value = false

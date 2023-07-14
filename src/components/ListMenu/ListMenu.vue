@@ -135,6 +135,12 @@ emitter.on('menuClose', (data) => {
 })
 
 const systemBarShow = localStorage.getItem('systemTitle') === 'true'
+
+const loginText = ref(localStorage.getItem('uid') ? localStorage.getItem('uname') : t('loginText'))
+
+emitter.on('setLoginText', (uname) => {
+  loginText.value = uname as string
+})
 </script>
 
 <template>
@@ -168,7 +174,7 @@ const systemBarShow = localStorage.getItem('systemTitle') === 'true'
           <span
             style="font-size: 14px; margin-left: 10px;"
             :c="routeName === 'account' && form !== 'setting' ? '!white group-hover:!white' : 'group-hover:!white dark:!#bbb'"
-          >{{ t('myAccount') }}</span>
+          >{{ loginText }}</span>
         </div>
       </div>
       <span v-if="!menuShort" class="title" c="dark:!#bbb" mb="!10px">{{ t('listMenu.cate') }}</span>
