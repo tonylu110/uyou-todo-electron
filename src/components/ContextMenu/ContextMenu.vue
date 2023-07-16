@@ -109,11 +109,11 @@ function itemFn(isChild?: boolean, event?: string) {
     }"
     bg="white/80 dark:#333/80"
   >
-    <div v-if="showCopy" class="img" @click="copy">
+    <div v-if="showCopy" class="img" flex items-center @click="copy">
       <div i-ph:copy-bold text-14px mr-5px c="#555 dark:#bbb" />
       <span c="#555 dark:#bbb">{{ t('contextMenu.copy') }}</span>
     </div>
-    <div v-if="showPaste" class="img" @click="paste">
+    <div v-if="showPaste" class="img" flex items-center @click="paste">
       <div i-mdi:content-paste text-14px mr-5px c="#555 dark:#bbb" />
       <span c="#555 dark:#bbb">{{ t('contextMenu.paste') }}</span>
     </div>
@@ -141,7 +141,7 @@ function itemFn(isChild?: boolean, event?: string) {
           <div
             v-for="(child, childI) in item.children"
             :key="childI"
-            p="y-7px r-7px l-35px" c="#555 dark:#bbb"
+            p="y-7px r-7px l-32px" c="#555 dark:#bbb"
             m="l--12px r--12px" overflow-hidden
             bg="hover:black/10" rounded-5px
             @click.stop="child.event"

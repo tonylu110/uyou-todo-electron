@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { onBeforeUnmount, reactive, ref, watchEffect } from 'vue'
+import { computed, onBeforeUnmount, reactive, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import getTime from '../../../util/getTime'
@@ -51,10 +51,8 @@ function copyText() {
     createToast({ msg: t('copyToast'), center: true }, itemDom.value)
   })
 }
-const moreShow = ref(false)
 
 const itemDom = ref(null) as unknown as Ref<HTMLElement>
-const moreDom = ref(null) as unknown as Ref<HTMLElement>
 
 const showContextMenu = ref(false)
 const contextMenu = ref({
@@ -75,16 +73,18 @@ const customContextMenu = reactive([{
   icon: 'i-mdi:close-circle-outline',
   color: '#d6010f',
 }, {
-  label: t('listMenu.cate'),
-  icon: 'i-ph:list-bold',
-  children: cateList.map((item) => {
-    return {
-      label: item.title,
-      event: () => {
-        moveCate(props.time, item.id)
-        showContextMenu.value = false
-      },
-    }
+  label: t('listMenu.to'),
+  icon: 'i-ph:caret-circle-right-bold',
+  children: computed(() => {
+    return cateList.map((item) => {
+      return {
+        label: item.title,
+        event: () => {
+          moveCate(props.time, item.id)
+          showContextMenu.value = false
+        },
+      }
+    })
   }),
 }])
 
