@@ -48,18 +48,18 @@ const contextMenu = ref({
   left: 0,
 })
 
+function contextmenuClick(e: MouseEvent) {
+  e.preventDefault()
+
+  showContextMenu.value = true
+
+  contextMenu.value = {
+    top: e.pageY,
+    left: e.pageX,
+  }
+}
+
 onMounted(() => {
-  dialog.value.addEventListener('contextmenu', (e) => {
-    e.preventDefault()
-
-    showContextMenu.value = true
-
-    contextMenu.value = {
-      top: e.pageY,
-      left: e.pageX,
-    }
-  })
-
   document.addEventListener('click', () => {
     showContextMenu.value = false
   })
@@ -76,6 +76,7 @@ const primaryColor = computed(() => isDark.value ? '#4e6fbb' : '#5985eb')
     :class="`alert ${dialogShow ? '' : 'hide'}`"
     bg="white dark:#333"
     border="1px solid #999 dark:black/10"
+    @contextmenu="contextmenuClick"
   >
     <div
       class="title"

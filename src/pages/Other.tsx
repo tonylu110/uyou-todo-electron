@@ -50,7 +50,7 @@ const Other: SetupFC = () => {
   return () => (
     <>
       <TabBar
-        leftImg="i-mdi:cog"
+        leftImg="i-ph:gear-fine-bold"
         title={title.value}
         leftImgShow={simpleMode}
         rightImgShow={route.query.listName !== 'allNotDo' && route.query.listName !== 'allDo' && route.query.listName !== 'star'}

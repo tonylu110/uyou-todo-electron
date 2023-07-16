@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
 import { onMounted, ref, watchEffect } from 'vue'
 import moment from 'moment'
 import { useI18n } from 'vue-i18n'
@@ -28,26 +27,24 @@ function showAddItem() {
   emits('setAddItem')
 }
 
-const addItemDom = ref(null) as unknown as Ref<HTMLElement>
-
 const showContextMenu = ref(false)
 const contextMenu = ref({
   top: 0,
   left: 0,
 })
 
+function contextmenuClick(e: MouseEvent) {
+  e.preventDefault()
+
+  showContextMenu.value = true
+
+  contextMenu.value = {
+    top: e.clientY,
+    left: e.clientX,
+  }
+}
+
 onMounted(() => {
-  addItemDom.value.addEventListener('contextmenu', (e) => {
-    e.preventDefault()
-
-    showContextMenu.value = true
-
-    contextMenu.value = {
-      top: e.pageY,
-      left: e.pageX,
-    }
-  })
-
   document.addEventListener('click', () => {
     showContextMenu.value = false
   })
@@ -56,7 +53,7 @@ onMounted(() => {
 const customContextMenu = [{
   label: t('contextMenu.clearTxt'),
   event: 'clear',
-  icon: 'i-mdi:backspace',
+  icon: 'i-ph:trash-bold',
   color: '#d6010f',
 }, {
   label: t('contextMenu.closeItem'),
@@ -76,7 +73,7 @@ function keyEnter() {
 </script>
 
 <template>
-  <div ref="addItemDom" class="add" shadow="sm black/20">
+  <div class="add" shadow="sm black/20" @contextmenu="contextmenuClick">
     <div class="add-time-area">
       <span>{{ moment(todoTime).format('hh:mm A') }}</span>
     </div>

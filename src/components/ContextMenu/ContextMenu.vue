@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
   showPaste?: boolean
   custom?: Array<{
     label?: string
-    event?: string
+    event: string
     icon?: string
     color?: string
   }>
@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<{
 
 const emits = defineEmits<{
   (e: 'pasteText', text: string): void
-  (e: string | undefined): void
+  (e: string): void
 }>()
 
 const { t } = useI18n()
@@ -61,36 +61,40 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="menu" :style="{ top: `${position.top}px`, left: `${position.left}px` }">
+  <div
+    class="menu"
+    :style="{
+      top: `${pos.top}px`,
+      left: `${pos.left}px`,
+    }"
+    bg="white/80 dark:#333/80"
+    c=""
+  >
     <div v-if="showCopy" class="img" @click="copy">
-      <div i-mdi:content-copy text-14px mr-5px />
-      <span>{{ t('contextMenu.copy') }}</span>
+      <div i-ph:copy-bold text-14px mr-5px c="#555 dark:#bbb" />
+      <span c="#555 dark:#bbb">{{ t('contextMenu.copy') }}</span>
     </div>
     <div v-if="showPaste" class="img" @click="paste">
-      <div i-mdi:content-paste text-14px mr-5px />
-      <span>{{ t('contextMenu.paste') }}</span>
+      <div i-mdi:content-paste text-14px mr-5px c="#555 dark:#bbb" />
+      <span c="#555 dark:#bbb">{{ t('contextMenu.paste') }}</span>
     </div>
     <span v-if="custom" class="menu-line" />
-    <div v-for="(item, index) in customMenu" v-show="custom" :key="index" class="img" :style="{ color: item.color }" @click="emits(item.event)">
-      <div v-if="item.icon" :class="item.icon" text-14px mr-5px />
-      <span>{{ item.label }}</span>
+    <div v-for="(item, index) in customMenu" v-show="custom" :key="index" class="img" @click="emits(item.event)">
+      <div v-if="item.icon" :class="item.icon" text-14px mr-5px c="#555 dark:#bbb" :style="{ color: item.color }" />
+      <span c="#555 dark:#bbb" :style="{ color: item.color }">{{ item.label }}</span>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .menu {
-  background-color: #ffffff90;
   position: fixed;
   z-index: 500;
-  top: 0;
-  left: 0;
   backdrop-filter: blur(5px);
   border-radius: 8px;
   box-shadow: 0 0 20px #00000040;
   overflow: hidden;
   padding: 5px;
-  border: 1px solid #ccc;
 
   .menu-line {
     height: 1px;

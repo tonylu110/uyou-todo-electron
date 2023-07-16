@@ -81,18 +81,18 @@ watchEffect(() => {
   }
 })
 
+function contextmenuClick(e: MouseEvent) {
+  e.preventDefault()
+
+  showContextMenu.value = true
+
+  contextMenu.value = {
+    top: e.pageY,
+    left: e.pageX,
+  }
+}
+
 onMounted(() => {
-  itemDom.value.addEventListener('contextmenu', (e) => {
-    e.preventDefault()
-
-    showContextMenu.value = true
-
-    contextMenu.value = {
-      top: e.pageY,
-      left: e.pageX,
-    }
-  })
-
   document.addEventListener('click', () => {
     showContextMenu.value = false
   })
@@ -142,7 +142,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="itemDom" class="item">
+  <div ref="itemDom" class="item" @contextmenu="contextmenuClick">
     <div v-if="listName !== 'allDo'" class="button" @click="setOk">
       <div i-mdi:check-bold text-24px c-white />
     </div>

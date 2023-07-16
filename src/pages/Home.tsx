@@ -22,7 +22,7 @@ const Home: SetupFC = () => {
       <TabBar
         onRightClick={() => showAddItem.value = !showAddItem.value}
         onLeftClick={() => router.push('/setting-sim')}
-        leftImg="i-mdi:cog"
+        leftImg="i-ph:gear-fine-bold"
         title={t('listMenu.allTodo')}
         leftImgShow={simpleMode}
         showMore={true}

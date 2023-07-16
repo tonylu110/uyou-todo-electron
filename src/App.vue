@@ -125,13 +125,13 @@ watchEffect(() => {
   if (newFloatUi.value) {
     floatWidth.value = '10px'
     floatHeight.value = 'calc(100vh - 20px)'
-    floatY.value = 'translateY(10px)'
+    floatY.value = '10px'
     floatBorder.value = '1px solid rgba(0, 0, 0, 0.1)'
   }
   else {
     floatWidth.value = 'auto'
     floatHeight.value = isRound.value ? 'calc(100vh - 10px)' : '100vh'
-    floatY.value = isRound.value ? 'translateY(9px)' : 'translateY(0px)'
+    floatY.value = isRound.value ? '9px' : '0'
     floatBorder.value = ''
   }
 })
@@ -212,7 +212,7 @@ const store = new Store()
 
     .todo-list {
       flex: 1;
-      transform: v-bind(floatY);
+      margin-top: v-bind(floatY);
       margin-right: v-bind(floatWidth);
       height: v-bind(floatHeight);
       overflow: hidden;

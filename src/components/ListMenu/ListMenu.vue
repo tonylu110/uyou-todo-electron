@@ -168,7 +168,7 @@ emitter.on('setLoginText', (uname) => {
       >
         <div>
           <div
-            i-mdi:account-circle text-18px
+            i-ph:user-circle-bold text-18px
             :c="routeName === 'account' && form !== 'setting' ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
           />
           <span
@@ -187,7 +187,7 @@ emitter.on('setLoginText', (uname) => {
         >
           <div>
             <div
-              i-mdi:weather-sunny text-18px
+              i-ph:sun-dim-bold text-18px
               :c="routeQueryName === 'today' ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
             />
             <span
@@ -204,7 +204,7 @@ emitter.on('setLoginText', (uname) => {
         >
           <div>
             <div
-              i-fluent:star-12-regular text-18px
+              i-ph:star-bold text-18px
               :c="routeQueryName === 'star' ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
             />
             <span
@@ -220,7 +220,7 @@ emitter.on('setLoginText', (uname) => {
         >
           <div>
             <div
-              i-mdi:list-box-outline text-18px
+              i-ph:list-dashes-bold text-18px
               :c="routeName === 'Home' ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
             />
             <span
@@ -237,7 +237,7 @@ emitter.on('setLoginText', (uname) => {
         >
           <div>
             <div
-              i-mdi:circle-outline text-18px
+              i-ph:circle-bold text-18px
               :c="routeQueryName === 'allNotDo' ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
             />
             <span
@@ -254,7 +254,7 @@ emitter.on('setLoginText', (uname) => {
         >
           <div>
             <div
-              i-mdi:checkbox-marked-circle text-18px
+              i-ph:check-circle-bold text-18px
               :c="routeQueryName === 'allDo' ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
             />
             <span
@@ -272,7 +272,7 @@ emitter.on('setLoginText', (uname) => {
         >
           <div>
             <div
-              i-mdi:star-circle-outline text-18px
+              i-ph:radio-button-bold text-18px
               :c="routeQueryName === `${item.id}` ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
             />
             <span
@@ -350,7 +350,7 @@ emitter.on('setLoginText', (uname) => {
       >
         <div>
           <div
-            i-mdi:cog text-18px
+            i-ph:gear-fine-bold text-18px
             :c="routeName === 'setting' || form === 'setting' ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
           />
           <span

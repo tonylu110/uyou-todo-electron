@@ -147,7 +147,7 @@ const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
 <template>
   <perfect-scrollbar class="list" :bg="isBlur ? 'dark:!#333/50' : 'dark:!#333/80'">
     <transition name="add">
-      <div v-if="showAddItem" ref="add" class="add-list">
+      <div v-if="showAddItem" class="add-list">
         <AddItem
           @set-add-item="setAddItem"
           @add-item="addItem"
@@ -158,7 +158,6 @@ const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
       <Item
         v-for="item in list"
         :key="item.id"
-        ref="item"
         :text="item.text"
         :time="item.id"
         :is-ok="item.ok"
@@ -173,7 +172,6 @@ const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
       <Item
         v-for="item in list.filter(listData => listData.ok === false)"
         :key="item.id"
-        ref="item"
         :text="item.text"
         :time="item.id"
         :is-ok="item.ok"
@@ -206,7 +204,6 @@ const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
         <Item
           v-for="item in list.filter(listData => listData.ok === true)"
           :key="item.id"
-          ref="item"
           :text="item.text"
           :time="item.id"
           :is-ok="item.ok"

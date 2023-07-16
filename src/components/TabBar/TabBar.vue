@@ -19,7 +19,7 @@ withDefaults(defineProps<{
   title: 'uyou ToDo',
   leftImgShow: true,
   rightImgShow: true,
-  leftImg: 'i-ph:caret-left-fill',
+  leftImg: 'i-ph:caret-left-bold',
   bgColor: 'light',
   showMore: false,
   showWrap: false,
@@ -139,7 +139,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
           p-5px w-20px rounded-5px no-drag cursor-pointer mr-10px
           @click="router.push('/')"
         >
-          <div i-mdi:home text-20px c="#555 dark:#bbb" block />
+          <div i-ph:house-bold text-20px c="#555 dark:#bbb" block />
         </div>
         <div
           v-if="showWrap"
@@ -147,7 +147,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="showWrapFn"
         >
-          <div i-ph:caret-up-down-fill text-20px c="#555 dark:#bbb" block />
+          <div i-ph:caret-up-down-bold text-20px c="#555 dark:#bbb" block />
         </div>
       </div>
     </div>
@@ -162,7 +162,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="() => emits('rightClick')"
         >
-          <div i-mdi:pencil-plus text-20px c="#555 dark:#bbb" block />
+          <div i-ph:plus-circle-bold text-20px c="#555 dark:#bbb" block />
         </div>
         <div
           v-if="syncImgShow && rightImgShow"
@@ -170,7 +170,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="sync"
         >
-          <div i-fluent:cloud-sync-24-filled text-20px c="#555 dark:#bbb" block />
+          <div i-ph:file-cloud-bold text-20px c="#555 dark:#bbb" block />
         </div>
       </div>
     </div>
