@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue'
+import { onMounted, reactive, ref, watchEffect } from 'vue'
+import type { Ref } from 'vue'
+
 import { useI18n } from 'vue-i18n'
 
 const props = withDefaults(defineProps<{
@@ -31,10 +33,11 @@ const { t } = useI18n()
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const { clipboard } = require('electron')
 
-const position = ref()
-
-watchEffect(() => {
-  position.value = props.pos
+const position = reactive({
+  top: `${props.pos.top}px`,
+  left: `${props.pos.left}px`,
+  bottom: 'auto',
+  right: 'auto',
 })
 
 const textProp = ref(props.text)
@@ -58,17 +61,35 @@ const customMenu = ref(props.custom)
 watchEffect(() => {
   customMenu.value = props.custom
 })
+
+const cateDom = ref(null) as unknown as Ref<HTMLDivElement>
+
+onMounted(() => {
+  const maxHeight = window.innerHeight - cateDom.value!.clientHeight
+  const maxWidth = window.innerWidth - cateDom.value!.clientWidth
+
+  if (props.pos.top > maxHeight) {
+    position.top = 'auto'
+    position.bottom = '10px'
+  }
+  if (props.pos.left > maxWidth) {
+    position.left = 'auto'
+    position.right = '10px'
+  }
+})
 </script>
 
 <template>
   <div
+    ref="cateDom"
     class="menu"
     :style="{
-      top: `${pos.top}px`,
-      left: `${pos.left}px`,
+      top: position.top,
+      left: position.left,
+      bottom: position.bottom,
+      right: position.right,
     }"
     bg="white/80 dark:#333/80"
-    c=""
   >
     <div v-if="showCopy" class="img" @click="copy">
       <div i-ph:copy-bold text-14px mr-5px c="#555 dark:#bbb" />
