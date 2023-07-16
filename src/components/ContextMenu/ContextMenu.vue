@@ -87,6 +87,15 @@ watchEffect(() => {
 </template>
 
 <style scoped lang="scss">
+@keyframes openMenu {
+  from {
+    transform: scale(0, 0);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+
 .menu {
   position: fixed;
   z-index: 500;
@@ -95,6 +104,8 @@ watchEffect(() => {
   box-shadow: 0 0 20px #00000040;
   overflow: hidden;
   padding: 5px;
+  transform-origin: left top;
+  animation: openMenu 250ms ease;
 
   .menu-line {
     height: 1px;
