@@ -36,7 +36,8 @@
     "allTodo": "All ToDos",
     "completed": "Completed",
     "incompleted": "Incompleted",
-    "star": "Starred ToDos"
+    "star": "Starred ToDos",
+    "to": "Move to "
   },
   "alertText": {
     "cancelText": "Cancel",

@@ -36,7 +36,8 @@
     "allTodo": "所有 ToDo",
     "completed": "已完成",
     "incompleted": "未完成",
-    "star": "加星 ToDo"
+    "star": "加星 ToDo",
+    "to": "移至 "
   },
   "alertText": {
     "cancelText": "取消",

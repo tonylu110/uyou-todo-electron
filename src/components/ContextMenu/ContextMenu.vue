@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, reactive, ref, watchEffect } from 'vue'
+import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 
 import { useI18n } from 'vue-i18n'
@@ -14,9 +14,15 @@ const props = withDefaults(defineProps<{
   showPaste?: boolean
   custom?: Array<{
     label?: string
-    event: string
+    event?: string
     icon?: string
     color?: string
+    children?: Array<{
+      label?: string
+      event?: () => void
+      icon?: string
+      color?: string
+    }>
   }>
 }>(), {
   showCopy: true,
@@ -25,7 +31,8 @@ const props = withDefaults(defineProps<{
 
 const emits = defineEmits<{
   (e: 'pasteText', text: string): void
-  (e: string): void
+  (e: string | undefined): void
+  (e: 'closeContext'): void
 }>()
 
 const { t } = useI18n()
@@ -34,8 +41,8 @@ const { t } = useI18n()
 const { clipboard } = require('electron')
 
 const position = reactive({
-  top: `${props.pos.top}px`,
-  left: `${props.pos.left}px`,
+  top: computed(() => `${props.pos.top}px`),
+  left: computed(() => `${props.pos.left}px`),
   bottom: 'auto',
   right: 'auto',
 })
@@ -77,6 +84,17 @@ onMounted(() => {
     position.right = '10px'
   }
 })
+
+const showItemChild = ref(false)
+function itemFn(isChild?: boolean, event?: string) {
+  if (isChild) {
+    showItemChild.value = !showItemChild.value
+  }
+  else {
+    emits(event)
+    emits('closeContext')
+  }
+}
 </script>
 
 <template>
@@ -100,10 +118,39 @@ onMounted(() => {
       <span c="#555 dark:#bbb">{{ t('contextMenu.paste') }}</span>
     </div>
     <span v-if="custom" class="menu-line" />
-    <div v-for="(item, index) in customMenu" v-show="custom" :key="index" class="img" @click="emits(item.event)">
-      <div v-if="item.icon" :class="item.icon" text-14px mr-5px c="#555 dark:#bbb" :style="{ color: item.color }" />
-      <span c="#555 dark:#bbb" :style="{ color: item.color }">{{ item.label }}</span>
-    </div>
+    <template v-if="custom">
+      <div
+        v-for="(item, index) in customMenu"
+        :key="index"
+        class="img"
+        :bg="showItemChild && Array.isArray(item.children) ? '!hover:transparent' : ''"
+        @click.stop="itemFn(Array.isArray(item.children), item.event)"
+      >
+        <div flex items-center justify-between>
+          <div flex items-center>
+            <div v-if="item.icon" :class="item.icon" text-14px mr-5px c="#555 dark:#bbb" :style="{ color: item.color }" />
+            <span c="#555 dark:#bbb" :style="{ color: item.color }">{{ item.label }}</span>
+          </div>
+          <div
+            v-if="Array.isArray(item.children)" i-fluent:chevron-right-12-filled
+            c="#555 dark:#bbb" transition="300 transform"
+            :rotate="showItemChild ? '90' : '0'"
+          />
+        </div>
+        <div v-if="showItemChild && Array.isArray(item.children)" mt-10px grid class="child">
+          <div
+            v-for="(child, childI) in item.children"
+            :key="childI"
+            p="y-7px r-7px l-35px" c="#555 dark:#bbb"
+            m="l--12px r--12px" overflow-hidden
+            bg="hover:black/10" rounded-5px
+            @click.stop="child.event"
+          >
+            {{ t('listMenu.to') + child.label }}
+          </div>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -114,6 +161,15 @@ onMounted(() => {
   }
   to {
     transform: scale(1, 1);
+  }
+}
+
+@keyframes showList {
+  0% {
+    grid-template-rows: 0fr;
+  }
+  100% {
+    grid-template-rows: 1fr;
   }
 }
 
@@ -143,8 +199,11 @@ onMounted(() => {
     font-weight: bold;
     border-radius: 6px;
     font-size: 14px;
-    display: flex;
-    align-items: center;
+
+    .child {
+      grid-template-rows: 0fr;
+      animation: showList .3s forwards;
+    }
 
     &:hover {
       background-color: #00000010;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { onBeforeUnmount, onMounted, reactive, ref, watchEffect } from 'vue'
+import { onBeforeUnmount, reactive, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import getTime from '../../../util/getTime'
@@ -62,6 +62,9 @@ const contextMenu = ref({
   left: 0,
 })
 
+const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
+const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
+
 const customContextMenu = reactive([{
   label: okState.value ? t('contextMenu.undoTodo') : t('contextMenu.comToDo'),
   event: 'setOk',
@@ -71,6 +74,18 @@ const customContextMenu = reactive([{
   event: 'remove',
   icon: 'i-mdi:close-circle-outline',
   color: '#d6010f',
+}, {
+  label: t('listMenu.cate'),
+  icon: 'i-ph:list-bold',
+  children: cateList.map((item) => {
+    return {
+      label: item.title,
+      event: () => {
+        moveCate(props.time, item.id)
+        showContextMenu.value = false
+      },
+    }
+  }),
 }])
 
 watchEffect(() => {
@@ -92,15 +107,6 @@ function contextmenuClick(e: MouseEvent) {
   }
 }
 
-onMounted(() => {
-  document.addEventListener('click', () => {
-    showContextMenu.value = false
-  })
-})
-
-const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
-const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
-
 emitter.on('setCate', (data) => {
   cateList.length = 0
   JSON.parse((data as string)).data.forEach((item: cateItem) => {
@@ -110,20 +116,6 @@ emitter.on('setCate', (data) => {
 
 function moveCate(id: number, cateId: number) {
   emits('setCate', id, cateId)
-}
-
-const moreMenuIsBottom = ref(false)
-function showMore(isCancel: boolean) {
-  moreShow.value = !moreShow.value
-  setTimeout(() => {
-    if (!isCancel) {
-      const itemTopHeight = itemDom.value.offsetTop
-      const windowHeight = window.innerHeight
-      const itemHeight = itemDom.value.offsetHeight
-      const moreHeight = moreDom.value.offsetHeight
-      moreMenuIsBottom.value = (windowHeight - itemTopHeight - itemHeight) < moreHeight
-    }
-  }, 0)
 }
 
 const textWrap = ref(localStorage.getItem('textWrap') === 'true')
@@ -142,7 +134,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="itemDom" class="item" @contextmenu="contextmenuClick">
+  <div ref="itemDom" class="item" @contextmenu="contextmenuClick" @click="showContextMenu = false">
     <div v-if="listName !== 'allDo'" class="button" @click="setOk">
       <div i-mdi:check-bold text-24px c-white />
     </div>
@@ -170,44 +162,8 @@ onBeforeUnmount(() => {
             <div v-if="textWrap" i-fluent:chevron-up-12-filled text-14px />
             <div v-else i-fluent:chevron-down-12-filled text-14px />
           </div>
-          <div class="c-button" ml="8px" @click="showMore(false)">
-            <div i-fluent:more-28-filled text-14px />
-          </div>
-        </div>
-        <div
-          v-if="moreShow" ref="moreDom" absolute
-          right-0 text-14px
-          :top="moreMenuIsBottom ? '' : '0'" :bottom="moreMenuIsBottom ? '0' : ''" bg="white/50"
-          backdrop-blur-10px p-10px rounded-5px z-1
-          shadow-item
-          cursor-pointer
-          pointer-events-auto
-          @click="showMore(true)"
-        >
-          <div
-            p-5px c="black/70"
-            bg="hover:black/5 active:black/10" rounded-5px
-            @click="copyText"
-          >
-            {{ t('copyText') }}
-          </div>
-          <div h-1px bg="black/10" my-5px />
-          <div
-            v-for="cate in cateList" :key="cate.id" p-5px
-            flex items-center
-            c="black/70"
-            bg="hover:black/5 active:black/10" rounded-5px
-            @click="moveCate(time, cate.id)"
-          >
-            {{ cate.title }}
-            <div i-mdi:chevron-right c="black/70" />
-          </div>
-          <div h-1px bg="black/10" my-5px />
-          <div
-            p-5px c="black/70"
-            bg="hover:black/5 active:black/10" rounded-5px
-          >
-            {{ t('cancelText') }}
+          <div class="c-button" ml="8px" @click="copyText">
+            <div i-ph:copy-bold text-14px />
           </div>
         </div>
       </div>
@@ -229,6 +185,7 @@ onBeforeUnmount(() => {
       :text="props.text"
       @set-ok="setOk"
       @remove="deleteItem"
+      @close-context="showContextMenu = false"
     />
   </div>
 </template>
