@@ -18,9 +18,6 @@ devDependencies:
   '@iconify-json/fluent':
     specifier: ^1.1.19
     version: 1.1.19
-  '@iconify-json/fluent-emoji-high-contrast':
-    specifier: ^1.1.9
-    version: 1.1.9
   '@iconify-json/mdi':
     specifier: ^1.1.50
     version: 1.1.50
@@ -302,12 +299,6 @@ packages:
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
     dependencies:
       '@hapi/hoek': 9.3.0
-    dev: true
-
-  /@iconify-json/fluent-emoji-high-contrast@1.1.9:
-    resolution: {integrity: sha512-s3S26pZW/9QDSzQa2Gqm324d05cyXkwM9hz4tDl1u1t2L2g2iH3qBQUeE77ZeYXNB9i8uwK9xWmBB7qz/+0TNQ==}
-    dependencies:
-      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify-json/fluent@1.1.19:

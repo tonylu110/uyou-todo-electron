@@ -25,7 +25,6 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.7",
     "@iconify-json/fluent": "^1.1.19",
-    "@iconify-json/fluent-emoji-high-contrast": "^1.1.9",
     "@iconify-json/mdi": "^1.1.50",
     "@iconify-json/ph": "^1.1.5",
     "@types/node": "^18.16.0",

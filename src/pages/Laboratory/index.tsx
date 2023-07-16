@@ -51,7 +51,7 @@ const Laboratory: SetupFC = () => {
           <Item title='⚠️ set whitch item in siderbar' onItemFun={() => router.push('/setListItem?from=setting')}/>
         </ItemBox>
         <Item
-          title='⚠️ set font'
+          title="⚠️ set font - can't use"
           onItemFun={() => router.push('/fontSet?from=setting')}
         />
         <Item
