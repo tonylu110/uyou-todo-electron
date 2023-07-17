@@ -3,6 +3,7 @@ import type { Ref } from 'vue'
 import { computed, onBeforeUnmount, reactive, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { usePreferredDark } from '@vueuse/core'
 import getTime from '../../../util/getTime'
 import ContextMenu from '../../ContextMenu/ContextMenu.vue'
 import type { cateItem } from '../../ListMenu/ICateItem'
@@ -25,6 +26,8 @@ const emits = defineEmits<{
 }>()
 
 const { t } = useI18n()
+
+const isDark = usePreferredDark()
 
 const okState = ref(props.isOk)
 const starState = ref(props.isStar)
@@ -65,14 +68,18 @@ const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
 
 const customContextMenu: Array<customContextMenuType> = reactive([{
-  label: okState.value ? t('contextMenu.undoTodo') : t('contextMenu.comToDo'),
+  label: computed(() => okState.value ? t('contextMenu.undoTodo') : t('contextMenu.comToDo')),
   event: 'setOk',
-  icon: okState.value ? 'i-mdi:checkbox-blank-circle-outline' : 'i-mdi:checkbox-marked-circle-outline',
+  icon: computed(() => okState.value ? 'i-mdi:checkbox-blank-circle-outline' : 'i-mdi:checkbox-marked-circle-outline'),
+}, {
+  label: computed(() => starState.value ? t('contextMenu.unstarred') : t('contextMenu.star')),
+  event: 'setStar',
+  icon: computed(() => starState.value ? 'i-ph:star-bold' : 'i-ph:star-fill'),
 }, {
   label: t('contextMenu.removeToDo'),
   event: 'remove',
   icon: 'i-mdi:close-circle-outline',
-  color: '#d6010f',
+  color: isDark.value ? '#99362f' : '#d6010f',
 }, {
   label: t('listMenu.to'),
   icon: 'i-ph:caret-circle-right-bold',
@@ -142,38 +149,54 @@ onBeforeUnmount(() => {
     <div class="delete" @click="deleteItem">
       <div i-mdi:close-thick text-24px c-white />
     </div>
-    <div class="list-item" shadow="sm black/20">
-      <div class="time-area">
-        <div flex items-center>
-          <span mr-7px>{{ getTime(time) }}</span>
+    <div
+      class="list-item"
+      shadow="sm black/20"
+      bg="white dark:#252525"
+    >
+      <div absolute right-10px top-5px flex items-center>
+        <div
+          class="c-button"
+          bg="black/10 dark:#bbb/10"
+          :opacity="starState ? '100' : '!0 hover:!100'"
+          @click="setStar"
+        >
           <div
             v-if="starState"
-            i-ph:star-fill text-14px c="#6e492f" pointer-events-auto cursor-pointer
-            @click="setStar"
+            i-ph:star-fill text-14px c="#fcd901 dark:#e6a400" pointer-events-auto cursor-pointer
           />
           <div
             v-else
-            i-ph:star-bold text-14px c="#6e492f" cursor-pointer
-            opacity-0 transition hover:opacity-100 pointer-events-auto
-            @click="setStar"
+            i-ph:star-bold text-14px c="#fcd901 dark:#e6a400" cursor-pointer
+            transition hover:opacity-100 pointer-events-auto
           />
         </div>
-        <div flex>
-          <div class="c-button" @click="textWrap = !textWrap">
-            <div v-if="textWrap" i-fluent:chevron-up-12-filled text-14px />
-            <div v-else i-fluent:chevron-down-12-filled text-14px />
+        <div flex ml-10px>
+          <div class="c-button" bg="black/10 dark:#bbb/10" @click="textWrap = !textWrap">
+            <div v-if="textWrap" i-fluent:chevron-up-12-filled text-14px c="#777 dark:#bbb" />
+            <div v-else i-fluent:chevron-down-12-filled text-14px c="#777 dark:#bbb" />
           </div>
-          <div class="c-button" ml="8px" @click="copyText">
-            <div i-ph:copy-bold text-14px />
+          <div class="c-button" bg="black/10 dark:#bbb/10" ml="8px" @click="copyText">
+            <div i-ph:copy-bold text-14px c="#777 dark:#bbb" />
           </div>
         </div>
       </div>
+      <div class="time-area">
+        <div flex items-center mb-3px mt-5px>
+          <span mr-7px c="#555/40 dark:#bbb/40" text-12px>{{ getTime(time) }}</span>
+        </div>
+      </div>
       <span
-        block mt-10px :c="listName === 'allNotDo' ? '#6e492f' : (okState ? '#cebfae' : '#6e492f')"
-        select-text pointer-events-auto
-        transition-300 bg="selection:#dcc6a9"
+        block mb-5px select-text pointer-events-auto
+        :c="listName === 'allNotDo'
+          ? '#555 dark:#bbb selection:white'
+          : (okState
+            ? '#555/25 dark:#bbb/25 selection:white'
+            : '#555 dark:#bbb selection:white')"
+        transition-300 bg="selection:primary-d selection:dark:primary-a"
         overflow-hidden text-ellipsis :whitespace="textWrap ? 'pre-wrap' : 'nowrap'"
         :line="listName === 'allNotDo' ? '' : (okState ? 'through' : '')"
+        max-w="[calc(100%-100px)]"
       >
         {{ text }}
       </span>
@@ -187,6 +210,7 @@ onBeforeUnmount(() => {
       @set-ok="setOk"
       @remove="deleteItem"
       @close-context="showContextMenu = false"
+      @set-star="setStar"
     />
   </div>
 </template>

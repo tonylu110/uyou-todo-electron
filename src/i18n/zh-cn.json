@@ -80,7 +80,9 @@
     "removeToDo": "删除 ToDo",
     "clearTxt": "清除文本",
     "closeItem": "关闭窗口",
-    "undoTodo": "取消完成"
+    "undoTodo": "取消完成",
+    "unstarred": "取消加星",
+    "star": "加星"
   },
   "language": "语言",
   "registerPage": {

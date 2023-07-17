@@ -80,7 +80,9 @@
     "removeToDo": "Delete ToDo",
     "clearTxt": "Clear Text",
     "closeItem": "Close Item",
-    "undoTodo": "Undo Completed"
+    "undoTodo": "Undo Completed",
+    "unstarred": "Unstar",
+    "star": "Star"
   },
   "language": "Language",
   "registerPage": {

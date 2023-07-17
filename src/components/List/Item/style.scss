@@ -6,7 +6,6 @@
   .list-item {
     position: relative;
     width: calc(100% - 20px);
-    background-color: #f6f2e9;
     height: auto;
     padding: 10px;
     border-radius: 5px;
@@ -14,46 +13,42 @@
     transition: transform .3s;
     pointer-events: none;
     list-style-type: none;
+    display: flex;
+    flex-direction: column-reverse;
   
     .time-area {
-      background-color: #ede4d8;
       margin-left: -10px;
-      margin-top: -10px;
+      margin-bottom: -10px;
       padding: 5px 10px;
       width: 100%;
-      border-radius: 7px 7px 0 0;
+      border-radius: 0 0 7px 7px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-  
-      span {
-        color: #cebfae;
-      }
-  
-      .c-button {
-        height: 10px;
-        padding: 5px;
-        line-height: 10px;
-        margin-right: -3px;
-        background-color: #00000010;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 3px;
-        color: #6e492f;
+      bottom: 0;
+    }
+
+    .c-button {
+      height: 10px;
+      padding: 5px;
+      line-height: 10px;
+      margin-right: -3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 3px;
+      opacity: 1;
+      cursor: pointer;
+      transition: opacity 0.2s ease-in-out;
+      pointer-events: visible;
+
+      &:hover {
         opacity: 1;
-        cursor: pointer;
-        transition: opacity 0.2s ease-in-out;
-        pointer-events: visible;
-  
-        &:hover {
-          opacity: 1;
-        }
-  
-        &:active {
-          background-color: #00000020;
-        }
+      }
+
+      &:active {
+        background-color: #00000020;
       }
     }
   
