@@ -161,7 +161,7 @@ function dragstart(index: number) {
   <div
     ref="itemDom"
     class="item"
-    draggable="true"
+    :draggable="route.name === 'Home'"
     @dragenter="dragenter($event, index)"
     @dragover="dragover($event)"
     @dragstart="dragstart(index)"
