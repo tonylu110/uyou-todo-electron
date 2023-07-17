@@ -32,6 +32,7 @@
     "@unocss/transformer-attributify-jsx": "^0.53.4",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "@vueuse/components": "^10.2.1",
     "@vueuse/core": "^10.2.1",
     "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",

@@ -39,6 +39,9 @@ devDependencies:
   '@vitejs/plugin-vue-jsx':
     specifier: ^3.0.1
     version: 3.0.1(vite@4.4.3)(vue@3.3.4)
+  '@vueuse/components':
+    specifier: ^10.2.1
+    version: registry.npmmirror.com/@vueuse/components@10.2.1(vue@3.3.4)
   '@vueuse/core':
     specifier: ^10.2.1
     version: registry.npmmirror.com/@vueuse/core@10.2.1(vue@3.3.4)
@@ -3793,6 +3796,20 @@ packages:
       '@vue/language-core': registry.npmmirror.com/@vue/language-core@1.8.4(typescript@5.1.6)
     transitivePeerDependencies:
       - typescript
+    dev: true
+
+  registry.npmmirror.com/@vueuse/components@10.2.1(vue@3.3.4):
+    resolution: {integrity: sha512-S21ZAfNSRouD/UokdGjBIrzvXH8WS7sz4t47ZWP+QRVWfsK9aIc5PmKMgkQrR5e8K3aNLiczqX8TuBa+l+CmDA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vueuse/components/-/components-10.2.1.tgz}
+    id: registry.npmmirror.com/@vueuse/components/10.2.1
+    name: '@vueuse/components'
+    version: 10.2.1
+    dependencies:
+      '@vueuse/core': registry.npmmirror.com/@vueuse/core@10.2.1(vue@3.3.4)
+      '@vueuse/shared': registry.npmmirror.com/@vueuse/shared@10.2.1(vue@3.3.4)
+      vue-demi: registry.npmmirror.com/vue-demi@0.14.5(vue@3.3.4)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
     dev: true
 
   registry.npmmirror.com/@vueuse/core@10.2.1(vue@3.3.4):
