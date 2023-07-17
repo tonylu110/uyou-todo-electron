@@ -149,7 +149,9 @@ function dragstart(index: number) {
 }
 function dragenter(index: number) {
   if (dragIndex.value !== index) {
-    const moving = listAll.value[dragIndex.value]
+    const moving = list.value[dragIndex.value]
+    list.value.splice(dragIndex.value, 1)
+    list.value.splice(index, 0, moving)
     listAll.value.splice(dragIndex.value, 1)
     listAll.value.splice(index, 0, moving)
     dragIndex.value = index
