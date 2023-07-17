@@ -16,6 +16,7 @@ const props = defineProps<{
   text: string
   isOk: boolean
   isStar: boolean | undefined
+  index: number
 }>()
 
 const emits = defineEmits<{
@@ -23,6 +24,9 @@ const emits = defineEmits<{
   (e: 'deleteItem', id: number): void
   (e: 'setCate', id: number, cateId: number): void
   (e: 'setStar', id: number, star: boolean): void
+  (e: 'dragenter', index: number): void
+  (e: 'dragstart', index: number): void
+  (e: 'dragend'): void
 }>()
 
 const { t } = useI18n()
@@ -140,10 +144,31 @@ emitter.on('showWrap', () => {
 onBeforeUnmount(() => {
   emitter.off('showWrap')
 })
+
+function dragenter(e: MouseEvent, index: number) {
+  e.preventDefault()
+  emits('dragenter', index)
+}
+function dragover(e: MouseEvent) {
+  e.preventDefault()
+}
+function dragstart(index: number) {
+  emits('dragstart', index)
+}
 </script>
 
 <template>
-  <div ref="itemDom" class="item" @contextmenu="contextmenuClick" @click="showContextMenu = false">
+  <div
+    ref="itemDom"
+    class="item"
+    draggable="true"
+    @dragenter="dragenter($event, index)"
+    @dragover="dragover($event)"
+    @dragstart="dragstart(index)"
+    @dragend="emits('dragend')"
+    @contextmenu="contextmenuClick"
+    @click="showContextMenu = false"
+  >
     <div
       v-if="listName !== 'allDo'"
       class="button"
@@ -164,7 +189,7 @@ onBeforeUnmount(() => {
     <div
       class="list-item"
       shadow="sm black/20"
-      bg="white dark:#252525"
+      bg="#eee/80 dark:#222/50"
     >
       <div absolute right-10px top-5px flex items-center>
         <div

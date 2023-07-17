@@ -28,7 +28,7 @@ const { t } = useI18n()
 const route = useRoute()
 
 const list: Ref<ITodoList[]> = ref(props.listData) as Ref<ITodoList[]>
-const listAll = ref(LocalStorage('get'))
+const listAll: Ref<ITodoList[]> = ref(LocalStorage('get')) as Ref<ITodoList[]>
 
 watchEffect(() => {
   list.value = props.listData as unknown as ITodoList[]
@@ -142,6 +142,21 @@ const showNotDo = ref(localStorage.getItem('notDoShow') === 'true' || localStora
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
 const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
+
+const dragIndex = ref(0)
+function dragstart(index: number) {
+  dragIndex.value = index
+}
+function dragenter(index: number) {
+  if (dragIndex.value !== index) {
+    const moving = list.value[dragIndex.value]
+    list.value.splice(dragIndex.value, 1)
+    list.value.splice(index, 0, moving)
+    listAll.value.splice(dragIndex.value, 1)
+    listAll.value.splice(index, 0, moving)
+    dragIndex.value = index
+  }
+}
 </script>
 
 <template>
@@ -156,30 +171,38 @@ const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
     </transition>
     <transition-group v-if="routeName === 'Home' || route.query.listName === 'allDo' || route.query.listName === 'allNotDo'" :name="routeName === 'Home' ? 'item' : 'other'">
       <Item
-        v-for="item in list"
+        v-for="(item, index) in list"
         :key="item.id"
         :text="item.text"
         :time="item.id"
         :is-ok="item.ok"
         :is-star="item.star"
+        :index="index"
         @set-ok="setOk"
         @delete-item="deleteItem"
         @set-cate="setCate"
         @set-star="setStar"
+        @dragstart="dragstart"
+        @dragenter="dragenter"
+        @dragend="saveItemSet(listAll!)"
       />
     </transition-group>
     <template v-else name="other">
       <Item
-        v-for="item in list.filter(listData => listData.ok === false)"
+        v-for="(item, index) in list.filter(listData => listData.ok === false)"
         :key="item.id"
         :text="item.text"
         :time="item.id"
         :is-ok="item.ok"
         :is-star="item.star"
+        :index="index"
         @set-ok="setOk"
         @delete-item="deleteItem"
         @set-cate="setCate"
         @set-star="setStar"
+        @dragstart="dragstart"
+        @dragenter="dragenter"
+        @dragend="saveItemSet(listAll!)"
       />
       <div
         v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo' && list.filter(listData => listData.ok === true).length > 0"
@@ -202,16 +225,20 @@ const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
       </div>
       <template v-if="showNotDo">
         <Item
-          v-for="item in list.filter(listData => listData.ok === true)"
+          v-for="(item, index) in list.filter(listData => listData.ok === true)"
           :key="item.id"
           :text="item.text"
           :time="item.id"
           :is-ok="item.ok"
           :is-star="item.star"
+          :index="index"
           @set-ok="setOk"
           @delete-item="deleteItem"
           @set-cate="setCate"
           @set-star="setStar"
+          @dragstart="dragstart"
+          @dragenter="dragenter"
+          @dragend="saveItemSet(listAll!)"
         />
       </template>
     </template>
@@ -241,7 +268,7 @@ const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
 
 .add-enter-from,
 .add-leave-to {
-  margin-top: calc(-100px - 4em);
+  margin-top: calc(-103px - 4em);
 }
 
 .add-enter-to,

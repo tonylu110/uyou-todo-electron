@@ -75,7 +75,7 @@ function keyEnter() {
   <div
     class="add"
     shadow="sm black/20"
-    bg="white dark:#252525 selection:primary-d selection:dark:primary-a"
+    bg="#eee/80 dark:#222/50 selection:primary-d selection:dark:primary-a"
     @contextmenu="contextmenuClick"
   >
     <textarea
