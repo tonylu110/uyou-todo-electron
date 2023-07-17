@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onMounted, ref, watchEffect } from 'vue'
-import moment from 'moment'
 import { useI18n } from 'vue-i18n'
 import ContextMenu from '../../ContextMenu/ContextMenu.vue'
 
@@ -73,18 +72,40 @@ function keyEnter() {
 </script>
 
 <template>
-  <div class="add" shadow="sm black/20" @contextmenu="contextmenuClick">
-    <div class="add-time-area">
-      <span>{{ moment(todoTime).format('hh:mm A') }}</span>
-    </div>
-    <textarea v-model="text" class="add-item-text" rows="3" @keydown.enter="keyEnter" />
+  <div
+    class="add"
+    shadow="sm black/20"
+    bg="white dark:#252525 selection:primary-d selection:dark:primary-a"
+    @contextmenu="contextmenuClick"
+  >
+    <textarea
+      v-model="text"
+      class="add-item-text" rows="4"
+      c="#555 dark:#bbb selection:white"
+      @keydown.enter="keyEnter"
+    />
   </div>
   <div class="buttons">
-    <button :style="{ width: showAddButton ? '50%' : '', margin: showAddButton ? '' : '0 0 0 -6px' }" class="ok-button" @click="addItem">
-      <div i-mdi:check-bold text-24px />
+    <button
+      :style="{
+        width: showAddButton ? '50%' : '',
+        margin: showAddButton ? '' : '0 0 0 -6px',
+      }"
+      bg="success-d dark:success-a active:success-a active:dark:success-d"
+      border="3px solid white dark:#444"
+      class="ok-button"
+      @click="addItem"
+    >
+      <div i-mdi:check-bold text-24px c="white dark:#444" />
     </button>
-    <button :style="{ width: showAddButton ? '50%' : '' }" class="close-button" @click="showAddItem">
-      <div i-mdi:close-thick text-24px />
+    <button
+      :style="{ width: showAddButton ? '50%' : '' }"
+      bg="error-d dark:error-a active:error-a active:dark:error-d"
+      border="3px solid white dark:#444"
+      class="close-button"
+      @click="showAddItem"
+    >
+      <div i-mdi:close-thick text-24px c="white dark:#444" />
     </button>
   </div>
   <ContextMenu

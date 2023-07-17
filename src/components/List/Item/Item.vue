@@ -75,6 +75,7 @@ const customContextMenu: Array<customContextMenuType> = reactive([{
   label: computed(() => starState.value ? t('contextMenu.unstarred') : t('contextMenu.star')),
   event: 'setStar',
   icon: computed(() => starState.value ? 'i-ph:star-bold' : 'i-ph:star-fill'),
+  color: computed(() => isDark.value ? '#e6a400' : '#fcd901'),
 }, {
   label: t('contextMenu.removeToDo'),
   event: 'remove',
@@ -143,11 +144,22 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="itemDom" class="item" @contextmenu="contextmenuClick" @click="showContextMenu = false">
-    <div v-if="listName !== 'allDo'" class="button" @click="setOk">
-      <div i-mdi:check-bold text-24px c-white />
+    <div
+      v-if="listName !== 'allDo'"
+      class="button"
+      bg="success-d dark:success-a active:success-a active:dark:success-a"
+      border="3px solid white dark:#444"
+      @click="setOk"
+    >
+      <div i-mdi:check-bold text-24px c="white dark:#444" />
     </div>
-    <div class="delete" @click="deleteItem">
-      <div i-mdi:close-thick text-24px c-white />
+    <div
+      class="delete"
+      bg="error-d dark:error-a active:error-a active:dark:error-d"
+      border="3px solid white dark:#444"
+      @click="deleteItem"
+    >
+      <div i-mdi:close-thick text-24px c="white dark:#444" />
     </div>
     <div
       class="list-item"

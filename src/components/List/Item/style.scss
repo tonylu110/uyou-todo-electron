@@ -88,7 +88,6 @@
   
     .ok-button {
       @extend .close-button;
-      background-color: #00b600;
       left: -7px;
   
       &:active {
@@ -100,7 +99,6 @@
   .button {
     width: 40px;
     height: 40px;
-    background-color: #00b600;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -111,33 +109,22 @@
     align-items: center;
     justify-content: center;
     box-shadow: inset 1px 1px 10px #00000030, 2px 2px 2px #00000030;
-    border: 3px solid white;
   
     span {
-      color: white;
       font-weight: bold;
     }
   
     &:hover ~ .list-item {
       transform: translateX(60px);
     }
-  
-    &:active {
-      background-color: #00a600;
-    }
   }
   
   .delete {
     @extend .button;
-    background-color: #d6010f;
     right: 4px;
   
     &:hover + .list-item {
       transform: translateX(-60px);
-    }
-  
-    &:active {
-      background-color: #b6000b;
     }
   }
 }

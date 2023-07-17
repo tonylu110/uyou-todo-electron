@@ -241,7 +241,7 @@ const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
 
 .add-enter-from,
 .add-leave-to {
-  margin-top: calc(-114px - 4rem);
+  margin-top: calc(-100px - 4em);
 }
 
 .add-enter-to,

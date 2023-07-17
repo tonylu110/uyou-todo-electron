@@ -52,6 +52,10 @@ export default defineConfig({
         h: '#c95047',
         a: '#99362f',
       },
+      success: {
+        d: '#00b600',
+        a: '#00a600',
+      },
     },
   },
 })
