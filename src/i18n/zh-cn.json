@@ -114,5 +114,25 @@
     "today": "我的一天",
     "allTodos": "所有 ToDo",
     "startPage": "启动页"
+  },
+  "timeAgo": {
+    "just-now": "现在",
+    "ago": "{0}之前",
+    "in": "在 {0}之中",
+    "last-month": "上个月",
+    "next-month": "下个月",
+    "month": "个月",
+    "last-year": "上年",
+    "next-year": "下年",
+    "year": "年",
+    "yesterday": "昨天",
+    "tomorrow": "明天",
+    "day": "天",
+    "last-week": "上周",
+    "next-week": "下周",
+    "week": "周",
+    "hour": "小时",
+    "minute": "分钟",
+    "second": "秒"
   }
 }

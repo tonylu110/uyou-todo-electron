@@ -8,6 +8,7 @@ import ContextMenu from '../../ContextMenu/ContextMenu.vue'
 import type { cateItem } from '../../ListMenu/ICateItem'
 import emitter from '../../../util/bus'
 import { createToast } from '../../Toast'
+import type customContextMenuType from '../../ContextMenu/customContextMenu.type'
 
 const props = defineProps<{
   time: number
@@ -63,7 +64,7 @@ const contextMenu = ref({
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
 
-const customContextMenu = reactive([{
+const customContextMenu: Array<customContextMenuType> = reactive([{
   label: okState.value ? t('contextMenu.undoTodo') : t('contextMenu.comToDo'),
   event: 'setOk',
   icon: okState.value ? 'i-mdi:checkbox-blank-circle-outline' : 'i-mdi:checkbox-marked-circle-outline',

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
 import type { Ref } from 'vue'
-
 import { useI18n } from 'vue-i18n'
+import type customContextMenu from './customContextMenu.type'
 
 const props = withDefaults(defineProps<{
   pos: {
@@ -12,18 +12,7 @@ const props = withDefaults(defineProps<{
   text?: string
   showCopy?: boolean
   showPaste?: boolean
-  custom?: Array<{
-    label?: string
-    event?: string
-    icon?: string
-    color?: string
-    children?: Array<{
-      label?: string
-      event?: () => void
-      icon?: string
-      color?: string
-    }>
-  }>
+  custom?: Array<customContextMenu>
 }>(), {
   showCopy: true,
   showPaste: true,

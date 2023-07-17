@@ -287,7 +287,7 @@ emitter.on('setLoginText', (uname) => {
             rounded-xl transition="300 width margin"
             @click.stop="delCate(item.id)"
           >
-            <div i-mdi:close-thick :c="routeQueryName === `${item.id}` ? 'white dark:#bbb' : '#777 group-hover:white'" text-12px />
+            <div i-mdi:close-thick :c="routeQueryName === `${item.id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />
           </div>
         </div>
         <div
