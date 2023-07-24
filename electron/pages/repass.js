@@ -1,6 +1,5 @@
 const path = require('node:path')
 const { MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
-const { ipcMain, nativeTheme } = require('electron')
 const { micaStyle, menuBlur } = require('../store/menuBlurStore')
 const setMicaStyle = require('./util/setMicaStyle')
 
@@ -24,10 +23,11 @@ function createRepassWindow(uname) {
   })
 
   if (menuBlur || menuBlur === undefined) {
-    if (IS_WINDOWS_11)
+    if (IS_WINDOWS_11) {
+      repassWindow.setAutoTheme()
       setMicaStyle(micaStyle || 'mica', repassWindow)
-    else
-      repassWindow.setAcrylic()
+    }
+    else { repassWindow.setAcrylic() }
   }
   repassWindow.setAlwaysOnTop(true)
 

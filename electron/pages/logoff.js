@@ -24,10 +24,11 @@ function createLogoffWindow(uname) {
   })
 
   if (menuBlur || menuBlur === undefined) {
-    if (IS_WINDOWS_11)
+    if (IS_WINDOWS_11) {
+      logoffWindow.setAutoTheme()
       setMicaStyle(micaStyle || 'mica', logoffWindow)
-    else
-      logoffWindow.setAcrylic()
+    }
+    else { logoffWindow.setAcrylic() }
   }
   logoffWindow.setAlwaysOnTop(true)
 

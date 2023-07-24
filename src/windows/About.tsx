@@ -15,10 +15,10 @@ const About: SetupFC = () => {
         src="./logo.png"
         alt=""
       />
-      <span c="#7a695c" font-bold text-24px>uyou ToDo v{versionText}</span>
+      <span c="#555 dark:#bbb" font-bold text-24px>uyou ToDo v{versionText}</span>
       <span
         block mt-15px
-        text-14px c="#7a695c" font-bold
+        text-14px c="#555 dark:#bbb" font-bold
       >
         Copyright (c) 2022-2023, Anthony Lu
       </span>

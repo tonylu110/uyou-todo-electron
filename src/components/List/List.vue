@@ -7,6 +7,7 @@ import LocalStorage from '../../util/localStorage'
 import type ITodoList from '../../interface/ITodoListArray'
 import setSwitchFn from '../../util/setSwitchFn'
 import { isLinux, isWindows10OrAfter } from '../../util/os'
+import emitter from '../../util/bus'
 import Item from './Item/Item.vue'
 import saveItemSet from './saveItemSet'
 import AddItem from './AddItem/AddItem.vue'
@@ -157,6 +158,11 @@ function dragenter(index: number) {
     dragIndex.value = index
   }
 }
+
+const menuShort = ref(window.innerWidth < 750)
+emitter.on('menuClose', (data) => {
+  menuShort.value = data as boolean
+})
 </script>
 
 <template>
@@ -206,8 +212,9 @@ function dragenter(index: number) {
       />
       <div
         v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo' && list.filter(listData => listData.ok === true).length > 0"
-        bg="#fff6dc hover:#f3ebd3 active:#eae2ca" :translate="simpleMode ? 'x-[calc(-50vw+50%+10px)]' : 'x-[calc(((-100vw+300px)/2)+50%+10px)]'"
-        whitespace-nowrap mb-10px p-x-10px p-y-5px rounded-5px c="#6e492f"
+        bg="#eee/80 dark:#222/50 hover:#eee/90 dark:hover:#222/60 active:#eee dark:active:#222/70"
+        :translate="simpleMode ? 'x-[calc(-50vw+50%+10px)]' : (menuShort ? 'x-[calc(((-100vw+58px)/2)+50%+10px)]' : 'x-[calc(((-100vw+300px)/2)+50%+10px)]')"
+        whitespace-nowrap mb-10px p-x-10px p-y-5px rounded-5px c="#555 dark:#bbb"
         font-bold flex items-center cursor-pointer
         shadow="sm black/30"
         @click="setSwitchFn('notDoShow', !showNotDo, () => showNotDo = !showNotDo)"
@@ -216,7 +223,7 @@ function dragenter(index: number) {
         {{ t('listMenu.completed') }}
         <div
           ml-5px text-10px
-          rounded-20px bg="#6e492f" c="#fff6dc"
+          rounded-20px bg="#555 dark:#bbb" c="#eee dark:#222"
           w-1rem h-1rem font-normal
           flex items-center justify-center
         >

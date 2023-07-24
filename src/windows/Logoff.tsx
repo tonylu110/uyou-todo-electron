@@ -118,7 +118,12 @@ const Logoff: SetupFC = () => {
         flex="~ col" justify-center items-center
       >
         <div flex="~ row" items-center justify-center>
-          <span w-25 flex justify-content-right>{t('registerPage.account')}</span>
+          <span
+            w-25 flex justify-content-right
+            c="#555 dark:#bbb"
+          >
+            {t('registerPage.account')}
+          </span>
           <input
             no-drag outline-primary-d
             mb-10px p-10px rounded-5px border="2px solid black/10"
@@ -128,17 +133,25 @@ const Logoff: SetupFC = () => {
           />
         </div>
         <div flex="~ row" items-center justify-center>
-          <span w-25 flex justify-content-right>{t('registerPage.password')}</span>
+          <span
+            w-25 flex justify-content-right
+            c="#555 dark:#bbb"
+          >
+            {t('registerPage.password')}
+          </span>
           <input
-            no-drag outline-primary-d
+            no-drag outline="primary-d dark:primary-a"
             mb-10px p-10px rounded-5px border="2px solid black/10"
+            bg="black/10 dark:#999/10"
+            c="#555 dark:#bbb"
             type="password"
             v-model={formData.passwd}
           />
         </div>
         <button
           no-drag cursor-pointer
-          bg="primary-d active:primary-a" c-white
+          bg="primary-d active:primary-a dark:primary-a dark:active:primary-d"
+          c-white
           border-none p-10px rounded-5px
           onClick={logoff}
         >

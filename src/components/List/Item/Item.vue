@@ -195,17 +195,11 @@ function dragstart(index: number) {
         <div
           class="c-button"
           bg="black/10 dark:#bbb/10"
-          :opacity="starState ? '100' : '!0 hover:!100'"
           @click="setStar"
         >
           <div
-            v-if="starState"
-            i-ph:star-fill text-14px c="#fcd901 dark:#e6a400" pointer-events-auto cursor-pointer
-          />
-          <div
-            v-else
-            i-ph:star-bold text-14px c="#fcd901 dark:#e6a400" cursor-pointer
-            transition hover:opacity-100 pointer-events-auto
+            i-ph:star-fill text-14px :c="starState ? '#e6a400' : '#555/20 dark:#bbb/20'"
+            pointer-events-auto cursor-pointer
           />
         </div>
         <div flex ml-10px>

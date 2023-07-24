@@ -24,10 +24,11 @@ function createAboutWindow() {
   })
 
   if (menuBlur || menuBlur === undefined) {
-    if (IS_WINDOWS_11)
+    if (IS_WINDOWS_11) {
+      aboutWindow.setAutoTheme()
       setMicaStyle(micaStyle || 'mica', aboutWindow)
-    else
-      aboutWindow.setAcrylic()
+    }
+    else { aboutWindow.setAcrylic() }
   }
   aboutWindow.setAlwaysOnTop(true)
 

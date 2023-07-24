@@ -82,17 +82,17 @@ function closeAlert() {
     <div p-7px flex items-center>
       <span
         flex justify-content-right w-100px
-        text-20px c="#7a695c" whitespace-pre
+        text-20px c="#555 dark:#bbb" whitespace-pre
       >
-        {{ t('accountPage.account') }}
+        {{ t('registerPage.account') }}
       </span>
       <input
         v-model="formData.account"
         no-drag
         p-10px outline-none rounded-5px
-        bg="#ffffff30"
+        bg="black/5 dark:#999/5"
         border="2px solid #00000010"
-        c="#00000070"
+        c="#555/50 dark:#bbb/50"
         type="text"
         disabled
       >
@@ -100,7 +100,7 @@ function closeAlert() {
     <div p-7px flex items-center>
       <span
         flex justify-content-right w-100px
-        text-20px c="#7a695c" whitespace-pre
+        text-20px c="#555 dark:#bbb" whitespace-pre
       >
         {{ t('rePassPage.oldPass') }}
       </span>
@@ -108,8 +108,9 @@ function closeAlert() {
         v-model="formData.oldPass"
         no-drag
         p-10px outline-none rounded-5px
-        bg="#ffffff90"
+        bg="black/10 dark:#999/10"
         border="2px solid #00000010"
+        c="#555 dark:#bbb"
         type="password"
         autofocus="true"
       >
@@ -117,7 +118,7 @@ function closeAlert() {
     <div p-7px flex items-center>
       <span
         flex justify-content-right w-100px
-        text-20px c="#7a695c" whitespace-pre
+        text-20px c="#555 dark:#bbb" whitespace-pre
       >
         {{ t('rePassPage.newPass') }}
       </span>
@@ -125,7 +126,8 @@ function closeAlert() {
         v-model="formData.newPass"
         no-drag
         p-10px outline-none rounded-5px
-        bg="#ffffff90"
+        bg="black/10 dark:#999/10"
+        c="#555 dark:#bbb"
         border="2px solid #00000010"
         type="password"
       >
@@ -133,7 +135,8 @@ function closeAlert() {
     <button
       no-drag
       mt-10px p="x-20px y-5px" rounded-5px
-      bg="#7a695c active:#574a40" c-white border-none
+      bg="primary-d active:primary-a dark:primary-a dark:active:primary-d"
+      c-white border-none
       text-18px cursor-pointer
       type="submit"
       @click="repass"

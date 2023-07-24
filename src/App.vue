@@ -159,7 +159,9 @@ const store = new Store()
 
 <template>
   <RouterUrl v-if="routerShow" />
-  <router-view name="isWindow" />
+  <div :class="isDark ? 'dark' : ''">
+    <router-view name="isWindow" />
+  </div>
   <div
     v-if="!isWinDow" class="list-main"
     :bg="!isBlur
