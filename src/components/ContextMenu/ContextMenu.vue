@@ -29,9 +29,23 @@ const { t } = useI18n()
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const { clipboard } = require('electron')
 
+const topAndLeft = reactive({
+  top: `${props.pos.top}px`,
+  left: `${props.pos.left}px`,
+})
 const position = reactive({
-  top: computed(() => `${props.pos.top}px`),
-  left: computed(() => `${props.pos.left}px`),
+  top: computed({
+    get: () => `${props.pos.top}px`,
+    set: (value) => {
+      topAndLeft.top = value
+    },
+  }),
+  left: computed({
+    get: () => `${props.pos.left}px`,
+    set: (value) => {
+      topAndLeft.left = value
+    },
+  }),
   bottom: 'auto',
   right: 'auto',
 })
@@ -91,8 +105,8 @@ function itemFn(isChild?: boolean, event?: string) {
     ref="cateDom"
     class="menu"
     :style="{
-      top: position.top,
-      left: position.left,
+      top: topAndLeft.top,
+      left: topAndLeft.left,
       bottom: position.bottom,
       right: position.right,
     }"
