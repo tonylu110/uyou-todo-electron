@@ -140,7 +140,7 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
         @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', t('restartApp'))"
       />
     </ItemBox>
-    <Item v-if="isInDev" title="Laboratory" @item-fun="router.push('/lab?from=setting')" />
+    <Item v-if="isInDev" :title="t('anotherSettings.laboratory')" @item-fun="router.push('/lab?from=setting')" />
     <ItemButton mode="error" @click="clearData">
       {{ t('clearData') }}
     </ItemButton>

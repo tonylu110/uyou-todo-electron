@@ -71,7 +71,8 @@
     "simple": "简易模式",
     "enterToAdd": "回车添加 ToDo",
     "autoStart": "开机自启",
-    "itemWrap": "ToDo 默认展开"
+    "itemWrap": "ToDo 默认展开",
+    "laboratory": "实验室"
   },
   "contextMenu": {
     "copy": "复制",

@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import Item from '../../components/ItemBox/Item/Item.vue'
@@ -9,6 +10,8 @@ import ItemBox from '../../components/ItemBox/ItemBox.vue'
 
 const Laboratory: SetupFC = () => {
   const router = useRouter()
+
+  const { t } = useI18n()
 
   const opLab = ref(true)
   const openLab = () => {
@@ -25,7 +28,7 @@ const Laboratory: SetupFC = () => {
   return () => (
     <>
       <TabBar
-        title="Laboratory"
+        title={t('anotherSettings.laboratory')}
         rightImgShow={false}
         leftImgShow={true}
         onLeftClick={() => router.back()}

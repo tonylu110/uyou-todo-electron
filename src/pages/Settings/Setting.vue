@@ -237,7 +237,7 @@ window.addEventListener('resize', () => {
         @switch-fun="setSwitchFn('saveWindowSizeState', !saveWindowSizeState, () => saveWindowSizeState = !saveWindowSizeState, 'setWindowSizeState')"
       />
     </ItemBox>
-    <Item v-if="isInDev" title="Laboratory" @item-fun="router.push('/lab?from=setting')" />
+    <Item v-if="isInDev" :title="t('anotherSettings.laboratory')" @item-fun="router.push('/lab?from=setting')" />
     <ItemBox>
       <Item :title="t('otherList.toWeb')" item-img="./images/web.png" @item-fun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')" />
       <Item :title="t('otherList.toPhone')" item-img="./images/phone.png" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')" />

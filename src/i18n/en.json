@@ -71,7 +71,8 @@
     "simple": "Simple Mode",
     "enterToAdd": "Enter to add ToDo",
     "autoStart": "Open With System",
-    "itemWrap": "ToDo default open"
+    "itemWrap": "ToDo default open",
+    "laboratory": "Laboratory"
   },
   "contextMenu": {
     "copy": "Copy",

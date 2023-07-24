@@ -71,7 +71,8 @@
     "simple": "簡易模式",
     "enterToAdd": "回車新增 ToDo",
     "autoStart": "開機自啟",
-    "itemWrap": "ToDo 預設展開"
+    "itemWrap": "ToDo 預設展開",
+    "laboratory": "實驗室"
   },
   "contextMenu": {
     "copy": "複製",
@@ -81,7 +82,9 @@
     "clearTxt": "清除文字",
     "closeItem": "關閉視窗",
     "undoTodo": "取消完成",
-    "edit": "編輯 ToDo"
+    "edit": "編輯 ToDo",
+    "star": "加星",
+    "unstarred": "取消加星"
   },
   "language": "語言",
   "registerPage": {
