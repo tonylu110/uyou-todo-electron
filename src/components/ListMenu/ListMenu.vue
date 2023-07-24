@@ -9,6 +9,7 @@ import { isMac } from '../../util/os'
 import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
 import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
+import MenuItem from './MenuItem.vue'
 
 const { t } = useI18n()
 
@@ -141,6 +142,27 @@ const loginText = ref(localStorage.getItem('uid') ? localStorage.getItem('uname'
 emitter.on('setLoginText', (uname) => {
   loginText.value = uname as string
 })
+
+function editCate(id: number, title: string) {
+  for (let i = 0; i < cateList.length; i++) {
+    if (cateList[i].id === id)
+      cateList[i].title = title
+  }
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList,
+  }))
+  emitter.emit('setCate', JSON.stringify({
+    data: cateList,
+  }))
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList,
+      },
+    })
+  }
+}
 </script>
 
 <template>
@@ -263,33 +285,14 @@ emitter.on('setLoginText', (uname) => {
             >{{ t('listMenu.completed') }}</span>
           </div>
         </div>
-        <div
+        <MenuItem
           v-for="item in cateList"
+          :id="item.id"
           :key="item.id"
-          class="all-todo-list group"
-          :bg="routeQueryName === `${item.id}` ? 'primary-d hover:primary-a dark:primary-a' : 'hover:primary-d dark:hover:primary-a'"
-          @click="toList(`${item.id}`)"
-        >
-          <div>
-            <div
-              i-ph:radio-button-bold text-18px
-              :c="routeQueryName === `${item.id}` ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
-            />
-            <span
-              style="font-size: 14px; margin-left: 10px;"
-              :c="routeQueryName === `${item.id}` ? '!white group-hover:!white' : 'group-hover:!white dark:!#bbb'"
-            >{{ item.title }}</span>
-          </div>
-          <div
-            flex justify-center items-center
-            :bg="routeQueryName === `${item.id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'"
-            h="18px" w="18px"
-            rounded-xl transition="300 width margin"
-            @click.stop="delCate(item.id)"
-          >
-            <div i-mdi:close-thick :c="routeQueryName === `${item.id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />
-          </div>
-        </div>
+          :title="item.title"
+          @del-cate="delCate"
+          @edit-cate="editCate"
+        />
         <div
           v-if="showAdd" flex items-center
           justify-center p-10px ml-10px no-drag
