@@ -140,6 +140,7 @@ const Logoff: SetupFC = () => {
             {t('registerPage.password')}
           </span>
           <input
+            v-focus
             no-drag outline="primary-d dark:primary-a"
             mb-10px p-10px rounded-5px border="2px solid black/10"
             bg="black/10 dark:#999/10"

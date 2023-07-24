@@ -92,13 +92,13 @@ function closeAlert() {
       </span>
       <input
         v-model="formData.account"
+        v-focus
         no-drag
         p-10px outline-none rounded-5px
         bg="black/10 dark:#999/10"
         c="#555 dark:#bbb"
         border="2px solid #00000010"
         type="text"
-        autofocus="true"
       >
     </div>
     <div p-7px flex items-center>

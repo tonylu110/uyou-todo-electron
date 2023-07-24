@@ -106,13 +106,13 @@ function closeAlert() {
       </span>
       <input
         v-model="formData.oldPass"
+        v-focus
         no-drag
         p-10px outline-none rounded-5px
         bg="black/10 dark:#999/10"
         border="2px solid #00000010"
         c="#555 dark:#bbb"
         type="password"
-        autofocus="true"
       >
     </div>
     <div p-7px flex items-center>

@@ -139,6 +139,18 @@ function setStar(id: number, star: boolean) {
   saveItemSet(listAll.value!)
 }
 
+function editItem(id: number, text: string) {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id)
+      list.value![i].text = text
+  }
+  for (let i = 0; i < listAll.value!.length; i++) {
+    if (listAll.value![i].id === id)
+      listAll.value![i].text = text
+  }
+  saveItemSet(listAll.value!)
+}
+
 const showNotDo = ref(localStorage.getItem('notDoShow') === 'true' || localStorage.getItem('notDoShow') === null)
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
@@ -186,6 +198,7 @@ emitter.on('menuClose', (data) => {
         :index="index"
         @set-ok="setOk"
         @delete-item="deleteItem"
+        @edit-item="editItem"
         @set-cate="setCate"
         @set-star="setStar"
         @dragstart="dragstart"
@@ -204,6 +217,7 @@ emitter.on('menuClose', (data) => {
         :index="index"
         @set-ok="setOk"
         @delete-item="deleteItem"
+        @edit-item="editItem"
         @set-cate="setCate"
         @set-star="setStar"
         @dragstart="dragstart"
@@ -241,6 +255,7 @@ emitter.on('menuClose', (data) => {
           :index="index"
           @set-ok="setOk"
           @delete-item="deleteItem"
+          @edit-item="editItem"
           @set-cate="setCate"
           @set-star="setStar"
           @dragstart="dragstart"

@@ -82,7 +82,8 @@
     "closeItem": "Close Item",
     "undoTodo": "Undo Completed",
     "unstarred": "Unstar",
-    "star": "Star"
+    "star": "Star",
+    "edit": "Edit ToDo"
   },
   "language": "Language",
   "registerPage": {

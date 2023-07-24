@@ -7,6 +7,7 @@ import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
 import router from './router'
 import AppSimple from './AppSimple.vue'
 import i18n from './i18n'
+import { vFocus } from './util/autofocus'
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
@@ -26,6 +27,7 @@ else
 app.use(router)
 app.use(i18n)
 app.use(PerfectScrollbar)
+app.directive('focus', vFocus)
 app.mount('#app')
 
 const keyToAdd = ref(localStorage.getItem('ketToAdd') === 'true')

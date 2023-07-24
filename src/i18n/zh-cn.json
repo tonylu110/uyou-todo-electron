@@ -82,7 +82,8 @@
     "closeItem": "关闭窗口",
     "undoTodo": "取消完成",
     "unstarred": "取消加星",
-    "star": "加星"
+    "star": "加星",
+    "edit": "编辑 ToDo"
   },
   "language": "语言",
   "registerPage": {
