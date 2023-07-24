@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import type { cateItem } from '../ListMenu/ICateItem'
 import emitter from '../../util/bus'
+import Alert from '../Alert/Alert.vue'
+import changeCate from '../ListMenu/changCate'
 
 const emits = defineEmits<{
   (e: 'clickMenu'): void
@@ -29,6 +31,51 @@ function toList(listName: string) {
       listName,
     },
   })
+}
+
+const dialogShow = ref(false)
+const cateText = ref('')
+function addCate() {
+  cateList.push({
+    id: new Date().getTime(),
+    title: cateText.value,
+  })
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList,
+  }))
+  emitter.emit('setCate', JSON.stringify({
+    data: cateList,
+  }))
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList,
+      },
+    })
+  }
+  dialogShow.value = false
+  cateText.value = ''
+}
+function delCate(id: number) {
+  for (let i = 0; i < cateList.length; i++) {
+    if (cateList[i].id === id)
+      cateList.splice(i, 1)
+  }
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList,
+  }))
+  emitter.emit('setCate', JSON.stringify({
+    data: cateList,
+  }))
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList,
+      },
+    })
+  }
 }
 </script>
 
@@ -78,12 +125,28 @@ function toList(listName: string) {
       </div>
       <div
         v-for="cate in cateList" :key="cate.id" p-10px w="[calc(100vw-20px)]"
-        text-center
-        text-18px
+        text-center text-18px relative
+        flex items-center justify-center
         bg="hover:black/5 active:black/10"
         @click="toList(`${cate.id}`)"
       >
         {{ cate.title }}
+        <div
+          absolute right-10px rounded-5px
+          p-5px bg="black/10 dark:#999/10"
+          flex items-center justify-center
+          @click.stop="delCate(cate.id)"
+        >
+          <div i-mdi:close-thick text-12px />
+        </div>
+      </div>
+      <div
+        p-10px text-18px
+        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]"
+        flex justify-center items-center
+        @click.stop="dialogShow = true"
+      >
+        <div i-ph:plus-circle-bold text-20px />
       </div>
     </PerfectScrollbar>
   </div>
@@ -92,6 +155,20 @@ function toList(listName: string) {
     w-screen h-screen fixed
     z-1
   />
+  <Alert
+    :title="t('add-category')"
+    :dialog-show="dialogShow"
+    @cancel="dialogShow = false"
+    @return="addCate"
+  >
+    <input
+      v-model="cateText"
+      type="text"
+      bg="black/10 dark:#999/10" c="#555 dark:#bbb"
+      outline="primary-d dark:primary-a" border-none p-10px
+      rounded-5px
+    >
+  </Alert>
 </template>
 
 <style scoped>

@@ -39,7 +39,9 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
 
 <template>
   <RouterUrl v-if="routerShow" />
-  <router-view name="isWindow" />
+  <div :class="isDark ? 'dark' : ''">
+    <router-view name="isWindow" />
+  </div>
   <div
     v-if="!isWinDow"
     :bg="!isBlur ? (isDark ? 'black' : '#e5e5e5') : ''"
