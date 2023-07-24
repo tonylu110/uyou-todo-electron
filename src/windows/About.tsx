@@ -1,11 +1,11 @@
-import { isMac, isWindows10OrAfter } from '../util/os'
+import { isMac } from '../util/os'
 import CloseButton from '../components/CloseButton'
 import { versionText } from '../util/appVersionCode'
 
 const About: SetupFC = () => {
   return () => (
     <div
-      drag bg={isWindows10OrAfter() ? 'transparent' : '#edd9b750'}
+      drag bg-transparent
       flex="~ col" justify-center items-center
       w-screen h-screen
     >

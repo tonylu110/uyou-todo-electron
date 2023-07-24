@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Alert from '../components/Alert/Alert.vue'
-import { isMac, isWindows10OrAfter } from '../util/os'
+import { isMac } from '../util/os'
 import CloseButton from '../components/CloseButton'
 
 const { t } = useI18n()
@@ -70,7 +70,7 @@ function closeAlert() {
 
 <template>
   <div
-    :bg="isWindows10OrAfter() ? 'transparent' : '#edd9b750'"
+    bg-transparent
     flex="~ col" justify-center items-center
     w-screen h-screen drag
   >

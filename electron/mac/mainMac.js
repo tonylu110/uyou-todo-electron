@@ -30,7 +30,7 @@ function createWindow() {
   initSim()
 
   mainWindow = new BrowserWindow({
-    width: simple ? 350 : 1000,
+    width: simple ? 370 : 1000,
     height: 750,
     minHeight: simple ? 500 : 600,
     minWidth: simple ? 290 : 400,

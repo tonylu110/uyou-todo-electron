@@ -6,6 +6,7 @@ import type { cateItem } from '../ListMenu/ICateItem'
 import emitter from '../../util/bus'
 import Alert from '../Alert/Alert.vue'
 import changeCate from '../ListMenu/changCate'
+import MenuItem from './MenuItem.vue'
 
 const emits = defineEmits<{
   (e: 'clickMenu'): void
@@ -77,6 +78,27 @@ function delCate(id: number) {
     })
   }
 }
+
+function editItem(id: number, title: string) {
+  for (let i = 0; i < cateList.length; i++) {
+    if (cateList[i].id === id)
+      cateList[i].title = title
+  }
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList,
+  }))
+  emitter.emit('setCate', JSON.stringify({
+    data: cateList,
+  }))
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList,
+      },
+    })
+  }
+}
 </script>
 
 <template>
@@ -123,23 +145,14 @@ function delCate(id: number) {
       >
         {{ t('listMenu.incompleted') }}
       </div>
-      <div
-        v-for="cate in cateList" :key="cate.id" p-10px w="[calc(100vw-20px)]"
-        text-center text-18px relative
-        flex items-center justify-center
-        bg="hover:black/5 active:black/10"
-        @click="toList(`${cate.id}`)"
-      >
-        {{ cate.title }}
-        <div
-          absolute right-10px rounded-5px
-          p-5px bg="black/10 dark:#999/10"
-          flex items-center justify-center
-          @click.stop="delCate(cate.id)"
-        >
-          <div i-mdi:close-thick text-12px />
-        </div>
-      </div>
+      <MenuItem
+        v-for="cate in cateList"
+        :id="cate.id"
+        :key="cate.id"
+        :title="cate.title"
+        @del-item="delCate"
+        @edit-item="editItem"
+      />
       <div
         p-10px text-18px
         bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]"
