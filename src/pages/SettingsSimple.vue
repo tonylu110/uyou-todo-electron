@@ -11,7 +11,7 @@ import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
 import emitter from '../util/bus'
 import isDev from '../util/mode'
 import setSwitchFn from '../util/setSwitchFn'
-import ColorChange from '../components/SettingList/ColorChange'
+import ColorChange from '../components/SettingList/colorChange'
 
 const { t } = useI18n()
 
@@ -80,7 +80,7 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
         @switch-fun="showRouterUrl"
       />
     </ItemBox>
-    <ColorChange v-if="(isLinux && isWindows10OrAfter) || isMac" />
+    <ColorChange v-if="(!isLinux || isWindows10OrAfter) || isMac" />
     <Item
       :title="loginState ? t('myAccount') : t('loginText')"
       @item-fun="() => router.push('/account?from=setting')"
@@ -113,7 +113,7 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
         :title="t('anotherSettings.itemWrap')"
         :show-switch="true"
         :switch-state="textWrapState"
-        @switch-fun="setSwitchFn('routerUrl', !textWrapState, () => textWrapState = !textWrapState)"
+        @switch-fun="setSwitchFn('textWrap', !textWrapState, () => textWrapState = !textWrapState)"
       />
     </ItemBox>
     <ItemBox>
