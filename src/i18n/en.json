@@ -139,5 +139,6 @@
     "minute": "minute | minutes",
     "second": "second | seconds"
   },
-  "add-category": "Add Category"
+  "add-category": "Add Category",
+  "today": "Today "
 }

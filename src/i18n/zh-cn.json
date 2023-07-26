@@ -139,5 +139,6 @@
     "minute": "分钟",
     "second": "秒"
   },
-  "add-category": "添加分类"
+  "add-category": "添加分类",
+  "today": "今天 "
 }

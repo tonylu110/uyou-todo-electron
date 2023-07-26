@@ -77,16 +77,6 @@ const customContextMenu: Array<customContextMenuType> = reactive([{
   event: 'setOk',
   icon: computed(() => okState.value ? 'i-mdi:checkbox-blank-circle-outline' : 'i-mdi:checkbox-marked-circle-outline'),
 }, {
-  label: computed(() => starState.value ? t('contextMenu.unstarred') : t('contextMenu.star')),
-  event: 'setStar',
-  icon: computed(() => starState.value ? 'i-ph:star-bold' : 'i-ph:star-fill'),
-  color: computed(() => isDark.value ? '#e6a400' : '#fcd901'),
-}, {
-  label: t('contextMenu.removeToDo'),
-  event: 'remove',
-  icon: 'i-ph:trash-bold',
-  color: isDark.value ? '#99362f' : '#d6010f',
-}, {
   label: t('contextMenu.edit'),
   event: 'edit',
   icon: 'i-ph:pencil-simple-bold',
@@ -104,6 +94,16 @@ const customContextMenu: Array<customContextMenuType> = reactive([{
       }
     })
   }),
+}, {
+  label: computed(() => starState.value ? t('contextMenu.unstarred') : t('contextMenu.star')),
+  event: 'setStar',
+  icon: computed(() => starState.value ? 'i-ph:star-bold' : 'i-ph:star-fill'),
+  color: computed(() => isDark.value ? '#e6a400' : '#fcd901'),
+}, {
+  label: t('contextMenu.removeToDo'),
+  event: 'remove',
+  icon: 'i-ph:trash-bold',
+  color: isDark.value ? '#99362f' : '#d6010f',
 }])
 
 watchEffect(() => {
@@ -205,16 +205,6 @@ function editItem() {
       bg="#eee/80 dark:#222/50"
     >
       <div v-if="!showEdit" absolute right-10px top-5px flex items-center>
-        <div
-          class="c-button"
-          bg="black/10 dark:#bbb/10"
-          @click="setStar"
-        >
-          <div
-            i-ph:star-fill text-14px :c="starState ? '#e6a400' : '#555/20 dark:#bbb/20'"
-            pointer-events-auto cursor-pointer
-          />
-        </div>
         <div flex ml-10px>
           <div class="c-button" bg="black/10 dark:#bbb/10" @click="textWrap = !textWrap">
             <div v-if="textWrap" i-fluent:chevron-up-12-filled text-14px c="#777 dark:#bbb" />
@@ -228,6 +218,15 @@ function editItem() {
       <div class="time-area">
         <div flex items-center mb-3px mt-5px>
           <span mr-7px c="#555/40 dark:#bbb/40" text-12px>{{ getTime(time) }}</span>
+          <div
+            class="c-button"
+            @click="setStar"
+          >
+            <div
+              i-ph:star-fill text-14px :c="starState ? '#e6a400' : '#555/20 dark:#bbb/20'"
+              pointer-events-auto cursor-pointer
+            />
+          </div>
         </div>
       </div>
       <div>
@@ -242,7 +241,7 @@ function editItem() {
           transition-300 bg="selection:primary-d selection:dark:primary-a"
           overflow-hidden text-ellipsis :whitespace="textWrap ? 'pre-wrap' : 'nowrap'"
           :line="listName === 'allNotDo' ? '' : (okState ? 'through' : '')"
-          max-w="[calc(100%-100px)]"
+          max-w="[calc(100%-65px)]"
         >
           {{ text }}
         </span>
@@ -250,30 +249,30 @@ function editItem() {
           v-else
           v-model="editText"
           v-focus
-          bg-transparent outline-none border-none w="[calc(100%-100px)]"
+          bg-transparent outline-none border-none w="[calc(100%-65px)]"
           c="#555 dark:#bbb" font="[smartisan-t]" text-4
           p-0 m-0 select-text pointer-events-auto
         />
         <div
           v-if="showEdit"
-          pointer-events-auto absolute flex
+          pointer-events-auto absolute flex="~ col"
           right-8px bottom="50%" translate="y-50%"
         >
           <div
-            p-7px mr-10px rounded-5px cursor-pointer
+            p="y-7px x-16px" mb-7px rounded-5px cursor-pointer
             bg="black/10 dark:#999/10 hover:black/20 dark:hover:#999/20"
             flex justify-center items-center
             @click.stop="editItem"
           >
-            <div i-ph:check-circle-bold text-25px c="#555 dark:#bbb" />
+            <div i-ph:check-circle-bold text-22px c="#555 dark:#bbb" />
           </div>
           <div
-            p-7px rounded-5px cursor-pointer
+            p="y-7px x-16px" rounded-5px cursor-pointer
             bg="black/10 dark:#999/10 hover:black/20 dark:hover:#999/20"
             flex justify-center items-center
             @click.stop="showEdit = false"
           >
-            <div i-mdi:close-circle-outline text-25px c="#555 dark:#bbb" />
+            <div i-mdi:close-circle-outline text-22px c="#555 dark:#bbb" />
           </div>
         </div>
       </div>
