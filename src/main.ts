@@ -1,5 +1,6 @@
 import 'virtual:uno.css'
 import './main.scss'
+import 'floating-vue/dist/style.css'
 import { createApp, ref } from 'vue'
 import PerfectScrollbar from 'vue3-perfect-scrollbar'
 import App from './App.vue'

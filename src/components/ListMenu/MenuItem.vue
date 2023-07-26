@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { Dropdown as VDropdown } from 'floating-vue'
+import { useI18n } from 'vue-i18n'
 
 defineProps<{
   id: number
@@ -11,6 +13,8 @@ const emits = defineEmits<{
   delCate: [id: number]
   editCate: [id: number, title: string]
 }>()
+
+const { t } = useI18n()
 
 const route = useRoute()
 const router = useRouter()
@@ -26,6 +30,8 @@ function toList(listName: string) {
 
 const cateText = ref('')
 const showEdit = ref(false)
+
+const isOpen = ref(false)
 </script>
 
 <template>
@@ -67,15 +73,51 @@ const showEdit = ref(false)
       >
         <div i-ph:pencil-simple-bold :c="route.query.listName === `${id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />
       </div>
-      <div
-        flex justify-center items-center
-        :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'"
-        h="18px" w="18px"
-        rounded-xl transition="300 width margin"
-        @click.stop="emits('delCate', id)"
+      <VDropdown
+        v-model:shown="isOpen"
+        :distance="12"
+        placement="top"
       >
-        <div i-ph:trash-simple-bold :c="route.query.listName === `${id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />
-      </div>
+        <div
+          flex justify-center
+          items-center
+          :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'" h="18px"
+          w="18px" rounded-xl
+          transition="300 width margin"
+          @click.stop="isOpen = true"
+        >
+          <div i-ph:trash-simple-bold :c="route.query.listName === `${id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />
+        </div>
+        <template #popper>
+          <div p-10px>
+            <span text-14px>{{ t('listMenu.delCate') }}</span>
+            <div flex justify-center items-center mt-10px>
+              <button
+                bg="white active:#ddd"
+                mr-5px border-none rounded-5px
+                p="x-10px y-5px" cursor-pointer
+                flex justify-center items-center
+                shadow="sm black/50"
+                @click.stop="isOpen = false"
+              >
+                <div i-mdi:close-thick mr-5px />
+                <span>{{ t('cancelText') }}</span>
+              </button>
+              <button
+                bg="primary-d active:primary-a"
+                border-none rounded-5px cursor-pointer
+                p="x-10px y-5px" c-white
+                flex justify-center items-center
+                shadow="sm black/20"
+                @click.stop="emits('delCate', id)"
+              >
+                <div i-mdi:check-bold mr-5px />
+                <span>{{ t('alertText.returnText') }}</span>
+              </button>
+            </div>
+          </div>
+        </template>
+      </VDropdown>
     </div>
     <div v-else>
       <div

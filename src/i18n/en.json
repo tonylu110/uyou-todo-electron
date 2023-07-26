@@ -37,7 +37,8 @@
     "completed": "Completed",
     "incompleted": "Incompleted",
     "star": "Starred ToDos",
-    "to": "Move to "
+    "to": "Move to ",
+    "delCate": "Are you sure you want to delete this category?"
   },
   "alertText": {
     "cancelText": "Cancel",

@@ -1,6 +1,6 @@
 {
   "name": "uyoutodo",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": false,
   "author": "Anthony Lu <taruruchan0@gmail.com>",
   "main": "electron/main.js",
@@ -37,8 +37,9 @@
     "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",
     "electron": "^25.3.0",
-    "electron-builder": "^24.4.0",
+    "electron-builder": "^24.6.3",
     "eslint": "^8.43.0",
+    "floating-vue": "2.0.0-beta.24",
     "mitt": "^3.0.1",
     "moment": "^2.29.4",
     "sass": "^1.53.0",

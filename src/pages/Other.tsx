@@ -41,7 +41,8 @@ const Other: SetupFC = () => {
     else {
       listData.value = list.value!.filter(listData => listData.cate === route.query.listName)
       const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
-      title.value = JSON.parse(localCateList!).data.filter((cate: cateItem) => `${cate.id}` === route.query.listName)[0].title
+      if (route.name === 'other')
+        title.value = JSON.parse(localCateList!).data.filter((cate: cateItem) => `${cate.id}` === route.query.listName)[0].title
     }
   })
 

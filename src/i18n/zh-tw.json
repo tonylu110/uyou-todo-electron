@@ -37,7 +37,8 @@
     "completed": "已完成",
     "incompleted": "未完成",
     "star": "加星 ToDo",
-    "to": "移至 "
+    "to": "移至 ",
+    "delCate": "你確定要刪除這個分類嗎？"
   },
   "alertText": {
     "cancelText": "取消",
