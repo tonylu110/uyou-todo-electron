@@ -80,6 +80,7 @@ function keyEnter() {
   >
     <textarea
       v-model="text"
+      v-focus
       class="add-item-text" rows="4"
       c="#555 dark:#bbb selection:white"
       @keydown.enter="keyEnter"

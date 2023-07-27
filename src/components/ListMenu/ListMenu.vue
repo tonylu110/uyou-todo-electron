@@ -168,16 +168,15 @@ function editCate(id: number, title: string) {
 }
 
 function delWithToDo(id: number) {
-  delCate(id)
-
   const listAll = ref<ITodoList[]>(LocalStorage('get')!)
 
-  for (let i = 0; i < listAll.value.length; i++) {
-    if (listAll.value[i].cate === `${id}`)
-      listAll.value!.splice(i, 1)
-  }
+  const resultArr = listAll.value.filter((value) => {
+    return value.cate !== `${id}`
+  })
 
-  saveItemSet(listAll.value!)
+  saveItemSet(resultArr)
+
+  delCate(id)
 }
 </script>
 
@@ -319,10 +318,11 @@ function delWithToDo(id: number) {
         >
           <div w="100%" flex items-center>
             <input
-              v-model="cateTitle" w="100%" text-12px rounded-5px
+              v-model="cateTitle"
+              v-focus
+              w="100%" text-12px rounded-5px
               p-5px bg="black/5" border-none c="dark:#bbb"
               outline-none
-              autofocus="true"
               type="text"
             >
             <div
