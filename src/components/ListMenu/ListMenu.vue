@@ -324,6 +324,7 @@ function delWithToDo(id: number) {
               p-5px bg="black/5" border-none c="dark:#bbb"
               outline-none
               type="text"
+              @keydown.enter="addCate"
             >
             <div
               flex justify-center items-center

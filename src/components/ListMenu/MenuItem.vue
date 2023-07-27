@@ -91,7 +91,7 @@ const isOpen = ref(false)
         </div>
         <template #popper>
           <div p-10px flex="~ col" items-center>
-            <span text-14px>{{ t('listMenu.delCate') }}</span>
+            <span text-14px>{{ t('listMenu.delCate', { title }) }}</span>
             <div flex justify-center items-center mt-10px>
               <button
                 bg="white active:#ddd"

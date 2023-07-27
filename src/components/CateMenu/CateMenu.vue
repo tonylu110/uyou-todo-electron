@@ -6,6 +6,9 @@ import type { cateItem } from '../ListMenu/ICateItem'
 import emitter from '../../util/bus'
 import Alert from '../Alert/Alert.vue'
 import changeCate from '../ListMenu/changCate'
+import type ITodoList from '../../interface/ITodoListArray'
+import LocalStorage from '../../util/localStorage'
+import saveItemSet from '../List/saveItemSet'
 import MenuItem from './MenuItem.vue'
 
 const emits = defineEmits<{
@@ -99,6 +102,18 @@ function editItem(id: number, title: string) {
     })
   }
 }
+
+function delWithToDo(id: number) {
+  const listAll = ref<ITodoList[]>(LocalStorage('get')!)
+
+  const resultArr = listAll.value.filter((value) => {
+    return value.cate !== `${id}`
+  })
+
+  saveItemSet(resultArr)
+
+  delCate(id)
+}
 </script>
 
 <template>
@@ -152,6 +167,7 @@ function editItem(id: number, title: string) {
         :title="cate.title"
         @del-item="delCate"
         @edit-item="editItem"
+        @del-with-to-do="delWithToDo"
       />
       <div
         p-10px text-18px

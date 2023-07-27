@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { Dropdown as VDropdown } from 'floating-vue'
+import { useI18n } from 'vue-i18n'
 
 defineProps<{
   id: number
@@ -10,7 +12,10 @@ defineProps<{
 const emits = defineEmits<{
   delItem: [id: number]
   editItem: [id: number, title: string]
+  delWithToDo: [id: number]
 }>()
+
+const { t } = useI18n()
 
 const router = useRouter()
 
@@ -25,6 +30,8 @@ function toList(listName: string) {
 
 const showEdit = ref(false)
 const cateTitle = ref('')
+
+const isOpen = ref(false)
 </script>
 
 <template>
@@ -62,13 +69,65 @@ const cateTitle = ref('')
       >
         <div i-ph:pencil-simple-bold text-12px />
       </div>
-      <div
-        rounded-5px p-5px bg="black/10 dark:#999/10"
-        flex items-center justify-center
-        @click.stop="emits('delItem', id)"
+      <VDropdown
+        v-model:shown="isOpen"
+        :distance="12"
+        :positioning-disabled="true"
       >
-        <div i-ph:trash-bold text-12px />
-      </div>
+        <div
+          rounded-5px p-5px bg="black/10 dark:#999/10"
+          flex items-center justify-center
+          @click.stop="isOpen = true"
+        >
+          <div i-ph:trash-bold text-12px />
+        </div>
+        <template #popper>
+          <div p-10px flex="~ col" items-center>
+            <span text-14px>{{ t('listMenu.delCate', { title }) }}</span>
+            <div flex justify-center items-center mt-10px>
+              <button
+                bg="white active:#ddd"
+                mr-5px border-none rounded-5px
+                p="x-10px y-5px" cursor-pointer
+                flex justify-center items-center
+                shadow="sm black/20" c="#555"
+                @click.stop="isOpen = false"
+              >
+                <div i-mdi:close-thick mr-5px />
+                <span>{{ t('cancelText') }}</span>
+              </button>
+              <button
+                bg="!primary-d active:!primary-a"
+                border-none rounded-5px cursor-pointer
+                p="x-10px y-5px" c="!white"
+                flex justify-center items-center
+                shadow="sm black/20" mr-5px
+                @click.stop="() => {
+                  emits('delItem', id)
+                  isOpen = false
+                }"
+              >
+                <div i-mdi:check-bold mr-5px />
+                <span>{{ t('alertText.returnText') }}</span>
+              </button>
+              <button
+                bg="!error-d active:!error-a"
+                border-none rounded-5px cursor-pointer
+                p="x-10px y-5px" c="!white"
+                flex justify-center items-center
+                shadow="sm black/20"
+                @click.stop="() => {
+                  emits('delWithToDo', id)
+                  isOpen = false
+                }"
+              >
+                <div i-ph:warning-circle-bold mr-5px />
+                <span>{{ t('listMenu.delTodo') }}</span>
+              </button>
+            </div>
+          </div>
+        </template>
+      </VDropdown>
     </div>
     <div
       v-else

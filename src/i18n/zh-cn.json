@@ -38,7 +38,7 @@
     "incompleted": "未完成",
     "star": "加星 ToDo",
     "to": "移至 ",
-    "delCate": "你确定要删除这个分类吗？",
+    "delCate": "你确定要删除 {title} 吗？",
     "delTodo": "一起删除 ToDo"
   },
   "alertText": {

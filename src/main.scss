@@ -30,6 +30,24 @@ body {
       --uno: border-white/90;
     }
   }
+
+  &.v-popper__popper--no-positioning {
+    --uno: fixed z-9999 top-0 l-0 w-100% h-100% flex items-end;
+
+    .v-popper__backdrop {
+      --uno: block bg-black/20;
+    }
+
+    .v-popper__wrapper {
+      --uno: w-100% pointer-events-auto transition-transform transition-150 transition-ease-out m-20px mb-50px;
+    }
+
+    &.v-popper__popper--hidden {
+      .v-popper__wrapper {
+        --uno: translate-y-100%;
+      }
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
