@@ -1,16 +1,7 @@
+@import url(./font.scss);
+
 ::-webkit-scrollbar {
   --uno: hidden;
-}
-
-@font-face {
-  font-family: 'smartisan-t';
-  src: url('../fonts/smartisan-t/Smartisan_Compact-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'smartisan-t';
-  font-weight: bold;
-  src: url('../fonts/smartisan-t/Smartisan_Compact-Bold.ttf');
 }
 
 .black-back {
@@ -45,15 +36,15 @@ body {
   .v-popper__popper {
     .v-popper__wrapper {
       .v-popper__inner {
-        --uno: bg-#555/90 c-#bbb border-#555/90;
+        --uno: bg-#444/90 c-#bbb border-#444/90;
 
         button {
-          --uno: bg-#555/90 c-#bbb;
+          --uno: bg-#555 c-#bbb active:bg-#505050;
         }
       }
 
       .v-popper__arrow-inner, .v-popper__arrow-outer {
-        --uno: border-#555/90;
+        --uno: border-#444/90;
       }
     }
   }

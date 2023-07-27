@@ -12,6 +12,7 @@ defineProps<{
 const emits = defineEmits<{
   delCate: [id: number]
   editCate: [id: number, title: string]
+  delWithToDo: [id: number]
 }>()
 
 const { t } = useI18n()
@@ -89,7 +90,7 @@ const isOpen = ref(false)
           <div i-ph:trash-simple-bold :c="route.query.listName === `${id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />
         </div>
         <template #popper>
-          <div p-10px>
+          <div p-10px flex="~ col" items-center>
             <span text-14px>{{ t('listMenu.delCate') }}</span>
             <div flex justify-center items-center mt-10px>
               <button
@@ -108,11 +109,28 @@ const isOpen = ref(false)
                 border-none rounded-5px cursor-pointer
                 p="x-10px y-5px" c="!white"
                 flex justify-center items-center
-                shadow="sm black/20"
-                @click.stop="emits('delCate', id)"
+                shadow="sm black/20" mr-5px
+                @click.stop="() => {
+                  emits('delCate', id)
+                  isOpen = false
+                }"
               >
                 <div i-mdi:check-bold mr-5px />
                 <span>{{ t('alertText.returnText') }}</span>
+              </button>
+              <button
+                bg="!error-d active:!error-a"
+                border-none rounded-5px cursor-pointer
+                p="x-10px y-5px" c="!white"
+                flex justify-center items-center
+                shadow="sm black/20"
+                @click.stop="() => {
+                  emits('delWithToDo', id)
+                  isOpen = false
+                }"
+              >
+                <div i-ph:warning-circle-bold mr-5px />
+                <span>{{ t('listMenu.delTodo') }}</span>
               </button>
             </div>
           </div>

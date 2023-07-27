@@ -7,6 +7,9 @@ import router from '../../router'
 import emitter from '../../util/bus'
 import { isMac } from '../../util/os'
 import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
+import LocalStorage from '../../util/localStorage'
+import type ITodoList from '../../interface/ITodoListArray'
+import saveItemSet from '../List/saveItemSet'
 import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
 import MenuItem from './MenuItem.vue'
@@ -163,6 +166,19 @@ function editCate(id: number, title: string) {
     })
   }
 }
+
+function delWithToDo(id: number) {
+  delCate(id)
+
+  const listAll = ref<ITodoList[]>(LocalStorage('get')!)
+
+  for (let i = 0; i < listAll.value.length; i++) {
+    if (listAll.value[i].cate === `${id}`)
+      listAll.value!.splice(i, 1)
+  }
+
+  saveItemSet(listAll.value!)
+}
 </script>
 
 <template>
@@ -292,6 +308,7 @@ function editCate(id: number, title: string) {
           :title="item.title"
           @del-cate="delCate"
           @edit-cate="editCate"
+          @del-with-to-do="delWithToDo"
         />
         <div
           v-if="showAdd" flex items-center
