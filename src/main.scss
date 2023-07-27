@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  display: none;
+  --uno: hidden;
 }
 
 @font-face {
@@ -14,27 +14,47 @@
 }
 
 .black-back {
-  background-color: #00000030;
-  backdrop-filter: blur(10px);
-  height: 100vh;
-  width: calc(100vw - 300px);
-  position: fixed;
-  top: 50%;
-  right: 0;
-  transform: translate(0%, -50%);
-  margin-top: 25px;
+  --uno: bg-black/45 backdrop-blur h-screen w-[calc(100vw-300px)] fixed top-50% right-0 translate-x-0 translate-y--50% mt-25px;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'smartisan-t';
+  --uno: m-0 p-0 font-[smartisan-t];
 
   #app {
-    user-select: none;
+    --uno: select-none;
   }
 }
 
 .ps {
-  padding-inline-start: 0;
+  --uno: p-inline-0;
+}
+
+.v-popper__popper {
+  .v-popper__wrapper {
+    .v-popper__inner {
+      --uno: bg-white/90 rounded-7px backdrop-blur c-#555;
+    }
+
+    .v-popper__arrow-inner, .v-popper__arrow-outer {
+      --uno: border-white/90;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .v-popper__popper {
+    .v-popper__wrapper {
+      .v-popper__inner {
+        --uno: bg-#555/90 c-#bbb border-#555/90;
+
+        button {
+          --uno: bg-#555/90 c-#bbb;
+        }
+      }
+
+      .v-popper__arrow-inner, .v-popper__arrow-outer {
+        --uno: border-#555/90;
+      }
+    }
+  }
 }

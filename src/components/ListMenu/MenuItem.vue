@@ -97,16 +97,16 @@ const isOpen = ref(false)
                 mr-5px border-none rounded-5px
                 p="x-10px y-5px" cursor-pointer
                 flex justify-center items-center
-                shadow="sm black/50"
+                shadow="sm black/20" c="#555"
                 @click.stop="isOpen = false"
               >
                 <div i-mdi:close-thick mr-5px />
                 <span>{{ t('cancelText') }}</span>
               </button>
               <button
-                bg="primary-d active:primary-a"
+                bg="!primary-d active:!primary-a"
                 border-none rounded-5px cursor-pointer
-                p="x-10px y-5px" c-white
+                p="x-10px y-5px" c="!white"
                 flex justify-center items-center
                 shadow="sm black/20"
                 @click.stop="emits('delCate', id)"

@@ -1,4 +1,4 @@
-import { defineConfig, presetAttributify, presetIcons, presetUno } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetUno, transformerDirectives } from 'unocss'
 import transformerAttributifyJsx from '@unocss/transformer-attributify-jsx'
 
 export default defineConfig({
@@ -18,6 +18,9 @@ export default defineConfig({
     }),
   ],
   transformers: [
+    transformerDirectives({
+      applyVariable: ['--at-apply', '--uno-apply', '--uno'],
+    }),
     transformerAttributifyJsx(),
   ],
   rules: [
