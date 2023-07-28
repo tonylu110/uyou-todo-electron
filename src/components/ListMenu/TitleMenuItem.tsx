@@ -35,12 +35,20 @@ const TitleMenuItem: SetupFC = () => {
         onClick={() => router.push('/account')}
       >
         <div
-          i-ph:user-circle-bold text-28px mr-10px
-          c={route.name === 'account' && route.query.from !== 'setting'
+          rounded-full p-6px w-16px h-16px mr-10px
+          bg={route.name === 'account' && route.query.from !== 'setting'
             ? 'white group-hover:white'
-            : 'group-hover:white #00000090 dark:#bbb'
+            : 'group-hover:white #333/20 dark:#bbb'
           }
-        />
+        >
+          <div
+            i-ph:user-bold text-16px block
+            c={route.name === 'account' && route.query.from !== 'setting'
+              ? 'primary-d dark:primary-a'
+              : 'group-hover:white #00000090 dark:#555'
+            }
+          />
+        </div>
         <span
           font-bold
           c={route.name === 'account' && route.query.from !== 'setting'
