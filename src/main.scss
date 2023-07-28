@@ -16,11 +16,17 @@ body {
   }
 }
 
+input[disabled] {
+  --uno: cursor-not-allowed;
+}
+
 .ps {
   --uno: p-inline-0;
 }
 
 .v-popper__popper {
+  --uno: no-drag;
+
   .v-popper__wrapper {
     .v-popper__inner {
       --uno: bg-white/90 rounded-7px backdrop-blur c-#555;
@@ -39,7 +45,7 @@ body {
     }
 
     .v-popper__wrapper {
-      --uno: w-100% pointer-events-auto transition-transform transition-150 transition-ease-out m-20px mb-50px;
+      --uno: w-100% pointer-events-auto transition-transform transition-150 transition-ease-out m-10px mb-50px;
     }
 
     &.v-popper__popper--hidden {

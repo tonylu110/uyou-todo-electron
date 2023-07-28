@@ -5,7 +5,6 @@ import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import router from '../../router'
 import emitter from '../../util/bus'
-import { isMac } from '../../util/os'
 import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
 import LocalStorage from '../../util/localStorage'
 import type ITodoList from '../../interface/ITodoListArray'
@@ -13,6 +12,7 @@ import saveItemSet from '../List/saveItemSet'
 import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
 import MenuItem from './MenuItem.vue'
+import TitleMenuItem from './TitleMenuItem'
 
 const { t } = useI18n()
 
@@ -195,8 +195,10 @@ function delWithToDo(id: number) {
       <div i-ph:list-bold text-20px block c="black/56 dark:#bbb" />
     </div>
     <div class="list">
-      <span v-if="!menuShort" class="title" c="dark:!#bbb" :mt="isMac() ? '' : (systemBarShow ? '!-30px' : '!10px')">{{ t('accountPage.account') }}</span>
+      <TitleMenuItem v-if="!menuShort" />
+      <!-- <span v-if="!menuShort" class="title" c="dark:!#bbb" :mt="isMac() ? '' : (systemBarShow ? '!-30px' : '!10px')">{{ t('accountPage.account') }}</span> -->
       <div
+        v-if="menuShort"
         class="account-list group"
         :mt="menuShort ? (systemBarShow ? '!-110px' : '!-70px') : ''"
         :mb="menuShort ? '' : '!10px'"
@@ -215,9 +217,9 @@ function delWithToDo(id: number) {
         </div>
       </div>
       <span v-if="!menuShort" class="title" c="dark:!#bbb" mb="!10px">{{ t('listMenu.cate') }}</span>
-      <perfect-scrollbar ref="cateListRef" class="cate" :shadow="ps === 0 ? '' : 'inner'" @ps-scroll-y="onScroll">
+      <perfect-scrollbar ref="cateListRef" class="cate" :h="menuShort ? '![calc(100vh-260px)]' : ''" :shadow="ps === 0 ? '' : 'inner'" @ps-scroll-y="onScroll">
         <div
-          v-if="showList.today.show"
+          v-if="showList.today.show && menuShort"
           class="all-todo-list group"
           :bg="routeQueryName === 'today' ? 'primary-d hover:primary-a dark:primary-a' : 'hover:primary-d dark:hover:primary-a'"
           @click="toList('today')"
@@ -234,7 +236,7 @@ function delWithToDo(id: number) {
           </div>
         </div>
         <div
-          v-if="showList.star.show"
+          v-if="showList.star.show && menuShort"
           class="all-todo-list group"
           :bg="routeQueryName === 'star' ? 'primary-d hover:primary-a dark:primary-a' : 'hover:primary-d dark:hover:primary-a'"
           @click="toList('star')"
@@ -251,6 +253,7 @@ function delWithToDo(id: number) {
           </div>
         </div>
         <div
+          v-if="menuShort"
           class="all-todo-list group"
           :bg="routeName === 'Home' ? 'primary-d hover:primary-a dark:primary-a' : 'hover:primary-d dark:hover:primary-a'"
           @click="router.push('/')"
@@ -267,7 +270,7 @@ function delWithToDo(id: number) {
           </div>
         </div>
         <div
-          v-if="showList.allNotDo.show"
+          v-if="showList.allNotDo.show && menuShort"
           class="all-todo-list group"
           :bg="routeQueryName === 'allNotDo' ? 'primary-d hover:primary-a dark:primary-a' : 'hover:primary-d dark:hover:primary-a'"
           @click="toList('allNotDo')"
@@ -284,7 +287,7 @@ function delWithToDo(id: number) {
           </div>
         </div>
         <div
-          v-if="showList.allDo.show"
+          v-if="showList.allDo.show && menuShort"
           class="all-todo-list group"
           :bg="routeQueryName === 'allDo' ? 'primary-d hover:primary-a dark:primary-a' : 'hover:primary-d dark:hover:primary-a'"
           @click="toList('allDo')"

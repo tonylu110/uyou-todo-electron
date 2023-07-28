@@ -59,6 +59,10 @@ export default defineConfig({
         d: '#00b600',
         a: '#00a600',
       },
+      warn: {
+        d: '#fcd901',
+        a: '#e6a400',
+      },
     },
   },
 })

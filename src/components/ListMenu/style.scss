@@ -11,14 +11,15 @@
   .list {
     .title {
       display: block;
-      margin: 10px 0 0 20px;
+      margin: 15px 0 0 20px;
       font-weight: bold;
       color: #00000090;
     }
 
     .cate {
       overflow-y: scroll;
-      height: calc(100vh - 260px);
+      height: calc(100vh - 520px);
+      margin-bottom: 10px;
     }
 
     .setting-list {
