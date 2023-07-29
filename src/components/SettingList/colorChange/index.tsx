@@ -32,13 +32,12 @@ const ColorChange: SetupFC = () => {
         flex justify-center items-center cursor-pointer
         onClick={() => setColor('system')}
       >
-        <div
-          w={simpleMode ? '82px' : '72px'} h={simpleMode ? '54px' : '44px'}
-          rounded-3px overflow-hidden bg-white
-          border="1px solid #666"
-        >
-          <div w="50%" h="100%" bg="#333"/>
-        </div>
+        <img
+          src="./color_mode/light_and_dark.png"
+          alt=""
+          w="[calc(100%-16px)]" h="[calc(100%-16px)]"
+          rounded-4px border="1px solid #00000020"
+        />
       </div>
       <div
         bg={colorMode.value === 'light' ? 'primary-d dark:primary-a' : ''}
@@ -47,10 +46,11 @@ const ColorChange: SetupFC = () => {
         flex justify-center items-center cursor-pointer
         onClick={() => setColor('light')}
       >
-        <div
-          w={simpleMode ? '82px' : '72px'} h={simpleMode ? '54px' : '44px'}
-          rounded-3px overflow-hidden bg-white
-          border="1px solid black/10"
+        <img
+          src="./color_mode/light.png"
+          alt=""
+          w="[calc(100%-16px)]" h="[calc(100%-16px)]"
+          rounded-4px border="1px solid #00000020"
         />
       </div>
       <div
@@ -60,10 +60,11 @@ const ColorChange: SetupFC = () => {
         flex justify-center items-center cursor-pointer
         onClick={() => setColor('dark')}
       >
-        <div
-          w={simpleMode ? '82px' : '72px'} h={simpleMode ? '54px' : '44px'}
-          rounded-3px overflow-hidden bg="#333"
-          border="1px solid black/10"
+        <img
+          src="./color_mode/dark.png"
+          alt=""
+          w="[calc(100%-16px)]" h="[calc(100%-16px)]"
+          rounded-4px border="1px solid #00000020"
         />
       </div>
     </div>
