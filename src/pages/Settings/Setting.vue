@@ -239,9 +239,9 @@ window.addEventListener('resize', () => {
     </ItemBox>
     <Item v-if="isInDev" :title="t('anotherSettings.laboratory')" @item-fun="router.push('/lab?from=setting')" />
     <ItemBox>
-      <Item :title="t('otherList.toWeb')" item-img="./images/web.png" @item-fun="shell.openExternal('https://uyoutodo.uyou.org.cn/#/')" />
-      <Item :title="t('otherList.toPhone')" item-img="./images/phone.png" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-uni/releases')" />
-      <Item :title="t('otherList.toDonate')" item-img="./images/donate.png" @item-fun="router.push('/donate?from=setting')" />
+      <Item :title="t('otherList.toFind')" item-img="./images/chat.png" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-electron/discussions/6')" />
+      <Item :title="t('otherList.toGithub')" item-img="./images/github.svg" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-electron')" />
+      <Item :title="t('otherList.toDonate')" item-img="./images/coffee.png" @item-fun="router.push('/donate?from=setting')" />
     </ItemBox>
     <ItemBox>
       <Item :title="t('anotherSettings.openSource')" @item-fun="router.push('/open?from=setting')" />

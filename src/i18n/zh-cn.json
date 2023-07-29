@@ -63,7 +63,9 @@
   "otherList": {
     "toWeb": "前往官网",
     "toPhone": "移动版",
-    "toDonate": "捐赠"
+    "toDonate": "请我喝杯咖啡",
+    "toGithub": "前往 GitHub",
+    "toFind": "联系我"
   },
   "anotherSettings": {
     "menuBlur": "页面菜单毛玻璃",

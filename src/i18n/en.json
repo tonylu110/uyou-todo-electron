@@ -63,7 +63,9 @@
   "otherList": {
     "toWeb": "Go to the official website",
     "toPhone": "Mobile version",
-    "toDonate": "Donate"
+    "toDonate": "Buy a cup of coffee for me",
+    "toGithub": "Go to GitHub",
+    "toFind": "Contact Me"
   },
   "anotherSettings": {
     "menuBlur": "Window List Menu Blur",
