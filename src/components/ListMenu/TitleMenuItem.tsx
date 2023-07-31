@@ -1,7 +1,8 @@
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import emitter from '../../util/bus'
+import LocalStorage from '../../util/localStorage'
 
 const TitleMenuItem: SetupFC = () => {
   const { t } = useI18n()
@@ -23,10 +24,21 @@ const TitleMenuItem: SetupFC = () => {
     })
   }
 
+  const listData = ref(LocalStorage('get'))
+
+  const TodayNum = computed(() => listData.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString()).length)
+  const starNum = computed(() => listData.value!.filter(listData => listData.star === true).length)
+  const doNum = computed(() => listData.value!.filter(listData => listData.ok).length)
+  const notDoNum = computed(() => listData.value!.filter(listData => !listData.ok).length)
+
+  emitter.on('changeList', () => {
+    listData.value = LocalStorage('get')
+  })
+
   return () => (
     <>
       <div
-        ml-10px p-10px no-drag cursor-pointer mb-10px
+        ml-10px p-10px no-drag cursor-pointer mb-10px relative
         bg={route.name === 'account' && route.query.from !== 'setting'
           ? 'primary-d dark:primary-a'
           : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
@@ -38,14 +50,14 @@ const TitleMenuItem: SetupFC = () => {
           rounded-full p-6px w-16px h-16px mr-10px
           bg={route.name === 'account' && route.query.from !== 'setting'
             ? 'white group-hover:white'
-            : 'group-hover:white #333/20 dark:#bbb'
+            : '#333/20 dark:#bbb'
           }
         >
           <div
             i-ph:user-bold text-16px block
             c={route.name === 'account' && route.query.from !== 'setting'
               ? 'primary-d dark:primary-a'
-              : 'group-hover:white #00000090 dark:#555'
+              : '#00000090 dark:#555'
             }
           />
         </div>
@@ -62,7 +74,7 @@ const TitleMenuItem: SetupFC = () => {
       <div flex="~ col" ml-10px no-drag>
         <div flex mb-10px>
           <div
-            flex="~ col" rounded-7px p-10px cursor-pointer
+            flex="~ col" rounded-7px p-10px cursor-pointer relative
             bg={route.query.listName === 'today'
               ? 'success-d dark:success-a'
               : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
@@ -74,14 +86,14 @@ const TitleMenuItem: SetupFC = () => {
               rounded-full p-6px w-16px h-16px mb-7px
               bg={route.query.listName === 'today'
                 ? 'white group-hover:white'
-                : 'group-hover:white #333/20 dark:#bbb'
+                : 'success-d dark:success-a'
               }
             >
               <div
                 i-ph:sun-dim-bold text-16px block
                 c={route.query.listName === 'today'
                   ? 'success-d dark:success-a'
-                  : 'group-hover:white #00000090 dark:#555'
+                  : 'white'
                 }
               />
             </div>
@@ -94,9 +106,18 @@ const TitleMenuItem: SetupFC = () => {
             >
               {t('startPage.today')}
             </span>
+            <span
+              absolute right-13px font-bold
+              c={route.query.listName === 'today'
+                ? 'white group-hover:white'
+                : 'group-hover:white #00000090 dark:#bbb'
+              }
+            >
+              {TodayNum.value}
+            </span>
           </div>
           <div
-            flex="~ col" rounded-7px p-10px cursor-pointer
+            flex="~ col" rounded-7px p-10px cursor-pointer relative
             bg={route.query.listName === 'star'
               ? 'warn-d dark:warn-a'
               : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
@@ -108,14 +129,14 @@ const TitleMenuItem: SetupFC = () => {
               rounded-full p-6px w-16px h-16px mb-7px
               bg={route.query.listName === 'star'
                 ? 'white group-hover:white'
-                : 'group-hover:white #333/20 dark:#bbb'
+                : 'warn-d dark:warn-a'
               }
             >
               <div
                 i-ph:star-bold text-16px block
                 c={route.query.listName === 'star'
                   ? 'warn-d dark:warn-a'
-                  : 'group-hover:white #00000090 dark:#555'
+                  : 'white'
                 }
               />
             </div>
@@ -128,13 +149,22 @@ const TitleMenuItem: SetupFC = () => {
             >
               {t('listMenu.star')}
             </span>
+            <span
+              absolute right-13px font-bold
+              c={route.query.listName === 'star'
+                ? 'white group-hover:white'
+                : 'group-hover:white #00000090 dark:#bbb'
+              }
+            >
+              {starNum.value}
+            </span>
           </div>
         </div>
         <div flex mb-10px>
           <div
-            flex="~ col" rounded-7px p-10px cursor-pointer
+            flex="~ col" rounded-7px p-10px cursor-pointer relative
             bg={route.query.listName === 'allNotDo'
-              ? 'primary-d dark:primary-a'
+              ? 'error-d dark:error-h'
               : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
             }
             mr-10px w="[calc(50%-30px)]"
@@ -144,14 +174,14 @@ const TitleMenuItem: SetupFC = () => {
               rounded-full p-6px w-16px h-16px mb-7px
               bg={route.query.listName === 'allNotDo'
                 ? 'white group-hover:white'
-                : 'group-hover:white #333/20 dark:#bbb'
+                : 'error-d dark:error-h'
               }
             >
               <div
                 i-ph:circle-bold text-16px block
                 c={route.query.listName === 'allNotDo'
-                  ? 'primary-d dark:primary-a'
-                  : 'group-hover:white #00000090 dark:#555'
+                  ? 'error-d dark:error-h'
+                  : 'white'
                 }
               />
             </div>
@@ -164,11 +194,20 @@ const TitleMenuItem: SetupFC = () => {
             >
               {t('listMenu.incompleted')}
             </span>
+            <span
+              absolute right-13px font-bold
+              c={route.query.listName === 'allNotDo'
+                ? 'white group-hover:white'
+                : 'group-hover:white #00000090 dark:#bbb'
+              }
+            >
+              {notDoNum.value}
+            </span>
           </div>
           <div
-            flex="~ col" rounded-7px p-10px cursor-pointer
+            flex="~ col" rounded-7px p-10px cursor-pointer relative
             bg={route.query.listName === 'allDo'
-              ? 'primary-d dark:primary-a'
+              ? 'gray-400 dark:gray-600'
               : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
             }
             w="[calc(50%-30px)]"
@@ -178,14 +217,14 @@ const TitleMenuItem: SetupFC = () => {
               rounded-full p-6px w-16px h-16px mb-7px
               bg={route.query.listName === 'allDo'
                 ? 'white group-hover:white'
-                : 'group-hover:white #333/20 dark:#bbb'
+                : 'gray-400 dark:gray-600'
               }
             >
               <div
                 i-ph:check-circle-bold text-16px block
                 c={route.query.listName === 'allDo'
-                  ? 'primary-d dark:primary-a'
-                  : 'group-hover:white #00000090 dark:#555'
+                  ? 'gray-400 dark:gray-600'
+                  : 'white'
                 }
               />
             </div>
@@ -197,6 +236,15 @@ const TitleMenuItem: SetupFC = () => {
               }
             >
               {t('listMenu.completed')}
+            </span>
+            <span
+              absolute right-13px font-bold
+              c={route.query.listName === 'allDo'
+                ? 'white group-hover:white'
+                : 'group-hover:white #00000090 dark:#bbb'
+              }
+            >
+              {doNum.value}
             </span>
           </div>
         </div>
@@ -213,14 +261,14 @@ const TitleMenuItem: SetupFC = () => {
             rounded-full p-6px w-16px h-16px mb-7px
             bg={route.name === 'Home'
               ? 'white group-hover:white'
-              : 'group-hover:white #333/20 dark:#bbb'
+              : 'primary-d dark:primary-a'
             }
           >
             <div
               i-ph:list-dashes-bold text-16px block
               c={route.name === 'Home'
                 ? 'primary-d dark:primary-a'
-                : 'group-hover:white #00000090 dark:#555'
+                : 'white'
               }
             />
           </div>

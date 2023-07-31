@@ -1,5 +1,6 @@
 import type ITodoList from '../../interface/ITodoListArray'
 import type IToDoListData from '../../interface/IToDoListData'
+import emitter from '../../util/bus'
 import LocalStorage from '../../util/localStorage'
 
 function saveItemSet(list: ITodoList[]) {
@@ -22,6 +23,7 @@ function saveItemSet(list: ITodoList[]) {
       return res.json()
     })
   }
+  emitter.emit('changeList')
 }
 
 export default saveItemSet
