@@ -124,6 +124,7 @@ function login() {
                 createToast({ msg: t('accountPage.syncSuccess') })
                 localStorage.setItem('ToDo', res.data)
                 emitter.emit('setLoginText', uname.value)
+                emitter.emit('changeList')
               }
               else {
                 createToast({ msg: t('accountPage.syncFail') })
