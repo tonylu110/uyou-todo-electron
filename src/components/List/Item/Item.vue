@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { computed, onBeforeUnmount, reactive, ref, watchEffect } from 'vue'
+import { computed, onBeforeUnmount, reactive, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { usePreferredDark } from '@vueuse/core'
@@ -10,6 +10,7 @@ import type { cateItem } from '../../ListMenu/ICateItem'
 import emitter from '../../../util/bus'
 import { createToast } from '../../Toast'
 import type customContextMenuType from '../../ContextMenu/customContextMenu.type'
+import CheckBox from './CheckBox/CheckBox.vue'
 
 const props = defineProps<{
   time: number
@@ -45,10 +46,9 @@ watchEffect(() => {
   listName.value = route.query.listName as unknown as string
 })
 
-function setOk() {
-  okState.value = !okState.value
+watch(okState, () => {
   emits('setOk', props.time!, okState.value)
-}
+})
 
 function deleteItem() {
   emits('deleteItem', props.time!)
@@ -181,7 +181,7 @@ function editItem() {
     @contextmenu="contextmenuClick"
     @click="showContextMenu = false"
   >
-    <div
+    <!-- <div
       v-if="listName !== 'allDo' && !showEdit"
       class="button"
       bg="success-d dark:success-a active:success-a active:dark:success-a"
@@ -189,7 +189,7 @@ function editItem() {
       @click="setOk"
     >
       <div i-mdi:check-bold text-24px c="white dark:#444" />
-    </div>
+    </div> -->
     <div
       v-if="!showEdit"
       class="delete"
@@ -204,6 +204,7 @@ function editItem() {
       shadow="sm black/20"
       bg="#eee/80 dark:#222/50"
     >
+      <CheckBox v-if="!showEdit" v-model="okState" :num="time" />
       <div v-if="!showEdit" absolute right-10px top-5px flex items-center>
         <div flex ml-10px>
           <div class="c-button" bg="black/10 dark:#bbb/10" @click="textWrap = !textWrap">
@@ -215,21 +216,22 @@ function editItem() {
           </div>
         </div>
       </div>
-      <div class="time-area">
+      <div class="time-area" :ml="showEdit ? '' : '!30px'">
         <div flex items-center mb-3px mt-5px>
           <span mr-7px c="#555/40 dark:#bbb/40" text-12px>{{ getTime(time) }}</span>
           <div
-            class="c-button"
+            class="c-button group" bg="!transparent"
             @click="setStar"
           >
             <div
               i-ph:star-fill text-14px :c="starState ? '#e6a400' : '#555/20 dark:#bbb/20'"
               pointer-events-auto cursor-pointer
+              scale="group-active:70 100" transition="transform 300"
             />
           </div>
         </div>
       </div>
-      <div>
+      <div :ml="showEdit ? '' : '!38px'">
         <span
           v-if="!showEdit"
           block mb-5px select-text pointer-events-auto
@@ -241,7 +243,7 @@ function editItem() {
           transition-300 bg="selection:primary-d selection:dark:primary-a"
           overflow-hidden text-ellipsis :whitespace="textWrap ? 'pre-wrap' : 'nowrap'"
           :line="listName === 'allNotDo' ? '' : (okState ? 'through' : '')"
-          max-w="[calc(100%-65px)]"
+          max-w="[calc(100%-73px)]"
         >
           {{ text }}
         </span>
@@ -283,7 +285,7 @@ function editItem() {
       :show-paste="false"
       :custom="customContextMenu"
       :text="props.text"
-      @set-ok="setOk"
+      @set-ok="okState = !okState"
       @remove="deleteItem"
       @close-context="showContextMenu = false"
       @set-star="setStar"
