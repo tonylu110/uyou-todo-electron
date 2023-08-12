@@ -144,5 +144,6 @@
     "second": "秒"
   },
   "add-category": "添加分类",
-  "today": "今天 "
+  "today": "今天 ",
+  "pick-a-day": "选择提醒时间"
 }

@@ -144,5 +144,6 @@
     "second": "second | seconds"
   },
   "add-category": "Add Category",
-  "today": "Today "
+  "today": "Today ",
+  "pick-a-day": "Choose reminder time"
 }

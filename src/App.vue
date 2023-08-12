@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { usePreferredDark } from '@vueuse/core'
+import { ElConfigProvider } from 'element-plus'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import en from 'element-plus/dist/locale/en.mjs'
+import zhTw from 'element-plus/dist/locale/zh-tw.mjs'
+import es from 'element-plus/dist/locale/es.mjs'
+import ja from 'element-plus/dist/locale/ja.mjs'
 import TitleBar from './components/TitleBar/newTitleBar'
 import Alert from './components/Alert/Alert.vue'
 import ListMenu from './components/ListMenu/ListMenu.vue'
@@ -14,7 +20,7 @@ import isDev from './util/mode'
 import getCateList from './util/getCateList'
 import { isLinux, isWindows10OrAfter } from './util/os'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
@@ -142,6 +148,19 @@ window.addEventListener('resize', () => {
 
 const isDark = usePreferredDark()
 
+function setAllDarkMode(dark: boolean) {
+  if (dark)
+    document.querySelector('html')?.classList.add('dark')
+  else
+    document.querySelector('html')?.classList.remove('dark')
+}
+
+setAllDarkMode(isDark.value)
+
+watch(isDark, (newValue) => {
+  setAllDarkMode(newValue)
+})
+
 if (isDev) {
   onMounted(() => {
     document.querySelector('.vue-devtools-frame')?.classList.add('no-drag')
@@ -155,51 +174,66 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
 const Store = require('electron-store')
 
 const store = new Store()
+
+const useLocale = computed(() => {
+  if (locale.value === 'zh-cn')
+    return zhCn
+  else if (locale.value === 'zh-tw')
+    return zhTw
+  else if (locale.value === 'ja')
+    return ja
+  else if (locale.value === 'es')
+    return es
+  else
+    return en
+})
 </script>
 
 <template>
-  <RouterUrl v-if="routerShow" />
-  <div :class="isDark ? 'dark' : ''">
-    <router-view name="isWindow" />
-  </div>
-  <div
-    v-if="!isWinDow" class="list-main"
-    :bg="!isBlur
-      ? (isDark
-        ? 'black'
-        : '#e5e5e5')
-      : ((isDark && store.get('micaStyle') === 'acrylic')
-        ? '#111/50'
-        : '')"
-    :class="isDark ? 'dark list-main' : 'list-main'"
-  >
-    <div class="list-in">
-      <div>
-        <TitleBar v-if="!systemTitleShow" />
-        <ListMenu />
-      </div>
-      <div
-        class="todo-list"
-        :rounded="isRound ? 'tl-15px' : newFloatUi ? '7px' : ''"
-        :border-l="newFloatUi ? '' : '!1px !solid !black/10'"
-        :border-t="isRound ? '!1px !solid !black/10' : ''"
-      >
-        <router-view />
-        <Alert
-          :dialog-show="alertShow"
-          :title="`${t('updateText')} v${newVersion}`"
-          @cancel="() => alertShow = false"
-          @return="returnClick"
+  <ElConfigProvider :locale="useLocale">
+    <RouterUrl v-if="routerShow" />
+    <div :class="isDark ? 'dark' : ''">
+      <router-view name="isWindow" />
+    </div>
+    <div
+      v-if="!isWinDow" class="list-main"
+      :bg="!isBlur
+        ? (isDark
+          ? 'black'
+          : '#e5e5e5')
+        : ((isDark && store.get('micaStyle') === 'acrylic')
+          ? '#111/50'
+          : '')"
+      :class="isDark ? 'dark list-main' : 'list-main'"
+    >
+      <div class="list-in">
+        <div>
+          <TitleBar v-if="!systemTitleShow" />
+          <ListMenu />
+        </div>
+        <div
+          class="todo-list"
+          :rounded="isRound ? 'tl-15px' : newFloatUi ? '7px' : ''"
+          :border-l="newFloatUi ? '' : '!1px !solid !black/10'"
+          :border-t="isRound ? '!1px !solid !black/10' : ''"
         >
-          <ul>
-            <li v-for="(item, index) in alertMsg" :key="index">
-              {{ item.slice(2) }}
-            </li>
-          </ul>
-        </Alert>
+          <router-view />
+          <Alert
+            :dialog-show="alertShow"
+            :title="`${t('updateText')} v${newVersion}`"
+            @cancel="() => alertShow = false"
+            @return="returnClick"
+          >
+            <ul>
+              <li v-for="(item, index) in alertMsg" :key="index">
+                {{ item.slice(2) }}
+              </li>
+            </ul>
+          </Alert>
+        </div>
       </div>
     </div>
-  </div>
+  </ElConfigProvider>
 </template>
 
 <style lang="scss">

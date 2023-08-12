@@ -38,6 +38,7 @@
     "cross-env": "^7.0.3",
     "electron": "^25.3.0",
     "electron-builder": "^24.6.3",
+    "element-plus": "^2.3.9",
     "eslint": "^8.43.0",
     "floating-vue": "2.0.0-beta.24",
     "mitt": "^3.0.1",

@@ -4,6 +4,7 @@ import { computed, onBeforeUnmount, reactive, ref, watch, watchEffect } from 'vu
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { usePreferredDark } from '@vueuse/core'
+import { ElDatePicker } from 'element-plus'
 import getTime from '../../../util/getTime'
 import ContextMenu from '../../ContextMenu/ContextMenu.vue'
 import type { cateItem } from '../../ListMenu/ICateItem'
@@ -167,6 +168,8 @@ function editItem() {
   emits('editItem', props.time, editText.value)
   showEdit.value = false
 }
+
+const useTime = ref('')
 </script>
 
 <template>
@@ -205,6 +208,17 @@ function editItem() {
       bg="#eee/80 dark:#222/50"
     >
       <CheckBox v-if="!showEdit" v-model="okState" :num="time" />
+      <div pointer-events-auto absolute right-6px bottom-7px no-drag w-150px>
+        <ElDatePicker
+          v-model="useTime"
+          type="datetime"
+          :placeholder="t('pick-a-day')"
+          size="small"
+          style="width: 100%"
+          :editable="false"
+          value-format="x"
+        />
+      </div>
       <div v-if="!showEdit" absolute right-10px top-5px flex items-center>
         <div flex ml-10px>
           <div class="c-button" bg="black/10 dark:#bbb/10" @click="textWrap = !textWrap">

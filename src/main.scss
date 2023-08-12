@@ -73,3 +73,7 @@ input[disabled] {
     }
   }
 }
+
+.el-picker__popper {
+  --uno: no-drag;
+}
