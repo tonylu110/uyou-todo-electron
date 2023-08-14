@@ -146,5 +146,9 @@
   "add-category": "Add Category",
   "today": "Today ",
   "pick-a-day": "Choose reminder time",
-  "todo-time": "ToDo Reminder"
+  "todo-time": "ToDo Reminder",
+  "quit": {
+    "tray": "Minimize to system tray",
+    "quit": "Quit"
+  }
 }

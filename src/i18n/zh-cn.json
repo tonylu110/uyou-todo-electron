@@ -146,5 +146,9 @@
   "add-category": "添加分类",
   "today": "今天 ",
   "pick-a-day": "选择提醒时间",
-  "todo-time": "ToDo 提醒"
+  "todo-time": "ToDo 提醒",
+  "quit": {
+    "tray": "最小化到系统托盘",
+    "quit": "退出"
+  }
 }

@@ -15,6 +15,7 @@ const createLogoffWindow = require('./pages/logoff')
 const setMicaStyle = require('./pages/util/setMicaStyle')
 const { initSim, simple, simpleIpc } = require('./store/simpleModeStore')
 const sendNotification = require('./pages/util/sendNotification')
+const i18n = require('./i18n/index.js')
 
 const store = new Store()
 
@@ -89,9 +90,11 @@ function createWindow() {
     else
       mainWindow.maximize()
   })
-  ipcMain.on('window-close', () => {
-    // app.quit()
-    mainWindow.hide()
+  ipcMain.on('window-close', (ev, isClose) => {
+    if (isClose)
+      app.quit()
+    else
+      mainWindow.hide()
   })
   ipcMain.on('window-on-top', (event, arg) => {
     mainWindow.setAlwaysOnTop(arg)
@@ -208,8 +211,8 @@ app.whenReady().then(() => {
 
   tray = new Tray(path.join(__dirname, '../dist/logo.png'))
   const contextMenu = Menu.buildFromTemplate([
-    { label: '打开 uyou ToDo', click: () => mainWindow.show() },
-    { label: '退出', click: () => app.quit() },
+    { label: i18n(app).open, click: () => mainWindow.show() },
+    { label: i18n(app).quit, click: () => app.quit() },
   ])
   tray.setToolTip('uyou ToDo')
   tray.setContextMenu(contextMenu)

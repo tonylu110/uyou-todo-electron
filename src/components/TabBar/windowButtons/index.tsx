@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { ElRadio, ElRadioGroup } from 'element-plus'
 import { isMac } from '../../../util/os'
 import Alert from '../../Alert/Alert.vue'
 import firstLoad from '../../TitleBar/firstLoad'
@@ -19,6 +20,13 @@ const WindowButtons: SetupFC = () => {
 
   const simpleMode = localStorage.getItem('simpleMode') === 'true'
   const systemBarShow = localStorage.getItem('systemTitle') === 'true'
+
+  const closeState = ref(false)
+
+  const close = () => {
+    closeWindow(undefined, closeState.value)
+    dialogShow.value = false
+  }
 
   return () => (
     <>
@@ -113,9 +121,19 @@ const WindowButtons: SetupFC = () => {
         dialogShow={dialogShow.value}
         title={t('accountPage.alertTitle')}
         onCancel={() => dialogShow.value = false}
-        onReturn={() => closeWindow()}
+        onReturn={() => close()}
       >
         <span>{t('closeWindow')}</span>
+        <div mt-10px>
+          <ElRadioGroup
+            class="flex flex-col !items-start"
+            modelValue={closeState.value}
+            onUpdate:modelValue={(val: any) => closeState.value = val}
+          >
+            <ElRadio label={false}>{t('quit.tray')}</ElRadio>
+            <ElRadio label={true}>{t('quit.quit')}</ElRadio>
+          </ElRadioGroup>
+        </div>
       </Alert>
     </>
   )

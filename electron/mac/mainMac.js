@@ -1,5 +1,5 @@
 const path = require('node:path')
-const { app, BrowserWindow, ipcMain, screen, Menu, shell, nativeTheme, globalShortcut } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Menu, shell, nativeTheme, globalShortcut, Tray } = require('electron')
 const Store = require('electron-store')
 const remoteMain = require('@electron/remote/main')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('../store/windowSizeStore')
@@ -8,6 +8,7 @@ const { initMenuBlur, menuBlur, menuBlurIpc } = require('../store/menuBlurStore'
 const { initWindowMenu, windowMenu, windowMenuIpc } = require('../store/windowMenuStore')
 const { initSim, simple, simpleIpc } = require('../store/simpleModeStore')
 const sendNotification = require('../pages/util/sendNotification')
+const i18n = require('../i18n')
 const createAboutWindowMac = require('./pages/aboutMac')
 const createRegisterWindowMac = require('./pages/registerMac')
 const createRepassWindowMac = require('./pages/repassMac')
@@ -79,8 +80,11 @@ function createWindow() {
     else
       mainWindow.maximize()
   })
-  ipcMain.on('window-close', () => {
-    app.quit()
+  ipcMain.on('window-close', (ev, isClose) => {
+    if (isClose)
+      app.quit()
+    else
+      mainWindow.hide()
   })
   ipcMain.on('window-on-top', (event, arg) => {
     mainWindow.setAlwaysOnTop(arg)
@@ -166,6 +170,8 @@ function createWindow() {
   })
 }
 
+let tray
+
 app.whenReady().then(() => {
   const { height } = screen.getPrimaryDisplay().workAreaSize
 
@@ -174,6 +180,14 @@ app.whenReady().then(() => {
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
   })
+
+  tray = new Tray(path.join(__dirname, '../dist/logo.png'))
+  const contextMenu = Menu.buildFromTemplate([
+    { label: i18n(app).open, click: () => mainWindow.show() },
+    { label: i18n(app).quit, click: () => app.quit() },
+  ])
+  tray.setToolTip('uyou ToDo')
+  tray.setContextMenu(contextMenu)
 
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
 

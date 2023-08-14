@@ -6,6 +6,8 @@ const minimizeText = '最小化'
 const biggestText = '最大のウィンドウ'
 const smallestText = '最小のウィンドウ'
 const resetWindowText = 'デフォルトのウィンドウサイズに戻す'
+const open = '「uyou ToDo」を開きます'
+const quit = '「uyou ToDo」をやめる'
 
 module.exports = {
   labelWindowText,
@@ -16,4 +18,6 @@ module.exports = {
   biggestText,
   smallestText,
   resetWindowText,
+  open,
+  quit,
 }

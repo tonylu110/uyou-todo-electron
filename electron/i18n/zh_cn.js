@@ -6,6 +6,8 @@ const minimizeText = '最小化'
 const biggestText = '最大窗口'
 const smallestText = '最小窗口'
 const resetWindowText = '恢复默认窗口大小'
+const open = '打开 uyou ToDo'
+const quit = '退出'
 
 module.exports = {
   labelWindowText,
@@ -16,4 +18,6 @@ module.exports = {
   biggestText,
   smallestText,
   resetWindowText,
+  open,
+  quit,
 }
