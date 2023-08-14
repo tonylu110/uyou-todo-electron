@@ -216,7 +216,7 @@ function setTimeChange() {
       bg="#eee/80 dark:#222/50"
     >
       <CheckBox v-if="!showEdit" v-model="okState" :num="time" />
-      <div pointer-events-auto absolute right-6px bottom-7px no-drag w-155px>
+      <div v-if="!showEdit" pointer-events-auto absolute right-6px bottom-7px no-drag w-155px>
         <ElDatePicker
           v-model="useTime"
           type="datetime"
