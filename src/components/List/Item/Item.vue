@@ -12,6 +12,7 @@ import emitter from '../../../util/bus'
 import { createToast } from '../../Toast'
 import type customContextMenuType from '../../ContextMenu/customContextMenu.type'
 import CheckBox from './CheckBox/CheckBox.vue'
+import setTime from './setTime'
 
 const props = defineProps<{
   time: number
@@ -19,6 +20,7 @@ const props = defineProps<{
   isOk: boolean
   isStar: boolean | undefined
   index: number
+  reminder?: number
 }>()
 
 const emits = defineEmits<{
@@ -26,6 +28,7 @@ const emits = defineEmits<{
   (e: 'deleteItem', id: number): void
   (e: 'setCate', id: number, cateId: number): void
   (e: 'setStar', id: number, star: boolean): void
+  (e: 'setReminder', id: number, reminder: number): void
   (e: 'dragenter', index: number): void
   (e: 'dragstart', index: number): void
   (e: 'dragend'): void
@@ -169,7 +172,12 @@ function editItem() {
   showEdit.value = false
 }
 
-const useTime = ref('')
+const useTime = ref(props.reminder)
+
+function setTimeChange() {
+  emits('setReminder', props.time, useTime.value!)
+  setTime(useTime.value!, props.text, t('todo-time'))
+}
 </script>
 
 <template>
@@ -208,7 +216,7 @@ const useTime = ref('')
       bg="#eee/80 dark:#222/50"
     >
       <CheckBox v-if="!showEdit" v-model="okState" :num="time" />
-      <div pointer-events-auto absolute right-6px bottom-7px no-drag w-150px>
+      <div pointer-events-auto absolute right-6px bottom-7px no-drag w-155px>
         <ElDatePicker
           v-model="useTime"
           type="datetime"
@@ -217,6 +225,9 @@ const useTime = ref('')
           style="width: 100%"
           :editable="false"
           value-format="x"
+          format="YYYY/MM/DD hh:mm"
+          :picker-options="{ confirm: true }"
+          @change="setTimeChange"
         />
       </div>
       <div v-if="!showEdit" absolute right-10px top-5px flex items-center>

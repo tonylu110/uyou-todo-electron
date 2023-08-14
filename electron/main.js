@@ -1,5 +1,5 @@
 const path = require('node:path')
-const { app, BrowserWindow, ipcMain, screen, Menu, shell, globalShortcut, nativeTheme } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Menu, shell, globalShortcut, nativeTheme, Tray } = require('electron')
 const Store = require('electron-store')
 const remoteMain = require('@electron/remote/main')
 const { MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
@@ -14,6 +14,7 @@ const createRepassWindow = require('./pages/repass')
 const createLogoffWindow = require('./pages/logoff')
 const setMicaStyle = require('./pages/util/setMicaStyle')
 const { initSim, simple, simpleIpc } = require('./store/simpleModeStore')
+const sendNotification = require('./pages/util/sendNotification')
 
 const store = new Store()
 
@@ -89,7 +90,8 @@ function createWindow() {
       mainWindow.maximize()
   })
   ipcMain.on('window-close', () => {
-    app.quit()
+    // app.quit()
+    mainWindow.hide()
   })
   ipcMain.on('window-on-top', (event, arg) => {
     mainWindow.setAlwaysOnTop(arg)
@@ -184,7 +186,18 @@ function createWindow() {
   mainWindow.on('move', () => {
     store.set('window-pos', mainWindow.getPosition())
   })
+
+  ipcMain.on('set-notification-timer', (ev, time, title, msg) => {
+    const timeoutFn = () => {
+      sendNotification(title, msg).show()
+    }
+
+    if (time > 0)
+      setTimeout(timeoutFn, time)
+  })
 }
+
+let tray
 
 app.whenReady().then(() => {
   createWindow()
@@ -192,6 +205,14 @@ app.whenReady().then(() => {
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
   })
+
+  tray = new Tray(path.join(__dirname, '../dist/logo.png'))
+  const contextMenu = Menu.buildFromTemplate([
+    { label: '打开 uyou ToDo', click: () => mainWindow.show() },
+    { label: '退出', click: () => app.quit() },
+  ])
+  tray.setToolTip('uyou ToDo')
+  tray.setContextMenu(contextMenu)
 
   const { height } = screen.getPrimaryDisplay().workAreaSize
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))

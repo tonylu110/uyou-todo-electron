@@ -145,5 +145,6 @@
   },
   "add-category": "Add Category",
   "today": "Today ",
-  "pick-a-day": "Choose reminder time"
+  "pick-a-day": "Choose reminder time",
+  "todo-time": "ToDo Reminder"
 }

@@ -4,6 +4,7 @@ interface ITodoList {
   ok: boolean
   cate?: string
   star?: boolean
+  time?: number
 }
 
 export default ITodoList

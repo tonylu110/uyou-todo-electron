@@ -5,11 +5,11 @@ import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { usePreferredDark } from '@vueuse/core'
 import { ElConfigProvider } from 'element-plus'
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import en from 'element-plus/dist/locale/en.mjs'
-import zhTw from 'element-plus/dist/locale/zh-tw.mjs'
-import es from 'element-plus/dist/locale/es.mjs'
-import ja from 'element-plus/dist/locale/ja.mjs'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import en from 'element-plus/es/locale/lang/en'
+import zhTw from 'element-plus/es/locale/lang/zh-tw'
+import es from 'element-plus/es/locale/lang/es'
+import ja from 'element-plus/es/locale/lang/ja'
 import TitleBar from './components/TitleBar/newTitleBar'
 import Alert from './components/Alert/Alert.vue'
 import ListMenu from './components/ListMenu/ListMenu.vue'
@@ -19,6 +19,9 @@ import emitter from './util/bus'
 import isDev from './util/mode'
 import getCateList from './util/getCateList'
 import { isLinux, isWindows10OrAfter } from './util/os'
+import type ITodoList from './interface/ITodoListArray'
+import LocalStorage from './util/localStorage'
+import setTime from './components/List/Item/setTime'
 
 const { t, locale } = useI18n()
 
@@ -186,6 +189,15 @@ const useLocale = computed(() => {
     return es
   else
     return en
+})
+
+onMounted(() => {
+  const listData = LocalStorage('get') as ITodoList[]
+
+  listData.forEach((item) => {
+    if (item.time)
+      setTime(item.time, item.text, t('todo-time'))
+  })
 })
 </script>
 

@@ -175,6 +175,18 @@ const menuShort = ref(window.innerWidth < 750)
 emitter.on('menuClose', (data) => {
   menuShort.value = data as boolean
 })
+
+function setReminder(id: number, time: number) {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id)
+      list.value![i].time = time
+  }
+  for (let i = 0; i < listAll.value!.length; i++) {
+    if (listAll.value![i].id === id)
+      listAll.value![i].time = time
+  }
+  saveItemSet(listAll.value!)
+}
 </script>
 
 <template>
@@ -196,11 +208,13 @@ emitter.on('menuClose', (data) => {
         :is-ok="item.ok"
         :is-star="item.star"
         :index="index"
+        :reminder="item.time"
         @set-ok="setOk"
         @delete-item="deleteItem"
         @edit-item="editItem"
         @set-cate="setCate"
         @set-star="setStar"
+        @set-reminder="setReminder"
         @dragstart="dragstart"
         @dragenter="dragenter"
         @dragend="saveItemSet(listAll!)"
@@ -215,11 +229,13 @@ emitter.on('menuClose', (data) => {
         :is-ok="item.ok"
         :is-star="item.star"
         :index="index"
+        :reminder="item.time"
         @set-ok="setOk"
         @delete-item="deleteItem"
         @edit-item="editItem"
         @set-cate="setCate"
         @set-star="setStar"
+        @set-reminder="setReminder"
         @dragstart="dragstart"
         @dragenter="dragenter"
         @dragend="saveItemSet(listAll!)"
@@ -253,11 +269,13 @@ emitter.on('menuClose', (data) => {
           :is-ok="item.ok"
           :is-star="item.star"
           :index="index"
+          :reminder="item.time"
           @set-ok="setOk"
           @delete-item="deleteItem"
           @edit-item="editItem"
           @set-cate="setCate"
           @set-star="setStar"
+          @set-reminder="setReminder"
           @dragstart="dragstart"
           @dragenter="dragenter"
           @dragend="saveItemSet(listAll!)"

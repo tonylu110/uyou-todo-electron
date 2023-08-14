@@ -7,6 +7,7 @@ const { initSystemBar, systemBar, systemBarIpc } = require('../store/systemTitle
 const { initMenuBlur, menuBlur, menuBlurIpc } = require('../store/menuBlurStore')
 const { initWindowMenu, windowMenu, windowMenuIpc } = require('../store/windowMenuStore')
 const { initSim, simple, simpleIpc } = require('../store/simpleModeStore')
+const sendNotification = require('../pages/util/sendNotification')
 const createAboutWindowMac = require('./pages/aboutMac')
 const createRegisterWindowMac = require('./pages/registerMac')
 const createRepassWindowMac = require('./pages/repassMac')
@@ -153,6 +154,15 @@ function createWindow() {
 
   mainWindow.on('move', () => {
     store.set('window-pos', mainWindow.getPosition())
+  })
+
+  ipcMain.on('set-notification-timer', (ev, time, title, msg) => {
+    const timeoutFn = () => {
+      sendNotification(title, msg).show()
+    }
+
+    if (time > 0)
+      setTimeout(timeoutFn, time)
   })
 }
 
