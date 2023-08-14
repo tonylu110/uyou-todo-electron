@@ -201,6 +201,7 @@ function createWindow() {
 }
 
 let tray
+app.setAppUserModelId('uyou ToDo')
 
 app.whenReady().then(() => {
   createWindow()
@@ -216,6 +217,8 @@ app.whenReady().then(() => {
   ])
   tray.setToolTip('uyou ToDo')
   tray.setContextMenu(contextMenu)
+
+  sendNotification.on('click', () => mainWindow.show())
 
   const { height } = screen.getPrimaryDisplay().workAreaSize
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
