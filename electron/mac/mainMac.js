@@ -162,7 +162,11 @@ function createWindow() {
 
   ipcMain.on('set-notification-timer', (ev, time, title, msg) => {
     const timeoutFn = () => {
-      sendNotification(title, msg).show()
+      const send = sendNotification(title, msg)
+      send.show()
+      send.on('click', () => {
+        mainWindow.show()
+      })
     }
 
     if (time > 0)
@@ -191,8 +195,6 @@ app.whenReady().then(() => {
   ])
   tray.setToolTip('uyou ToDo')
   tray.setContextMenu(contextMenu)
-
-  sendNotification.on('click', () => mainWindow.show())
 
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
 
