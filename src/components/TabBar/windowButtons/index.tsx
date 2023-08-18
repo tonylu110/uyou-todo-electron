@@ -1,6 +1,6 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ElRadio, ElRadioGroup } from 'element-plus'
+import { ElCheckbox, ElRadio, ElRadioGroup } from 'element-plus'
 import { isMac } from '../../../util/os'
 import Alert from '../../Alert/Alert.vue'
 import firstLoad from '../../TitleBar/firstLoad'
@@ -21,12 +21,24 @@ const WindowButtons: SetupFC = () => {
   const simpleMode = localStorage.getItem('simpleMode') === 'true'
   const systemBarShow = localStorage.getItem('systemTitle') === 'true'
 
-  const closeState = ref(false)
+  const localRememberClose = localStorage.getItem('rememberClose') === 'true'
+  const localCloseState = localStorage.getItem('closeState') === 'true'
+
+  const closeState = ref(localRememberClose ? localCloseState : false)
 
   const close = () => {
     closeWindow(undefined, closeState.value)
     dialogShow.value = false
   }
+
+  watch(closeState, (newValue) => {
+    localStorage.setItem('closeState', `${newValue}`)
+  })
+
+  const remember = ref(localRememberClose)
+  watch(remember, (newValue) => {
+    localStorage.setItem('rememberClose', `${newValue}`)
+  })
 
   return () => (
     <>
@@ -123,8 +135,12 @@ const WindowButtons: SetupFC = () => {
         onCancel={() => dialogShow.value = false}
         onReturn={() => close()}
       >
-        <span>{t('closeWindow')}</span>
-        <div mt-10px>
+        <span text-16px font-bold>{t('closeWindow')}</span>
+        <div
+          mt-20px w="[calc(100%-30px)]" bg="black/5"
+          rounded-5px p="x-15px y-5px"
+          flex="~ col"
+        >
           <ElRadioGroup
             class="flex flex-col !items-start"
             modelValue={closeState.value}
@@ -133,6 +149,11 @@ const WindowButtons: SetupFC = () => {
             <ElRadio label={false}>{t('quit.tray')}</ElRadio>
             <ElRadio label={true}>{t('quit.quit')}</ElRadio>
           </ElRadioGroup>
+          <ElCheckbox
+            label={t('quit.remember')}
+            modelValue={remember.value}
+            onUpdate:modelValue={(val: any) => remember.value = val}
+          />
         </div>
       </Alert>
     </>

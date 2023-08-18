@@ -149,6 +149,7 @@
   "todo-time": "ToDo Reminder",
   "quit": {
     "tray": "Minimize to system tray",
-    "quit": "Quit"
+    "quit": "Quit",
+    "remember": "remember next time"
   }
 }

@@ -149,6 +149,7 @@
   "todo-time": "ToDo 提醒",
   "quit": {
     "tray": "最小化到系统托盘",
-    "quit": "退出"
+    "quit": "退出",
+    "remember": "下次记住"
   }
 }
