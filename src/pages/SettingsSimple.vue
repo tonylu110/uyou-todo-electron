@@ -27,10 +27,11 @@ const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('u
 const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
 const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
 const topState = ref(firstLoad())
-const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
+const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
 const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
 const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
 const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
+const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
 
 emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
@@ -101,6 +102,12 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
         :show-switch="true"
         :switch-state="enterAddState"
         @switch-fun="setSwitchFn('enterAdd', !enterAddState, () => enterAddState = !enterAddState)"
+      />
+      <Item
+        :title="t('anotherSettings.itemBtnShow')"
+        :show-switch="true"
+        :switch-state="showToDoBtn"
+        @switch-fun="setSwitchFn('ToDoBtn', !showToDoBtn, () => showToDoBtn = !showToDoBtn)"
       />
       <Item
         v-if="isLinux"

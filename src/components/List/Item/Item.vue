@@ -140,7 +140,7 @@ function moveCate(id: number, cateId: number) {
   emits('setCate', id, cateId)
 }
 
-const textWrap = ref(localStorage.getItem('textWrap') === 'true')
+const textWrap = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
 
 function setStar() {
   starState.value = !starState.value
@@ -178,6 +178,8 @@ function setTimeChange() {
   emits('setReminder', props.time, useTime.value!)
   setTime(useTime.value!, props.text, t('todo-time'))
 }
+
+const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
 </script>
 
 <template>
@@ -216,7 +218,13 @@ function setTimeChange() {
       bg="#eee/80 dark:#222/50"
     >
       <CheckBox v-if="!showEdit" v-model="okState" :num="time" />
-      <div v-if="!showEdit" pointer-events-auto absolute right-6px bottom-7px no-drag w-155px>
+      <div
+        v-if="!showEdit"
+        pointer-events-auto absolute right-6px
+        bottom-7px no-drag w-155px
+        :opacity="showToDoBtn ? '100' : '0 hover:100'"
+        transition-300
+      >
         <ElDatePicker
           v-model="useTime"
           type="datetime"
@@ -232,11 +240,11 @@ function setTimeChange() {
       </div>
       <div v-if="!showEdit" absolute right-10px top-5px flex items-center>
         <div flex ml-10px>
-          <div class="c-button" bg="black/10 dark:#bbb/10" @click="textWrap = !textWrap">
+          <div class="c-button" :opacity="showToDoBtn ? '100' : '0'" bg="black/10 dark:#bbb/10" @click="textWrap = !textWrap">
             <div v-if="textWrap" i-fluent:chevron-up-12-filled text-14px c="#777 dark:#bbb" />
             <div v-else i-fluent:chevron-down-12-filled text-14px c="#777 dark:#bbb" />
           </div>
-          <div class="c-button" bg="black/10 dark:#bbb/10" ml="8px" @click="copyText">
+          <div class="c-button" :opacity="showToDoBtn ? '100' : '0'" bg="black/10 dark:#bbb/10" ml="8px" @click="copyText">
             <div i-ph:copy-bold text-14px c="#777 dark:#bbb" />
           </div>
         </div>
@@ -268,7 +276,7 @@ function setTimeChange() {
           transition-300 bg="selection:primary-d selection:dark:primary-a"
           overflow-hidden text-ellipsis :whitespace="textWrap ? 'pre-wrap' : 'nowrap'"
           :line="listName === 'allNotDo' ? '' : (okState ? 'through' : '')"
-          max-w="[calc(100%-73px)]"
+          :max-w="showToDoBtn ? '[calc(100%-73px)]' : '100%'"
         >
           {{ text }}
         </span>

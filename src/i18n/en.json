@@ -76,7 +76,8 @@
     "enterToAdd": "Enter to add ToDo",
     "autoStart": "Open With System",
     "itemWrap": "ToDo default open",
-    "laboratory": "Laboratory"
+    "laboratory": "Laboratory",
+    "itemBtnShow": "Show ToDo button"
   },
   "contextMenu": {
     "copy": "Copy",

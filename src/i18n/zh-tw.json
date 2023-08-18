@@ -76,7 +76,8 @@
     "enterToAdd": "回車新增 ToDo",
     "autoStart": "開機自啟",
     "itemWrap": "ToDo 預設展開",
-    "laboratory": "實驗室"
+    "laboratory": "實驗室",
+    "itemBtnShow": "顯示 ToDo 按鈕"
   },
   "contextMenu": {
     "copy": "複製",

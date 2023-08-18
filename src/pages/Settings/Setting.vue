@@ -41,8 +41,9 @@ const showWindowMenuState = ref(localStorage.getItem('windowMenu') === 'true')
 const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
 const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
 const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
-const textWrapState = ref(localStorage.getItem('textWrap') === 'true')
+const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
 const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
+const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
 function showRouterUrl() {
   routerUrlState.value = !routerUrlState.value
   emitter.emit('routerShow', routerUrlState.value)
@@ -151,6 +152,12 @@ window.addEventListener('resize', () => {
         :show-switch="true"
         :switch-state="enterAddState"
         @switch-fun="setSwitchFn('enterAdd', !enterAddState, () => enterAddState = !enterAddState)"
+      />
+      <Item
+        :title="t('anotherSettings.itemBtnShow')"
+        :show-switch="true"
+        :switch-state="showToDoBtn"
+        @switch-fun="setSwitchFn('ToDoBtn', !showToDoBtn, () => showToDoBtn = !showToDoBtn)"
       />
       <Item
         v-if="isLinux"
