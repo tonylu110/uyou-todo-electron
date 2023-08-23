@@ -22,6 +22,7 @@ import { isLinux, isWindows10OrAfter } from './util/os'
 import type ITodoList from './interface/ITodoListArray'
 import LocalStorage from './util/localStorage'
 import setTime from './components/List/Item/setTime'
+import firstLoad from './util/firstLoad'
 
 const { t, locale } = useI18n()
 
@@ -34,6 +35,8 @@ const newVersion = ref('')
 
 const version = versionCode
 const autoUpdateState = localStorage.getItem('autoUpdate') !== 'false'
+
+firstLoad()
 
 if (autoUpdateState) {
   fetch('https://api.todo.uyou.org.cn/update/get').then((res) => {

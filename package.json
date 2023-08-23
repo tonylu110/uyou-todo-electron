@@ -1,6 +1,6 @@
 {
   "name": "uyoutodo",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "private": false,
   "author": "Anthony Lu <taruruchan0@gmail.com>",
   "main": "electron/main.js",
@@ -48,7 +48,7 @@
     "unocss": "^0.53.4",
     "unplugin-vue-macros": "^2.3.6",
     "vite": "^4.4.3",
-    "vite-plugin-vue-devtools": "^1.0.0-beta.3",
+    "vite-plugin-vue-devtools": "^1.0.0-rc.2",
     "vue": "^3.3.4",
     "vue-i18n": "9.3.0-beta.24",
     "vue-router": "^4.2.4",
