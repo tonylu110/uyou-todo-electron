@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Dropdown as VDropdown } from 'floating-vue'
 import { useI18n } from 'vue-i18n'
+import Icons from './Icons'
 
 defineProps<{
   id: number
@@ -33,6 +34,8 @@ const cateText = ref('')
 const showEdit = ref(false)
 
 const isOpen = ref(false)
+
+const showIcons = ref(false)
 </script>
 
 <template>
@@ -42,10 +45,20 @@ const isOpen = ref(false)
     @click="toList(`${id}`)"
   >
     <div>
-      <div
-        i-ph:radio-button-bold text-18px
-        :c="route.query.listName === `${id}` ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
-      />
+      <VDropdown
+        v-model:shown="showIcons"
+        :distance="12"
+        placement="top"
+      >
+        <div
+          i-ph:radio-button-bold text-18px
+          :c="route.query.listName === `${id}` ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
+          @click.stop="showIcons = true"
+        />
+        <template #popper>
+          <Icons />
+        </template>
+      </VDropdown>
       <span
         v-if="!showEdit"
         style="font-size: 14px; margin-left: 10px;"
