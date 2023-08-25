@@ -8,12 +8,14 @@ import Icons from './Icons'
 defineProps<{
   id: number
   title: string
+  icon?: string
 }>()
 
 const emits = defineEmits<{
   delCate: [id: number]
   editCate: [id: number, title: string]
   delWithToDo: [id: number]
+  setIcon: [id: number, icon: string]
 }>()
 
 const { t } = useI18n()
@@ -48,15 +50,21 @@ const showIcons = ref(false)
       <VDropdown
         v-model:shown="showIcons"
         :distance="12"
-        placement="top"
+        :skidding="-12"
+        placement="top-start"
       >
         <div
-          i-ph:radio-button-bold text-18px
+          :class="icon ? icon : 'i-ph:radio-button-bold'" text-18px
           :c="route.query.listName === `${id}` ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
           @click.stop="showIcons = true"
         />
         <template #popper>
-          <Icons />
+          <Icons
+            @set-icon="(icon: string) => {
+              showIcons = false
+              emits('setIcon', id, icon)
+            }"
+          />
         </template>
       </VDropdown>
       <span

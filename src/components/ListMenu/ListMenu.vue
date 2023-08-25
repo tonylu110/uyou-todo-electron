@@ -97,6 +97,27 @@ function delCate(id: number) {
   }
 }
 
+function setIcon(id: number, icon: string) {
+  for (let i = 0; i < cateList.length; i++) {
+    if (cateList[i].id === id)
+      cateList[i].icon = icon
+  }
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList,
+  }))
+  emitter.emit('setCate', JSON.stringify({
+    data: cateList,
+  }))
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList,
+      },
+    })
+  }
+}
+
 emitter.on('setCate', (data) => {
   cateList.length = 0
   JSON.parse((data as string)).data.forEach((item: cateItem) => {
@@ -307,10 +328,12 @@ function delWithToDo(id: number) {
           v-for="item in cateList"
           :id="item.id"
           :key="item.id"
+          :icon="item.icon"
           :title="item.title"
           @del-cate="delCate"
           @edit-cate="editCate"
           @del-with-to-do="delWithToDo"
+          @set-icon="setIcon"
         />
         <div
           v-if="showAdd" flex items-center
