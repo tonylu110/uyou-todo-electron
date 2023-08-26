@@ -1,8 +1,8 @@
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import { computed, ref } from 'vue'
-import emitter from '../../util/bus'
-import LocalStorage from '../../util/localStorage'
+import emitter from '../../../util/bus'
+import LocalStorage from '../../../util/localStorage'
 
 const TitleMenuItem: SetupFC = () => {
   const { t } = useI18n()
