@@ -31,4 +31,6 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
 ![](./demo/demo4.png)
 ![](./demo/demo5.png)
 
-![Star History Chart](https://api.star-history.com/svg?repos=tonylu110/uyou-todo-electron&type=Date)
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=tonylu110/uyou-todo-electron&type=Date)](https://star-history.com/#tonylu110/uyou-todo-electron&Date)
