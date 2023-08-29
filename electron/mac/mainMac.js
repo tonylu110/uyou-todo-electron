@@ -195,6 +195,7 @@ app.whenReady().then(() => {
   ])
   tray.setToolTip('uyou ToDo')
   tray.setContextMenu(contextMenu)
+  tray.on('click', () => mainWindow.show())
 
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
 
