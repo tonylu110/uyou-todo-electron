@@ -60,6 +60,7 @@ const showIcons = ref(false)
         />
         <template #popper>
           <Icons
+            :icon="icon"
             @set-icon="(icon: string) => {
               showIcons = false
               emits('setIcon', id, icon)

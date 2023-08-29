@@ -1,5 +1,6 @@
 import { reactive, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import TabBar from '../../../components/TabBar/TabBar.vue'
 import SettingList from '../../../components/SettingList'
 import ItemBox from '../../../components/ItemBox/ItemBox.vue'
@@ -9,6 +10,8 @@ import type ListItems from './ListItems'
 
 const ShowListItem: SetupFC = () => {
   const router = useRouter()
+
+  const { t } = useI18n()
 
   const showList = reactive(localStorage.getItem('listMenuItem')
     ? JSON.parse(localStorage.getItem('listMenuItem')!) as ListItems
@@ -44,7 +47,7 @@ const ShowListItem: SetupFC = () => {
   return () => (
     <>
       <TabBar
-        title="⚠️ Set List Item"
+        title={t('custListItem')}
         rightImgShow={false}
         leftImgShow={true}
         onLeftClick={() => router.back()}
@@ -52,7 +55,7 @@ const ShowListItem: SetupFC = () => {
       />
       <SettingList>
         <Item
-          title='show All'
+          title={t('custList.showAll')}
           showSwitch={true}
           switchState={showAll.value}
           onSwitchFun={() => {

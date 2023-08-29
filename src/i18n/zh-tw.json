@@ -152,5 +152,9 @@
     "tray": "最小化到系統托盤",
     "quit": "退出",
     "remember": "下次記住"
+  },
+  "custListItem": "自定義側邊欄分類",
+  "custList": {
+    "showAll": "顯示所有"
   }
 }

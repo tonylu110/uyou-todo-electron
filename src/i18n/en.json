@@ -152,5 +152,9 @@
     "tray": "Minimize to system tray",
     "quit": "Quit",
     "remember": "remember next time"
+  },
+  "custListItem": "Custom Sidebar Categories",
+  "custList": {
+    "showAll": "show all"
   }
 }

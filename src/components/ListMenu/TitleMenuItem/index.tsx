@@ -3,6 +3,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { computed, ref } from 'vue'
 import emitter from '../../../util/bus'
 import LocalStorage from '../../../util/localStorage'
+import type ListItems from '../../../pages/Laboratory/showListItem/ListItems'
 
 const TitleMenuItem: SetupFC = () => {
   const { t } = useI18n()
@@ -34,6 +35,34 @@ const TitleMenuItem: SetupFC = () => {
   emitter.on('changeList', () => {
     listData.value = LocalStorage('get')
   })
+
+  const showList = ref<ListItems>(localStorage.getItem('listMenuItem')
+    ? JSON.parse(localStorage.getItem('listMenuItem')!) as ListItems
+    : {
+        today: {
+          name: 'today',
+          show: true,
+        },
+        star: {
+          name: 'star',
+          show: true,
+        },
+        allDo: {
+          name: 'completed',
+          show: true,
+        },
+        allNotDo: {
+          name: 'incompleted',
+          show: true,
+        },
+      } as ListItems,
+  )
+
+  emitter.on('setListItem', (data) => {
+    showList.value = (data as ListItems)
+  })
+
+  const listAllHidden = computed(() => Object.keys(showList.value).map(key => showList.value[key as keyof ListItems].show).every(t => !t))
 
   return () => (
     <>
@@ -72,181 +101,191 @@ const TitleMenuItem: SetupFC = () => {
         </span>
       </div>
       <div flex="~ col" ml-10px no-drag>
-        <div flex mb-10px>
-          <div
-            flex="~ col" rounded-7px p-10px cursor-pointer relative
-            bg={route.query.listName === 'today'
-              ? 'success-d dark:success-a'
-              : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
-            }
-            mr-10px w="[calc(50%-30px)]"
-            onClick={() => toList('today')}
-          >
+        <div flex="~ wrap gap-10px" mb={listAllHidden.value ? '' : '10px'}>
+          {showList.value.today.show
+            ? (
             <div
-              rounded-full p-6px w-16px h-16px mb-7px
+              flex="~ col" rounded-7px p-10px cursor-pointer relative
               bg={route.query.listName === 'today'
-                ? 'white group-hover:white'
-                : 'success-d dark:success-a'
+                ? 'success-d dark:success-a'
+                : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
               }
+              w="[calc(50%-30px)]"
+              onClick={() => toList('today')}
             >
               <div
-                i-ph:sun-dim-bold text-16px block
+                rounded-full p-6px w-16px h-16px mb-7px
+                bg={route.query.listName === 'today'
+                  ? 'white group-hover:white'
+                  : 'success-d dark:success-a'
+                }
+              >
+                <div
+                  i-ph:sun-dim-bold text-16px block
+                  c={route.query.listName === 'today'
+                    ? 'success-d dark:success-a'
+                    : 'white'
+                  }
+                />
+              </div>
+              <span
+                font-bold
                 c={route.query.listName === 'today'
-                  ? 'success-d dark:success-a'
-                  : 'white'
+                  ? 'white group-hover:white'
+                  : 'group-hover:white #00000090 dark:#bbb'
                 }
-              />
-            </div>
-            <span
-              font-bold
-              c={route.query.listName === 'today'
-                ? 'white group-hover:white'
-                : 'group-hover:white #00000090 dark:#bbb'
-              }
-            >
-              {t('startPage.today')}
-            </span>
-            <span
-              absolute right-13px font-bold
-              c={route.query.listName === 'today'
-                ? 'white group-hover:white'
-                : 'group-hover:white #00000090 dark:#bbb'
-              }
-            >
-              {TodayNum.value}
-            </span>
-          </div>
-          <div
-            flex="~ col" rounded-7px p-10px cursor-pointer relative
-            bg={route.query.listName === 'star'
-              ? 'warn-d dark:warn-a'
-              : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
-            }
-            w="[calc(50%-30px)]"
-            onClick={() => toList('star')}
-          >
+              >
+                {t('startPage.today')}
+              </span>
+              <span
+                absolute right-13px font-bold
+                c={route.query.listName === 'today'
+                  ? 'white group-hover:white'
+                  : 'group-hover:white #00000090 dark:#bbb'
+                }
+              >
+                {TodayNum.value}
+              </span>
+            </div>)
+            : null}
+          {showList.value.star.show
+            ? (
             <div
-              rounded-full p-6px w-16px h-16px mb-7px
+              flex="~ col" rounded-7px p-10px cursor-pointer relative
               bg={route.query.listName === 'star'
-                ? 'white group-hover:white'
-                : 'warn-d dark:warn-a'
+                ? 'warn-d dark:warn-a'
+                : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
               }
+              w="[calc(50%-30px)]"
+              onClick={() => toList('star')}
             >
               <div
-                i-ph:star-bold text-16px block
+                rounded-full p-6px w-16px h-16px mb-7px
+                bg={route.query.listName === 'star'
+                  ? 'white group-hover:white'
+                  : 'warn-d dark:warn-a'
+                }
+              >
+                <div
+                  i-ph:star-bold text-16px block
+                  c={route.query.listName === 'star'
+                    ? 'warn-d dark:warn-a'
+                    : 'white'
+                  }
+                />
+              </div>
+              <span
+                font-bold
                 c={route.query.listName === 'star'
-                  ? 'warn-d dark:warn-a'
-                  : 'white'
+                  ? 'white group-hover:white'
+                  : 'group-hover:white #00000090 dark:#bbb'
                 }
-              />
-            </div>
-            <span
-              font-bold
-              c={route.query.listName === 'star'
-                ? 'white group-hover:white'
-                : 'group-hover:white #00000090 dark:#bbb'
-              }
-            >
-              {t('listMenu.star')}
-            </span>
-            <span
-              absolute right-13px font-bold
-              c={route.query.listName === 'star'
-                ? 'white group-hover:white'
-                : 'group-hover:white #00000090 dark:#bbb'
-              }
-            >
-              {starNum.value}
-            </span>
-          </div>
-        </div>
-        <div flex mb-10px>
-          <div
-            flex="~ col" rounded-7px p-10px cursor-pointer relative
-            bg={route.query.listName === 'allNotDo'
-              ? 'error-d dark:error-h'
-              : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
-            }
-            mr-10px w="[calc(50%-30px)]"
-            onClick={() => toList('allNotDo')}
-          >
+              >
+                {t('listMenu.star')}
+              </span>
+              <span
+                absolute right-13px font-bold
+                c={route.query.listName === 'star'
+                  ? 'white group-hover:white'
+                  : 'group-hover:white #00000090 dark:#bbb'
+                }
+              >
+                {starNum.value}
+              </span>
+            </div>)
+            : null}
+          {showList.value.allNotDo.show
+            ? (
             <div
-              rounded-full p-6px w-16px h-16px mb-7px
+              flex="~ col" rounded-7px p-10px cursor-pointer relative
               bg={route.query.listName === 'allNotDo'
-                ? 'white group-hover:white'
-                : 'error-d dark:error-h'
+                ? 'error-d dark:error-h'
+                : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
               }
+              w="[calc(50%-30px)]"
+              onClick={() => toList('allNotDo')}
             >
               <div
-                i-ph:circle-bold text-16px block
+                rounded-full p-6px w-16px h-16px mb-7px
+                bg={route.query.listName === 'allNotDo'
+                  ? 'white group-hover:white'
+                  : 'error-d dark:error-h'
+                }
+              >
+                <div
+                  i-ph:circle-bold text-16px block
+                  c={route.query.listName === 'allNotDo'
+                    ? 'error-d dark:error-h'
+                    : 'white'
+                  }
+                />
+              </div>
+              <span
+                font-bold
                 c={route.query.listName === 'allNotDo'
-                  ? 'error-d dark:error-h'
-                  : 'white'
+                  ? 'white group-hover:white'
+                  : 'group-hover:white #00000090 dark:#bbb'
                 }
-              />
-            </div>
-            <span
-              font-bold
-              c={route.query.listName === 'allNotDo'
-                ? 'white group-hover:white'
-                : 'group-hover:white #00000090 dark:#bbb'
-              }
-            >
-              {t('listMenu.incompleted')}
-            </span>
-            <span
-              absolute right-13px font-bold
-              c={route.query.listName === 'allNotDo'
-                ? 'white group-hover:white'
-                : 'group-hover:white #00000090 dark:#bbb'
-              }
-            >
-              {notDoNum.value}
-            </span>
-          </div>
-          <div
-            flex="~ col" rounded-7px p-10px cursor-pointer relative
-            bg={route.query.listName === 'allDo'
-              ? 'gray-400 dark:gray-600'
-              : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
-            }
-            w="[calc(50%-30px)]"
-            onClick={() => toList('allDo')}
-          >
+              >
+                {t('listMenu.incompleted')}
+              </span>
+              <span
+                absolute right-13px font-bold
+                c={route.query.listName === 'allNotDo'
+                  ? 'white group-hover:white'
+                  : 'group-hover:white #00000090 dark:#bbb'
+                }
+              >
+                {notDoNum.value}
+              </span>
+            </div>)
+            : null}
+          {showList.value.allDo.show
+            ? (
             <div
-              rounded-full p-6px w-16px h-16px mb-7px
+              flex="~ col" rounded-7px p-10px cursor-pointer relative
               bg={route.query.listName === 'allDo'
-                ? 'white group-hover:white'
-                : 'gray-400 dark:gray-600'
+                ? 'gray-400 dark:gray-600'
+                : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
               }
+              w="[calc(50%-30px)]"
+              onClick={() => toList('allDo')}
             >
               <div
-                i-ph:check-circle-bold text-16px block
-                c={route.query.listName === 'allDo'
-                  ? 'gray-400 dark:gray-600'
-                  : 'white'
+                rounded-full p-6px w-16px h-16px mb-7px
+                bg={route.query.listName === 'allDo'
+                  ? 'white group-hover:white'
+                  : 'gray-400 dark:gray-600'
                 }
-              />
-            </div>
-            <span
-              font-bold
-              c={route.query.listName === 'allDo'
-                ? 'white group-hover:white'
-                : 'group-hover:white #00000090 dark:#bbb'
-              }
-            >
-              {t('listMenu.completed')}
-            </span>
-            <span
-              absolute right-13px font-bold
-              c={route.query.listName === 'allDo'
-                ? 'white group-hover:white'
-                : 'group-hover:white #00000090 dark:#bbb'
-              }
-            >
-              {doNum.value}
-            </span>
-          </div>
+              >
+                <div
+                  i-ph:check-circle-bold text-16px block
+                  c={route.query.listName === 'allDo'
+                    ? 'gray-400 dark:gray-600'
+                    : 'white'
+                  }
+                />
+              </div>
+              <span
+                font-bold
+                c={route.query.listName === 'allDo'
+                  ? 'white group-hover:white'
+                  : 'group-hover:white #00000090 dark:#bbb'
+                }
+              >
+                {t('listMenu.completed')}
+              </span>
+              <span
+                absolute right-13px font-bold
+                c={route.query.listName === 'allDo'
+                  ? 'white group-hover:white'
+                  : 'group-hover:white #00000090 dark:#bbb'
+                }
+              >
+                {doNum.value}
+              </span>
+            </div>)
+            : null}
         </div>
         <div
           flex="~ col" rounded-7px p-10px cursor-pointer mb-5px

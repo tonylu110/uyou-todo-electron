@@ -147,6 +147,10 @@ window.addEventListener('resize', () => {
         @home="setStartPage('home')"
         @today="setStartPage('today')"
       />
+      <!-- <Item
+        :title="t('custListItem')"
+        @item-fun="router.push('/setListItem?from=setting')"
+      /> -->
       <Item
         :title="t('anotherSettings.enterToAdd')"
         :show-switch="true"
