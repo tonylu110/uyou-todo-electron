@@ -84,5 +84,11 @@ const isVip = ref(localStorage.getItem('isVip') === 'true')
         <li>{{ t('vip.more') }}</li>
       </ul>
     </div>
+    <template v-if="isVip">
+      <Item
+        :title="t('custListItem')"
+        @item-fun="router.push('/setListItem?from=setting')"
+      />
+    </template>
   </SettingList>
 </template>

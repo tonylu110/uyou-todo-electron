@@ -116,7 +116,7 @@ window.addEventListener('resize', () => {
       />
     </ItemBox>
     <ColorChange v-if="(!isLinux || isWindows10OrAfter) || !isMac" />
-    <Item :title="t('vip.proVersion')" item-img="./images/VIP.png" @item-fun="router.push('/vip')" />
+    <Item :title="t('vip.proVersion')" item-img="./images/VIP.png" @item-fun="router.push('/vip?from=setting')" />
     <Item
       :title="loginState ? t('myAccount') : t('loginText')"
       @item-fun="() => router.push('/account?from=setting')"
@@ -148,10 +148,6 @@ window.addEventListener('resize', () => {
         @home="setStartPage('home')"
         @today="setStartPage('today')"
       />
-      <!-- <Item
-        :title="t('custListItem')"
-        @item-fun="router.push('/setListItem?from=setting')"
-      /> -->
       <Item
         :title="t('anotherSettings.enterToAdd')"
         :show-switch="true"
