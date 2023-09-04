@@ -155,7 +155,11 @@
   },
   "custListItem": "自定義側邊欄分類",
   "custList": {
-    "showAll": "顯示所有"
+    "showAll": "顯示所有",
+    "today": "我的一天",
+    "star": "加星 ToDo",
+    "completed": "已完成",
+    "incompleted": "未完成"
   },
   "vip": {
     "proVersion": "uyou ToDo 專業版",

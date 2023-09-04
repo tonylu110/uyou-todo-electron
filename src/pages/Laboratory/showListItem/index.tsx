@@ -69,7 +69,7 @@ const ShowListItem: SetupFC = () => {
         <ItemBox>
           {Object.keys(showList).map(key =>
           <Item
-            title={showList[(key as keyof ListItems)].name}
+            title={t(`custList.${showList[(key as keyof ListItems)].name}`)}
             showSwitch={true}
             switchState={showList[(key as keyof ListItems)].show}
             onSwitchFun={() => {

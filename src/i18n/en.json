@@ -155,7 +155,11 @@
   },
   "custListItem": "Custom Sidebar Categories",
   "custList": {
-    "showAll": "show all"
+    "showAll": "show all",
+    "today": "My Today",
+    "star": "Starred ToDos",
+    "completed": "Completed",
+    "incompleted": "Incompleted"
   },
   "vip": {
     "proVersion": "uyou ToDo pro version",
