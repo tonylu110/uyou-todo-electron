@@ -156,5 +156,17 @@
   "custListItem": "自定義側邊欄分類",
   "custList": {
     "showAll": "顯示所有"
+  },
+  "vip": {
+    "proVersion": "uyou ToDo 專業版",
+    "8yuan": "或 ￥8.00 + GitHub Star",
+    "msg": "如果你喜歡 uyou ToDo 的話，可以嘗試給我付費哦\n付費模式為誠信付費，靈感來自於椒鹽音樂\n你當然也可以自己使用不付費，當然，付費後再使用是誠信的表現\n請考慮好後再付費",
+    "isPay": "我已誠信付款，啟用專業版",
+    "more": "更多功能，敬請期待...",
+    "proFeature": "專業版功能",
+    "showList": "自定義顯示分類",
+    "custColor": "自定義顏色",
+    "doPay": "已誠信付費 uyou ToDo 專業版",
+    "thanks": "感謝你的支持，這會幫助 uyou ToDo 更好的發展"
   }
 }

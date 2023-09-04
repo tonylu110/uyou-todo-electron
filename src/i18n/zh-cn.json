@@ -156,5 +156,17 @@
   "custListItem": "自定义侧边栏分类",
   "custList": {
     "showAll": "显示所有"
+  },
+  "vip": {
+    "proVersion": "uyou ToDo 专业版",
+    "8yuan": "或 ￥8.00 + GitHub Star",
+    "msg": "如果你喜欢 uyou ToDo 的话，可以尝试给我付费哦\n付费模式为诚信付费，灵感来自于椒盐音乐\n你当然也可以自己使用不付费，当然，付费后再使用是诚信的表现\n请考虑好后再付费",
+    "isPay": "我已诚信付款，启用专业版",
+    "more": "更多功能，敬请期待...",
+    "proFeature": "专业版功能",
+    "showList": "自定义显示分类",
+    "custColor": "自定义颜色",
+    "doPay": "已诚信付费 uyou ToDo 专业版",
+    "thanks": "感谢你的支持，这会帮助 uyou ToDo 更好的发展"
   }
 }

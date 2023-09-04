@@ -89,6 +89,11 @@ const routes = [
     name: 'fontSet',
     component: () => import('./pages/Laboratory/FontSet'),
   },
+  {
+    path: '/vip',
+    name: 'vip',
+    component: () => import('./pages/Settings/vip.vue'),
+  },
 ]
 
 const router = createRouter({

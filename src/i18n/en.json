@@ -156,5 +156,17 @@
   "custListItem": "Custom Sidebar Categories",
   "custList": {
     "showAll": "show all"
+  },
+  "vip": {
+    "proVersion": "uyou ToDo pro version",
+    "8yuan": "0r ￥8.00 + GitHub Star",
+    "msg": "If you like uyou ToDo, you can try to pay me\nThe payment mode is honest payment, inspired by salt and pepper music\nOf course, you can also use it yourself without paying. Of course, using it after paying is a sign of integrity\nPlease consider before paying",
+    "isPay": "I have paid in good faith and activated the professional version",
+    "more": "More features, please stay tuned...",
+    "proFeature": "Pro features",
+    "showList": "Custom display categories",
+    "custColor": "Custom color",
+    "doPay": "Has paid in good faith uyou ToDo Professional Edition",
+    "thanks": "Thank you for your support, this will help uyou ToDo develop better"
   }
 }
