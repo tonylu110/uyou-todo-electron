@@ -15,13 +15,13 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
   ```bash 
   pnpm i
   pnpm electron:serve // run in Windows
-  pnpm electron:servemac // run in mac
+  pnpm electron:servemac // run in mac or Linux
   ```
 - build
   ```bash
-  yarn
-  yarn electron:build // build for Windows
-  yarn electron:buildmac // build for mac 
+  pnpm i
+  pnpm electron:build // build for Windows
+  pnpm electron:buildmac // build for mac or Linux
   ```
 
 ## Preview
