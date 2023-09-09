@@ -64,6 +64,12 @@ const TitleMenuItem: SetupFC = () => {
 
   const listAllHidden = computed(() => Object.keys(showList.value).map(key => showList.value[key as keyof ListItems].show).every(t => !t))
 
+  const isVip = ref(localStorage.getItem('isVip') === 'true')
+
+  emitter.on('changeVip', (data) => {
+    isVip.value = data as boolean
+  })
+
   return () => (
     <>
       <div
@@ -72,33 +78,36 @@ const TitleMenuItem: SetupFC = () => {
           ? 'primary-d dark:primary-a'
           : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'
         }
-        rounded-7px flex items-center w="[calc(100%-40px)]"
+        rounded-7px flex items-center justify-between w="[calc(100%-40px)]"
         onClick={() => router.push('/account')}
       >
-        <div
-          rounded-full p-6px w-16px h-16px mr-10px
-          bg={route.name === 'account' && route.query.from !== 'setting'
-            ? 'white group-hover:white'
-            : '#333/20 dark:#bbb'
-          }
-        >
+        <div flex items-center>
           <div
-            i-ph:user-bold text-16px block
-            c={route.name === 'account' && route.query.from !== 'setting'
-              ? 'primary-d dark:primary-a'
-              : '#00000090 dark:#555'
+            rounded-full p-6px w-16px h-16px mr-10px
+            bg={route.name === 'account' && route.query.from !== 'setting'
+              ? 'white group-hover:white'
+              : '#333/20 dark:#bbb'
             }
-          />
+          >
+            <div
+              i-ph:user-bold text-16px block
+              c={route.name === 'account' && route.query.from !== 'setting'
+                ? 'primary-d dark:primary-a'
+                : '#00000090 dark:#555'
+              }
+            />
+          </div>
+          <span
+            font-bold
+            c={route.name === 'account' && route.query.from !== 'setting'
+              ? 'white group-hover:white'
+              : 'group-hover:white #00000090 dark:#bbb'
+            }
+          >
+            {loginText.value}
+          </span>
         </div>
-        <span
-          font-bold
-          c={route.name === 'account' && route.query.from !== 'setting'
-            ? 'white group-hover:white'
-            : 'group-hover:white #00000090 dark:#bbb'
-          }
-        >
-          {loginText.value}
-        </span>
+        {isVip.value ? <img src="/images/VIP.png" w-27px h-27px alt="" srcset="" /> : null}
       </div>
       <div flex="~ col" ml-10px no-drag>
         <div flex="~ wrap gap-10px" mb={listAllHidden.value ? '' : '10px'}>

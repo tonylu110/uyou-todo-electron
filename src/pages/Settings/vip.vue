@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import router from '../../router'
@@ -16,6 +16,10 @@ emitter.on('menuClose', (data) => {
 })
 
 const isVip = ref(localStorage.getItem('isVip') === 'true')
+
+watch(isVip, (newValue) => {
+  emitter.emit('changeVip', newValue)
+})
 </script>
 
 <template>
