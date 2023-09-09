@@ -20,6 +20,8 @@ const isVip = ref(localStorage.getItem('isVip') === 'true')
 watch(isVip, (newValue) => {
   emitter.emit('changeVip', newValue)
 })
+
+const simpleMode = localStorage.getItem('simpleMode') === 'true'
 </script>
 
 <template>
@@ -32,7 +34,7 @@ watch(isVip, (newValue) => {
   <SettingList>
     <div
       v-if="!isVip"
-      :w="menuShort ? '[calc(100vw-118px)]' : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px
+      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px
       h-auto flex="~ wrap" justify-center
       items-center bg="white dark:#999/10" rounded-7px
       border="1px solid #00000020"
@@ -59,7 +61,7 @@ watch(isVip, (newValue) => {
     </div>
     <div
       v-else
-      :w="menuShort ? '[calc(100vw-118px)]' : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px
+      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px
       h-auto flex justify-start items-center
       bg="warn-a" rounded-7px
       border="1px solid #00000020"
@@ -77,7 +79,7 @@ watch(isVip, (newValue) => {
       @switch-fun="setSwitchFn('isVip', !isVip, () => isVip = !isVip)"
     />
     <div
-      :w="menuShort ? '[calc(100vw-118px)]' : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px h-auto
+      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px h-auto
       flex="~ col wrap" justify-center items-start
       bg="white dark:#999/10" rounded-7px border="1px solid #00000020"
     >

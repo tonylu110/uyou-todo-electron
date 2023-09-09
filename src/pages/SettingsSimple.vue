@@ -82,6 +82,7 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
       />
     </ItemBox>
     <ColorChange v-if="(!isLinux || isWindows10OrAfter) || isMac" />
+    <Item :title="t('vip.proVersion')" item-img="./images/VIP.png" @item-fun="router.push('/vip?from=setting')" />
     <Item
       :title="loginState ? t('myAccount') : t('loginText')"
       @item-fun="() => router.push('/account?from=setting')"

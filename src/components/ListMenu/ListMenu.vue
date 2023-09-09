@@ -79,6 +79,7 @@ function addCate() {
   }
   showAdd.value = false
   cateTitle.value = ''
+  icon.value = 'i-ph:radio-button-bold'
 }
 function delCate(id: number) {
   for (let i = 0; i < cateList.length; i++) {
@@ -372,7 +373,7 @@ const showIcons = ref(false)
                 placement="top-start"
               >
                 <div
-                  :class="icon" text-15px block
+                  :class="icon" text-16px block
                   c="group-hover:white #00000090 dark:#bbb"
                   @click.stop="showIcons = true"
                 />
