@@ -3,6 +3,7 @@ import type { Ref } from 'vue'
 import { computed, reactive, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { Dropdown as VDropdown } from 'floating-vue'
 import router from '../../router'
 import emitter from '../../util/bus'
 import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
@@ -13,6 +14,7 @@ import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
 import MenuItem from './MenuItem/MenuItem.vue'
 import TitleMenuItem from './TitleMenuItem'
+import Icons from './MenuItem/Icons'
 
 const { t } = useI18n()
 
@@ -54,10 +56,12 @@ function onScroll() {
   ps.value = cateListRef.value.ps.scrollbarYTop
 }
 
+const icon = ref('i-ph:radio-button-bold')
 function addCate() {
   cateList.push({
     id: new Date().getTime(),
     title: cateTitle.value,
+    icon: icon.value,
   })
   localStorage.setItem('cate', JSON.stringify({
     data: cateList,
@@ -201,6 +205,8 @@ function delWithToDo(id: number) {
 }
 
 const count = computed(() => Object.values(showList.value).filter(obj => !obj.show).length)
+
+const showIcons = ref(false)
 </script>
 
 <template>
@@ -355,6 +361,32 @@ const count = computed(() => Object.values(showList.value).filter(obj => !obj.sh
           mt="10px"
         >
           <div w="100%" flex items-center>
+            <div
+              p-4px mr-7px
+              bg="black/5" rounded-5px
+            >
+              <VDropdown
+                v-model:shown="showIcons"
+                :distance="12"
+                :skidding="-12"
+                placement="top-start"
+              >
+                <div
+                  :class="icon" text-15px block
+                  c="group-hover:white #00000090 dark:#bbb"
+                  @click.stop="showIcons = true"
+                />
+                <template #popper>
+                  <Icons
+                    :icon="icon"
+                    @set-icon="(cIcon: string) => {
+                      showIcons = false
+                      icon = cIcon
+                    }"
+                  />
+                </template>
+              </VDropdown>
+            </div>
             <input
               v-model="cateTitle"
               v-focus
