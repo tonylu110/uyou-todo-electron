@@ -13,7 +13,7 @@ const ShowListItem: SetupFC = () => {
 
   const { t } = useI18n()
 
-  const showList = reactive(localStorage.getItem('listMenuItem')
+  const showList = reactive(localStorage.getItem('listMenuItem') && JSON.parse(localStorage.getItem('listMenuItem')!).today.name !== 'today'
     ? JSON.parse(localStorage.getItem('listMenuItem')!) as ListItems
     : {
         today: {

@@ -125,7 +125,7 @@ emitter.on('setCate', (data) => {
   })
 })
 
-const showList: Ref<ListItems> = ref(localStorage.getItem('listMenuItem')
+const showList: Ref<ListItems> = ref(localStorage.getItem('listMenuItem') && JSON.parse(localStorage.getItem('listMenuItem')!).today.name !== 'today'
   ? JSON.parse(localStorage.getItem('listMenuItem')!) as ListItems
   : {
       today: {
