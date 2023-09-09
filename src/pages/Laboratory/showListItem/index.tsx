@@ -17,19 +17,19 @@ const ShowListItem: SetupFC = () => {
     ? JSON.parse(localStorage.getItem('listMenuItem')!) as ListItems
     : {
         today: {
-          name: 'today',
+          name: 'custList.today',
           show: true,
         },
         star: {
-          name: 'star',
+          name: 'custList.star',
           show: true,
         },
         allDo: {
-          name: 'completed',
+          name: 'custList.completed',
           show: true,
         },
         allNotDo: {
-          name: 'incompleted',
+          name: 'custList.incompleted',
           show: true,
         },
       } as ListItems,
@@ -69,7 +69,7 @@ const ShowListItem: SetupFC = () => {
         <ItemBox>
           {Object.keys(showList).map(key =>
           <Item
-            title={t(`custList.${showList[(key as keyof ListItems)].name}`)}
+            title={t(showList[(key as keyof ListItems)].name)}
             showSwitch={true}
             switchState={showList[(key as keyof ListItems)].show}
             onSwitchFun={() => {

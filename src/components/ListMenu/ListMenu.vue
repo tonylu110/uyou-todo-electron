@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { reactive, ref, watch, watchEffect } from 'vue'
+import { computed, reactive, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import router from '../../router'
@@ -129,19 +129,19 @@ const showList: Ref<ListItems> = ref(localStorage.getItem('listMenuItem')
   ? JSON.parse(localStorage.getItem('listMenuItem')!) as ListItems
   : {
       today: {
-        name: 'today',
+        name: 'custList.today',
         show: true,
       },
       star: {
-        name: 'star',
+        name: 'custList.star',
         show: true,
       },
       allDo: {
-        name: 'completed',
+        name: 'custList.completed',
         show: true,
       },
       allNotDo: {
-        name: 'incompleted',
+        name: 'custList.incompleted',
         show: true,
       },
     } as ListItems,
@@ -199,6 +199,8 @@ function delWithToDo(id: number) {
 
   delCate(id)
 }
+
+const count = computed(() => Object.values(showList.value).filter(obj => !obj.show).length)
 </script>
 
 <template>
@@ -238,7 +240,17 @@ function delWithToDo(id: number) {
         </div>
       </div>
       <span v-if="!menuShort" class="title" c="dark:!#bbb" mb="!10px">{{ t('listMenu.cate') }}</span>
-      <perfect-scrollbar ref="cateListRef" class="cate" :h="menuShort ? '![calc(100vh-260px)]' : ''" :shadow="ps === 0 ? '' : 'inner'" @ps-scroll-y="onScroll">
+      <perfect-scrollbar
+        ref="cateListRef" class="cate"
+        :style="{
+          height: (menuShort
+            ? 'calc(100vh - 260px)'
+            : (count > 1
+              ? (count > 3 ? 'calc(100vh - 348px)' : 'calc(100vh - 434px)')
+              : 'calc(100vh - 520px)')),
+        }"
+        :shadow="ps === 0 ? '' : 'inner'" @ps-scroll-y="onScroll"
+      >
         <div
           v-if="showList.today.show && menuShort"
           class="all-todo-list group"
