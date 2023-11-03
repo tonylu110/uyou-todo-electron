@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { onMounted, ref, watchEffect } from 'vue'
+import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { usePreferredDark } from '@vueuse/core'
 import LocalStorage from '../../util/localStorage'
 import type ITodoList from '../../interface/ITodoListArray'
 import setSwitchFn from '../../util/setSwitchFn'
 import { isLinux, isWindows10OrAfter } from '../../util/os'
 import emitter from '../../util/bus'
+import type { cateItem } from '../ListMenu/ICateItem'
 import Item from './Item/Item.vue'
 import saveItemSet from './saveItemSet'
 import AddItem from './AddItem/AddItem.vue'
@@ -154,7 +156,17 @@ function editItem(id: number, text: string) {
 const showNotDo = ref(localStorage.getItem('notDoShow') === 'true' || localStorage.getItem('notDoShow') === null)
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
-const bgColor = isBlur ? 'rgba(255, 255, 255, .5)' : 'rgba(255, 255, 255, .8)'
+
+const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
+const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
+const bgColor = computed(() => cateList.filter(value => value.id === Number(route.query.listName))[0])
+
+emitter.on('changeBgColor', (color) => {
+  for (let i = 0; i < cateList.length; i++) {
+    if (cateList[i].id === Number(route.query.listName))
+      cateList[i].color = color as string | null
+  }
+})
 
 const dragIndex = ref(0)
 function dragstart(index: number) {
@@ -187,10 +199,26 @@ function setReminder(id: number, time: number) {
   }
   saveItemSet(listAll.value!)
 }
+
+const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
+const isDark = usePreferredDark()
 </script>
 
 <template>
-  <perfect-scrollbar class="list" :bg="isBlur ? 'dark:!#333/50' : 'dark:!#333/80'">
+  <perfect-scrollbar
+    class="list"
+    :style="{
+      backgroundColor: !isNaN(Number.parseInt((route.query.listName as string))) && useCustColor
+        ? isBlur
+          ? bgColor.color
+            ? `${bgColor.color}50` : isDark ? 'rgba(51, 51, 51, 0.5)' : 'rgba(255, 255, 255, 0.5)'
+          : bgColor
+            ? `${bgColor.color}cc` : isDark ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)'
+        : isBlur
+          ? isDark ? 'rgba(51, 51, 51, 0.5)' : 'rgba(255, 255, 255, 0.5)'
+          : isDark ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+    }"
+  >
     <transition name="add">
       <div v-if="showAddItem" class="add-list">
         <AddItem
@@ -293,7 +321,6 @@ function setReminder(id: number, time: number) {
 
 <style scoped lang="scss">
 .list {
-  background-color: v-bind(bgColor);
   height: calc(100% - 105px);
   display: flex;
   flex-direction: column;

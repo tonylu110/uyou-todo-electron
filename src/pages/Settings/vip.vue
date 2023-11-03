@@ -6,6 +6,7 @@ import router from '../../router'
 import SettingList from '../../components/SettingList'
 import emitter from '../../util/bus'
 import Item from '../../components/ItemBox/Item/Item.vue'
+import ItemBox from '../../components/ItemBox/ItemBox.vue'
 import setSwitchFn from '../../util/setSwitchFn'
 
 const { t } = useI18n()
@@ -22,6 +23,10 @@ watch(isVip, (newValue) => {
 })
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
+
+const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
+
+const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
 </script>
 
 <template>
@@ -46,7 +51,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
           {{ t('vip.msg') }}
         </p>
       </div>
-      <div flex="~ wrap" justify-center items-center>
+      <div flex="~ wrap" j ustify-center items-center>
         <img
           w-170px p-10px
           src="/images/donate/alipay.png"
@@ -87,13 +92,31 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
       <ul>
         <li>{{ t('vip.custColor') }}</li>
         <li>{{ t('vip.showList') }}</li>
+        <li>{{ t('vip.floatUI') }}</li>
         <li>{{ t('vip.more') }}</li>
       </ul>
     </div>
     <template v-if="isVip">
+      <ItemBox>
+        <Item
+          :title="t('vip.floatUI')"
+          :show-switch="true"
+          :switch-state="newFloatUi"
+          @switch-fun="setSwitchFn('newFloatUi', !newFloatUi, () => {
+            newFloatUi = !newFloatUi
+            emitter.emit('setNewFloatUi')
+          })"
+        />
+        <Item
+          :title="t('custListItem')"
+          @item-fun="router.push('/setListItem?from=setting')"
+        />
+      </ItemBox>
       <Item
-        :title="t('custListItem')"
-        @item-fun="router.push('/setListItem?from=setting')"
+        :title="t('vip.custColor')"
+        :show-switch="true"
+        :switch-state="useCustColor"
+        @switch-fun="setSwitchFn('useCustColor', !useCustColor, () => useCustColor = !useCustColor)"
       />
     </template>
   </SettingList>

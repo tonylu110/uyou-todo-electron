@@ -169,8 +169,9 @@
     "more": "More features, please stay tuned...",
     "proFeature": "Pro features",
     "showList": "Custom display categories",
-    "custColor": "Custom color",
+    "custColor": "Custom category colors",
     "doPay": "Has paid in good faith uyou ToDo Professional Edition",
-    "thanks": "Thank you for your support, this will help uyou ToDo develop better"
+    "thanks": "Thank you for your support, this will help uyou ToDo develop better",
+    "floatUI": "Use Float UI"
   }
 }

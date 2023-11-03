@@ -5,8 +5,6 @@ import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import setSwitchFn from '../../util/setSwitchFn'
-import emitter from '../../util/bus'
-import ItemBox from '../../components/ItemBox/ItemBox.vue'
 
 const Laboratory: SetupFC = () => {
   const router = useRouter()
@@ -21,7 +19,7 @@ const Laboratory: SetupFC = () => {
 
   const keyToAdd = ref(localStorage.getItem('ketToAdd') === 'true')
 
-  const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
+  // const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
 
   const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
@@ -41,7 +39,7 @@ const Laboratory: SetupFC = () => {
           switchState={opLab.value}
           onSwitchFun={openLab}
         />
-        <ItemBox>
+        {/* <ItemBox>
           <Item
             title="⚠️ new float ui - Only for Default mode"
             showSwitch={true}
@@ -52,7 +50,7 @@ const Laboratory: SetupFC = () => {
             })}
           />
           <Item title='⚠️ set whitch item in siderbar' onItemFun={() => router.push('/setListItem?from=setting')}/>
-        </ItemBox>
+        </ItemBox> */}
         <Item
           title="⚠️ set font - can't use"
           onItemFun={() => router.push('/fontSet?from=setting')}

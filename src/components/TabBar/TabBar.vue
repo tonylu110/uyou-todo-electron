@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { Dropdown as VDropdown } from 'floating-vue'
+import { usePreferredDark } from '@vueuse/core'
 import CateMenu from '../CateMenu/CateMenu.vue'
 import getCateList from '../../util/getCateList'
 import emitter from '../../util/bus'
 import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'
+import type { cateItem } from '../ListMenu/ICateItem'
+import changeCate from '../ListMenu/changCate'
 import windowButtons from './windowButtons'
 
 withDefaults(defineProps<{
@@ -88,14 +92,58 @@ ipcRenderer.on('useKeyAddItem', () => {
 })
 
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
+
+const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
+const showColor = ref(false)
+
+const isDark = usePreferredDark()
+
+const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
+const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
+const bgColor = ref(cateList.filter(value => value.id === Number(route.query.listName)))
+
+function changColor(color: string | null) {
+  for (let i = 0; i < cateList.length; i++) {
+    if (cateList[i].id === Number(route.query.listName))
+      cateList[i].color = color
+  }
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList,
+  }))
+  emitter.emit('setCate', JSON.stringify({
+    data: cateList,
+  }))
+  bgColor.value[0].color = color
+  emitter.emit('changeBgColor', color)
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList,
+      },
+    })
+  }
+}
+
+watchEffect(() => {
+  bgColor.value = cateList.filter(value => value.id === Number(route.query.listName))
+})
 </script>
 
 <template>
   <div
-    class="title-bar"
-    :bg="isBlur ? 'white/50 dark:#333/50' : 'white/80 dark:#333/80'" drag
+    class="title-bar" drag
     :style="{
       borderTopLeftRadius: isRound ? '15px' : '',
+      backgroundColor: !isNaN(Number.parseInt((route.query.listName as string))) && useCustColor
+        ? isBlur
+          ? bgColor[0].color
+            ? `${bgColor[0].color}50` : isDark ? 'rgba(51, 51, 51, 0.5)' : 'rgba(255, 255, 255, 0.5)'
+          : bgColor[0].color
+            ? `${bgColor[0].color}cc` : isDark ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)'
+        : isBlur
+          ? isDark ? 'rgba(51, 51, 51, 0.5)' : 'rgba(255, 255, 255, 0.5)'
+          : isDark ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)',
     }"
   >
     <div :ml="leftImgShow || showWrap ? '15px' : '20px'" flex="~ col-reverse">
@@ -156,9 +204,67 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
         <window-buttons v-if="!systemTitleShow" />
       </div>
       <div flex mt-12px :h="rightImgShow ? '' : '30px'">
+        <VDropdown
+          v-model:shown="showColor"
+          :distance="12"
+          placement="bottom"
+        >
+          <div
+            v-if="!isNaN(Number.parseInt((route.query.listName as string))) && useCustColor"
+            bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
+            p-5px w-20px rounded-5px no-drag cursor-pointer
+            @click="showColor = true"
+          >
+            <div i-ph:palette-bold text-20px c="#555 dark:#bbb" block />
+          </div>
+          <template #popper>
+            <div p-10px flex="~ gap-5px wrap" max-w-120px>
+              <div
+                p-10px bg="#eee dark:#555" rounded-5px
+                @click="changColor(null)"
+              />
+              <div
+                p-10px bg="#f04490" rounded-5px
+                @click="changColor('#f04490')"
+              />
+              <div
+                p-10px bg="#f96a02" rounded-5px
+                @click="changColor('#f96a02')"
+              />
+              <div
+                p-10px bg="#eb7760" rounded-5px
+                @click="changColor('#eb7760')"
+              />
+              <div
+                p-10px bg="#d9c003" rounded-5px
+                @click="changColor('#d9c003')"
+              />
+              <div
+                p-10px bg="#feb9be" rounded-5px
+                @click="changColor('#feb9be')"
+              />
+              <div
+                p-10px bg="#02aa33" rounded-5px
+                @click="changColor('#02aa33')"
+              />
+              <div
+                p-10px bg="#a3bc3c" rounded-5px
+                @click="changColor('#a3bc3c')"
+              />
+              <div
+                p-10px bg="#3f607f" rounded-5px
+                @click="changColor('#3f607f')"
+              />
+              <div
+                p-10px bg="#af7c5d" rounded-5px
+                @click="changColor('#af7c5d')"
+              />
+            </div>
+          </template>
+        </VDropdown>
         <div
           v-if="rightImgShow"
-          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
+          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20" ml-10px
           p-5px w-20px rounded-5px no-drag cursor-pointer
           @click="() => emits('rightClick')"
         >

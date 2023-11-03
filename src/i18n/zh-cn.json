@@ -169,8 +169,9 @@
     "more": "更多功能，敬请期待...",
     "proFeature": "专业版功能",
     "showList": "自定义侧边栏分类",
-    "custColor": "自定义颜色",
+    "custColor": "自定义分类颜色",
     "doPay": "已诚信付费 uyou ToDo 专业版",
-    "thanks": "感谢你的支持，这会帮助 uyou ToDo 更好的发展"
+    "thanks": "感谢你的支持，这会帮助 uyou ToDo 更好的发展",
+    "floatUI": "使用浮动 UI"
   }
 }
