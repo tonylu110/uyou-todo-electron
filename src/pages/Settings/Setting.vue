@@ -44,6 +44,8 @@ const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
 const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
 const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
 const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
+const closeMsgBox = ref(localStorage.getItem('closeMsgBox') === 'true')
+
 function showRouterUrl() {
   routerUrlState.value = !routerUrlState.value
   emitter.emit('routerShow', routerUrlState.value)
@@ -172,6 +174,17 @@ window.addEventListener('resize', () => {
         :show-switch="true"
         :switch-state="textWrapState"
         @switch-fun="setSwitchFn('textWrap', !textWrapState, () => textWrapState = !textWrapState)"
+      />
+    </ItemBox>
+    <ItemBox>
+      <Item
+        :title="t('quit.closeMsgBox')"
+        :show-switch="true"
+        :switch-state="closeMsgBox"
+        @switch-fun="setSwitchFn('closeMsgBox', !closeMsgBox, () => {
+          closeMsgBox = !closeMsgBox
+          emitter.emit('changeCloseMsgBox', closeMsgBox)
+        })"
       />
     </ItemBox>
     <ItemBox>

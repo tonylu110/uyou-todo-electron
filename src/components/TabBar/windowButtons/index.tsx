@@ -5,6 +5,7 @@ import { isMac } from '../../../util/os'
 import Alert from '../../Alert/Alert.vue'
 import firstLoad from '../../TitleBar/firstLoad'
 import { closeWindow, maxWindow, minWindow, topWindow } from '../../../util/windowApi'
+import emitter from '../../../util/bus'
 
 const WindowButtons: SetupFC = () => {
   const { t } = useI18n()
@@ -52,6 +53,10 @@ const WindowButtons: SetupFC = () => {
     else
       dialogShow.value = true
   }
+
+  emitter.on('changeCloseMsgBox', (data) => {
+    closeMsgBox.value = data as boolean
+  })
 
   return () => (
     <>
