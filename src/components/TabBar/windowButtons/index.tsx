@@ -22,6 +22,7 @@ const WindowButtons: SetupFC = () => {
   const systemBarShow = localStorage.getItem('systemTitle') === 'true'
 
   const localRememberClose = localStorage.getItem('rememberClose') === 'true'
+  const localCloseMsgBox = localStorage.getItem('closeMsgBox') === 'true'
   const localCloseState = localStorage.getItem('closeState') === 'true'
 
   const closeState = ref(localRememberClose ? localCloseState : false)
@@ -39,6 +40,18 @@ const WindowButtons: SetupFC = () => {
   watch(remember, (newValue) => {
     localStorage.setItem('rememberClose', `${newValue}`)
   })
+
+  const closeMsgBox = ref(localCloseMsgBox)
+  watch(closeMsgBox, (newValue) => {
+    localStorage.setItem('closeMsgBox', `${newValue}`)
+  })
+
+  const closeFn = () => {
+    if (closeMsgBox.value)
+      close()
+    else
+      dialogShow.value = true
+  }
 
   return () => (
     <>
@@ -119,7 +132,7 @@ const WindowButtons: SetupFC = () => {
                 w-13px h-13px rounded-full
                 bg="black/10 hover:error-d active:error-a dark:#999/10 dark:active:error-d dark:hover:error-h"
                 class="group"
-                onClick={() => dialogShow.value = true}
+                onClick={closeFn}
               >
                 <div
                   i-mdi:close-thick block
@@ -153,6 +166,11 @@ const WindowButtons: SetupFC = () => {
             label={t('quit.remember')}
             modelValue={remember.value}
             onUpdate:modelValue={(val: any) => remember.value = val}
+          />
+          <ElCheckbox
+            label={t('quit.closeMsgBox')}
+            modelValue={closeMsgBox.value}
+            onUpdate:modelValue={(val: any) => closeMsgBox.value = val}
           />
         </div>
       </Alert>

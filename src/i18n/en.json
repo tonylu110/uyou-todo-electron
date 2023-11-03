@@ -151,7 +151,8 @@
   "quit": {
     "tray": "Minimize to system tray",
     "quit": "Quit",
-    "remember": "remember next time"
+    "remember": "remember next time",
+    "closeMsgBox": "Don't show close dialog"
   },
   "custListItem": "Custom Sidebar Categories",
   "custList": {

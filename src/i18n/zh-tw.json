@@ -151,7 +151,8 @@
   "quit": {
     "tray": "最小化到系統托盤",
     "quit": "退出",
-    "remember": "下次記住"
+    "remember": "下次記住",
+    "closeMsgBox": "不顯示關閉對話框"
   },
   "custListItem": "自定義側邊欄分類",
   "custList": {

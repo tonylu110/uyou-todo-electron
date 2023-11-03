@@ -151,7 +151,8 @@
   "quit": {
     "tray": "最小化到系统托盘",
     "quit": "退出",
-    "remember": "下次记住"
+    "remember": "下次记住",
+    "closeMsgBox": "不显示关闭对话框"
   },
   "custListItem": "自定义侧边栏分类",
   "custList": {
