@@ -77,7 +77,8 @@
     "autoStart": "開機自啟",
     "itemWrap": "ToDo 預設展開",
     "laboratory": "實驗室",
-    "itemBtnShow": "顯示 ToDo 按鈕"
+    "itemBtnShow": "顯示 ToDo 按鈕",
+    "rememberQuit": "記住關閉視窗操作"
   },
   "contextMenu": {
     "copy": "複製",

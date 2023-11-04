@@ -58,6 +58,14 @@ const WindowButtons: SetupFC = () => {
     closeMsgBox.value = data as boolean
   })
 
+  emitter.on('changeRemember', (data) => {
+    remember.value = data as boolean
+  })
+
+  emitter.on('changeCloseState', (data) => {
+    closeState.value = data as boolean
+  })
+
   return () => (
     <>
       <div flex no-drag>

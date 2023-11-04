@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { onBeforeUnmount, ref } from 'vue'
+import { onBeforeUnmount, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { ElRadio, ElRadioGroup } from 'element-plus'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import Item from '../../components/ItemBox/Item/Item.vue'
@@ -45,6 +46,7 @@ const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localSt
 const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
 const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
 const closeMsgBox = ref(localStorage.getItem('closeMsgBox') === 'true')
+const remember = ref(localStorage.getItem('rememberClose') === 'true')
 
 function showRouterUrl() {
   routerUrlState.value = !routerUrlState.value
@@ -94,6 +96,13 @@ function setStartPage(StartPage: string) {
 const minWidth = ref(window.innerWidth < 750)
 window.addEventListener('resize', () => {
   minWidth.value = window.innerWidth < 750
+})
+
+const localCloseState = localStorage.getItem('closeState') === 'true'
+const closeState = ref(remember.value ? localCloseState : false)
+watch(closeState, (newValue) => {
+  localStorage.setItem('closeState', `${newValue}`)
+  emitter.emit('changeCloseState', newValue)
 })
 </script>
 
@@ -186,6 +195,35 @@ window.addEventListener('resize', () => {
           emitter.emit('changeCloseMsgBox', closeMsgBox)
         })"
       />
+      <Item
+        :title="t('anotherSettings.rememberQuit')"
+        :show-switch="true"
+        :switch-state="remember"
+        @switch-fun="setSwitchFn('rememberClose', !remember, () => {
+          remember = !remember
+          emitter.emit('changeRemember', remember)
+        })"
+      />
+      <div
+        v-if="remember"
+        class="item"
+        :max-w="minWidth ? '[calc(100vw-450px)]' : '550px'"
+        bg="white dark:#999/10"
+        flex justify-center items-center
+        min-h-30px h-30px p="x-15px y-10px"
+      >
+        <ElRadioGroup
+          v-model="closeState"
+          flex="~ row"
+        >
+          <ElRadio :label="false">
+            {{ t('quit.tray') }}
+          </ElRadio>
+          <ElRadio :label="true">
+            {{ t('quit.quit') }}
+          </ElRadio>
+        </ElRadioGroup>
+      </div>
     </ItemBox>
     <ItemBox>
       <Item
