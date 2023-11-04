@@ -107,7 +107,7 @@ const TitleMenuItem: SetupFC = () => {
             {loginText.value}
           </span>
         </div>
-        {isVip.value ? <img src="/images/VIP.png" w-27px h-27px alt="" srcset="" /> : null}
+        {isVip.value ? <img src="./images/VIP.png" w-27px h-27px alt="" srcset="" /> : null}
       </div>
       <div flex="~ col" ml-10px no-drag>
         <div flex="~ wrap gap-10px" mb={listAllHidden.value ? '' : '10px'}>

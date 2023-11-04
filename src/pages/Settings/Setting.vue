@@ -128,10 +128,16 @@ watch(closeState, (newValue) => {
     </ItemBox>
     <ColorChange v-if="(!isLinux || isWindows10OrAfter) || !isMac" />
     <Item :title="t('vip.proVersion')" item-img="./images/VIP.png" @item-fun="router.push('/vip?from=setting')" />
-    <Item
-      :title="loginState ? t('myAccount') : t('loginText')"
-      @item-fun="() => router.push('/account?from=setting')"
-    />
+    <ItemBox>
+      <Item
+        :title="loginState ? t('myAccount') : t('loginText')"
+        @item-fun="() => router.push('/account?from=setting')"
+      />
+      <Item 
+        :title="t('anotherSettings.openPass')"
+        @item-fun="router.push('/openPass?from=setting')"
+      />
+    </ItemBox>
     <ItemBox>
       <Item
         :title="t('update.autoUpdate')"

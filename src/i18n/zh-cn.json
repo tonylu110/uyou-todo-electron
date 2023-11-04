@@ -78,7 +78,8 @@
     "itemWrap": "ToDo 默认展开",
     "laboratory": "实验室",
     "itemBtnShow": "显示 ToDo 按钮",
-    "rememberQuit": "记住关闭窗口操作"
+    "rememberQuit": "记住关闭窗口操作",
+    "openPass": "启动加密"
   },
   "contextMenu": {
     "copy": "复制",
@@ -175,5 +176,8 @@
     "doPay": "已诚信付费 uyou ToDo 专业版",
     "thanks": "感谢你的支持，这会帮助 uyou ToDo 更好的发展",
     "floatUI": "使用浮动 UI"
+  },
+  "openPass": {
+    "useOpenPass": "使用启动加密"
   }
 }

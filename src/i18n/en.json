@@ -78,7 +78,8 @@
     "itemWrap": "ToDo default open",
     "laboratory": "Laboratory",
     "itemBtnShow": "Show ToDo button",
-    "rememberQuit": "Remember to close the window"
+    "rememberQuit": "Remember to close the window",
+    "openPass": "Start encryption"
   },
   "contextMenu": {
     "copy": "Copy",
@@ -175,5 +176,8 @@
     "doPay": "Has paid in good faith uyou ToDo Professional Edition",
     "thanks": "Thank you for your support, this will help uyou ToDo develop better",
     "floatUI": "Use Float UI"
+  },
+  "openPass": {
+    "useOpenPass": "Use startup encryption"
   }
 }

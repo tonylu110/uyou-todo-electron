@@ -94,6 +94,11 @@ const routes = [
     name: 'vip',
     component: () => import('./pages/Settings/vip.vue'),
   },
+  {
+    path: '/openPass',
+    name: 'openPass',
+    component: () => import('./pages/Settings/OpenPass.vue'),
+  },
 ]
 
 const router = createRouter({

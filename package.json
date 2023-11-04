@@ -1,6 +1,6 @@
 {
   "name": "uyoutodo",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": false,
   "author": "Anthony Lu <taruruchan0@gmail.com>",
   "main": "electron/main.js",
