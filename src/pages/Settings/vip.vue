@@ -87,6 +87,7 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
       :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px h-auto
       flex="~ col wrap" justify-center items-start
       bg="white dark:#999/10" rounded-7px border="1px solid #00000020"
+      v-if="!isVip"
     >
       <h2>{{ t('vip.proFeature') }}</h2>
       <ul>
