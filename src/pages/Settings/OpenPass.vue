@@ -17,6 +17,17 @@ const menuShort = ref(window.innerWidth < 750)
 emitter.on('menuClose', (data) => {
   menuShort.value = data as boolean
 })
+
+const openPass = ref(localStorage.getItem('openPass') ? localStorage.getItem('openPass') : '')
+
+function setPass() {
+  localStorage.setItem('openPass', openPass.value!)
+}
+
+function clearPass() {
+  openPass.value = ''
+  localStorage.setItem('openPass', '')
+}
 </script>
 
 <template>
@@ -40,12 +51,12 @@ emitter.on('menuClose', (data) => {
         flex="~ wrap" justify-center items-center
         bg="white dark:#999/10" rounded-7px border="1px solid #00000020"
       >
-        <input type="password" w="100%" p-10px rounded-5px outline-primary-d border="1px black/30">
+        <input type="password" w="100%" p-10px rounded-5px outline-primary-d border="1px black/30" v-model="openPass">
       </div>
-      <ItemButton mode="primary">
+      <ItemButton mode="primary" @click="setPass">
         <span>{{ t('openPass.usePass') }}</span>
       </ItemButton>
-      <ItemButton mode="error">
+      <ItemButton mode="error" @click="clearPass">
         <span>{{ t('openPass.clearPass') }}</span>
       </ItemButton>
     </template>
