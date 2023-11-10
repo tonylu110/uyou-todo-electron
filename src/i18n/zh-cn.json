@@ -178,6 +178,8 @@
     "floatUI": "使用浮动 UI"
   },
   "openPass": {
-    "useOpenPass": "使用启动加密"
+    "useOpenPass": "使用启动加密",
+    "usePass": "使用密码",
+    "clearPass": "清除密码"
   }
 }

@@ -178,6 +178,8 @@
     "floatUI": "Use Float UI"
   },
   "openPass": {
-    "useOpenPass": "Use startup encryption"
+    "useOpenPass": "Use startup encryption",
+    "usePass": "Use password",
+    "clearPass": "Clear password"
   }
 }
