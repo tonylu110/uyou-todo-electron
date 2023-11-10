@@ -18,6 +18,7 @@ import { isLinux, isWindows10OrAfter } from './util/os'
 import LocalStorage from './util/localStorage'
 import type ITodoList from './interface/ITodoListArray'
 import setTime from './components/List/Item/setTime'
+import { closeWindow } from './util/windowApi'
 
 const route = useRoute()
 const router = useRouter()
@@ -115,8 +116,8 @@ function ok() {
   </ElConfigProvider>
   <Alert
     :dialog-show="passAlert"
-    :cancel-button-show="false"
     :title="t('openPass.plzPass')"
+    @cancel="closeWindow(void 0, true)"
     @return="ok"
   >
     <div flex="~ col" justify-center items-center>

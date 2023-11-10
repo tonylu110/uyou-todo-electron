@@ -74,8 +74,8 @@ function ok() {
   </SettingList>
   <Alert
     :dialog-show="alertShow"
-    :cancel-button-show="false"
     :title="t('openPass.plzPass')"
+    @cancel="router.back()"
     @return="ok"
   >
     <div flex="~ col" justify-center items-center>

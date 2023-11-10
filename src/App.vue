@@ -23,6 +23,7 @@ import type ITodoList from './interface/ITodoListArray'
 import LocalStorage from './util/localStorage'
 import setTime from './components/List/Item/setTime'
 import firstLoad from './util/firstLoad'
+import { closeWindow } from './util/windowApi'
 
 const { t, locale } = useI18n()
 
@@ -263,8 +264,8 @@ function ok() {
   </ElConfigProvider>
   <Alert
     :dialog-show="passAlert"
-    :cancel-button-show="false"
     :title="t('openPass.plzPass')"
+    @cancel="closeWindow(void 0, true)"
     @return="ok"
   >
     <div flex="~ col" justify-center items-center>
