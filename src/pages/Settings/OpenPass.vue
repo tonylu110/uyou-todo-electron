@@ -8,6 +8,7 @@ import setSwitchFn from '../../util/setSwitchFn'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import emitter from '../../util/bus'
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
+import Alert from '../../components/Alert/Alert.vue'
 
 const { t } = useI18n()
 
@@ -27,6 +28,16 @@ function setPass() {
 function clearPass() {
   openPass.value = ''
   localStorage.setItem('openPass', '')
+}
+
+const alertShow = ref(useOpenPass.value && openPass.value !== '')
+const alertMsg = ref('')
+const inPass = ref('')
+function ok() {
+  if(inPass.value === openPass.value)
+    alertShow.value = false
+  else
+    alertMsg.value = t('openPass.passErr')
 }
 </script>
 
@@ -51,7 +62,7 @@ function clearPass() {
         flex="~ wrap" justify-center items-center
         bg="white dark:#999/10" rounded-7px border="1px solid #00000020"
       >
-        <input type="password" w="100%" p-10px rounded-5px outline-primary-d border="1px black/30" v-model="openPass">
+        <input type="password" w="100%" p-10px rounded-5px outline-primary-d border="1px black/30" text-center v-model="openPass">
       </div>
       <ItemButton mode="primary" @click="setPass">
         <span>{{ t('openPass.usePass') }}</span>
@@ -61,4 +72,15 @@ function clearPass() {
       </ItemButton>
     </template>
   </SettingList>
+  <Alert
+    :dialog-show="alertShow"
+    :cancel-button-show="false"
+    :title="t('openPass.plzPass')"
+    @return="ok"
+  >
+    <div flex="~ col" justify-center items-center>
+      <div :mb="alertMsg ? '15px' : '0px'">{{ alertMsg }}</div>
+      <input type="password" v-model="inPass" w="80%" p-10px rounded-5px outline-primary-d border="1px black/30" text-center>
+    </div>
+  </Alert>
 </template>

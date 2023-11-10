@@ -180,6 +180,8 @@
   "openPass": {
     "useOpenPass": "使用啟動加密",
     "usePass": "使用密碼",
-    "clearPass": "清除密碼"
+    "clearPass": "清除密碼",
+    "plzPass": "請輸入密碼",
+    "passErr": "密碼錯誤，請重新輸入"
   }
 }

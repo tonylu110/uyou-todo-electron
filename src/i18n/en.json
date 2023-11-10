@@ -180,6 +180,8 @@
   "openPass": {
     "useOpenPass": "Use startup encryption",
     "usePass": "Use password",
-    "clearPass": "Clear password"
+    "clearPass": "Clear password",
+    "plzPass": "Please enter password",
+    "passErr": "Wrong password, please re-enter"
   }
 }
