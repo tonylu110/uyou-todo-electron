@@ -9,6 +9,7 @@ import ja from 'element-plus/es/locale/lang/ja'
 import es from 'element-plus/es/locale/lang/es'
 import en from 'element-plus/es/locale/lang/en'
 import { ElConfigProvider } from 'element-plus'
+import Alert from './components/Alert/Alert.vue'
 import RouterUrl from './components/RouterUrl'
 import emitter from './util/bus'
 import isDev from './util/mode'
@@ -82,6 +83,18 @@ onMounted(() => {
       setTime(item.time, item.text, t('todo-time'))
   })
 })
+
+const useOpenPass = ref(localStorage.getItem('useOpenPass') === 'true')
+const openPass = ref(localStorage.getItem('openPass') ? localStorage.getItem('openPass') : '')
+const passAlert = ref(useOpenPass.value && openPass.value !== '')
+const passAlertMsg = ref('')
+const inPass = ref('')
+function ok() {
+  if(inPass.value === openPass.value)
+    passAlert.value = false
+  else
+    passAlertMsg.value = t('openPass.passErr')
+}
 </script>
 
 <template>
@@ -100,4 +113,15 @@ onMounted(() => {
       </div>
     </div>
   </ElConfigProvider>
+  <Alert
+    :dialog-show="passAlert"
+    :cancel-button-show="false"
+    :title="t('openPass.plzPass')"
+    @return="ok"
+  >
+    <div flex="~ col" justify-center items-center>
+      <div :mb="passAlert ? '15px' : '0px'">{{ passAlertMsg }}</div>
+      <input type="password" v-model="inPass" w="80%" p-10px rounded-5px outline-primary-d border="1px black/30" text-center>
+    </div>
+  </Alert>
 </template>
