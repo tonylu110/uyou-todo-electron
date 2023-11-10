@@ -269,7 +269,13 @@ function ok() {
   >
     <div flex="~ col" justify-center items-center>
       <div :mb="passAlert ? '15px' : '0px'">{{ passAlertMsg }}</div>
-      <input type="password" v-model="inPass" w="80%" p-10px rounded-5px outline-primary-d border="1px black/30" text-center>
+      <input 
+        type="password" 
+        v-model="inPass" 
+        @keyup.enter="ok"
+        w="80%" p-10px rounded-5px outline-primary-d 
+        border="1px black/30" text-center
+      >
     </div>
   </Alert>
 </template>
