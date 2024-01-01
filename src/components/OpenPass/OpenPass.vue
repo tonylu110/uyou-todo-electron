@@ -1,19 +1,29 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { closeWindow } from '../../util/windowApi'
+import { useI18n } from 'vue-i18n'
+import { createToast } from '../../components/Toast'
 
-const openPass = ref('')
+const { t } = useI18n()
 
-const emit = defineEmits<{
-  ok: []
-}>()
+const inPass = ref('')
 
 function numClick(num: string) {
-  openPass.value = openPass.value + num
+  inPass.value = inPass.value + num
 }
 
 function backSpace() {
-  openPass.value = openPass.value.substring(0, openPass.value.length - 1)
+  inPass.value = inPass.value.substring(0, inPass.value.length - 1)
+}
+
+const model = defineModel<boolean>()
+const useOpenPass = ref(localStorage.getItem('useOpenPass') === 'true')
+const openPass = ref(localStorage.getItem('openPass') ? localStorage.getItem('openPass') : '')
+function ok() {
+  if(inPass.value === openPass.value)
+    model.value = false
+  else
+    createToast({ msg: t('openPass.passErr') })
 }
 </script>
 
@@ -27,14 +37,14 @@ function backSpace() {
       <div relative w-190px>
         <input
           v-focus
-          type="text"
+          type="password"
           p="x-10px y-20px" rounded-7px outline-primary-d 
           text-center border-none w-full
           bg="white/50 dark:#666/50"
-          v-model="openPass"
+          v-model="inPass"
         >
         <div 
-          v-if="openPass"
+          v-if="inPass"
           absolute right="[calc(-1rem-70px)]" top-0 p-20px
           h-1rem bg="gray/50 active:gray"
           flex justify-center items-center
@@ -128,7 +138,7 @@ function backSpace() {
         <div 
           flex justify-center items-center
           bg="primary-d/50 active:primary-d" h-64px rounded-7px
-          @click="emit('ok')"
+          @click="ok"
         >
           <div i-ph:check-bold/>
         </div>

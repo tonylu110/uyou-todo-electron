@@ -22,6 +22,7 @@ const Toast: SetupFC = () => {
       translate={props.center ? '[-50%]' : 'x-[-50%]'}
       position={props.center ? 'absolute' : 'fixed'}
       class={props.center ? '' : 'animate-toastShow'}
+      z-999999999
     >
       { props.msg }
     </div>

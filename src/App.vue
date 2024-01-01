@@ -208,18 +208,10 @@ onMounted(() => {
 const useOpenPass = ref(localStorage.getItem('useOpenPass') === 'true')
 const openPass = ref(localStorage.getItem('openPass') ? localStorage.getItem('openPass') : '')
 const passAlert = ref(useOpenPass.value && openPass.value !== '')
-const passAlertMsg = ref('')
-const inPass = ref('')
-function ok() {
-  if(inPass.value === openPass.value)
-    passAlert.value = false
-  else
-    passAlertMsg.value = t('openPass.passErr')
-}
 </script>
 
 <template>
-  <OpenPass/>
+  <OpenPass v-if="passAlert" v-model="passAlert"/>
   <ElConfigProvider :locale="useLocale">
     <RouterUrl v-if="routerShow" />
     <div :class="isDark ? 'dark' : ''">
@@ -264,23 +256,6 @@ function ok() {
       </div>
     </div>
   </ElConfigProvider>
-  <Alert
-    :dialog-show="passAlert"
-    :title="t('openPass.plzPass')"
-    @cancel="closeWindow(void 0, true)"
-    @return="ok"
-  >
-    <div flex="~ col" justify-center items-center>
-      <div :mb="passAlert ? '15px' : '0px'">{{ passAlertMsg }}</div>
-      <input 
-        type="password" 
-        v-model="inPass" 
-        @keyup.enter="ok"
-        w="80%" p-10px rounded-5px outline-primary-d 
-        border="1px black/30" text-center
-      >
-    </div>
-  </Alert>
 </template>
 
 <style lang="scss">
