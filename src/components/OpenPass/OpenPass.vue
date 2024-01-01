@@ -42,6 +42,7 @@ function ok() {
           text-center border-none w-full
           bg="white/50 dark:#666/50"
           v-model="inPass"
+          @keydown.enter="ok"
         >
         <div 
           v-if="inPass"
