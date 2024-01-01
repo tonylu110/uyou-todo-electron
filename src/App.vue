@@ -24,6 +24,7 @@ import LocalStorage from './util/localStorage'
 import setTime from './components/List/Item/setTime'
 import firstLoad from './util/firstLoad'
 import { closeWindow } from './util/windowApi'
+import OpenPass from './components/OpenPass/OpenPass.vue'
 
 const { t, locale } = useI18n()
 
@@ -218,6 +219,7 @@ function ok() {
 </script>
 
 <template>
+  <OpenPass/>
   <ElConfigProvider :locale="useLocale">
     <RouterUrl v-if="routerShow" />
     <div :class="isDark ? 'dark' : ''">
