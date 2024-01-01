@@ -20,7 +20,7 @@ const About: SetupFC = () => {
         block mt-15px
         text-14px c="#555 dark:#bbb" font-bold
       >
-        Copyright (c) 2022-2023, Anthony Lu
+        Copyright (c) 2022-{new Date().getFullYear()}, Anthony Lu
       </span>
       {!isMac() ? <CloseButton/> : null}
     </div>
