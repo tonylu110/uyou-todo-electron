@@ -225,6 +225,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
         : ((isDark && store.get('micaStyle') === 'acrylic')
           ? '#111/50'
           : '')"
+      :opacity="passAlert ? '0' : '100'"
       :class="isDark ? 'dark list-main' : 'list-main'"
     >
       <div class="list-in">

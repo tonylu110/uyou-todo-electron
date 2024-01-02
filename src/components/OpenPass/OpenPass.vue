@@ -23,7 +23,10 @@ function ok() {
   if(inPass.value === openPass.value)
     model.value = false
   else
-    createToast({ msg: t('openPass.passErr') })
+    createToast({
+      msg: t('openPass.passErr'),
+      center: true
+    })
 }
 
 const backSpaceRef = ref()
@@ -43,11 +46,11 @@ onLongPress(
 
 <template>
   <div 
-    z-1000 backdrop-blur-md w-screen h-screen
-    fixed top-0 left-0 bg="black/15"
+    z-1000 w-screen h-screen
+    fixed top-0 left-0 drag
     flex justify-center items-center
   >
-    <div>
+    <div no-drag>
       <div relative w-190px>
         <input
           v-focus
@@ -68,7 +71,7 @@ onLongPress(
           absolute right="[calc(-1rem-70px)]" top-0 p-20px
           h-1rem bg="gray/50 active:gray"
           flex justify-center items-center
-          rounded-7px shadow-md
+          rounded-7px shadow-md no-drag
           @click="backSpace"
         >
           <div i-ph:backspace-bold/>

@@ -92,7 +92,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
 </script>
 
 <template>
-  <OpenPass v-if="passAlert" v-model="passAlert"/>
+  <OpenPass v-if="passAlert && !isWinDow" v-model="passAlert"/>
   <ElConfigProvider :locale="useLocale">
     <RouterUrl v-if="routerShow" />
     <div :class="isDark ? 'dark' : ''">
