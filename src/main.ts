@@ -11,6 +11,7 @@ import router from './router'
 import AppSimple from './AppSimple.vue'
 import i18n from './i18n'
 import { vFocus } from './util/autofocus'
+import { VTooltip } from 'floating-vue'
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
@@ -31,6 +32,7 @@ app.use(router)
 app.use(i18n)
 app.use(PerfectScrollbar)
 app.directive('focus', vFocus)
+app.directive('tooltip', VTooltip)
 app.mount('#app')
 
 const keyToAdd = ref(localStorage.getItem('ketToAdd') === 'true')

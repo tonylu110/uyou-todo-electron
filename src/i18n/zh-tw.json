@@ -182,6 +182,7 @@
     "usePass": "使用密碼",
     "clearPass": "清除密碼",
     "plzPass": "請輸入密碼",
-    "passErr": "密碼錯誤，請重新輸入"
+    "passErr": "密碼錯誤，請重新輸入",
+    "longPress": "長按刪除"
   }
 }

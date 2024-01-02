@@ -182,6 +182,7 @@
     "usePass": "Use password",
     "clearPass": "Clear password",
     "plzPass": "Please enter password",
-    "passErr": "Wrong password, please re-enter"
+    "passErr": "Wrong password, please re-enter",
+    "longPress": "Long press to delete"
   }
 }
