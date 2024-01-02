@@ -23,7 +23,6 @@ import type ITodoList from './interface/ITodoListArray'
 import LocalStorage from './util/localStorage'
 import setTime from './components/List/Item/setTime'
 import firstLoad from './util/firstLoad'
-import { closeWindow } from './util/windowApi'
 import OpenPass from './components/OpenPass/OpenPass.vue'
 
 const { t, locale } = useI18n()
@@ -211,7 +210,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
 </script>
 
 <template>
-  <OpenPass v-if="passAlert" v-model="passAlert"/>
+  <OpenPass v-if="passAlert && !isWinDow" v-model="passAlert"/>
   <ElConfigProvider :locale="useLocale">
     <RouterUrl v-if="routerShow" />
     <div :class="isDark ? 'dark' : ''">
