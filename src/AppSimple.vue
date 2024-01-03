@@ -92,7 +92,9 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
 </script>
 
 <template>
-  <OpenPass v-if="passAlert && !isWinDow" v-model="passAlert"/>
+  <Transition name="open-pass">
+    <OpenPass v-if="passAlert && !isWinDow" v-model="passAlert"/>
+  </Transition>
   <ElConfigProvider :locale="useLocale">
     <RouterUrl v-if="routerShow" />
     <div :class="isDark ? 'dark' : ''">
@@ -101,6 +103,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
     <div
       v-if="!isWinDow"
       :bg="!isBlur ? (isDark ? 'black' : '#e5e5e5') : ''"
+      :opacity="passAlert ? '0' : '100'"
       :class="isDark ? 'dark' : ''"
     >
       <div overflow-hidden w-100vw h-100vh>
@@ -109,3 +112,16 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
     </div>
   </ElConfigProvider>
 </template>
+
+<style scoped lang="scss">
+.open-pass-leave-active {
+  transition-property: opacity, top;
+  transition-duration: .4s, .4s;
+}
+
+.open-pass-enter-from,
+.open-pass-leave-to {
+  opacity: 0;
+  top: 100%;
+}
+</style>
