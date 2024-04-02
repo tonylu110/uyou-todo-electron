@@ -92,6 +92,7 @@ function addItem(id: number, text: string) {
       ok: false,
     }
     list.value!.unshift(item)
+    listAll.value!.unshift(item)
     saveItemSet(list.value!)
   }
 }
