@@ -184,5 +184,10 @@
     "plzPass": "请输入密码",
     "passErr": "密码错误，请重新输入",
     "longPress": "长按删除"
+  },
+  "todayShow": {
+    "creatTime": "仅显示今天创建",
+    "remindTime": "仅显示今天提醒",
+    "allTime": "显示所有有关今天"
   }
 }

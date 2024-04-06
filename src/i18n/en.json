@@ -184,5 +184,10 @@
     "plzPass": "Please enter password",
     "passErr": "Wrong password, please re-enter",
     "longPress": "Long press to delete"
+  },
+  "todayShow": {
+    "creatTime": "Show only those created today",
+    "remindTime": "Only show reminders for today",
+    "allTime": "Show all about today"
   }
 }
