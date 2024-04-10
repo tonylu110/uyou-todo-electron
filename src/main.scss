@@ -20,10 +20,6 @@ input[disabled] {
   --uno: cursor-not-allowed;
 }
 
-.ps {
-  --uno: p-inline-0;
-}
-
 .v-popper__popper {
   --uno: no-drag;
 
@@ -76,4 +72,8 @@ input[disabled] {
 
 .el-picker__popper {
   --uno: no-drag;
+}
+
+.ps {
+  --uno: p-inline-0;
 }

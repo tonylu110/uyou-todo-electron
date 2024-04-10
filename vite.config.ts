@@ -5,7 +5,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import VueMacros from 'unplugin-vue-macros/vite'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   base: './',
   plugins: [

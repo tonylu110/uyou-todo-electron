@@ -1,4 +1,5 @@
 import 'virtual:uno.css'
+import 'virtual:unocss-devtools'
 import './main.scss'
 import 'floating-vue/dist/style.css'
 import 'element-plus/dist/index.css'

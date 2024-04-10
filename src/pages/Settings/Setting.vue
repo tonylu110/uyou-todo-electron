@@ -120,6 +120,10 @@ watch(closeState, (newValue) => {
         @item-fun="openUrl('http://localhost:3000/__unocss')"
       />
       <Item
+        title="vue devtool"
+        @item-fun="openUrl('http://localhost:3000/__devtools__/')"
+      />
+      <Item
         title="Show router url"
         :show-switch="true"
         :switch-state="routerUrlState"
