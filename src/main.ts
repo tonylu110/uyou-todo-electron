@@ -39,3 +39,5 @@ app.mount('#app')
 const keyToAdd = ref(localStorage.getItem('ketToAdd') === 'true')
 
 ipcRenderer.send('setAddItemCut', keyToAdd.value)
+
+ipcRenderer.send('initFont', localStorage.getItem('useCustomFont') === 'true')

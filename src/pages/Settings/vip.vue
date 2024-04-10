@@ -94,6 +94,7 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
         <li>{{ t('vip.custColor') }}</li>
         <li>{{ t('vip.showList') }}</li>
         <li>{{ t('vip.floatUI') }}</li>
+        <li>{{ t('vip.setCustFont') }}</li>
         <li>{{ t('vip.more') }}</li>
       </ul>
     </div>
@@ -113,6 +114,10 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
           @item-fun="router.push('/setListItem?from=setting')"
         />
       </ItemBox>
+      <Item
+        :title="t('vip.setCustFont')"
+        @item-fun="router.push('/fontSet?from=setting')"
+      />
       <Item
         :title="t('vip.custColor')"
         :show-switch="true"

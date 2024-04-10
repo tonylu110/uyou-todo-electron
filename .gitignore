@@ -25,3 +25,4 @@ dist-ssr
 
 .vscode
 dist_electron
+selectedFont.css

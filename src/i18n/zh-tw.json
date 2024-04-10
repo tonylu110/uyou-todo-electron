@@ -175,7 +175,8 @@
     "custColor": "自定義分類顏色",
     "doPay": "已誠信付費 uyou ToDo 專業版",
     "thanks": "感謝你的支持，這會幫助 uyou ToDo 更好的發展",
-    "floatUI": "浮動 UI"
+    "floatUI": "浮動 UI",
+    "setCustFont": "設定自訂字體"
   },
   "openPass": {
     "useOpenPass": "使用啟動加密",
@@ -189,5 +190,9 @@
     "creatTime": "僅顯示今天創建",
     "remindTime": "僅顯示今天提醒",
     "allTime": "顯示所有相關今天"
+  },
+  "setFont": {
+    "useCustomFont": "使用自訂字體",
+    "donnotSelect": "未選擇字體"
   }
 }

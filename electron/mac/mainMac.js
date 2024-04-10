@@ -172,6 +172,39 @@ function createWindow() {
     if (time > 0)
       setTimeout(timeoutFn, time)
   })
+
+  ipcMain.on('setFont', () => {
+    dialog.showOpenDialog({
+      properties: ['openFile'],
+      filters: [{ name: 'Fonts', extensions: ['ttf'] }]
+    }).then(result => {
+      const filePath = result.filePaths[0];
+      if (filePath) {
+        const fontName = path.basename(filePath);
+        const fontCss = `
+          @font-face {
+            font-family: '${fontName}';
+            src: url('file://${filePath}');
+          }
+          * {
+            font-family: '${fontName}', sans-serif;
+          }
+        `;
+        fs.writeFileSync(path.join(__dirname, 'selectedFont.css'), fontCss);
+        mainWindow.webContents.insertCSS(fontCss);
+        mainWindow.webContents.send('getFontName', fontName.slice(0, -4))
+      }
+    }).catch(err => {
+      console.error(err);
+    });
+  })
+
+  ipcMain.on('initFont', (ev, useFont) => {
+    if (useFont) {
+      const fontCss = fs.readFileSync(path.join(__dirname, 'selectedFont.css'), 'utf-8')
+      mainWindow.webContents.insertCSS(fontCss);
+    }
+  })
 }
 
 let tray

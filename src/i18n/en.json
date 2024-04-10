@@ -175,7 +175,8 @@
     "custColor": "Custom category colors",
     "doPay": "Has paid in good faith uyou ToDo Professional Edition",
     "thanks": "Thank you for your support, this will help uyou ToDo develop better",
-    "floatUI": "Use Float UI"
+    "floatUI": "Use Float UI",
+    "setCustFont": "Set custom font"
   },
   "openPass": {
     "useOpenPass": "Use startup encryption",
@@ -189,5 +190,9 @@
     "creatTime": "Show only those created today",
     "remindTime": "Only show reminders for today",
     "allTime": "Show all about today"
+  },
+  "setFont": {
+    "useCustomFont": "Use custom font",
+    "donnotSelect": "No font selected"
   }
 }

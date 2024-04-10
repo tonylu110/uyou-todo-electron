@@ -1,8 +1,9 @@
 const path = require('node:path')
-const { app, BrowserWindow, ipcMain, screen, Menu, shell, globalShortcut, nativeTheme, Tray } = require('electron')
+const { app, BrowserWindow, ipcMain, screen, Menu, shell, globalShortcut, nativeTheme, Tray, dialog } = require('electron')
 const Store = require('electron-store')
 const remoteMain = require('@electron/remote/main')
 const { MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
+const fs = require('node:fs')
 const menuTemplate = require('./menu.js')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
@@ -52,6 +53,7 @@ function createWindow() {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
+      webSecurity: false,
     },
   })
 
@@ -201,6 +203,39 @@ function createWindow() {
 
     if (time > 0)
       setTimeout(timeoutFn, time, () => mainWindow.show())
+  })
+
+  ipcMain.on('setFont', () => {
+    dialog.showOpenDialog({
+      properties: ['openFile'],
+      filters: [{ name: 'Fonts', extensions: ['ttf'] }]
+    }).then(result => {
+      const filePath = result.filePaths[0];
+      if (filePath) {
+        const fontName = path.basename(filePath);
+        const fontCss = `
+          @font-face {
+            font-family: '${fontName}';
+            src: url('${filePath.replace(/\\/g, "/")}');
+          }
+          * {
+            font-family: '${fontName}', sans-serif;
+          }
+        `;
+        fs.writeFileSync(path.join(__dirname, 'selectedFont.css'), fontCss);
+        mainWindow.webContents.insertCSS(fontCss);
+        mainWindow.webContents.send('getFontName', fontName.slice(0, -4))
+      }
+    }).catch(err => {
+      console.error(err);
+    });
+  })
+
+  ipcMain.on('initFont', (ev, useFont) => {
+    if (useFont) {
+      const fontCss = fs.readFileSync(path.join(__dirname, 'selectedFont.css'), 'utf-8')
+      mainWindow.webContents.insertCSS(fontCss);
+    }
   })
 }
 
