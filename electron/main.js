@@ -233,8 +233,12 @@ function createWindow() {
 
   ipcMain.on('initFont', (ev, useFont) => {
     if (useFont) {
-      const fontCss = fs.readFileSync(path.join(__dirname, 'selectedFont.css'), 'utf-8')
-      mainWindow.webContents.insertCSS(fontCss);
+      fs.readFile(path.join(__dirname, 'selectedFont.css'), 'utf-8', (err, data) => {
+        if (err) {
+          return
+        }
+        mainWindow.webContents.insertCSS(data);
+      })
     }
   })
 }
