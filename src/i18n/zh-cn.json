@@ -193,6 +193,7 @@
   },
   "setFont": {
     "useCustomFont": "使用自定义字体",
-    "donnotSelect": "未选择字体"
+    "donnotSelect": "未选择字体",
+    "select": "已选择"
   }
 }

@@ -46,7 +46,7 @@ const FontSet: SetupFC = () => {
         {useCustomFont.value 
           ? (
             <Item
-              title={fontName.value ? fontName.value : t('setFont.donnotSelect')}
+              title={fontName.value ? t('setFont.select') + ' ' + fontName.value : t('setFont.donnotSelect')}
               onItemFun={selectFont}
             />
           )
