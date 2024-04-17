@@ -1,5 +1,6 @@
 const path = require('node:path')
-const { app, BrowserWindow, ipcMain, screen, Menu, shell, nativeTheme, globalShortcut, Tray } = require('electron')
+const fs = require('node:fs')
+const { app, BrowserWindow, ipcMain, screen, Menu, shell, nativeTheme, globalShortcut, Tray, dialog } = require('electron')
 const Store = require('electron-store')
 const remoteMain = require('@electron/remote/main')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('../store/windowSizeStore')
@@ -52,6 +53,7 @@ function createWindow() {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
+      webSecurity: false,
     },
   })
 
