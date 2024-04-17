@@ -27,7 +27,19 @@ const TitleMenuItem: SetupFC = () => {
 
   const listData = ref(LocalStorage('get'))
 
-  const TodayNum = computed(() => listData.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString()).length)
+  const todayShow = ref(localStorage.getItem('todayShow'))
+  emitter.on('todayShow', (show) => {
+    todayShow.value = show as string
+  })
+
+  const TodayNum = computed(() => {
+    if (todayShow.value === 'todayRemind')
+      return listData.value!.filter(listData => new Date(listData.time!).toDateString() === new Date().toDateString()).length
+    else if (todayShow.value === 'allAboutToday')
+      return listData.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString() || new Date(listData.time!).toDateString() === new Date().toDateString()).length
+    else
+      return listData.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString()).length
+  })
   const starNum = computed(() => listData.value!.filter(listData => listData.star === true).length)
   const doNum = computed(() => listData.value!.filter(listData => listData.ok).length)
   const notDoNum = computed(() => listData.value!.filter(listData => !listData.ok).length)

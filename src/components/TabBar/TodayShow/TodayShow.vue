@@ -2,10 +2,20 @@
 import { Dropdown as VDropdown } from 'floating-vue'
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import emitter from '../../../util/bus';
 
 const { t } = useI18n()
 
 const showToday = ref(false)
+
+const todayShow = ref(localStorage.getItem('todayShow'))
+
+function changeTodayshow(show: string) {
+  todayShow.value = show
+  localStorage.setItem('todayShow', todayShow.value!)
+  emitter.emit('todayShow', todayShow.value)
+  showToday.value = false
+}
 </script>
 
 <template>
@@ -28,8 +38,12 @@ const showToday = ref(false)
           flex items-center p-3
           border-b="1px solid #ddd dark:#333"
           bg="hover:black/5 active:primary-d"
+          @click="changeTodayshow('null')"
         >
-          <div i-ph:check-bold c-primary-d mr-3/>
+          <div
+            i-ph:check-bold c-primary-d mr-3
+            :opacity="todayShow === null || todayShow === 'null' ? '100' : '0'"
+          />
           <span select-none group-active:c-white>{{ t('todayShow.creatTime') }}</span>
         </div>
         <div
@@ -37,16 +51,24 @@ const showToday = ref(false)
           flex items-center p-3 
           border-b="1px solid #ddd dark:#333"
           bg="hover:black/5 active:primary-d"
+          @click="changeTodayshow('todayRemind')"
         >
-          <div i-ph:check-bold c-primary-d mr-3/>
+          <div
+            i-ph:check-bold c-primary-d mr-3
+            :opacity="todayShow === 'todayRemind' ? '100' : '0'"
+          />
           <span select-none group-active:c-white>{{ t('todayShow.remindTime') }}</span>
         </div>
         <div
           class="group"
           flex items-center p-3
           bg="hover:black/5 active:primary-d"
+          @click="changeTodayshow('allAboutToday')"
         >
-          <div i-ph:check-bold c-primary-d mr-3/>
+          <div
+            i-ph:check-bold c-primary-d mr-3
+            :opacity="todayShow === 'allAboutToday' ? '100' : '0'"
+          />
           <span select-none group-active:c-white>{{ t('todayShow.allTime') }}</span>
         </div>
       </div>

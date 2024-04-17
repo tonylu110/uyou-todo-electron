@@ -7,6 +7,7 @@ import List from '../components/List/List.vue'
 import LocalStorage from '../util/localStorage'
 import type ITodoList from '../interface/ITodoListArray'
 import type { cateItem } from '../components/ListMenu/ICateItem'
+import emitter from '../util/bus'
 
 const Other: SetupFC = () => {
   const { t } = useI18n()
@@ -21,6 +22,8 @@ const Other: SetupFC = () => {
 
   const showAddItem = ref(false)
 
+  const todayShow = ref(localStorage.getItem('todayShow'))
+
   watchEffect(() => {
     if (route.query.listName === 'allNotDo') {
       listData.value = list.value!.filter(listData => listData.ok === false)
@@ -31,7 +34,12 @@ const Other: SetupFC = () => {
       title.value = t('listMenu.completed')
     }
     else if (route.query.listName === 'today') {
-      listData.value = list.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString())
+      if (todayShow.value === 'todayRemind')
+        listData.value = list.value!.filter(listData => new Date(listData.time!).toDateString() === new Date().toDateString())
+      else if (todayShow.value === 'allAboutToday')
+        listData.value = list.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString() || new Date(listData.time!).toDateString() === new Date().toDateString())
+      else
+        listData.value = list.value!.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString())
       title.value = t('startPage.today')
     }
     else if (route.query.listName === 'star') {
@@ -44,6 +52,10 @@ const Other: SetupFC = () => {
       if (route.name === 'other')
         title.value = JSON.parse(localCateList!).data.filter((cate: cateItem) => `${cate.id}` === route.query.listName)[0].title
     }
+  })
+
+  emitter.on('todayShow', (show) => {
+    todayShow.value = show as string
   })
 
   const simpleMode = localStorage.getItem('simpleMode') === 'true'
