@@ -22,9 +22,21 @@ const FontSet: SetupFC = () => {
     localStorage.setItem('customFontName', fontName.value)
   });
 
+  const fontNameBold = ref(localStorage.getItem('customFontNameBold'))
+  ipcRenderer.on('getFontNameBold', (_event: unknown, font: string) => {
+    fontNameBold.value = font
+    localStorage.setItem('customFontNameBold', fontNameBold.value)
+  });
+
   const selectFont = () => {
     ipcRenderer.send('setFont')
   }
+
+  const selectBoldFont = () => {
+    ipcRenderer.send('setBoldFont')
+  }
+
+  const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
   return () => (
     <>
@@ -45,10 +57,30 @@ const FontSet: SetupFC = () => {
         />
         {useCustomFont.value 
           ? (
-            <Item
-              title={fontName.value ? t('setFont.select') + ' ' + fontName.value : t('setFont.donnotSelect')}
-              onItemFun={selectFont}
-            />
+            <>
+              <div 
+                c="#333 dark:#bbb" font-bold
+                max-w-550px mb-10px select-text
+                w={simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'}
+              >
+                {t('setFont.regular')}
+              </div>
+              <Item
+                title={fontName.value ? t('setFont.select') + ' ' + fontName.value : t('setFont.donnotSelect')}
+                onItemFun={selectFont}
+              />
+              <div 
+                c="#333 dark:#bbb" font-bold
+                max-w-550px mb-10px select-text
+                w={simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'}
+              >
+                {t('setFont.bold')}
+              </div>
+              <Item
+                title={fontNameBold.value ? t('setFont.select') + ' ' + fontNameBold.value : t('setFont.donnotSelect')}
+                onItemFun={selectBoldFont}
+              />
+            </>
           )
           : null
         }

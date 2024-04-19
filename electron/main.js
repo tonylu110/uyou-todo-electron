@@ -215,11 +215,11 @@ function createWindow() {
         const fontName = path.basename(filePath);
         const fontCss = `
           @font-face {
-            font-family: '${fontName}';
+            font-family: 'cus_font';
             src: url('${filePath.replace(/\\/g, "/")}');
           }
           * {
-            font-family: '${fontName}', sans-serif;
+            font-family: 'cus_font', sans-serif;
           }
         `;
         fs.writeFileSync(path.join(__dirname, 'selectedFont.css'), fontCss);
@@ -231,9 +231,42 @@ function createWindow() {
     });
   })
 
+  ipcMain.on('setBoldFont', () => {
+    dialog.showOpenDialog({
+      properties: ['openFile'],
+      filters: [{ name: 'Fonts', extensions: ['ttf'] }]
+    }).then(result => {
+      const filePath = result.filePaths[0];
+      if (filePath) {
+        const fontName = path.basename(filePath);
+        const fontCss = `
+          @font-face {
+            font-family: 'cus_font';
+            font-weight: bold;
+            src: url('${filePath.replace(/\\/g, "/")}');
+          }
+          * {
+            font-family: 'cus_font', sans-serif;
+          }
+        `;
+        fs.writeFileSync(path.join(__dirname, 'selectedBoldFont.css'), fontCss);
+        mainWindow.webContents.insertCSS(fontCss);
+        mainWindow.webContents.send('getFontNameBold', fontName.slice(0, -4))
+      }
+    }).catch(err => {
+      console.error(err);
+    });
+  })
+
   ipcMain.on('initFont', (ev, useFont) => {
     if (useFont) {
       fs.readFile(path.join(__dirname, 'selectedFont.css'), 'utf-8', (err, data) => {
+        if (err) {
+          return
+        }
+        mainWindow.webContents.insertCSS(data);
+      })
+      fs.readFile(path.join(__dirname, 'selectedBoldFont.css'), 'utf-8', (err, data) => {
         if (err) {
           return
         }

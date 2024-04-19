@@ -194,6 +194,8 @@
   "setFont": {
     "useCustomFont": "Use custom font",
     "donnotSelect": "No font selected",
-    "select": "chosen"
+    "select": "chosen",
+    "regular": "Regular",
+    "bold": "Bold"
   }
 }

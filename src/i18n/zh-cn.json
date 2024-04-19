@@ -194,6 +194,8 @@
   "setFont": {
     "useCustomFont": "使用自定义字体",
     "donnotSelect": "未选择字体",
-    "select": "已选择"
+    "select": "已选择",
+    "regular": "常规体",
+    "bold": "粗体"
   }
 }
