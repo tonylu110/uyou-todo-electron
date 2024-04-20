@@ -6,6 +6,7 @@ import TabBar from '../../../components/TabBar/TabBar.vue'
 import setSwitchFn from '../../../util/setSwitchFn'
 import { useI18n } from 'vue-i18n'
 import { createToast } from '../../../components/Toast'
+import ItemText from '../../../components/ItemBox/ItemText'
 
 const FontSet: SetupFC = () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
@@ -36,8 +37,6 @@ const FontSet: SetupFC = () => {
     ipcRenderer.send('setBoldFont')
   }
 
-  const simpleMode = localStorage.getItem('simpleMode') === 'true'
-
   return () => (
     <>
       <TabBar
@@ -58,24 +57,16 @@ const FontSet: SetupFC = () => {
         {useCustomFont.value 
           ? (
             <>
-              <div 
-                c="#333 dark:#bbb" font-bold
-                max-w-550px mb-10px select-text
-                w={simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'}
-              >
+              <ItemText isBold={true}>
                 {t('setFont.regular')}
-              </div>
+              </ItemText>
               <Item
                 title={fontName.value ? t('setFont.select') + ' ' + fontName.value : t('setFont.donnotSelect')}
                 onItemFun={selectFont}
               />
-              <div 
-                c="#333 dark:#bbb" font-bold
-                max-w-550px mb-10px select-text
-                w={simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'}
-              >
+              <ItemText isBold={true}>
                 {t('setFont.bold')}
-              </div>
+              </ItemText>
               <Item
                 title={fontNameBold.value ? t('setFont.select') + ' ' + fontNameBold.value : t('setFont.donnotSelect')}
                 onItemFun={selectBoldFont}

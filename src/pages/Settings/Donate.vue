@@ -5,6 +5,7 @@ import TabBar from '../../components/TabBar/TabBar.vue'
 import router from '../../router'
 import SettingList from '../../components/SettingList'
 import emitter from '../../util/bus'
+import ItemSpace from '../../components/ItemBox/ItemSpace'
 
 const { t } = useI18n()
 
@@ -23,11 +24,7 @@ emitter.on('menuClose', (data) => {
     @left-click="router.back()"
   />
   <SettingList>
-    <div
-      :w="menuShort ? '[calc(100vw-118px)]' : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px h-auto
-      flex="~ wrap" justify-center items-center
-      bg="white dark:#999/10" rounded-7px border="1px solid #00000020"
-    >
+    <ItemSpace flex="~ wrap" justify-center items-center>
       <img
         w-250px p-10px
         src="/images/donate/alipay.png"
@@ -38,6 +35,6 @@ emitter.on('menuClose', (data) => {
         src="/images/donate/wechatpay.png"
         alt=""
       >
-    </div>
+    </ItemSpace>
   </SettingList>
 </template>

@@ -5,6 +5,7 @@ import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import setSwitchFn from '../../util/setSwitchFn'
+import ItemText from '../../components/ItemBox/ItemText'
 
 const Laboratory: SetupFC = () => {
   const router = useRouter()
@@ -21,7 +22,7 @@ const Laboratory: SetupFC = () => {
 
   // const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
 
-  const simpleMode = localStorage.getItem('simpleMode') === 'true'
+  const newNoteUI = ref(localStorage.getItem('newNoteUi') === 'true')
 
   return () => (
     <>
@@ -61,9 +62,15 @@ const Laboratory: SetupFC = () => {
           switchState={keyToAdd.value}
           onSwitchFun={() => setSwitchFn('ketToAdd', !keyToAdd.value, () => keyToAdd.value = !keyToAdd.value, 'setAddItemCut')}
         />
-        <div c="#333 dark:#bbb" max-w-550px w={simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'} mb-10px select-text>
+        <Item
+          title="⚠️ new Note UI"
+          showSwitch={true}
+          switchState={newNoteUI.value}
+          onSwitchFun={() => setSwitchFn('newNoteUI', !newNoteUI.value, () => newNoteUI.value = !newNoteUI.value)}
+        />
+        <ItemText>
           ⚠️ This page contains experimental features, may be unstable, and may be removed at any time, for experience only
-        </div>
+        </ItemText>
       </SettingList>
     </>
   )

@@ -10,13 +10,12 @@ import Item from '../components/ItemBox/Item/Item.vue'
 import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
 import emitter from '../util/bus'
 import { createToast } from '../components/Toast'
+import ItemSpace from '../components/ItemBox/ItemSpace'
 
 const { t } = useI18n()
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
-
-const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
 const form = ref('')
 const route = useRoute()
@@ -234,13 +233,7 @@ function openLogoff() {
   />
   <SettingList>
     <Item :title="loginText" :show-arrow="false" />
-    <div
-      v-if="!loginState" mb-10px rounded-7px
-      p="x-15px y-10px" border="1px solid #00000020"
-      :w="simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'"
-      bg="white dark:#999/10" flex="~ col"
-      max-w-550px
-    >
+    <ItemSpace v-if="!loginState">
       <input
         v-model="uname" p-15px
         m="x-0 y-5px" c="black dark:#bbb"
@@ -258,7 +251,7 @@ function openLogoff() {
         :placeholder="t('accountPage.passwd')"
         @keydown.enter="login"
       >
-    </div>
+    </ItemSpace>
     <ItemButton v-if="!loginState" mode="primary" @click="login">
       {{ t('accountPage.login') }}
     </ItemButton>

@@ -9,6 +9,7 @@ import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
 import { versionCode } from '../../util/appVersionCode'
 import { createToast } from '../../components/Toast'
 import emitter from '../../util/bus'
+import ItemSpace from '../../components/ItemBox/ItemSpace'
 
 const { t } = useI18n()
 
@@ -88,11 +89,9 @@ emitter.on('menuClose', (data) => {
       flex justify-center items-center
       :w="simpleMode ? '100%' : ''"
     >
-      <div
-        :w="simpleMode ? '[calc(100%-40px)]' : (menuShort ? '[calc(100vw-98px)]' : '[calc(100vw-400px)]')" max-w-560px h-auto
-        flex="~ col" justify-center items-center
-        bg="white dark:#999/10" border="1px solid #00000020"
-        rounded-7px mb-10px p="x-10px y-0"
+      <ItemSpace 
+        justify-center items-center
+        :w="simpleMode ? '' : (menuShort ? '[calc(100vw-108px)]' : '[calc(100vw-400px)]')"
       >
         <img
           h-100px
@@ -141,7 +140,7 @@ emitter.on('menuClose', (data) => {
             </li>
           </ul>
         </div>
-      </div>
+      </ItemSpace>
     </div>
     <ItemButton mode="primary" @click="updateButtonCilck">
       {{ updateButton }}
