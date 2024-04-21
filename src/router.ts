@@ -4,7 +4,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('./pages/Home.tsx'),
+    components: {
+      default: () => import('./pages/Home.tsx'),
+      noteUI: () => import('./pages/NoteUI.vue')
+    },
   },
   {
     path: '/setting',

@@ -22,7 +22,7 @@ const Laboratory: SetupFC = () => {
 
   // const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
 
-  const newNoteUI = ref(localStorage.getItem('newNoteUi') === 'true')
+  const newNoteUI = ref(localStorage.getItem('newNoteUI') === 'true')
 
   return () => (
     <>

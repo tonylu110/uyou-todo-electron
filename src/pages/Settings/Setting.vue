@@ -104,13 +104,16 @@ watch(closeState, (newValue) => {
   localStorage.setItem('closeState', `${newValue}`)
   emitter.emit('changeCloseState', newValue)
 })
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
   <TabBar
     :title="t('settingTitleText')"
     :right-img-show="false"
-    :left-img-show="false"
+    :left-img-show="isNoteUI"
+    @left-click="router.back()"
     bg-color="light"
   />
   <SettingList>

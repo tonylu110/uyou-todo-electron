@@ -97,7 +97,7 @@ const isWinDow = ref(true)
 
 router.isReady().then(() => {
   isWinDow.value = route.query.isWin === 'true'
-  if (!isWinDow.value) {
+  if (!isWinDow.value && !isNoteUI) {
     const startRoute = ref(localStorage.getItem('start') ? localStorage.getItem('start')! : 'home')
     if (startRoute.value === 'home')
       startRoute.value = '/'
@@ -106,6 +106,8 @@ router.isReady().then(() => {
     router.push(startRoute.value)
   }
 })
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 
 const routerShow = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
 
@@ -219,7 +221,15 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
       <router-view name="isWindow" />
     </div>
     <div
-      v-if="!isWinDow" class="list-main"
+      v-if="isNoteUI" 
+      :class="isDark ? 'dark' : ''"
+      overflow-hidden h-100vh w-100vw
+    >
+      <router-view name="noteUI" />
+      <router-view v-if="route.name !== 'Home'" />
+    </div>
+    <div
+      v-if="!isWinDow && !isNoteUI" class="list-main"
       :bg="!isBlur
         ? (isDark
           ? 'black'
