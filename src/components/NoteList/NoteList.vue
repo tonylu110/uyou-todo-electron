@@ -13,5 +13,6 @@ import NoteBox from './NoteBox/NoteBox.vue';
     <NoteBox h-200px title="200-4" />
     <NoteBox h-600px title="600-5" />
     <NoteBox h-500px title="500-6" />
+    <NoteBox h-500px title="500-7" />
   </div>
 </template>

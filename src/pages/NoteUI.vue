@@ -21,22 +21,22 @@ const router = useRouter()
     >
       <div 
         flex justify-center items-center
-        p-15px bg="primary-d active:primary-a" 
-        transition="duration-300 border-radius"
+        p-13px bg="primary-d active:primary-a" 
+        transition="duration-300 all"
         rounded="10px hover:30px"
-        shadow="md"
+        shadow="md" active:transform-scale-90
       >
-        <div i-ph:plus-bold text-24px c-white />
+        <div i-ph:plus-bold text-22px c-white />
       </div>
       <div 
         flex justify-center items-center
-        p-15px bg="primary-d active:primary-a" 
-        transition="duration-300 border-radius"
+        p-13px bg="primary-d active:primary-a" 
+        transition="duration-300 all"
         rounded="10px hover:30px"
-        shadow="md"
+        shadow="md" active:transform-scale-90
         @click="router.push('/setting')"
       >
-        <div i-ph:gear-fine-bold text-24px c-white/>
+        <div i-ph:gear-fine-bold text-22px c-white/>
       </div>
     </div>
   </SettingList>
