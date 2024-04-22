@@ -31,6 +31,10 @@ export default defineConfig({
     ['shadow-switch-in', { 'box-shadow': 'inset 1px 1px 5px #00000030' }],
     ['shadow-switch-out', { 'box-shadow': '1px 1px 3px #00000050' }],
     [/^justify-content-(.+)$/, ([, name]) => ({ 'justify-content': name })],
+    [/^col-count-(.+)$/, ([, number]) => ({ 'column-count': number })],
+    [/^col-gap-(.+)$/, ([, number]) => ({ 'column-gap': number })],
+    [/^col-width-(.+)$/, ([, number]) => ({ 'column-width': number })],
+    [/^col-fill-(.+)$/, ([, name]) => ({ 'column-fill': name })],
   ],
   theme: {
     animation: {
