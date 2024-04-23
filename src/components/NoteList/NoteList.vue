@@ -4,8 +4,8 @@ import NoteBox from './NoteBox/NoteBox.vue';
 
 <template>
   <div 
-    w-75vw no-drag
-    col-count="1 sm:2 md:3 lg:4 xl:5" col-gap-20px
+    w-75vw no-drag col-gap-20px
+    col-count="1 sm:2 md:3 lg:4 xl:5"
   >
     <NoteBox h-400px title="400-1" />
     <NoteBox h-300px title="300-2" />

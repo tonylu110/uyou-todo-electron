@@ -18,6 +18,5 @@ withDefaults(defineProps<{
     >
       {{ title }}
     </div>
-    <slot />
   </div>
 </template>

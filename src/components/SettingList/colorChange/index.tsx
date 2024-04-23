@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import ItemSpace from '../../ItemBox/ItemSpace'
 
 const ColorChange: SetupFC = () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
@@ -19,12 +20,7 @@ const ColorChange: SetupFC = () => {
   })
 
   return () => (
-    <div
-      bg="white dark:#999/10" flex="~ wrap gap-10px"
-      rounded-7px mb-10px p-15px max-w-550px
-      w={simpleMode ? '[calc(100%-50px)]' : (minWidth.value ? '[calc(100vw-108px)]' : '[calc(100vw-450px)]')}
-      border="1px solid #00000020"
-    >
+    <ItemSpace flex="~ !row gap-10px wrap">
       <div
         bg={colorMode.value === 'system' ? 'primary-d dark:primary-a' : ''}
         w={simpleMode ? '98px' : '87px'} h={simpleMode ? '69px' : '59px'}
@@ -67,7 +63,7 @@ const ColorChange: SetupFC = () => {
           rounded-4px border="1px solid #00000020"
         />
       </div>
-    </div>
+    </ItemSpace>
   )
 }
 

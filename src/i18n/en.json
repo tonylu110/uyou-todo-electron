@@ -196,6 +196,12 @@
     "donnotSelect": "No font selected",
     "select": "chosen",
     "regular": "Regular",
-    "bold": "Bold"
+    "bold": "Bold",
+    "setFontSize": "Set font size",
+    "setFont": "Set font",
+    "small": "small",
+    "normal": "standard",
+    "big": "big",
+    "large": "large"
   }
 }

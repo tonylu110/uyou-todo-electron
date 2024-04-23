@@ -196,6 +196,12 @@
     "donnotSelect": "未選擇字體",
     "select": "已選擇",
     "regular": "常規體",
-    "bold": "粗體"
+    "bold": "粗體",
+    "setFontSize": "設定字體大小",
+    "setFont": "設定字體",
+    "small": "小號",
+    "normal": "標準",
+    "big": "大號",
+    "large": "特大"
   }
 }

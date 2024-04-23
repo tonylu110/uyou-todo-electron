@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import Item from '../../../components/ItemBox/Item/Item.vue'
 import SettingList from '../../../components/SettingList'
@@ -7,6 +7,8 @@ import setSwitchFn from '../../../util/setSwitchFn'
 import { useI18n } from 'vue-i18n'
 import { createToast } from '../../../components/Toast'
 import ItemText from '../../../components/ItemBox/ItemText'
+import ItemSpace from '../../../components/ItemBox/ItemSpace'
+import { ElSlider } from 'element-plus'
 
 const FontSet: SetupFC = () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
@@ -37,6 +39,13 @@ const FontSet: SetupFC = () => {
     ipcRenderer.send('setBoldFont')
   }
 
+  const fontSize = ref(Number(localStorage.getItem('fontSize') ? localStorage.getItem('fontSize') : '33'))
+  
+  watch(fontSize, (newValue) => {
+    localStorage.setItem('fontSize', newValue + '')
+    ipcRenderer.send('setFontSize', newValue)
+  })
+
   return () => (
     <>
       <TabBar
@@ -57,6 +66,24 @@ const FontSet: SetupFC = () => {
         {useCustomFont.value 
           ? (
             <>
+              <ItemText>{t('setFont.setFontSize')}</ItemText>
+              <ItemSpace items-center>
+                <div w="90%">
+                  <ElSlider
+                    v-model={fontSize.value}
+                    step={33}
+                    show-stops
+                    show-tooltip={false}
+                  />
+                </div>
+                <div flex justify-between w="95%">
+                  <span>{t('setFont.small')}</span>
+                  <span>{t('setFont.normal')}</span>
+                  <span>{t('setFont.big')}</span>
+                  <span>{t('setFont.large')}</span>
+                </div>
+              </ItemSpace>
+              <ItemText>{t('setFont.setFont')}</ItemText>
               <ItemText isBold={true}>
                 {t('setFont.regular')}
               </ItemText>

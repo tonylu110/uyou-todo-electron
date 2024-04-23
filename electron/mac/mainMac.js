@@ -15,6 +15,7 @@ const createRegisterWindowMac = require('./pages/registerMac')
 const createRepassWindowMac = require('./pages/repassMac')
 const createLogoffWindowMac = require('./pages/logoffMac')
 const menuTemplate = require('./menu.js')
+const useFontSize = require('../useFontSize.js')
 
 const store = new Store()
 
@@ -228,8 +229,10 @@ function createWindow() {
     });
   })
 
-  ipcMain.on('initFont', (ev, useFont) => {
+  ipcMain.on('initFont', (ev, useFont, fontSize) => {
     if (useFont) {
+      mainWindow.webContents.insertCSS(useFontSize(fontSize))
+
       fs.readFile(path.join(__dirname, 'selectedFont.css'), 'utf-8', (err, data) => {
         if (err) {
           return
@@ -243,6 +246,10 @@ function createWindow() {
         mainWindow.webContents.insertCSS(data);
       })
     }
+  })
+
+  ipcMain.on('setFontSize', (ev, size) => {
+    mainWindow.webContents.insertCSS(useFontSize(size))
   })
 }
 
