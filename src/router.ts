@@ -6,7 +6,7 @@ const routes = [
     name: 'Home',
     components: {
       default: () => import('./pages/Home.tsx'),
-      noteUI: () => import('./pages/NoteUI.vue')
+      noteUI: () => import('./pages/NoteUI.vue'),
     },
   },
   {

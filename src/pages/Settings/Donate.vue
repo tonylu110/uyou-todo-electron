@@ -24,7 +24,7 @@ emitter.on('menuClose', (data) => {
     @left-click="router.back()"
   />
   <SettingList>
-    <ItemSpace flex="~ wrap" justify-center items-center>
+    <ItemSpace flex="~ wrap" items-center justify-center>
       <img
         w-250px p-10px
         src="/images/donate/alipay.png"

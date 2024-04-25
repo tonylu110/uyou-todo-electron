@@ -27,7 +27,7 @@ import OpenPass from './components/OpenPass/OpenPass.vue'
 
 const { t, locale } = useI18n()
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
 
 const alertShow = ref(false)
@@ -179,7 +179,7 @@ if (isDev) {
 
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const Store = require('electron-store')
 
 const store = new Store()
@@ -213,7 +213,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
 
 <template>
   <Transition name="open-pass">
-    <OpenPass v-if="passAlert && !isWinDow" v-model="passAlert"/>
+    <OpenPass v-if="passAlert && !isWinDow" v-model="passAlert" />
   </Transition>
   <ElConfigProvider :locale="useLocale">
     <RouterUrl v-if="routerShow" />
@@ -221,9 +221,9 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
       <router-view name="isWindow" />
     </div>
     <div
-      v-if="isNoteUI" 
+      v-if="isNoteUI"
       :class="isDark ? 'dark' : ''"
-      overflow-hidden h-100vh w-100vw
+      h-100vh w-100vw overflow-hidden
     >
       <router-view name="noteUI" />
       <router-view v-if="route.name !== 'Home'" />
@@ -294,7 +294,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
 
 .open-pass-leave-active {
   transition-property: opacity, transform;
-  transition-duration: .3s, .4s;
+  transition-duration: 0.3s, 0.4s;
 }
 
 .open-pass-enter-from,

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Dropdown as VDropdown } from 'floating-vue'
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import emitter from '../../../util/bus';
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import emitter from '../../../util/bus'
 
 const { t } = useI18n()
 
@@ -26,10 +26,10 @@ function changeTodayshow(show: string) {
   >
     <div
       bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
-      p-5px w-20px rounded-5px no-drag cursor-pointer
+      w-20px cursor-pointer rounded-5px p-5px no-drag
       @click="showToday = true"
     >
-      <div i-ph:clock-bold text-20px c="#555 dark:#bbb" block />
+      <div c="#555 dark:#bbb" i-ph:clock-bold block text-20px />
     </div>
     <template #popper>
       <div flex="~ wrap col">
@@ -41,20 +41,20 @@ function changeTodayshow(show: string) {
           @click="changeTodayshow('null')"
         >
           <div
-            i-ph:check-bold c-primary-d mr-3
+            i-ph:check-bold mr-3 c-primary-d
             :opacity="todayShow === null || todayShow === 'null' ? '100' : '0'"
           />
           <span select-none group-active:c-white>{{ t('todayShow.creatTime') }}</span>
         </div>
         <div
           class="group"
-          flex items-center p-3 
+          flex items-center p-3
           border-b="1px solid #ddd dark:#333"
           bg="hover:black/5 active:primary-d"
           @click="changeTodayshow('todayRemind')"
         >
           <div
-            i-ph:check-bold c-primary-d mr-3
+            i-ph:check-bold mr-3 c-primary-d
             :opacity="todayShow === 'todayRemind' ? '100' : '0'"
           />
           <span select-none group-active:c-white>{{ t('todayShow.remindTime') }}</span>
@@ -66,7 +66,7 @@ function changeTodayshow(show: string) {
           @click="changeTodayshow('allAboutToday')"
         >
           <div
-            i-ph:check-bold c-primary-d mr-3
+            i-ph:check-bold mr-3 c-primary-d
             :opacity="todayShow === 'allAboutToday' ? '100' : '0'"
           />
           <span select-none group-active:c-white>{{ t('todayShow.allTime') }}</span>

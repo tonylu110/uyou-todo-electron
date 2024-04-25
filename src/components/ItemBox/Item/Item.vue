@@ -66,25 +66,25 @@ window.addEventListener('resize', () => {
     />
     <div
       v-if="showListBox"
-      border="1px solid black/10" right-7px
-      absolute p="x-10px y-5px" rounded-5px
+      border="1px solid black/10"
+      p="x-10px y-5px"
       bg="active:primary-d"
-      cursor-pointer whitespace-nowrap
+      absolute right-7px cursor-pointer whitespace-nowrap rounded-5px
       class="group"
       @click="showList = !showList"
     >
-      <div w="!fit" flex justify-center items-center group-active:c-white>
+      <div w="!fit" flex items-center justify-center group-active:c-white>
         {{ listBoxTitle }}
         <div v-if="showList" i-mdi:chevron-up ml-5px group-active:c-white />
         <div v-else i-mdi:chevron-down ml-5px group-active:c-white />
       </div>
       <div
         v-if="showList"
-        absolute right-0 bg="white dark:#333"
-        top-35px flex="~ !col" justify-center
-        items-center shadow="md black/20" z-10
-        p-10px border="1px solid black/5"
-        rounded-7px whitespace-nowrap
+        bg="white dark:#333"
+        flex="~ !col"
+        shadow="md black/20"
+        border="1px solid black/5"
+        absolute right-0 top-35px z-10 items-center justify-center whitespace-nowrap rounded-7px p-10px
       >
         <div
           v-for="(item, index) in list" :key="index"
@@ -97,7 +97,7 @@ window.addEventListener('resize', () => {
         </div>
       </div>
     </div>
-    <div v-if="showArrow && !showSwitch && !showListBox" i-mdi:chevron-right text-24px absolute right-15px group-active:c-white />
+    <div v-if="showArrow && !showSwitch && !showListBox" i-mdi:chevron-right absolute right-15px text-24px group-active:c-white />
   </div>
 </template>
 

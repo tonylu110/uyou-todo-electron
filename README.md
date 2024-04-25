@@ -12,7 +12,7 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
 ## Run and build
 
 - run in development mode
-  ```bash 
+  ```bash
   pnpm i
   pnpm electron:serve // run in Windows
   pnpm electron:servemac // run in mac or Linux
@@ -25,6 +25,7 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
   ```
 
 ## Preview
+
 ![](./demo/demo1.png)
 ![](./demo/demo2.png)
 ![](./demo/demo3.png)
@@ -32,9 +33,10 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
 ![](./demo/demo5.png)
 
 ## Font
+
 If you want to use the built-in fonts before 2.1.3, you can click the link below
 
-[Smartisan T Regular](https://github.com/tonylu110/uyou-todo-electron/releases/download/2.1.3/Smartisan_Compact-Regular.ttf) | 
+[Smartisan T Regular](https://github.com/tonylu110/uyou-todo-electron/releases/download/2.1.3/Smartisan_Compact-Regular.ttf) |
 [Smartisan T Bold](https://github.com/tonylu110/uyou-todo-electron/releases/download/2.1.3/Smartisan_Compact-Bold.ttf)
 
 ## Star History

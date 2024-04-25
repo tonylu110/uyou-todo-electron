@@ -67,17 +67,18 @@ const ShowListItem: SetupFC = () => {
           }}
         />
         <ItemBox>
-          {Object.keys(showList).map(key =>
-          <Item
-            title={t(showList[(key as keyof ListItems)].name)}
-            showSwitch={true}
-            switchState={showList[(key as keyof ListItems)].show}
-            onSwitchFun={() => {
-              showList[(key as keyof ListItems)].show = !showList[(key as keyof ListItems)].show
-              localStorage.setItem('listMenuItem', JSON.stringify(showList))
-              emitter.emit('setListItem', showList)
-            }
-          } />)}
+          {Object.keys(showList).map(key => (
+            <Item
+              title={t(showList[key as keyof ListItems].name)}
+              showSwitch={true}
+              switchState={showList[key as keyof ListItems].show}
+              onSwitchFun={() => {
+                showList[key as keyof ListItems].show = !showList[key as keyof ListItems].show
+                localStorage.setItem('listMenuItem', JSON.stringify(showList))
+                emitter.emit('setListItem', showList)
+              }}
+            />
+          ))}
         </ItemBox>
       </SettingList>
     </>

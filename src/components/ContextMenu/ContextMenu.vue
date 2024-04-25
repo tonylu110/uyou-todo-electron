@@ -26,7 +26,7 @@ const emits = defineEmits<{
 
 const { t } = useI18n()
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const { clipboard } = require('electron')
 
 const topAndLeft = reactive({
@@ -113,11 +113,11 @@ function itemFn(isChild?: boolean, event?: string) {
     bg="white/80 dark:#333/80"
   >
     <div v-if="showCopy" class="img" flex items-center @click="copy">
-      <div i-ph:copy-bold text-14px mr-5px c="#555 dark:#bbb" />
+      <div i-ph:copy-bold mr-5px text-14px c="#555 dark:#bbb" />
       <span c="#555 dark:#bbb">{{ t('contextMenu.copy') }}</span>
     </div>
     <div v-if="showPaste" class="img" flex items-center @click="paste">
-      <div i-mdi:content-paste text-14px mr-5px c="#555 dark:#bbb" />
+      <div i-mdi:content-paste mr-5px text-14px c="#555 dark:#bbb" />
       <span c="#555 dark:#bbb">{{ t('contextMenu.paste') }}</span>
     </div>
     <span v-if="custom" class="menu-line" />
@@ -131,7 +131,7 @@ function itemFn(isChild?: boolean, event?: string) {
       >
         <div flex items-center justify-between>
           <div flex items-center>
-            <div v-if="item.icon" :class="item.icon" text-14px mr-5px c="#555 dark:#bbb" :style="{ color: item.color }" />
+            <div v-if="item.icon" :class="item.icon" mr-5px text-14px c="#555 dark:#bbb" :style="{ color: item.color }" />
             <span c="#555 dark:#bbb" :style="{ color: item.color }">{{ item.label }}</span>
           </div>
           <div
@@ -140,7 +140,7 @@ function itemFn(isChild?: boolean, event?: string) {
             :rotate="showItemChild ? '90' : '0'"
           />
         </div>
-        <div v-if="showItemChild && Array.isArray(item.children)" mt-10px grid class="child">
+        <div v-if="showItemChild && Array.isArray(item.children)" grid mt-10px class="child">
           <div
             v-for="(child, childI) in item.children"
             :key="childI"
@@ -205,7 +205,7 @@ function itemFn(isChild?: boolean, event?: string) {
 
     .child {
       grid-template-rows: 0fr;
-      animation: showList .3s forwards;
+      animation: showList 0.3s forwards;
     }
 
     &:hover {

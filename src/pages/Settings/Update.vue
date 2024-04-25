@@ -13,9 +13,9 @@ import ItemSpace from '../../components/ItemBox/ItemSpace'
 
 const { t } = useI18n()
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const { app } = require('@electron/remote')
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const { ipcRenderer } = require('electron')
 
 const version = versionCode
@@ -86,11 +86,11 @@ emitter.on('menuClose', (data) => {
   />
   <SettingList justify="between">
     <div
-      flex justify-center items-center
+      flex items-center justify-center
       :w="simpleMode ? '100%' : ''"
     >
-      <ItemSpace 
-        justify-center items-center
+      <ItemSpace
+        items-center justify-center
         :w="simpleMode ? '' : (menuShort ? '[calc(100vw-108px)]' : '[calc(100vw-400px)]')"
       >
         <img
@@ -109,9 +109,9 @@ emitter.on('menuClose', (data) => {
         </span>
         <span
           v-if="newVersion !== ''"
-          c="#00000050 dark:#bbb" mt-5px text-14px
-          mb-15px
-          font-bold
+          c="#00000050 dark:#bbb"
+
+          mb-15px mt-5px text-14px font-bold
         >
           {{ newVersion }}
         </span>
@@ -124,8 +124,8 @@ emitter.on('menuClose', (data) => {
           p="y-5px x-15px"
         >
           <span
-            c="black dark:#bbb" text-16px font-bold
-            mt-10px
+            c="black dark:#bbb"
+            mt-10px text-16px font-bold
           >
             {{ t('update.updateLog') }}
           </span>

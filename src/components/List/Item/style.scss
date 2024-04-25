@@ -10,12 +10,12 @@
     padding: 10px;
     border-radius: 5px;
     // z-index: 2;
-    transition: transform .3s;
+    transition: transform 0.3s;
     pointer-events: none;
     list-style-type: none;
     display: flex;
     flex-direction: column-reverse;
-  
+
     .time-area {
       margin-left: -10px;
       margin-bottom: -10px;
@@ -51,7 +51,7 @@
         background-color: #00000020;
       }
     }
-  
+
     .close-button {
       position: absolute;
       top: -7px;
@@ -69,33 +69,33 @@
       transition: opacity 0.2s ease-in-out;
       box-shadow: 0 2px 2px #00000015;
       color: white;
-  
+
       span {
         font-size: 12px;
         font-weight: bold;
       }
-  
+
       &:hover {
         cursor: pointer;
         opacity: 1;
       }
-  
+
       &:active {
         background-color: #b6000b;
         border: 2px solid #eee;
       }
     }
-  
+
     .ok-button {
       @extend .close-button;
       left: -7px;
-  
+
       &:active {
         background-color: #00a600;
       }
     }
   }
-  
+
   .button {
     width: 40px;
     height: 40px;
@@ -110,7 +110,7 @@
     justify-content: center;
     opacity: 0;
     transition: opacity 300ms;
-  
+
     span {
       font-weight: bold;
     }
@@ -118,16 +118,16 @@
     &:hover {
       opacity: 1;
     }
-  
+
     &:hover ~ .list-item {
       transform: translateX(60px);
     }
   }
-  
+
   .delete {
     @extend .button;
     right: 4px;
-  
+
     &:hover + .list-item {
       transform: translateX(-60px);
     }

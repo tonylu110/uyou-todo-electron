@@ -1,9 +1,9 @@
 const path = require('node:path')
+const fs = require('node:fs')
 const { app, BrowserWindow, ipcMain, screen, Menu, shell, globalShortcut, nativeTheme, Tray, dialog } = require('electron')
 const Store = require('electron-store')
 const remoteMain = require('@electron/remote/main')
 const { MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
-const fs = require('node:fs')
 const menuTemplate = require('./menu.js')
 const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('./store/windowSizeStore')
 const { initSystemBar, systemBar, systemBarIpc } = require('./store/systemTitleBarStore')
@@ -209,54 +209,54 @@ function createWindow() {
   ipcMain.on('setFont', () => {
     dialog.showOpenDialog({
       properties: ['openFile'],
-      filters: [{ name: 'Fonts', extensions: ['ttf'] }]
-    }).then(result => {
-      const filePath = result.filePaths[0];
+      filters: [{ name: 'Fonts', extensions: ['ttf'] }],
+    }).then((result) => {
+      const filePath = result.filePaths[0]
       if (filePath) {
-        const fontName = path.basename(filePath);
+        const fontName = path.basename(filePath)
         const fontCss = `
           @font-face {
             font-family: 'cus_font';
-            src: url('${filePath.replace(/\\/g, "/")}');
+            src: url('${filePath.replace(/\\/g, '/')}');
           }
           * {
             font-family: 'cus_font', sans-serif;
           }
-        `;
-        fs.writeFileSync(path.join(__dirname, 'selectedFont.css'), fontCss);
-        mainWindow.webContents.insertCSS(fontCss);
+        `
+        fs.writeFileSync(path.join(__dirname, 'selectedFont.css'), fontCss)
+        mainWindow.webContents.insertCSS(fontCss)
         mainWindow.webContents.send('getFontName', fontName.slice(0, -4))
       }
-    }).catch(err => {
-      console.error(err);
-    });
+    }).catch((err) => {
+      console.error(err)
+    })
   })
 
   ipcMain.on('setBoldFont', () => {
     dialog.showOpenDialog({
       properties: ['openFile'],
-      filters: [{ name: 'Fonts', extensions: ['ttf'] }]
-    }).then(result => {
-      const filePath = result.filePaths[0];
+      filters: [{ name: 'Fonts', extensions: ['ttf'] }],
+    }).then((result) => {
+      const filePath = result.filePaths[0]
       if (filePath) {
-        const fontName = path.basename(filePath);
+        const fontName = path.basename(filePath)
         const fontCss = `
           @font-face {
             font-family: 'cus_font';
             font-weight: bold;
-            src: url('${filePath.replace(/\\/g, "/")}');
+            src: url('${filePath.replace(/\\/g, '/')}');
           }
           * {
             font-family: 'cus_font', sans-serif;
           }
-        `;
-        fs.writeFileSync(path.join(__dirname, 'selectedBoldFont.css'), fontCss);
-        mainWindow.webContents.insertCSS(fontCss);
+        `
+        fs.writeFileSync(path.join(__dirname, 'selectedBoldFont.css'), fontCss)
+        mainWindow.webContents.insertCSS(fontCss)
         mainWindow.webContents.send('getFontNameBold', fontName.slice(0, -4))
       }
-    }).catch(err => {
-      console.error(err);
-    });
+    }).catch((err) => {
+      console.error(err)
+    })
   })
 
   ipcMain.on('initFont', (ev, useFont, fontSize) => {
@@ -264,16 +264,16 @@ function createWindow() {
       mainWindow.webContents.insertCSS(useFontSize(fontSize))
 
       fs.readFile(path.join(__dirname, 'selectedFont.css'), 'utf-8', (err, data) => {
-        if (err) {
+        if (err)
           return
-        }
-        mainWindow.webContents.insertCSS(data);
+
+        mainWindow.webContents.insertCSS(data)
       })
       fs.readFile(path.join(__dirname, 'selectedBoldFont.css'), 'utf-8', (err, data) => {
-        if (err) {
+        if (err)
           return
-        }
-        mainWindow.webContents.insertCSS(data);
+
+        mainWindow.webContents.insertCSS(data)
       })
     }
   })

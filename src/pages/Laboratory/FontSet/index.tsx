@@ -1,17 +1,16 @@
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { ElSlider } from 'element-plus'
 import Item from '../../../components/ItemBox/Item/Item.vue'
 import SettingList from '../../../components/SettingList'
 import TabBar from '../../../components/TabBar/TabBar.vue'
 import setSwitchFn from '../../../util/setSwitchFn'
-import { useI18n } from 'vue-i18n'
 import { createToast } from '../../../components/Toast'
 import ItemText from '../../../components/ItemBox/ItemText'
 import ItemSpace from '../../../components/ItemBox/ItemSpace'
-import { ElSlider } from 'element-plus'
 
 const FontSet: SetupFC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
   const ipcRenderer = require('electron').ipcRenderer
 
   const { t } = useI18n()
@@ -23,13 +22,13 @@ const FontSet: SetupFC = () => {
   ipcRenderer.on('getFontName', (_event: unknown, font: string) => {
     fontName.value = font
     localStorage.setItem('customFontName', fontName.value)
-  });
+  })
 
   const fontNameBold = ref(localStorage.getItem('customFontNameBold'))
   ipcRenderer.on('getFontNameBold', (_event: unknown, font: string) => {
     fontNameBold.value = font
     localStorage.setItem('customFontNameBold', fontNameBold.value)
-  });
+  })
 
   const selectFont = () => {
     ipcRenderer.send('setFont')
@@ -40,9 +39,9 @@ const FontSet: SetupFC = () => {
   }
 
   const fontSize = ref(Number(localStorage.getItem('fontSize') ? localStorage.getItem('fontSize') : '33'))
-  
+
   watch(fontSize, (newValue) => {
-    localStorage.setItem('fontSize', newValue + '')
+    localStorage.setItem('fontSize', `${newValue}`)
     ipcRenderer.send('setFontSize', newValue)
   })
 
@@ -60,10 +59,10 @@ const FontSet: SetupFC = () => {
           switchState={useCustomFont.value}
           onSwitchFun={() => setSwitchFn('useCustomFont', !useCustomFont.value, () => {
             useCustomFont.value = !useCustomFont.value
-            createToast({msg: t('restartApp')})
+            createToast({ msg: t('restartApp') })
           })}
         />
-        {useCustomFont.value 
+        {useCustomFont.value
           ? (
             <>
               <ItemText>{t('setFont.setFontSize')}</ItemText>
@@ -88,20 +87,19 @@ const FontSet: SetupFC = () => {
                 {t('setFont.regular')}
               </ItemText>
               <Item
-                title={fontName.value ? t('setFont.select') + ' ' + fontName.value : t('setFont.donnotSelect')}
+                title={fontName.value ? `${t('setFont.select')} ${fontName.value}` : t('setFont.donnotSelect')}
                 onItemFun={selectFont}
               />
               <ItemText isBold={true}>
                 {t('setFont.bold')}
               </ItemText>
               <Item
-                title={fontNameBold.value ? t('setFont.select') + ' ' + fontNameBold.value : t('setFont.donnotSelect')}
+                title={fontNameBold.value ? `${t('setFont.select')} ${fontNameBold.value}` : t('setFont.donnotSelect')}
                 onItemFun={selectBoldFont}
               />
             </>
-          )
-          : null
-        }
+            )
+          : null}
       </SettingList>
     </>
   )

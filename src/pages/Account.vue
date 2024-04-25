@@ -14,7 +14,7 @@ import ItemSpace from '../components/ItemBox/ItemSpace'
 
 const { t } = useI18n()
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
 
 const form = ref('')
@@ -235,17 +235,17 @@ function openLogoff() {
     <Item :title="loginText" :show-arrow="false" />
     <ItemSpace v-if="!loginState">
       <input
-        v-model="uname" p-15px
+        v-model="uname"
         m="x-0 y-5px" c="black dark:#bbb"
-        border="1.5px solid #00000020" bg="#00000010" rounded-5px
+        border="1.5px solid #00000020" bg="#00000010" rounded-5px p-15px
         outline="primary-d dark:primary-a"
         type="text"
         :placeholder="t('accountPage.account')"
       >
       <input
-        v-model="passwd" p-15px
+        v-model="passwd"
         m="x-0 y-5px" c="black dark:#bbb"
-        border="1.5px solid #00000020" bg="#00000010" rounded-5px
+        border="1.5px solid #00000020" bg="#00000010" rounded-5px p-15px
         outline="primary-d dark:primary-a"
         type="password"
         :placeholder="t('accountPage.passwd')"

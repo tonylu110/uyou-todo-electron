@@ -15,7 +15,7 @@ import ColorChange from '../components/SettingList/colorChange'
 
 const { t } = useI18n()
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const os = require('node:os')
 
 const isLinux = !(process.platform === 'linux')
@@ -88,7 +88,7 @@ const isInDev = localStorage.getItem('isInDev') === 'true'
         :title="loginState ? t('myAccount') : t('loginText')"
         @item-fun="() => router.push('/account?from=setting')"
       />
-      <Item 
+      <Item
         :title="t('anotherSettings.openPass')"
         @item-fun="router.push('/openPass?from=setting')"
       />

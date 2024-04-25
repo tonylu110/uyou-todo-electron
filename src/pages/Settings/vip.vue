@@ -39,9 +39,9 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
   <SettingList>
     <div
       v-if="!isVip"
-      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px
-      h-auto flex="~ wrap" justify-center
-      items-center bg="white dark:#999/10" rounded-7px
+      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'"
+      flex="~ wrap"
+      bg="white dark:#999/10" mb-10px h-auto max-w-540px items-center justify-center rounded-7px p-20px
       border="1px solid #00000020"
     >
       <div w="100%">
@@ -66,12 +66,12 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
     </div>
     <div
       v-else
-      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px
-      h-auto flex justify-start items-center
-      bg="warn-a" rounded-7px
+      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'"
+
+      bg="warn-a" mb-10px h-auto max-w-540px flex items-center justify-start rounded-7px p-20px
       border="1px solid #00000020"
     >
-      <img src="/images/VIP.png" w-70px h-70px alt="" srcset="">
+      <img src="/images/VIP.png" h-70px w-70px alt="" srcset="">
       <div flex="~ col gap-5px" ml-10px>
         <span text-18px font-bold>{{ t('vip.doPay') }}</span>
         <span text-14px>{{ t('vip.thanks') }}</span>
@@ -84,10 +84,10 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
       @switch-fun="setSwitchFn('isVip', !isVip, () => isVip = !isVip)"
     />
     <div
-      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px h-auto
-      flex="~ col wrap" justify-center items-start
-      bg="white dark:#999/10" rounded-7px border="1px solid #00000020"
-      v-if="!isVip"
+      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'"
+      flex="~ col wrap"
+      bg="white dark:#999/10" v-if="!isVip" mb-10px h-auto max-w-540px items-start justify-center rounded-7px p-20px
+      border="1px solid #00000020"
     >
       <h2>{{ t('vip.proFeature') }}</h2>
       <ul>

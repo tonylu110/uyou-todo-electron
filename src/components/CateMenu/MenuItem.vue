@@ -36,9 +36,9 @@ const isOpen = ref(false)
 
 <template>
   <div
-    p-10px w="[calc(100vw-20px)]"
-    text-center text-18px relative
-    flex items-center justify-center
+    w="[calc(100vw-20px)]"
+
+    relative flex items-center justify-center p-10px text-center text-18px
     bg="hover:black/5 active:black/10"
     @click="toList(`${id}`)"
   >
@@ -49,19 +49,19 @@ const isOpen = ref(false)
         v-model="cateTitle"
         v-focus
         type="text"
-        p-0 m-0 text-14px w="100%" absolute
-        border-none outline-none font="bold [smartisan-t]"
-        c="#555 dark:#bbb" text-18px left-0 bg-transparent
+        w="100%"
+        font="bold [smartisan-t]"
+        c="#555 dark:#bbb" absolute left-0 m-0 border-none bg-transparent p-0 text-14px text-18px outline-none
       >
     </div>
     <div
       v-if="!showEdit"
-      absolute right-10px
-      flex justify-center items-center
+
+      absolute right-10px flex items-center justify-center
     >
       <div
-        rounded-5px p-5px bg="black/10 dark:#999/10"
-        flex items-center justify-center mr-6px
+        bg="black/10 dark:#999/10"
+        mr-6px flex items-center justify-center rounded-5px p-5px
         @click.stop="() => {
           showEdit = true
           cateTitle = title
@@ -75,21 +75,21 @@ const isOpen = ref(false)
         :positioning-disabled="true"
       >
         <div
-          rounded-5px p-5px bg="black/10 dark:#999/10"
-          flex items-center justify-center
+          bg="black/10 dark:#999/10"
+          flex items-center justify-center rounded-5px p-5px
           @click.stop="isOpen = true"
         >
           <div i-ph:trash-bold text-12px />
         </div>
         <template #popper>
-          <div p-10px flex="~ col" items-center>
+          <div flex="~ col" items-center p-10px>
             <span text-14px>{{ t('listMenu.delCate', { title }) }}</span>
-            <div flex justify-center items-center mt-10px>
+            <div mt-10px flex items-center justify-center>
               <button
                 bg="white active:#ddd"
-                mr-5px border-none rounded-5px
-                p="x-10px y-5px" cursor-pointer
-                flex justify-center items-center
+
+                p="x-10px y-5px"
+                mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                 shadow="sm black/20" c="#555"
                 @click.stop="isOpen = false"
               >
@@ -98,10 +98,10 @@ const isOpen = ref(false)
               </button>
               <button
                 bg="!primary-d active:!primary-a"
-                border-none rounded-5px cursor-pointer
+
                 p="x-10px y-5px" c="!white"
-                flex justify-center items-center
-                shadow="sm black/20" mr-5px
+
+                shadow="sm black/20" mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                 @click.stop="() => {
                   emits('delItem', id)
                   isOpen = false
@@ -112,9 +112,9 @@ const isOpen = ref(false)
               </button>
               <button
                 bg="!error-d active:!error-a"
-                border-none rounded-5px cursor-pointer
+
                 p="x-10px y-5px" c="!white"
-                flex justify-center items-center
+                flex cursor-pointer items-center justify-center rounded-5px border-none
                 shadow="sm black/20"
                 @click.stop="() => {
                   emits('delWithToDo', id)
@@ -131,12 +131,12 @@ const isOpen = ref(false)
     </div>
     <div
       v-else
-      absolute right-10px
-      flex justify-center items-center
+
+      absolute right-10px flex items-center justify-center
     >
       <div
-        rounded-5px p-5px bg="black/10 dark:#999/10"
-        flex items-center justify-center mr-6px
+        bg="black/10 dark:#999/10"
+        mr-6px flex items-center justify-center rounded-5px p-5px
         @click.stop="() => {
           emits('editItem', id, cateTitle)
           showEdit = false
@@ -145,8 +145,8 @@ const isOpen = ref(false)
         <div i-mdi:check-bold text-12px />
       </div>
       <div
-        rounded-5px p-5px bg="black/10 dark:#999/10"
-        flex items-center justify-center
+        bg="black/10 dark:#999/10"
+        flex items-center justify-center rounded-5px p-5px
         @click.stop="showEdit = false"
       >
         <div i-mdi:close-thick text-12px />

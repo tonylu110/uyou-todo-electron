@@ -34,7 +34,7 @@ const alertShow = ref(useOpenPass.value && openPass.value !== '')
 const alertMsg = ref('')
 const inPass = ref('')
 function ok() {
-  if(inPass.value === openPass.value)
+  if (inPass.value === openPass.value)
     alertShow.value = false
   else
     alertMsg.value = t('openPass.passErr')
@@ -58,11 +58,11 @@ function ok() {
     <template v-if="useOpenPass">
       <div
         v-if="useOpenPass"
-        :w="menuShort ? '[calc(100vw-118px)]' : '[calc(100vw-460px)]'" p-20px mb-10px max-w-540px h-auto
-        flex="~ wrap" justify-center items-center
-        bg="white dark:#999/10" rounded-7px border="1px solid #00000020"
+        :w="menuShort ? '[calc(100vw-118px)]' : '[calc(100vw-460px)]'"
+        flex="~ wrap"
+        bg="white dark:#999/10" mb-10px h-auto max-w-540px items-center justify-center rounded-7px p-20px border="1px solid #00000020"
       >
-        <input type="password" w="100%" p-10px rounded-5px outline-primary-d border="1px black/30" text-center v-model="openPass">
+        <input v-model="openPass" type="password" w="100%" border="1px black/30" rounded-5px p-10px text-center outline-primary-d>
       </div>
       <ItemButton mode="primary" @click="setPass">
         <span>{{ t('openPass.usePass') }}</span>
@@ -78,14 +78,16 @@ function ok() {
     @cancel="router.back()"
     @return="ok"
   >
-    <div flex="~ col" justify-center items-center>
-      <div :mb="alertMsg ? '15px' : '0px'">{{ alertMsg }}</div>
-      <input 
-        type="password" 
-        v-model="inPass" 
-        @keyup.enter="ok"
-        w="80%" p-10px rounded-5px outline-primary-d 
-        border="1px black/30" text-center
+    <div flex="~ col" items-center justify-center>
+      <div :mb="alertMsg ? '15px' : '0px'">
+        {{ alertMsg }}
+      </div>
+      <input
+        v-model="inPass"
+        type="password"
+        w="80%"
+        border="1px black/30"
+        rounded-5px p-10px text-center outline-primary-d @keyup.enter="ok"
       >
     </div>
   </Alert>

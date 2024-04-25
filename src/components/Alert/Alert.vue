@@ -109,7 +109,7 @@ const primaryColor = computed(() => isDark.value ? '#4e6fbb' : '#5985eb')
 </template>
 
 <style lang="scss" scoped>
-@import "dialogAnimation.scss";
+@import 'dialogAnimation.scss';
 
 .alert {
   padding: 0;

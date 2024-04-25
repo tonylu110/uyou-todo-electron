@@ -8,7 +8,7 @@ import router from '../../router'
 
 const { t } = useI18n()
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
 
 function openUrlInBrowser(url: string) {

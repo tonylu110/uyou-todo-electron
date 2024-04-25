@@ -220,10 +220,9 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
       <CheckBox v-if="!showEdit" v-model="okState" :num="time" />
       <div
         v-if="!showEdit"
-        pointer-events-auto absolute right-6px
-        bottom-7px no-drag w-155px
+
         :opacity="showToDoBtn ? '100' : '0 hover:100'"
-        transition-300
+        pointer-events-auto absolute bottom-7px right-6px w-155px transition-300 no-drag
       >
         <ElDatePicker
           v-model="useTime"
@@ -239,7 +238,7 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
         />
       </div>
       <div v-if="!showEdit" absolute right-10px top-5px flex items-center>
-        <div flex ml-10px>
+        <div ml-10px flex>
           <div class="c-button" :opacity="showToDoBtn ? '100' : '0'" bg="black/10 dark:#bbb/10" @click="textWrap = !textWrap">
             <div v-if="textWrap" i-fluent:chevron-up-12-filled text-14px c="#777 dark:#bbb" />
             <div v-else i-fluent:chevron-down-12-filled text-14px c="#777 dark:#bbb" />
@@ -250,15 +249,15 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
         </div>
       </div>
       <div class="time-area" :ml="showEdit ? '' : '!30px'">
-        <div flex items-center mb-3px mt-5px>
+        <div mb-3px mt-5px flex items-center>
           <span mr-7px c="#555/40 dark:#bbb/40" text-12px>{{ getTime(time) }}</span>
           <div
             class="c-button group" bg="!transparent"
             @click="setStar"
           >
             <div
-              i-ph:star-fill text-14px :c="starState ? '#e6a400' : '#555/20 dark:#bbb/20'"
-              pointer-events-auto cursor-pointer
+              :c="starState ? '#e6a400' : '#555/20 dark:#bbb/20'"
+              i-ph:star-fill pointer-events-auto cursor-pointer text-14px
               scale="group-active:70 100" transition="transform 300"
             />
           </div>
@@ -267,14 +266,14 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
       <div :ml="showEdit ? '' : '!38px'">
         <span
           v-if="!showEdit"
-          block mb-5px select-text pointer-events-auto
+
           :c="listName === 'allNotDo'
             ? '#555 dark:#bbb selection:white'
             : (okState
               ? '#555/25 dark:#bbb/25 selection:white'
               : '#555 dark:#bbb selection:white')"
-          transition-300 bg="selection:primary-d selection:dark:primary-a"
-          overflow-hidden text-ellipsis :whitespace="textWrap ? 'pre-wrap' : 'nowrap'"
+          bg="selection:primary-d selection:dark:primary-a"
+          pointer-events-auto mb-5px block select-text overflow-hidden text-ellipsis transition-300 :whitespace="textWrap ? 'pre-wrap' : 'nowrap'"
           :line="listName === 'allNotDo' ? '' : (okState ? 'through' : '')"
           :max-w="showToDoBtn ? '[calc(100%-73px)]' : '100%'"
         >
@@ -284,9 +283,9 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
           v-else
           v-model="editText"
           v-focus
-          bg-transparent outline-none border-none w="[calc(100%-65px)]"
-          c="#555 dark:#bbb" font="[smartisan-t]" text-4
-          p-0 m-0 select-text pointer-events-auto
+          w="[calc(100%-65px)]"
+          c="#555 dark:#bbb" font="[smartisan-t]"
+          pointer-events-auto m-0 select-text border-none bg-transparent p-0 text-4 outline-none
         />
         <div
           v-if="showEdit"
@@ -294,17 +293,17 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
           right-8px bottom="50%" translate="y-50%"
         >
           <div
-            p="y-7px x-16px" mb-7px rounded-5px cursor-pointer
+            p="y-7px x-16px"
             bg="black/10 dark:#999/10 hover:black/20 dark:hover:#999/20"
-            flex justify-center items-center
+            mb-7px flex cursor-pointer items-center justify-center rounded-5px
             @click.stop="editItem"
           >
             <div i-ph:check-circle-bold text-22px c="#555 dark:#bbb" />
           </div>
           <div
-            p="y-7px x-16px" rounded-5px cursor-pointer
+            p="y-7px x-16px"
             bg="black/10 dark:#999/10 hover:black/20 dark:hover:#999/20"
-            flex justify-center items-center
+            flex cursor-pointer items-center justify-center rounded-5px
             @click.stop="showEdit = false"
           >
             <div i-mdi:close-circle-outline text-22px c="#555 dark:#bbb" />

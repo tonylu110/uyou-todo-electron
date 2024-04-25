@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import NoteBox from './NoteBox/NoteBox.vue';
+import NoteBox from './NoteBox/NoteBox.vue'
 </script>
 
 <template>
-  <div 
+  <div
     w-75vw no-drag col-gap-20px
     col-count="1 sm:2 md:3 lg:4 xl:5"
   >

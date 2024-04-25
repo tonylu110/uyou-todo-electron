@@ -117,45 +117,45 @@ function delWithToDo(id: number) {
 </script>
 
 <template>
-  <div class="list" top-95px fixed z-2>
+  <div class="list" fixed top-95px z-2>
     <PerfectScrollbar
-      z-2 cursor-pointer overflow-y-scroll
-      bg="white/50 dark:#333/70" w-screen p-y-10px h-auto
-      flex="~ col" items-center backdrop-blur-7px
-      shadow-item c="#555 dark:#bbb" font-bold rounded-b-10px
+
+      bg="white/50 dark:#333/70"
+      flex="~ col"
+      c="#555 dark:#bbb" z-2 h-auto w-screen cursor-pointer items-center overflow-y-scroll rounded-b-10px p-y-10px font-bold backdrop-blur-7px shadow-item
       @click="emits('clickMenu')"
     >
       <div
-        p-10px text-18px
-        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
+
+        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" p-10px text-center text-18px
         @click="toList('today')"
       >
         {{ t('startPage.today') }}
       </div>
       <div
-        p-10px text-18px
-        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
+
+        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" p-10px text-center text-18px
         @click="toList('star')"
       >
         {{ t('listMenu.star') }}
       </div>
       <div
-        p-10px text-18px
-        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
+
+        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" p-10px text-center text-18px
         @click="router.push('/')"
       >
         {{ t('listMenu.allTodo') }}
       </div>
       <div
-        p-10px text-18px
-        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
+
+        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" p-10px text-center text-18px
         @click="toList('allDo')"
       >
         {{ t('listMenu.completed') }}
       </div>
       <div
-        p-10px text-18px
-        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" text-center
+
+        bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]" p-10px text-center text-18px
         @click="toList('allNotDo')"
       >
         {{ t('listMenu.incompleted') }}
@@ -170,9 +170,9 @@ function delWithToDo(id: number) {
         @del-with-to-do="delWithToDo"
       />
       <div
-        p-10px text-18px
+
         bg="hover:black/5 active:black/10" w="[calc(100vw-20px)]"
-        flex justify-center items-center
+        flex items-center justify-center p-10px text-18px
         @click.stop="dialogShow = true"
       >
         <div i-ph:plus-circle-bold text-20px />
@@ -180,9 +180,9 @@ function delWithToDo(id: number) {
     </PerfectScrollbar>
   </div>
   <div
-    class="black" bg-black rounded-7px
-    w-screen h-screen fixed
-    z-1
+    class="black"
+
+    fixed z-1 h-screen w-screen rounded-7px bg-black
   />
   <Alert
     :title="t('add-category')"
@@ -194,8 +194,8 @@ function delWithToDo(id: number) {
       v-model="cateText"
       type="text"
       bg="black/10 dark:#999/10" c="#555 dark:#bbb"
-      outline="primary-d dark:primary-a" border-none p-10px
-      rounded-5px
+      outline="primary-d dark:primary-a"
+      rounded-5px border-none p-10px
     >
   </Alert>
 </template>
@@ -222,10 +222,10 @@ function delWithToDo(id: number) {
 .list {
   display: grid;
   grid-template-rows: 0fr;
-  animation: showList .3s forwards;
+  animation: showList 0.3s forwards;
 }
 
 .black {
-  animation: back .3s forwards;
+  animation: back 0.3s forwards;
 }
 </style>

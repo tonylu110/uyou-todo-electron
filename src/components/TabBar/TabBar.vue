@@ -38,7 +38,7 @@ const emits = defineEmits<{
 const router = useRouter()
 const route = useRoute()
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const ipcRenderer = require('electron').ipcRenderer
 
 const systemTitleShow = localStorage.getItem('systemTitle') === 'true'
@@ -154,15 +154,15 @@ watchEffect(() => {
           c="#555 dark:#bbb"
         >{{ title }}</span>
         <div
-          v-if="simpleMode && (route.name === 'Home' || route.name === 'other')" absolute top-0 text-20px
-          font-bold flex w="[calc(100%+20px)]"
-          items-center c-transparent
-          cursor-pointer no-drag
+          v-if="simpleMode && (route.name === 'Home' || route.name === 'other')"
+          w="[calc(100%+20px)]"
+
+          absolute top-0 flex cursor-pointer items-center text-20px font-bold c-transparent no-drag
           @click="showListFn"
         >
           {{ title }}
-          <div v-if="showList && simpleMode" i-mdi:menu-up text-20px c="#555 dark:#bbb" vertical-baseline />
-          <div v-else i-mdi:menu-down text-20px c="#555 dark:#bbb" vertical-baseline />
+          <div v-if="showList && simpleMode" c="#555 dark:#bbb" i-mdi:menu-up vertical-baseline text-20px />
+          <div v-else c="#555 dark:#bbb" i-mdi:menu-down vertical-baseline text-20px />
         </div>
       </div>
       <div
@@ -172,58 +172,58 @@ watchEffect(() => {
       >
         <div
           v-if="leftImgShow"
-          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20" mr-10px
-          p-5px w-20px rounded-5px no-drag cursor-pointer
+          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
+          mr-10px w-20px cursor-pointer rounded-5px p-5px no-drag
           @click="() => emits('leftClick')"
         >
           <div
             :class="leftImg"
-            text-20px c="#555 dark:#bbb" block
+            c="#555 dark:#bbb" block text-20px
           />
         </div>
         <div
           v-if="route.name !== 'Home' && simpleMode"
           bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
-          p-5px w-20px rounded-5px no-drag cursor-pointer mr-10px
+          mr-10px w-20px cursor-pointer rounded-5px p-5px no-drag
           @click="router.push('/')"
         >
-          <div i-ph:house-bold text-20px c="#555 dark:#bbb" block />
+          <div c="#555 dark:#bbb" i-ph:house-bold block text-20px />
         </div>
         <div
           v-if="showWrap"
           bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
-          p-5px w-20px rounded-5px no-drag cursor-pointer
+          w-20px cursor-pointer rounded-5px p-5px no-drag
           @click="showWrapFn"
         >
-          <div i-ph:caret-up-down-bold text-20px c="#555 dark:#bbb" block />
+          <div c="#555 dark:#bbb" i-ph:caret-up-down-bold block text-20px />
         </div>
       </div>
     </div>
-    <div flex="~ col" items-end mr-15px>
+    <div flex="~ col" mr-15px items-end>
       <div :h="!systemTitleShow ? '' : '26px'">
         <window-buttons v-if="!systemTitleShow" />
       </div>
-      <div flex mt-12px :h="rightImgShow ? '' : '30px'">
-        <TodayShow v-if="route.query.listName === 'today'"/>
-        <ChangeColor 
+      <div mt-12px flex :h="rightImgShow ? '' : '30px'">
+        <TodayShow v-if="route.query.listName === 'today'" />
+        <ChangeColor
           v-if="!isNaN(Number.parseInt((route.query.listName as string))) && useCustColor"
           @change-color="changColor"
         />
         <div
           v-if="rightImgShow"
-          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20" ml-10px
-          p-5px w-20px rounded-5px no-drag cursor-pointer
+          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
+          ml-10px w-20px cursor-pointer rounded-5px p-5px no-drag
           @click="() => emits('rightClick')"
         >
-          <div i-ph:plus-circle-bold text-20px c="#555 dark:#bbb" block />
+          <div c="#555 dark:#bbb" i-ph:plus-circle-bold block text-20px />
         </div>
         <div
           v-if="syncImgShow && rightImgShow"
-          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20" ml-10px
-          p-5px w-20px rounded-5px no-drag cursor-pointer
+          bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
+          ml-10px w-20px cursor-pointer rounded-5px p-5px no-drag
           @click="sync"
         >
-          <div i-ph:file-cloud-bold text-20px c="#555 dark:#bbb" block />
+          <div c="#555 dark:#bbb" i-ph:file-cloud-bold block text-20px />
         </div>
       </div>
     </div>

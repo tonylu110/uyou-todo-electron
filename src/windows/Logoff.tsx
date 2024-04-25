@@ -111,22 +111,33 @@ const Logoff: SetupFC = () => {
   return () => (
     <div
       drag
-      flex justify-center items-center
-      h-screen w-screen
+      flex
+      justify-center
+      items-center
+      h-screen
+      w-screen
     >
       <div
-        flex="~ col" justify-center items-center
+        flex="~ col"
+        justify-center
+        items-center
       >
         <div flex="~ row" items-center justify-center>
           <span
-            w-25 flex justify-content-right
+            w-25
+            flex
+            justify-content-right
             c="#555 dark:#bbb"
           >
             {t('registerPage.account')}
           </span>
           <input
-            no-drag outline-primary-d
-            mb-10px p-10px rounded-5px border="2px solid black/10"
+            no-drag
+            outline-primary-d
+            mb-10px
+            p-10px
+            rounded-5px
+            border="2px solid black/10"
             type="text"
             disabled
             v-model={formData.account}
@@ -134,15 +145,21 @@ const Logoff: SetupFC = () => {
         </div>
         <div flex="~ row" items-center justify-center>
           <span
-            w-25 flex justify-content-right
+            w-25
+            flex
+            justify-content-right
             c="#555 dark:#bbb"
           >
             {t('registerPage.password')}
           </span>
           <input
             v-focus
-            no-drag outline="primary-d dark:primary-a"
-            mb-10px p-10px rounded-5px border="2px solid black/10"
+            no-drag
+            outline="primary-d dark:primary-a"
+            mb-10px
+            p-10px
+            rounded-5px
+            border="2px solid black/10"
             bg="black/10 dark:#999/10"
             c="#555 dark:#bbb"
             type="password"
@@ -150,10 +167,13 @@ const Logoff: SetupFC = () => {
           />
         </div>
         <button
-          no-drag cursor-pointer
+          no-drag
+          cursor-pointer
           bg="primary-d active:primary-a dark:primary-a dark:active:primary-d"
           c-white
-          border-none p-10px rounded-5px
+          border-none
+          p-10px
+          rounded-5px
           onClick={logoff}
         >
           {t('logoffPage.logoff')}

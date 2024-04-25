@@ -5,7 +5,7 @@ import emitter from '../../util/bus'
 import { closeWindow, minWindow, topWindow } from '../../util/windowApi'
 import firstLoad from './firstLoad'
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const os = require('node:os')
 
 const isMac = navigator.userAgent.includes('Mac')
@@ -76,10 +76,10 @@ watchEffect(() => {
   >
     <div
       :bg="topState ? 'error-d hover:error-h active:error-a' : 'black/10 hover:black/20 active:black/30'"
-      w-13px h-13px rounded-full :right="isMac ? '12px' : ''"
-      no-drag p-6px absolute :left="isMac ? '' : '12px'"
-      flex items-center justify-center
-      cursor-pointer rounded-5px mt-5px
+      :right="isMac ? '12px' : ''"
+      :left="isMac ? '' : '12px'"
+
+      absolute mt-5px h-13px w-13px flex cursor-pointer items-center justify-center rounded-5px rounded-full p-6px no-drag
       @click="onTopWindow"
     >
       <div i-fluent:pin-12-filled text-13px :c="topState ? 'white' : '#555'" />
@@ -90,10 +90,8 @@ watchEffect(() => {
     <div
       v-if="!isMac"
       bg="black/10 hover:black/20 active:black/30"
-      w-13px h-13px rounded-full
-      no-drag p-6px absolute right-42px
-      flex items-center justify-center
-      cursor-pointer rounded-5px mt-5px
+
+      absolute right-42px mt-5px h-13px w-13px flex cursor-pointer items-center justify-center rounded-5px rounded-full p-6px no-drag
       @click="minWindow"
     >
       <div i-mdi:minus-thick text-13px c="#555" />
@@ -101,10 +99,8 @@ watchEffect(() => {
     <div
       v-if="!isMac"
       bg="black/10 hover:error-d active:error-a"
-      w-13px h-13px rounded-full
-      no-drag p-6px absolute right-12px
-      flex items-center justify-center
-      cursor-pointer rounded-5px mt-5px
+
+      absolute right-12px mt-5px h-13px w-13px flex cursor-pointer items-center justify-center rounded-5px rounded-full p-6px no-drag
       class="group"
       @click="closeWindow"
     >

@@ -17,7 +17,7 @@ declare module '*.vue' {
 //   export default en;
 // }
 
-// declare module 'element-plus/dist/locale/zh-tw.mjs' { 
+// declare module 'element-plus/dist/locale/zh-tw.mjs' {
 //   const zhTw: any;
 //   export default zhTw;
 // }

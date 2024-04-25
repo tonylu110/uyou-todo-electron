@@ -1,3 +1,4 @@
+<!-- eslint-disable ts/no-require-imports -->
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -8,7 +9,7 @@ import CloseButton from '../components/CloseButton'
 
 const { t } = useI18n()
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const { ipcRenderer } = require('electron')
 
 const route = useRoute()
@@ -70,62 +71,61 @@ function closeAlert() {
 
 <template>
   <div
-    bg-transparent
-    flex="~ col" justify-center items-center
-    w-screen h-screen drag
+
+    flex="~ col"
+    h-screen w-screen items-center justify-center bg-transparent drag
   >
     <img
-      w-150px h-150px mb-20px
+      mb-20px h-150px w-150px
       src="/logo.png"
       alt=""
     >
-    <div p-7px flex items-center>
+    <div flex items-center p-7px>
       <span
-        flex justify-content-right w-100px
-        text-20px c="#555 dark:#bbb" whitespace-pre
+
+        c="#555 dark:#bbb" w-100px flex whitespace-pre text-20px justify-content-right
       >
         {{ t('registerPage.account') }}
       </span>
       <input
         v-model="formData.account"
-        no-drag
-        p-10px outline-none rounded-5px
+
         bg="black/5 dark:#999/5"
         border="2px solid #00000010"
         c="#555/50 dark:#bbb/50"
         type="text"
-        disabled
+        disabled rounded-5px p-10px outline-none no-drag
       >
     </div>
-    <div p-7px flex items-center>
+    <div flex items-center p-7px>
       <span
-        flex justify-content-right w-100px
-        text-20px c="#555 dark:#bbb" whitespace-pre
+
+        c="#555 dark:#bbb" w-100px flex whitespace-pre text-20px justify-content-right
       >
         {{ t('rePassPage.oldPass') }}
       </span>
       <input
         v-model="formData.oldPass"
         v-focus
-        no-drag
-        p-10px outline-none rounded-5px
+
+        rounded-5px p-10px outline-none no-drag
         bg="black/10 dark:#999/10"
         border="2px solid #00000010"
         c="#555 dark:#bbb"
         type="password"
       >
     </div>
-    <div p-7px flex items-center>
+    <div flex items-center p-7px>
       <span
-        flex justify-content-right w-100px
-        text-20px c="#555 dark:#bbb" whitespace-pre
+
+        c="#555 dark:#bbb" w-100px flex whitespace-pre text-20px justify-content-right
       >
         {{ t('rePassPage.newPass') }}
       </span>
       <input
         v-model="formData.newPass"
-        no-drag
-        p-10px outline-none rounded-5px
+
+        rounded-5px p-10px outline-none no-drag
         bg="black/10 dark:#999/10"
         c="#555 dark:#bbb"
         border="2px solid #00000010"
@@ -133,11 +133,11 @@ function closeAlert() {
       >
     </div>
     <button
-      no-drag
-      mt-10px p="x-20px y-5px" rounded-5px
+
+      p="x-20px y-5px"
       bg="primary-d active:primary-a dark:primary-a dark:active:primary-d"
-      c-white border-none
-      text-18px cursor-pointer
+
+      mt-10px cursor-pointer rounded-5px border-none text-18px c-white no-drag
       type="submit"
       @click="repass"
     >

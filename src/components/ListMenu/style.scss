@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: space-between;
   z-index: 10;
-  transition: width .2s ease;
+  transition: width 0.2s ease;
 
   .list {
     .title {
@@ -56,7 +56,7 @@
     .account-list {
       @extend .setting-list;
       margin-top: 12px;
-      transition: margin .2s;
+      transition: margin 0.2s;
     }
   }
 }

@@ -79,16 +79,16 @@ const showIcons = ref(false)
         v-focus
         type="text"
         :c="route.query.listName === `${id}` ? '!white group-hover:!white' : 'group-hover:!white dark:!#bbb'"
-        ml-10px p-0 m-0 bg-transparent text-14px
-        border-none outline-none font="bold [smartisan-t]"
+
+        m-0 ml-10px border-none bg-transparent p-0 text-14px outline-none font="bold [smartisan-t]"
       >
     </div>
     <div v-if="!showEdit">
       <div
-        flex justify-center items-center
+
         :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'"
-        h="18px" w="18px" mr-7px
-        rounded-xl transition="300 width margin"
+        h="18px" w="18px"
+        mr-7px flex items-center justify-center rounded-xl transition="300 width margin"
         @click.stop="() => {
           showEdit = !showEdit
           cateText = title
@@ -102,24 +102,23 @@ const showIcons = ref(false)
         placement="top"
       >
         <div
-          flex justify-center
-          items-center
+
           :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'" h="18px"
-          w="18px" rounded-xl
+          w="18px" flex items-center justify-center rounded-xl
           transition="300 width margin"
           @click.stop="isOpen = true"
         >
           <div i-ph:trash-simple-bold :c="route.query.listName === `${id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />
         </div>
         <template #popper>
-          <div p-10px flex="~ col" items-center>
+          <div flex="~ col" items-center p-10px>
             <span text-14px>{{ t('listMenu.delCate', { title }) }}</span>
-            <div flex justify-center items-center mt-10px>
+            <div mt-10px flex items-center justify-center>
               <button
                 bg="white active:#ddd"
-                mr-5px border-none rounded-5px
-                p="x-10px y-5px" cursor-pointer
-                flex justify-center items-center
+
+                p="x-10px y-5px"
+                mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                 shadow="sm black/20" c="#555"
                 @click.stop="isOpen = false"
               >
@@ -128,10 +127,10 @@ const showIcons = ref(false)
               </button>
               <button
                 bg="!primary-d active:!primary-a"
-                border-none rounded-5px cursor-pointer
+
                 p="x-10px y-5px" c="!white"
-                flex justify-center items-center
-                shadow="sm black/20" mr-5px
+
+                shadow="sm black/20" mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                 @click.stop="() => {
                   emits('delCate', id)
                   isOpen = false
@@ -142,9 +141,9 @@ const showIcons = ref(false)
               </button>
               <button
                 bg="!error-d active:!error-a"
-                border-none rounded-5px cursor-pointer
+
                 p="x-10px y-5px" c="!white"
-                flex justify-center items-center
+                flex cursor-pointer items-center justify-center rounded-5px border-none
                 shadow="sm black/20"
                 @click.stop="() => {
                   emits('delWithToDo', id)
@@ -161,10 +160,10 @@ const showIcons = ref(false)
     </div>
     <div v-else>
       <div
-        flex justify-center items-center
+
         :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'"
-        h="18px" w="18px" mr-7px
-        rounded-xl transition="300 width margin"
+        h="18px" w="18px"
+        mr-7px flex items-center justify-center rounded-xl transition="300 width margin"
         @click.stop="() => {
           emits('editCate', id, cateText)
           showEdit = false
@@ -173,10 +172,10 @@ const showIcons = ref(false)
         <div i-mdi:check-bold :c="route.query.listName === `${id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />
       </div>
       <div
-        flex justify-center items-center
+
         :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'"
         h="18px" w="18px"
-        rounded-xl transition="300 width margin"
+        flex items-center justify-center rounded-xl transition="300 width margin"
         @click.stop="showEdit = false"
       >
         <div i-mdi:close-thick :c="route.query.listName === `${id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />

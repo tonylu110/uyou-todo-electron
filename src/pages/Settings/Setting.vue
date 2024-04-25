@@ -17,9 +17,9 @@ import ColorChange from '../../components/SettingList/colorChange'
 
 const { t } = useI18n()
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const os = require('node:os')
-// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-var-requires
 const { ipcRenderer, shell } = require('electron')
 
 const isWindows10OrAfter = os.release().split('.')[2] > 15063
@@ -113,8 +113,8 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     :title="t('settingTitleText')"
     :right-img-show="false"
     :left-img-show="isNoteUI"
-    @left-click="router.back()"
     bg-color="light"
+    @left-click="router.back()"
   />
   <SettingList>
     <ItemBox v-if="isDev">
@@ -140,7 +140,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
         :title="loginState ? t('myAccount') : t('loginText')"
         @item-fun="() => router.push('/account?from=setting')"
       />
-      <Item 
+      <Item
         :title="t('anotherSettings.openPass')"
         @item-fun="router.push('/openPass?from=setting')"
       />
@@ -222,8 +222,8 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
         class="item"
         :max-w="minWidth ? '[calc(100vw-450px)]' : '550px'"
         bg="white dark:#999/10"
-        flex justify-center items-center
-        min-h-30px h-30px p="x-15px y-10px"
+
+        h-30px min-h-30px flex items-center justify-center p="x-15px y-10px"
       >
         <ElRadioGroup
           v-model="closeState"
@@ -261,7 +261,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
       />
       <div
         v-if="isWin11 && menuBlurState"
-        class="item-blur item"
+        class="item item-blur"
         :max-w="minWidth ? '' : '550px'"
         bg="white dark:#999/10"
       >

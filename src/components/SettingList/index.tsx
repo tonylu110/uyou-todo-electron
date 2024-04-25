@@ -19,8 +19,12 @@ const SettingList: SetupFC = () => {
     <PerfectScrollbar
       justify={props.justify}
       bg={isBlur ? 'white/50 dark:#333/50' : 'white/80 dark:#333/80'}
-      w="100%" h="[calc(100%-105px)]" pt-10px
-      flex="~ col" items-center overflow-y-scroll
+      w="100%"
+      h="[calc(100%-105px)]"
+      pt-10px
+      flex="~ col"
+      items-center
+      overflow-y-scroll
     >
       { renderSlot(slots, 'default') }
     </PerfectScrollbar>

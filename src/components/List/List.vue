@@ -273,18 +273,18 @@ const isDark = usePreferredDark()
         v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo' && list.filter(listData => listData.ok === true).length > 0"
         bg="#eee/80 dark:#222/50 hover:#eee/90 dark:hover:#222/60 active:#eee dark:active:#222/70"
         :translate="simpleMode ? 'x-[calc(-50vw+50%+10px)]' : (menuShort ? 'x-[calc(((-100vw+58px)/2)+50%+10px)]' : 'x-[calc(((-100vw+300px)/2)+50%+10px)]')"
-        whitespace-nowrap mb-10px p-x-10px p-y-5px rounded-5px c="#555 dark:#bbb"
-        font-bold flex items-center cursor-pointer
+        c="#555 dark:#bbb"
+        mb-10px flex cursor-pointer items-center whitespace-nowrap rounded-5px p-x-10px p-y-5px font-bold
         shadow="sm black/30"
         @click="setSwitchFn('notDoShow', !showNotDo, () => showNotDo = !showNotDo)"
       >
-        <div i-fluent:caret-down-12-filled text-18px mr-5px :rotate="showNotDo ? '0' : '-90'" transition-300 />
+        <div :rotate="showNotDo ? '0' : '-90'" i-fluent:caret-down-12-filled mr-5px text-18px transition-300 />
         {{ t('listMenu.completed') }}
         <div
-          ml-5px text-10px
-          rounded-20px bg="#555 dark:#bbb" c="#eee dark:#222"
-          w-1rem h-1rem font-normal
-          flex items-center justify-center
+
+          bg="#555 dark:#bbb" c="#eee dark:#222"
+
+          ml-5px h-1rem w-1rem flex items-center justify-center rounded-20px text-10px font-normal
         >
           {{ list!.filter(listData => listData.ok === true).length }}
         </div>
@@ -346,7 +346,7 @@ const isDark = usePreferredDark()
 
 .add-enter-active,
 .add-leave-active {
-  transition: margin .3s;
+  transition: margin 0.3s;
 }
 
 .item-leave-to {
@@ -361,10 +361,10 @@ const isDark = usePreferredDark()
 
 .item-enter-active,
 .item-leave-active {
-  transition: transform .4s;
+  transition: transform 0.4s;
 }
 
 .item-move {
-  transition: all .5s;
+  transition: all 0.5s;
 }
 </style>

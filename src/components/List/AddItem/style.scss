@@ -34,7 +34,9 @@
     align-items: center;
     justify-content: center;
     padding: 5px 0;
-    transition: width .3s, margin .4s;
+    transition:
+      width 0.3s,
+      margin 0.4s;
     cursor: pointer;
 
     &.ok-button {

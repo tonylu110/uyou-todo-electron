@@ -34,7 +34,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
     <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }">
       <div class="box-radius">
         <div
-          class="item group"
+          class="group item"
           :class="langShow('withSystem') ? 'select' : ''"
           :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }"
           bg="white dark:#999/10 active:primary-d dark:active:primary-a"

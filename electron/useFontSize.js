@@ -7,19 +7,22 @@ function useFontSize(size) {
         font-size: 0.85rem;
       }
     `
-  } else if (size === 66) {
+  }
+  else if (size === 66) {
     fontSize = `
       * {
         font-size: 1.15rem;
       }
     `
-  } else if (size === 99) {
+  }
+  else if (size === 99) {
     fontSize = `
       * {
         font-size: 1.25rem;
       }
     `
-  } else {
+  }
+  else {
     fontSize = `
       * {
         font-size: 1rem;

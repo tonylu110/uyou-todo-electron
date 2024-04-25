@@ -5,7 +5,7 @@ import { computed, ref } from 'vue'
 withDefaults(defineProps<{
   mode: string
 }>(), {
-  mode: ''
+  mode: '',
 })
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'

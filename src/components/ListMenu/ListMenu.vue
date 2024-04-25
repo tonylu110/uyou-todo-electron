@@ -47,7 +47,7 @@ const showAdd = ref(false)
 const cateTitle = ref('')
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
-const cateListRef = ref(null) as unknown as Ref<{ $el: HTMLAreaElement; ps: { scrollbarYTop: number } }>
+const cateListRef = ref(null) as unknown as Ref<{ $el: HTMLAreaElement, ps: { scrollbarYTop: number } }>
 const ps = ref(0)
 function showAddFn() {
   showAdd.value = !showAdd.value
@@ -217,19 +217,19 @@ const showIcons = ref(false)
     :style="{ backgroundColor: listMenuColor, height: titleBarShow ? '100vh' : '' }"
   >
     <div
-      m="l-13px t-8px" rounded-5px
+      m="l-13px t-8px"
       bg="hover:black/10 active:black/20"
-      p-5px w-20px no-drag
+      w-20px rounded-5px p-5px no-drag
       @click="menuShort = !menuShort"
     >
-      <div i-ph:list-bold text-20px block c="black/56 dark:#bbb" />
+      <div i-ph:list-bold block text-20px c="black/56 dark:#bbb" />
     </div>
     <div class="list">
       <TitleMenuItem v-if="!menuShort" />
       <!-- <span v-if="!menuShort" class="title" c="dark:!#bbb" :mt="isMac() ? '' : (systemBarShow ? '!-30px' : '!10px')">{{ t('accountPage.account') }}</span> -->
       <div
         v-if="menuShort"
-        class="account-list group"
+        class="group account-list"
         :mt="menuShort ? (systemBarShow ? '!-110px' : '!-70px') : ''"
         :mb="menuShort ? '' : '!10px'"
         :bg="routeName === 'account' && form !== 'setting' ? 'primary-d hover:primary-a dark:primary-a' : 'hover:primary-d'"
@@ -260,7 +260,7 @@ const showIcons = ref(false)
       >
         <div
           v-if="showList.today.show && menuShort"
-          class="all-todo-list group"
+          class="group all-todo-list"
           :bg="routeQueryName === 'today' ? 'primary-d hover:primary-a dark:primary-a' : 'hover:primary-d dark:hover:primary-a'"
           @click="toList('today')"
         >
@@ -355,16 +355,16 @@ const showIcons = ref(false)
           @set-icon="setIcon"
         />
         <div
-          v-if="showAdd" flex items-center
-          justify-center p-10px ml-10px no-drag
-          w="260px" cursor-pointer mb-5px
-          bg="black/5 dark:#999/10" rounded-7px
+          v-if="showAdd"
+
+          w="260px"
+          bg="black/5 dark:#999/10" mb-5px ml-10px flex cursor-pointer items-center justify-center rounded-7px p-10px no-drag
           mt="10px"
         >
           <div w="100%" flex items-center>
             <div
-              p-4px mr-7px
-              bg="black/5" rounded-5px
+
+              bg="black/5" mr-7px rounded-5px p-4px
             >
               <VDropdown
                 v-model:shown="showIcons"
@@ -373,7 +373,7 @@ const showIcons = ref(false)
                 placement="top-start"
               >
                 <div
-                  :class="icon" text-16px block
+                  :class="icon" block text-16px
                   c="group-hover:white #00000090 dark:#bbb"
                   @click.stop="showIcons = true"
                 />
@@ -391,27 +391,27 @@ const showIcons = ref(false)
             <input
               v-model="cateTitle"
               v-focus
-              w="100%" text-12px rounded-5px
-              p-5px bg="black/5" border-none c="dark:#bbb"
-              outline-none
+              w="100%"
+              bg="black/5" c="dark:#bbb"
+              rounded-5px border-none p-5px text-12px outline-none
               type="text"
               @keydown.enter="addCate"
             >
             <div
-              flex justify-center items-center
+
               bg="black/5 hover:black/10 active:black/15 dark:#999/5 dark:hover:#999/10 dark:active:#999/15"
               h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '0px'"
-              :m="cateTitle !== '' ? 'x-8px' : 'l-8px'" rounded-5px
+              :m="cateTitle !== '' ? 'x-8px' : 'l-8px'" flex items-center justify-center rounded-5px
               transition="300 width margin"
               @click="addCate"
             >
               <div i-mdi:check-bold c="#777 dark:#bbb" />
             </div>
             <div
-              flex justify-center items-center
+
               bg="black/5 hover:black/10 active:black/15 dark:#999/5 dark:hover:#999/10 dark:active:#999/15"
               h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '[calc(1em+12px)]'"
-              rounded-5px transition="300 width margin"
+              flex items-center justify-center rounded-5px transition="300 width margin"
               @click="showAdd = false"
             >
               <div i-mdi:close-thick c="#777 dark:#bbb" />
@@ -419,16 +419,16 @@ const showIcons = ref(false)
           </div>
         </div>
         <div
-          v-if="!menuShort" flex items-center
-          justify-center p-10px w="260px" ml-10px
-          h-18px cursor-pointer
-          rounded-7px no-drag
+          v-if="!menuShort"
+          w="260px"
+
+          ml-10px h-18px flex cursor-pointer items-center justify-center rounded-7px p-10px no-drag
           bg="active:#00000010 hover:black/10 black/5 dark:#999/5 dark:hover:#999/10 dark:active:#999/15"
           :mt="showAdd ? '' : '10px'"
           @click="showAddFn"
         >
           <div>
-            <div i-fluent:add-12-filled block text-18px text-center c="#00000090 dark:#bbb" />
+            <div i-fluent:add-12-filled block text-center text-18px c="#00000090 dark:#bbb" />
           </div>
         </div>
       </perfect-scrollbar>
@@ -436,7 +436,7 @@ const showIcons = ref(false)
     <div class="list">
       <div
         mb="!20px"
-        class="setting-list group"
+        class="group setting-list"
         :bg="routeName === 'setting' || form === 'setting' ? 'primary-d hover:primary-a dark:primary-a' : 'hover:primary-d dark:hover:primary-a'"
         @click="router.push('/setting')"
       >

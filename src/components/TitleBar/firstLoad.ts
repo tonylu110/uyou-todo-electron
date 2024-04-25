@@ -5,7 +5,7 @@ function firstLoad() {
   else
     alwaysOnTop = false
 
-  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+  // eslint-disable-next-line ts/no-var-requires
   const ipcRenderer = require('electron').ipcRenderer
   if (localStorage.getItem('saveTopState') !== 'false') {
     ipcRenderer.send('window-on-top', alwaysOnTop)

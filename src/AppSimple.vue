@@ -9,7 +9,6 @@ import ja from 'element-plus/es/locale/lang/ja'
 import es from 'element-plus/es/locale/lang/es'
 import en from 'element-plus/es/locale/lang/en'
 import { ElConfigProvider } from 'element-plus'
-import Alert from './components/Alert/Alert.vue'
 import RouterUrl from './components/RouterUrl'
 import emitter from './util/bus'
 import isDev from './util/mode'
@@ -18,7 +17,6 @@ import { isLinux, isWindows10OrAfter } from './util/os'
 import LocalStorage from './util/localStorage'
 import type ITodoList from './interface/ITodoListArray'
 import setTime from './components/List/Item/setTime'
-import { closeWindow } from './util/windowApi'
 import OpenPass from './components/OpenPass/OpenPass.vue'
 
 const route = useRoute()
@@ -93,7 +91,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
 
 <template>
   <Transition name="open-pass">
-    <OpenPass v-if="passAlert && !isWinDow" v-model="passAlert"/>
+    <OpenPass v-if="passAlert && !isWinDow" v-model="passAlert" />
   </Transition>
   <ElConfigProvider :locale="useLocale">
     <RouterUrl v-if="routerShow" />
@@ -106,7 +104,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
       :opacity="passAlert ? '0' : '100'"
       :class="isDark ? 'dark' : ''"
     >
-      <div overflow-hidden w-100vw h-100vh>
+      <div h-100vh w-100vw overflow-hidden>
         <router-view />
       </div>
     </div>
@@ -116,7 +114,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
 <style scoped lang="scss">
 .open-pass-leave-active {
   transition-property: opacity, top;
-  transition-duration: .4s, .4s;
+  transition-duration: 0.4s, 0.4s;
 }
 
 .open-pass-enter-from,

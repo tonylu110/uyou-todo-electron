@@ -24,7 +24,8 @@ const Icons: SetupFC = () => {
     <div p-7px flex="~ gap-5px wrap" max-w-150px>
       {icons.map((item, index) => (
         <div
-          p-5px rounded-5px
+          p-5px
+          rounded-5px
           bg={
             props.icon === undefined && index === 0
               ? 'primary-d dark:primary-a'
@@ -36,7 +37,8 @@ const Icons: SetupFC = () => {
           onClick={() => emit('setIcon', item)}
         >
           <div
-            className={item} block
+            className={item}
+            block
             c={
               props.icon === undefined && index === 0
                 ? 'white'
