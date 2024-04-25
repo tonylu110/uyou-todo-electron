@@ -38,7 +38,7 @@ const emits = defineEmits<{
 const router = useRouter()
 const route = useRoute()
 
-// eslint-disable-next-line ts/no-var-requires
+// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
 const ipcRenderer = require('electron').ipcRenderer
 
 const systemTitleShow = localStorage.getItem('systemTitle') === 'true'

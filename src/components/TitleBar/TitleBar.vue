@@ -5,7 +5,7 @@ import emitter from '../../util/bus'
 import { closeWindow, minWindow, topWindow } from '../../util/windowApi'
 import firstLoad from './firstLoad'
 
-// eslint-disable-next-line ts/no-var-requires
+// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
 const os = require('node:os')
 
 const isMac = navigator.userAgent.includes('Mac')

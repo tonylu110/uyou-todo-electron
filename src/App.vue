@@ -27,7 +27,7 @@ import OpenPass from './components/OpenPass/OpenPass.vue'
 
 const { t, locale } = useI18n()
 
-// eslint-disable-next-line ts/no-var-requires
+// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
 const ipcRenderer = require('electron').ipcRenderer
 
 const alertShow = ref(false)
@@ -95,6 +95,8 @@ const route = useRoute()
 const router = useRouter()
 const isWinDow = ref(true)
 
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
+
 router.isReady().then(() => {
   isWinDow.value = route.query.isWin === 'true'
   if (!isWinDow.value && !isNoteUI) {
@@ -106,8 +108,6 @@ router.isReady().then(() => {
     router.push(startRoute.value)
   }
 })
-
-const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 
 const routerShow = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
 
@@ -179,7 +179,7 @@ if (isDev) {
 
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
 
-// eslint-disable-next-line ts/no-var-requires
+// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
 const Store = require('electron-store')
 
 const store = new Store()

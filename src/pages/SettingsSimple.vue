@@ -15,7 +15,7 @@ import ColorChange from '../components/SettingList/colorChange'
 
 const { t } = useI18n()
 
-// eslint-disable-next-line ts/no-var-requires
+// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
 const os = require('node:os')
 
 const isLinux = !(process.platform === 'linux')
@@ -37,7 +37,7 @@ emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
 })
 emitter.on('routerShow', (data: unknown) => {
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  // eslint-disable-next-line ts/no-use-before-define
   routerUrlState.value = (data as boolean)
 })
 function clearData() {

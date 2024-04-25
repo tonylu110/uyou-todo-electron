@@ -1,4 +1,4 @@
-// eslint-disable-next-line ts/no-var-requires
+// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
 const os = require('node:os')
 
 export function isMac() {

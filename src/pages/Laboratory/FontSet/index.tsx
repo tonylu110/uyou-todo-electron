@@ -11,6 +11,7 @@ import ItemText from '../../../components/ItemBox/ItemText'
 import ItemSpace from '../../../components/ItemBox/ItemSpace'
 
 const FontSet: SetupFC = () => {
+  // eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
   const ipcRenderer = require('electron').ipcRenderer
 
   const { t } = useI18n()

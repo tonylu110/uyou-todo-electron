@@ -26,7 +26,7 @@ const emits = defineEmits<{
 
 const { t } = useI18n()
 
-// eslint-disable-next-line ts/no-var-requires
+// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
 const { clipboard } = require('electron')
 
 const topAndLeft = reactive({

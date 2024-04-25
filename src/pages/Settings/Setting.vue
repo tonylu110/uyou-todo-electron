@@ -17,9 +17,9 @@ import ColorChange from '../../components/SettingList/colorChange'
 
 const { t } = useI18n()
 
-// eslint-disable-next-line ts/no-var-requires
+// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
 const os = require('node:os')
-// eslint-disable-next-line ts/no-var-requires
+// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
 const { ipcRenderer, shell } = require('electron')
 
 const isWindows10OrAfter = os.release().split('.')[2] > 15063
