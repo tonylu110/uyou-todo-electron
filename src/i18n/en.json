@@ -176,7 +176,8 @@
     "doPay": "Has paid in good faith uyou ToDo Professional Edition",
     "thanks": "Thank you for your support, this will help uyou ToDo develop better",
     "floatUI": "Use Float UI",
-    "setCustFont": "Set custom font"
+    "setCustFont": "Set custom font",
+    "setCustPassKey": "Custom encryption keyboard style"
   },
   "openPass": {
     "useOpenPass": "Use startup encryption",
@@ -203,5 +204,8 @@
     "normal": "standard",
     "big": "big",
     "large": "large"
+  },
+  "setPassKey": {
+    "useCustPass": "Use a custom lock keyboard"
   }
 }

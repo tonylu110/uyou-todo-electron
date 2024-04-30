@@ -102,6 +102,11 @@ const routes = [
     name: 'openPass',
     component: () => import('./pages/Settings/OpenPass.vue'),
   },
+  {
+    path: '/passKey',
+    name: 'passKey',
+    component: () => import('./pages/Settings/Vip/PassKey.vue'),
+  },
 ]
 
 const router = createRouter({

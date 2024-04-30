@@ -84,9 +84,9 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
       @switch-fun="setSwitchFn('isVip', !isVip, () => isVip = !isVip)"
     />
     <div
+      v-if="!isVip"
       :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'"
-      flex="~ col wrap"
-      bg="white dark:#999/10" v-if="!isVip" mb-10px h-auto max-w-540px items-start justify-center rounded-7px p-20px
+      flex="~ col wrap" bg="white dark:#999/10" mb-10px h-auto max-w-540px items-start justify-center rounded-7px p-20px
       border="1px solid #00000020"
     >
       <h2>{{ t('vip.proFeature') }}</h2>
@@ -117,6 +117,10 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
       <Item
         :title="t('vip.setCustFont')"
         @item-fun="router.push('/fontSet?from=setting')"
+      />
+      <Item
+        :title="t('vip.setCustPassKey')"
+        @item-fun="router.push('/passKey?from=setting')"
       />
       <Item
         :title="t('vip.custColor')"

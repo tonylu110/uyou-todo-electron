@@ -4,6 +4,8 @@ import { useI18n } from 'vue-i18n'
 import { onLongPress } from '@vueuse/core'
 import { createToast } from '../../components/Toast'
 import nums from './nums.vue'
+import nums2 from './otherKey/nums2.vue'
+import none from './otherKey/none.vue'
 
 const { t } = useI18n()
 
@@ -42,18 +44,29 @@ onLongPress(
     },
   },
 )
+
+const passKey = localStorage.getItem('passKey')
+const useCustPass = localStorage.getItem('useCustPass') === 'true'
+
+function keySelect(key: string | null) {
+  if (key === 'nums2')
+    return nums2
+  else if (key === 'none')
+    return none
+  else
+    return nums
+}
 </script>
 
 <template>
   <div
-
     fixed left-0 top-0 z-1000 h-screen w-screen flex items-center justify-center drag
   >
     <div no-drag>
       <div relative w-190px>
         <input
-          v-focus
           v-model="inPass"
+          v-focus
           type="password"
           p="x-10px y-20px" w-full rounded-7px border-none text-center shadow-md
           outline-primary-d
@@ -69,14 +82,13 @@ onLongPress(
           }"
           right="[calc(-1rem-70px)]"
           bg="gray/50 active:gray"
-
           absolute top-0 h-1rem flex items-center justify-center rounded-7px p-20px shadow-md no-drag
           @click="backSpace"
         >
           <div i-ph:backspace-bold />
         </div>
       </div>
-      <nums @num-click="numClick" @ok="ok" />
+      <Component :is="useCustPass ? keySelect(passKey) : nums" @num-click="numClick" @ok="ok" />
     </div>
   </div>
 </template>

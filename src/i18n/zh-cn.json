@@ -176,7 +176,8 @@
     "doPay": "已诚信付费 uyou ToDo 专业版",
     "thanks": "感谢你的支持，这会帮助 uyou ToDo 更好的发展",
     "floatUI": "使用浮动 UI",
-    "setCustFont": "设置自定义字体"
+    "setCustFont": "设置自定义字体",
+    "setCustPassKey": "自定义加密键盘样式"
   },
   "openPass": {
     "useOpenPass": "使用启动加密",
@@ -203,5 +204,8 @@
     "normal": "标准",
     "big": "大号",
     "large": "特大"
+  },
+  "setPassKey": {
+    "useCustPass": "使用自定义锁定键盘"
   }
 }
