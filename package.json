@@ -11,6 +11,7 @@
     "electron:serve": "concurrently -k \"pnpm dev\" \"pnpm electron\"",
     "electron:servemac": "concurrently -k \"pnpm dev\" \"pnpm electron:mac\"",
     "electron:build": "vite build && electron-builder",
+    "electron:buildwinarm": "vite build && electron-builder --win --arm64",
     "electron:buildmac": "vite build && electron-builder --config.npmRebuild=false -c.extraMetadata.main=electron/mac/mainMac.js",
     "electron": "wait-on tcp:3000 && cross-env NODE_ENV=development electron .",
     "electron:mac": "wait-on tcp:3000 && cross-env NODE_ENV=development electron electron/mac/mainMac.js",
@@ -78,7 +79,8 @@
       ]
     },
     "win": {
-      "icon": "./logo.ico"
+      "icon": "./logo.ico",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
     },
     "linux": {
       "icon": "./logo.png",

@@ -90,7 +90,7 @@ const routes = [
   {
     path: '/fontSet',
     name: 'fontSet',
-    component: () => import('./pages/Laboratory/FontSet'),
+    component: () => import('./pages/Settings/Vip/FontSet.vue'),
   },
   {
     path: '/vip',

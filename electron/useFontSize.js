@@ -1,21 +1,23 @@
 let fontSize
 
 function useFontSize(size) {
-  if (size === 0) {
+  const stringSize = `${size}`
+
+  if (stringSize === '0') {
     fontSize = `
       * {
         font-size: 0.85rem;
       }
     `
   }
-  else if (size === 66) {
+  else if (stringSize === '66') {
     fontSize = `
       * {
         font-size: 1.15rem;
       }
     `
   }
-  else if (size === 99) {
+  else if (stringSize === '99') {
     fontSize = `
       * {
         font-size: 1.25rem;
