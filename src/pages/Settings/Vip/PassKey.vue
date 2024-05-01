@@ -36,16 +36,40 @@ function setPassKey(key: string) {
       @switch-fun="() => setSwitchFn('useCustPass', !useCustPass, () => useCustPass = !useCustPass)"
     />
     <template v-if="useCustPass">
-      <ItemSpace>
-        <button @click="setPassKey('nums')">
-          1
-        </button>
-        <button @click="setPassKey('nums2')">
-          2
-        </button>
-        <button @click="setPassKey('none')">
-          2
-        </button>
+      <ItemSpace flex="~ row wrap gap-10px" justify-center>
+        <div
+          h-80px w-80px rounded-10px p-10px border="2px solid black/10"
+          :bg="passKey === 'nums' || !passKey ? 'primary-d' : 'white'"
+          @click="setPassKey('nums')"
+        >
+          <img
+            src="/keyboard/n1.png"
+            alt="keyboard1"
+            h-full w-full rounded-7px
+          >
+        </div>
+        <div
+          h-80px w-80px rounded-10px p-10px border="2px solid black/10"
+          :bg="passKey === 'nums2' ? 'primary-d' : 'white'"
+          @click="setPassKey('nums2')"
+        >
+          <img
+            src="/keyboard/n2.png"
+            alt="keyboard2"
+            h-full w-full rounded-7px
+          >
+        </div>
+        <div
+          h-80px w-80px rounded-10px p-10px border="2px solid black/10"
+          :bg="passKey === 'none' ? 'primary-d' : 'white'"
+          @click="setPassKey('none')"
+        >
+          <img
+            src="/keyboard/none.png"
+            alt="keyboard3"
+            h-full w-full rounded-7px
+          >
+        </div>
       </ItemSpace>
     </template>
   </SettingList>
