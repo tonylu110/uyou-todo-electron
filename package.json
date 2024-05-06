@@ -1,6 +1,6 @@
 {
   "name": "uyoutodo",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "private": false,
   "author": "Anthony Lu <taruruchan0@gmail.com>",
   "main": "electron/main.js",
@@ -60,48 +60,5 @@
     "vue3-perfect-scrollbar": "^1.6.1",
     "wait-on": "^6.0.1"
   },
-  "build": {
-    "appId": "cn.org.uyou.todo",
-    "productName": "uyou ToDo",
-    "copyright": "Copyright © 2022 Anthony Lu",
-    "mac": {
-      "category": "public.app-category.utilities",
-      "icon": "./logo.icns",
-      "darkModeSupport": false,
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
-        }
-      ]
-    },
-    "win": {
-      "icon": "./logo.ico",
-      "artifactName": "${productName}-${version}-${arch}.${ext}"
-    },
-    "linux": {
-      "icon": "./logo.png",
-      "target": [
-        "snap",
-        "flatpak",
-        "AppImage"
-      ],
-      "category": "Utility"
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
-    },
-    "files": [
-      "dist/**/*",
-      "electron/**/*"
-    ],
-    "directories": {
-      "buildResources": "assets",
-      "output": "dist_electron"
-    }
-  }
+  "packageManager": "pnpm@9.0.6"
 }
