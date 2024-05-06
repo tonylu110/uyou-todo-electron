@@ -2,19 +2,25 @@
   "name": "uyoutodo",
   "version": "2.2.1",
   "private": false,
-  "author": "Anthony Lu <taruruchan0@gmail.com>",
+  "author": {
+    "name": "Anthony Lu",
+    "email": "taruruchan0@gmail.com"
+  },
+  "license": "MIT",
   "main": "electron/main.js",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "electron:serve": "concurrently -k \"pnpm dev\" \"pnpm electron\"",
+    "electron:servewin": "concurrently -k \"pnpm dev\" \"pnpm electron\"",
     "electron:servemac": "concurrently -k \"pnpm dev\" \"pnpm electron:mac\"",
-    "electron:build": "vite build && electron-builder",
+    "electron:servelinux": "concurrently -k \"pnpm dev\" \"pnpm electron:linux\"",
+    "electron:buildwin": "vite build && electron-builder",
     "electron:buildwinarm": "vite build && electron-builder --win --arm64",
     "electron:buildmac": "vite build && electron-builder --config.npmRebuild=false -c.extraMetadata.main=electron/mac/mainMac.js",
     "electron": "wait-on tcp:3000 && cross-env NODE_ENV=development electron .",
     "electron:mac": "wait-on tcp:3000 && cross-env NODE_ENV=development electron electron/mac/mainMac.js",
+    "electron:linux": "wait-on tcp:3000 && cross-env NODE_ENV=development electron electron/mac/mainMac.js --no-sandbox",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
