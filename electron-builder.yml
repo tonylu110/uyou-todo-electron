@@ -16,10 +16,15 @@ win:
 linux:
   icon: ./logo.png
   target:
-    - target:
-      - snap
-      - flatpak
-      - AppImage
+    - target: snap
+      arch:
+        - x64
+        - arm64
+    - target: flatpak
+      arch:
+        - x64
+        - arm64
+    - target: AppImage
       arch:
         - x64
         - arm64
