@@ -16,9 +16,13 @@ win:
 linux:
   icon: ./logo.png
   target:
-    - snap
-    - flatpak
-    - AppImage
+    - target:
+      - snap
+      - flatpak
+      - AppImage
+      arch:
+        - x64
+        - arm64
   category: Utility
 nsis:
   oneClick: false
