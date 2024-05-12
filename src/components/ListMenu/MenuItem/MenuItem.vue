@@ -55,7 +55,7 @@ const showIcons = ref(false)
       >
         <div
           :class="icon ? icon : 'i-ph:radio-button-bold'" text-18px
-          :c="route.query.listName === `${id}` ? 'white group-hover:white' : 'group-hover:white #00000090 dark:#bbb'"
+          :c="route.query.listName === `${id}` ? '!white !group-hover:white' : 'group-hover:white! !#00000090 !dark:#bbb'"
           @click.stop="showIcons = true"
         />
         <template #popper>
@@ -85,7 +85,6 @@ const showIcons = ref(false)
     </div>
     <div v-if="!showEdit">
       <div
-
         :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'"
         h="18px" w="18px"
         mr-7px flex items-center justify-center rounded-xl transition="300 width margin"
@@ -102,7 +101,6 @@ const showIcons = ref(false)
         placement="top"
       >
         <div
-
           :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'" h="18px"
           w="18px" flex items-center justify-center rounded-xl
           transition="300 width margin"
@@ -116,7 +114,6 @@ const showIcons = ref(false)
             <div mt-10px flex items-center justify-center>
               <button
                 bg="white active:#ddd"
-
                 p="x-10px y-5px"
                 mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                 shadow="sm black/20" c="#555"
@@ -127,9 +124,7 @@ const showIcons = ref(false)
               </button>
               <button
                 bg="!primary-d active:!primary-a"
-
                 p="x-10px y-5px" c="!white"
-
                 shadow="sm black/20" mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                 @click.stop="() => {
                   emits('delCate', id)
@@ -141,7 +136,6 @@ const showIcons = ref(false)
               </button>
               <button
                 bg="!error-d active:!error-a"
-
                 p="x-10px y-5px" c="!white"
                 flex cursor-pointer items-center justify-center rounded-5px border-none
                 shadow="sm black/20"
@@ -160,7 +154,6 @@ const showIcons = ref(false)
     </div>
     <div v-else>
       <div
-
         :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'"
         h="18px" w="18px"
         mr-7px flex items-center justify-center rounded-xl transition="300 width margin"

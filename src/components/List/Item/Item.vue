@@ -21,6 +21,7 @@ const props = defineProps<{
   isStar: boolean | undefined
   index: number
   reminder?: number
+  color?: string | null
 }>()
 
 const emits = defineEmits<{
@@ -60,7 +61,7 @@ function deleteItem() {
 
 function copyText() {
   navigator.clipboard.writeText(props.text!).then(() => {
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    // eslint-disable-next-line ts/no-use-before-define
     createToast({ msg: t('copyToast'), center: true }, itemDom.value)
   })
 }
@@ -217,7 +218,7 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
       shadow="sm black/20"
       bg="#eee/80 dark:#222/50"
     >
-      <CheckBox v-if="!showEdit" v-model="okState" :num="time" />
+      <CheckBox v-if="!showEdit" v-model="okState" :num="time" :color="color ? color : 'primary-d'" />
       <div
         v-if="!showEdit"
 
@@ -266,7 +267,6 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
       <div :ml="showEdit ? '' : '!38px'">
         <span
           v-if="!showEdit"
-
           :c="listName === 'allNotDo'
             ? '#555 dark:#bbb selection:white'
             : (okState

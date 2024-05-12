@@ -38,12 +38,12 @@ const Icons: SetupFC = () => {
         >
           <div
             className={item}
-            block
+            block="!~"
             c={
               props.icon === undefined && index === 0
-                ? 'white'
+                ? '!white'
                 : props.icon === item
-                  ? 'white'
+                  ? '!white'
                   : ''
             }
           />

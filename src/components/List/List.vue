@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
+import { computed, onMounted, reactive, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { usePreferredDark } from '@vueuse/core'
@@ -14,12 +14,12 @@ import Item from './Item/Item.vue'
 import saveItemSet from './saveItemSet'
 import AddItem from './AddItem/AddItem.vue'
 
-const props = defineProps({
-  showAddItem: Boolean,
-  listData: {
-    default: [] as ITodoList[],
-    type: Array,
-  },
+const props = withDefaults(defineProps<{
+  showAddItem: boolean
+  listData: ITodoList[]
+  color?: string | null
+}>(), {
+  color: 'primary-d',
 })
 
 const emits = defineEmits<{
@@ -162,6 +162,10 @@ const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
 const bgColor = computed(() => cateList.filter(value => value.id === Number(route.query.listName))[0])
 
+const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
+
+const colorUse = computed(() => useCustColor.value ? cateList.find(item => item.id === Number(route.query.listName))?.color : 'primary-d')
+
 emitter.on('changeBgColor', (color) => {
   for (let i = 0; i < cateList.length; i++) {
     if (cateList[i].id === Number(route.query.listName))
@@ -201,7 +205,6 @@ function setReminder(id: number, time: number) {
   saveItemSet(listAll.value!)
 }
 
-const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
 const isDark = usePreferredDark()
 </script>
 
@@ -249,6 +252,7 @@ const isDark = usePreferredDark()
         @dragend="saveItemSet(listAll!)"
       />
     </transition-group>
+    <!-- eslint-disable-next-line vue/no-useless-template-attributes -->
     <template v-else name="other">
       <Item
         v-for="(item, index) in list.filter(listData => listData.ok === false)"
@@ -259,6 +263,7 @@ const isDark = usePreferredDark()
         :is-star="item.star"
         :index="index"
         :reminder="item.time"
+        :color="colorUse"
         @set-ok="setOk"
         @delete-item="deleteItem"
         @edit-item="editItem"
@@ -299,6 +304,7 @@ const isDark = usePreferredDark()
           :is-star="item.star"
           :index="index"
           :reminder="item.time"
+          :color="colorUse"
           @set-ok="setOk"
           @delete-item="deleteItem"
           @edit-item="editItem"
