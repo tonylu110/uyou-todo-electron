@@ -5,10 +5,10 @@ import 'floating-vue/dist/style.css'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import { createApp, ref } from 'vue'
-import PerfectScrollbar from 'vue3-perfect-scrollbar'
+import { PerfectScrollbarPlugin } from 'vue3-perfect-scrollbar'
 import { VTooltip } from 'floating-vue'
 import App from './App.vue'
-import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css'
+import 'vue3-perfect-scrollbar/style.css'
 import router from './router'
 import AppSimple from './AppSimple.vue'
 import i18n from './i18n'
@@ -31,7 +31,7 @@ else
 
 app.use(router)
 app.use(i18n)
-app.use(PerfectScrollbar)
+app.use(PerfectScrollbarPlugin)
 app.directive('focus', vFocus)
 app.directive('tooltip', VTooltip)
 app.mount('#app')

@@ -207,5 +207,9 @@
   },
   "setPassKey": {
     "useCustPass": "使用自訂鎖定鍵盤"
+  },
+  "noteui": {
+    "noData": "無數據",
+    "other": "未分類"
   }
 }
