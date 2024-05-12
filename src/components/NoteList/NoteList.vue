@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { cateItem } from '../ListMenu/ICateItem'
+import LocalStorage from '../../util/localStorage'
 import NoteBox from './NoteBox/NoteBox.vue'
 
 const { t } = useI18n()
 
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
+
+const list = ref(LocalStorage('get'))
+const otherList = ref(list.value!.filter(listData => listData.cate === undefined))
 </script>
 
 <template>
@@ -24,6 +28,7 @@ const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
       :icon="item.icon"
     />
     <NoteBox
+      v-if="otherList.length > 0"
       :title="t('noteui.other')"
       :other-cate="true"
     />

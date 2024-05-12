@@ -25,12 +25,23 @@ const okState = ref(props.isOk)
       {{ title }}
     </div>
     <div
-      flex items-center justify-center rounded-7px
-      bg="error-d/80 active:error-d" transition="all 300"
-      p="x-4px y-6px hover:x-6px"
-      opacity="0 hover:100" w="0 hover:16px" ml="0 hover:10px"
+      flex="~ gap-5px"
+      absolute right--10px overflow-hidden pr-10px
+      w="15px hover:61px" transition="all 300"
+      opacity="0 hover:100"
     >
-      <div i-ph:trash-bold c-white />
+      <div
+        bg="primary-d active:primary-a" transition="all 300"
+        w-16px flex items-center justify-center rounded-7px p-6px
+      >
+        <div i-ph:pencil-bold c-white />
+      </div>
+      <div
+        bg="error-d active:error-a" transition="all 300"
+        w-16px flex items-center justify-center rounded-7px p-6px
+      >
+        <div i-ph:trash-bold c-white />
+      </div>
     </div>
   </div>
 </template>
