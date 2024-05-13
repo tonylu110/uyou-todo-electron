@@ -259,7 +259,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
             @cancel="() => alertShow = false"
             @return="returnClick"
           >
-            <ul>
+            <ul m-0 p-l-20px>
               <li v-for="(item, index) in alertMsg" :key="index">
                 {{ item.slice(2) }}
               </li>

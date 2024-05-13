@@ -74,11 +74,14 @@ function ok() {
   </SettingList>
   <Alert
     :dialog-show="alertShow"
-    :title="t('openPass.plzPass')"
+    :show-title="false"
     @cancel="router.back()"
     @return="ok"
   >
     <div flex="~ col" items-center justify-center>
+      <div mb-20px font-bold>
+        {{ t('openPass.plzPass') }}
+      </div>
       <div :mb="alertMsg ? '15px' : '0px'">
         {{ alertMsg }}
       </div>

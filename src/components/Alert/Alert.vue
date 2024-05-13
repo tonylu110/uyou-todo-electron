@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { usePreferredDark } from '@vueuse/core'
 import ContextMenu from '../ContextMenu/ContextMenu.vue'
 
 const props = withDefaults(defineProps<{
@@ -10,11 +9,13 @@ const props = withDefaults(defineProps<{
   body?: Array<string>
   cancelButtonShow?: boolean
   dialogShow?: boolean
+  showTitle?: boolean
 }>(), {
   title: 'title',
   body: () => ['1', '2'],
   cancelButtonShow: true,
   dialogShow: false,
+  showTitle: true,
 })
 
 const emits = defineEmits<{
@@ -64,10 +65,6 @@ onMounted(() => {
     showContextMenu.value = false
   })
 })
-
-const isDark = usePreferredDark()
-
-const primaryColor = computed(() => isDark.value ? '#4e6fbb' : '#5985eb')
 </script>
 
 <template>
@@ -75,33 +72,38 @@ const primaryColor = computed(() => isDark.value ? '#4e6fbb' : '#5985eb')
     ref="dialog"
     :class="`alert ${dialogShow ? '' : 'hide'}`"
     bg="white dark:#333"
-    border="1px solid #999 dark:black/10"
+    border-none
     @contextmenu="contextmenuClick"
   >
     <div
-      class="title"
       c="#333 dark:#bbb"
     >
-      {{ title }}
-    </div>
-    <div
-      class="body"
-      :style="{ alignItems: title === t('accountPage.alertTitle') ? 'center' : '' }"
-      c="#333 dark:#bbb"
-    >
-      <slot />
-    </div>
-    <div class="buttons" no-drag>
-      <div
-        v-if="cancelButtonShow"
-        class="cancel"
-        c="#333 dark:#bbb"
-        @click="emits('cancel')"
-      >
-        {{ t('alertText.cancelText') }}
+      <div v-if="showTitle" text-6 font-bold m="t-15px l-20px">
+        {{ title }}
       </div>
-      <div class="return" :style="{ width: cancelButtonShow ? '' : '100%' }" @click="emits('return')">
-        {{ t('alertText.returnText') }}
+      <div flex="~ col" min-h-16 justify-center p-20px>
+        <slot />
+      </div>
+      <div flex="~ gap-15px" bg="black/5" p-15px no-drag>
+        <button
+          flex-1 rounded-5px p-y-5px outline-none
+          c="dark:#111 #fff" border="2px solid primary-d dark:primary-a"
+          shadow="sm black/30 active:none"
+          bg="primary-d/90 dark:primary-a/90 active:primary-d active:dark:primary-a"
+          @click="emits('return')"
+        >
+          {{ t('alertText.returnText') }}
+        </button>
+        <button
+          v-if="cancelButtonShow"
+          flex-1 rounded-5px p-y-5px outline-none
+          c="dark:#111 #fff" border="2px solid error-d dark:error-a"
+          shadow="sm black/30 active:none"
+          bg="error-d/90 dark:error-a/90 active:error-d dark:active:error-a"
+          @click="emits('cancel')"
+        >
+          {{ t('alertText.cancelText') }}
+        </button>
       </div>
     </div>
     <ContextMenu v-if="showContextMenu" :pos="contextMenu" :show-paste="false" />
@@ -121,86 +123,5 @@ const primaryColor = computed(() => isDark.value ? '#4e6fbb' : '#5985eb')
   transition: dialog;
   user-select: none;
   outline: none;
-
-  .title {
-    -webkit-app-region: drag;
-    border-bottom: 1.5px solid #00000015;
-    padding: 12px;
-    display: flex;
-    background: #00000008;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-  }
-
-  .body {
-    padding: 18px;
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1.5px solid #00000015;
-    min-height: 3em;
-    justify-content: center;
-
-    &:deep(ul) {
-      margin: 0;
-
-      li {
-        margin-left: -18px;
-        user-select: text;
-      }
-    }
-
-    &:deep(span) {
-      display: block;
-      white-space: pre-wrap;
-      user-select: text;
-      text-align: center;
-    }
-  }
-
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 50px;
-    background: #00000010;
-
-    div {
-      width: 50%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-
-      &.cancel {
-        border-right: 2px solid #00000010;
-
-        &:active {
-          background-color: #00000010 !important;
-        }
-
-        &:hover {
-          background-color: #00000005;
-        }
-      }
-
-      &.return {
-        color: v-bind(primaryColor);
-
-        &:active {
-          background-color: v-bind(primaryColor) !important;
-          color: white;
-        }
-
-        &:hover {
-          background-color: #00000005;
-        }
-      }
-    }
-  }
 }
 </style>

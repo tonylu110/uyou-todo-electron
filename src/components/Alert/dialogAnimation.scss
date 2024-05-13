@@ -19,11 +19,9 @@
 @keyframes showDialogBackdrop {
   from {
     background: rgba(0, 0, 0, 0);
-    backdrop-filter: blur(0px);
   }
   to {
     background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
   }
 }
 
