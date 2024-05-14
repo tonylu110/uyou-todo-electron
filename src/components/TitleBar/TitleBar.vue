@@ -102,7 +102,7 @@ watchEffect(() => {
 
       absolute right-12px mt-5px h-13px w-13px flex cursor-pointer items-center justify-center rounded-5px rounded-full p-6px no-drag
       class="group"
-      @click="closeWindow"
+      @click="closeWindow()"
     >
       <div i-mdi:close-thick text-13px c="#555 group-hover:white" />
     </div>

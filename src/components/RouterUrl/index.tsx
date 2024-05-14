@@ -61,10 +61,12 @@ const RouterUrl: SetupFC = () => {
       ref={body}
     >
       <div>
-        {route.fullPath}
-        {' '}
-        -
-        {' '}
+        <span>
+          {route.fullPath}
+          {' '}
+          -
+          {' '}
+        </span>
         <span c-primary-d>
           [name:
           {route.name}

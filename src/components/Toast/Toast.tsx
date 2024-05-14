@@ -1,5 +1,10 @@
 import { usePreferredDark } from '@vueuse/core'
 
+export interface IProps {
+  msg: string
+  center: boolean
+}
+
 const Toast: SetupFC = () => {
   const props = withDefaults(defineProps<{
     msg: string
