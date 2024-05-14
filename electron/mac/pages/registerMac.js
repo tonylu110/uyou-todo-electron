@@ -1,6 +1,7 @@
 const path = require('node:path')
 const { BrowserWindow } = require('electron')
 
+// eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
 
 let registerWindow

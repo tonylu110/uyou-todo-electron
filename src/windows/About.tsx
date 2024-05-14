@@ -16,7 +16,7 @@ const About: SetupFC = () => {
       <img
         w-130px
         h-130px
-        mb-30px
+        m="b-30px t-20px"
         src="./logo.png"
         alt=""
       />
@@ -35,6 +35,23 @@ const About: SetupFC = () => {
         {new Date().getFullYear()}
         , Anthony Lu
       </span>
+      <div
+        flex
+        justify-center
+        items-center
+        mt-35px
+        text-12px
+        c="#555/50 dark:#bbb/50"
+        font-bold
+      >
+        Power By
+        <div p-5px bg="#2c2e3a" rounded-full mx-7px>
+          <div i-logos:electron text-3 block></div>
+        </div>
+        Electron v
+        {/* eslint-disable-next-line node/prefer-global/process */}
+        {process.versions.electron}
+      </div>
       {!isMac() ? <CloseButton /> : null}
     </div>
   )

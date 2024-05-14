@@ -1,7 +1,9 @@
+// eslint-disable-next-line unused-imports/no-unused-vars
 const { shell, ipcMain, app } = require('electron')
 const i18n = require('./i18n')
 const createAboutWindow = require('./pages/about')
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 module.exports = function (app, mainWindow, height) {
   return [
     {

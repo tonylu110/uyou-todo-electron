@@ -209,21 +209,18 @@ const WindowButtons: SetupFC = () => {
         >
           <ElRadioGroup
             class="flex flex-col !items-start"
-            modelValue={closeState.value}
-            onUpdate:modelValue={(val: any) => closeState.value = val}
+            v-model={closeState.value}
           >
-            <ElRadio label={false}>{t('quit.tray')}</ElRadio>
-            <ElRadio label={true}>{t('quit.quit')}</ElRadio>
+            <ElRadio value={false}>{t('quit.tray')}</ElRadio>
+            <ElRadio value={true}>{t('quit.quit')}</ElRadio>
           </ElRadioGroup>
           <ElCheckbox
             label={t('quit.remember')}
-            modelValue={remember.value}
-            onUpdate:modelValue={(val: any) => remember.value = val}
+            v-model={remember.value}
           />
           <ElCheckbox
             label={t('quit.closeMsgBox')}
-            modelValue={closeMsgBox.value}
-            onUpdate:modelValue={(val: any) => closeMsgBox.value = val}
+            v-model={closeMsgBox.value}
           />
         </div>
       </Alert>

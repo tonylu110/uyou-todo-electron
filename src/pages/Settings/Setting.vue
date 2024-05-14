@@ -229,10 +229,10 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
           v-model="closeState"
           flex="~ row"
         >
-          <ElRadio :label="false">
+          <ElRadio :value="false">
             {{ t('quit.tray') }}
           </ElRadio>
-          <ElRadio :label="true">
+          <ElRadio :value="true">
             {{ t('quit.quit') }}
           </ElRadio>
         </ElRadioGroup>

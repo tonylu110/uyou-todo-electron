@@ -21,7 +21,11 @@ const useFontSize = require('./useFontSize.js')
 
 const store = new Store()
 
+// eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
+
+// eslint-disable-next-line node/prefer-global/process
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 
 remoteMain.initialize()
 Store.initRenderer()
@@ -126,6 +130,7 @@ function createWindow() {
   windowMenuIpc(appMenu)
   simpleIpc()
 
+  // eslint-disable-next-line unused-imports/no-unused-vars
   let aboutId, regId, rePassId
 
   ipcMain.on('open-about', () => {
@@ -314,6 +319,7 @@ app.whenReady().then(() => {
 })
 
 app.on('window-all-closed', () => {
+  // eslint-disable-next-line node/prefer-global/process
   if (process.platform !== 'darwin')
     app.quit()
 })

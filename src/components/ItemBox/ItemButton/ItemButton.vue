@@ -3,7 +3,7 @@ import { usePreferredDark } from '@vueuse/core'
 import { computed, ref } from 'vue'
 
 withDefaults(defineProps<{
-  mode: string
+  mode?: string
 }>(), {
   mode: '',
 })

@@ -3,6 +3,7 @@ const { MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
 const { micaStyle, menuBlur } = require('../store/menuBlurStore')
 const setMicaStyle = require('./util/setMicaStyle')
 
+// eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
 
 let repassWindow

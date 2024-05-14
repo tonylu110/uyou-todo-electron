@@ -19,7 +19,11 @@ const menuTemplate = require('./menu.js')
 
 const store = new Store()
 
+// eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
+
+// eslint-disable-next-line node/prefer-global/process
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 
 remoteMain.initialize()
 
@@ -256,6 +260,7 @@ function createWindow() {
 let tray
 
 app.whenReady().then(() => {
+  // eslint-disable-next-line node/prefer-global/process
   if (process.platform === 'win32')
     app.setAppUserModelId('uyou ToDo')
 
@@ -280,6 +285,7 @@ app.whenReady().then(() => {
 
   Menu.setApplicationMenu(null)
 
+  // eslint-disable-next-line node/prefer-global/process
   if (process.platform === 'darwin' || windowMenu)
     Menu.setApplicationMenu(appMenu)
 
@@ -290,6 +296,7 @@ app.whenReady().then(() => {
 })
 
 app.on('window-all-closed', () => {
+  // eslint-disable-next-line node/prefer-global/process
   if (process.platform !== 'darwin')
     app.quit()
 })
