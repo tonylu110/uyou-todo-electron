@@ -235,7 +235,7 @@ function createWindow() {
 
   ipcMain.on('initFont', (ev, useFont, fontSize) => {
     if (useFont) {
-      mainWindow.webContents.insertCSS(useFontSize(fontSize))
+      mainWindow.webContents.insertCSS(useFontSize(fontSize, true))
 
       fs.readFile(path.join(__dirname, 'selectedFont.css'), 'utf-8', (err, data) => {
         if (err)

@@ -1,6 +1,6 @@
-let fontSize
+let fontSize = ''
 
-function useFontSize(size) {
+function useFontSize(size, init) {
   const stringSize = `${size}`
 
   if (stringSize === '0') {
@@ -25,11 +25,13 @@ function useFontSize(size) {
     `
   }
   else {
-    fontSize = `
-      * {
-        font-size: 1rem;
-      }
-    `
+    if (!init) {
+      fontSize = `
+        * {
+          font-size: 1rem;
+        }
+      `
+    }
   }
   return fontSize
 }
