@@ -111,6 +111,8 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-expect-error
   routes,
 })
 

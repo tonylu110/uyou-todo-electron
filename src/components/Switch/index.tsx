@@ -31,7 +31,7 @@ const Switch: SetupFC = () => {
         ml=".575em"
       >
         <div
-          translate={props.swichState ? '' : 'x-[-1.75em]'}
+          transform={props.swichState ? '' : 'translate-x-[-1.75em]'}
           w-8px
           h-8px
           rounded-5px
@@ -41,7 +41,7 @@ const Switch: SetupFC = () => {
         >
         </div>
         <div
-          translate={props.swichState ? '' : 'x-[-1.85em]'}
+          transform={props.swichState ? '' : 'translate-x-[-1.85em]'}
           w="1.6em"
           h="1.6em"
           rounded-1em
@@ -52,7 +52,7 @@ const Switch: SetupFC = () => {
         >
         </div>
         <div
-          translate={props.swichState ? '' : 'x-[-1.78em]'}
+          transform={props.swichState ? '' : 'translate-x-[-1.78em]'}
           w-8px
           h-8px
           rounded-5px

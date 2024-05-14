@@ -48,7 +48,7 @@ const RouterUrl: SetupFC = () => {
       fixed
       top="50px"
       left="50%"
-      translate="x-[-50%]"
+      transform="translate-x--50%"
       z-1000
       bg-white
       p-x-20px

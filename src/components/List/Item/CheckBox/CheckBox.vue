@@ -14,7 +14,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 <template>
   <div
     pointer-events-auto absolute
-    top="50%" left-13px translate="y--50%"
+    top="50%" left-13px transform="translate-y--50%"
   >
     <input :id="`checkbox${num}`" v-model="model" type="checkbox" hidden>
     <label :for="`checkbox${num}`">

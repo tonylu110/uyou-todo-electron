@@ -277,7 +277,7 @@ const isDark = usePreferredDark()
       <div
         v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo' && list.filter(listData => listData.ok === true).length > 0"
         bg="#eee/80 dark:#222/50 hover:#eee/90 dark:hover:#222/60 active:#eee dark:active:#222/70"
-        :translate="simpleMode ? 'x-[calc(-50vw+50%+10px)]' : (menuShort ? 'x-[calc(((-100vw+58px)/2)+50%+10px)]' : 'x-[calc(((-100vw+300px)/2)+50%+10px)]')"
+        :transform="simpleMode ? 'translate-x-[calc(-50vw+50%+10px)]' : (menuShort ? 'translate-x-[calc(((-100vw+58px)/2)+50%+10px)]' : 'translate-x-[calc(((-100vw+300px)/2)+50%+10px)]')"
         c="#555 dark:#bbb"
         mb-10px flex cursor-pointer items-center whitespace-nowrap rounded-5px p-x-10px p-y-5px font-bold
         shadow="sm black/30"
@@ -319,7 +319,7 @@ const isDark = usePreferredDark()
     </template>
     <div
       v-if="list.length === 0"
-      i-mdi:list-box-outline top="50%" translate="y-[calc(-50%-20px)]"
+      i-mdi:list-box-outline top="50%" transform="translate-y-[calc(-50%-20px)]"
       absolute text-150px
       c="black/10"
     />

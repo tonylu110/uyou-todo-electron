@@ -2,7 +2,7 @@ import { usePreferredDark } from '@vueuse/core'
 
 export interface IProps {
   msg: string
-  center: boolean
+  center?: boolean
 }
 
 const Toast: SetupFC = () => {
@@ -31,7 +31,7 @@ const Toast: SetupFC = () => {
       animate-ease
       top={props.center ? '50%' : ''}
       left={props.center ? '50%' : (simpleMode ? '50%' : '[calc(50%+150px)]')}
-      translate={props.center ? '[-50%]' : 'x-[-50%]'}
+      transform={props.center ? 'translate--50%' : 'translate-x--50%'}
       position={props.center ? 'absolute' : 'fixed'}
       class={props.center ? '' : 'animate-toastShow'}
       z-999999999

@@ -1,6 +1,6 @@
 import { ref, renderSlot, useSlots } from 'vue'
 
-const ItemSpace: SetupFC = () => {
+const ItemSpace: SetupFC<{ flex?: string }> = () => {
   defineSlots<{
     default: () => any
   }>()

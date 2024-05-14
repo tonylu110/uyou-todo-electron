@@ -61,8 +61,8 @@ const customContextMenu = [{
   color: '#d6010f',
 }]
 
-function paste(pasteText: string) {
-  text.value = pasteText
+function paste(pasteText: string | undefined) {
+  text.value = pasteText ? pasteText! : ''
 }
 
 function keyEnter() {

@@ -290,7 +290,7 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
         <div
           v-if="showEdit"
           pointer-events-auto absolute flex="~ col"
-          right-8px bottom="50%" translate="y-50%"
+          right-8px bottom="50%" transform="translate-y--50%"
         >
           <div
             p="y-7px x-16px"
