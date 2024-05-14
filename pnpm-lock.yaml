@@ -10,13 +10,13 @@ importers:
     dependencies:
       '@electron/remote':
         specifier: ^2.0.10
-        version: 2.0.10(electron@26.4.3)
+        version: 2.0.10(electron@28.3.1)
       electron-store:
         specifier: ^8.1.0
         version: 8.1.0
       mica-electron:
-        specifier: ^1.5.3
-        version: 1.5.3
+        specifier: ^1.5.9
+        version: 1.5.9
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^2.13.2
@@ -64,8 +64,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       electron:
-        specifier: ^26.4.3
-        version: 26.4.3
+        specifier: ^28.3.1
+        version: 28.3.1
       electron-builder:
         specifier: ^24.13.3
         version: 24.13.3(electron-builder-squirrel-windows@24.13.3(dmg-builder@24.13.3))
@@ -1935,8 +1935,8 @@ packages:
   electron-to-chromium@1.4.731:
     resolution: {integrity: sha512-+TqVfZjpRz2V/5SPpmJxq9qK620SC5SqCnxQIOi7i/U08ZDcTpKbT7Xjj9FU5CbXTMUb4fywbIr8C7cGv4hcjw==}
 
-  electron@26.4.3:
-    resolution: {integrity: sha512-2U+hYgGQck+/b8+B48JMTcE6UWYDC4BBrLNigmjkpOsPUdVuVJXafXHUN6QKxDxZhbwoc5pbk/xpTFOBP1UCOA==}
+  electron@28.3.1:
+    resolution: {integrity: sha512-aF9fONuhVDJlctJS7YOw76ynxVAQdfIWmlhRMKits24tDcdSL0eMHUS0wWYiRfGWbQnUKB6V49Rf17o32f4/fg==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -2793,8 +2793,8 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  mica-electron@1.5.3:
-    resolution: {integrity: sha512-ewjW5jvdAzxFeJVlxJBc9DEPQzKw/gsM8xmXi5x0GOpVSPUsb34tlv8PXOU+SUNOGzkjQ8QOXFmChk4+5X7yuA==}
+  mica-electron@1.5.9:
+    resolution: {integrity: sha512-Pur4sB8d9RXQv2kGZZdrdKerfFze0O3Tgo8mQvpRMQapOexLEHOT+BzrXFZPhiGsfBFqB4qTOtQsf+1M7iHbxw==}
 
   micromark@2.11.4:
     resolution: {integrity: sha512-+WoovN/ppKolQOFIAajxi7Lu9kInbPxFuTBVEavFcL8eAfVstoc5MocPmqBeAdBOJV00uaVjegzH4+MA0DN/uA==}
@@ -4290,9 +4290,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/remote@2.0.10(electron@26.4.3)':
+  '@electron/remote@2.0.10(electron@28.3.1)':
     dependencies:
-      electron: 26.4.3
+      electron: 28.3.1
 
   '@electron/universal@1.5.1':
     dependencies:
@@ -6101,7 +6101,7 @@ snapshots:
 
   electron-to-chromium@1.4.731: {}
 
-  electron@26.4.3:
+  electron@28.3.1:
     dependencies:
       '@electron/get': 2.0.2
       '@types/node': 18.16.0
@@ -7067,7 +7067,7 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  mica-electron@1.5.3: {}
+  mica-electron@1.5.9: {}
 
   micromark@2.11.4:
     dependencies:
