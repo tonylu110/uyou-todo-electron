@@ -156,8 +156,7 @@ watchEffect(() => {
         <div
           v-if="simpleMode && (route.name === 'Home' || route.name === 'other')"
           w="[calc(100%+20px)]"
-
-          absolute top-0 flex cursor-pointer items-center text-20px font-bold c-transparent no-drag
+          absolute top-0 flex cursor-pointer items-center text-20px c-transparent font-bold no-drag
           @click="showListFn"
         >
           {{ title }}

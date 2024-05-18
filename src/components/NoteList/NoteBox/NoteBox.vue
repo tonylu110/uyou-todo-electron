@@ -62,10 +62,10 @@ const isOpen = ref(false)
               <span text-14px>{{ t('listMenu.delCate', { title }) }}</span>
               <div mt-10px flex items-center justify-center>
                 <button
-                  bg="white active:#ddd"
+                  bg="white active:#ddd dark:#555 active:dark:#444"
                   p="x-10px y-5px"
                   mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
-                  shadow="sm black/20" c="#555"
+                  shadow="sm black/20" c="#555 dark:#ddd"
                   @click.stop="isOpen = false"
                 >
                   <div i-mdi:close-thick mr-5px />

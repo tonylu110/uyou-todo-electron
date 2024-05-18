@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import Icons from '../../ListMenu/MenuItem/Icons'
 import Alert from '../../Alert/Alert.vue'
 import emitter from '../../../util/bus'
+import Colors from './Colors/Color.vue'
 
 defineProps<{
   open: boolean
@@ -16,18 +17,30 @@ const emit = defineEmits<{
 const { t } = useI18n()
 
 const cateName = ref('')
-
 const icon = ref('i-ph:radio-button-bold')
+const color = ref('null')
 
 function addCate() {
-  emitter.emit('addCateNote', { name: cateName.value, icon: icon.value, color: 'primary-d' })
+  emitter.emit('addCateNote', {
+    name: cateName.value,
+    icon: icon.value,
+    color: color.value,
+  })
+  emit('close')
   cateName.value = ''
   icon.value = 'i-ph:radio-button-bold'
-  emit('close')
+  color.value = 'null'
 }
 
 const isVip = ref(localStorage.getItem('isVip') === 'true')
 const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
+
+function close() {
+  emit('close')
+  cateName.value = ''
+  icon.value = 'i-ph:radio-button-bold'
+  color.value = 'null'
+}
 </script>
 
 <template>
@@ -37,7 +50,7 @@ const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
     :dialog-show="open"
     :confirm-btn-name="t('noteui.addCate')"
     :cancel-btn-name="t('noteui.cancelAdd')"
-    @cancel="emit('close')"
+    @cancel="close"
     @return="addCate"
   >
     <div
@@ -60,6 +73,7 @@ const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
         >
         <template v-if="isVip && useCustColor">
           <span m="l-7px b-5px t-5px" font-bold>Choose category color</span>
+          <Colors :color="color" @set-color="(selectColor: string) => color = selectColor" />
         </template>
       </div>
     </div>
