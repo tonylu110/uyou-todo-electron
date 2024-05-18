@@ -5,6 +5,8 @@ import type { cateItem } from '../ListMenu/ICateItem'
 import LocalStorage from '../../util/localStorage'
 import emitter from '../../util/bus'
 import changeCate from '../ListMenu/changCate'
+import saveItemSet from '../List/saveItemSet'
+import type ITodoList from '../../interface/ITodoListArray'
 import NoteBox from './NoteBox/NoteBox.vue'
 
 interface addCate {
@@ -42,6 +44,36 @@ emitter.on('addCateNote', (date) => {
     })
   }
 })
+
+function delCate(id: number) {
+  for (let i = 0; i < cateList.length; i++) {
+    if (cateList[i].id === id)
+      cateList.splice(i, 1)
+  }
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList,
+  }))
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList,
+      },
+    })
+  }
+}
+
+function delWithToDo(id: number) {
+  const listAll = ref<ITodoList[]>(LocalStorage('get')!)
+
+  const resultArr = listAll.value.filter((value) => {
+    return value.cate !== `${id}`
+  })
+
+  saveItemSet(resultArr)
+
+  delCate(id)
+}
 </script>
 
 <template>
@@ -56,6 +88,8 @@ emitter.on('addCateNote', (date) => {
       :title="item.title"
       :color="item.color"
       :icon="item.icon"
+      @delete-cate="delCate"
+      @del-with-to-do="delWithToDo"
     />
     <NoteBox
       v-if="otherList.length > 0"

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Dropdown as VDropdown } from 'floating-vue'
+import { useI18n } from 'vue-i18n'
 import LocalStorage from '../../../util/localStorage'
 import Item from './Item/Item.vue'
 
@@ -15,12 +17,17 @@ const props = withDefaults(defineProps<{
 })
 
 const emits = defineEmits<{
-  deleteCate: []
+  deleteCate: [id: number]
+  delWithToDo: [id: number]
 }>()
+
+const { t } = useI18n()
 
 const list = ref(LocalStorage('get'))
 const listData = ref(list.value!.filter(listData => listData.cate === `${props.id}`))
 const otherList = ref(list.value!.filter(listData => listData.cate === undefined))
+
+const isOpen = ref(false)
 </script>
 
 <template>
@@ -42,9 +49,57 @@ const otherList = ref(list.value!.filter(listData => listData.cate === undefined
         <div>
           <div i-ph:pencil-bold block />
         </div>
-        <div @click="emits('deleteCate')">
-          <div i-ph:trash-bold block />
-        </div>
+        <VDropdown
+          v-model:shown="isOpen"
+          :distance="12"
+          placement="top"
+        >
+          <div @click="isOpen = true">
+            <div i-ph:trash-bold block />
+          </div>
+          <template #popper>
+            <div flex="~ col" items-center p-10px>
+              <span text-14px>{{ t('listMenu.delCate', { title }) }}</span>
+              <div mt-10px flex items-center justify-center>
+                <button
+                  bg="white active:#ddd"
+                  p="x-10px y-5px"
+                  mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
+                  shadow="sm black/20" c="#555"
+                  @click.stop="isOpen = false"
+                >
+                  <div i-mdi:close-thick mr-5px />
+                  <span>{{ t('cancelText') }}</span>
+                </button>
+                <button
+                  bg="!primary-d active:!primary-a"
+                  p="x-10px y-5px" c="!white"
+                  shadow="sm black/20" mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
+                  @click.stop="() => {
+                    isOpen = false
+                    emits('deleteCate', id!)
+                  }"
+                >
+                  <div i-mdi:check-bold mr-5px />
+                  <span>{{ t('alertText.returnText') }}</span>
+                </button>
+                <button
+                  bg="!error-d active:!error-a"
+                  p="x-10px y-5px" c="!white"
+                  flex cursor-pointer items-center justify-center rounded-5px border-none
+                  shadow="sm black/20"
+                  @click.stop="() => {
+                    emits('delWithToDo', id!)
+                    isOpen = false
+                  }"
+                >
+                  <div i-ph:warning-circle-bold mr-5px />
+                  <span>{{ t('listMenu.delTodo') }}</span>
+                </button>
+              </div>
+            </div>
+          </template>
+        </VDropdown>
       </div>
     </div>
     <div p="10px t-20px">
