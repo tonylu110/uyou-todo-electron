@@ -210,6 +210,8 @@
   },
   "noteui": {
     "noData": "無數據",
-    "other": "未分類"
+    "other": "未分類",
+    "addCate": "新增類別",
+    "cancelAdd": "取消新增"
   }
 }

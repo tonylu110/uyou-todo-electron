@@ -210,6 +210,8 @@
   },
   "noteui": {
     "noData": "no data",
-    "other": "uncategorized"
+    "other": "uncategorized",
+    "addCate": "Add Category",
+    "cancelAdd": "Cancel Add"
   }
 }

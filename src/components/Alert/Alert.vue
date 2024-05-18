@@ -10,6 +10,9 @@ const props = withDefaults(defineProps<{
   cancelButtonShow?: boolean
   dialogShow?: boolean
   showTitle?: boolean
+  confirmBtnName?: string
+  cancelBtnName?: string
+  bodyPadding?: string
 }>(), {
   title: 'title',
   body: () => ['1', '2'],
@@ -81,28 +84,28 @@ onMounted(() => {
       <div v-if="showTitle" text-6 font-bold m="t-15px l-20px">
         {{ title }}
       </div>
-      <div flex="~ col" min-h-16 justify-center p-20px>
+      <div flex="~ col" min-h-16 justify-center :p="bodyPadding ? bodyPadding : '20px'">
         <slot />
       </div>
       <div flex="~ gap-15px" bg="black/5" p-15px no-drag>
         <button
-          flex-1 rounded-5px p-y-5px outline-none
+          flex-1 rounded-5px p-y-5px outline-none no-drag
           c="dark:#111 #fff" border="2px solid primary-d dark:primary-a"
           shadow="sm black/30 active:none"
           bg="primary-d/90 dark:primary-a/90 active:primary-d active:dark:primary-a"
           @click="emits('return')"
         >
-          {{ t('alertText.returnText') }}
+          {{ confirmBtnName ? confirmBtnName : t('alertText.returnText') }}
         </button>
         <button
           v-if="cancelButtonShow"
-          flex-1 rounded-5px p-y-5px outline-none
+          flex-1 rounded-5px p-y-5px outline-none no-drag
           c="dark:#111 #fff" border="2px solid error-d dark:error-a"
           shadow="sm black/30 active:none"
           bg="error-d/90 dark:error-a/90 active:error-d dark:active:error-a"
           @click="emits('cancel')"
         >
-          {{ t('alertText.cancelText') }}
+          {{ cancelBtnName ? cancelBtnName : t('alertText.cancelText') }}
         </button>
       </div>
     </div>

@@ -42,7 +42,7 @@ const showIcons = ref(false)
 
 <template>
   <div
-    class="all-todo-list group"
+    class="group all-todo-list"
     :bg="route.query.listName === `${id}` ? 'primary-d hover:primary-a dark:primary-a' : 'hover:primary-d dark:hover:primary-a'"
     @click="toList(`${id}`)"
   >

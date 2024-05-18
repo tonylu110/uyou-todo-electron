@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import Icons from '../../ListMenu/MenuItem/Icons'
+import Alert from '../../Alert/Alert.vue'
 
-const props = defineProps<{
+defineProps<{
   open: boolean
 }>()
 
@@ -10,30 +12,7 @@ const emit = defineEmits<{
   close: []
 }>()
 
-const dialog = ref<HTMLDialogElement>()
-
-function openDialog(open: boolean) {
-  const closeAlert = () => {
-    dialog.value!.close()
-  }
-
-  if (open) {
-    // dialog.value!.removeEventListener('animationend', closeAlert)
-    dialog.value!.showModal()
-  }
-  else {
-    // dialog.value!.addEventListener('animationend', closeAlert)
-    closeAlert()
-  }
-}
-
-onMounted(() => {
-  openDialog(props.open)
-
-  watch(props, (newValue) => {
-    openDialog(newValue.open)
-  })
-})
+const { t } = useI18n()
 
 const cateName = defineModel<string>()
 
@@ -42,10 +21,13 @@ const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
 </script>
 
 <template>
-  <dialog
-    ref="dialog"
-    :class="`dialog ${open ? '' : 'hide'}`"
-    rounded-10px border-none p-0 outline-none shadow-item
+  <Alert
+    body-padding="0"
+    :show-title="false"
+    :dialog-show="open"
+    :confirm-btn-name="t('noteui.addCate')"
+    :cancel-btn-name="t('noteui.cancelAdd')"
+    @cancel="emit('close')"
   >
     <div
       flex="~ col"
@@ -65,26 +47,8 @@ const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
           <span m="l-7px b-5px t-5px" font-bold>Choose category color</span>
         </template>
       </div>
-      <div w-full flex>
-        <button
-          bg="primary-d/70 active:primary-d/90"
-          h-50px flex-1 select-none rounded-bl-10px
-          border-none c-white outline-none no-drag
-          @click="emit('close')"
-        >
-          Confirm
-        </button>
-        <button
-          bg="error-d/70 active:error-d/90"
-          h-50px flex-1 select-none rounded-br-10px
-          border-none c-white outline-none no-drag
-          @click="emit('close')"
-        >
-          close
-        </button>
-      </div>
     </div>
-  </dialog>
+  </Alert>
 </template>
 
 <style lang="scss" scoped>
