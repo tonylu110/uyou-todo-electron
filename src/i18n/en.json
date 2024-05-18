@@ -212,6 +212,9 @@
     "noData": "no data",
     "other": "uncategorized",
     "addCate": "Add Category",
-    "cancelAdd": "Cancel Add"
+    "cancelAdd": "Cancel Add",
+    "chooseIcon": "Select category icon",
+    "cateName": "Category name",
+    "chooseColor": "Select category color"
   }
 }

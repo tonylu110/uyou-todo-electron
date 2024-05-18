@@ -58,21 +58,21 @@ function close() {
       w-300px items-center justify-between no-drag
     >
       <div flex="~ 1 col" w="[calc(100%-20px)]" p="x-10px y-17px">
-        <span m="l-7px b-5px" font-bold>Choose category icon</span>
+        <span m="l-7px b-5px" font-bold>{{ t('noteui.chooseIcon') }}</span>
         <Icons
           max-w="![calc(100%-20px)]"
           :icon="icon"
           @set-icon="(newIcon) => icon = newIcon"
         />
-        <span m="l-7px b-5px t-5px" font-bold>Category name</span>
+        <span m="l-7px b-5px t-5px" font-bold>{{ t('noteui.cateName') }}</span>
         <input
           v-model="cateName"
-          type="text" w="[calc(100%-30px)]" m="l-7px t-5px"
+          type="text" w="[calc(100%-25px)]" m="l-7px t-5px"
           rounded-7px border-none p-5px outline-primary-d
           bg="black/5"
         >
         <template v-if="isVip && useCustColor">
-          <span m="l-7px b-5px t-5px" font-bold>Choose category color</span>
+          <span m="l-7px b-7px t-7px" font-bold>{{ t('noteui.chooseColor') }}</span>
           <Colors :color="color" @set-color="(selectColor: string) => color = selectColor" />
         </template>
       </div>
@@ -83,18 +83,18 @@ function close() {
 <style lang="scss" scoped>
 @keyframes show {
   from {
-    transform: translateY(100%);
+    transform: translate(100%, 100%) scale(0, 0);
     opacity: 0;
   }
   to {
-    transform: translateY(0);
+    transform: translate(0) scale(1, 1);
     opacity: 1;
   }
 }
 
 @keyframes hide {
   to {
-    transform: translateY(100%);
+    transform: translate(100%, 100%) scale(0, 0);
     opacity: 0;
   }
 }
@@ -116,6 +116,8 @@ function close() {
 }
 
 dialog {
+  transform-origin: bottom right;
+
   &[open] {
     animation: show 0.3s ease normal;
 

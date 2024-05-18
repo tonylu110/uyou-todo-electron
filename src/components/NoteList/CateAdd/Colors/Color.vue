@@ -11,7 +11,7 @@ function showCheck(checkColor: string) {
   return checkColor === props.color
 }
 
-const list = ['null', '#f04490', '#f96a02', '#eb7760', '#d9c003', '#feb9be', '#02aa33', '#a3bc3c', '#3f607f', 'af7c5d']
+const list = ['null', '#f04490', '#f96a02', '#eb7760', '#d9c003', '#feb9be', '#02aa33', '#a3bc3c', '#3f607f', '#af7c5d']
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const list = ['null', '#f04490', '#f96a02', '#eb7760', '#d9c003', '#feb9be', '#0
       v-for="item, index in list"
       :key="index"
       :bg="item !== 'null' ? item : 'primary-d'"
-      h-26px w-50px flex items-center justify-center rounded-13px
+      h-26px w-49px flex items-center justify-center rounded-13px
       @click="emits('setColor', item)"
     >
       <div v-if="showCheck(item)" i-mdi:check-bold c-white />

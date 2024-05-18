@@ -212,6 +212,9 @@
     "noData": "無數據",
     "other": "未分類",
     "addCate": "新增類別",
-    "cancelAdd": "取消新增"
+    "cancelAdd": "取消新增",
+    "chooseIcon": "選擇類別圖標",
+    "cateName": "類別名稱",
+    "chooseColor": "選擇類別顏色"
   }
 }
