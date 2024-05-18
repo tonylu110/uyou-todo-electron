@@ -3,7 +3,15 @@ import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { cateItem } from '../ListMenu/ICateItem'
 import LocalStorage from '../../util/localStorage'
+import emitter from '../../util/bus'
+import changeCate from '../ListMenu/changCate'
 import NoteBox from './NoteBox/NoteBox.vue'
+
+interface addCate {
+  name: string
+  icon: string
+  color?: string
+}
 
 const { t } = useI18n()
 
@@ -12,6 +20,28 @@ const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
 
 const list = ref(LocalStorage('get'))
 const otherList = ref(list.value!.filter(listData => listData.cate === undefined))
+
+emitter.on('addCateNote', (date) => {
+  const cate = date as addCate
+
+  cateList.push({
+    id: new Date().getTime(),
+    title: cate.name,
+    icon: cate.icon,
+    color: cate.color ? cate.color : 'primary-d',
+  })
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList,
+  }))
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList,
+      },
+    })
+  }
+})
 </script>
 
 <template>

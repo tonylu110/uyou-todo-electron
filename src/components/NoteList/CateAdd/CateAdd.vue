@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Icons from '../../ListMenu/MenuItem/Icons'
 import Alert from '../../Alert/Alert.vue'
+import emitter from '../../../util/bus'
 
 defineProps<{
   open: boolean
@@ -14,7 +15,16 @@ const emit = defineEmits<{
 
 const { t } = useI18n()
 
-const cateName = defineModel<string>()
+const cateName = ref('')
+
+const icon = ref('i-ph:radio-button-bold')
+
+function addCate() {
+  emitter.emit('addCateNote', { name: cateName.value, icon: icon.value, color: 'primary-d' })
+  cateName.value = ''
+  icon.value = 'i-ph:radio-button-bold'
+  emit('close')
+}
 
 const isVip = ref(localStorage.getItem('isVip') === 'true')
 const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
@@ -28,6 +38,7 @@ const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
     :confirm-btn-name="t('noteui.addCate')"
     :cancel-btn-name="t('noteui.cancelAdd')"
     @cancel="emit('close')"
+    @return="addCate"
   >
     <div
       flex="~ col"
@@ -35,7 +46,11 @@ const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
     >
       <div flex="~ 1 col" w="[calc(100%-20px)]" p="x-10px y-17px">
         <span m="l-7px b-5px" font-bold>Choose category icon</span>
-        <Icons max-w="![calc(100%-20px)]" />
+        <Icons
+          max-w="![calc(100%-20px)]"
+          :icon="icon"
+          @set-icon="(newIcon) => icon = newIcon"
+        />
         <span m="l-7px b-5px t-5px" font-bold>Category name</span>
         <input
           v-model="cateName"
