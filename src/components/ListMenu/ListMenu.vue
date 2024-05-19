@@ -220,8 +220,8 @@ const showSearch = ref(false)
     :style="{ backgroundColor: listMenuColor, height: titleBarShow ? '100vh' : '' }"
   >
     <div
-      v-if="route.name === 'Home' || route.name === 'other'" absolute right-10px top--26px rounded-7px p-10px
-      no-drag
+      v-if="(route.name === 'Home' || route.name === 'other') && !menuShort"
+      absolute right-10px top--26px rounded-7px p-10px no-drag
       bg="#333/20 dark:#bbb/20 active:#333/50 active:dark:#bbb/50"
       @click="showSearch = true"
     >
