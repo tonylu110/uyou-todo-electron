@@ -75,7 +75,7 @@ onMounted(() => {
     ref="dialog"
     :class="`alert ${dialogShow ? '' : 'hide'}`"
     bg="white dark:#333"
-    border-none
+    border-none no-drag
     @contextmenu="contextmenuClick"
   >
     <div

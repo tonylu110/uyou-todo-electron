@@ -10,6 +10,7 @@ import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
 import LocalStorage from '../../util/localStorage'
 import type ITodoList from '../../interface/ITodoListArray'
 import saveItemSet from '../List/saveItemSet'
+import Search from '../Search/Search.vue'
 import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
 import MenuItem from './MenuItem/MenuItem.vue'
@@ -208,6 +209,8 @@ function delWithToDo(id: number) {
 const count = computed(() => Object.values(showList.value).filter(obj => !obj.show).length)
 
 const showIcons = ref(false)
+
+const showSearch = ref(false)
 </script>
 
 <template>
@@ -216,6 +219,13 @@ const showIcons = ref(false)
     :w="menuShort ? '58px' : '300px'"
     :style="{ backgroundColor: listMenuColor, height: titleBarShow ? '100vh' : '' }"
   >
+    <div
+      absolute right-10px top--26px rounded-7px p-10px no-drag
+      bg="#333/20 dark:#bbb/20 active:#333/50 active:dark:#bbb/50"
+      @click="showSearch = true"
+    >
+      <div i-ph:magnifying-glass-bold block />
+    </div>
     <div
       m="l-13px t-8px"
       bg="hover:black/10 active:black/20"
@@ -452,6 +462,7 @@ const showIcons = ref(false)
         </div>
       </div>
     </div>
+    <Search :open="showSearch" @close="showSearch = false" />
   </div>
 </template>
 

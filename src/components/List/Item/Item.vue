@@ -257,7 +257,7 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
             @click="setStar"
           >
             <div
-              :c="starState ? '#e6a400' : '#555/20 dark:#bbb/20'"
+              :c="isStar ? '#e6a400' : '#555/20 dark:#bbb/20'"
               i-ph:star-fill pointer-events-auto cursor-pointer text-14px
               scale="group-active:70 100" transition="transform 300"
             />

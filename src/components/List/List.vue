@@ -71,6 +71,14 @@ function setOk(id: number, isOk: boolean) {
   }
   saveItemSet(listAll.value!)
 }
+emitter.on('searchSetOk', (data) => {
+  const useData = data as {
+    id: number
+    ok: boolean
+  }
+
+  setOk(useData.id, useData.ok)
+})
 
 function addItem(id: number, text: string) {
   emits('setAddItem')
@@ -112,6 +120,11 @@ function deleteItem(id: number) {
   }
   saveItemSet(listAll.value!)
 }
+emitter.on('searchDelete', (id) => {
+  const useId = id as number
+
+  deleteItem(useId)
+})
 
 const routeName = ref(route.name)
 watchEffect(() => {
@@ -141,6 +154,14 @@ function setStar(id: number, star: boolean) {
   }
   saveItemSet(listAll.value!)
 }
+emitter.on('searchSetStar', (data) => {
+  const useData = data as {
+    id: number
+    star: boolean
+  }
+
+  setStar(useData.id, useData.star)
+})
 
 function editItem(id: number, text: string) {
   for (let i = 0; i < list.value!.length; i++) {
