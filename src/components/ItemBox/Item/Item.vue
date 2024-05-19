@@ -47,8 +47,9 @@ window.addEventListener('resize', () => {
       width: simpleMode ? 'calc(100% - 50px)' : (minWidth ? 'calc(100vw - 108px)' : ''),
     }"
     :max-w="!simpleMode && minWidth ? '' : '550px'"
-    :bg="showSwitch || showListBox ? 'white dark:#999/10' : 'white dark:#999/10 active:primary-d dark:active:primary-a'"
-    :c="showSwitch || showListBox ? 'black dark:#bbb' : 'black dark:#bbb'"
+    :bg="showSwitch || showListBox ? 'white dark:#999/10' : 'white dark:#999/10 !active:primary-d !dark:active:primary-a'"
+    :c="showSwitch || showListBox ? 'black dark:#bbb' : 'black dark:#bbb'" shadow-md
+    border="1px solid black/20"
     @click="emits('itemFun')"
   >
     <div>
@@ -109,7 +110,6 @@ window.addEventListener('resize', () => {
   height: 30px;
   padding: 10px 15px;
   border-radius: 7px;
-  border: 1px solid #00000020;
   cursor: pointer;
   margin-bottom: 10px;
   display: flex;

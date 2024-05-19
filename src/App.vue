@@ -223,6 +223,13 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
     <div
       v-if="isNoteUI"
       :class="isDark ? 'dark' : ''"
+      :bg="!isBlur
+        ? (isDark
+          ? 'black'
+          : '#888')
+        : ((isDark && store.get('micaStyle') === 'acrylic')
+          ? '#111/50'
+          : '')"
       h-100vh w-100vw overflow-hidden
     >
       <router-view name="noteUI" />
@@ -233,7 +240,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
       :bg="!isBlur
         ? (isDark
           ? 'black'
-          : '#e5e5e5')
+          : '#bbb')
         : ((isDark && store.get('micaStyle') === 'acrylic')
           ? '#111/50'
           : '')"

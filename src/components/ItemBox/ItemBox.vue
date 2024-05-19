@@ -21,26 +21,19 @@ const itemWidth = computed(() => simpleMode ? 'calc(100% - 30px)' : (minWidth.va
 
 <style lang="scss" scoped>
 .item-box {
-  margin-bottom: 10px;
-  border: 1px solid #00000015;
-  border-radius: 7px;
+  --uno: mb-10px border-1px border-solid border-black/20 shadow-md rounded-7px
+    bg-white;
 
   .box-radius {
-    border-radius: 7px;
-    overflow: hidden;
+    --uno: rounded-7px overflow-hidden;
 
     &:deep(.item) {
-      box-shadow: none;
-      margin-bottom: 0;
-      border-radius: 0;
-      border-bottom: 1px solid #00000015;
-      border-top: 0px;
-      border-left: 0px;
-      border-right: 0px;
+      --uno: shadow-none mb-0 rounded-0 border-b-1px border-b-solid
+        border-b-black/10 border-x-0 border-t-0 bg-transparent;
       width: v-bind(itemWidth) !important;
 
       &:last-child {
-        border: 0;
+        --uno: border-none;
       }
     }
   }

@@ -32,7 +32,7 @@ const isOpen = ref(false)
 
 <template>
   <div
-    mb-30px break-inside-avoid rounded-10px bg="white dark:#333"
+    mb-30px break-inside-avoid rounded-10px bg="white dark:#333" drop-shadow-md
   >
     <div
       p="y-5px x-10px r-0"

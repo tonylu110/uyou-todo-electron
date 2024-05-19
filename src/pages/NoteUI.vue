@@ -9,6 +9,7 @@ import firstLoad from '../components/TitleBar/firstLoad'
 import { topWindow } from '../util/windowApi'
 import emitter from '../util/bus'
 import { isMac } from '../util/os'
+import Search from '../components/Search/Search.vue'
 
 const router = useRouter()
 
@@ -24,6 +25,8 @@ function onTopWindow() {
 emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
 })
+
+const showSearch = ref(false)
 </script>
 
 <template>
@@ -46,6 +49,17 @@ emitter.on('topWindow', (data: unknown) => {
 
     <NoteList />
 
+    <div flex="~ gap-10px" fixed bottom-15px left-15px no-drag>
+      <div
+        bg="primary-d active:primary-a"
+        transition="duration-300 all"
+        rounded="10px hover:30px"
+        shadow="md" flex items-center justify-center p-13px active:transform-scale-90
+        @click="showSearch = true"
+      >
+        <div i-ph:magnifying-glass-bold text-22px c-white />
+      </div>
+    </div>
     <div
       flex="~ gap-10px" fixed bottom-15px right-15px no-drag
     >
@@ -70,5 +84,6 @@ emitter.on('topWindow', (data: unknown) => {
       </div>
     </div>
     <CateAdd :open="showCateAdd" @close="showCateAdd = false" />
+    <Search :open="showSearch" @close="showSearch = false" />
   </SettingList>
 </template>

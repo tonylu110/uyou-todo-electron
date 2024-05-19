@@ -105,11 +105,12 @@ function setStar(id: number, star: boolean) {
         bg="white dark:#333" rounded-7px
         max-h="[calc(100vh-250px)]"
       >
-        <div v-if="listData.length > 0" flex="~ col" items-center pt-10px>
+        <div v-if="listData.length > 0" flex="~ col" items-center p="y-10px x-5px">
           <Item
-            v-for="item in listData"
+            v-for="item, index in listData"
             :id="item.id"
             :key="item.id"
+            :border="listData.length !== index + 1 ? 'b-black/5 b-solid b-2px' : 'none'"
             :text="item.text"
             :ok="item.ok"
             :star="item.star"
@@ -128,5 +129,23 @@ function setStar(id: number, star: boolean) {
 
 .alert {
   --uno: overflow-hidden select-none;
+}
+
+@keyframes show {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
 }
 </style>

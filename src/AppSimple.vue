@@ -100,7 +100,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
     </div>
     <div
       v-if="!isWinDow"
-      :bg="!isBlur ? (isDark ? 'black' : '#e5e5e5') : ''"
+      :bg="!isBlur ? (isDark ? 'black' : '#aaa') : ''"
       :opacity="passAlert ? '0' : '100'"
       :class="isDark ? 'dark' : ''"
     >

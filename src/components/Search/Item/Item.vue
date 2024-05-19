@@ -25,8 +25,7 @@ watch(okState, (newValue) => {
 <template>
   <div
     w="[calc(100%-40px)]"
-    bg="black/10" relative mb-10px
-    flex items-center rounded-5px p-10px
+    relative flex items-center rounded-5px p-10px
   >
     <div absolute>
       <CheckBox v-model="okState" :num="id" left="!0" />

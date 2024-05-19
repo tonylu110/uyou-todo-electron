@@ -216,7 +216,7 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
     <div
       class="list-item"
       shadow="sm black/20"
-      bg="#eee/80 dark:#222/50"
+      bg="white/80 dark:#222/50"
     >
       <CheckBox v-if="!showEdit" v-model="okState" :num="time" :color="color ? color : 'primary-d'" />
       <div

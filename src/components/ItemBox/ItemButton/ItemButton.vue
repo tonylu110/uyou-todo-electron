@@ -30,6 +30,8 @@ const primaryColorA = computed(() => !isDark.value ? '#4e6fbb' : '#5985eb')
     :max-w="!simpleMode && minWidth ? '' : '550px'"
     c="#333 dark:#bbb"
     bg="white dark:#999/10"
+    border="1px solid black/10"
+    shadow-md
   >
     <slot>button</slot>
   </div>
@@ -43,7 +45,6 @@ const primaryColorA = computed(() => !isDark.value ? '#4e6fbb' : '#5985eb')
   min-height: 30px;
   padding: 10px 15px;
   border-radius: 7px;
-  border: 1px solid #00000020;
   cursor: pointer;
   margin-bottom: 10px;
   display: flex;
@@ -57,9 +58,9 @@ const primaryColorA = computed(() => !isDark.value ? '#4e6fbb' : '#5985eb')
   }
 
   &.primary {
+    --uno: shadow-primary-a/70;
     background-color: v-bind(primaryColor);
     color: white;
-    border: none;
 
     &:active {
       background-color: v-bind(primaryColorA);
@@ -67,9 +68,9 @@ const primaryColorA = computed(() => !isDark.value ? '#4e6fbb' : '#5985eb')
   }
 
   &.error {
+    --uno: shadow-error-a/70;
     background-color: v-bind(errorColor);
     color: white;
-    border: none;
 
     &:active {
       background-color: v-bind(errorColorA);
