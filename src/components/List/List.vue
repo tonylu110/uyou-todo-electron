@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { computed, onMounted, reactive, ref, watch, watchEffect } from 'vue'
+import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { usePreferredDark } from '@vueuse/core'
+import _ from 'lodash'
 import LocalStorage from '../../util/localStorage'
 import type ITodoList from '../../interface/ITodoListArray'
 import setSwitchFn from '../../util/setSwitchFn'
@@ -235,13 +236,23 @@ const isDark = usePreferredDark()
     :style="{
       backgroundColor: !isNaN(Number.parseInt((route.query.listName as string))) && useCustColor
         ? isBlur
-          ? bgColor.color
-            ? `${bgColor.color}50` : isDark ? 'rgba(51, 51, 51, 0.5)' : 'rgba(255, 255, 255, 0.5)'
+          ? !_.isUndefined(bgColor.color)
+            ? `${bgColor.color}50`
+            : isDark
+              ? 'rgba(51, 51, 51, 0.5)'
+              : 'rgba(255, 255, 255, 0.5)'
           : bgColor
-            ? `${bgColor.color}cc` : isDark ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)'
+            ? `${bgColor.color}cc`
+            : isDark
+              ? 'rgba(51, 51, 51, 0.8)'
+              : 'rgba(255, 255, 255, 0.8)'
         : isBlur
-          ? isDark ? 'rgba(51, 51, 51, 0.5)' : 'rgba(255, 255, 255, 0.5)'
-          : isDark ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+          ? isDark
+            ? 'rgba(51, 51, 51, 0.5)'
+            : 'rgba(255, 255, 255, 0.5)'
+          : isDark
+            ? 'rgba(51, 51, 51, 0.8)'
+            : 'rgba(255, 255, 255, 0.8)',
     }"
   >
     <transition name="add">

@@ -84,6 +84,9 @@ importers:
       floating-vue:
         specifier: 2.0.0-beta.24
         version: 2.0.0-beta.24(vue@3.4.27(typescript@5.4.4))
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       mitt:
         specifier: ^3.0.1
         version: 3.0.1
