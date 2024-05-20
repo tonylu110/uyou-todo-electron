@@ -13,6 +13,9 @@ mac:
 win:
   icon: ./logo.ico
   artifactName: '${productName}-${version}-${arch}.${ext}'
+  target:
+    - nsis
+    - zip
 linux:
   icon: ./logo.png
   target:

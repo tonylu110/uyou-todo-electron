@@ -12,7 +12,10 @@ const itemWidth = computed(() => simpleMode ? 'calc(100% - 30px)' : (minWidth.va
 </script>
 
 <template>
-  <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : (minWidth ? 'calc(100vw - 78px)' : '') }">
+  <div
+    class="item-box" bg="white dark:#999/10"
+    :style="{ width: simpleMode ? 'calc(100% - 20px)' : (minWidth ? 'calc(100vw - 78px)' : '') }"
+  >
     <div class="box-radius">
       <slot />
     </div>
@@ -21,8 +24,7 @@ const itemWidth = computed(() => simpleMode ? 'calc(100% - 30px)' : (minWidth.va
 
 <style lang="scss" scoped>
 .item-box {
-  --uno: mb-10px border-1px border-solid border-black/20 shadow-md rounded-7px
-    bg-white;
+  --uno: mb-10px border-1px border-solid border-black/20 shadow-md rounded-7px;
 
   .box-radius {
     --uno: rounded-7px overflow-hidden;

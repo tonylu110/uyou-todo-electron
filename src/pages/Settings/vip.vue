@@ -67,9 +67,8 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
     <div
       v-else
       :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'"
-
       bg="warn-a" mb-10px h-auto max-w-540px flex items-center justify-start rounded-7px p-20px
-      border="1px solid #00000020"
+      border="2px solid black/15" shadow="md warn-a/50"
     >
       <img src="/images/VIP.png" h-70px w-70px alt="" srcset="">
       <div flex="~ col gap-5px" ml-10px>

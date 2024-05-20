@@ -31,7 +31,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
     @left-click="router.back()"
   />
   <SettingList>
-    <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }">
+    <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }" shadow-md>
       <div class="box-radius">
         <div
           class="group item"
@@ -101,7 +101,7 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
 <style scoped lang="scss">
 .item-box {
   margin-bottom: 10px;
-  border: 1px solid #00000015;
+  border: 1px solid rgba($color: #000000, $alpha: 0.2);
   border-radius: 7px;
 
   .box-radius {

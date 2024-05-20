@@ -51,6 +51,7 @@ const primaryColorA = computed(() => !isDark.value ? '#4e6fbb' : '#5985eb')
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  border: 1px solid rgba($color: #000000, $alpha: 0.2);
 
   &:active {
     background-color: v-bind(primaryColor);
