@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { BrowserWindow, Menu, Tray, app, dialog, globalShortcut, ipcMain, nativeTheme, screen, shell } from 'electron'
 import Store from 'electron-store'
-import remoteMain from '@electron/remote/main'
+import remoteMain from '@electron/remote/main/index.js'
 import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from '../store/windowSizeStore.js'
 import { initSystemBar, systemBar, systemBarIpc } from '../store/systemTitleBarStore.js'
 import { initMenuBlur, menuBlur, menuBlurIpc } from '../store/menuBlurStore.js'
@@ -62,7 +62,7 @@ function createWindow() {
     },
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, '../preload.js'),
+      preload: path.join(__dirname, '../preload.mjs'),
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
