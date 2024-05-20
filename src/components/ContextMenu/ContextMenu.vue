@@ -2,6 +2,7 @@
 import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { clipboard } from 'electron'
 import type customContextMenu from './customContextMenu.type'
 
 const props = withDefaults(defineProps<{
@@ -25,9 +26,6 @@ const emits = defineEmits<{
 }>()
 
 const { t } = useI18n()
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const { clipboard } = require('electron')
 
 const topAndLeft = reactive({
   top: `${props.pos.top}px`,
@@ -59,7 +57,7 @@ function copy() {
   if (copyText)
     clipboard.writeText(copyText)
   else
-    clipboard.writeText(textProp.value)
+    clipboard.writeText(textProp.value!)
 }
 
 function paste() {

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import os from 'node:os'
 import type { Ref } from 'vue'
 import { onBeforeUnmount, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ElRadio, ElRadioGroup } from 'element-plus'
+import { ipcRenderer, shell } from 'electron'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import Item from '../../components/ItemBox/Item/Item.vue'
@@ -17,12 +19,7 @@ import ColorChange from '../../components/SettingList/colorChange'
 
 const { t } = useI18n()
 
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const os = require('node:os')
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const { ipcRenderer, shell } = require('electron')
-
-const isWindows10OrAfter = os.release().split('.')[2] > 15063
+const isWindows10OrAfter = Number(os.release().split('.')[2]) > 15063
 const isLinux = !(process.platform === 'linux')
 const isMac = !(process.platform === 'darwin')
 

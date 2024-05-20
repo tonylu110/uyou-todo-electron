@@ -1,5 +1,9 @@
-const path = require('node:path')
-const { BrowserWindow } = require('electron')
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { BrowserWindow } from 'electron'
+import remoteMain from '@electron/remote/main/index.js'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
@@ -23,7 +27,6 @@ function createLogoffWindow(uname) {
       contextIsolation: false,
     },
   })
-
   logoffWindow.setAlwaysOnTop(true)
   if (NODE_ENV === 'development') {
     logoffWindow.loadURL(`http://localhost:3000/#/logoff?isWin=true&account=${uname}`)
@@ -33,10 +36,8 @@ function createLogoffWindow(uname) {
       hash: `/logoff?isWin=true&account=${uname}`,
     })
   }
-
-  require('@electron/remote/main').enable(logoffWindow.webContents)
-
+  remoteMain.enable(logoffWindow.webContents)
   return logoffWindow
 }
 
-module.exports = createLogoffWindow
+export default createLogoffWindow

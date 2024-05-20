@@ -1,5 +1,4 @@
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const os = require('node:os')
+import os from 'node:os'
 
 export function isMac() {
   return /Mac/.test(navigator.userAgent)
@@ -14,5 +13,5 @@ export function isLinux() {
 }
 
 export function isWindows10OrAfter() {
-  return isWindow() && os.release().split('.')[2] > 15063
+  return isWindow() && Number(os.release().split('.')[2]) > 15063
 }

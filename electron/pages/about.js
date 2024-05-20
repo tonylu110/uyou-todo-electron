@@ -1,7 +1,11 @@
-const path = require('node:path')
-const { MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
-const { micaStyle, menuBlur } = require('../store/menuBlurStore')
-const setMicaStyle = require('./util/setMicaStyle')
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
+import remoteMain from '@electron/remote/main/index.js'
+import { menuBlur, micaStyle } from '../store/menuBlurStore.js'
+import setMicaStyle from './util/setMicaStyle.js'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
@@ -23,16 +27,16 @@ function createAboutWindow() {
       contextIsolation: false,
     },
   })
-
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
       aboutWindow.setAutoTheme()
       setMicaStyle(micaStyle || 'mica', aboutWindow)
     }
-    else { aboutWindow.setAcrylic() }
+    else {
+      aboutWindow.setAcrylic()
+    }
   }
   aboutWindow.setAlwaysOnTop(true)
-
   if (NODE_ENV === 'development') {
     aboutWindow.loadURL('http://localhost:3000/#/about?isWin=true')
   }
@@ -41,14 +45,11 @@ function createAboutWindow() {
       hash: '/about?isWin=true',
     })
   }
-
-  require('@electron/remote/main').enable(aboutWindow.webContents)
-
+  remoteMain.enable(aboutWindow.webContents)
   aboutWindow.once('ready-to-show', () => {
     aboutWindow.show()
   })
-
   return aboutWindow
 }
 
-module.exports = createAboutWindow
+export default createAboutWindow

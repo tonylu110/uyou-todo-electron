@@ -1,7 +1,11 @@
-const path = require('node:path')
-const { MicaBrowserWindow, IS_WINDOWS_11 } = require('mica-electron')
-const { micaStyle, menuBlur } = require('../store/menuBlurStore')
-const setMicaStyle = require('./util/setMicaStyle')
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
+import remoteMain from '@electron/remote/main/index.js'
+import { menuBlur, micaStyle } from '../store/menuBlurStore.js'
+import setMicaStyle from './util/setMicaStyle.js'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
@@ -23,16 +27,16 @@ function createRegisterWindow() {
       contextIsolation: false,
     },
   })
-
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
       registerWindow.setAutoTheme()
       setMicaStyle(micaStyle || 'mica', registerWindow)
     }
-    else { registerWindow.setAcrylic() }
+    else {
+      registerWindow.setAcrylic()
+    }
   }
   registerWindow.setAlwaysOnTop(true)
-
   if (NODE_ENV === 'development') {
     registerWindow.loadURL('http://localhost:3000/#/register?isWin=true')
   }
@@ -41,14 +45,10 @@ function createRegisterWindow() {
       hash: '/register?isWin=true',
     })
   }
-
-  require('@electron/remote/main').enable(registerWindow.webContents)
-
+  remoteMain.enable(registerWindow.webContents)
   registerWindow.once('ready-to-show', () => {
     registerWindow.show()
   })
-
   return registerWindow
 }
-
-module.exports = createRegisterWindow
+export default createRegisterWindow

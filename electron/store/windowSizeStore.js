@@ -1,9 +1,8 @@
-const { ipcMain } = require('electron')
-const Store = require('electron-store')
+import { ipcMain } from 'electron'
+import Store from 'electron-store'
 
 const store = new Store()
-
-function initWindowSize() {
+export function initWindowSize() {
   if (store.get('windowSize') === undefined) {
     store.set('windowSize', {
       height: 150,
@@ -13,24 +12,13 @@ function initWindowSize() {
   if (store.get('windowSizeState') === undefined)
     store.set('windowSizeState', false)
 }
-
-const windowSize = store.get('windowSize')
-
-const windowSizeState = store.get('windowSizeState')
-
-function windowSizeIpc() {
+export const windowSize = store.get('windowSize')
+export const windowSizeState = store.get('windowSizeState')
+export function windowSizeIpc() {
   ipcMain.on('getWindowSize', (event, arg) => {
     store.set('windowSize', arg)
   })
-
   ipcMain.on('setWindowSizeState', (event, arg) => {
     store.set('windowSizeState', arg)
   })
-}
-
-module.exports = {
-  initWindowSize,
-  windowSize,
-  windowSizeState,
-  windowSizeIpc,
 }

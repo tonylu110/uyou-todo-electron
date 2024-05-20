@@ -10,6 +10,8 @@ import en from 'element-plus/es/locale/lang/en'
 import zhTw from 'element-plus/es/locale/lang/zh-tw'
 import es from 'element-plus/es/locale/lang/es'
 import ja from 'element-plus/es/locale/lang/ja'
+import { ipcRenderer } from 'electron'
+import Store from 'electron-store'
 import TitleBar from './components/TitleBar/newTitleBar'
 import Alert from './components/Alert/Alert.vue'
 import ListMenu from './components/ListMenu/ListMenu.vue'
@@ -26,9 +28,6 @@ import firstLoad from './util/firstLoad'
 import OpenPass from './components/OpenPass/OpenPass.vue'
 
 const { t, locale } = useI18n()
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const ipcRenderer = require('electron').ipcRenderer
 
 const alertShow = ref(false)
 const alertMsg: Ref<string[]> = ref([])
@@ -178,9 +177,6 @@ if (isDev) {
 }
 
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const Store = require('electron-store')
 
 const store = new Store()
 

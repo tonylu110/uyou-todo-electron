@@ -2,6 +2,7 @@
 import { onMounted, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { ipcRenderer } from 'electron'
 import router from '../router'
 import TabBar from '../components/TabBar/TabBar.vue'
 import SettingList from '../components/SettingList'
@@ -13,9 +14,6 @@ import { createToast } from '../components/Toast'
 import ItemSpace from '../components/ItemBox/ItemSpace'
 
 const { t } = useI18n()
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const ipcRenderer = require('electron').ipcRenderer
 
 const form = ref('')
 const route = useRoute()

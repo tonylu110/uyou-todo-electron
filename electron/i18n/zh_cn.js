@@ -9,7 +9,7 @@ const resetWindowText = '恢复默认窗口大小'
 const open = '打开 uyou ToDo'
 const quit = '退出'
 
-module.exports = {
+export default {
   labelWindowText,
   aboutText,
   gotoWebText,

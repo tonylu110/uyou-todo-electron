@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ElSlider } from 'element-plus'
+import { ipcRenderer } from 'electron'
 import TabBar from '../../../components/TabBar/TabBar.vue'
 import SettingList from '../../../components/SettingList'
 import Item from '../../../components/ItemBox/Item/Item.vue'
@@ -10,9 +11,6 @@ import setSwitchFn from '../../../util/setSwitchFn'
 import { createToast } from '../../../components/Toast'
 import ItemText from '../../../components/ItemBox/ItemText'
 import ItemSpace from '../../../components/ItemBox/ItemSpace'
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const ipcRenderer = require('electron').ipcRenderer
 
 const { t } = useI18n()
 

@@ -2,14 +2,12 @@
 import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { ipcRenderer } from 'electron'
 import Alert from '../components/Alert/Alert.vue'
 import { isMac } from '../util/os'
 import CloseButton from '../components/CloseButton'
 
 const { t } = useI18n()
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const { ipcRenderer } = require('electron')
 
 const route = useRoute()
 

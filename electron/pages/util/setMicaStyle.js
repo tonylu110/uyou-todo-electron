@@ -1,10 +1,6 @@
 function setMicaStyle(effect, windowPro) {
   if (effect === 'mica')
-    windowPro.setMicaEffect()
-  else if (effect === 'tabbed')
-    windowPro.setMicaTabbedEffect()
-  else
-    windowPro.setMicaAcrylicEffect()
+    windowPro.setMicaEffect(); else if (effect === 'tabbed')
+    windowPro.setMicaTabbedEffect(); else windowPro.setMicaAcrylicEffect()
 }
-
-module.exports = setMicaStyle
+export default setMicaStyle

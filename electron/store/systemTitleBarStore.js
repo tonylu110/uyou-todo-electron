@@ -1,23 +1,14 @@
-const { ipcMain } = require('electron')
-const Store = require('electron-store')
+import { ipcMain } from 'electron'
+import Store from 'electron-store'
 
 const store = new Store()
-
-function initSystemBar() {
+export function initSystemBar() {
   if (store.get('systemBar') === undefined)
     store.set('systemBar', false)
 }
-
-const systemBar = store.get('systemBar')
-
-function systemBarIpc() {
+export const systemBar = store.get('systemBar')
+export function systemBarIpc() {
   ipcMain.on('setSystemBar', (event, arg) => {
     store.set('systemBar', arg)
   })
-}
-
-module.exports = {
-  initSystemBar,
-  systemBar,
-  systemBarIpc,
 }

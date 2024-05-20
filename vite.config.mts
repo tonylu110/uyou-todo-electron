@@ -5,6 +5,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import VueMacros from 'unplugin-vue-macros/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
+import ElectronRenderer from 'vite-plugin-electron-renderer'
 
 export default defineConfig({
   base: './',
@@ -22,6 +23,7 @@ export default defineConfig({
     VueDevTools(),
     UnoCSS(),
     ElementPlus({}),
+    ElectronRenderer(),
   ],
   server: {
     port: 3000,

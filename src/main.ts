@@ -6,15 +6,13 @@ import 'element-plus/theme-chalk/dark/css-vars.css'
 import { createApp, ref } from 'vue'
 import { PerfectScrollbarPlugin } from 'vue3-perfect-scrollbar'
 import { VTooltip } from 'floating-vue'
+import { ipcRenderer } from 'electron'
 import App from './App.vue'
 import 'vue3-perfect-scrollbar/style.css'
 import router from './router'
 import AppSimple from './AppSimple.vue'
 import i18n from './i18n'
 import { vFocus } from './util/autofocus'
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const ipcRenderer = require('electron').ipcRenderer
 
 const simpleMode = localStorage.getItem('simpleMode')
 

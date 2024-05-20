@@ -1,10 +1,8 @@
 import { ref } from 'vue'
+import { ipcRenderer } from 'electron'
 import ItemSpace from '../../ItemBox/ItemSpace'
 
 const ColorChange: SetupFC = () => {
-  // eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-  const { ipcRenderer } = require('electron')
-
   const colorMode = ref(localStorage.getItem('colorMode') ? localStorage.getItem('colorMode') : 'system')
 
   const setColor = (color: string) => {

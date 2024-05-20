@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import os from 'node:os'
 import { onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import TabBar from '../components/TabBar/TabBar.vue'
@@ -15,11 +16,8 @@ import ColorChange from '../components/SettingList/colorChange'
 
 const { t } = useI18n()
 
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const os = require('node:os')
-
 const isLinux = !(process.platform === 'linux')
-const isWindows10OrAfter = os.release().split('.')[2] > 15063
+const isWindows10OrAfter = Number(os.release().split('.')[2]) > 15063
 const isMac = process.platform === 'darwin'
 
 const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null

@@ -9,7 +9,7 @@ const resetWindowText = 'Restore default window size'
 const open = 'Open uyou ToDo'
 const quit = 'Quit'
 
-module.exports = {
+export default {
   labelWindowText,
   aboutText,
   gotoWebText,

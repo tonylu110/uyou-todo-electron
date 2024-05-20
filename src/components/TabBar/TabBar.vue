@@ -2,6 +2,7 @@
 import { onMounted, reactive, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePreferredDark } from '@vueuse/core'
+import { ipcRenderer } from 'electron'
 import CateMenu from '../CateMenu/CateMenu.vue'
 import getCateList from '../../util/getCateList'
 import emitter from '../../util/bus'
@@ -37,9 +38,6 @@ const emits = defineEmits<{
 
 const router = useRouter()
 const route = useRoute()
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const ipcRenderer = require('electron').ipcRenderer
 
 const systemTitleShow = localStorage.getItem('systemTitle') === 'true'
 

@@ -2,7 +2,6 @@ let fontSize = ''
 
 function useFontSize(size, init) {
   const stringSize = `${size}`
-
   if (stringSize === '0') {
     fontSize = `
       * {
@@ -35,5 +34,4 @@ function useFontSize(size, init) {
   }
   return fontSize
 }
-
-module.exports = useFontSize
+export default useFontSize

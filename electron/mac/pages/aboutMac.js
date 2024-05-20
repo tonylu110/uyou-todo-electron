@@ -1,5 +1,9 @@
-const path = require('node:path')
-const { BrowserWindow } = require('electron')
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import remoteMain from '@electron/remote/main/index.js'
+import { BrowserWindow } from 'electron'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
@@ -23,9 +27,7 @@ function createAboutWindow() {
       contextIsolation: false,
     },
   })
-
   aboutWindow.setAlwaysOnTop(true)
-
   if (NODE_ENV === 'development') {
     aboutWindow.loadURL('http://localhost:3000/#/about?isWin=true')
   }
@@ -34,10 +36,8 @@ function createAboutWindow() {
       hash: '/about?isWin=true',
     })
   }
-
-  require('@electron/remote/main').enable(aboutWindow.webContents)
-
+  remoteMain.enable(aboutWindow.webContents)
   return aboutWindow
 }
 
-module.exports = createAboutWindow
+export default createAboutWindow

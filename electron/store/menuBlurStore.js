@@ -1,28 +1,17 @@
-const { ipcMain } = require('electron')
-const Store = require('electron-store')
+import { ipcMain } from 'electron'
+import Store from 'electron-store'
 
 const store = new Store()
-
-function initMenuBlur() {
+export function initMenuBlur() {
   if (store.get('menuBlur') === undefined)
     store.set('menuBlur', true)
-
   if (store.get('micaStyle') === undefined)
     store.set('micaStyle', 'mica')
 }
-
-const menuBlur = store.get('menuBlur')
-const micaStyle = store.get('micaStyle')
-
-function menuBlurIpc() {
+export const menuBlur = store.get('menuBlur')
+export const micaStyle = store.get('micaStyle')
+export function menuBlurIpc() {
   ipcMain.on('setMenuBlur', (event, arg) => {
     store.set('menuBlur', arg)
   })
-}
-
-module.exports = {
-  initMenuBlur,
-  menuBlur,
-  menuBlurIpc,
-  micaStyle,
 }

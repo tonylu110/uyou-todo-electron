@@ -2,6 +2,8 @@
 import type { Ref } from 'vue'
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { app } from '@electron/remote'
+import { ipcRenderer } from 'electron'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import router from '../../router'
 import SettingList from '../../components/SettingList'
@@ -12,11 +14,6 @@ import emitter from '../../util/bus'
 import ItemSpace from '../../components/ItemBox/ItemSpace'
 
 const { t } = useI18n()
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const { app } = require('@electron/remote')
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const { ipcRenderer } = require('electron')
 
 const version = versionCode
 

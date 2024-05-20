@@ -1,23 +1,26 @@
-const path = require('node:path')
-const fs = require('node:fs')
-const { app, BrowserWindow, ipcMain, screen, Menu, shell, nativeTheme, globalShortcut, Tray, dialog } = require('electron')
-const Store = require('electron-store')
-const remoteMain = require('@electron/remote/main')
-const { initWindowSize, windowSize, windowSizeState, windowSizeIpc } = require('../store/windowSizeStore')
-const { initSystemBar, systemBar, systemBarIpc } = require('../store/systemTitleBarStore')
-const { initMenuBlur, menuBlur, menuBlurIpc } = require('../store/menuBlurStore')
-const { initWindowMenu, windowMenu, windowMenuIpc } = require('../store/windowMenuStore')
-const { initSim, simple, simpleIpc } = require('../store/simpleModeStore')
-const sendNotification = require('../pages/util/sendNotification')
-const i18n = require('../i18n')
-const useFontSize = require('../useFontSize.js')
-const createAboutWindowMac = require('./pages/aboutMac')
-const createRegisterWindowMac = require('./pages/registerMac')
-const createRepassWindowMac = require('./pages/repassMac')
-const createLogoffWindowMac = require('./pages/logoffMac')
-const menuTemplate = require('./menu.js')
+import path from 'node:path'
+import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { BrowserWindow, Menu, Tray, app, dialog, globalShortcut, ipcMain, nativeTheme, screen, shell } from 'electron'
+import Store from 'electron-store'
+import remoteMain from '@electron/remote/main'
+import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from '../store/windowSizeStore.js'
+import { initSystemBar, systemBar, systemBarIpc } from '../store/systemTitleBarStore.js'
+import { initMenuBlur, menuBlur, menuBlurIpc } from '../store/menuBlurStore.js'
+import { initWindowMenu, windowMenu, windowMenuIpc } from '../store/windowMenuStore.js'
+import { initSim, simple, simpleIpc } from '../store/simpleModeStore.js'
+import sendNotification from '../pages/util/sendNotification.js'
+import i18n from '../i18n/index.js'
+import useFontSize from '../useFontSize.js'
+import createAboutWindowMac from './pages/aboutMac.js'
+import createRegisterWindowMac from './pages/registerMac.js'
+import createRepassWindowMac from './pages/repassMac.js'
+import createLogoffWindowMac from './pages/logoffMac.js'
+import menuTemplate from './menu.js'
 
 const store = new Store()
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
@@ -30,13 +33,15 @@ remoteMain.initialize()
 let mainWindow
 
 function createWindow() {
-  const { width, height } = screen.getPrimaryDisplay().workAreaSize
+  const {
+    width,
+    height,
+  } = screen.getPrimaryDisplay().workAreaSize
   initWindowSize()
   initSystemBar()
   initMenuBlur()
   initWindowMenu()
   initSim()
-
   mainWindow = new BrowserWindow({
     width: simple ? 370 : 1000,
     height: 750,
@@ -46,12 +51,15 @@ function createWindow() {
     maximizable: !simple,
     x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000)) / 2,
     y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750)) / 2,
-    vibrancy: (menuBlur || menuBlur === undefined) ? 'menu' : null,
+    vibrancy: menuBlur || menuBlur === undefined ? 'menu' : null,
     visualEffectState: 'active',
     icon: path.join(__dirname, '../../dist/logo.png'),
     frame: systemBar,
     titleBarStyle: systemBar ? 'default' : 'hiddenInset',
-    trafficLightPosition: { x: 15, y: simple ? 20 : 15 },
+    trafficLightPosition: {
+      x: 15,
+      y: simple ? 20 : 15,
+    },
     show: false,
     webPreferences: {
       preload: path.join(__dirname, '../preload.js'),
@@ -61,46 +69,35 @@ function createWindow() {
       webSecurity: false,
     },
   })
-
   if (windowSizeState)
     mainWindow.setSize(windowSize.width, windowSize.height)
-
   remoteMain.enable(mainWindow.webContents)
-
-  mainWindow.loadURL(
-    NODE_ENV === 'development'
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, '../../dist/index.html')}`,
-  )
+  mainWindow.loadURL(NODE_ENV === 'development' ? 'http://localhost:3000' : `file://${path.join(__dirname, '../../dist/index.html')}`)
 
   // mainWindow.setMaximizable(false)
 
-  if (NODE_ENV === 'development')
-    mainWindow.webContents.openDevTools({ mode: 'detach' })
-
+  if (NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools({
+      mode: 'detach',
+    })
+  }
   ipcMain.on('window-min', () => {
     mainWindow.minimize()
   })
   ipcMain.on('window-max', () => {
     if (mainWindow.isMaximized())
-      mainWindow.unmaximize()
-    else
-      mainWindow.maximize()
+      mainWindow.unmaximize(); else mainWindow.maximize()
   })
   ipcMain.on('window-close', (ev, isClose) => {
     if (isClose)
-      app.quit()
-    else
-      mainWindow.hide()
+      app.quit(); else mainWindow.hide()
   })
   ipcMain.on('window-on-top', (event, arg) => {
     mainWindow.setAlwaysOnTop(arg)
   })
-
   ipcMain.on('open-url', (event, url) => {
     shell.openExternal(url)
   })
-
   ipcMain.on('setAddItemCut', (event, use) => {
     if (use) {
       globalShortcut.register('Alt+A', () => {
@@ -111,62 +108,49 @@ function createWindow() {
       globalShortcut.unregister('Alt+A')
     }
   })
-
   windowSizeIpc()
   systemBarIpc()
   menuBlurIpc()
   windowMenuIpc()
   simpleIpc()
-
   ipcMain.on('open-about', () => {
     const aboutWindow = createAboutWindowMac()
-
     ipcMain.once('close-about', () => {
       aboutWindow.close()
     })
   })
-
   ipcMain.on('open-register', () => {
     const registerWindow = createRegisterWindowMac()
     const registerId = registerWindow.id
-
     ipcMain.once('close-register', () => {
       BrowserWindow.fromId(registerId).close()
     })
   })
-
   ipcMain.on('open-repass', (ev, uname) => {
     const repassWindow = createRepassWindowMac(uname)
     const repassId = repassWindow.id
-
     ipcMain.once('close-repass', () => {
       BrowserWindow.fromId(repassId).close()
     })
   })
-
   ipcMain.on('open-logoff', (ev, uname) => {
     const logoffWindow = createLogoffWindowMac(uname)
     const logoffId = logoffWindow.id
-
     ipcMain.once('close-logoff', () => {
       BrowserWindow.fromId(logoffId).close()
     })
   })
-
   ipcMain.on('setAutoStart', (ev, isAutoStart) => {
     app.setLoginItemSettings({
       openAtLogin: isAutoStart,
     })
   })
-
   ipcMain.on('colorMode', (ev, color) => {
     nativeTheme.themeSource = color
   })
-
   mainWindow.on('move', () => {
     store.set('window-pos', mainWindow.getPosition())
   })
-
   ipcMain.on('set-notification-timer', (ev, time, title, msg) => {
     const timeoutFn = () => {
       const send = sendNotification(title, msg)
@@ -175,15 +159,16 @@ function createWindow() {
         mainWindow.show()
       })
     }
-
     if (time > 0)
       setTimeout(timeoutFn, time)
   })
-
   ipcMain.on('setFont', () => {
     dialog.showOpenDialog({
       properties: ['openFile'],
-      filters: [{ name: 'Fonts', extensions: ['ttf'] }],
+      filters: [{
+        name: 'Fonts',
+        extensions: ['ttf'],
+      }],
     }).then((result) => {
       const filePath = result.filePaths[0]
       if (filePath) {
@@ -205,11 +190,13 @@ function createWindow() {
       console.error(err)
     })
   })
-
   ipcMain.on('setBoldFont', () => {
     dialog.showOpenDialog({
       properties: ['openFile'],
-      filters: [{ name: 'Fonts', extensions: ['ttf'] }],
+      filters: [{
+        name: 'Fonts',
+        extensions: ['ttf'],
+      }],
     }).then((result) => {
       const filePath = result.filePaths[0]
       if (filePath) {
@@ -232,69 +219,59 @@ function createWindow() {
       console.error(err)
     })
   })
-
   ipcMain.on('initFont', (ev, useFont, fontSize) => {
     if (useFont) {
       mainWindow.webContents.insertCSS(useFontSize(fontSize, true))
-
       fs.readFile(path.join(__dirname, 'selectedFont.css'), 'utf-8', (err, data) => {
         if (err)
           return
-
         mainWindow.webContents.insertCSS(data)
       })
       fs.readFile(path.join(__dirname, 'selectedBoldFont.css'), 'utf-8', (err, data) => {
         if (err)
           return
-
         mainWindow.webContents.insertCSS(data)
       })
     }
   })
-
   ipcMain.on('setFontSize', (ev, size) => {
     mainWindow.webContents.insertCSS(useFontSize(size))
   })
 }
-
 let tray
-
 app.whenReady().then(() => {
   // eslint-disable-next-line node/prefer-global/process
   if (process.platform === 'win32')
     app.setAppUserModelId('uyou ToDo')
-
-  const { height } = screen.getPrimaryDisplay().workAreaSize
-
+  const {
+    height,
+  } = screen.getPrimaryDisplay().workAreaSize
   createWindow()
-
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
   })
-
   tray = new Tray(path.join(__dirname, '../dist/logo.png'))
-  const contextMenu = Menu.buildFromTemplate([
-    { label: i18n(app).open, click: () => mainWindow.show() },
-    { label: i18n(app).quit, click: () => app.quit() },
-  ])
+  const contextMenu = Menu.buildFromTemplate([{
+    label: i18n(app).open,
+    click: () => mainWindow.show(),
+  }, {
+    label: i18n(app).quit,
+    click: () => app.quit(),
+  }])
   tray.setToolTip('uyou ToDo')
   tray.setContextMenu(contextMenu)
   tray.on('click', () => mainWindow.show())
-
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
-
   Menu.setApplicationMenu(null)
 
   // eslint-disable-next-line node/prefer-global/process
   if (process.platform === 'darwin' || windowMenu)
     Menu.setApplicationMenu(appMenu)
-
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0)
       createWindow()
   })
 })
-
 app.on('window-all-closed', () => {
   // eslint-disable-next-line node/prefer-global/process
   if (process.platform !== 'darwin')

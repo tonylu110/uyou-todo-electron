@@ -1,24 +1,15 @@
-const { ipcMain, Menu } = require('electron')
-const Store = require('electron-store')
+import { Menu, ipcMain } from 'electron'
+import Store from 'electron-store'
 
 const store = new Store()
-
-function initWindowMenu() {
+export function initWindowMenu() {
   if (store.get('windowMenu') === undefined)
     store.set('windowMenu', false)
 }
-
-const windowMenu = store.get('windowMenu')
-
-function windowMenuIpc(appMenu) {
+export const windowMenu = store.get('windowMenu')
+export function windowMenuIpc(appMenu) {
   ipcMain.on('setWindowMenu', (event, arg) => {
     store.set('windowMenu', arg)
     Menu.setApplicationMenu(arg ? appMenu : null)
   })
-}
-
-module.exports = {
-  initWindowMenu,
-  windowMenu,
-  windowMenuIpc,
 }

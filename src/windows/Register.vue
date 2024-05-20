@@ -1,14 +1,12 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { ipcRenderer } from 'electron'
 import Alert from '../components/Alert/Alert.vue'
 import CloseButton from '../components/CloseButton'
 import { isMac } from '../util/os'
 
 const { t } = useI18n()
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const { ipcRenderer } = require('electron')
 
 const formData = reactive({
   account: '',

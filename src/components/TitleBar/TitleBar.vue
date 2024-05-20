@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import os from 'node:os'
 import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import emitter from '../../util/bus'
 import { closeWindow, minWindow, topWindow } from '../../util/windowApi'
 import firstLoad from './firstLoad'
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const os = require('node:os')
 
 const isMac = navigator.userAgent.includes('Mac')
 
@@ -40,7 +38,7 @@ emitter.on('topWindow', (data: unknown) => {
 // })
 
 const isWindows = navigator.userAgent.includes('Win')
-const isWindows10OrAfter = os.release().split('.')[2] > 15063
+const isWindows10OrAfter = Number(os.release().split('.')[2]) > 15063
 const listMenuColor = ref('')
 if (isWindows && (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && isWindows10OrAfter)
   listMenuColor.value = '#fff6dc00'

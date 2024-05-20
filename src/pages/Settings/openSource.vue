@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
+import { ipcRenderer } from 'electron'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import ItemBox from '../../components/ItemBox/ItemBox.vue'
@@ -7,9 +8,6 @@ import Item from '../../components/ItemBox/Item/Item.vue'
 import router from '../../router'
 
 const { t } = useI18n()
-
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const ipcRenderer = require('electron').ipcRenderer
 
 function openUrlInBrowser(url: string) {
   ipcRenderer.send('open-url', url)

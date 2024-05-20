@@ -1,5 +1,4 @@
-// eslint-disable-next-line ts/no-var-requires, ts/no-require-imports
-const ipcRenderer = require('electron').ipcRenderer
+import { ipcRenderer } from 'electron'
 
 function closeWindow(window?: string, isClose?: boolean) {
   if (window)
