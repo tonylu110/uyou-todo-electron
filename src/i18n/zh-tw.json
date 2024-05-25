@@ -65,7 +65,8 @@
     "toPhone": "移動版",
     "toDonate": "請我喝杯咖啡",
     "toGithub": "前往 GitHub",
-    "toFind": "聯繫我"
+    "toFind": "聯繫我",
+    "aboutSponser": "關於贊助"
   },
   "anotherSettings": {
     "menuBlur": "頁面選單毛玻璃",
@@ -216,5 +217,8 @@
     "chooseIcon": "選擇類別圖標",
     "cateName": "類別名稱",
     "chooseColor": "選擇類別顏色"
+  },
+  "sponsor": {
+    "thanks": "感謝贊助"
   }
 }

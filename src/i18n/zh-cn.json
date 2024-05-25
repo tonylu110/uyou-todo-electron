@@ -65,7 +65,8 @@
     "toPhone": "移动版",
     "toDonate": "请我喝杯咖啡",
     "toGithub": "前往 GitHub",
-    "toFind": "联系我"
+    "toFind": "联系我",
+    "aboutSponser": "关于赞助"
   },
   "anotherSettings": {
     "menuBlur": "页面菜单毛玻璃",
@@ -216,5 +217,8 @@
     "chooseIcon": "选择类别图标",
     "cateName": "类别名称",
     "chooseColor": "选择类别颜色"
+  },
+  "sponsor": {
+    "thanks": "感谢赞助"
   }
 }

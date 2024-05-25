@@ -65,7 +65,8 @@
     "toPhone": "Mobile version",
     "toDonate": "Buy a cup of coffee for me",
     "toGithub": "Go to GitHub",
-    "toFind": "Contact Me"
+    "toFind": "Contact Me",
+    "aboutSponser": "About Sponsor"
   },
   "anotherSettings": {
     "menuBlur": "Window List Menu Blur",
@@ -216,5 +217,8 @@
     "chooseIcon": "Select category icon",
     "cateName": "Category name",
     "chooseColor": "Select category color"
+  },
+  "sponsor": {
+    "thanks": "Thanks Sponsors"
   }
 }
