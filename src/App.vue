@@ -43,8 +43,11 @@ if (autoUpdateState) {
     return res.json()
   }).then((res) => {
     if (res[1].code > version) {
+      if (locale.value === 'zh-cn')
+        alertMsg.value = res[1].data
+      else
+        alertMsg.value = res[1].enData
       newVersion.value = res[1].version
-      alertMsg.value = res[1].data
       alertShow.value = true
     }
   })

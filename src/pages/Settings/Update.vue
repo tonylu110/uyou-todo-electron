@@ -13,7 +13,7 @@ import { createToast } from '../../components/Toast'
 import emitter from '../../util/bus'
 import ItemSpace from '../../components/ItemBox/ItemSpace'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const version = versionCode
 
@@ -27,7 +27,10 @@ function getUpdate() {
     }).then((res) => {
       if (res[1].code > version) {
         newVersion.value = `${t('updateText')}: v${res[1].version}`
-        updateMsg.value = res[1].data
+        if (locale.value === 'zh-cn')
+          updateMsg.value = res[1].data
+        else
+          updateMsg.value = res[1].enData
         updateButton.value = t('update.gotoUpdate')
       }
       else {
