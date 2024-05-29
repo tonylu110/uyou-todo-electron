@@ -39,6 +39,11 @@ If you want to use the built-in fonts before 2.1.3, you can click the link below
 [Smartisan T Regular](https://github.com/tonylu110/uyou-todo-electron/releases/download/2.1.3/Smartisan_Compact-Regular.ttf) |
 [Smartisan T Bold](https://github.com/tonylu110/uyou-todo-electron/releases/download/2.1.3/Smartisan_Compact-Bold.ttf)
 
+## Sponsor
+
+<img src="./demo/afd.png" width="300" />
+<img src="./demo/paypal.png" width="300" />
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=tonylu110/uyou-todo-electron&type=Date)](https://star-history.com/#tonylu110/uyou-todo-electron&Date)
