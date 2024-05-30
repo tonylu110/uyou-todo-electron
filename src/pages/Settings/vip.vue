@@ -8,6 +8,8 @@ import emitter from '../../util/bus'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import ItemBox from '../../components/ItemBox/ItemBox.vue'
 import setSwitchFn from '../../util/setSwitchFn'
+import ItemSpace from '../../components/ItemBox/ItemSpace'
+import SponsorList from '../../components/Sponsor/List.vue'
 
 const { t } = useI18n()
 
@@ -37,12 +39,8 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
     @left-click="router.back()"
   />
   <SettingList>
-    <div
+    <ItemSpace
       v-if="!isVip"
-      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'"
-      flex="~ wrap"
-      bg="white dark:#999/10" mb-10px h-auto max-w-540px items-center justify-center rounded-7px p-20px
-      border="1px solid #00000020"
     >
       <div w="100%">
         <h1>￥ 10.00</h1>
@@ -53,17 +51,22 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
       </div>
       <div flex="~ wrap" j ustify-center items-center>
         <img
-          w-170px p-10px
+          w-163px p-10px
           src="/images/donate/alipay.png"
           alt=""
         >
         <img
-          w-170px p-10px
+          w-163px p-10px
           src="/images/donate/wechatpay.png"
           alt=""
         >
+        <img
+          w-163px p-10px
+          src="/images/donate/afd.png"
+          alt=""
+        >
       </div>
-    </div>
+    </ItemSpace>
     <div
       v-else
       :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'"
@@ -82,11 +85,8 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
       :switch-state="isVip"
       @switch-fun="setSwitchFn('isVip', !isVip, () => isVip = !isVip)"
     />
-    <div
+    <ItemSpace
       v-if="!isVip"
-      :w="menuShort ? (simpleMode ? '[calc(100vw-60px)]' : '[calc(100vw-118px)]') : '[calc(100vw-460px)]'"
-      flex="~ col wrap" bg="white dark:#999/10" mb-10px h-auto max-w-540px items-start justify-center rounded-7px p-20px
-      border="1px solid #00000020"
     >
       <h2>{{ t('vip.proFeature') }}</h2>
       <ul>
@@ -96,7 +96,8 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
         <li>{{ t('vip.setCustFont') }}</li>
         <li>{{ t('vip.more') }}</li>
       </ul>
-    </div>
+    </ItemSpace>
+    <SponsorList v-if="!isVip" />
     <template v-if="isVip">
       <ItemBox>
         <Item

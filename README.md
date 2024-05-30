@@ -42,8 +42,8 @@ If you want to use the built-in fonts before 2.1.3, you can click the link below
 ## Sponsor
 
 <p float="left">
-  <img src="./demo/afd.png" width="300" />
-  <img src="./demo/paypal.png" width="300" />
+  <img src="./public/images/donate/paypal.png" width="300" />
+  <img src="./public/images/donate/afd.png" width="300" />
 <p/>
 
 ## Star History
