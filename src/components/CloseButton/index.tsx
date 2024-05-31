@@ -4,6 +4,10 @@ import { closeWindow } from '../../util/windowApi'
 const CloseButton: SetupFC = () => {
   const route = useRoute()
 
+  const props = defineProps<{
+    windowName?: string
+  }>()
+
   return () => (
     <div
       fixed
@@ -22,7 +26,7 @@ const CloseButton: SetupFC = () => {
       p-6px
       rounded-full
       className="group"
-      onclick={() => closeWindow(route.name as unknown as string)}
+      onclick={() => closeWindow(props.windowName ? props.windowName : route.name as unknown as string)}
     >
       <div i-mdi:close-thick c="#555 group-hover:white group-active:white dark:#bbb" text-13px></div>
     </div>

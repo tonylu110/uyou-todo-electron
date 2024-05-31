@@ -37,14 +37,11 @@ function createRegisterWindow() {
     }
   }
   registerWindow.setAlwaysOnTop(true)
-  if (NODE_ENV === 'development') {
-    registerWindow.loadURL('http://localhost:3000/#/register?isWin=true')
-  }
-  else {
-    registerWindow.loadFile(path.join(__dirname, '../../dist/index.html'), {
-      hash: '/register?isWin=true',
-    })
-  }
+  if (NODE_ENV === 'development')
+    registerWindow.loadURL('http://localhost:3000/electronWindows/register/')
+  else
+    registerWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/register/index.html'))
+
   remoteMain.enable(registerWindow.webContents)
   registerWindow.once('ready-to-show', () => {
     registerWindow.show()

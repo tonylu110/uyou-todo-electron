@@ -37,14 +37,11 @@ function createAboutWindow() {
     }
   }
   aboutWindow.setAlwaysOnTop(true)
-  if (NODE_ENV === 'development') {
-    aboutWindow.loadURL('http://localhost:3000/#/about?isWin=true')
-  }
-  else {
-    aboutWindow.loadFile(path.join(__dirname, '../../dist/index.html'), {
-      hash: '/about?isWin=true',
-    })
-  }
+  if (NODE_ENV === 'development')
+    aboutWindow.loadURL('http://localhost:3000/electronWindows/about/')
+  else
+    aboutWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/about/index.html'))
+
   remoteMain.enable(aboutWindow.webContents)
   aboutWindow.once('ready-to-show', () => {
     aboutWindow.show()

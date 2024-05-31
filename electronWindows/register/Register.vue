@@ -2,9 +2,9 @@
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ipcRenderer } from 'electron'
-import Alert from '../components/Alert/Alert.vue'
-import CloseButton from '../components/CloseButton'
-import { isMac } from '../util/os'
+import Alert from '../../src/components/Alert/Alert.vue'
+import CloseButton from '../../src/components/CloseButton'
+import { isMac } from '../../src/util/os'
 
 const { t } = useI18n()
 
@@ -152,6 +152,6 @@ function closeAlert() {
     >
       {{ alertMsg }}
     </Alert>
-    <CloseButton v-if="!isMac()" />
+    <CloseButton v-if="!isMac()" window-name="register" />
   </div>
 </template>

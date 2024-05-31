@@ -1,25 +1,26 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ipcRenderer } from 'electron'
-import Alert from '../components/Alert/Alert.vue'
-import { isMac } from '../util/os'
-import CloseButton from '../components/CloseButton'
+import Alert from '../../src/components/Alert/Alert.vue'
+import { isMac } from '../../src/util/os'
+import CloseButton from '../../src/components/CloseButton'
 
 const { t } = useI18n()
-
-const route = useRoute()
 
 function closeWindow() {
   ipcRenderer.send('close-repass')
 }
 
 const formData = reactive({
-  account: route.query.account,
+  account: '',
   oldPass: '',
   newPass: '',
 })
+
+ipcRenderer.on('getUserName', (_ev, name: string) => [
+  formData.account = name,
+])
 
 const showAlert = ref(false)
 const alertMsg = ref('')
@@ -148,6 +149,6 @@ function closeAlert() {
     >
       {{ alertMsg }}
     </Alert>
-    <CloseButton v-if="!isMac()" />
+    <CloseButton v-if="!isMac()" window-name="repass" />
   </div>
 </template>

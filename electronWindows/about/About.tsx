@@ -1,6 +1,6 @@
-import { isMac } from '../util/os'
-import CloseButton from '../components/CloseButton'
-import { versionText } from '../util/appVersionCode'
+import { isMac } from '../../src/util/os'
+import CloseButton from '../../src/components/CloseButton'
+import { versionText } from '../../src/util/appVersionCode'
 
 const About: SetupFC = () => {
   return () => (
@@ -17,7 +17,7 @@ const About: SetupFC = () => {
         w-130px
         h-130px
         m="b-30px t-20px"
-        src="./logo.png"
+        src="../../logo.png"
         alt=""
       />
       <span c="#555 dark:#bbb" font-bold text-24px>
@@ -52,7 +52,9 @@ const About: SetupFC = () => {
         {/* eslint-disable-next-line node/prefer-global/process */}
         {process.versions.electron}
       </div>
-      {!isMac() ? <CloseButton /> : null}
+      {/* eslint-disable-next-line ts/ban-ts-comment */}
+      {/* @ts-expect-error */}
+      {!isMac() ? <CloseButton windowName="about" /> : null}
     </div>
   )
 }

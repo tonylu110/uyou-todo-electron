@@ -28,15 +28,15 @@ function createRepassWindow(uname) {
     },
   })
   repassWindow.setAlwaysOnTop(true)
-  if (NODE_ENV === 'development') {
-    repassWindow.loadURL(`http://localhost:3000/#/repass?isWin=true&account=${uname}`)
-  }
-  else {
-    repassWindow.loadFile(path.join(__dirname, '../../../dist/index.html'), {
-      hash: `/repass?isWin=true&account=${uname}`,
-    })
-  }
+  if (NODE_ENV === 'development')
+    repassWindow.loadURL(`http://localhost:3000/electronWindows/repass/`)
+  else
+    repassWindow.loadFile(path.join(__dirname, '../../../dist/electronWindows/repass/index.html'))
+
   remoteMain.enable(repassWindow.webContents)
+  repassWindow.on('ready-to-show', () => {
+    repassWindow.webContents.send('getUserName', uname)
+  })
   return repassWindow
 }
 

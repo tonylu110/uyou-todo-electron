@@ -50,34 +50,6 @@ const routes = [
     component: () => import('./pages/Settings/LangSet.vue'),
   },
   {
-    path: '/about',
-    name: 'about',
-    components: {
-      isWindow: () => import('./windows/About.tsx'),
-    },
-  },
-  {
-    path: '/register',
-    name: 'register',
-    components: {
-      isWindow: () => import('./windows/Register.vue'),
-    },
-  },
-  {
-    path: '/repass',
-    name: 'repass',
-    components: {
-      isWindow: () => import('./windows/Repass.vue'),
-    },
-  },
-  {
-    path: '/logoff',
-    name: 'logoff',
-    components: {
-      isWindow: () => import('./windows/Logoff.tsx'),
-    },
-  },
-  {
     path: '/lab',
     name: 'lab',
     component: () => import('./pages/Laboratory'),
@@ -111,8 +83,6 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  // eslint-disable-next-line ts/ban-ts-comment
-  // @ts-expect-error
   routes,
 })
 

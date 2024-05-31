@@ -1,19 +1,21 @@
 import { reactive, ref } from 'vue'
-import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import CloseButton from '../components/CloseButton'
-import Alert from '../components/Alert/Alert.vue'
-import { isMac } from '../util/os'
-import { closeWindow } from '../util/windowApi'
+import { ipcRenderer } from 'electron'
+import CloseButton from '../../src/components/CloseButton'
+import Alert from '../../src/components/Alert/Alert.vue'
+import { isMac } from '../../src/util/os'
+import { closeWindow } from '../../src/util/windowApi'
 
 const Logoff: SetupFC = () => {
   const { t } = useI18n()
 
-  const route = useRoute()
-
   const formData = reactive({
-    account: route.query.account,
+    account: '',
     passwd: '',
+  })
+
+  ipcRenderer.on('getUserName', (_ev, name: string) => {
+    formData.account = name
   })
 
   const showDialog = ref(false)
@@ -187,7 +189,9 @@ const Logoff: SetupFC = () => {
       >
         <span>{dialogText.value}</span>
       </Alert>
-      {isMac() ? null : <CloseButton />}
+      {/* eslint-disable-next-line ts/ban-ts-comment */}
+      {/* @ts-expect-error */}
+      {!isMac() ? <CloseButton windowName="logoff" /> : null}
     </div>
   )
 }

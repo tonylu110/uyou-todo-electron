@@ -37,17 +37,15 @@ function createLogoffWindow(uname) {
     }
   }
   logoffWindow.setAlwaysOnTop(true)
-  if (NODE_ENV === 'development') {
-    logoffWindow.loadURL(`http://localhost:3000/#/logoff?isWin=true&account=${uname}`)
-  }
-  else {
-    logoffWindow.loadFile(path.join(__dirname, '../../dist/index.html'), {
-      hash: `/logoff?isWin=true&account=${uname}`,
-    })
-  }
+  if (NODE_ENV === 'development')
+    logoffWindow.loadURL(`http://localhost:3000/electronWindows/logoff/`)
+  else
+    logoffWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/logoff/index.html'))
+
   remoteMain.enable(logoffWindow.webContents)
   logoffWindow.once('ready-to-show', () => {
     logoffWindow.show()
+    logoffWindow.webContents.send('getUserName', uname)
   })
   return logoffWindow
 }
