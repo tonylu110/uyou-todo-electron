@@ -41,7 +41,7 @@ window.addEventListener('resize', () => {
 
 <template>
   <div
-    class="item group"
+    class="group item"
     :style="{
       cursor: showSwitch || showListBox ? 'auto' : '',
       width: simpleMode ? 'calc(100% - 50px)' : (minWidth ? 'calc(100vw - 108px)' : ''),

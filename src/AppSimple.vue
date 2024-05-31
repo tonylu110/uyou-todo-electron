@@ -19,15 +19,7 @@ import type ITodoList from './interface/ITodoListArray'
 import setTime from './components/List/Item/setTime'
 import OpenPass from './components/OpenPass/OpenPass.vue'
 
-const route = useRoute()
-const router = useRouter()
-const isWinDow = ref(true)
-
 const { t, locale } = useI18n()
-
-router.isReady().then(() => {
-  isWinDow.value = route.query.isWin === 'true'
-})
 
 const routerShow = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
 
@@ -91,15 +83,11 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
 
 <template>
   <Transition name="open-pass">
-    <OpenPass v-if="passAlert && !isWinDow" v-model="passAlert" />
+    <OpenPass v-if="passAlert" v-model="passAlert" />
   </Transition>
   <ElConfigProvider :locale="useLocale">
     <RouterUrl v-if="routerShow" />
-    <div :class="isDark ? 'dark' : ''">
-      <router-view name="isWindow" />
-    </div>
     <div
-      v-if="!isWinDow"
       :bg="!isBlur ? (isDark ? 'black' : '#aaa') : ''"
       :opacity="passAlert ? '0' : '100'"
       :class="isDark ? 'dark' : ''"

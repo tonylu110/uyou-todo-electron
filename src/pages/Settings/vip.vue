@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { shell } from 'electron'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import router from '../../router'
 import SettingList from '../../components/SettingList'
@@ -97,7 +98,10 @@ const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
         <li>{{ t('vip.more') }}</li>
       </ul>
     </ItemSpace>
-    <SponsorList v-if="!isVip" />
+    <template v-if="!isVip">
+      <Item :title="t('otherList.aboutSponser')" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-electron/discussions/34')" />
+      <SponsorList />
+    </template>
     <template v-if="isVip">
       <ItemBox>
         <Item

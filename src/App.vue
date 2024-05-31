@@ -95,20 +95,16 @@ const systemTitleShow = localStorage.getItem('systemTitle') === 'true'
 
 const route = useRoute()
 const router = useRouter()
-const isWinDow = ref(true)
 
 const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 
 router.isReady().then(() => {
-  isWinDow.value = route.query.isWin === 'true'
-  if (!isWinDow.value && !isNoteUI) {
-    const startRoute = ref(localStorage.getItem('start') ? localStorage.getItem('start')! : 'home')
-    if (startRoute.value === 'home')
-      startRoute.value = '/'
-    else
-      startRoute.value = '/other?listName=today'
-    router.push(startRoute.value)
-  }
+  const startRoute = ref(localStorage.getItem('start') ? localStorage.getItem('start')! : 'home')
+  if (startRoute.value === 'home')
+    startRoute.value = '/'
+  else
+    startRoute.value = '/other?listName=today'
+  router.push(startRoute.value)
 })
 
 const routerShow = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
@@ -212,13 +208,10 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
 
 <template>
   <Transition name="open-pass">
-    <OpenPass v-if="passAlert && !isWinDow" v-model="passAlert" />
+    <OpenPass v-if="passAlert" v-model="passAlert" />
   </Transition>
   <ElConfigProvider :locale="useLocale">
     <RouterUrl v-if="routerShow" />
-    <div :class="isDark ? 'dark' : ''">
-      <router-view name="isWindow" />
-    </div>
     <div
       v-if="isNoteUI"
       :class="isDark ? 'dark' : ''"
@@ -235,7 +228,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
       <router-view v-if="route.name !== 'Home'" />
     </div>
     <div
-      v-if="!isWinDow && !isNoteUI" class="list-main"
+      v-if="!isNoteUI" class="list-main"
       :bg="!isBlur
         ? (isDark
           ? 'black'
