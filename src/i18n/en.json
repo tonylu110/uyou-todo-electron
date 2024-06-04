@@ -213,10 +213,11 @@
     "noData": "no data",
     "other": "uncategorized",
     "addCate": "Add Category",
-    "cancelAdd": "Cancel Add",
+    "cancelAdd": "Cancel To Add",
     "chooseIcon": "Select category icon",
     "cateName": "Category name",
-    "chooseColor": "Select category color"
+    "chooseColor": "Select category color",
+    "addItem": "Confirm To Add"
   },
   "sponsor": {
     "thanks": "Thanks Sponsors"

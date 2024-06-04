@@ -36,15 +36,14 @@ Store.initRenderer()
 
 let mainWindow
 function createWindow() {
-  const {
-    width,
-    height,
-  } = screen.getPrimaryDisplay().workAreaSize
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize
+
   initWindowSize()
   initSystemBar()
   initMenuBlur()
   initWindowMenu()
   initSim()
+
   mainWindow = new MicaBrowserWindow({
     width: simple ? 370 : 1000,
     height: 750,
@@ -67,22 +66,27 @@ function createWindow() {
   })
   if (windowSizeState)
     mainWindow.setSize(windowSize.width, windowSize.height)
+
   remoteMain.enable(mainWindow.webContents)
+
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11)
-      setMicaStyle(micaStyle || 'mica', mainWindow); else mainWindow.setAcrylic()
+      setMicaStyle(micaStyle || 'mica', mainWindow)
+    else
+      mainWindow.setAcrylic()
   }
   else { mainWindow.setBackgroundColor('#fff') }
 
-  mainWindow.loadURL(NODE_ENV === 'development' ? 'http://localhost:3000' : `file://${path.join(__dirname, '../dist/index.html')}`)
-
-  // mainWindow.setMaximizable(false)
+  mainWindow.loadURL(NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : `file://${path.join(__dirname, '../dist/index.html')}`)
 
   if (NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools({
       mode: 'detach',
     })
   }
+
   ipcMain.on('window-min', () => {
     mainWindow.minimize()
   })
@@ -100,6 +104,7 @@ function createWindow() {
   ipcMain.on('open-url', (event, url) => {
     shell.openExternal(url)
   })
+
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
   ipcMain.on('setAddItemCut', (event, use) => {
     if (use) {
@@ -111,6 +116,7 @@ function createWindow() {
       globalShortcut.unregister('Alt+A')
     }
   })
+
   windowSizeIpc()
   systemBarIpc()
   menuBlurIpc()

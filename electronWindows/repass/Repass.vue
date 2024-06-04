@@ -18,9 +18,9 @@ const formData = reactive({
   newPass: '',
 })
 
-ipcRenderer.on('getUserName', (_ev, name: string) => [
-  formData.account = name,
-])
+ipcRenderer.on('getUserName', (_ev, name: string) => {
+  formData.account = name
+})
 
 const showAlert = ref(false)
 const alertMsg = ref('')

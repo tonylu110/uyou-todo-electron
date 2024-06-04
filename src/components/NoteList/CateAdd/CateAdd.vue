@@ -18,7 +18,7 @@ const { t } = useI18n()
 
 const cateName = ref('')
 const icon = ref('i-ph:radio-button-bold')
-const color = ref('null')
+const color = ref<string | null>(null)
 
 function addCate() {
   emitter.emit('addCateNote', {
@@ -29,7 +29,7 @@ function addCate() {
   emit('close')
   cateName.value = ''
   icon.value = 'i-ph:radio-button-bold'
-  color.value = 'null'
+  color.value = null
 }
 
 const isVip = ref(localStorage.getItem('isVip') === 'true')
@@ -39,7 +39,7 @@ function close() {
   emit('close')
   cateName.value = ''
   icon.value = 'i-ph:radio-button-bold'
-  color.value = 'null'
+  color.value = null
 }
 </script>
 
@@ -73,7 +73,7 @@ function close() {
         >
         <template v-if="isVip && useCustColor">
           <span m="l-7px b-7px t-7px" font-bold>{{ t('noteui.chooseColor') }}</span>
-          <Colors :color="color" @set-color="(selectColor: string) => color = selectColor" />
+          <Colors :color="color" @set-color="(selectColor: string | null) => color = selectColor" />
         </template>
       </div>
     </div>

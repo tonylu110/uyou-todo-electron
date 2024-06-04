@@ -8,6 +8,7 @@ import changeCate from '../ListMenu/changCate'
 import saveItemSet from '../List/saveItemSet'
 import type ITodoList from '../../interface/ITodoListArray'
 import NoteBox from './NoteBox/NoteBox.vue'
+import AddItem from './AddItem/AddItem.vue'
 
 interface addCate {
   name: string
@@ -74,6 +75,23 @@ function delWithToDo(id: number) {
 
   delCate(id)
 }
+
+const openAddItem = ref(false)
+const itemText = ref('')
+const cateid = ref<number>()
+emitter.on('noteShowAddItem', (cateId) => {
+  cateid.value = cateId as number
+  openAddItem.value = true
+})
+function addItem(time: string) {
+  emitter.emit('noteAddItem', { text: itemText.value, cateid: cateid.value, time })
+  itemText.value = ''
+  openAddItem.value = false
+}
+function close() {
+  openAddItem.value = false
+  itemText.value = ''
+}
 </script>
 
 <template>
@@ -96,5 +114,6 @@ function delWithToDo(id: number) {
       :title="t('noteui.other')"
       :other-cate="true"
     />
+    <AddItem v-model="itemText" :open="openAddItem" @close="close" @add="addItem" />
   </div>
 </template>

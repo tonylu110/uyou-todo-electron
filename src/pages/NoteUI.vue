@@ -30,7 +30,10 @@ const showSearch = ref(false)
 </script>
 
 <template>
-  <SettingList h="![calc(100vh-160px)]" p-y="!80px" drag>
+  <SettingList h="![calc(100vh-160px)]" p-y="!80px">
+    <div fixed left-0 top-0 h-65px w-full drag />
+    <div fixed left-0 top-0 h-full w-12vw drag />
+    <div fixed right-0 top-0 h-full w-12vw drag />
     <div
       v-if="!isMac()"
       :bg="topState
@@ -54,7 +57,9 @@ const showSearch = ref(false)
         bg="primary-d active:primary-a"
         transition="duration-300 all"
         rounded="10px hover:30px"
-        shadow="md" flex items-center justify-center p-13px active:transform-scale-90
+        shadow="md hover:lg primary-d/70 dark:primary-a/70"
+        flex items-center justify-center p-13px
+        transform="active:scale-90 hover:scale-120"
         @click="showSearch = true"
       >
         <div i-ph:magnifying-glass-bold text-22px c-white />
@@ -67,17 +72,20 @@ const showSearch = ref(false)
         bg="primary-d active:primary-a"
         transition="duration-300 all"
         rounded="10px hover:30px"
-        shadow="md" flex items-center justify-center p-13px active:transform-scale-90
+        shadow="md hover:lg primary-d/70 dark:primary-a/70"
+        flex items-center justify-center p-13px
+        transform="active:scale-90 hover:scale-120"
         @click="showCateAdd = true"
       >
         <div i-ph:plus-bold text-22px c-white />
       </div>
       <div
-
         bg="primary-d active:primary-a"
         transition="duration-300 all"
         rounded="10px hover:30px"
-        shadow="md" flex items-center justify-center p-13px active:transform-scale-90
+        shadow="md hover:lg primary-d/70 dark:primary-a/70"
+        flex items-center justify-center p-13px
+        transform="active:scale-90 hover:scale-120"
         @click="router.push('/setting')"
       >
         <div i-ph:gear-fine-bold text-22px c-white />

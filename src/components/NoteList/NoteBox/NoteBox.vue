@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { Dropdown as VDropdown } from 'floating-vue'
 import { useI18n } from 'vue-i18n'
 import LocalStorage from '../../../util/localStorage'
+import emitter from '../../../util/bus'
+import saveItemSet from '../../List/saveItemSet'
+import setTime from '../../List/Item/setTime'
 import Item from './Item/Item.vue'
 
 const props = withDefaults(defineProps<{
@@ -24,10 +27,36 @@ const emits = defineEmits<{
 const { t } = useI18n()
 
 const list = ref(LocalStorage('get'))
-const listData = ref(list.value!.filter(listData => listData.cate === `${props.id}`))
+const listData = computed(() => list.value!.filter(listData => listData.cate === `${props.id}`))
 const otherList = ref(list.value!.filter(listData => listData.cate === undefined))
 
 const isOpen = ref(false)
+
+function add() {
+  emitter.emit('noteShowAddItem', props.id!)
+}
+
+emitter.on('noteAddItem', (item) => {
+  const useItem = item as {
+    text: string
+    cateid: number
+    time: string
+  }
+
+  if (props.id === useItem.cateid) {
+    list.value!.unshift({
+      ok: false,
+      id: new Date().getTime(),
+      text: useItem.text,
+      cate: `${useItem.cateid}`,
+      time: Number(useItem.time),
+    })
+
+    saveItemSet(list.value!)
+
+    setTime(Number(useItem.time), useItem.text, t('todo-time'))
+  }
+})
 </script>
 
 <template>
@@ -127,6 +156,7 @@ const isOpen = ref(false)
         bg="black/5 active:black/10" mt-5px flex items-center justify-center rounded-7px
         p-10px
         transition="all 300"
+        @click="add"
       >
         <div i-ph:plus-bold />
       </div>

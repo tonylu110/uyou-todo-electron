@@ -216,7 +216,8 @@
     "cancelAdd": "取消添加",
     "chooseIcon": "选择类别图标",
     "cateName": "类别名称",
-    "chooseColor": "选择类别颜色"
+    "chooseColor": "选择类别颜色",
+    "addItem": "确定添加"
   },
   "sponsor": {
     "thanks": "感谢赞助"

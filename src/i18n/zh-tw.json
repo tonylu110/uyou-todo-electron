@@ -216,7 +216,8 @@
     "cancelAdd": "取消新增",
     "chooseIcon": "選擇類別圖標",
     "cateName": "類別名稱",
-    "chooseColor": "選擇類別顏色"
+    "chooseColor": "選擇類別顏色",
+    "addItem": "確定添加"
   },
   "sponsor": {
     "thanks": "感謝贊助"
