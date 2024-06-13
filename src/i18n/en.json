@@ -80,7 +80,8 @@
     "laboratory": "Laboratory",
     "itemBtnShow": "Show ToDo button",
     "rememberQuit": "Remember to close the window",
-    "openPass": "Start encryption"
+    "openPass": "Start encryption",
+    "model": "Mode selection"
   },
   "contextMenu": {
     "copy": "Copy",
@@ -221,5 +222,8 @@
   },
   "sponsor": {
     "thanks": "Thanks Sponsors"
+  },
+  "mode": {
+    "normal": "Standard Mode"
   }
 }

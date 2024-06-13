@@ -36,7 +36,6 @@ const useSystemTitleBar = ref(localStorage.getItem('systemTitle') === 'true')
 const topState = ref(firstLoad())
 const menuBlurState = ref(localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null)
 const showWindowMenuState = ref(localStorage.getItem('windowMenu') === 'true')
-const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
 const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
 const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
 const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
@@ -142,6 +141,10 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
         @item-fun="router.push('/openPass?from=setting')"
       />
     </ItemBox>
+    <Item
+      :title="t('anotherSettings.model')"
+      @item-fun="router.push('/mode?from=setting')"
+    />
     <ItemBox>
       <Item
         :title="t('update.autoUpdate')"
@@ -155,12 +158,6 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
       />
     </ItemBox>
     <ItemBox>
-      <Item
-        :title="t('anotherSettings.simple')"
-        :show-switch="true"
-        :switch-state="simpleModeState"
-        @switch-fun="setSwitchFn('simpleMode', !simpleModeState, () => simpleModeState = !simpleModeState, 'setSimple', t('restartApp'))"
-      />
       <Item
         :title="t('startPage.startPage')"
         :show-list-box="true"

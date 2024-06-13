@@ -80,7 +80,8 @@
     "laboratory": "實驗室",
     "itemBtnShow": "顯示 ToDo 按鈕",
     "rememberQuit": "記住關閉視窗操作",
-    "openPass": "啟動加密"
+    "openPass": "啟動加密",
+    "model": "模式選擇"
   },
   "contextMenu": {
     "copy": "複製",
@@ -221,5 +222,8 @@
   },
   "sponsor": {
     "thanks": "感謝贊助"
+  },
+  "mode": {
+    "normal": "標準模式"
   }
 }

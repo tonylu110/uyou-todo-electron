@@ -79,6 +79,11 @@ const routes = [
     name: 'passKey',
     component: () => import('./pages/Settings/Vip/PassKey.vue'),
   },
+  {
+    path: '/mode',
+    name: 'mode',
+    component: () => import('./pages/Settings/Mode.vue'),
+  },
 ]
 
 const router = createRouter({
