@@ -1,6 +1,8 @@
 import path from 'node:path'
 import { Notification } from 'electron'
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
 function sendNotification(title, msg) {
   const notification = new Notification({
     title,
