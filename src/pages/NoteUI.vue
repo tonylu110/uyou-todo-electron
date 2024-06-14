@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import WindowButtons from '../components/TabBar/windowButtons'
 import SettingList from '../components/SettingList'
 import NoteList from '../components/NoteList/NoteList.vue'
@@ -10,8 +11,12 @@ import { topWindow } from '../util/windowApi'
 import emitter from '../util/bus'
 import { isMac } from '../util/os'
 import Search from '../components/Search/Search.vue'
+import Tabs from '../components/Tabs/Tabs.vue'
+import Tab from '../components/Tabs/Tab/Tab.vue'
 
 const router = useRouter()
+
+const { t } = useI18n()
 
 const showCateAdd = ref(false)
 
@@ -26,6 +31,21 @@ emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
 })
 
+const lableWidth = ref('')
+const lableLeft = ref('0')
+const tabsRef = ref<{
+  $el: HTMLDivElement
+}>()
+function choose(id: string, width: string, left: number) {
+  setLab(width, left)
+  return id
+}
+
+function setLab(width: string, left: number) {
+  lableWidth.value = width
+  lableLeft.value = `${left - (tabsRef.value!.$el.getBoundingClientRect().left + 12)}px`
+}
+
 const showSearch = ref(false)
 </script>
 
@@ -34,6 +54,16 @@ const showSearch = ref(false)
     <div fixed left-0 top-0 h-65px w-full drag />
     <div fixed left-0 top-0 h-full w-12vw drag />
     <div fixed right-0 top-0 h-full w-12vw drag />
+    <Tabs ref="tabsRef" :lab-width="lableWidth" :lab-left="lableLeft">
+      <template #header>
+        <Tab id="side" icon="i-f7:sidebar-left" :control="true" />
+      </template>
+      <template #footer>
+        <Tab id="search" icon="i-f7:search" :control="true" @choose="showSearch = true" />
+      </template>
+      <Tab id="all" :title="t('noteui.allcate')" :checked="true" :index="0" @choose="choose" @load="setLab" />
+      <Tab id="use" :title="t('noteui.othercate')" :index="1" @choose="choose" />
+    </Tabs>
     <div
       v-if="!isMac()"
       :bg="topState
@@ -52,19 +82,6 @@ const showSearch = ref(false)
 
     <NoteList />
 
-    <div flex="~ gap-10px" fixed bottom-15px left-15px no-drag>
-      <div
-        bg="primary-d active:primary-a"
-        transition="duration-300 all"
-        rounded="10px hover:30px"
-        shadow="md hover:lg primary-d/70 dark:primary-a/70"
-        flex items-center justify-center p-13px
-        transform="active:scale-90 hover:scale-120"
-        @click="showSearch = true"
-      >
-        <div i-ph:magnifying-glass-bold text-22px c-white />
-      </div>
-    </div>
     <div
       flex="~ gap-10px" fixed bottom-15px right-15px no-drag
     >

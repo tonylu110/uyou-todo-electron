@@ -218,7 +218,9 @@
     "chooseIcon": "選擇類別圖標",
     "cateName": "類別名稱",
     "chooseColor": "選擇類別顏色",
-    "addItem": "確定添加"
+    "addItem": "確定添加",
+    "allcate": "所有類別",
+    "othercate": "其他類別"
   },
   "sponsor": {
     "thanks": "感謝贊助"

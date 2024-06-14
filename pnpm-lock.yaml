@@ -21,6 +21,9 @@ importers:
       '@antfu/eslint-config':
         specifier: ^2.20.0
         version: 2.20.0(@unocss/eslint-plugin@0.60.2(eslint@9.2.0)(typescript@5.4.4))(@vue/compiler-sfc@3.4.27)(eslint-plugin-format@0.1.1(eslint@9.2.0))(eslint@9.2.0)(typescript@5.4.4)
+      '@iconify-json/f7':
+        specifier: ^1.1.0
+        version: 1.1.0
       '@iconify-json/fluent':
         specifier: ^1.1.55
         version: 1.1.55
@@ -765,10 +768,14 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@humanwhocodes/retry@0.2.4':
     resolution: {integrity: sha512-Ttl/jHpxfS3st5sxwICYfk4pOH0WrLI1SpW283GgQL7sCWU7EHIOhX4b4fkIxr3tkfzwg8+FNojtzsIEE7Ecgg==}
     engines: {node: '>=18.18'}
+
+  '@iconify-json/f7@1.1.0':
+    resolution: {integrity: sha512-CSY3ZVPkCGBdx1FjAi/VDV3is68CMM1E8qVWUQwy3rGJeHHsfdo0M10sY4I65gC8DvcUdr+uqnRQ64R3eHC69g==}
 
   '@iconify-json/fluent@1.1.55':
     resolution: {integrity: sha512-YMN/6c0deR0XlU2LR4MDJS/PERAwvvZssfEcDYZ/KFBa6RVJSHWxb02DCwxjgrmeO3Pex1TI9nRig/IMvW7zhQ==}
@@ -4623,6 +4630,10 @@ snapshots:
   '@humanwhocodes/object-schema@2.0.3': {}
 
   '@humanwhocodes/retry@0.2.4': {}
+
+  '@iconify-json/f7@1.1.0':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify-json/fluent@1.1.55':
     dependencies:

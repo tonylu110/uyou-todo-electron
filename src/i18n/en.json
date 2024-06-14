@@ -218,7 +218,9 @@
     "chooseIcon": "Select category icon",
     "cateName": "Category name",
     "chooseColor": "Select category color",
-    "addItem": "Confirm To Add"
+    "addItem": "Confirm To Add",
+    "allcate": "All categories",
+    "othercate": "other categories"
   },
   "sponsor": {
     "thanks": "Thanks Sponsors"

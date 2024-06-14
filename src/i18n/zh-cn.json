@@ -218,7 +218,9 @@
     "chooseIcon": "选择类别图标",
     "cateName": "类别名称",
     "chooseColor": "选择类别颜色",
-    "addItem": "确定添加"
+    "addItem": "确定添加",
+    "allcate": "所有类别",
+    "othercate": "其他类别"
   },
   "sponsor": {
     "thanks": "感谢赞助"
