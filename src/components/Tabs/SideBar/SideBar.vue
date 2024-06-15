@@ -6,6 +6,8 @@ defineProps<{
 const emits = defineEmits<{
   setSide: []
 }>()
+
+const menuBlur = localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null
 </script>
 
 <template>
@@ -16,7 +18,8 @@ const emits = defineEmits<{
     :pointer-events="open ? 'auto' : 'none'" @click="emits('setSide')"
   >
     <div
-      absolute h-screen w-300px bg="#ddd" pl-4 shadow-xl no-drag
+      :bg="menuBlur ? '#ddd' : '#ddd/50'" absolute h-screen
+      w-300px pl-4 shadow-xl backdrop-blur-xl no-drag
       :left="open ? '0' : '-316px'"
       transition="all duration-200"
     >

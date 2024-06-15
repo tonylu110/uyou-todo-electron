@@ -3,10 +3,16 @@ defineProps<{
   labWidth: string
   labLeft: string
 }>()
+
+const menuBlur = localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null
 </script>
 
 <template>
-  <div bg="#ddd" shadow="[inset_0_1px_2px_0_rgba(0,0,0,0.05)]" fixed top="2.5" z-1 rounded-full p-4px no-drag>
+  <div
+    :bg="menuBlur ? '#ddd' : '#ddd/50'"
+    shadow="[inset_0_1px_2px_0_rgba(0,0,0,0.05)]"
+    top="2.5" fixed z-1 rounded-full p-4px backdrop-blur-xl no-drag
+  >
     <nav relative flex>
       <slot name="header" />
       <slot />
@@ -15,7 +21,9 @@ defineProps<{
         :style="{
           width: labWidth,
           left: labLeft,
-        }" absolute bottom-0 h-full rounded-full bg-white shadow-sm transition="all duration-250"
+        }"
+        absolute bottom-0 h-full rounded-full
+        bg-white shadow-sm transition="all duration-250"
       />
     </nav>
   </div>

@@ -2,6 +2,7 @@
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { ipcRenderer } from 'electron'
 import WindowButtons from '../components/TabBar/windowButtons'
 import SettingList from '../components/SettingList'
 import NoteList from '../components/NoteList/NoteList.vue'
@@ -15,10 +16,39 @@ import Tabs from '../components/Tabs/Tabs.vue'
 import Tab from '../components/Tabs/Tab/Tab.vue'
 import SideBar from '../components/Tabs/SideBar/SideBar.vue'
 import Item from '../components/Tabs/SideBar/Item/Item.vue'
+import Alert from '../components/Alert/Alert.vue'
+import { versionCode } from '../util/appVersionCode'
 
 const router = useRouter()
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+
+const alertShow = ref(false)
+const alertMsg = ref<string[]>([])
+const newVersion = ref('')
+
+const version = versionCode
+const autoUpdateState = localStorage.getItem('autoUpdate') !== 'false'
+
+if (autoUpdateState) {
+  fetch('https://api.todo.uyou.org.cn/update/get').then((res) => {
+    return res.json()
+  }).then((res) => {
+    if (res[1].code > version) {
+      if (locale.value === 'zh-cn')
+        alertMsg.value = res[1].data
+      else
+        alertMsg.value = res[1].enData
+      newVersion.value = res[1].version
+      alertShow.value = true
+    }
+  })
+}
+
+function returnClick() {
+  alertShow.value = false
+  ipcRenderer.send('open-url', 'https://github.com/tonylu110/uyou-todo-electron/releases')
+}
 
 const showCateAdd = ref(false)
 
@@ -48,6 +78,16 @@ function setLab(width: string, left: number) {
   lableLeft.value = `${left - (tabsRef.value!.$el.getBoundingClientRect().left + 12)}px`
 }
 
+const showTab = ref(!(window.innerWidth < 640))
+window.addEventListener('resize', () => {
+  if (window.innerWidth < 640) {
+    showTab.value = false
+  }
+  else {
+    showTab.value = true
+  }
+})
+
 const openSideBar = ref(false)
 
 const showSearch = ref(false)
@@ -71,7 +111,7 @@ const showSearch = ref(false)
         <Tab id="search" icon="i-f7:search" :control="true" @choose="showSearch = true" />
       </template>
       <Tab id="all" :title="t('noteui.allcate')" :checked="true" :index="0" @choose="choose" @load="setLab" />
-      <Tab id="use" :title="t('noteui.othercate')" :index="1" @choose="choose" />
+      <Tab v-if="showTab" id="use" :title="t('noteui.othercate')" :index="1" @choose="choose" />
     </Tabs>
     <div
       v-if="!isMac()"
@@ -120,4 +160,17 @@ const showSearch = ref(false)
     <CateAdd :open="showCateAdd" @close="showCateAdd = false" />
     <Search :open="showSearch" @close="showSearch = false" />
   </SettingList>
+  <Alert
+    :dialog-show="alertShow"
+    :title="`${t('updateText')} v${newVersion}`"
+    :confirm-btn-name="t('update.gotoUpdate')"
+    @cancel="() => alertShow = false"
+    @return="returnClick"
+  >
+    <ul m-0 p-l-20px>
+      <li v-for="(item, index) in alertMsg" :key="index">
+        {{ item.slice(2) }}
+      </li>
+    </ul>
+  </Alert>
 </template>

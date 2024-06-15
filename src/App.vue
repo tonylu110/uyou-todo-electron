@@ -255,6 +255,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
           <Alert
             :dialog-show="alertShow"
             :title="`${t('updateText')} v${newVersion}`"
+            :confirm-btn-name="t('update.gotoUpdate')"
             @cancel="() => alertShow = false"
             @return="returnClick"
           >

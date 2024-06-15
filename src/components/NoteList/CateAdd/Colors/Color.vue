@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  color: string
+  color: string | null
 }>()
 
 const emits = defineEmits<{

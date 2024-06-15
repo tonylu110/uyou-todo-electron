@@ -10,6 +10,18 @@ import ElectronRenderer from 'vite-plugin-electron-renderer'
 
 export default defineConfig({
   base: './',
+  resolve: {
+    alias: {
+      '~/': `${path.resolve(__dirname, 'src')}/`,
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "~/styles/element/index.scss" as *;`,
+      },
+    },
+  },
   plugins: [
     VueMacros({
       plugins: {
@@ -23,7 +35,9 @@ export default defineConfig({
     }),
     VueDevTools(),
     UnoCSS(),
-    ElementPlus({}),
+    ElementPlus({
+      useSource: true,
+    }),
     ElectronRenderer(),
   ],
   server: {

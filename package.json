@@ -1,6 +1,6 @@
 {
   "name": "uyoutodo",
-  "version": "2.2.3",
+  "version": "3.0.0",
   "private": false,
   "author": {
     "name": "Anthony Lu",
@@ -48,7 +48,7 @@
     "@vueuse/core": "^10.10.0",
     "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",
-    "electron": "^30.0.9",
+    "electron": "^31.0.1",
     "electron-builder": "^24.13.3",
     "element-plus": "^2.7.4",
     "eslint": "^9.2.0",
