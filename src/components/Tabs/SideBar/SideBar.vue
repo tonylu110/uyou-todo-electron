@@ -18,7 +18,7 @@ const menuBlur = localStorage.getItem('menuBlur') === 'true' || localStorage.get
     :pointer-events="open ? 'auto' : 'none'" @click="emits('setSide')"
   >
     <div
-      :bg="menuBlur ? '#ddd' : '#ddd/50'" absolute h-screen
+      :bg="menuBlur ? '#ddd dark:#333' : '#ddd/50 dark:#333/50'" absolute h-screen
       w-300px pl-4 shadow-xl backdrop-blur-xl no-drag
       :left="open ? '0' : '-316px'"
       transition="all duration-200"
