@@ -220,7 +220,8 @@
     "chooseColor": "选择类别颜色",
     "addItem": "确定添加",
     "allcate": "所有类别",
-    "othercate": "其他类别"
+    "othercate": "其他类别",
+    "search": "搜索"
   },
   "sponsor": {
     "thanks": "感谢赞助"

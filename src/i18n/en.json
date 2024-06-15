@@ -219,8 +219,9 @@
     "cateName": "Category name",
     "chooseColor": "Select category color",
     "addItem": "Confirm To Add",
-    "allcate": "All categories",
-    "othercate": "other categories"
+    "allcate": "All Categories",
+    "othercate": "Other categories",
+    "search": "Search"
   },
   "sponsor": {
     "thanks": "Thanks Sponsors"

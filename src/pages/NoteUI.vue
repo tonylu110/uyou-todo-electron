@@ -13,6 +13,8 @@ import { isMac } from '../util/os'
 import Search from '../components/Search/Search.vue'
 import Tabs from '../components/Tabs/Tabs.vue'
 import Tab from '../components/Tabs/Tab/Tab.vue'
+import SideBar from '../components/Tabs/SideBar/SideBar.vue'
+import Item from '../components/Tabs/SideBar/Item/Item.vue'
 
 const router = useRouter()
 
@@ -46,6 +48,8 @@ function setLab(width: string, left: number) {
   lableLeft.value = `${left - (tabsRef.value!.$el.getBoundingClientRect().left + 12)}px`
 }
 
+const openSideBar = ref(false)
+
 const showSearch = ref(false)
 </script>
 
@@ -54,9 +58,14 @@ const showSearch = ref(false)
     <div fixed left-0 top-0 h-65px w-full drag />
     <div fixed left-0 top-0 h-full w-12vw drag />
     <div fixed right-0 top-0 h-full w-12vw drag />
+    <SideBar :open="openSideBar" @set-side="openSideBar = false">
+      <Item icon="i-f7:square-list" :title="t('noteui.allcate')" :selected="true" />
+      <Item icon="i-f7:today" :title="t('noteui.othercate')" :selected="false" />
+      <Item icon="i-f7:search" :title="t('noteui.search')" :selected="false" @click="showSearch = true" />
+    </SideBar>
     <Tabs ref="tabsRef" :lab-width="lableWidth" :lab-left="lableLeft">
       <template #header>
-        <Tab id="side" icon="i-f7:sidebar-left" :control="true" />
+        <Tab id="side" icon="i-f7:sidebar-left" :control="true" @choose="openSideBar = true" />
       </template>
       <template #footer>
         <Tab id="search" icon="i-f7:search" :control="true" @choose="showSearch = true" />
@@ -76,7 +85,7 @@ const showSearch = ref(false)
       <div i-fluent:pin-12-filled text-13px :c="topState ? 'white' : '#555'" />
     </div>
 
-    <div fixed right-15px top-14px>
+    <div fixed right-15px top-14px z-1>
       <WindowButtons />
     </div>
 

@@ -6,7 +6,7 @@ defineProps<{
 </script>
 
 <template>
-  <div bg="#ddd" shadow="[inset_0_1px_2px_0_rgba(0,0,0,0.05)]" fixed top-3 z-1 rounded-full p-4px no-drag>
+  <div bg="#ddd" shadow="[inset_0_1px_2px_0_rgba(0,0,0,0.05)]" fixed top="2.5" z-1 rounded-full p-4px no-drag>
     <nav relative flex>
       <slot name="header" />
       <slot />
@@ -15,7 +15,7 @@ defineProps<{
         :style="{
           width: labWidth,
           left: labLeft,
-        }" absolute bottom-0 h-full rounded-full bg-white shadow-sm transition="all 300"
+        }" absolute bottom-0 h-full rounded-full bg-white shadow-sm transition="all duration-250"
       />
     </nav>
   </div>
