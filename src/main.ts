@@ -1,6 +1,6 @@
 import 'virtual:uno.css'
 import 'virtual:unocss-devtools'
-import './main.scss'
+import './styles/main.scss'
 import 'floating-vue/dist/style.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import { createApp, ref } from 'vue'

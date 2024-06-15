@@ -1,6 +1,6 @@
 import 'virtual:uno.css'
 import 'virtual:unocss-devtools'
-import '../../src/main.scss'
+import '../../src/styles/main.scss'
 import { createApp } from 'vue'
 import About from './About'
 
