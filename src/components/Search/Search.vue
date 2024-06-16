@@ -91,10 +91,10 @@ function setStar(id: number, star: boolean) {
           v-model="searchValue"
           type="text"
           bg="white dark:#333"
-          mr-10px w-500px rounded-7px border-none p-20px text-5 outline-none
+          mr-10px w-500px rounded-7px border-none p-20px text-5 shadow-lg outline-none
         >
         <button
-          bg="error-d dark:error-a active:error-a active:dark:error-h"
+          bg="error-d dark:error-a active:error-a active:dark:error-h" shadow="lg error-a/70"
           rounded="7px" h-66px w-45px flex items-center justify-center border-none outline-none
           @click="close"
         >
@@ -103,7 +103,7 @@ function setStar(id: number, star: boolean) {
       </div>
       <PerfectScrollbar
         bg="white dark:#333" rounded-7px
-        max-h="[calc(100vh-250px)]"
+        max-h="[calc(100vh-250px)]" shadow-lg
       >
         <div v-if="listData.length > 0" flex="~ col" items-center p="y-10px x-5px">
           <Item

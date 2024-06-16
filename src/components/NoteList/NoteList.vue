@@ -108,6 +108,11 @@ function del(id: number) {
   }
   saveItemSet(list.value!)
 }
+emitter.on('searchDelete', (id) => {
+  const useId = id as number
+
+  del(useId)
+})
 
 function setOk(id: number, isOk: boolean) {
   for (let i = 0; i < list.value!.length; i++) {
@@ -116,6 +121,14 @@ function setOk(id: number, isOk: boolean) {
   }
   saveItemSet(list.value!)
 }
+emitter.on('searchSetOk', (data) => {
+  const useData = data as {
+    id: number
+    ok: boolean
+  }
+
+  setOk(useData.id, useData.ok)
+})
 </script>
 
 <template>
