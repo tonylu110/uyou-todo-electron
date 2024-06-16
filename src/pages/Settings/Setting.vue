@@ -102,6 +102,7 @@ watch(closeState, (newValue) => {
 })
 
 const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
+const localLang = navigator.language.toLowerCase()
 </script>
 
 <template>
@@ -317,7 +318,15 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
       {{ t('clearData') }}
     </ItemButton>
     <ItemButton @click="router.push('/lang?from=setting')">
-      <img src="/images/lang.png" alt="" class="lang-img">
+      <div flex gap-4>
+        <div i-flagpack:us text-7 drop-shadow-md />
+        <div i-flagpack:gb-ukm text-7 drop-shadow-md />
+        <div i-flagpack:es text-7 drop-shadow-md />
+        <div i-flagpack:cn text-7 drop-shadow-md />
+        <div i-flagpack:hk text-7 drop-shadow-md />
+        <div v-if="localLang === 'zh-tw'" i-flagpack:tw text-7 drop-shadow-md />
+        <div i-flagpack:jp text-7 drop-shadow-md />
+      </div>
     </ItemButton>
   </SettingList>
 </template>

@@ -32,7 +32,10 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.20.0",
+    "@iconify-json/circle-flags": "^1.1.47",
+    "@iconify-json/emojione-v1": "^1.1.10",
     "@iconify-json/f7": "^1.1.0",
+    "@iconify-json/flagpack": "^1.1.14",
     "@iconify-json/fluent": "^1.1.55",
     "@iconify-json/logos": "^1.1.42",
     "@iconify-json/mdi": "^1.1.66",

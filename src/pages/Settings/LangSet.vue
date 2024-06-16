@@ -20,6 +20,7 @@ function langShow(lang: string): boolean {
 }
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
+const localLang = navigator.language.toLowerCase()
 </script>
 
 <template>
@@ -40,7 +41,10 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
           bg="white dark:#999/10 active:primary-d dark:active:primary-a"
           @click="() => menuClick('withSystem')"
         >
-          <span c="#333 dark:#bbb group-active:white">{{ t('setLangText') }}</span>
+          <div flex items-center>
+            <div i-emojione-v1:globe-showing-americas mr-3 text-5 />
+            <span c="#333 dark:#bbb group-active:white">{{ t('setLangText') }}</span>
+          </div>
           <div v-if="langShow('withSystem')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
         <div
@@ -50,7 +54,10 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
           bg="white dark:#999/10 active:primary-d dark:active:primary-a"
           @click="() => menuClick('en')"
         >
-          <span c="#333 dark:#bbb group-active:white">English</span>
+          <div flex items-center>
+            <div i-circle-flags:us mr-3 text-5 />
+            <span c="#333 dark:#bbb group-active:white">English</span>
+          </div>
           <div v-if="langShow('en')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
         <div
@@ -60,7 +67,10 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
           bg="white dark:#999/10 active:primary-d dark:active:primary-a"
           @click="() => menuClick('es')"
         >
-          <span c="#333 dark:#bbb group-active:white">Español</span>
+          <div flex items-center>
+            <div i-circle-flags:es mr-3 text-5 />
+            <span c="#333 dark:#bbb group-active:white">Español</span>
+          </div>
           <div v-if="langShow('es')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
         <div
@@ -70,7 +80,10 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
           bg="white dark:#999/10 active:primary-d dark:active:primary-a"
           @click="() => menuClick('zh-cn')"
         >
-          <span c="#333 dark:#bbb group-active:white">中文（简体）</span>
+          <div flex items-center>
+            <div i-circle-flags:cn mr-3 text-5 />
+            <span c="#333 dark:#bbb group-active:white">中文（简体）</span>
+          </div>
           <div v-if="langShow('zh-cn')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
         <div
@@ -80,7 +93,10 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
           bg="white dark:#999/10 active:primary-d dark:active:primary-a"
           @click="() => menuClick('zh-tw')"
         >
-          <span c="#333 dark:#bbb group-active:white">中文（繁體）</span>
+          <div flex items-center>
+            <div :class="localLang === 'zh-tw' ? 'i-circle-flags:tw' : 'i-circle-flags:cn-hk'" mr-3 text-5 />
+            <span c="#333 dark:#bbb group-active:white">中文（繁體）</span>
+          </div>
           <div v-if="langShow('zh-tw')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
         <div
@@ -90,7 +106,10 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
           bg="white dark:#999/10 active:primary-d dark:active:primary-a"
           @click="() => menuClick('ja')"
         >
-          <span c="#333 dark:#bbb group-active:white">日本語</span>
+          <div flex items-center>
+            <div i-circle-flags:jp mr-3 text-5 />
+            <span c="#333 dark:#bbb group-active:white">日本語</span>
+          </div>
           <div v-if="langShow('ja')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
       </div>

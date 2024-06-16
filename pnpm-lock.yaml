@@ -21,9 +21,18 @@ importers:
       '@antfu/eslint-config':
         specifier: ^2.20.0
         version: 2.20.0(@unocss/eslint-plugin@0.60.2(eslint@9.2.0)(typescript@5.4.4))(@vue/compiler-sfc@3.4.27)(eslint-plugin-format@0.1.1(eslint@9.2.0))(eslint@9.2.0)(typescript@5.4.4)
+      '@iconify-json/circle-flags':
+        specifier: ^1.1.47
+        version: 1.1.47
+      '@iconify-json/emojione-v1':
+        specifier: ^1.1.10
+        version: 1.1.10
       '@iconify-json/f7':
         specifier: ^1.1.0
         version: 1.1.0
+      '@iconify-json/flagpack':
+        specifier: ^1.1.14
+        version: 1.1.14
       '@iconify-json/fluent':
         specifier: ^1.1.55
         version: 1.1.55
@@ -774,8 +783,17 @@ packages:
     resolution: {integrity: sha512-Ttl/jHpxfS3st5sxwICYfk4pOH0WrLI1SpW283GgQL7sCWU7EHIOhX4b4fkIxr3tkfzwg8+FNojtzsIEE7Ecgg==}
     engines: {node: '>=18.18'}
 
+  '@iconify-json/circle-flags@1.1.47':
+    resolution: {integrity: sha512-dG57yMC82w9lU0X5Sy7toAIWV5VuyoBM14KihPvYLPYqHgzR9GOfEaIn6BvFt0d5NtiMSzaDnFZY5rrAcI6q3A==}
+
+  '@iconify-json/emojione-v1@1.1.10':
+    resolution: {integrity: sha512-lsatKVNAuq/+kebFks2g4qF6D4QO7FUJB9U6H00DfRgUt+bEGlDDDpdmeLIwE+keuc75gNhAF731AM0fsFaAfw==}
+
   '@iconify-json/f7@1.1.0':
     resolution: {integrity: sha512-CSY3ZVPkCGBdx1FjAi/VDV3is68CMM1E8qVWUQwy3rGJeHHsfdo0M10sY4I65gC8DvcUdr+uqnRQ64R3eHC69g==}
+
+  '@iconify-json/flagpack@1.1.14':
+    resolution: {integrity: sha512-XtjvjcrNvQgP5FRWBYlaZ32TR4CpNVYFM8wGBtfBw9V7dmw9G0rZU+GcP61+7ZReghEqOby48B/dVPK/81oG0A==}
 
   '@iconify-json/fluent@1.1.55':
     resolution: {integrity: sha512-YMN/6c0deR0XlU2LR4MDJS/PERAwvvZssfEcDYZ/KFBa6RVJSHWxb02DCwxjgrmeO3Pex1TI9nRig/IMvW7zhQ==}
@@ -4631,7 +4649,19 @@ snapshots:
 
   '@humanwhocodes/retry@0.2.4': {}
 
+  '@iconify-json/circle-flags@1.1.47':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/emojione-v1@1.1.10':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/f7@1.1.0':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/flagpack@1.1.14':
     dependencies:
       '@iconify/types': 2.0.0
 
