@@ -62,7 +62,7 @@ function close() {
         <Icons
           max-w="![calc(100%-20px)]"
           :icon="icon"
-          @set-icon="(newIcon) => icon = newIcon"
+          @set-icon="(newIcon: string) => icon = newIcon"
         />
         <span m="l-7px b-5px t-5px" font-bold>{{ t('noteui.cateName') }}</span>
         <input

@@ -9,6 +9,10 @@ const props = defineProps<{
   color?: string | null
 }>()
 
+const emits = defineEmits<{
+  del: [id: number]
+}>()
+
 const okState = ref(props.isOk)
 </script>
 
@@ -39,6 +43,7 @@ const okState = ref(props.isOk)
       <div
         bg="error-d active:error-a" transition="all 300"
         w-16px flex items-center justify-center rounded-7px p-6px
+        @click="emits('del', id)"
       >
         <div i-ph:trash-bold c-white />
       </div>

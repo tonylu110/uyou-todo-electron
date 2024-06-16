@@ -57,6 +57,14 @@ emitter.on('noteAddItem', (item) => {
     setTime(Number(useItem.time), useItem.text, t('todo-time'))
   }
 })
+
+function del(id: number) {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id)
+      list.value!.splice(i, 1)
+  }
+  saveItemSet(list.value!)
+}
 </script>
 
 <template>
@@ -138,6 +146,7 @@ emitter.on('noteAddItem', (item) => {
             :id="item.id"
             :title="item.text"
             :is-ok="item.ok"
+            @del="del"
           />
         </div>
       </template>
@@ -148,6 +157,7 @@ emitter.on('noteAddItem', (item) => {
             :title="item.text"
             :is-ok="item.ok"
             :color="color"
+            @del="del"
           />
         </div>
       </template>
