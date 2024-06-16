@@ -65,6 +65,14 @@ function del(id: number) {
   }
   saveItemSet(list.value!)
 }
+
+function setOk(id: number, isOk: boolean) {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id)
+      list.value![i].ok = isOk
+  }
+  saveItemSet(list.value!)
+}
 </script>
 
 <template>
@@ -147,6 +155,7 @@ function del(id: number) {
             :title="item.text"
             :is-ok="item.ok"
             @del="del"
+            @set-ok="setOk"
           />
         </div>
       </template>
@@ -158,6 +167,7 @@ function del(id: number) {
             :is-ok="item.ok"
             :color="color"
             @del="del"
+            @set-ok="setOk"
           />
         </div>
       </template>
