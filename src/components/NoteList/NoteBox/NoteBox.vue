@@ -2,10 +2,8 @@
 import { computed, ref } from 'vue'
 import { Dropdown as VDropdown } from 'floating-vue'
 import { useI18n } from 'vue-i18n'
-import LocalStorage from '../../../util/localStorage'
 import emitter from '../../../util/bus'
-import saveItemSet from '../../List/saveItemSet'
-import setTime from '../../List/Item/setTime'
+import type ITodoList from '../../../interface/ITodoListArray'
 import Item from './Item/Item.vue'
 
 const props = withDefaults(defineProps<{
@@ -14,6 +12,7 @@ const props = withDefaults(defineProps<{
   color?: string | null
   icon?: string
   otherCate?: boolean
+  list: ITodoList[]
 }>(), {
   title: 'title',
   color: 'primary-d',
@@ -22,56 +21,19 @@ const props = withDefaults(defineProps<{
 const emits = defineEmits<{
   deleteCate: [id: number]
   delWithToDo: [id: number]
+  delItem: [id: number]
+  setOk: [id: number, ok: boolean]
 }>()
 
 const { t } = useI18n()
 
-const list = ref(LocalStorage('get'))
-const listData = computed(() => list.value!.filter(listData => listData.cate === `${props.id}`))
-const otherList = ref(list.value!.filter(listData => listData.cate === undefined))
+const listData = computed(() => props.list.filter(listData => listData.cate === `${props.id}`))
+const otherList = ref(props.list.filter(listData => listData.cate === undefined))
 
 const isOpen = ref(false)
 
 function add() {
   emitter.emit('noteShowAddItem', props.id!)
-}
-
-emitter.on('noteAddItem', (item) => {
-  const useItem = item as {
-    text: string
-    cateid: number
-    time: string
-  }
-
-  if (props.id === useItem.cateid) {
-    list.value!.unshift({
-      ok: false,
-      id: new Date().getTime(),
-      text: useItem.text,
-      cate: `${useItem.cateid}`,
-      time: Number(useItem.time),
-    })
-
-    saveItemSet(list.value!)
-
-    setTime(Number(useItem.time), useItem.text, t('todo-time'))
-  }
-})
-
-function del(id: number) {
-  for (let i = 0; i < list.value!.length; i++) {
-    if (list.value![i].id === id)
-      list.value!.splice(i, 1)
-  }
-  saveItemSet(list.value!)
-}
-
-function setOk(id: number, isOk: boolean) {
-  for (let i = 0; i < list.value!.length; i++) {
-    if (list.value![i].id === id)
-      list.value![i].ok = isOk
-  }
-  saveItemSet(list.value!)
 }
 </script>
 
@@ -154,8 +116,8 @@ function setOk(id: number, isOk: boolean) {
             :id="item.id"
             :title="item.text"
             :is-ok="item.ok"
-            @del="del"
-            @set-ok="setOk"
+            @del="(itemId: number) => emits('delItem', itemId)"
+            @set-ok="(itemId: number, isOk: boolean) => emits('setOk', itemId, isOk)"
           />
         </div>
       </template>
@@ -166,8 +128,8 @@ function setOk(id: number, isOk: boolean) {
             :title="item.text"
             :is-ok="item.ok"
             :color="color"
-            @del="del"
-            @set-ok="setOk"
+            @del="(itemId: number) => emits('delItem', itemId)"
+            @set-ok="(itemId: number, isOk: boolean) => emits('setOk', itemId, isOk)"
           />
         </div>
       </template>

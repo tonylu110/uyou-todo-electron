@@ -84,13 +84,37 @@ emitter.on('noteShowAddItem', (cateId) => {
   openAddItem.value = true
 })
 function addItem(time: string) {
-  emitter.emit('noteAddItem', { text: itemText.value, cateid: cateid.value, time })
+  list.value!.unshift({
+    ok: false,
+    id: new Date().getTime(),
+    text: itemText.value,
+    cate: `${cateid.value}`,
+    time: Number(time),
+  })
+
+  saveItemSet(list.value!)
   itemText.value = ''
   openAddItem.value = false
 }
 function close() {
   openAddItem.value = false
   itemText.value = ''
+}
+
+function del(id: number) {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id)
+      list.value!.splice(i, 1)
+  }
+  saveItemSet(list.value!)
+}
+
+function setOk(id: number, isOk: boolean) {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id)
+      list.value![i].ok = isOk
+  }
+  saveItemSet(list.value!)
 }
 </script>
 
@@ -103,16 +127,22 @@ function close() {
       v-for="item in cateList"
       :id="item.id"
       :key="item.id"
+      :list
       :title="item.title"
       :color="item.color"
       :icon="item.icon"
       @delete-cate="delCate"
       @del-with-to-do="delWithToDo"
+      @del-item="del"
+      @set-ok="setOk"
     />
     <NoteBox
       v-if="otherList.length > 0"
+      :list
       :title="t('noteui.other')"
       :other-cate="true"
+      @del-item="del"
+      @set-ok="setOk"
     />
     <AddItem v-model="itemText" :open="openAddItem" @close="close" @add="addItem" />
   </div>
