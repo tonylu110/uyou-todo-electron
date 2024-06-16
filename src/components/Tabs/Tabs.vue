@@ -9,8 +9,8 @@ const menuBlur = localStorage.getItem('menuBlur') === 'true' || localStorage.get
 
 <template>
   <div
-    :bg="menuBlur ? '#ddd dark:#272727' : '#ddd/50 dark:#272727/50'"
-    shadow="[inset_0_1px_2px_0_rgba(0,0,0,0.05)]"
+    :bg="menuBlur ? 'primary-sidebar dark:primary-sidebard' : 'primary-sidebar/50 dark:primary-sidebard/50'"
+    shadow="[inset_0_1px_2px_0_rgba(0,0,0,0.05)]" border="1px solid primary-a/15"
     top="2.5" fixed z-1 rounded-full p-4px backdrop-blur-xl no-drag
   >
     <nav relative flex>

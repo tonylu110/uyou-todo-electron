@@ -53,6 +53,8 @@ export default defineConfig({
       primary: {
         d: '#5985eb',
         a: '#4e6fbb',
+        sidebar: 'hsl(222,78%,95%)',
+        sidebard: 'hsl(222,78%,15%)',
       },
       error: {
         d: '#e5544b',

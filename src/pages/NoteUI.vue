@@ -18,6 +18,7 @@ import SideBar from '../components/Tabs/SideBar/SideBar.vue'
 import Item from '../components/Tabs/SideBar/Item/Item.vue'
 import Alert from '../components/Alert/Alert.vue'
 import { versionCode } from '../util/appVersionCode'
+import Divider from '../components/Tabs/SideBar/Divider/Divider.vue'
 
 const router = useRouter()
 
@@ -100,7 +101,9 @@ const showSearch = ref(false)
     <div fixed right-0 top-0 h-full w-12vw drag />
     <SideBar :open="openSideBar" @set-side="openSideBar = false">
       <Item icon="i-f7:square-list" :title="t('noteui.allcate')" :selected="true" />
+      <Item icon="i-f7:staroflife" :title="t('noteui.spcate')" :selected="false" />
       <Item icon="i-f7:today" :title="t('noteui.othercate')" :selected="false" />
+      <Divider />
       <Item icon="i-f7:search" :title="t('noteui.search')" :selected="false" @click="showSearch = true" />
     </SideBar>
     <Tabs ref="tabsRef" :lab-width="lableWidth" :lab-left="lableLeft">
@@ -111,7 +114,7 @@ const showSearch = ref(false)
         <Tab id="search" icon="i-f7:search" :control="true" @choose="showSearch = true" />
       </template>
       <Tab id="all" :title="t('noteui.allcate')" :checked="true" :index="0" @choose="choose" @load="setLab" />
-      <Tab v-if="showTab" id="use" :title="t('noteui.othercate')" :index="1" @choose="choose" />
+      <Tab v-if="showTab" id="use" :title="t('noteui.spcate')" :index="1" @choose="choose" />
     </Tabs>
     <div
       v-if="!isMac()"
