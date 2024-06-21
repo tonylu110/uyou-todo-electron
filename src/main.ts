@@ -5,7 +5,7 @@ import 'floating-vue/dist/style.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import { createApp, ref } from 'vue'
 import { PerfectScrollbarPlugin } from 'vue3-perfect-scrollbar'
-import { VTooltip } from 'floating-vue'
+import { vTooltip } from 'floating-vue'
 import { ipcRenderer } from 'electron'
 import { devtools } from '@vue/devtools'
 import App from './App.vue'
@@ -35,7 +35,7 @@ app.use(router)
 app.use(i18n)
 app.use(PerfectScrollbarPlugin)
 app.directive('focus', vFocus)
-app.directive('tooltip', VTooltip)
+app.directive('tooltip', vTooltip)
 app.mount('#app')
 
 const keyToAdd = ref(localStorage.getItem('ketToAdd') === 'true')

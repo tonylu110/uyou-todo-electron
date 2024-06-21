@@ -123,7 +123,7 @@ function createWindow() {
   windowMenuIpc(appMenu)
   simpleIpc()
 
-  // eslint-disable-next-line unused-imports/no-unused-vars
+  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
   let aboutId, regId, rePassId
   ipcMain.on('open-about', () => {
     const aboutWindow = createAboutWindow()

@@ -224,7 +224,7 @@ const passAlert = ref(useOpenPass.value && openPass.value !== '')
           : '')"
       h-100vh w-100vw overflow-hidden
     >
-      <router-view name="noteUI" />
+      <router-view v-if="!passAlert" name="noteUI" />
       <router-view v-if="route.name !== 'Home'" />
     </div>
     <div
