@@ -7,12 +7,17 @@ import { createApp, ref } from 'vue'
 import { PerfectScrollbarPlugin } from 'vue3-perfect-scrollbar'
 import { VTooltip } from 'floating-vue'
 import { ipcRenderer } from 'electron'
+import { devtools } from '@vue/devtools'
 import App from './App.vue'
 import 'vue3-perfect-scrollbar/style.css'
 import router from './router'
 import AppSimple from './AppSimple.vue'
 import i18n from './i18n'
 import { vFocus } from './util/autofocus'
+
+// eslint-disable-next-line node/prefer-global/process
+if (process.env.NODE_ENV === 'development')
+  devtools.connect(/* host (the default is "http://localhost"), port (the default is 8090) */)
 
 const simpleMode = localStorage.getItem('simpleMode')
 

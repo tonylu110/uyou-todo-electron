@@ -3,7 +3,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import VueDevTools from 'vite-plugin-vue-devtools'
 import VueMacros from 'unplugin-vue-macros/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
 import ElectronRenderer from 'vite-plugin-electron-renderer'
@@ -33,7 +32,6 @@ export default defineConfig({
         vueJsx: vueJsx(),
       },
     }),
-    VueDevTools(),
     UnoCSS(),
     ElementPlus({
       useSource: true,
