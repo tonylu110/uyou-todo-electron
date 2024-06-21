@@ -95,7 +95,7 @@ const localLang = navigator.language.toLowerCase()
         >
           <div flex items-center>
             <div :class="localLang === 'zh-tw' ? 'i-circle-flags:tw' : 'i-circle-flags:cn-hk'" mr-3 text-5 />
-            <span c="#333 dark:#bbb group-active:white">中文（繁體）</span>
+            <span c="#333 dark:#bbb group-active:white">{{ localLang === 'zh-tw' ? t('zh-tw') : '中文（繁體）' }}</span>
           </div>
           <div v-if="langShow('zh-tw')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
