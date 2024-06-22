@@ -140,7 +140,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    w-75vw no-drag col-gap-20px
+    absolute w-75vw no-drag col-gap-20px
     col-count="1 sm:2 md:3 lg:4 xl:5"
   >
     <NoteBox

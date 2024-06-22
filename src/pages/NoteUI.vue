@@ -135,15 +135,18 @@ const showSearch = ref(false)
     <div fixed right-15px top-14px z-1>
       <WindowButtons />
     </div>
-
-    <NoteList v-if="listId === 'all'" />
-    <OtherNoteList v-else-if="listId === 'other'" />
-    <SpNoteList v-else />
-
+    <div relative w-75vw flex>
+      <Transition name="list">
+        <NoteList v-if="listId === 'all'" />
+        <SpNoteList v-else-if="listId === 'use'" />
+        <OtherNoteList v-else />
+      </Transition>
+    </div>
     <div
       flex="~ gap-10px" fixed bottom-15px right-15px no-drag
     >
       <div
+        v-if="listId === 'all'"
         bg="primary-d active:primary-a"
         transition="duration-300 all"
         rounded="10px hover:30px"
@@ -183,3 +186,22 @@ const showSearch = ref(false)
     </ul>
   </Alert>
 </template>
+
+<style scoped>
+.list-enter-from,
+.list-leave-to {
+  transform: scale(0.4);
+  opacity: 0;
+}
+
+.list-enter-to,
+.list-leave-from {
+  transform: scale(1);
+  opacity: 100;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+</style>
