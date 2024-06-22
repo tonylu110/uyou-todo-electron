@@ -19,6 +19,8 @@ import Item from '../components/Tabs/SideBar/Item/Item.vue'
 import Alert from '../components/Alert/Alert.vue'
 import { versionCode } from '../util/appVersionCode'
 import Divider from '../components/Tabs/SideBar/Divider/Divider.vue'
+import SpNoteList from '../components/NoteList/SpNoteList.vue'
+import OtherNoteList from '../components/NoteList/OtherNoteList.vue'
 
 const router = useRouter()
 
@@ -64,6 +66,8 @@ emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
 })
 
+const listId = ref('all')
+
 const lableWidth = ref('')
 const lableLeft = ref('0')
 const tabsRef = ref<{
@@ -71,7 +75,7 @@ const tabsRef = ref<{
 }>()
 function choose(id: string, width: string, left: number) {
   setLab(width, left)
-  return id
+  listId.value = id
 }
 
 function setLab(width: string, left: number) {
@@ -100,9 +104,9 @@ const showSearch = ref(false)
     <div fixed left-0 top-0 h-full w-12vw drag />
     <div fixed right-0 top-0 h-full w-12vw drag />
     <SideBar :open="openSideBar" @set-side="openSideBar = false">
-      <Item icon="i-f7:square-list" :title="t('noteui.allcate')" :selected="true" />
-      <Item icon="i-f7:staroflife" :title="t('noteui.spcate')" :selected="false" />
-      <Item icon="i-f7:today" :title="t('noteui.othercate')" :selected="false" />
+      <Item icon="i-f7:square-list" :title="t('noteui.allcate')" :selected="listId === 'all'" @click="listId = 'all'" />
+      <Item icon="i-f7:staroflife" :title="t('noteui.spcate')" :selected="listId === 'use'" @click="listId = 'use'" />
+      <Item icon="i-f7:today" :title="t('noteui.othercate')" :selected="listId === 'other'" @click="listId = 'other'" />
       <Divider />
       <Item icon="i-f7:search" :title="t('noteui.search')" :selected="false" @click="showSearch = true" />
     </SideBar>
@@ -132,7 +136,9 @@ const showSearch = ref(false)
       <WindowButtons />
     </div>
 
-    <NoteList />
+    <NoteList v-if="listId === 'all'" />
+    <OtherNoteList v-else-if="listId === 'other'" />
+    <SpNoteList v-else />
 
     <div
       flex="~ gap-10px" fixed bottom-15px right-15px no-drag

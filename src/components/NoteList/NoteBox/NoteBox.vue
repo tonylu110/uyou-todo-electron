@@ -8,26 +8,46 @@ import Item from './Item/Item.vue'
 
 const props = withDefaults(defineProps<{
   title: string
-  id?: number
+  id?: number | string
   color?: string | null
   icon?: string
   otherCate?: boolean
+  showAddItem?: boolean
+  showBtn?: boolean
   list: ITodoList[]
 }>(), {
   title: 'title',
   color: 'primary-d',
+  showAddItem: true,
+  showBtn: true,
 })
 
 const emits = defineEmits<{
-  deleteCate: [id: number]
-  delWithToDo: [id: number]
+  deleteCate: [id: number | string]
+  delWithToDo: [id: number | string]
   delItem: [id: number]
   setOk: [id: number, ok: boolean]
 }>()
 
 const { t } = useI18n()
 
-const listData = computed(() => props.list.filter(listData => listData.cate === `${props.id}`))
+const listData = computed(() => {
+  if (props.id === 'today') {
+    return props.list.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString() || new Date(listData.time!).toDateString() === new Date().toDateString())
+  }
+  else if (props.id === 'star') {
+    return props.list.filter(listData => listData.star)
+  }
+  else if (props.id === 'allNotDo') {
+    return props.list.filter(listData => !listData.ok)
+  }
+  else if (props.id === 'allDo') {
+    return props.list.filter(listData => listData.ok)
+  }
+  else {
+    return props.list.filter(listData => listData.cate === `${props.id}`)
+  }
+})
 const otherList = ref(props.list.filter(listData => listData.cate === undefined))
 
 const isOpen = ref(false)
@@ -50,6 +70,7 @@ function add() {
       <div :class="otherCate ? 'i-ph:smiley-blank-bold' : (icon ? icon : 'i-ph:radio-button-bold')" mr-8px />
       <span>{{ title }}</span>
       <div
+        v-if="showBtn"
         flex="~ gap-5px" w="0 hover:37px" transition="all 300"
         items-center overflow-hidden p="r-10px l-7px" op="0 hover:100"
       >
@@ -108,6 +129,7 @@ function add() {
           </template>
         </VDropdown>
       </div>
+      <div v-else w-13px />
     </div>
     <div p="10px t-20px">
       <template v-if="otherCate">
@@ -134,7 +156,13 @@ function add() {
         </div>
       </template>
       <div
-        v-if="!otherCate" w="[calc(100%-20px)]"
+        v-if="!showAddItem && listData.length === 0"
+        w-full flex items-center justify-center p-y-2
+      >
+        <div i-mdi:list-box-outline text-8 c="black/10" />
+      </div>
+      <div
+        v-if="!otherCate && showAddItem" w="[calc(100%-20px)]"
         bg="black/5 active:black/10" mt-5px flex items-center justify-center rounded-7px
         p-10px
         transition="all 300"

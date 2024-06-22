@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { onBeforeUnmount, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { cateItem } from '../ListMenu/ICateItem'
 import LocalStorage from '../../util/localStorage'
@@ -128,6 +128,13 @@ emitter.on('searchSetOk', (data) => {
   }
 
   setOk(useData.id, useData.ok)
+})
+
+onBeforeUnmount(() => {
+  emitter.off('searchSetOk')
+  emitter.off('searchDelete')
+  emitter.off('noteShowAddItem')
+  emitter.off('addCateNote')
 })
 </script>
 
