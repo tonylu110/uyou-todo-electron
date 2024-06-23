@@ -104,13 +104,13 @@ const showSearch = ref(false)
     <div fixed left-0 top-0 h-full w-12vw drag />
     <div fixed right-0 top-0 h-full w-12vw drag />
     <SideBar :open="openSideBar" @set-side="openSideBar = false">
-      <Item icon="i-f7:square-list" :title="t('noteui.allcate')" :selected="listId === 'all'" @click="listId = 'all'" />
-      <Item icon="i-f7:staroflife" :title="t('noteui.spcate')" :selected="listId === 'use'" @click="listId = 'use'" />
-      <Item icon="i-f7:today" :title="t('noteui.othercate')" :selected="listId === 'other'" @click="listId = 'other'" />
+      <Item id="all" icon="i-f7:square-list" :title="t('noteui.allcate')" :selected="listId === 'all'" @click="listId = 'all'" />
+      <Item id="use" icon="i-f7:staroflife" :title="t('noteui.spcate')" :selected="listId === 'use'" @click="listId = 'use'" />
+      <Item id="other" icon="i-f7:today" :title="t('noteui.othercate')" :selected="listId === 'other'" @click="listId = 'other'" />
       <Divider />
       <Item icon="i-f7:search" :title="t('noteui.search')" :selected="false" @click="showSearch = true" />
     </SideBar>
-    <Tabs ref="tabsRef" :lab-width="lableWidth" :lab-left="lableLeft">
+    <Tabs ref="tabsRef" :lab-width="lableWidth" :lab-left="lableLeft" :show-tab="showTab ? (listId === 'all' || listId === 'use') : listId === 'all'">
       <template #header>
         <Tab id="side" icon="i-f7:sidebar-left" :control="true" @choose="openSideBar = true" />
       </template>
@@ -118,7 +118,7 @@ const showSearch = ref(false)
         <Tab id="search" icon="i-f7:search" :control="true" @choose="showSearch = true" />
       </template>
       <Tab id="all" :title="t('noteui.allcate')" :checked="true" :index="0" @choose="choose" @load="setLab" />
-      <Tab v-if="showTab" id="use" :title="t('noteui.spcate')" :index="1" @choose="choose" />
+      <Tab v-if="showTab" id="use" :title="t('noteui.spcate')" :index="1" @choose="choose" @load="setLab" />
     </Tabs>
     <div
       v-if="!isMac()"
@@ -190,18 +190,17 @@ const showSearch = ref(false)
 <style scoped>
 .list-enter-from,
 .list-leave-to {
-  transform: scale(0.4);
-  opacity: 0;
+  --uno: scale-60 op-0;
 }
 
 .list-enter-to,
 .list-leave-from {
-  transform: scale(1);
-  opacity: 100;
+  --uno: scale-100 op-100;
 }
 
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.3s ease-in-out;
+  --uno: transition-transform,
+    opacity transition-duration-300 transition-ease-in-out;
 }
 </style>

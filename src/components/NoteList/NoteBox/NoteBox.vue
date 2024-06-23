@@ -72,7 +72,7 @@ function add() {
       <div
         v-if="showBtn"
         flex="~ gap-5px" w="0 hover:37px" transition="all 300"
-        items-center overflow-hidden p="r-10px l-7px" op="0 hover:100"
+        items-center overflow-hidden p="r-10px l-5px" op="0 hover:100"
       >
         <div>
           <div i-ph:pencil-bold block />
@@ -159,7 +159,7 @@ function add() {
         v-if="!showAddItem && listData.length === 0"
         w-full flex items-center justify-center p-y-2
       >
-        <div i-mdi:list-box-outline text-8 c="black/10" />
+        <div i-mdi:list-box-outline text-8 c="black/10 dark:#ddd/10" />
       </div>
       <div
         v-if="!otherCate && showAddItem" w="[calc(100%-20px)]"

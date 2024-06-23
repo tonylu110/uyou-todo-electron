@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import emitter from '../../../util/bus'
 
 const props = defineProps<{
   id: string
@@ -19,6 +20,12 @@ const labRef = ref<HTMLDivElement>()
 
 onMounted(() => {
   if (props.index === 0) {
+    emits('load', `${labRef.value!.offsetWidth + 4}px`, labRef.value!.getBoundingClientRect().left + 6)
+  }
+})
+
+emitter.on('changeTab', (data) => {
+  if (data === props.id && labRef.value!.offsetWidth) {
     emits('load', `${labRef.value!.offsetWidth + 4}px`, labRef.value!.getBoundingClientRect().left + 6)
   }
 })
