@@ -228,7 +228,8 @@
     "thanks": "Thanks Sponsors"
   },
   "mode": {
-    "normal": "Standard Mode"
+    "normal": "Standard Mode",
+    "note": "Note Mode"
   },
   "newCate": "new category"
 }

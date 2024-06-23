@@ -228,7 +228,8 @@
     "thanks": "感謝贊助"
   },
   "mode": {
-    "normal": "標準模式"
+    "normal": "標準模式",
+    "note": "便條紙模式"
   },
   "newCate": "新類別",
   "zh-tw": "正體中文"

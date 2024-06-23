@@ -10,15 +10,26 @@ import { createToast } from '../../components/Toast'
 const { t } = useI18n()
 
 const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
+const newNoteUI = ref(localStorage.getItem('newNoteUI') === 'true')
 
 function menuClick(mode: string) {
   if (mode === 'normal') {
+    simpleModeState.value = false
+    localStorage.setItem('simpleMode', `${simpleModeState.value}`)
+    newNoteUI.value = false
+    localStorage.setItem('newNoteUI', `${newNoteUI.value}`)
+  }
+  else if (mode === 'note') {
+    newNoteUI.value = true
+    localStorage.setItem('newNoteUI', `${newNoteUI.value}`)
     simpleModeState.value = false
     localStorage.setItem('simpleMode', `${simpleModeState.value}`)
   }
   else if (mode === 'simple') {
     simpleModeState.value = true
     localStorage.setItem('simpleMode', `${simpleModeState.value}`)
+    newNoteUI.value = false
+    localStorage.setItem('newNoteUI', `${newNoteUI.value}`)
     ipcRenderer.send('setSimple', simpleModeState.value)
   }
   createToast({ msg: t('restartApp') })
@@ -26,7 +37,9 @@ function menuClick(mode: string) {
 
 function modeShow(mode: string): boolean {
   if (mode === 'normal')
-    return !simpleModeState.value
+    return !simpleModeState.value && !newNoteUI.value
+  else if (mode === 'note')
+    return newNoteUI.value
   else
     return simpleModeState.value
 }
@@ -54,6 +67,16 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
         >
           <span c="#333 dark:#bbb group-active:white">{{ t('mode.normal') }}</span>
           <div v-if="modeShow('normal')" i-mdi:check text-24px c="primary-d dark:primary-a" />
+        </div>
+        <div
+          class="group item"
+          :class="modeShow('normal') ? 'select' : ''"
+          :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }"
+          bg="white dark:#999/10 active:primary-d dark:active:primary-a"
+          @click="() => menuClick('note')"
+        >
+          <span c="#333 dark:#bbb group-active:white">{{ t('mode.note') }}</span>
+          <div v-if="modeShow('note')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
         <div
           class="item group"

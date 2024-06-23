@@ -22,7 +22,7 @@ const Laboratory: SetupFC = () => {
 
   // const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
 
-  const newNoteUI = ref(localStorage.getItem('newNoteUI') === 'true')
+  // const newNoteUI = ref(localStorage.getItem('newNoteUI') === 'true')
 
   return () => (
     <>
@@ -62,12 +62,12 @@ const Laboratory: SetupFC = () => {
           switchState={keyToAdd.value}
           onSwitchFun={() => setSwitchFn('ketToAdd', !keyToAdd.value, () => keyToAdd.value = !keyToAdd.value, 'setAddItemCut')}
         />
-        <Item
+        {/* <Item
           title="⚠️ new Note UI"
           showSwitch={true}
           switchState={newNoteUI.value}
           onSwitchFun={() => setSwitchFn('newNoteUI', !newNoteUI.value, () => newNoteUI.value = !newNoteUI.value)}
-        />
+        /> */}
         <ItemText>
           ⚠️ This page contains experimental features, may be unstable, and may be removed at any time, for experience only
         </ItemText>

@@ -197,7 +197,7 @@ const TitleMenuItem: SetupFC = () => {
                 cursor-pointer
                 relative
                 bg={route.query.listName === 'star'
-                  ? 'warn-d dark:warn-a'
+                  ? 'warn-a warn-d dark:warn-a'
                   : '#333/10 hover:#333/20 active:#333/30 dark:#999/20 dark:hover:#999/30 dark:active:#999/40'}
                 w="[calc(50%-30px)]"
                 onClick={() => toList('star')}
