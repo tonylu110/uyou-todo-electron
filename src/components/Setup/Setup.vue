@@ -14,6 +14,9 @@ function setMode(setMode: string) {
 }
 
 function toUse() {
+  if (mode.value === 'normal') {
+    localStorage.setItem('newNoteUI', 'false')
+  }
   location.reload()
 }
 </script>
@@ -62,8 +65,10 @@ function toUse() {
       </div>
       <span c="black/20" mt-4>{{ t('setup.toset') }}</span>
       <button
-        bg="primary-d dark:primary-a"
-        w-200px rounded-full border-none p-4 c-white outline-none
+        bg="primary-d dark:primary-a active:primary-a dark:active:primary-d"
+        w-200px rounded-full border-none p-4
+        c-white font-bold outline-none shadow="hover:primary-a/50 hover:md active:none"
+        scale="hover:110 active:95" transition="all duration-300"
         @click="toUse"
       >
         {{ t('setup.touse') }}
