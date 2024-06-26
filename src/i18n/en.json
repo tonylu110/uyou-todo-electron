@@ -231,5 +231,9 @@
     "normal": "Standard Mode",
     "note": "Note Mode"
   },
-  "newCate": "new category"
+  "newCate": "new category",
+  "setup": {
+    "touse": "Go to use",
+    "toset": "Go to \"Settings\" -> \"Mode Selection\" to reselect the mode"
+  }
 }

@@ -12,6 +12,7 @@ import es from 'element-plus/es/locale/lang/es'
 import ja from 'element-plus/es/locale/lang/ja'
 import { ipcRenderer } from 'electron'
 import Store from 'electron-store'
+import { isNull } from 'lodash'
 import TitleBar from './components/TitleBar/newTitleBar'
 import Alert from './components/Alert/Alert.vue'
 import ListMenu from './components/ListMenu/ListMenu.vue'
@@ -26,6 +27,7 @@ import LocalStorage from './util/localStorage'
 import setTime from './components/List/Item/setTime'
 import firstLoad from './util/firstLoad'
 import OpenPass from './components/OpenPass/OpenPass.vue'
+import Setup from './components/Setup/Setup.vue'
 
 const { t, locale } = useI18n()
 
@@ -204,13 +206,16 @@ onMounted(() => {
 const useOpenPass = ref(localStorage.getItem('useOpenPass') === 'true')
 const openPass = ref(localStorage.getItem('openPass') ? localStorage.getItem('openPass') : '')
 const passAlert = ref(useOpenPass.value && openPass.value !== '')
+
+const showSetup = ref(isNull(localStorage.getItem('newNoteUI')))
 </script>
 
 <template>
-  <Transition name="open-pass">
+  <Setup v-if="showSetup" />
+  <Transition v-if="!showSetup" name="open-pass">
     <OpenPass v-if="passAlert" v-model="passAlert" />
   </Transition>
-  <ElConfigProvider :locale="useLocale">
+  <ElConfigProvider v-if="!showSetup" :locale="useLocale">
     <RouterUrl v-if="routerShow" />
     <div
       v-if="isNoteUI"
