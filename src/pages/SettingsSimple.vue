@@ -81,35 +81,41 @@ const localLang = navigator.language.toLowerCase()
       />
     </ItemBox>
     <ColorChange v-if="(!isLinux || isWindows10OrAfter) || isMac" />
-    <Item :title="t('vip.proVersion')" item-img="./images/VIP.png" @item-fun="router.push('/vip?from=setting')" />
+    <Item :title="t('vip.proVersion')" icon="i-icon-park:vip-one" @item-fun="router.push('/vip?from=setting')" />
     <ItemBox>
       <Item
+        icon="i-icon-park:reduce-user"
         :title="loginState ? t('myAccount') : t('loginText')"
         @item-fun="() => router.push('/account?from=setting')"
       />
       <Item
+        icon="i-icon-park:lock-one"
         :title="t('anotherSettings.openPass')"
         @item-fun="router.push('/openPass?from=setting')"
       />
     </ItemBox>
     <Item
+      icon="i-icon-park:update-rotation"
       :title="t('update.updateTitle')"
       @item-fun="router.push('/update?from=setting')"
     />
     <ItemBox>
       <Item
+        icon="i-icon-park:two-dimensional-code"
         :title="t('anotherSettings.simple')"
         :show-switch="true"
         :switch-state="simpleModeState"
         @switch-fun="setSwitchFn('simpleMode', !simpleModeState, () => simpleModeState = !simpleModeState, 'setSimple', t('restartApp'))"
       />
       <Item
+        icon="i-icon-park:enter-key"
         :title="t('anotherSettings.enterToAdd')"
         :show-switch="true"
         :switch-state="enterAddState"
         @switch-fun="setSwitchFn('enterAdd', !enterAddState, () => enterAddState = !enterAddState)"
       />
       <Item
+        icon="i-icon-park:eyes"
         :title="t('anotherSettings.itemBtnShow')"
         :show-switch="true"
         :switch-state="showToDoBtn"
@@ -117,12 +123,14 @@ const localLang = navigator.language.toLowerCase()
       />
       <Item
         v-if="isLinux"
+        icon="i-icon-park:computer"
         :title="t('anotherSettings.autoStart')"
         :show-switch="true"
         :switch-state="autoStartState"
         @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
       />
       <Item
+        icon="i-icon-park:reverse-operation-out"
         :title="t('anotherSettings.itemWrap')"
         :show-switch="true"
         :switch-state="textWrapState"

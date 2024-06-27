@@ -130,32 +130,38 @@ const localLang = navigator.language.toLowerCase()
     <Item :title="t('vip.proVersion')" icon="i-icon-park:vip-one" @item-fun="router.push('/vip?from=setting')" />
     <ItemBox>
       <Item
+        icon="i-icon-park:reduce-user"
         :title="loginState ? t('myAccount') : t('loginText')"
         @item-fun="() => router.push('/account?from=setting')"
       />
       <Item
+        icon="i-icon-park:lock-one"
         :title="t('anotherSettings.openPass')"
         @item-fun="router.push('/openPass?from=setting')"
       />
     </ItemBox>
     <Item
+      icon="i-icon-park:two-dimensional-code"
       :title="t('anotherSettings.model')"
       @item-fun="router.push('/mode?from=setting')"
     />
     <ItemBox>
       <Item
+        icon="i-icon-park:auto-focus"
         :title="t('update.autoUpdate')"
         :show-switch="true"
         :switch-state="autoUpdateState"
         @switch-fun="setSwitchFn('autoUpdate', !autoUpdateState, () => autoUpdateState = !autoUpdateState)"
       />
       <Item
+        icon="i-icon-park:update-rotation"
         :title="t('update.updateTitle')"
         @item-fun="router.push('/update?from=setting')"
       />
     </ItemBox>
     <ItemBox>
       <Item
+        icon="i-icon-park:web-page"
         :title="t('startPage.startPage')"
         :show-list-box="true"
         :list-box-title="startPage"
@@ -164,12 +170,14 @@ const localLang = navigator.language.toLowerCase()
         @today="setStartPage('today')"
       />
       <Item
+        icon="i-icon-park:enter-key"
         :title="t('anotherSettings.enterToAdd')"
         :show-switch="true"
         :switch-state="enterAddState"
         @switch-fun="setSwitchFn('enterAdd', !enterAddState, () => enterAddState = !enterAddState)"
       />
       <Item
+        icon="i-icon-park:eyes"
         :title="t('anotherSettings.itemBtnShow')"
         :show-switch="true"
         :switch-state="showToDoBtn"
@@ -177,12 +185,14 @@ const localLang = navigator.language.toLowerCase()
       />
       <Item
         v-if="isLinux"
+        icon="i-icon-park:computer"
         :title="t('anotherSettings.autoStart')"
         :show-switch="true"
         :switch-state="autoStartState"
         @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
       />
       <Item
+        icon="i-icon-park:reverse-operation-out"
         :title="t('anotherSettings.itemWrap')"
         :show-switch="true"
         :switch-state="textWrapState"
@@ -307,8 +317,8 @@ const localLang = navigator.language.toLowerCase()
       <Item :title="t('otherList.toDonate')" icon="i-icon-park:coffee-machine" @item-fun="router.push('/donate?from=setting')" />
     </ItemBox>
     <ItemBox>
-      <Item :title="t('anotherSettings.openSource')" @item-fun="router.push('/open?from=setting')" />
-      <Item :title="t('anotherSettings.about')" @item-fun="openAboutWindow" />
+      <Item :title="t('anotherSettings.openSource')" icon="i-icon-park:heart-ballon" @item-fun="router.push('/open?from=setting')" />
+      <Item :title="t('anotherSettings.about')" icon="i-icon-park:info" @item-fun="openAboutWindow" />
     </ItemBox>
     <ItemButton mode="error" @click="clearData">
       {{ t('clearData') }}
