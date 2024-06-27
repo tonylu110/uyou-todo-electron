@@ -25,14 +25,15 @@ function toUse() {
   <div
     fixed z-10 h-screen w-screen
     flex items-center justify-center drag
+    bg="white/30 dark:#333/30"
   >
-    <div flex="~ col gap-8" items-center no-drag>
-      <div flex="~ gap-2">
-        <div flex="~ col gap-1" items-center>
+    <div flex="~ col gap-16" items-center no-drag>
+      <div flex="~ gap-4">
+        <div flex="~ col gap-2" items-center>
           <div
             :bg="mode === 'normal' ? 'primary-d dark:primary-a' : ''"
-            border="primary-d dark:primary-a solid 2px"
-            h-200px
+            :border="`${mode === 'normal' ? 'primary-d dark:primary-a' : 'black/10'} solid 2px`"
+            h-200px transition="all duration-300"
             w-320px rounded-10px p-2
             @click="setMode('normal')"
           >
@@ -40,16 +41,16 @@ function toUse() {
               :src="isDark ? '/color_mode/dark.png' : '/color_mode/light.png'"
               alt="light"
               srcset=""
-              h-full w-full rounded-7px
+              h-full w-full rounded-6px
             >
           </div>
           <span>{{ t('mode.normal') }}</span>
         </div>
-        <div flex="~ col gap-1" items-center>
+        <div flex="~ col gap-2" items-center>
           <div
             :bg="mode === 'note' ? 'primary-d dark:primary-a' : ''"
-            border="primary-d dark:primary-a solid 2px"
-            h-200px
+            :border="`${mode === 'note' ? 'primary-d dark:primary-a' : 'black/10'} solid 2px`"
+            h-200px transition="all duration-300"
             w-320px rounded-10px p-2
             @click="setMode('note')"
           >
@@ -57,22 +58,24 @@ function toUse() {
               :src="isDark ? '/images/note/dark.png' : '/images/note/light.png'"
               alt="dark"
               srcset=""
-              h-full w-full rounded-7px
+              h-full w-full rounded-6px
             >
           </div>
           <span>{{ t('mode.note') }}</span>
         </div>
       </div>
-      <span c="black/20" mt-4>{{ t('setup.toset') }}</span>
       <button
         bg="primary-d dark:primary-a active:primary-a dark:active:primary-d"
-        w-200px rounded-full border-none p-4
-        c-white font-bold outline-none shadow="hover:primary-a/50 hover:md active:none"
-        scale="hover:110 active:95" transition="all duration-300"
+        w-auto rounded-full border-none p="y-4 x-10 hover:x-4" c-white font-bold outline-none
+        shadow="hover:primary-a/50 hover:md active:none"
+        scale="hover:150 active:80" transition="all duration-300"
+        class="group"
         @click="toUse"
       >
-        {{ t('setup.touse') }}
+        <div i-ph:arrow-right-bold hidden text-5 group-hover:block />
+        <span text-4 line-height-5 group-hover:hidden>{{ t('setup.touse') }}</span>
       </button>
     </div>
+    <span fixed bottom-6 c="black/30">{{ t('setup.toset') }}</span>
   </div>
 </template>
