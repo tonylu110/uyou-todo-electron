@@ -36,6 +36,9 @@ importers:
       '@iconify-json/fluent':
         specifier: ^1.1.55
         version: 1.1.55
+      '@iconify-json/icon-park':
+        specifier: ^1.1.13
+        version: 1.1.13
       '@iconify-json/logos':
         specifier: ^1.1.42
         version: 1.1.42
@@ -700,6 +703,9 @@ packages:
 
   '@iconify-json/fluent@1.1.55':
     resolution: {integrity: sha512-YMN/6c0deR0XlU2LR4MDJS/PERAwvvZssfEcDYZ/KFBa6RVJSHWxb02DCwxjgrmeO3Pex1TI9nRig/IMvW7zhQ==}
+
+  '@iconify-json/icon-park@1.1.13':
+    resolution: {integrity: sha512-7AoB802JUeMwaJBRz1a+3PGfifxDiMiE+mVgbDPZLHgLaLq7WXslQCV0aDs8kQHF0SGIBUp7f8kKTHGUktuFtw==}
 
   '@iconify-json/logos@1.1.42':
     resolution: {integrity: sha512-/f+frtPm3m3Z30oy8Pk+QqRDkbmAiIaWGPl5CmsCXm15MVfvw9a/V/gD7WzdyuSGAZcFuQaqbHXj92y/n+2ifg==}
@@ -4543,6 +4549,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/fluent@1.1.55':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/icon-park@1.1.13':
     dependencies:
       '@iconify/types': 2.0.0
 

@@ -127,7 +127,7 @@ const localLang = navigator.language.toLowerCase()
       />
     </ItemBox>
     <ColorChange v-if="(!isLinux || isWindows10OrAfter) || !isMac" />
-    <Item :title="t('vip.proVersion')" item-img="./images/VIP.png" @item-fun="router.push('/vip?from=setting')" />
+    <Item :title="t('vip.proVersion')" icon="i-icon-park:vip-one" @item-fun="router.push('/vip?from=setting')" />
     <ItemBox>
       <Item
         :title="loginState ? t('myAccount') : t('loginText')"
@@ -302,9 +302,9 @@ const localLang = navigator.language.toLowerCase()
     </ItemBox>
     <Item v-if="isInDev" :title="t('anotherSettings.laboratory')" @item-fun="router.push('/lab?from=setting')" />
     <ItemBox>
-      <Item :title="t('otherList.toFind')" item-img="./images/chat.png" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-electron/discussions/6')" />
-      <Item :title="t('otherList.toGithub')" item-img="./images/github.svg" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-electron')" />
-      <Item :title="t('otherList.toDonate')" item-img="./images/coffee.png" @item-fun="router.push('/donate?from=setting')" />
+      <Item :title="t('otherList.toFind')" icon="i-icon-park:message" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-electron/discussions/6')" />
+      <Item :title="t('otherList.toGithub')" icon="i-icon-park:github" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-electron')" />
+      <Item :title="t('otherList.toDonate')" icon="i-icon-park:coffee-machine" @item-fun="router.push('/donate?from=setting')" />
     </ItemBox>
     <ItemBox>
       <Item :title="t('anotherSettings.openSource')" @item-fun="router.push('/open?from=setting')" />

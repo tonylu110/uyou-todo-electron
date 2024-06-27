@@ -8,6 +8,7 @@ withDefaults(defineProps<{
   showSwitch?: boolean
   showArrow?: boolean
   itemImg?: string
+  icon?: string
   showListBox?: boolean
   listBoxTitle?: string
   list?: {
@@ -55,6 +56,7 @@ window.addEventListener('resize', () => {
     <div>
       <div v-if="itemImg" class="img-back" />
       <img v-if="itemImg" :src="itemImg" alt="">
+      <div v-if="icon" :class="icon" mr-3 block text-6 />
       <span
         :style="{ width: simpleMode ? 'calc(100vw - 115px)' : (minWidth ? 'calc(100vw - 165px)' : '') }"
         :c="showSwitch || showListBox ? '' : 'group-active:white'"
