@@ -76,5 +76,8 @@
     "vue3-perfect-scrollbar": "^2.0.0",
     "wait-on": "^7.2.0"
   },
-  "packageManager": "pnpm@9.0.6"
+  "volta": {
+    "node": "20.15.0",
+    "pnpm": "9.0.6"
+  }
 }
