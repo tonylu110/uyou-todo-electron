@@ -154,6 +154,17 @@ function edit(id: string | number, name: string, icon: string, color: string | n
   }
 }
 
+function editItem(id: number, title: string, cateId: number | string) {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id) {
+      list.value![i].text = title
+      list.value![i].cate = `${cateId}`
+    }
+  }
+
+  saveItemSet(list.value!)
+}
+
 onBeforeUnmount(() => {
   emitter.off('searchSetOk')
   emitter.off('searchDelete')
@@ -180,6 +191,7 @@ onBeforeUnmount(() => {
       @del-item="del"
       @set-ok="setOk"
       @edit="edit"
+      @edit-item="editItem"
     />
     <NoteBox
       v-if="otherList.length > 0"
@@ -188,6 +200,7 @@ onBeforeUnmount(() => {
       :other-cate="true"
       @del-item="del"
       @set-ok="setOk"
+      @edit-item="editItem"
     />
     <AddItem v-model="itemText" :open="openAddItem" @close="close" @add="addItem" />
   </div>

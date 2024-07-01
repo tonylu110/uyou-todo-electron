@@ -235,5 +235,8 @@
   "setup": {
     "touse": "Go to use",
     "toset": "Go to \"Settings\" -> \"Mode Selection\" to reselect the mode"
+  },
+  "note": {
+    "select": "Select category"
   }
 }

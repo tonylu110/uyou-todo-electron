@@ -29,6 +29,7 @@ const emits = defineEmits<{
   delItem: [id: number]
   setOk: [id: number, ok: boolean]
   edit: [id: number | string, name: string, icon: string, color: string | null]
+  editItem: [id: number, title: string, cateId: number | string]
 }>()
 
 const { t } = useI18n()
@@ -143,6 +144,8 @@ function add() {
             :id="item.id"
             :title="item.text"
             :is-ok="item.ok"
+            :cate-id="id"
+            @edit="(itemId, title, cateId) => emits('editItem', itemId, title, cateId)"
             @del="(itemId: number) => emits('delItem', itemId)"
             @set-ok="(itemId: number, isOk: boolean) => emits('setOk', itemId, isOk)"
           />
@@ -155,6 +158,8 @@ function add() {
             :title="item.text"
             :is-ok="item.ok"
             :color="color"
+            :cate-id="id"
+            @edit="(itemId, title, cateId) => emits('editItem', itemId, title, cateId)"
             @del="(itemId: number) => emits('delItem', itemId)"
             @set-ok="(itemId: number, isOk: boolean) => emits('setOk', itemId, isOk)"
           />

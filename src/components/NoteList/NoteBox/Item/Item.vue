@@ -3,17 +3,20 @@ import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import CheckBox from '../../../List/Item/CheckBox/CheckBox.vue'
 import { createToast } from '../../../Toast'
+import Edit from './Edit/Edit.vue'
 
 const props = defineProps<{
   title: string
   id: number
   isOk: boolean
   color?: string | null
+  cateId: string | number
 }>()
 
 const emits = defineEmits<{
   del: [id: number]
   setOk: [id: number, ok: boolean]
+  edit: [id: number, title: string, cateId: number | string]
 }>()
 
 const { t } = useI18n()
@@ -57,12 +60,7 @@ function copy() {
       >
         <div i-ph:copy-bold c-white />
       </div>
-      <div
-        bg="primary-d active:primary-a" transition="all 300"
-        w-16px flex items-center justify-center rounded-7px p-6px
-      >
-        <div i-ph:pencil-bold c-white />
-      </div>
+      <Edit :title :cate-id @edit="(title, cateId) => emits('edit', id, title, cateId)" />
       <div
         bg="error-d active:error-a" transition="all 300"
         w-16px flex items-center justify-center rounded-7px p-6px
