@@ -96,10 +96,14 @@ function login() {
             }).then((res) => {
               return res.json()
             }).then((res) => {
-              if (res.code === 200)
+              if (res.code === 200) {
+                localStorage.setItem('autoSync', 'true')
+                swichState.value = true
                 createToast({ msg: t('accountPage.syncSuccess') })
-              else
+              }
+              else {
                 createToast({ msg: t('accountPage.syncFail') })
+              }
 
               emitter.emit('setLoginText', uname.value)
             })
@@ -120,6 +124,8 @@ function login() {
               if (res._id) {
                 createToast({ msg: t('accountPage.syncSuccess') })
                 localStorage.setItem('ToDo', res.data)
+                localStorage.setItem('autoSync', 'true')
+                swichState.value = true
                 emitter.emit('setLoginText', uname.value)
                 emitter.emit('changeList')
               }
@@ -147,10 +153,14 @@ function login() {
             }).then((res) => {
               return res.json()
             }).then((res) => {
-              if (res.code === 200)
+              if (res.code === 200) {
+                localStorage.setItem('autoSync', 'true')
+                swichState.value = true
                 createToast({ msg: t('accountPage.syncSuccess') })
-              else
+              }
+              else {
                 createToast({ msg: t('accountPage.syncFail') })
+              }
 
               emitter.emit('setLoginText', uname.value)
             })
@@ -170,6 +180,8 @@ function login() {
               if (res._id) {
                 createToast({ msg: t('accountPage.syncSuccess') })
                 localStorage.setItem('cate', res.data)
+                localStorage.setItem('autoSync', 'true')
+                swichState.value = true
                 emitter.emit('setCate', res.data)
                 emitter.emit('setLoginText', uname.value)
               }
@@ -201,6 +213,8 @@ function returnAlert() {
     loginText.value = t('loginText')
     localStorage.setItem('uname', '')
     localStorage.setItem('uid', '')
+    localStorage.setItem('autoSync', 'false')
+    swichState.value = false
     loginState.value = false
     alertShow.value = false
     isLogoutClick.value = false

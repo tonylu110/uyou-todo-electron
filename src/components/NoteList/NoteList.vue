@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, reactive, ref } from 'vue'
+import { onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { cateItem } from '../ListMenu/ICateItem'
 import LocalStorage from '../../util/localStorage'
@@ -23,6 +23,27 @@ const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
 
 const list = ref(LocalStorage('get'))
 const otherList = ref(list.value!.filter(listData => listData.cate === undefined))
+
+onMounted(() => {
+  const uid = localStorage.getItem('uid')
+  const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
+  if ((uid !== '' && uid !== null) && autoSync) {
+    fetch('https://api.todo.uyou.org.cn/gettodo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        uid,
+      }),
+    }).then((res) => {
+      return res.json()
+    }).then((res) => {
+      localStorage.setItem('ToDo', res.data)
+      list.value = LocalStorage('get') as ITodoList[]
+    })
+  }
+})
 
 emitter.on('addCateNote', (date) => {
   const cate = date as addCate

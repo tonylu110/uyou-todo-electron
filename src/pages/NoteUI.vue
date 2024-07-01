@@ -21,6 +21,7 @@ import { versionCode } from '../util/appVersionCode'
 import Divider from '../components/Tabs/SideBar/Divider/Divider.vue'
 import SpNoteList from '../components/NoteList/SpNoteList.vue'
 import OtherNoteList from '../components/NoteList/OtherNoteList.vue'
+import getCateList from '../util/getCateList'
 
 const router = useRouter()
 
@@ -96,6 +97,32 @@ window.addEventListener('resize', () => {
 const openSideBar = ref(false)
 
 const showSearch = ref(false)
+
+const uid = localStorage.getItem('uid')
+const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
+
+function sync() {
+  if (uid) {
+    fetch('https://api.todo.uyou.org.cn/gettodo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        uid: localStorage.getItem('uid'),
+      }),
+    }).then((res) => {
+      return res.json()
+    }).then((res) => {
+      localStorage.setItem('ToDo', res.data)
+      window.location.reload()
+    })
+    getCateList()
+  }
+  else {
+    router.push('/account?from=setting')
+  }
+}
 </script>
 
 <template>
@@ -141,6 +168,20 @@ const showSearch = ref(false)
         <SpNoteList v-else-if="listId === 'use'" />
         <OtherNoteList v-else />
       </Transition>
+    </div>
+    <div flex="~ gap-10px" fixed bottom-15px left-15px no-drag>
+      <div
+        v-if="(listId === 'all') && !autoSync"
+        bg="primary-d active:primary-a"
+        transition="duration-300 all"
+        rounded="10px hover:30px"
+        shadow="md hover:lg primary-d/70 dark:primary-a/70"
+        flex items-center justify-center p-13px
+        transform="active:scale-90 hover:scale-120"
+        @click="sync"
+      >
+        <div :class="uid ? 'i-ph:cloud-arrow-down-bold' : 'i-ph:user-bold'" text-22px c="!white" />
+      </div>
     </div>
     <div
       flex="~ gap-10px" fixed bottom-15px right-15px no-drag

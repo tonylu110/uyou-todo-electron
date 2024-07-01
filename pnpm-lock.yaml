@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@electron/remote':
         specifier: ^2.1.2
-        version: 2.1.2(electron@30.1.2)
+        version: 2.1.2(electron@31.1.0)
       electron-store:
         specifier: ^8.1.0
         version: 8.2.0
@@ -85,8 +85,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       electron:
-        specifier: ^30.1.2
-        version: 30.1.2
+        specifier: ^31.1.0
+        version: 31.1.0
       electron-builder:
         specifier: ^24.13.3
         version: 24.13.3(electron-builder-squirrel-windows@24.13.3(dmg-builder@24.13.3))
@@ -1997,8 +1997,8 @@ packages:
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
-  electron@30.1.2:
-    resolution: {integrity: sha512-A5CFGwbA+HSXnzwjc8fP2GIezBcAb0uN/VbNGLOW8DHOYn07rvJ/1bAJECHUUzt5zbfohveG3hpMQiYpbktuDw==}
+  electron@31.1.0:
+    resolution: {integrity: sha512-TBOwqLxSxnx6+pH6GMri7R3JPH2AkuGJHfWZS0p1HsmN+Qr1T9b0IRJnnehSd/3NZAmAre4ft9Ljec7zjyKFJA==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -4383,9 +4383,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/remote@2.1.2(electron@30.1.2)':
+  '@electron/remote@2.1.2(electron@31.1.0)':
     dependencies:
-      electron: 30.1.2
+      electron: 31.1.0
 
   '@electron/universal@1.5.1':
     dependencies:
@@ -6277,7 +6277,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@30.1.2:
+  electron@31.1.0:
     dependencies:
       '@electron/get': 2.0.2
       '@types/node': 20.12.12
