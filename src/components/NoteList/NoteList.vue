@@ -46,7 +46,7 @@ emitter.on('addCateNote', (date) => {
   }
 })
 
-function delCate(id: number) {
+function delCate(id: number | string) {
   for (let i = 0; i < cateList.length; i++) {
     if (cateList[i].id === id)
       cateList.splice(i, 1)
@@ -64,7 +64,7 @@ function delCate(id: number) {
   }
 }
 
-function delWithToDo(id: number) {
+function delWithToDo(id: number | string) {
   const listAll = ref<ITodoList[]>(LocalStorage('get')!)
 
   const resultArr = listAll.value.filter((value) => {
@@ -130,6 +130,30 @@ emitter.on('searchSetOk', (data) => {
   setOk(useData.id, useData.ok)
 })
 
+function edit(id: string | number, name: string, icon: string, color: string | null) {
+  for (let i = 0; i < cateList.length; i++) {
+    if (cateList[i].id === id) {
+      cateList[i].title = name
+      cateList[i].icon = icon
+      cateList[i].color = color
+    }
+  }
+  localStorage.setItem('cate', JSON.stringify({
+    data: cateList,
+  }))
+  emitter.emit('setCate', JSON.stringify({
+    data: cateList,
+  }))
+  if (localStorage.getItem('uid')) {
+    changeCate({
+      uid: localStorage.getItem('uid')!,
+      data: {
+        data: cateList,
+      },
+    })
+  }
+}
+
 onBeforeUnmount(() => {
   emitter.off('searchSetOk')
   emitter.off('searchDelete')
@@ -155,6 +179,7 @@ onBeforeUnmount(() => {
       @del-with-to-do="delWithToDo"
       @del-item="del"
       @set-ok="setOk"
+      @edit="edit"
     />
     <NoteBox
       v-if="otherList.length > 0"

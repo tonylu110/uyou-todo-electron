@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n'
 import emitter from '../../../util/bus'
 import type ITodoList from '../../../interface/ITodoListArray'
 import Item from './Item/Item.vue'
+import Edit from './Edit/Edit.vue'
 
 const props = withDefaults(defineProps<{
   title: string
@@ -27,6 +28,7 @@ const emits = defineEmits<{
   delWithToDo: [id: number | string]
   delItem: [id: number]
   setOk: [id: number, ok: boolean]
+  edit: [id: number | string, name: string, icon: string, color: string | null]
 }>()
 
 const { t } = useI18n()
@@ -74,9 +76,12 @@ function add() {
         flex="~ gap-5px" w="0 hover:37px" transition="all 300"
         items-center overflow-hidden p="r-10px l-5px" op="0 hover:100"
       >
-        <div>
-          <div i-ph:pencil-bold block />
-        </div>
+        <Edit
+          :color
+          :icon
+          :name="title"
+          @edit="(name, icon, color) => emits('edit', id!, name, icon, color)"
+        />
         <VDropdown
           v-model:shown="isOpen"
           :distance="12"
