@@ -43,6 +43,17 @@ onBeforeUnmount(() => {
   emitter.off('searchSetOk')
   emitter.off('searchDelete')
 })
+
+function editItem(id: number, title: string, cateId: number | string) {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id) {
+      list.value![i].text = title
+      list.value![i].cate = `${cateId}`
+    }
+  }
+
+  saveItemSet(list.value!)
+}
 </script>
 
 <template>
@@ -58,6 +69,7 @@ onBeforeUnmount(() => {
       :title="t('listMenu.incompleted')"
       :show-add-item="false"
       :show-btn="false"
+      @edit-item="editItem"
       @del-item="del"
       @set-ok="setOk"
     />
@@ -69,6 +81,7 @@ onBeforeUnmount(() => {
       :title="t('listMenu.completed')"
       :show-add-item="false"
       :show-btn="false"
+      @edit-item="editItem"
       @del-item="del"
       @set-ok="setOk"
     />

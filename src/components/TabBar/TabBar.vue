@@ -123,6 +123,8 @@ function changColor(color: string | null) {
   }
 }
 
+const newNoteUI = localStorage.getItem('newNoteUI') === 'true'
+
 watchEffect(() => {
   bgColor.value = cateList.filter(value => value.id === Number(route.query.listName))
 })
@@ -164,8 +166,15 @@ watchEffect(() => {
       </div>
       <div
         :h="leftImgShow || showWrap ? '' : '30px'" flex
-        :mb="isMac() && simpleMode ? '15px' : '10px'"
-        :ml="isMac() && simpleMode ? '65px' : ''"
+        :mb="isMac()
+          ? simpleMode
+            ? '15px'
+            : newNoteUI
+              ? '20px'
+              : '10px'
+          : '10px'"
+        :ml="isMac() && (simpleMode || newNoteUI) ? '65px' : ''"
+        :mt="isMac() && newNoteUI ? '-5px' : ''"
       >
         <div
           v-if="leftImgShow"

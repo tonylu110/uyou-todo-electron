@@ -161,6 +161,7 @@ const localLang = navigator.language.toLowerCase()
     </ItemBox>
     <ItemBox>
       <Item
+        v-if="!isNoteUI"
         icon="i-icon-park:web-page"
         :title="t('startPage.startPage')"
         :show-list-box="true"
@@ -170,6 +171,7 @@ const localLang = navigator.language.toLowerCase()
         @today="setStartPage('today')"
       />
       <Item
+        v-if="!isNoteUI"
         icon="i-icon-park:enter-key"
         :title="t('anotherSettings.enterToAdd')"
         :show-switch="true"
@@ -177,6 +179,7 @@ const localLang = navigator.language.toLowerCase()
         @switch-fun="setSwitchFn('enterAdd', !enterAddState, () => enterAddState = !enterAddState)"
       />
       <Item
+        v-if="!isNoteUI"
         icon="i-icon-park:eyes"
         :title="t('anotherSettings.itemBtnShow')"
         :show-switch="true"
@@ -192,6 +195,7 @@ const localLang = navigator.language.toLowerCase()
         @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
       />
       <Item
+        v-if="!isNoteUI"
         icon="i-icon-park:reverse-operation-out"
         :title="t('anotherSettings.itemWrap')"
         :show-switch="true"
@@ -199,7 +203,7 @@ const localLang = navigator.language.toLowerCase()
         @switch-fun="setSwitchFn('textWrap', !textWrapState, () => textWrapState = !textWrapState)"
       />
     </ItemBox>
-    <ItemBox>
+    <ItemBox v-if="isMac">
       <Item
         :title="t('quit.closeMsgBox')"
         :show-switch="true"

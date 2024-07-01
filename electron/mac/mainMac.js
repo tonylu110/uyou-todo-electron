@@ -55,7 +55,7 @@ function createWindow() {
     visualEffectState: 'active',
     icon: path.join(__dirname, '../../dist/logo.png'),
     frame: systemBar,
-    titleBarStyle: systemBar ? 'default' : 'hiddenInset',
+    titleBarStyle: systemBar ? 'default' : 'hidden',
     trafficLightPosition: {
       x: 15,
       y: simple ? 20 : 15,
@@ -86,11 +86,15 @@ function createWindow() {
   })
   ipcMain.on('window-max', () => {
     if (mainWindow.isMaximized())
-      mainWindow.unmaximize(); else mainWindow.maximize()
+      mainWindow.unmaximize()
+    else
+      mainWindow.maximize()
   })
   ipcMain.on('window-close', (ev, isClose) => {
     if (isClose)
-      app.quit(); else mainWindow.hide()
+      app.quit()
+    else
+      mainWindow.hide()
   })
   ipcMain.on('window-on-top', (event, arg) => {
     mainWindow.setAlwaysOnTop(arg)

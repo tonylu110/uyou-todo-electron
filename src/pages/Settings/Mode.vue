@@ -18,12 +18,14 @@ function menuClick(mode: string) {
     localStorage.setItem('simpleMode', `${simpleModeState.value}`)
     newNoteUI.value = false
     localStorage.setItem('newNoteUI', `${newNoteUI.value}`)
+    ipcRenderer.send('setSimple', simpleModeState.value)
   }
   else if (mode === 'note') {
     newNoteUI.value = true
     localStorage.setItem('newNoteUI', `${newNoteUI.value}`)
     simpleModeState.value = false
     localStorage.setItem('simpleMode', `${simpleModeState.value}`)
+    ipcRenderer.send('setSimple', simpleModeState.value)
   }
   else if (mode === 'simple') {
     simpleModeState.value = true

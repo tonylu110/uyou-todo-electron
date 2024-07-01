@@ -14,9 +14,10 @@ import router from './router'
 import AppSimple from './AppSimple.vue'
 import i18n from './i18n'
 import { vFocus } from './util/autofocus'
+import { isMac } from './util/os'
 
 // eslint-disable-next-line node/prefer-global/process
-if (process.env.NODE_ENV === 'development')
+if (process.env.NODE_ENV === 'development' && !isMac())
   devtools.connect(/* host (the default is "http://localhost"), port (the default is 8090) */)
 
 const simpleMode = localStorage.getItem('simpleMode')
