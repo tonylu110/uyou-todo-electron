@@ -11,6 +11,7 @@ import ItemBox from '../../components/ItemBox/ItemBox.vue'
 import setSwitchFn from '../../util/setSwitchFn'
 import ItemSpace from '../../components/ItemBox/ItemSpace'
 import SponsorList from '../../components/Sponsor/List.vue'
+import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()
 
@@ -30,16 +31,20 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
 const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
 
 const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('vip.proVersion')" />
   <TabBar
+    v-else
     :title="t('vip.proVersion')"
     :right-img-show="false"
     :left-img-show="true"
     @left-click="router.back()"
   />
-  <SettingList>
+  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <ItemSpace
       v-if="!isVip"
     >

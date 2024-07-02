@@ -11,6 +11,7 @@ import setSwitchFn from '../../../util/setSwitchFn'
 import { createToast } from '../../../components/Toast'
 import ItemText from '../../../components/ItemBox/ItemText'
 import ItemSpace from '../../../components/ItemBox/ItemSpace'
+import NoteTabBar from '../../../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()
 
@@ -43,15 +44,19 @@ watch(fontSize, (newValue) => {
   localStorage.setItem('fontSize', `${newValue}`)
   ipcRenderer.send('setFontSize', newValue)
 })
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('vip.setCustFont')" />
   <TabBar
+    v-else
     :title="t('vip.setCustFont')"
     :right-img-show="false"
     @left-click="() => router.back()"
   />
-  <SettingList>
+  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <Item
       :title="t('setFont.useCustomFont')"
       :show-switch="true"

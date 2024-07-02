@@ -12,6 +12,7 @@ import { versionCode } from '../../util/appVersionCode'
 import { createToast } from '../../components/Toast'
 import emitter from '../../util/bus'
 import ItemSpace from '../../components/ItemBox/ItemSpace'
+import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 
 const { t, locale } = useI18n()
 
@@ -74,17 +75,21 @@ const menuShort = ref(window.innerWidth < 750)
 emitter.on('menuClose', (data) => {
   menuShort.value = data as boolean
 })
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('update.updateTitle')" />
   <TabBar
+    v-else
     :title="t('update.updateTitle')"
     :right-img-show="false"
     :left-img-show="true"
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList justify="between">
+  <SettingList justify="between" :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <div
       flex items-center justify-center
       :w="simpleMode ? '100%' : ''"

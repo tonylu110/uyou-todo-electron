@@ -9,6 +9,7 @@ import emitter from '../../util/bus'
 import ItemSpace from '../../components/ItemBox/ItemSpace'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import SponsorList from '../../components/Sponsor/List.vue'
+import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()
 
@@ -16,17 +17,21 @@ const menuShort = ref(window.innerWidth < 750)
 emitter.on('menuClose', (data) => {
   menuShort.value = data as boolean
 })
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('otherList.toDonate')" />
   <TabBar
+    v-else
     :title="t('otherList.toDonate')"
     :right-img-show="false"
     :left-img-show="true"
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList>
+  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <ItemSpace flex="~ wrap" items-center justify-center>
       <img
         w-163px p-10px

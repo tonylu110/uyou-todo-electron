@@ -16,6 +16,7 @@ import emitter from '../../util/bus'
 import isDev from '../../util/mode'
 import setSwitchFn from '../../util/setSwitchFn'
 import ColorChange from '../../components/SettingList/colorChange'
+import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()
 
@@ -106,14 +107,15 @@ const localLang = navigator.language.toLowerCase()
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('settingTitleText')" />
   <TabBar
+    v-else
     :title="t('settingTitleText')"
     :right-img-show="false"
-    :left-img-show="isNoteUI"
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList>
+  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <ItemBox v-if="isDev">
       <Item
         title="UnoCss dev"

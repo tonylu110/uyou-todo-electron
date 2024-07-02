@@ -6,6 +6,7 @@ import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import router from '../../router'
 import { createToast } from '../../components/Toast'
+import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()
 
@@ -47,17 +48,21 @@ function modeShow(mode: string): boolean {
 }
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('anotherSettings.model')" />
   <TabBar
+    v-else
     :title="t('anotherSettings.model')"
     :right-img-show="false"
     :left-img-show="true"
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList>
+  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }" shadow-md>
       <div class="box-radius">
         <div

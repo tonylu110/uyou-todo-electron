@@ -6,23 +6,28 @@ import SettingList from '../../components/SettingList'
 import ItemBox from '../../components/ItemBox/ItemBox.vue'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import router from '../../router'
+import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()
 
 function openUrlInBrowser(url: string) {
   ipcRenderer.send('open-url', url)
 }
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('anotherSettings.openSource')" />
   <TabBar
+    v-else
     :title="t('anotherSettings.openSource')"
     :right-img-show="false"
     :left-img-show="true"
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList>
+  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <ItemBox>
       <Item title="electron" @item-fun="openUrlInBrowser('https://github.com/electron')" />
       <Item title="vue" @item-fun="openUrlInBrowser('https://github.com/vuejs')" />

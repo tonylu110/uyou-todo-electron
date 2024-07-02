@@ -3,6 +3,7 @@ import { useI18n } from 'vue-i18n'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList'
 import router from '../../router'
+import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 
 const { t, locale } = useI18n()
 
@@ -21,17 +22,21 @@ function langShow(lang: string): boolean {
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 const localLang = navigator.language.toLowerCase()
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('language')" />
   <TabBar
+    v-else
     :title="t('language')"
     :right-img-show="false"
     :left-img-show="true"
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList>
+  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }" shadow-md>
       <div class="box-radius">
         <div

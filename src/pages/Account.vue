@@ -12,6 +12,7 @@ import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
 import emitter from '../util/bus'
 import { createToast } from '../components/Toast'
 import ItemSpace from '../components/ItemBox/ItemSpace'
+import NoteTabBar from '../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()
 
@@ -233,17 +234,21 @@ function closeAlert() {
 function openLogoff() {
   ipcRenderer.send('open-logoff', localStorage.getItem('uname'))
 }
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('accountPage.account')" />
   <TabBar
+    v-else
     :title="t('accountPage.account')"
     :right-img-show="false"
     :left-img-show="form === 'setting'"
     bg-color="light"
     @left-click="() => router.back()"
   />
-  <SettingList>
+  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <Item :title="loginText" :show-arrow="false" />
     <ItemSpace v-if="!loginState">
       <input

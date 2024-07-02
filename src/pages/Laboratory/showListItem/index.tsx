@@ -6,6 +6,7 @@ import SettingList from '../../../components/SettingList'
 import ItemBox from '../../../components/ItemBox/ItemBox.vue'
 import Item from '../../../components/ItemBox/Item/Item.vue'
 import emitter from '../../../util/bus'
+import NoteTabBar from '../../../components/TabBar/NoteTabBar.vue'
 import type ListItems from './ListItems'
 
 const ShowListItem: SetupFC = () => {
@@ -44,16 +45,23 @@ const ShowListItem: SetupFC = () => {
     },
   )
 
+  const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
+
   return () => (
     <>
-      <TabBar
-        title={t('custListItem')}
-        rightImgShow={false}
-        leftImgShow={true}
-        onLeftClick={() => router.back()}
-        bg-color="light"
-      />
-      <SettingList>
+      {isNoteUI
+        ? <NoteTabBar title={t('custListItem')} />
+        : (
+            <TabBar
+              title={t('custListItem')}
+              rightImgShow={false}
+              leftImgShow={true}
+              onLeftClick={() => router.back()}
+              bg-color="light"
+            />
+          )}
+
+      <SettingList h={isNoteUI ? '![calc(100vh-65px)]' : ''}>
         <Item
           title={t('custList.showAll')}
           showSwitch={true}

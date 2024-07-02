@@ -7,6 +7,7 @@ import SettingList from '../../../components/SettingList'
 import Item from '../../../components/ItemBox/Item/Item.vue'
 import setSwitchFn from '../../../util/setSwitchFn'
 import ItemSpace from '../../../components/ItemBox/ItemSpace'
+import NoteTabBar from '../../../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()
 
@@ -19,16 +20,20 @@ function setPassKey(key: string) {
   passKey.value = key
   localStorage.setItem('passKey', passKey.value)
 }
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('vip.setCustPassKey')" />
   <TabBar
+    v-else
     :title="t('vip.setCustPassKey')"
     :right-img-show="false"
     :left-img-show="true"
     @left-click="router.back()"
   />
-  <SettingList>
+  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <Item
       :title="t('setPassKey.useCustPass')"
       :show-switch="true"

@@ -9,6 +9,7 @@ import Item from '../../components/ItemBox/Item/Item.vue'
 import emitter from '../../util/bus'
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
 import Alert from '../../components/Alert/Alert.vue'
+import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()
 
@@ -39,16 +40,20 @@ function ok() {
   else
     alertMsg.value = t('openPass.passErr')
 }
+
+const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
+  <NoteTabBar v-if="isNoteUI" :title="t('anotherSettings.openPass')" />
   <TabBar
+    v-else
     :title="t('anotherSettings.openPass')"
     :right-img-show="false"
     :left-img-show="true"
     @left-click="router.back()"
   />
-  <SettingList>
+  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
     <Item
       :title="t('openPass.useOpenPass')"
       :show-switch="true"
