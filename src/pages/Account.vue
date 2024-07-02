@@ -248,7 +248,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     bg-color="light"
     @left-click="() => router.back()"
   />
-  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : ''">
+  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'">
     <Item :title="loginText" :show-arrow="false" />
     <ItemSpace v-if="!loginState">
       <input

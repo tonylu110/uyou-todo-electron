@@ -27,7 +27,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : ''">
+  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'">
     <ItemBox>
       <Item title="electron" @item-fun="openUrlInBrowser('https://github.com/electron')" />
       <Item title="vue" @item-fun="openUrlInBrowser('https://github.com/vuejs')" />

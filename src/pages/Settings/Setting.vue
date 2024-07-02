@@ -115,7 +115,7 @@ const localLang = navigator.language.toLowerCase()
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : ''">
+  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'">
     <ItemBox v-if="isDev">
       <Item
         title="UnoCss dev"

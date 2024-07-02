@@ -31,7 +31,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : ''">
+  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'">
     <ItemSpace flex="~ wrap" items-center justify-center>
       <img
         w-163px p-10px

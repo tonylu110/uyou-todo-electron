@@ -89,7 +89,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList justify="between" :h="isNoteUI ? '![calc(100vh-63px)]' : ''">
+  <SettingList justify="between" :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'">
     <div
       flex items-center justify-center
       :w="simpleMode ? '100%' : ''"

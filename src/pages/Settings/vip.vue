@@ -44,7 +44,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     :left-img-show="true"
     @left-click="router.back()"
   />
-  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : ''">
+  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'">
     <ItemSpace
       v-if="!isVip"
     >
