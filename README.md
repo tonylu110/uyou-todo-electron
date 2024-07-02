@@ -28,6 +28,7 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
 
 ![](./demo/demo1.png)
 ![](./demo/demo2.png)
+![](./demo/demo6.png)
 ![](./demo/demo3.png)
 ![](./demo/demo4.png)
 ![](./demo/demo5.png)
