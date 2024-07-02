@@ -17,6 +17,8 @@ const ColorChange: SetupFC = () => {
     minWidth.value = window.innerWidth < 750
   })
 
+  const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
+
   return () => (
     <ItemSpace flex="~ !row gap-10px wrap">
       <div
@@ -53,7 +55,7 @@ const ColorChange: SetupFC = () => {
         onClick={() => setColor('light')}
       >
         <img
-          src="./color_mode/light.png"
+          src={isNoteUI ? './images/note/light.png' : './color_mode/light.png'}
           alt=""
           w="[calc(100%-16px)]"
           h="[calc(100%-16px)]"
@@ -74,7 +76,7 @@ const ColorChange: SetupFC = () => {
         onClick={() => setColor('dark')}
       >
         <img
-          src="./color_mode/dark.png"
+          src={isNoteUI ? './images/note/dark.png' : './color_mode/dark.png'}
           alt=""
           w="[calc(100%-16px)]"
           h="[calc(100%-16px)]"

@@ -9,6 +9,8 @@ const ItemSpace: SetupFC<{ flex?: string }> = () => {
 
   const simpleMode = ref(localStorage.getItem('simpleMode') === 'true')
 
+  const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
+
   window.addEventListener('resize', () => {
     window.innerWidth < 750
       ? simpleMode.value = true
@@ -19,7 +21,11 @@ const ItemSpace: SetupFC<{ flex?: string }> = () => {
     <div
       p="x-15px y-10px"
       border="1px solid black/20"
-      w={simpleMode.value ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'}
+      w={simpleMode.value
+        ? isNoteUI
+          ? '[calc(100vw-108px)]'
+          : '[calc(100%-50px)]'
+        : '[calc(100vw-450px)]'}
       bg="white dark:#999/10"
       flex="~ col"
       max-w={simpleMode.value ? '750px' : '550px'}
