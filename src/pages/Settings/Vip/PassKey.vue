@@ -33,7 +33,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     :left-img-show="true"
     @left-click="router.back()"
   />
-  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
+  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : ''">
     <Item
       :title="t('setPassKey.useCustPass')"
       :show-switch="true"

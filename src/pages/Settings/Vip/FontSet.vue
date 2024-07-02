@@ -56,7 +56,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     :right-img-show="false"
     @left-click="() => router.back()"
   />
-  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
+  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : ''">
     <Item
       :title="t('setFont.useCustomFont')"
       :show-switch="true"

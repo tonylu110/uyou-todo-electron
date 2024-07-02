@@ -36,7 +36,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     bg-color="light"
     @left-click="router.back()"
   />
-  <SettingList :h="isNoteUI ? '![calc(100vh-65px)]' : ''">
+  <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : ''">
     <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }" shadow-md>
       <div class="box-radius">
         <div

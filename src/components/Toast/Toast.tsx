@@ -15,6 +15,8 @@ const Toast: SetupFC = () => {
 
   const simpleMode = window.innerWidth < 800
 
+  const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
+
   const isDark = usePreferredDark()
 
   return () => (
@@ -30,7 +32,7 @@ const Toast: SetupFC = () => {
       animate-fill-mode-forwards
       animate-ease
       top={props.center ? '50%' : ''}
-      left={props.center ? '50%' : (simpleMode ? '50%' : '[calc(50%+150px)]')}
+      left={props.center ? '50%' : (simpleMode || isNoteUI ? '50%' : '[calc(50%+150px)]')}
       transform={props.center ? 'translate--50%' : 'translate-x--50%'}
       position={props.center ? 'absolute' : 'fixed'}
       class={props.center ? '' : 'animate-toastShow'}
