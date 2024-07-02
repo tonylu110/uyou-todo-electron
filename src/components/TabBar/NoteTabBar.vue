@@ -22,7 +22,8 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
   >
     <div
       bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
-      absolute left-12px w-20px cursor-pointer rounded-5px p-5px no-drag
+      absolute :left="isMac() ? '80px' : '12px'" :top="isMac() ? '10px' : ''"
+      w-20px cursor-pointer rounded-5px p-5px no-drag
       @click="router.back()"
     >
       <div i-ph:caret-left-bold c="#555 dark:#bbb" block text-20px />

@@ -58,7 +58,7 @@ function createWindow() {
     titleBarStyle: systemBar ? 'default' : 'hidden',
     trafficLightPosition: {
       x: 15,
-      y: simple ? 20 : 15,
+      y: simple ? 20 : 17,
     },
     show: false,
     webPreferences: {
