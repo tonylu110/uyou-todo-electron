@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
+import { ref } from 'vue'
 import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'
+import firstLoad from '../TitleBar/firstLoad'
+import { topWindow } from '../../util/windowApi'
+import emitter from '../../util/bus'
 import WindowButtons from './windowButtons'
 
 withDefaults(defineProps<{
@@ -12,6 +16,17 @@ withDefaults(defineProps<{
 const route = useRoute()
 const router = useRouter()
 
+const topState = ref(firstLoad())
+function onTopWindow() {
+  topState.value = !topState.value
+  topWindow(topState.value)
+  localStorage.setItem('alwaysOnTop', `${topState.value}`)
+  emitter.emit('topWindow', topState.value)
+}
+emitter.on('topWindow', (data: unknown) => {
+  topState.value = (data as boolean)
+})
+
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
 </script>
 
@@ -21,12 +36,27 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
     :bg="isBlur ? (isMac() && route.name === 'Home' ? 'white/00' : 'white/50 dark:#333/50') : 'white/80 dark:#333/80'"
   >
     <div
-      bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
       absolute :left="isMac() ? '80px' : '12px'" :top="isMac() ? '10px' : ''"
-      w-20px cursor-pointer rounded-5px p-5px no-drag
-      @click="router.back()"
+      flex items-center
     >
-      <div i-ph:caret-left-bold c="#555 dark:#bbb" block text-20px />
+      <div
+        v-if="!isMac()"
+        :bg="topState
+          ? 'error-d hover:error-h active:error-a'
+          : 'black/10 hover:black/20 active:black/30'"
+        m="r-3 l-3px" h-13px w-13px flex cursor-pointer
+        items-center justify-center rounded-5px rounded-full p-6px no-drag
+        @click="onTopWindow"
+      >
+        <div i-fluent:pin-12-filled text-13px :c="topState ? 'white' : '#555'" />
+      </div>
+      <div
+        bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
+        w-20px cursor-pointer rounded-5px p-5px no-drag
+        @click="router.back()"
+      >
+        <div i-ph:caret-left-bold c="#555 dark:#bbb" block text-20px />
+      </div>
     </div>
     <span text-5 font-bold>{{ title }}</span>
     <div fixed right-15px top-14px z-1>

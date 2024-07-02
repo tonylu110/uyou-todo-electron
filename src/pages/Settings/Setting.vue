@@ -44,6 +44,7 @@ const routerUrlState = ref((localStorage.getItem('routerUrl') === 'true' || !loc
 const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
 const closeMsgBox = ref(localStorage.getItem('closeMsgBox') === 'true')
 const remember = ref(localStorage.getItem('rememberClose') === 'true')
+const showStar = ref(localStorage.getItem('showStar') === 'true' || localStorage.getItem('showStar') === null)
 
 function showRouterUrl() {
   routerUrlState.value = !routerUrlState.value
@@ -203,6 +204,14 @@ const localLang = navigator.language.toLowerCase()
         :show-switch="true"
         :switch-state="textWrapState"
         @switch-fun="setSwitchFn('textWrap', !textWrapState, () => textWrapState = !textWrapState)"
+      />
+      <Item
+        v-if="isNoteUI"
+        icon="i-icon-park:star"
+        :title="t('anotherSettings.star')"
+        :show-switch="true"
+        :switch-state="showStar"
+        @switch-fun="setSwitchFn('showStar', !showStar, () => showStar = !showStar)"
       />
     </ItemBox>
     <ItemBox v-if="isMac">

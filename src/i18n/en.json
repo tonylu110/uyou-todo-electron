@@ -81,7 +81,8 @@
     "itemBtnShow": "Show ToDo button",
     "rememberQuit": "Remember to close the window",
     "openPass": "Start encryption",
-    "model": "Mode selection"
+    "model": "Mode selection",
+    "star": "show star button"
   },
   "contextMenu": {
     "copy": "Copy",

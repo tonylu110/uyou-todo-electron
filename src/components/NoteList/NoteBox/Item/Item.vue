@@ -36,20 +36,24 @@ function copy() {
     createToast({ msg: t('copyToast'), center: true }, itemDom.value)
   })
 }
+
+const showStar = localStorage.getItem('showStar') === 'true' || localStorage.getItem('showStar') === null
 </script>
 
 <template>
   <div ref="itemDom" relative flex items-center justify-between p-5px>
     <CheckBox v-model="okState" left="4px!" :num="id" :color="color ? color : 'primary-d'" />
     <div
-      ml-25px flex items-center
+      :ml="showStar ? '25px' : '30px'" flex items-center
       :line="okState ? 'through' : ''"
       :c="okState
         ? '#333/25 dark:#bbb/25 selection:white'
         : '#333 dark:#bbb selection:white'"
     >
       <div
+        v-if="showStar"
         i-ph:star-fill mr-5px :c="star ? '#e6a400' : '#555/20 dark:#bbb/20'"
+        scale="active:85" transition="all duration-300"
         @click="() => {
           starState = !starState
           emits('setStar', id, starState)
