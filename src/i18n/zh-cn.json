@@ -49,7 +49,9 @@
     "欢迎使用 uyou ToDo",
     "将鼠标移至 ToDo 项的左边，完成 ToDo",
     "将鼠标移至 ToDo 项的右边，删除 ToDo",
-    "将鼠标移至 ToDo 标题栏右上角，复制 ToDo 内容"
+    "将鼠标移至 ToDo 标题栏右上角，复制 ToDo 内容",
+    "星标 ToDo",
+    "你可以设置多个 ToDo 分类"
   ],
   "update": {
     "autoUpdate": "自动获取更新",
@@ -242,5 +244,6 @@
   },
   "open": {
     "thanks": "uyou ToDo 的开发离不开开源社区\n感谢以下开源项目以构建 uyou ToDo"
-  }
+  },
+  "seccate": "第二类别"
 }

@@ -49,7 +49,9 @@
     "Welcome to use uyou ToDo",
     "Move the mouse to the left of the ToDo item to complete the ToDo",
     "Move the mouse to the right of the ToDo item to delete the ToDo",
-    "Move the mouse to the top right corner of the ToDo title bar to copy the ToDo content"
+    "Move the mouse to the top right corner of the ToDo title bar to copy the ToDo content",
+    "Star ToDo",
+    "You can set multiple ToDo categories"
   ],
   "update": {
     "autoUpdate": "Get Updates Automatically",
@@ -242,5 +244,6 @@
   },
   "open": {
     "thanks": "The development of uyou ToDo is inseparable from the open source community\n\nThanks to the following open source projects to build uyou ToDo"
-  }
+  },
+  "seccate": "Category 2"
 }

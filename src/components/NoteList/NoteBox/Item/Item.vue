@@ -53,7 +53,7 @@ const showStar = localStorage.getItem('showStar') === 'true' || localStorage.get
       <div
         v-if="showStar"
         i-ph:star-fill mr-5px :c="star ? '#e6a400' : '#555/20 dark:#bbb/20'"
-        scale="active:85" transition="all duration-300"
+        scale="active:85" transition="all duration-300" min-w-4
         @click="() => {
           starState = !starState
           emits('setStar', id, starState)

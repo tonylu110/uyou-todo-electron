@@ -16,7 +16,7 @@ function firstLoad() {
       {
         text: t('firstLoadData[1]'),
         id: new Date().getTime() + 1,
-        ok: false,
+        ok: true,
         cate: '123',
       },
       {
@@ -31,6 +31,19 @@ function firstLoad() {
         ok: false,
         cate: '123',
       },
+      {
+        text: t('firstLoadData[4]'),
+        id: new Date().getTime() + 5,
+        ok: false,
+        cate: '456',
+        star: true,
+      },
+      {
+        text: t('firstLoadData[5]'),
+        id: new Date().getTime() + 6,
+        ok: false,
+        cate: '456',
+      },
     ],
   }
 
@@ -39,6 +52,10 @@ function firstLoad() {
       {
         id: 123,
         title: t('newCate'),
+      },
+      {
+        id: 456,
+        title: t('seccate'),
       },
     ],
   }

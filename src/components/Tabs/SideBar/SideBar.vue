@@ -19,7 +19,7 @@ const menuBlur = localStorage.getItem('menuBlur') === 'true' || localStorage.get
   >
     <div
       :bg="menuBlur ? 'primary-sidebar dark:primary-sidebard' : 'primary-sidebar/50 dark:primary-sidebard/50'" absolute h-screen
-      w-300px pl-4 shadow-xl backdrop-blur-xl no-drag
+      w-300px pl-4 :shadow="open ? 'xl' : 'none'" backdrop-blur-xl no-drag
       :left="open ? '0' : '-316px'"
       transition="all duration-200"
     >

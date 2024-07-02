@@ -49,7 +49,9 @@
     "歡迎使用 uyou ToDo",
     "將滑鼠移至 ToDo 項的左邊，完成 ToDo",
     "將滑鼠移至 ToDo 項的右邊，刪除 ToDo",
-    "將滑鼠移至 ToDo 標題欄右上角，複製 ToDo 內容"
+    "將滑鼠移至 ToDo 標題欄右上角，複製 ToDo 內容",
+    "星標 ToDo",
+    "你可以設定多個 ToDo 分類"
   ],
   "update": {
     "autoUpdate": "自動獲取更新",
@@ -243,5 +245,6 @@
   },
   "open": {
     "thanks": "uyou ToDo 的開發離不開源社群\n\n感謝以下開源專案以建立 uyou ToDo"
-  }
+  },
+  "seccate": "第二類別"
 }
