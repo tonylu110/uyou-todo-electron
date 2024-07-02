@@ -239,5 +239,8 @@
   },
   "note": {
     "select": "Select category"
+  },
+  "open": {
+    "thanks": "The development of uyou ToDo is inseparable from the open source community\n\nThanks to the following open source projects to build uyou ToDo"
   }
 }

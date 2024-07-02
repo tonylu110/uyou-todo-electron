@@ -239,5 +239,8 @@
   },
   "note": {
     "select": "选择类别"
+  },
+  "open": {
+    "thanks": "uyou ToDo 的开发离不开开源社区\n感谢以下开源项目以构建 uyou ToDo"
   }
 }

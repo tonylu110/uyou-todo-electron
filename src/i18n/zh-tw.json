@@ -240,5 +240,8 @@
   },
   "note": {
     "select": "選擇類別"
+  },
+  "open": {
+    "thanks": "uyou ToDo 的開發離不開源社群\n\n感謝以下開源專案以建立 uyou ToDo"
   }
 }
