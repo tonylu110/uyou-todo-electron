@@ -9,6 +9,7 @@ const props = defineProps<{
   title: string
   id: number
   isOk: boolean
+  star?: boolean
   color?: string | null
   cateId: string | number
 }>()
@@ -17,11 +18,13 @@ const emits = defineEmits<{
   del: [id: number]
   setOk: [id: number, ok: boolean]
   edit: [id: number, title: string, cateId: number | string]
+  setStar: [id: number, star: boolean]
 }>()
 
 const { t } = useI18n()
 
 const okState = ref(props.isOk)
+const starState = ref(props.star)
 
 watch(okState, (newValue) => {
   emits('setOk', props.id, newValue)
@@ -39,13 +42,20 @@ function copy() {
   <div ref="itemDom" relative flex items-center justify-between p-5px>
     <CheckBox v-model="okState" left="4px!" :num="id" :color="color ? color : 'primary-d'" />
     <div
-      ml-30px
+      ml-25px flex items-center
       :line="okState ? 'through' : ''"
       :c="okState
         ? '#333/25 dark:#bbb/25 selection:white'
         : '#333 dark:#bbb selection:white'"
     >
-      {{ title }}
+      <div
+        i-ph:star-fill mr-5px :c="star ? '#e6a400' : '#555/20 dark:#bbb/20'"
+        @click="() => {
+          starState = !starState
+          emits('setStar', id, starState)
+        }"
+      />
+      <span>{{ title }}</span>
     </div>
     <div
       flex="~ gap-5px"

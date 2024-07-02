@@ -186,9 +186,29 @@ function editItem(id: number, title: string, cateId: number | string) {
   saveItemSet(list.value!)
 }
 
+function setStar(id: number, star: boolean) {
+  for (let i = 0; i < list.value!.length; i++) {
+    if (list.value![i].id === id) {
+      list.value![i].star = star
+    }
+  }
+
+  saveItemSet(list.value!)
+}
+
+emitter.on('searchSetStar', (data) => {
+  const useData = data as {
+    id: number
+    star: boolean
+  }
+
+  setStar(useData.id, useData.star)
+})
+
 onBeforeUnmount(() => {
   emitter.off('searchSetOk')
   emitter.off('searchDelete')
+  emitter.off('searchSetStar')
   emitter.off('noteShowAddItem')
   emitter.off('addCateNote')
 })
@@ -213,6 +233,7 @@ onBeforeUnmount(() => {
       @set-ok="setOk"
       @edit="edit"
       @edit-item="editItem"
+      @set-star="setStar"
     />
     <NoteBox
       v-if="otherList.length > 0"
@@ -222,6 +243,7 @@ onBeforeUnmount(() => {
       @del-item="del"
       @set-ok="setOk"
       @edit-item="editItem"
+      @set-star="setStar"
     />
     <AddItem v-model="itemText" :open="openAddItem" @close="close" @add="addItem" />
   </div>
