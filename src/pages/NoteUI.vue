@@ -123,6 +123,8 @@ function sync() {
     router.push('/account?from=setting')
   }
 }
+
+const systemTitle = localStorage.getItem('systemTitle') === 'true'
 </script>
 
 <template>
@@ -148,7 +150,7 @@ function sync() {
       <Tab v-if="showTab" id="use" :title="t('noteui.spcate')" :index="1" @choose="choose" @load="setLab" />
     </Tabs>
     <div
-      v-if="!isMac()"
+      v-if="!isMac() && !systemTitle"
       :bg="topState
         ? 'error-d hover:error-h active:error-a'
         : 'black/10 hover:black/20 active:black/30'"
@@ -159,7 +161,7 @@ function sync() {
       <div i-fluent:pin-12-filled text-13px :c="topState ? 'white' : '#555'" />
     </div>
 
-    <div fixed right-15px top-14px z-1>
+    <div v-if="!systemTitle" fixed right-15px top-14px z-1>
       <WindowButtons />
     </div>
     <div relative w-75vw flex>

@@ -28,11 +28,13 @@ emitter.on('topWindow', (data: unknown) => {
 })
 
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
+
+const systemTitle = localStorage.getItem('systemTitle') === 'true'
 </script>
 
 <template>
   <div
-    relative h-53px w-screen flex items-center justify-center drag
+    relative z-1 h-53px w-screen flex items-center justify-center drag
     :bg="isBlur ? (isMac() && route.name === 'Home' ? 'white/00' : 'white/50 dark:#333/50') : 'white/80 dark:#333/80'"
   >
     <div
@@ -40,7 +42,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
       flex items-center
     >
       <div
-        v-if="!isMac()"
+        v-if="!isMac() && !systemTitle"
         :bg="topState
           ? 'error-d hover:error-h active:error-a'
           : 'black/10 hover:black/20 active:black/30'"
@@ -59,7 +61,7 @@ const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getI
       </div>
     </div>
     <span text-5 font-bold>{{ title }}</span>
-    <div fixed right-15px top-14px z-1>
+    <div v-if="!systemTitle" fixed right-15px top-14px z-1>
       <WindowButtons />
     </div>
   </div>
