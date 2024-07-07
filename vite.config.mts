@@ -6,6 +6,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueMacros from 'unplugin-vue-macros/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
 import ElectronRenderer from 'vite-plugin-electron-renderer'
+import { VineVitePlugin } from 'vue-vine/vite'
 
 export default defineConfig({
   base: './',
@@ -33,6 +34,7 @@ export default defineConfig({
       },
     }),
     UnoCSS(),
+    VineVitePlugin(),
     ElementPlus({
       useSource: true,
     }),

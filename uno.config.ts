@@ -17,6 +17,18 @@ export default defineConfig({
       },
     }),
   ],
+  content: {
+    pipeline: {
+      include: [
+        'src/**/*.vine.ts',
+        'electronWindows/**/*.vine.ts',
+        'src/**/*.vue',
+        'electronWindows/**/*.vue',
+        'src/**/*.tsx',
+        'electronWindows/**/*.tsx',
+      ],
+    },
+  },
   transformers: [
     transformerDirectives({
       applyVariable: ['--at-apply', '--uno-apply', '--uno'],

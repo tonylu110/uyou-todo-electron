@@ -39,6 +39,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
       <Item title="vue" @item-fun="openUrlInBrowser('https://github.com/vuejs')" />
       <Item title="vue macros" @item-fun="openUrlInBrowser('https://github.com/vue-macros/vue-macros')" />
       <Item title="vue devtools" @item-fun="openUrlInBrowser('https://github.com/vuejs/devtools-next')" />
+      <Item title="vue vine" @item-fun="openUrlInBrowser('https://github.com/vue-vine')" />
       <Item title="vueuse" @item-fun="openUrlInBrowser('https://github.com/vueuse')" />
       <Item title="vite" @item-fun="openUrlInBrowser('https://github.com/vitejs')" />
       <Item title="TypeScript" @item-fun="openUrlInBrowser('https://github.com/microsoft/TypeScript')" />
