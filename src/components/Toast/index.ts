@@ -1,6 +1,6 @@
 import { createVNode, render } from 'vue'
-import type { IProps } from './Toast'
-import Toast from './Toast'
+import type { IProps } from './Toast.vine'
+import Toast from './Toast.vine'
 
 export function createToast({ msg, center }: IProps, node?: Element) {
   const vm = createVNode(Toast, { msg, center })

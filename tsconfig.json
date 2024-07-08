@@ -2,10 +2,9 @@
   "compilerOptions": {
     "target": "esnext",
     "types": [
+      "vue-vine/types/macros",
       "unplugin-vue-macros/macros-global", 
-      "node", 
-      "vite/client",
-      "vue-vine/macros"
+      "node"
     ],
     "useDefineForClassFields": true,
     "module": "esnext",

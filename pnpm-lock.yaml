@@ -145,8 +145,8 @@ importers:
         specifier: ^2.0.19
         version: 2.0.19(typescript@5.4.4)
       vue-vine:
-        specifier: ^0.1.4
-        version: 0.1.4(vue@3.4.27(typescript@5.4.4))
+        specifier: ^0.1.5
+        version: 0.1.5(vue@3.4.27(typescript@5.4.4))
       vue3-perfect-scrollbar:
         specifier: ^2.0.0
         version: 2.0.0(vue@3.4.27(typescript@5.4.4))
@@ -1379,11 +1379,11 @@ packages:
     resolution: {integrity: sha512-Q2geG7eAHFVu8w6/joxK5AQlpzKW6NcpxbU4k2ummuvjYPP9JnmY0h8pU1CRsEf6uzRv+yEUDDyDDeqHsN0IpA==}
     engines: {node: '>=16.14.0'}
 
-  '@vue-vine/compiler@0.1.4':
-    resolution: {integrity: sha512-F6z2iL8v3Q7RFL7nBVsVP4MzJ/YwAHK/TML9kdC1kXFfvP4xJOJSL7CwEE51zZB65y1ZJIpv+qI8SSi9j5Clkw==}
+  '@vue-vine/compiler@0.1.5':
+    resolution: {integrity: sha512-e2TDWq92H7+Gc5YR/fdlErekErmZMV1YoaWiLUDe6gmTFuFYkUMMjoBpUlzI0KSaxplZyIFX3gTL5hC7Bgx91g==}
 
-  '@vue-vine/vite-plugin@0.1.4':
-    resolution: {integrity: sha512-EVK8H0pktyNUxHlwpLjdpdgQOK9SRm39EaQ8LxzYOGPAyi95UTB2XwKfbhK013+uylpiGQBkvhhIhB92rgcpfA==}
+  '@vue-vine/vite-plugin@0.1.5':
+    resolution: {integrity: sha512-3hDGRRA58TxZaMF2CF4gdSLoHbmG6IGuOWAcgKshE8JubF2WIPWTPeHn6EzlhGmEzGgjJXeYk7O+9Q8PbOHgpQ==}
 
   '@vue/babel-helper-vue-transform-on@1.2.2':
     resolution: {integrity: sha512-nOttamHUR3YzdEqdM/XXDyCSdxMA9VizUKoroLX6yTyRtggzQMHXcmwh8a7ZErcJttIBIc9s68a1B8GZ+Dmvsw==}
@@ -3890,8 +3890,8 @@ packages:
     peerDependencies:
       typescript: '*'
 
-  vue-vine@0.1.4:
-    resolution: {integrity: sha512-jKHB2a3QQ9jaBn8j7sMYeyecVDDtRgwWmHvLfX48iCNC4rCdmtSlbf12Yf53sNB7hCzvxn6esxGC2Agvs7rVtw==}
+  vue-vine@0.1.5:
+    resolution: {integrity: sha512-z4EhqHHTo/4dvpa9JFgitLyH2jU7kfGK5/L6T+XmiQHR1xRMVstH93zVstw1KPDqMfoD95EXTxfDHIoWl5fgWQ==}
 
   vue3-perfect-scrollbar@2.0.0:
     resolution: {integrity: sha512-nSWVcRyViCgt0Pe3RhU3w/BllLcFSrEzYOGlRBjSyhVmiZlERHHziffW+9P8L0IMEWouC5t+uYrgNJGSAElqMA==}
@@ -5483,7 +5483,7 @@ snapshots:
       - rollup
       - vue
 
-  '@vue-vine/compiler@0.1.4':
+  '@vue-vine/compiler@0.1.5':
     dependencies:
       '@babel/parser': 7.24.6
       '@babel/types': 7.24.6
@@ -5497,9 +5497,9 @@ snapshots:
       postcss-selector-parser: 6.0.16
       source-map-js: 1.2.0
 
-  '@vue-vine/vite-plugin@0.1.4':
+  '@vue-vine/vite-plugin@0.1.5':
     dependencies:
-      '@vue-vine/compiler': 0.1.4
+      '@vue-vine/compiler': 0.1.5
 
   '@vue/babel-helper-vue-transform-on@1.2.2': {}
 
@@ -8352,9 +8352,9 @@ snapshots:
       semver: 7.6.0
       typescript: 5.4.4
 
-  vue-vine@0.1.4(vue@3.4.27(typescript@5.4.4)):
+  vue-vine@0.1.5(vue@3.4.27(typescript@5.4.4)):
     dependencies:
-      '@vue-vine/vite-plugin': 0.1.4
+      '@vue-vine/vite-plugin': 0.1.5
       '@vueuse/core': 10.10.0(vue@3.4.27(typescript@5.4.4))
     transitivePeerDependencies:
       - '@vue/composition-api'
