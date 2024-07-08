@@ -1,45 +1,47 @@
 import antfu from '@antfu/eslint-config'
+import VueVineESLintParser from '@vue-vine/eslint-parser'
 
-export default antfu({
-  // Enable stylistic formatting rules
-  // stylistic: true,
+export default antfu(
+  {
+    stylistic: {
+      indent: 2,
+      quotes: 'single',
+    },
 
-  // Or customize the stylistic rules
-  stylistic: {
-    indent: 2, // 4, or 'tab'
-    quotes: 'single', // or 'double'
+    typescript: true,
+    vue: true,
+
+    jsonc: false,
+    yaml: false,
+
+    ignores: [
+      '**/fixtures',
+      'electronWindows/**/*.vine.ts',
+      'src/**/*.vine.ts',
+    ],
+    unocss: true,
+    formatters: {
+      css: true,
+      html: true,
+      markdown: 'prettier',
+    },
   },
-
-  // TypeScript and Vue are auto-detected, you can also explicitly enable them:
-  typescript: true,
-  vue: true,
-
-  // Disable jsonc and yaml support
-  jsonc: false,
-  yaml: false,
-
-  // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
-  ignores: [
-    '**/fixtures',
-    // ...globs
-  ],
-  unocss: true,
-  formatters: {
-    /**
-     * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue
-     * By default uses Prettier
-     */
-    css: true,
-    /**
-     * Format HTML files
-     * By default uses Prettier
-     */
-    html: true,
-    /**
-     * Format Markdown files
-     * Supports Prettier and dprint
-     * By default uses Prettier
-     */
-    markdown: 'prettier',
+  {
+    rules: {
+      'curly': 'off',
+      'prefer-const': 'off',
+    },
   },
-})
+  {
+    files: [
+      'electronWindows/**/*.vine.ts',
+      'src/**/*.vine.ts',
+    ],
+    languageOptions: {
+      parser: VueVineESLintParser,
+    },
+    rules: {
+      'no-console': 'off',
+    },
+  }
+)

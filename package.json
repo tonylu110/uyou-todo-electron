@@ -48,6 +48,7 @@
     "@unocss/transformer-attributify-jsx": "^0.60.2",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@vue-vine/eslint-parser": "^0.1.5",
     "@vue/devtools": "^7.3.5",
     "@vueuse/components": "^10.10.0",
     "@vueuse/core": "^10.10.0",
