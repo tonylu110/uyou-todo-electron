@@ -38,7 +38,7 @@ function toUse() {
             @click="setMode('normal')"
           >
             <img
-              :src="isDark ? '/color_mode/dark.png' : '/color_mode/light.png'"
+              :src="isDark ? './color_mode/dark.png' : './color_mode/light.png'"
               alt="light"
               srcset=""
               h-full w-full rounded-6px
@@ -55,7 +55,7 @@ function toUse() {
             @click="setMode('note')"
           >
             <img
-              :src="isDark ? '/images/note/dark.png' : '/images/note/light.png'"
+              :src="isDark ? './images/note/dark.png' : './images/note/light.png'"
               alt="dark"
               srcset=""
               h-full w-full rounded-6px

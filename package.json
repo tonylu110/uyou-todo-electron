@@ -1,6 +1,6 @@
 {
   "name": "uyoutodo",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": false,
   "author": {
     "name": "Anthony Lu",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.3",
+    "@electron/rebuild": "^3.6.0",
     "@iconify-json/circle-flags": "^1.1.47",
     "@iconify-json/emojione-v1": "^1.1.10",
     "@iconify-json/f7": "^1.1.0",
