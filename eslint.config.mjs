@@ -1,5 +1,5 @@
 import antfu from '@antfu/eslint-config'
-import VueVineESLintParser from '@vue-vine/eslint-parser'
+import * as VueVineESLintParser from '@vue-vine/eslint-parser'
 
 export default antfu(
   {

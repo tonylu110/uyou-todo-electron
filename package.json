@@ -31,7 +31,7 @@
     "mica-electron": "^1.5.13"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.21.2",
+    "@antfu/eslint-config": "^2.21.3",
     "@iconify-json/circle-flags": "^1.1.47",
     "@iconify-json/emojione-v1": "^1.1.10",
     "@iconify-json/f7": "^1.1.0",
@@ -48,7 +48,7 @@
     "@unocss/transformer-attributify-jsx": "^0.60.2",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
-    "@vue-vine/eslint-parser": "^0.1.5",
+    "@vue-vine/eslint-parser": "^0.1.6",
     "@vue/devtools": "^7.3.5",
     "@vueuse/components": "^10.10.0",
     "@vueuse/core": "^10.10.0",
@@ -74,7 +74,7 @@
     "vue-i18n": "9.13.1",
     "vue-router": "^4.3.2",
     "vue-tsc": "^2.0.19",
-    "vue-vine": "^0.1.5",
+    "vue-vine": "^0.1.6",
     "vue3-perfect-scrollbar": "^2.0.0",
     "wait-on": "^7.2.0"
   },
