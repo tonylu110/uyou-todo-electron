@@ -1,4 +1,3 @@
-import type { Ref } from 'vue'
 import { ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
@@ -9,12 +8,12 @@ import type ITodoList from '../interface/ITodoListArray'
 import type { cateItem } from '../components/ListMenu/ICateItem'
 import emitter from '../util/bus'
 
-const Other: SetupFC = () => {
+function Other() {
   const { t } = useI18n()
 
   const title = ref('')
 
-  const listData: Ref<ITodoList[]> = ref([])
+  const listData = ref<ITodoList[]>([])
 
   const route = useRoute()
   const router = useRouter()
@@ -60,25 +59,23 @@ const Other: SetupFC = () => {
 
   const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
-  return () => (
-    <>
-      <TabBar
-        leftImg="i-ph:gear-fine-bold"
-        title={title.value}
-        leftImgShow={simpleMode}
-        rightImgShow={route.query.listName !== 'allNotDo' && route.query.listName !== 'allDo' && route.query.listName !== 'star'}
-        onRightClick={() => showAddItem.value = !showAddItem.value}
-        onLeftClick={() => router.push('/setting-sim')}
-        showMore={true}
-        showWrap={true}
-      />
-      <List
-        showAddItem={showAddItem.value}
-        listData={listData.value}
-        onSetAddItem={() => showAddItem.value = false}
-      />
-    </>
-  )
+  return vine`
+    <TabBar
+      left-img="i-ph:gear-fine-bold"
+      :title="title"
+      :left-img-show="simpleMode"
+      :right-img-show="route.query.listName !== 'allNotDo' && route.query.listName !== 'allDo' && route.query.listName !== 'star'"
+      :show-more="true"
+      :show-wrap="true"
+      @right-click="showAddItem = !showAddItem"
+      @left-click="router.push('/setting-sim')"
+    />
+    <List
+      :show-add-item="showAddItem"
+      :list-data="listData"
+      @set-add-item="showAddItem = false"
+    />
+  `
 }
 
 export default Other

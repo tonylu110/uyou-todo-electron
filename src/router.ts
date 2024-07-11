@@ -27,7 +27,7 @@ const routes = [
   {
     path: '/other',
     name: 'other',
-    component: () => import('./pages/Other.tsx'),
+    component: () => import('./pages/Other.vine.ts'),
   },
   {
     path: '/update',
