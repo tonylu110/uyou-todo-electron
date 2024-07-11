@@ -15,8 +15,8 @@ importers:
         specifier: ^8.1.0
         version: 8.2.0
       mica-electron:
-        specifier: ^1.5.14
-        version: 1.5.14
+        specifier: ^1.5.15
+        version: 1.5.15
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^2.22.0
@@ -3233,8 +3233,8 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  mica-electron@1.5.14:
-    resolution: {integrity: sha512-H52bbj9K76e6jU9etghKhQsO/gCpMKCRFkrZoL4ddugxp4lB+1lRVFhwvD2VPfFLrHtzw9QNUfm30ipw7pMxTg==}
+  mica-electron@1.5.15:
+    resolution: {integrity: sha512-a3Z6/BHO2SlkH1ZuVmbZWuKBiuGuQiw13Xhl02/Px8wf+340B2t7vnckt6M9X68uhjafIHIGMqBRWYCjFWs9pg==}
 
   micromark@2.11.4:
     resolution: {integrity: sha512-+WoovN/ppKolQOFIAajxi7Lu9kInbPxFuTBVEavFcL8eAfVstoc5MocPmqBeAdBOJV00uaVjegzH4+MA0DN/uA==}
@@ -8272,7 +8272,7 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  mica-electron@1.5.14: {}
+  mica-electron@1.5.15: {}
 
   micromark@2.11.4:
     dependencies:

@@ -5,7 +5,7 @@ const routes = [
     path: '/',
     name: 'Home',
     components: {
-      default: () => import('./pages/Home.tsx'),
+      default: () => import('./pages/Home.vine.ts'),
       noteUI: () => import('./pages/NoteUI.vue'),
     },
   },
