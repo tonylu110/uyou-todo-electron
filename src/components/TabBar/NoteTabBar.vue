@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onUnmounted, ref } from 'vue'
 import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'
 import firstLoad from '../TitleBar/firstLoad'
 import { topWindow } from '../../util/windowApi'
@@ -25,6 +25,10 @@ function onTopWindow() {
 }
 emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
+})
+
+onUnmounted(() => {
+  emitter.off('topWindow')
 })
 
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())

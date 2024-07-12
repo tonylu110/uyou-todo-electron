@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { shell } from 'electron'
 import TabBar from '../../components/TabBar/TabBar.vue'
@@ -18,6 +18,10 @@ const { t } = useI18n()
 const menuShort = ref(window.innerWidth < 750)
 emitter.on('menuClose', (data) => {
   menuShort.value = data as boolean
+})
+
+onUnmounted(() => {
+  emitter.off('menuClose')
 })
 
 const isVip = ref(localStorage.getItem('isVip') === 'true')

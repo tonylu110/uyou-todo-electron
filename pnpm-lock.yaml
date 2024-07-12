@@ -73,8 +73,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(vite@5.3.3(@types/node@20.14.10)(sass@1.54.3))(vue@3.4.31(typescript@5.5.3))
       '@vue-vine/eslint-parser':
-        specifier: ^0.1.8
-        version: 0.1.8(eslint@9.6.0)(typescript@5.5.3)
+        specifier: ^0.1.9
+        version: 0.1.9(eslint@9.6.0)(typescript@5.5.3)
       '@vue/devtools':
         specifier: ^7.3.5
         version: 7.3.5(utf-8-validate@5.0.10)(vite@5.3.3(@types/node@20.14.10)(sass@1.54.3))(vue@3.4.31(typescript@5.5.3))
@@ -151,8 +151,8 @@ importers:
         specifier: ^2.0.26
         version: 2.0.26(typescript@5.5.3)
       vue-vine:
-        specifier: ^0.1.8
-        version: 0.1.8(vue@3.4.31(typescript@5.5.3))
+        specifier: ^0.1.9
+        version: 0.1.9(vue@3.4.31(typescript@5.5.3))
       vue3-perfect-scrollbar:
         specifier: ^2.0.0
         version: 2.0.0(vue@3.4.31(typescript@5.5.3))
@@ -1574,14 +1574,14 @@ packages:
     resolution: {integrity: sha512-Q2geG7eAHFVu8w6/joxK5AQlpzKW6NcpxbU4k2ummuvjYPP9JnmY0h8pU1CRsEf6uzRv+yEUDDyDDeqHsN0IpA==}
     engines: {node: '>=16.14.0'}
 
-  '@vue-vine/compiler@0.1.8':
-    resolution: {integrity: sha512-lxEQMy/SBFwwTmi2jNihEn5dzBwp5FS8EvanDoVTIge0okMi0VKNLEo38I4yTiAURmhYq82zsL74/opGZw+Kjw==}
+  '@vue-vine/compiler@0.1.9':
+    resolution: {integrity: sha512-LsurUlgP3OjLfz/mzalsmmW0OUT5g6R2NSlE7QRMP8M+Rwbf5v3e3QvyDyeZfU+uG2QTTDmNqN2YjrdbjAsaHg==}
 
-  '@vue-vine/eslint-parser@0.1.8':
-    resolution: {integrity: sha512-N3xqJKrolS9lkr8DLfCF6bnB0ML/+2xeVmXpQp15Irm2QQEBqAWYSy1wwc/lVKdSe/MqVPa9GYJOApwMyHUCkw==}
+  '@vue-vine/eslint-parser@0.1.9':
+    resolution: {integrity: sha512-LTaLJWB26EINmKqHAER4Epridwm4msrEdT/rhm2K5W2Q8lejfCpvXGK1GLgLv21iHMds0EqZrC0m2+xbR9fuUQ==}
 
-  '@vue-vine/vite-plugin@0.1.8':
-    resolution: {integrity: sha512-vzokrLA47kj+wK2RmAcGmDLvl/xNkjU7sYhxYH91PJAUGRWdnBQ2zBgo2nTyNa7mK8gAjfROlk2Od4I113qLAQ==}
+  '@vue-vine/vite-plugin@0.1.9':
+    resolution: {integrity: sha512-6v4KpooQSLVMx2tXVoPwwPWi63pW8O9eX3N1XuWI5WVTI+Slnu3f/JlnWTHqk4UgYr9x3BiF2lqMhgBVN3K5mA==}
 
   '@vue/babel-helper-vue-transform-on@1.2.2':
     resolution: {integrity: sha512-nOttamHUR3YzdEqdM/XXDyCSdxMA9VizUKoroLX6yTyRtggzQMHXcmwh8a7ZErcJttIBIc9s68a1B8GZ+Dmvsw==}
@@ -4306,8 +4306,8 @@ packages:
     peerDependencies:
       typescript: '>=5.0.0'
 
-  vue-vine@0.1.8:
-    resolution: {integrity: sha512-Ji5F6zMCX3LNtiGjVCCzXO8BWGmSYewUWDpJbMAlyMHsQAyDL4MX93NxiTfVI6oHaC9F46lbEJDaxE8WADXZkA==}
+  vue-vine@0.1.9:
+    resolution: {integrity: sha512-fSjlcLs3aVLcPBxgiS8KmOL8VfS9SFEQiubFf/gzXZWzAgndPPAs9kNyA6sl0WNBuzITLuljyRPOMwZ0gE3rNg==}
 
   vue3-perfect-scrollbar@2.0.0:
     resolution: {integrity: sha512-nSWVcRyViCgt0Pe3RhU3w/BllLcFSrEzYOGlRBjSyhVmiZlERHHziffW+9P8L0IMEWouC5t+uYrgNJGSAElqMA==}
@@ -6196,7 +6196,7 @@ snapshots:
       - rollup
       - vue
 
-  '@vue-vine/compiler@0.1.8':
+  '@vue-vine/compiler@0.1.9':
     dependencies:
       '@babel/parser': 7.24.7
       '@babel/types': 7.24.7
@@ -6210,7 +6210,7 @@ snapshots:
       postcss-selector-parser: 6.0.16
       source-map-js: 1.2.0
 
-  '@vue-vine/eslint-parser@0.1.8(eslint@9.6.0)(typescript@5.5.3)':
+  '@vue-vine/eslint-parser@0.1.9(eslint@9.6.0)(typescript@5.5.3)':
     dependencies:
       '@typescript-eslint/parser': 6.21.0(eslint@9.6.0)(typescript@5.5.3)
       '@typescript-eslint/scope-manager': 6.21.0
@@ -6225,9 +6225,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@vue-vine/vite-plugin@0.1.8':
+  '@vue-vine/vite-plugin@0.1.9':
     dependencies:
-      '@vue-vine/compiler': 0.1.8
+      '@vue-vine/compiler': 0.1.9
 
   '@vue/babel-helper-vue-transform-on@1.2.2': {}
 
@@ -9370,9 +9370,9 @@ snapshots:
       semver: 7.6.2
       typescript: 5.5.3
 
-  vue-vine@0.1.8(vue@3.4.31(typescript@5.5.3)):
+  vue-vine@0.1.9(vue@3.4.31(typescript@5.5.3)):
     dependencies:
-      '@vue-vine/vite-plugin': 0.1.8
+      '@vue-vine/vite-plugin': 0.1.9
       '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.3))
     transitivePeerDependencies:
       - '@vue/composition-api'

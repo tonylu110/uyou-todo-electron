@@ -1,4 +1,4 @@
-import { ref, watchEffect } from 'vue'
+import { onUnmounted, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import TabBar from '../components/TabBar/TabBar.vue'
@@ -55,6 +55,10 @@ function Other() {
 
   emitter.on('todayShow', (show) => {
     todayShow.value = show as string
+  })
+
+  onUnmounted(() => {
+    emitter.off('todayShow')
   })
 
   const simpleMode = localStorage.getItem('simpleMode') === 'true'

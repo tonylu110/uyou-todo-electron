@@ -153,6 +153,7 @@ emitter.on('showWrap', () => {
 })
 onBeforeUnmount(() => {
   emitter.off('showWrap')
+  emitter.off('setCate')
 })
 
 function dragenter(e: MouseEvent, index: number) {

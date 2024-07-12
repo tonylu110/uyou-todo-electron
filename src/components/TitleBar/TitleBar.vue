@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import os from 'node:os'
-import { ref, watchEffect } from 'vue'
+import { onUnmounted, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import emitter from '../../util/bus'
 import { closeWindow, minWindow, topWindow } from '../../util/windowApi'
@@ -19,6 +19,10 @@ function onTopWindow() {
 }
 emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
+})
+
+onUnmounted(() => {
+  emitter.off('topWindow')
 })
 
 // const title = ref('uyou ToDo')

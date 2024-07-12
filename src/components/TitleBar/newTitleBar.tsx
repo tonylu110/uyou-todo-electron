@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { onUnmounted, ref } from 'vue'
 import emitter from '../../util/bus'
 import { isMac, isWindow } from '../../util/os'
 import { topWindow } from '../../util/windowApi'
@@ -30,6 +30,12 @@ const newTitleBar: SetupFC = () => {
     menuShort.value = data as boolean
   })
 
+  onUnmounted(() => {
+    emitter.off('topWindow')
+    emitter.off('titleColor')
+    emitter.off('menuClose')
+  })
+
   return () => (
     <div
       drag
@@ -44,26 +50,26 @@ const newTitleBar: SetupFC = () => {
       {isMac()
         ? null
         : (
-          <div
-            bg={topState.value
-              ? 'error-d hover:error-h active:error-a dark:error-h dark:active:error-d dark:hover:error-a'
-              : 'black/10 hover:black/20 active:black/30 dark:#999/10 dark:hover:#999/20 dark:active:#999/30'}
-            w-13px
-            h-13px
-            rounded-full
-            no-drag
-            p-6px
-            mt-12px
-            flex
-            items-center
-            justify-center
-            ml-16px
-            cursor-pointer
-            rounded-5px
-            onClick={onTopWindow}
-          >
-            <div i-fluent:pin-12-filled text-13px c={topState.value ? 'white' : '#555 dark:#bbb'}></div>
-          </div>
+            <div
+              bg={topState.value
+                ? 'error-d hover:error-h active:error-a dark:error-h dark:active:error-d dark:hover:error-a'
+                : 'black/10 hover:black/20 active:black/30 dark:#999/10 dark:hover:#999/20 dark:active:#999/30'}
+              w-13px
+              h-13px
+              rounded-full
+              no-drag
+              p-6px
+              mt-12px
+              flex
+              items-center
+              justify-center
+              ml-16px
+              cursor-pointer
+              rounded-5px
+              onClick={onTopWindow}
+            >
+              <div i-fluent:pin-12-filled text-13px c={topState.value ? 'white' : '#555 dark:#bbb'}></div>
+            </div>
           )}
     </div>
   )

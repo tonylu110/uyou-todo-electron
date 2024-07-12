@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { computed, reactive, ref, watch, watchEffect } from 'vue'
+import { computed, onUnmounted, reactive, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { Dropdown as VDropdown } from 'floating-vue'
@@ -205,6 +205,13 @@ function delWithToDo(id: number) {
 
   delCate(id)
 }
+
+onUnmounted(() => {
+  emitter.off('setCate')
+  emitter.off('setListItem')
+  emitter.off('menuClose')
+  emitter.off('setLoginText')
+})
 
 const count = computed(() => Object.values(showList.value).filter(obj => !obj.show).length)
 

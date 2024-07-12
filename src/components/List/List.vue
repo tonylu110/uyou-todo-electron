@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
+import { computed, onMounted, onUnmounted, reactive, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { usePreferredDark } from '@vueuse/core'
@@ -226,6 +226,14 @@ function setReminder(id: number, time: number) {
   }
   saveItemSet(listAll.value!)
 }
+
+onUnmounted(() => {
+  emitter.off('searchSetOk')
+  emitter.off('searchDelete')
+  emitter.off('searchSetStar')
+  emitter.off('changeBgColor')
+  emitter.off('menuClose')
+})
 
 const isDark = usePreferredDark()
 </script>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { onUnmounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import type { cateItem } from '../ListMenu/ICateItem'
@@ -25,6 +25,10 @@ emitter.on('setCate', (data) => {
   JSON.parse((data as string)).data.forEach((item: cateItem) => {
     cateList.push(item)
   })
+})
+
+onUnmounted(() => {
+  emitter.off('setCate')
 })
 
 const router = useRouter()

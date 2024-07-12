@@ -198,7 +198,6 @@ const localLang = navigator.language.toLowerCase()
         @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
       />
       <Item
-        v-if="!isNoteUI"
         icon="i-icon-park:reverse-operation-out"
         :title="t('anotherSettings.itemWrap')"
         :show-switch="true"

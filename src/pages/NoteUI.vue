@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ipcRenderer } from 'electron'
 import WindowButtons from '../components/TabBar/windowButtons'
@@ -65,6 +65,10 @@ function onTopWindow() {
 }
 emitter.on('topWindow', (data: unknown) => {
   topState.value = (data as boolean)
+})
+
+onUnmounted(() => {
+  emitter.off('topWindow')
 })
 
 const listId = ref('all')

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { shell } from 'electron'
 import TabBar from '../../components/TabBar/TabBar.vue'
@@ -16,6 +16,10 @@ const { t } = useI18n()
 const menuShort = ref(window.innerWidth < 750)
 emitter.on('menuClose', (data) => {
   menuShort.value = data as boolean
+})
+
+onUnmounted(() => {
+  emitter.off('menuClose')
 })
 
 const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
