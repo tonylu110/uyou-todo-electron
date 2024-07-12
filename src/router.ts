@@ -6,7 +6,7 @@ const routes = [
     name: 'Home',
     components: {
       default: () => import('./pages/Home.vine.ts'),
-      noteUI: () => import('./pages/NoteUI.vue'),
+      noteUI: () => import('./pages/NoteUI.vine.ts'),
     },
   },
   {
