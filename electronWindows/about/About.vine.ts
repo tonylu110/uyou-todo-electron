@@ -1,5 +1,5 @@
 import { isMac } from '../../src/util/os'
-import CloseButton from '../../src/components/CloseButton'
+import CloseButton from '../../src/components/CloseButton/CloseButton.vine'
 import { versionText } from '../../src/util/appVersionCode'
 
 function About() {

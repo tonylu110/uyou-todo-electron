@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { ipcRenderer } from 'electron'
 import Alert from '../../src/components/Alert/Alert.vue'
 import { isMac } from '../../src/util/os'
-import CloseButton from '../../src/components/CloseButton'
+import CloseButton from '../../src/components/CloseButton/CloseButton.vine'
 
 const { t } = useI18n()
 
