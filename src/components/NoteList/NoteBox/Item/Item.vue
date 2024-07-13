@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUnmounted, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import CheckBox from '../../../List/Item/CheckBox/CheckBox.vue'
 import { createToast } from '../../../Toast'
@@ -42,9 +42,11 @@ const showStar = localStorage.getItem('showStar') === 'true' || localStorage.get
 
 const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
 
-emitter.on('textOpen', (data) => {
-  textWrapState.value = data as boolean
-  localStorage.setItem('textWrap', `${data}`)
+onMounted(() => {
+  emitter.on('textOpen', (data) => {
+    textWrapState.value = data as boolean
+    localStorage.setItem('textWrap', `${data}`)
+  })
 })
 
 onUnmounted(() => {
