@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import CheckBox from '../../../List/Item/CheckBox/CheckBox.vue'
 import { createToast } from '../../../Toast'
+import emitter from '../../../../util/bus'
 import Edit from './Edit/Edit.vue'
 
 const props = defineProps<{
@@ -38,6 +39,17 @@ function copy() {
 }
 
 const showStar = localStorage.getItem('showStar') === 'true' || localStorage.getItem('showStar') === null
+
+const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
+
+emitter.on('textOpen', (data) => {
+  textWrapState.value = data as boolean
+  localStorage.setItem('textWrap', `${data}`)
+})
+
+onUnmounted(() => {
+  emitter.off('textOpen')
+})
 </script>
 
 <template>
@@ -59,7 +71,20 @@ const showStar = localStorage.getItem('showStar') === 'true' || localStorage.get
           emits('setStar', id, starState)
         }"
       />
-      <span>{{ title }}</span>
+      <span
+        :whitespace="!textWrapState ? 'nowrap' : 'pre-wrap'"
+        :overflow="!textWrapState ? 'hidden' : 'auto'"
+        :text="!textWrapState ? 'ellipsis' : ''"
+        :max-w="`
+          [calc(75vw-70px)]
+          sm:[calc(37.5vw-80px)]
+          md:[calc(25vw-85px)]
+          lg:[calc(18.75vw-85px)]
+          xl:[calc(15vw-90px)]
+          ${''}
+          `
+        "
+      >{{ title }}</span>
     </div>
     <div
       flex="~ gap-5px"

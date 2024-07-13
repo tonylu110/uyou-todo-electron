@@ -1,5 +1,5 @@
 import { useRouter } from 'vue-router'
-import { onUnmounted, ref } from 'vue'
+import { onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ipcRenderer } from 'electron'
 import WindowButtons from '../components/TabBar/windowButtons'
@@ -128,6 +128,12 @@ function NoteUI() {
     }
   }
 
+  const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
+
+  watch(textWrapState, (newValue) => {
+    emitter.emit('textOpen', newValue)
+  })
+
   const systemTitle = localStorage.getItem('systemTitle') === 'true'
 
   vineStyle.scoped(css`
@@ -158,6 +164,12 @@ function NoteUI() {
         <Item id="use" icon="i-f7:staroflife" :title="t('noteui.spcate')" :selected="listId === 'use'" @click="listId = 'use'" />
         <Item id="other" icon="i-f7:today" :title="t('noteui.othercate')" :selected="listId === 'other'" @click="listId = 'other'" />
         <Divider />
+        <Item 
+          :icon="textWrapState ? 'i-f7:arrow-down-right-arrow-up-left' : 'i-f7:arrow-up-left-arrow-down-right'" 
+          :title="textWrapState ? t('noteui.closetext') : t('noteui.opentext')"  
+          :selected="false" 
+          @click="textWrapState = !textWrapState"
+        />
         <Item icon="i-f7:search" :title="t('noteui.search')" :selected="false" @click="showSearch = true" />
       </SideBar>
       <Tabs ref="tabsRef" :lab-width="lableWidth" :lab-left="lableLeft" :show-tab="showTab ? (listId === 'all' || listId === 'use') : listId === 'all'">
@@ -207,7 +219,8 @@ function NoteUI() {
         </div>
       </div>
       <div
-        flex="~ gap-10px" fixed bottom-15px right-15px no-drag
+        flex="~ gap-10px" fixed
+        bottom-15px right-15px no-drag
       >
         <div
           v-if="listId === 'all'"

@@ -225,7 +225,9 @@
     "allcate": "所有类别",
     "othercate": "其他类别",
     "search": "搜索",
-    "spcate": "特殊类别"
+    "spcate": "特殊类别",
+    "opentext": "展开文字",
+    "closetext": "折叠文字"
   },
   "sponsor": {
     "thanks": "感谢赞助"

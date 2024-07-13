@@ -225,7 +225,9 @@
     "allcate": "所有類別",
     "othercate": "其他類別",
     "search": "搜尋",
-    "spcate": "特殊類別"
+    "spcate": "特殊類別",
+    "closetext": "折疊文字",
+    "opentext": "展開文字"
   },
   "sponsor": {
     "thanks": "感謝贊助"

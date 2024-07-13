@@ -225,7 +225,9 @@
     "allcate": "All Categories",
     "othercate": "Other categories",
     "search": "Search",
-    "spcate": "Special Category"
+    "spcate": "Special Category",
+    "closetext": "Collapse text",
+    "opentext": "Expand text"
   },
   "sponsor": {
     "thanks": "Thanks Sponsors"

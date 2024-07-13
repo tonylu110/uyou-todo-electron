@@ -7,7 +7,7 @@ export interface IProps {
 
 function Toast() {
   const msg = vineProp.withDefault('toast')
-  const center = vineProp.withDefault(false)
+  const center = vineProp.optional<boolean>()
 
   const simpleMode = window.innerWidth < 800
 
