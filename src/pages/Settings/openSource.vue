@@ -2,7 +2,7 @@
 import { useI18n } from 'vue-i18n'
 import { ipcRenderer } from 'electron'
 import TabBar from '../../components/TabBar/TabBar.vue'
-import SettingList from '../../components/SettingList'
+import SettingList from '../../components/SettingList/SettingList.vine'
 import ItemBox from '../../components/ItemBox/ItemBox.vue'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import router from '../../router'

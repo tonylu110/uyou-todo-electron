@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import TabBar from '../../components/TabBar/TabBar.vue'
-import SettingList from '../../components/SettingList'
+import SettingList from '../../components/SettingList/SettingList.vine'
 import router from '../../router'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 

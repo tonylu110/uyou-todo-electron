@@ -4,7 +4,7 @@ import { onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import TabBar from '../components/TabBar/TabBar.vue'
 import router from '../router'
-import SettingList from '../components/SettingList'
+import SettingList from '../components/SettingList/SettingList.vine'
 import Item from '../components/ItemBox/Item/Item.vue'
 import ItemBox from '../components/ItemBox/ItemBox.vue'
 import firstLoad from '../components/TitleBar/firstLoad'
@@ -12,7 +12,7 @@ import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
 import emitter from '../util/bus'
 import isDev from '../util/mode'
 import setSwitchFn from '../util/setSwitchFn'
-import ColorChange from '../components/SettingList/colorChange'
+import ColorChange from '../components/SettingList/colorChange/colorChange.vine'
 
 const { t } = useI18n()
 
