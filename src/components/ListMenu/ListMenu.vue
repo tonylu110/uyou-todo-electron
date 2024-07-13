@@ -15,7 +15,7 @@ import changeCate from './changCate'
 import type { cateItem } from './ICateItem'
 import MenuItem from './MenuItem/MenuItem.vue'
 import TitleMenuItem from './TitleMenuItem'
-import Icons from './MenuItem/Icons'
+import Icons from './MenuItem/Icons/Icons.vine'
 
 const { t } = useI18n()
 

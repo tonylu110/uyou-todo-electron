@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { Dropdown as VDropdown } from 'floating-vue'
 import { useI18n } from 'vue-i18n'
-import Icons from '../../../ListMenu/MenuItem/Icons'
+import Icons from '../../../ListMenu/MenuItem/Icons/Icons.vine'
 import Colors from '../../CateAdd/Colors/Color.vue'
 
 const props = defineProps<{

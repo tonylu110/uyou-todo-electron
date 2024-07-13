@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import Icons from '../../ListMenu/MenuItem/Icons'
+import Icons from '../../ListMenu/MenuItem/Icons/Icons.vine'
 import Alert from '../../Alert/Alert.vue'
 import emitter from '../../../util/bus'
 import Colors from './Colors/Color.vue'

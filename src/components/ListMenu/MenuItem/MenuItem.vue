@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Dropdown as VDropdown } from 'floating-vue'
 import { useI18n } from 'vue-i18n'
-import Icons from './Icons'
+import Icons from './Icons/Icons.vine'
 
 defineProps<{
   id: number
@@ -205,4 +205,4 @@ const showIcons = ref(false)
   }
 }
 </style>
-./Icons/Icons
+./Icons/Icons.vine/Icons
