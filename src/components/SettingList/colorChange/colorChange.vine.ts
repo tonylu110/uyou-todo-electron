@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { ipcRenderer } from 'electron'
-import ItemSpace from '../../ItemBox/ItemSpace'
+import ItemSpace from '../../ItemBox/ItemSpace/ItemSpace.vine'
 
 function ColorChange() {
   const colorMode = ref(localStorage.getItem('colorMode') ? localStorage.getItem('colorMode') : 'system')

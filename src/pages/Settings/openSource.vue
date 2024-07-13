@@ -7,7 +7,7 @@ import ItemBox from '../../components/ItemBox/ItemBox.vue'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import router from '../../router'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
-import ItemSpace from '../../components/ItemBox/ItemSpace'
+import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
 
 const { t } = useI18n()
 

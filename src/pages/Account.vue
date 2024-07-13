@@ -11,7 +11,7 @@ import Item from '../components/ItemBox/Item/Item.vue'
 import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
 import emitter from '../util/bus'
 import { createToast } from '../components/Toast'
-import ItemSpace from '../components/ItemBox/ItemSpace'
+import ItemSpace from '../components/ItemBox/ItemSpace/ItemSpace.vine'
 import NoteTabBar from '../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()

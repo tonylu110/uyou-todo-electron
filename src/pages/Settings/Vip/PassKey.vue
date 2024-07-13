@@ -6,7 +6,7 @@ import TabBar from '../../../components/TabBar/TabBar.vue'
 import SettingList from '../../../components/SettingList/SettingList.vine'
 import Item from '../../../components/ItemBox/Item/Item.vue'
 import setSwitchFn from '../../../util/setSwitchFn'
-import ItemSpace from '../../../components/ItemBox/ItemSpace'
+import ItemSpace from '../../../components/ItemBox/ItemSpace/ItemSpace.vine'
 import NoteTabBar from '../../../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()

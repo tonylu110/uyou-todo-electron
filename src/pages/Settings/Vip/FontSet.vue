@@ -10,7 +10,7 @@ import Item from '../../../components/ItemBox/Item/Item.vue'
 import setSwitchFn from '../../../util/setSwitchFn'
 import { createToast } from '../../../components/Toast'
 import ItemText from '../../../components/ItemBox/ItemText/ItemText.vine'
-import ItemSpace from '../../../components/ItemBox/ItemSpace'
+import ItemSpace from '../../../components/ItemBox/ItemSpace/ItemSpace.vine'
 import NoteTabBar from '../../../components/TabBar/NoteTabBar.vue'
 
 const { t } = useI18n()

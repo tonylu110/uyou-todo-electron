@@ -9,7 +9,7 @@ import emitter from '../../util/bus'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import ItemBox from '../../components/ItemBox/ItemBox.vue'
 import setSwitchFn from '../../util/setSwitchFn'
-import ItemSpace from '../../components/ItemBox/ItemSpace'
+import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
 import SponsorList from '../../components/Sponsor/List.vue'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 
