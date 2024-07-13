@@ -5,7 +5,7 @@ import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList/SettingList.vine'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import setSwitchFn from '../../util/setSwitchFn'
-import ItemText from '../../components/ItemBox/ItemText'
+import ItemText from '../../components/ItemBox/ItemText/ItemText.vine'
 
 const Laboratory: SetupFC = () => {
   const router = useRouter()

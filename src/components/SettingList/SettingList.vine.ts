@@ -1,4 +1,3 @@
-import { renderSlot, useSlots } from 'vue'
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 import { useRoute } from 'vue-router'
 import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'

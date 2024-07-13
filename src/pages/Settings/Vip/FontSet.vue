@@ -9,7 +9,7 @@ import SettingList from '../../../components/SettingList/SettingList.vine'
 import Item from '../../../components/ItemBox/Item/Item.vue'
 import setSwitchFn from '../../../util/setSwitchFn'
 import { createToast } from '../../../components/Toast'
-import ItemText from '../../../components/ItemBox/ItemText'
+import ItemText from '../../../components/ItemBox/ItemText/ItemText.vine'
 import ItemSpace from '../../../components/ItemBox/ItemSpace'
 import NoteTabBar from '../../../components/TabBar/NoteTabBar.vue'
 
