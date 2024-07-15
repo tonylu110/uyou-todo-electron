@@ -73,8 +73,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(vite@5.3.3(@types/node@20.14.10)(sass@1.54.3))(vue@3.4.31(typescript@5.5.3))
       '@vue-vine/eslint-parser':
-        specifier: ^0.1.11
-        version: 0.1.11(eslint@9.6.0)(typescript@5.5.3)
+        specifier: ^0.1.13
+        version: 0.1.13(eslint@9.6.0)(typescript@5.5.3)
       '@vue/devtools':
         specifier: ^7.3.5
         version: 7.3.5(utf-8-validate@5.0.10)(vite@5.3.3(@types/node@20.14.10)(sass@1.54.3))(vue@3.4.31(typescript@5.5.3))
@@ -151,8 +151,8 @@ importers:
         specifier: ^2.0.26
         version: 2.0.26(typescript@5.5.3)
       vue-vine:
-        specifier: ^0.1.11
-        version: 0.1.11(vue@3.4.31(typescript@5.5.3))
+        specifier: ^0.1.13
+        version: 0.1.13(vue@3.4.31(typescript@5.5.3))
       vue3-perfect-scrollbar:
         specifier: ^2.0.0
         version: 2.0.0(vue@3.4.31(typescript@5.5.3))
@@ -1574,14 +1574,14 @@ packages:
     resolution: {integrity: sha512-Q2geG7eAHFVu8w6/joxK5AQlpzKW6NcpxbU4k2ummuvjYPP9JnmY0h8pU1CRsEf6uzRv+yEUDDyDDeqHsN0IpA==}
     engines: {node: '>=16.14.0'}
 
-  '@vue-vine/compiler@0.1.11':
-    resolution: {integrity: sha512-c0CPOhhH/gxxB1+1UaB/nwb7QNkj7uzgR6XpeLrBSM4AP0pO7rT0QdBdUINH8x05ZsPbNyzw7m9hTVCaBnGmqQ==}
+  '@vue-vine/compiler@0.1.13':
+    resolution: {integrity: sha512-L4kTXTaYabg+aIWK8iUbWZm3WjxM52bwiXazYpwYmq9uVFNLShzbWKcgVUJbxilI6p6MMYYBrWtugfkx7mXMug==}
 
-  '@vue-vine/eslint-parser@0.1.11':
-    resolution: {integrity: sha512-7l/+RFhQu4lNqAtQ1Y387S6RvOzMJrebNbXLucMJupOTV7bJbAzYxlEP6zZ35SbFNP9F0i7YfsPiQQzqrA0c7w==}
+  '@vue-vine/eslint-parser@0.1.13':
+    resolution: {integrity: sha512-dHeg3WH6B7BMKgMH1HEPVTv+Gp8yWVYa40iZ9vSKYsgMZXOEEt+3/WtQ+6oo1W1ke10SOdqzllH+NojRy3ndjA==}
 
-  '@vue-vine/vite-plugin@0.1.11':
-    resolution: {integrity: sha512-k/y3XWzcgVtdGW17QW2M1S55Iq1v7hrlRFpLkEKhBCw64t6ygzM+PM3C+28viQ4fPNM5dJJMm46zZMqxZ0RE2A==}
+  '@vue-vine/vite-plugin@0.1.13':
+    resolution: {integrity: sha512-ADd/VTNaEKljZcUXUSK8lMmE4FAb6uwO3kzpB8hXW3ML+nYJ82NdVbBkRRVOaGe+Rxe+OaNwjpcAmHu8cOV30w==}
 
   '@vue/babel-helper-vue-transform-on@1.2.2':
     resolution: {integrity: sha512-nOttamHUR3YzdEqdM/XXDyCSdxMA9VizUKoroLX6yTyRtggzQMHXcmwh8a7ZErcJttIBIc9s68a1B8GZ+Dmvsw==}
@@ -4306,8 +4306,8 @@ packages:
     peerDependencies:
       typescript: '>=5.0.0'
 
-  vue-vine@0.1.11:
-    resolution: {integrity: sha512-qBLXMoTeFGF45bG3thUc9GadC+/jvAu7PlyumPHRD+zuqGouhO73YO6B7hBGUTMP/NPQajKRICXkd+bu04iSgA==}
+  vue-vine@0.1.13:
+    resolution: {integrity: sha512-9Ck8LB47E9qqKLkdlt+C++9Nr7kY+HGkVV0Np8rrgc2x67/DjUbJVwtYAvV2PTxGyT0LQByZA3ksaQjX4Jl1cA==}
 
   vue3-perfect-scrollbar@2.0.0:
     resolution: {integrity: sha512-nSWVcRyViCgt0Pe3RhU3w/BllLcFSrEzYOGlRBjSyhVmiZlERHHziffW+9P8L0IMEWouC5t+uYrgNJGSAElqMA==}
@@ -6196,7 +6196,7 @@ snapshots:
       - rollup
       - vue
 
-  '@vue-vine/compiler@0.1.11':
+  '@vue-vine/compiler@0.1.13':
     dependencies:
       '@babel/parser': 7.24.7
       '@babel/types': 7.24.7
@@ -6210,7 +6210,7 @@ snapshots:
       postcss-selector-parser: 6.0.16
       source-map-js: 1.2.0
 
-  '@vue-vine/eslint-parser@0.1.11(eslint@9.6.0)(typescript@5.5.3)':
+  '@vue-vine/eslint-parser@0.1.13(eslint@9.6.0)(typescript@5.5.3)':
     dependencies:
       '@typescript-eslint/parser': 6.21.0(eslint@9.6.0)(typescript@5.5.3)
       '@typescript-eslint/scope-manager': 6.21.0
@@ -6225,9 +6225,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@vue-vine/vite-plugin@0.1.11':
+  '@vue-vine/vite-plugin@0.1.13':
     dependencies:
-      '@vue-vine/compiler': 0.1.11
+      '@vue-vine/compiler': 0.1.13
 
   '@vue/babel-helper-vue-transform-on@1.2.2': {}
 
@@ -9370,9 +9370,9 @@ snapshots:
       semver: 7.6.2
       typescript: 5.5.3
 
-  vue-vine@0.1.11(vue@3.4.31(typescript@5.5.3)):
+  vue-vine@0.1.13(vue@3.4.31(typescript@5.5.3)):
     dependencies:
-      '@vue-vine/vite-plugin': 0.1.11
+      '@vue-vine/vite-plugin': 0.1.13
       '@vueuse/core': 10.11.0(vue@3.4.31(typescript@5.5.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
