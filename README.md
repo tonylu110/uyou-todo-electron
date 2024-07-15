@@ -12,13 +12,18 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
 ## Run and build
 
 - run in development mode
+
   ```sh
   # If you didn't install `@antfu/ni` yet, I highly recommend you to install it.
   ni
   nr electron:servewin # run in Windows
   nr electron:servemac # run in macOS
   nr electron:servelinux # run in Linux
+
+  # When running for the first time, you need to run
+  pnpm vite build
   ```
+
 - build
   ```sh
   # If you didn't install `@antfu/ni` yet, I highly recommend you to install it.
