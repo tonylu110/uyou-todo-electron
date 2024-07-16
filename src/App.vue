@@ -11,7 +11,7 @@ import es from 'element-plus/es/locale/lang/es'
 import ja from 'element-plus/es/locale/lang/ja'
 import { ipcRenderer } from 'electron'
 import Store from 'electron-store'
-import { isNull } from 'lodash'
+import isNull from 'lodash/isNull'
 import TitleBar from './components/TitleBar/newTitleBar'
 import Alert from './components/Alert/Alert.vue'
 import ListMenu from './components/ListMenu/ListMenu.vue'
@@ -31,7 +31,7 @@ import Setup from './components/Setup/Setup.vue'
 const { t, locale } = useI18n()
 
 const alertShow = ref(false)
-const alertMsg= ref<string[]>([])
+const alertMsg = ref<string[]>([])
 const newVersion = ref('')
 
 const version = versionCode

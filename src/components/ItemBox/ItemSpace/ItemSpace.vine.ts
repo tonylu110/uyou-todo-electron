@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 function ItemSpace() {
   const simpleMode = ref(localStorage.getItem('simpleMode') === 'true')
@@ -6,6 +6,12 @@ function ItemSpace() {
   const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 
   window.addEventListener('resize', () => {
+    window.innerWidth < 750
+      ? simpleMode.value = true
+      : simpleMode.value = false
+  })
+
+  onMounted(() => {
     window.innerWidth < 750
       ? simpleMode.value = true
       : simpleMode.value = false

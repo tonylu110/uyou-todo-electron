@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { ipcRenderer } from 'electron'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList/SettingList.vine'
@@ -47,7 +47,19 @@ function modeShow(mode: string): boolean {
     return simpleModeState.value
 }
 
-const simpleMode = localStorage.getItem('simpleMode') === 'true'
+const simpleMode = ref(localStorage.getItem('simpleMode') === 'true')
+
+onMounted(() => {
+  window.innerWidth < 750
+    ? simpleMode.value = true
+    : simpleMode.value = false
+})
+
+window.addEventListener('resize', () => {
+  window.innerWidth < 750
+    ? simpleMode.value = true
+    : simpleMode.value = false
+})
 
 const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
@@ -63,7 +75,15 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     @left-click="router.back()"
   />
   <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'">
-    <div class="item-box" :style="{ width: simpleMode ? 'calc(100% - 20px)' : '' }" shadow-md>
+    <div
+      class="item-box"
+      :w="simpleMode
+        ? isNoteUI
+          ? '[calc(100vw-108px)]'
+          : '[calc(100%-50px)]'
+        : '[calc(100vw-450px)]'
+      " shadow-md
+    >
       <div class="box-radius">
         <div
           class="group item"
@@ -105,6 +125,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
   margin-bottom: 10px;
   border: 1px solid rgba($color: #000000, $alpha: 0.2);
   border-radius: 7px;
+  max-width: 550px;
 
   .box-radius {
     border-radius: 7px;
@@ -113,7 +134,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     .item {
       position: relative;
       max-width: 550px;
-      width: calc(100vw - 450px);
+      width: calc(100% - 30px);
       min-height: 30px;
       height: 30px;
       padding: 10px 15px;

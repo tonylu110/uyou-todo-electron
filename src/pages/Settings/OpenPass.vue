@@ -10,6 +10,7 @@ import emitter from '../../util/bus'
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
 import Alert from '../../components/Alert/Alert.vue'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
+import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
 
 const { t } = useI18n()
 
@@ -61,14 +62,13 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
       @switch-fun="setSwitchFn('useOpenPass', !useOpenPass, () => useOpenPass = !useOpenPass)"
     />
     <template v-if="useOpenPass">
-      <div
-        v-if="useOpenPass"
-        :w="menuShort ? '[calc(100vw-118px)]' : '[calc(100vw-460px)]'"
-        flex="~ wrap"
-        bg="white dark:#999/10" mb-10px h-auto max-w-540px items-center justify-center rounded-7px p-20px border="1px solid #00000020"
-      >
-        <input v-model="openPass" type="password" w="100%" border="1px black/30" rounded-5px p-10px text-center outline-primary-d>
-      </div>
+      <ItemSpace>
+        <input
+          v-model="openPass" type="password"
+          w="[calc(100%-20px)]" border="1px black/30"
+          my-2 rounded-5px p-10px text-center outline-primary-d
+        >
+      </ItemSpace>
       <ItemButton mode="primary" @click="setPass">
         <span>{{ t('openPass.usePass') }}</span>
       </ItemButton>
