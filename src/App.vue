@@ -101,7 +101,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 
 router.isReady().then(() => {
   const startRoute = ref(localStorage.getItem('start') ? localStorage.getItem('start')! : 'home')
-  if (startRoute.value === 'home')
+  if (startRoute.value === 'home' || isNoteUI)
     startRoute.value = '/'
   else
     startRoute.value = '/other?listName=today'

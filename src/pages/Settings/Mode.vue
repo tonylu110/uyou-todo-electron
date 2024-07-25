@@ -50,12 +50,14 @@ function modeShow(mode: string): boolean {
 const simpleMode = ref(localStorage.getItem('simpleMode') === 'true')
 
 onMounted(() => {
+  // eslint-disable-next-line ts/no-unused-expressions
   window.innerWidth < 750
     ? simpleMode.value = true
     : simpleMode.value = false
 })
 
 window.addEventListener('resize', () => {
+  // eslint-disable-next-line ts/no-unused-expressions
   window.innerWidth < 750
     ? simpleMode.value = true
     : simpleMode.value = false
