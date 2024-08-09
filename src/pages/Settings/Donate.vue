@@ -51,6 +51,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
         w-163px p-10px
         src="/images/donate/afd.png"
         alt=""
+        :title="t('afd')"
         @click="openUrlInBrowser('https://afdian.com/a/tonylu')"
       >
       <img

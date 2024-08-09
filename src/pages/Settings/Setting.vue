@@ -339,13 +339,13 @@ const localLang = navigator.language.toLowerCase()
     </ItemButton>
     <ItemButton @click="router.push('/lang?from=setting')">
       <div flex gap-4>
-        <div i-flagpack:us text-7 drop-shadow-md />
-        <div i-flagpack:gb-ukm text-7 drop-shadow-md />
-        <div i-flagpack:es text-7 drop-shadow-md />
-        <div i-flagpack:cn text-7 drop-shadow-md />
-        <div i-flagpack:hk text-7 drop-shadow-md />
-        <div v-if="localLang === 'zh-tw'" i-flagpack:tw text-7 drop-shadow-md />
-        <div i-flagpack:jp text-7 drop-shadow-md />
+        <div i-flagpack:us text-5 drop-shadow-md />
+        <div i-flagpack:gb-ukm text-5 drop-shadow-md />
+        <div i-flagpack:es text-5 drop-shadow-md />
+        <div i-flagpack:cn text-5 drop-shadow-md />
+        <div i-flagpack:hk text-5 drop-shadow-md />
+        <div v-if="localLang === 'zh-tw'" i-flagpack:tw text-5 drop-shadow-md />
+        <div i-flagpack:jp text-5 drop-shadow-md />
       </div>
     </ItemButton>
   </SettingList>
