@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { ipcRenderer } from 'electron'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import SettingList from '../../components/SettingList/SettingList.vine'
 import ItemBox from '../../components/ItemBox/ItemBox.vue'
@@ -8,12 +7,9 @@ import Item from '../../components/ItemBox/Item/Item.vue'
 import router from '../../router'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
+import openUrlInBrowser from '../../util/openUrlInBrowser'
 
 const { t } = useI18n()
-
-function openUrlInBrowser(url: string) {
-  ipcRenderer.send('open-url', url)
-}
 
 const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { shell } from 'electron'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import router from '../../router'
 import SettingList from '../../components/SettingList/SettingList.vine'
@@ -10,6 +9,7 @@ import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import SponsorList from '../../components/Sponsor/List.vue'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
+import openUrlInBrowser from '../../util/openUrlInBrowser'
 
 const { t } = useI18n()
 
@@ -51,6 +51,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
         w-163px p-10px
         src="/images/donate/afd.png"
         alt=""
+        @click="openUrlInBrowser('https://afdian.com/a/tonylu')"
       >
       <img
         w-163px p-10px
@@ -58,7 +59,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
         alt=""
       >
     </ItemSpace>
-    <Item :title="t('otherList.aboutSponser')" @item-fun="shell.openExternal('https://github.com/tonylu110/uyou-todo-electron/discussions/34')" />
+    <Item :title="t('otherList.aboutSponser')" @item-fun="openUrlInBrowser('https://github.com/tonylu110/uyou-todo-electron/discussions/34')" />
     <SponsorList />
   </SettingList>
 </template>

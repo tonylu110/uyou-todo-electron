@@ -12,6 +12,7 @@ import setSwitchFn from '../../util/setSwitchFn'
 import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
 import SponsorList from '../../components/Sponsor/List.vue'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
+import openUrlInBrowser from '../../util/openUrlInBrowser'
 
 const { t } = useI18n()
 
@@ -74,6 +75,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
           w-163px p-10px
           src="/images/donate/afd.png"
           alt=""
+          @click="openUrlInBrowser('https://afdian.com/a/tonylu')"
         >
       </div>
     </ItemSpace>
