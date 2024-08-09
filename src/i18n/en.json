@@ -84,7 +84,8 @@
     "rememberQuit": "Remember to close the window",
     "openPass": "Start encryption",
     "model": "Mode selection",
-    "star": "show star button"
+    "star": "show star button",
+    "ok": "Show Completed Button"
   },
   "contextMenu": {
     "copy": "Copy",

@@ -45,6 +45,7 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
 const closeMsgBox = ref(localStorage.getItem('closeMsgBox') === 'true')
 const remember = ref(localStorage.getItem('rememberClose') === 'true')
 const showStar = ref(localStorage.getItem('showStar') === 'true' || localStorage.getItem('showStar') === null)
+const showCompleted = ref(localStorage.getItem('showCompleted') === 'true' || localStorage.getItem('showCompleted') === null)
 
 function showRouterUrl() {
   routerUrlState.value = !routerUrlState.value
@@ -211,6 +212,14 @@ const localLang = navigator.language.toLowerCase()
         :show-switch="true"
         :switch-state="showStar"
         @switch-fun="setSwitchFn('showStar', !showStar, () => showStar = !showStar)"
+      />
+      <Item
+        v-if="isNoteUI"
+        icon="i-icon-park:check-one"
+        :title="t('anotherSettings.ok')"
+        :show-switch="true"
+        :switch-state="showCompleted"
+        @switch-fun="setSwitchFn('showCompleted', !showCompleted, () => showCompleted = !showCompleted)"
       />
     </ItemBox>
     <ItemBox v-if="isMac">

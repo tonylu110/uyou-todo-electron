@@ -84,7 +84,8 @@
     "rememberQuit": "記住關閉視窗操作",
     "openPass": "啟動加密",
     "model": "模式選擇",
-    "star": "顯示加星按鈕"
+    "star": "顯示加星按鈕",
+    "ok": "顯示完成按鈕"
   },
   "contextMenu": {
     "copy": "複製",

@@ -84,7 +84,8 @@
     "rememberQuit": "记住关闭窗口操作",
     "openPass": "启动加密",
     "model": "模式选择",
-    "star": "显示加星按钮"
+    "star": "显示加星按钮",
+    "ok": "显示完成按钮"
   },
   "contextMenu": {
     "copy": "复制",
