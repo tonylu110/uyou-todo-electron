@@ -218,6 +218,7 @@ const count = computed(() => Object.values(showList.value).filter(obj => !obj.sh
 const showIcons = ref(false)
 
 const showSearch = ref(false)
+const useSystemTitleBar = localStorage.getItem('systemTitle') === 'true'
 </script>
 
 <template>
@@ -228,7 +229,7 @@ const showSearch = ref(false)
   >
     <div
       v-if="(route.name === 'Home' || route.name === 'other') && !menuShort"
-      absolute right-10px top--26px rounded-7px p-10px no-drag
+      absolute right-10px :top="useSystemTitleBar ? '10px' : '-26px'" rounded-7px p-10px no-drag
       bg="#333/20 dark:#bbb/20 active:#333/50 active:dark:#bbb/50"
       @click="showSearch = true"
     >
