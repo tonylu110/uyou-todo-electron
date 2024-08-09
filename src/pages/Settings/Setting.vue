@@ -80,10 +80,12 @@ const startPageList = [
   {
     title: t('startPage.allTodos'),
     fn: 'home',
+    icon: 'i-ph:list-bullets-bold'
   },
   {
     title: t('startPage.today'),
     fn: 'today',
+    icon: 'i-ph:sun-bold'
   },
 ]
 const startPage = ref(localStorage.getItem('start') ? startPageList.filter(item => item.fn === localStorage.getItem('start'))[0].title : t('startPage.allTodos')) as unknown as Ref<string>
@@ -175,6 +177,16 @@ const localLang = navigator.language.toLowerCase()
         @today="setStartPage('today')"
       />
       <Item
+        v-if="isLinux"
+        icon="i-icon-park:computer"
+        :title="t('anotherSettings.autoStart')"
+        :show-switch="true"
+        :switch-state="autoStartState"
+        @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
+      />
+    </ItemBox>
+    <ItemBox>
+      <Item
         v-if="!isNoteUI"
         icon="i-icon-park:enter-key"
         :title="t('anotherSettings.enterToAdd')"
@@ -189,14 +201,6 @@ const localLang = navigator.language.toLowerCase()
         :show-switch="true"
         :switch-state="showToDoBtn"
         @switch-fun="setSwitchFn('ToDoBtn', !showToDoBtn, () => showToDoBtn = !showToDoBtn)"
-      />
-      <Item
-        v-if="isLinux"
-        icon="i-icon-park:computer"
-        :title="t('anotherSettings.autoStart')"
-        :show-switch="true"
-        :switch-state="autoStartState"
-        @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
       />
       <Item
         icon="i-icon-park:reverse-operation-out"

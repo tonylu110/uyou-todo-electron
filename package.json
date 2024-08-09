@@ -57,7 +57,7 @@
     "cross-env": "^7.0.3",
     "electron": "^31.3.1",
     "electron-builder": "^24.13.3",
-    "element-plus": "^2.7.7",
+    "element-plus": "^2.8.0",
     "eslint": "^9.8.0",
     "eslint-plugin-format": "^0.1.2",
     "floating-vue": "5.2.2",

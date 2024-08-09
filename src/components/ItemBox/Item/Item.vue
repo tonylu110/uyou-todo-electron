@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Switch from '../../Switch'
+import { ElSelect, ElOption } from 'element-plus'
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   switchState?: boolean
   title: string
   showSwitch?: boolean
@@ -14,6 +15,7 @@ withDefaults(defineProps<{
   list?: {
     title: string
     fn: string
+    icon: string
   }[]
 }>(), {
   switchState: true,
@@ -32,7 +34,7 @@ const emits = defineEmits<{
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
-const showList = ref(false)
+const listTitle = ref(props.listBoxTitle)
 
 const minWidth = ref(window.innerWidth < 750)
 window.addEventListener('resize', () => {
@@ -67,38 +69,24 @@ window.addEventListener('resize', () => {
       :swich-state="switchState"
       @switch="emits('switchFun')"
     />
-    <div
-      v-if="showListBox"
-      border="1px solid black/10"
-      p="x-10px y-5px"
-      bg="active:primary-d"
-      absolute right-7px cursor-pointer whitespace-nowrap rounded-5px
-      class="group"
-      @click="showList = !showList"
-    >
-      <div w="!fit" flex items-center justify-center group-active:c-white>
-        {{ listBoxTitle }}
-        <div v-if="showList" i-mdi:chevron-up ml-5px group-active:c-white />
-        <div v-else i-mdi:chevron-down ml-5px group-active:c-white />
-      </div>
-      <div
-        v-if="showList"
-        bg="white dark:#333"
-        flex="~ !col"
-        shadow="md black/20"
-        border="1px solid black/5"
-        absolute right-0 top-35px z-10 items-center justify-center whitespace-nowrap rounded-7px p-10px
+    <div w-auto absolute right-7px>
+      <el-select
+        v-if="showListBox"
+        v-model="listTitle"
       >
-        <div
-          v-for="(item, index) in list" :key="index"
-          p="x-20px y-10px" w="[calc(100%-40px)]"
-          bg="active:primary-a hover:primary-d dark:hover:primary-a"
-          rounded-5px c="hover:white active:white"
+        <el-option
+          v-for="item, index in list"
+          :key="index"
+          :label="item.title"
+          :value="item.title"
           @click="emits(item.fn)"
         >
-          {{ item.title }}
-        </div>
-      </div>
+          <div flex items-center>
+            <div :class="item.icon" mr-6px />
+            <span>{{ item.title }}</span>
+          </div>
+        </el-option>
+      </el-select>
     </div>
     <div v-if="showArrow && !showSwitch && !showListBox" i-mdi:chevron-right absolute right-15px text-24px group-active:c-white />
   </div>
@@ -117,6 +105,12 @@ window.addEventListener('resize', () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  :deep(.el-select) {
+    .el-select__selection {
+      --uno: min-w-80px;
+    }
+  }
 
   div {
     display: flex;
