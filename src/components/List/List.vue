@@ -177,7 +177,6 @@ function editItem(id: number, text: string) {
 }
 
 const showNotDo = ref(localStorage.getItem('notDoShow') === 'true' || localStorage.getItem('notDoShow') === null)
-const simpleMode = localStorage.getItem('simpleMode') === 'true'
 const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
 
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
@@ -209,11 +208,6 @@ function dragenter(index: number) {
     dragIndex.value = index
   }
 }
-
-const menuShort = ref(window.innerWidth < 750)
-emitter.on('menuClose', (data) => {
-  menuShort.value = data as boolean
-})
 
 function setReminder(id: number, time: number) {
   for (let i = 0; i < list.value!.length; i++) {
@@ -315,23 +309,25 @@ const isDark = usePreferredDark()
         @dragend="saveItemSet(listAll!)"
       />
       <div
-        v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo' && list.filter(listData => listData.ok === true).length > 0"
-        bg="#eee/80 dark:#222/50 hover:#eee/90 dark:hover:#222/60 active:#eee dark:active:#222/70"
-        :transform="simpleMode ? 'translate-x-[calc(-50vw+50%+10px)]' : (menuShort ? 'translate-x-[calc(((-100vw+58px)/2)+50%+10px)]' : 'translate-x-[calc(((-100vw+300px)/2)+50%+10px)]')"
-        c="#555 dark:#bbb"
-        mb-10px flex cursor-pointer items-center whitespace-nowrap rounded-5px p-x-10px p-y-5px font-bold
-        shadow="sm black/30"
-        @click="setSwitchFn('notDoShow', !showNotDo, () => showNotDo = !showNotDo)"
+        v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo' && list.filter(listData => listData.ok === true).length > 0" 
+        w-full mb-10px flex
       >
-        <div :rotate="showNotDo ? '0' : '-90'" i-fluent:caret-down-12-filled mr-5px text-18px transition-300 />
-        {{ t('listMenu.completed') }}
         <div
-
-          bg="#555 dark:#bbb" c="#eee dark:#222"
-
-          ml-5px h-1rem w-1rem flex items-center justify-center rounded-20px text-10px font-normal
+          bg="#eee/80 dark:#222/50 hover:#eee/90 dark:hover:#222/60 active:#eee dark:active:#222/70"
+          c="#555 dark:#bbb" ml-10px
+          flex cursor-pointer items-center whitespace-nowrap rounded-5px p-x-10px p-y-5px font-bold
+          shadow="sm black/30"
+          @click="setSwitchFn('notDoShow', !showNotDo, () => showNotDo = !showNotDo)"
         >
-          {{ list!.filter(listData => listData.ok === true).length }}
+          <div :rotate="showNotDo ? '0' : '-90'" i-fluent:caret-down-12-filled mr-5px text-18px transition-300 />
+          {{ t('listMenu.completed') }}
+          <div
+            bg="#555 dark:#bbb" c="#eee dark:#222"
+            ml-5px h-4 w-4 flex items-center 
+            justify-center rounded-20px text-10px font-normal
+          >
+            {{ list!.filter(listData => listData.ok === true).length }}
+          </div>
         </div>
       </div>
       <template v-if="showNotDo">
