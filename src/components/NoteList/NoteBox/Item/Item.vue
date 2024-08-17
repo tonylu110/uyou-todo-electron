@@ -41,7 +41,6 @@ function copy() {
 const showStar = localStorage.getItem('showStar') === 'true' || localStorage.getItem('showStar') === null
 const showCompleted = localStorage.getItem('showCompleted') === 'true' || localStorage.getItem('showCompleted') === null
 
-
 const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
 
 onMounted(() => {
@@ -60,8 +59,8 @@ onUnmounted(() => {
   <div ref="itemDom" relative flex items-center justify-between p-5px>
     <CheckBox v-if="showCompleted" v-model="okState" left="4px!" :num="id" :color="color ? color : 'primary-d'" />
     <div
-      :ml="showCompleted 
-        ? showStar ? '25px' : '30px' 
+      :ml="showCompleted
+        ? showStar ? '25px' : '30px'
         : '0'"
       flex items-center
       :line="okState ? 'through' : ''"

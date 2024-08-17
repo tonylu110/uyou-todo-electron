@@ -1,4 +1,5 @@
 import type { cateItem } from '../components/ListMenu/ICateItem'
+import { createToast } from '../components/Toast'
 import emitter from './bus'
 
 export default () => {
@@ -39,8 +40,8 @@ export default () => {
           }),
         }).then((res) => {
           return res.json()
-        }).then((res) => {
-          console.log(res)
+        }).catch((err) => {
+          createToast({ msg: err })
         })
       }
     })

@@ -22,7 +22,9 @@ function backSpace() {
 const model = defineModel<boolean>()
 const openPass = ref(localStorage.getItem('openPass') ? localStorage.getItem('openPass') : '')
 function ok() {
-  if (inPass.value === openPass.value) { model.value = false }
+  if (inPass.value === openPass.value) {
+    model.value = false
+  }
   else {
     createToast({
       msg: t('openPass.passErr'),

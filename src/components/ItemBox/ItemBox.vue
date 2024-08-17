@@ -30,8 +30,8 @@ const itemWidth = computed(() => simpleMode ? 'calc(100% - 30px)' : (minWidth.va
     --uno: rounded-7px overflow-hidden;
 
     &:deep(.item) {
-      --uno: shadow-none mb-0 rounded-0 border-b-1px border-b-solid
-        border-b-black/10 border-x-0 border-t-0 bg-transparent;
+      --uno: shadow-none mb-0 rounded-0 border-b-1px border-b-solid border-b-black/10 border-x-0 border-t-0
+        bg-transparent;
       width: v-bind(itemWidth) !important;
 
       &:last-child {

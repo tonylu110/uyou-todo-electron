@@ -123,7 +123,6 @@ function delWithToDo(id: number) {
 <template>
   <div class="list" fixed top-95px z-2>
     <PerfectScrollbar
-
       bg="white/50 dark:#333/70"
       flex="~ col"
       c="#555 dark:#bbb" z-2 h-auto w-screen cursor-pointer items-center overflow-y-scroll rounded-b-10px p-y-10px font-bold backdrop-blur-7px shadow-item

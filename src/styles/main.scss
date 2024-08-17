@@ -3,8 +3,7 @@
 }
 
 .black-back {
-  --uno: bg-black/45 backdrop-blur h-screen w-[calc(100vw-300px)] fixed top-50% right-0
-    translate-x-0 translate-y--50% mt-25px;
+  --uno: bg-black/45 backdrop-blur h-screen w-[calc(100vw-300px)] fixed top-50% right-0 translate-x-0 translate-y--50% mt-25px;
 }
 
 body {
@@ -41,8 +40,7 @@ input[disabled] {
     }
 
     .v-popper__wrapper {
-      --uno: w-100% pointer-events-auto transition-transform transition-150
-        transition-ease-out m-10px mb-50px;
+      --uno: w-100% pointer-events-auto transition-transform transition-150 transition-ease-out m-10px mb-50px;
     }
 
     &.v-popper__popper--hidden {

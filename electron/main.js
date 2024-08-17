@@ -92,11 +92,15 @@ function createWindow() {
   })
   ipcMain.on('window-max', () => {
     if (mainWindow.isMaximized())
-      mainWindow.unmaximize(); else mainWindow.maximize()
+      mainWindow.unmaximize()
+    else
+      mainWindow.maximize()
   })
   ipcMain.on('window-close', (ev, isClose) => {
     if (isClose)
-      app.quit(); else mainWindow.hide()
+      app.quit()
+    else
+      mainWindow.hide()
   })
   ipcMain.on('window-on-top', (event, arg) => {
     mainWindow.setAlwaysOnTop(arg)
@@ -165,8 +169,11 @@ function createWindow() {
     nativeTheme.themeSource = color
     if (IS_WINDOWS_11) {
       if (color === 'system')
-        mainWindow.setAutoTheme(); else if (color === 'light')
-        mainWindow.setLightTheme(); else mainWindow.setDarkTheme()
+        mainWindow.setAutoTheme()
+      else if (color === 'light')
+        mainWindow.setLightTheme()
+      else
+        mainWindow.setDarkTheme()
     }
   })
   mainWindow.on('move', () => {

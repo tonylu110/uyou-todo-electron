@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { ElOption, ElSelect } from 'element-plus'
 import Switch from '../../Switch'
-import { ElSelect, ElOption } from 'element-plus'
 
 const props = withDefaults(defineProps<{
   switchState?: boolean
@@ -69,12 +69,12 @@ window.addEventListener('resize', () => {
       :swich-state="switchState"
       @switch="emits('switchFun')"
     />
-    <div w-auto absolute right-7px>
-      <el-select
+    <div absolute right-7px w-auto>
+      <ElSelect
         v-if="showListBox"
         v-model="listTitle"
       >
-        <el-option
+        <ElOption
           v-for="item, index in list"
           :key="index"
           :label="item.title"
@@ -85,8 +85,8 @@ window.addEventListener('resize', () => {
             <div :class="item.icon" mr-6px />
             <span>{{ item.title }}</span>
           </div>
-        </el-option>
-      </el-select>
+        </ElOption>
+      </ElSelect>
     </div>
     <div v-if="showArrow && !showSwitch && !showListBox" i-mdi:chevron-right absolute right-15px text-24px group-active:c-white />
   </div>

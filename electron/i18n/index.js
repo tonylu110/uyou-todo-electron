@@ -5,7 +5,10 @@ import ja from './ja.js'
 
 export default function (app) {
   if (app.getLocale() === 'zh-CN')
-    return zhCN; else if (app.getLocale() === 'zh-HK' || app.getLocale() === 'zh-TW')
-    return zhTW; else if (app.getLocale() === 'ja')
-    return ja; else return en
+    return zhCN
+  else if (app.getLocale() === 'zh-HK' || app.getLocale() === 'zh-TW')
+    return zhTW
+  else if (app.getLocale() === 'ja')
+    return ja
+  else return en
 }

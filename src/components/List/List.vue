@@ -309,8 +309,8 @@ const isDark = usePreferredDark()
         @dragend="saveItemSet(listAll!)"
       />
       <div
-        v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo' && list.filter(listData => listData.ok === true).length > 0" 
-        w-full mb-10px flex
+        v-if="route.query.listName !== 'allDo' && route.query.listName !== 'allNotDo' && list.filter(listData => listData.ok === true).length > 0"
+        mb-10px w-full flex
       >
         <div
           bg="#eee/80 dark:#222/50 hover:#eee/90 dark:hover:#222/60 active:#eee dark:active:#222/70"
@@ -323,7 +323,7 @@ const isDark = usePreferredDark()
           {{ t('listMenu.completed') }}
           <div
             bg="#555 dark:#bbb" c="#eee dark:#222"
-            ml-5px h-4 w-4 flex items-center 
+            ml-5px h-4 w-4 flex items-center
             justify-center rounded-20px text-10px font-normal
           >
             {{ list!.filter(listData => listData.ok === true).length }}

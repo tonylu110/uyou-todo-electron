@@ -1,3 +1,4 @@
+import { createToast } from '../Toast'
 import type { cateItem } from './ICateItem'
 
 interface todoCateModel {
@@ -19,7 +20,7 @@ export default (todoCate: todoCateModel) => {
     }),
   }).then((res) => {
     return res.json()
-  }).then((res) => {
-    console.log(res)
+  }).catch((err) => {
+    createToast({ msg: err })
   })
 }

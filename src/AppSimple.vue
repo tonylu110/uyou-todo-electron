@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { usePreferredDark } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'

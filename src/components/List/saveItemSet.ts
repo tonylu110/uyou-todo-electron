@@ -2,6 +2,7 @@ import type ITodoList from '../../interface/ITodoListArray'
 import type IToDoListData from '../../interface/IToDoListData'
 import emitter from '../../util/bus'
 import LocalStorage from '../../util/localStorage'
+import { createToast } from '../Toast'
 
 function saveItemSet(list: ITodoList[]) {
   const localStorageSetTodoList: IToDoListData = {
@@ -21,6 +22,8 @@ function saveItemSet(list: ITodoList[]) {
       }),
     }).then((res) => {
       return res.json()
+    }).catch((err) => {
+      createToast({ msg: err })
     })
   }
   emitter.emit('changeList')
