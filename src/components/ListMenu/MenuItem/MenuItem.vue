@@ -56,13 +56,12 @@ const showIcons = ref(false)
         <div
           :class="icon ? icon : 'i-ph:radio-button-bold'" text-18px
           :c="route.query.listName === `${id}` ? '!white !group-hover:white' : 'group-hover:white! !#00000090 !dark:#bbb'"
-          @click.stop="showIcons = true"
         />
         <template #popper>
           <Icons
+            v-close-popper
             :icon="icon"
             @set-icon="(icon: string) => {
-              showIcons = false
               emits('setIcon', id, icon)
             }"
           />
@@ -104,7 +103,6 @@ const showIcons = ref(false)
           :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'" h="18px"
           w="18px" flex items-center justify-center rounded-xl
           transition="300 width margin"
-          @click.stop="isOpen = true"
         >
           <div i-ph:trash-simple-bold :c="route.query.listName === `${id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />
         </div>
@@ -113,35 +111,35 @@ const showIcons = ref(false)
             <span text-14px>{{ t('listMenu.delCate', { title }) }}</span>
             <div mt-10px flex items-center justify-center>
               <button
+                v-close-popper
                 bg="white active:#ddd"
                 p="x-10px y-5px"
                 mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                 shadow="sm black/20" c="#555"
-                @click.stop="isOpen = false"
               >
                 <div i-mdi:close-thick mr-5px />
                 <span>{{ t('cancelText') }}</span>
               </button>
               <button
+                v-close-popper
                 bg="!primary-d active:!primary-a"
                 p="x-10px y-5px" c="!white"
                 shadow="sm black/20" mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                 @click.stop="() => {
                   emits('delCate', id)
-                  isOpen = false
                 }"
               >
                 <div i-mdi:check-bold mr-5px />
                 <span>{{ t('alertText.returnText') }}</span>
               </button>
               <button
+                v-close-popper
                 bg="!error-d active:!error-a"
                 p="x-10px y-5px" c="!white"
                 flex cursor-pointer items-center justify-center rounded-5px border-none
                 shadow="sm black/20"
                 @click.stop="() => {
                   emits('delWithToDo', id)
-                  isOpen = false
                 }"
               >
                 <div i-ph:warning-circle-bold mr-5px />

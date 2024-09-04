@@ -375,14 +375,14 @@ const useSystemTitleBar = localStorage.getItem('systemTitle') === 'true'
         />
         <div
           v-if="showAdd"
-
           w="260px"
-          bg="black/5 dark:#999/10" mb-5px ml-10px flex cursor-pointer items-center justify-center rounded-7px p-10px no-drag
+          bg="black/5 dark:#999/10" mb-5px ml-10px
+          flex cursor-pointer items-center justify-center
+          rounded-7px p-10px no-drag
           mt="10px"
         >
           <div w="100%" flex items-center>
             <div
-
               bg="black/5" mr-7px rounded-5px p-4px
             >
               <VDropdown
@@ -392,15 +392,15 @@ const useSystemTitleBar = localStorage.getItem('systemTitle') === 'true'
                 placement="top-start"
               >
                 <div
-                  :class="icon" block text-16px
+                  v-close-popper
+                  :class="icon" block="!~" text-16px
                   c="group-hover:white #00000090 dark:#bbb"
-                  @click.stop="showIcons = true"
                 />
                 <template #popper>
                   <Icons
+                    v-close-popper
                     :icon="icon"
                     @set-icon="(cIcon: string) => {
-                      showIcons = false
                       icon = cIcon
                     }"
                   />

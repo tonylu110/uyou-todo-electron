@@ -75,9 +75,9 @@ const isOpen = ref(false)
         :positioning-disabled="true"
       >
         <div
+          v-close-popper
           bg="black/10 dark:#999/10"
           flex items-center justify-center rounded-5px p-5px
-          @click.stop="isOpen = true"
         >
           <div i-ph:trash-bold text-12px />
         </div>
@@ -97,28 +97,26 @@ const isOpen = ref(false)
                 <span>{{ t('cancelText') }}</span>
               </button>
               <button
+                v-close-popper
                 bg="!primary-d active:!primary-a"
-
                 p="x-10px y-5px" c="!white"
-
-                shadow="sm black/20" mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
+                shadow="sm black/20" mr-5px flex cursor-pointer items-center justify-center
+                rounded-5px border-none
                 @click.stop="() => {
                   emits('delItem', id)
-                  isOpen = false
                 }"
               >
                 <div i-mdi:check-bold mr-5px />
                 <span>{{ t('alertText.returnText') }}</span>
               </button>
               <button
+                v-close-popper
                 bg="!error-d active:!error-a"
-
                 p="x-10px y-5px" c="!white"
                 flex cursor-pointer items-center justify-center rounded-5px border-none
                 shadow="sm black/20"
                 @click.stop="() => {
                   emits('delWithToDo', id)
-                  isOpen = false
                 }"
               >
                 <div i-ph:warning-circle-bold mr-5px />

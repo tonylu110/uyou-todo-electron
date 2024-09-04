@@ -10,7 +10,6 @@ const showColor = ref(false)
 
 function changColor(color: string | null) {
   emit('changeColor', color)
-  showColor.value = false
 }
 </script>
 
@@ -23,12 +22,11 @@ function changColor(color: string | null) {
     <div
       bg="black/10 hover:black/20 dark:#999/10 dark:hover:#999/20"
       w-20px cursor-pointer rounded-5px p-5px no-drag
-      @click="showColor = true"
     >
       <div c="#555 dark:#bbb" i-ph:palette-bold block text-20px />
     </div>
     <template #popper>
-      <div flex="~ gap-5px wrap" max-w-120px p-10px>
+      <div v-close-popper flex="~ gap-5px wrap" max-w-120px p-10px>
         <div
           bg="#eee dark:#555" rounded-5px p-10px
           @click="changColor(null)"

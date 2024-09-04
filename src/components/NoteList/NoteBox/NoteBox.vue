@@ -86,7 +86,7 @@ function add() {
           :distance="12"
           placement="top"
         >
-          <div @click="isOpen = true">
+          <div>
             <div i-ph:trash-bold block />
           </div>
           <template #popper>
@@ -94,21 +94,21 @@ function add() {
               <span text-14px>{{ t('listMenu.delCate', { title }) }}</span>
               <div mt-10px flex items-center justify-center>
                 <button
+                  v-close-popper
                   bg="white active:#ddd dark:#555 active:dark:#444"
                   p="x-10px y-5px"
                   mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                   shadow="sm black/20" c="#555 dark:#ddd"
-                  @click.stop="isOpen = false"
                 >
                   <div i-mdi:close-thick mr-5px />
                   <span>{{ t('cancelText') }}</span>
                 </button>
                 <button
+                  v-close-popper
                   bg="!primary-d active:!primary-a"
                   p="x-10px y-5px" c="!white"
                   shadow="sm black/20" mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                   @click.stop="() => {
-                    isOpen = false
                     emits('deleteCate', id!)
                   }"
                 >
@@ -116,13 +116,13 @@ function add() {
                   <span>{{ t('alertText.returnText') }}</span>
                 </button>
                 <button
+                  v-close-popper
                   bg="!error-d active:!error-a"
                   p="x-10px y-5px" c="!white"
                   flex cursor-pointer items-center justify-center rounded-5px border-none
                   shadow="sm black/20"
                   @click.stop="() => {
                     emits('delWithToDo', id!)
-                    isOpen = false
                   }"
                 >
                   <div i-ph:warning-circle-bold mr-5px />

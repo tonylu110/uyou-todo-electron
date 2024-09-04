@@ -33,7 +33,7 @@ const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
     :distance="12"
     placement="top"
   >
-    <div @click="isOpen = true">
+    <div>
       <div i-ph:pencil-bold block />
     </div>
     <template #popper>
@@ -62,23 +62,23 @@ const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
         </div>
         <div flex="~ gap-3" w="[calc(100%-28px)]" p="x-3 b-3" no-drag>
           <button
+            v-close-popper
             flex-1 rounded-5px p-y-5px outline-none no-drag
             c="dark:#111 #fff" border="2px solid primary-d dark:primary-a"
             shadow="sm black/30 active:none"
             bg="primary-d/90 dark:primary-a/90 active:primary-d active:dark:primary-a"
             @click="() => {
               emits('edit', cateName, useIcon, useColor)
-              isOpen = false
             }"
           >
             {{ t('alertText.returnText') }}
           </button>
           <button
+            v-close-popper
             flex-1 rounded-5px p-y-5px outline-none no-drag
             c="dark:#111 #fff" border="2px solid error-d dark:error-a"
             shadow="sm black/30 active:none"
             bg="error-d/90 dark:error-a/90 active:error-d dark:active:error-a"
-            @click="isOpen = false"
           >
             {{ t('alertText.cancelText') }}
           </button>
