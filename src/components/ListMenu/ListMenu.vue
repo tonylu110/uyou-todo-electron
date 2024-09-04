@@ -48,13 +48,13 @@ const showAdd = ref(false)
 const cateTitle = ref('')
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
-const cateListRef = useTemplateRef('cateListRef')
+const useCateListRef = useTemplateRef('cateListRef')
 const ps = ref(0)
 function showAddFn() {
   showAdd.value = !showAdd.value
 }
 function onScroll() {
-  ps.value = cateListRef.value!.ps!.scrollbarYTop
+  ps.value = useCateListRef.value!.ps!.scrollbarYTop
 }
 
 const icon = ref('i-ph:radio-button-bold')

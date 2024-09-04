@@ -7,7 +7,7 @@ import type ITodoList from '../../../interface/ITodoListArray'
 import Item from './Item/Item.vue'
 import Edit from './Edit/Edit.vue'
 
-const props = withDefaults(defineProps<{
+interface Props {
   title: string
   id?: number | string
   color?: string | null
@@ -16,12 +16,9 @@ const props = withDefaults(defineProps<{
   showAddItem?: boolean
   showBtn?: boolean
   list: ITodoList[]
-}>(), {
-  title: 'title',
-  color: 'primary-d',
-  showAddItem: true,
-  showBtn: true,
-})
+}
+
+const { title = 'title', color = 'primary-d', showAddItem = true, showBtn = true, id, list } = defineProps<Props>()
 
 const emits = defineEmits<{
   deleteCate: [id: number | string]
@@ -36,28 +33,28 @@ const emits = defineEmits<{
 const { t } = useI18n()
 
 const listData = computed(() => {
-  if (props.id === 'today') {
-    return props.list.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString() || new Date(listData.time!).toDateString() === new Date().toDateString())
+  if (id === 'today') {
+    return list.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString() || new Date(listData.time!).toDateString() === new Date().toDateString())
   }
-  else if (props.id === 'star') {
-    return props.list.filter(listData => listData.star)
+  else if (id === 'star') {
+    return list.filter(listData => listData.star)
   }
-  else if (props.id === 'allNotDo') {
-    return props.list.filter(listData => !listData.ok)
+  else if (id === 'allNotDo') {
+    return list.filter(listData => !listData.ok)
   }
-  else if (props.id === 'allDo') {
-    return props.list.filter(listData => listData.ok)
+  else if (id === 'allDo') {
+    return list.filter(listData => listData.ok)
   }
   else {
-    return props.list.filter(listData => listData.cate === `${props.id}`)
+    return list.filter(listData => listData.cate === `${id}`)
   }
 })
-const otherList = ref(props.list.filter(listData => listData.cate === undefined))
+const otherList = ref(list.filter(listData => listData.cate === undefined))
 
 const isOpen = ref(false)
 
 function add() {
-  emitter.emit('noteShowAddItem', props.id!)
+  emitter.emit('noteShowAddItem', id!)
 }
 </script>
 

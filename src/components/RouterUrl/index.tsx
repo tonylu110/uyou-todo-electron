@@ -12,13 +12,13 @@ const RouterUrl: SetupFC = () => {
     routeUrl.value = ''
   }
 
-  const body = useTemplateRef('body')
+  const useBody = useTemplateRef('body')
 
   onMounted(() => {
     const x = ref(0)
     const y = ref(0)
 
-    const bodyDOM = body.value as unknown as HTMLElement
+    const bodyDOM = useBody.value as unknown as HTMLElement
 
     const dragWindow = (ev: MouseEvent) => {
       bodyDOM.style.transform = 'translate(0px)'

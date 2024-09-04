@@ -2,11 +2,11 @@
 import { usePreferredDark } from '@vueuse/core'
 import { computed, ref } from 'vue'
 
-withDefaults(defineProps<{
+interface Props {
   mode?: string
-}>(), {
-  mode: '',
-})
+}
+
+const { mode = '' } = defineProps<Props>()
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 

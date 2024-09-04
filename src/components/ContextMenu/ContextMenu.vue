@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { computed, onMounted, reactive, ref, useTemplateRef, watchEffect } from 'vue'
-import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { clipboard } from 'electron'
 import type customContextMenu from './customContextMenu.type'
 
-const props = withDefaults(defineProps<{
+interface Props {
   pos: {
     top: number
     left: number
@@ -14,10 +13,9 @@ const props = withDefaults(defineProps<{
   showCopy?: boolean
   showPaste?: boolean
   custom?: Array<customContextMenu>
-}>(), {
-  showCopy: true,
-  showPaste: true,
-})
+}
+
+const { showCopy = true, showPaste = true, pos, text, custom } = defineProps<Props>()
 
 const emits = defineEmits<{
   (e: 'pasteText', text: string): void
@@ -28,18 +26,18 @@ const emits = defineEmits<{
 const { t } = useI18n()
 
 const topAndLeft = reactive({
-  top: `${props.pos.top}px`,
-  left: `${props.pos.left}px`,
+  top: `${pos.top}px`,
+  left: `${pos.left}px`,
 })
 const position = reactive({
   top: computed({
-    get: () => `${props.pos.top}px`,
+    get: () => `${pos.top}px`,
     set: (value) => {
       topAndLeft.top = value
     },
   }),
   left: computed({
-    get: () => `${props.pos.left}px`,
+    get: () => `${pos.left}px`,
     set: (value) => {
       topAndLeft.left = value
     },
@@ -48,9 +46,9 @@ const position = reactive({
   right: 'auto',
 })
 
-const textProp = ref(props.text)
+const textProp = ref(text)
 watchEffect(() => {
-  textProp.value = props.text!
+  textProp.value = text!
 })
 function copy() {
   const copyText = window.getSelection()!.toString()
@@ -65,21 +63,21 @@ function paste() {
   emits('pasteText', pasteText)
 }
 
-const customMenu = ref(props.custom)
+const customMenu = ref(custom)
 watchEffect(() => {
-  customMenu.value = props.custom
+  customMenu.value = custom
 })
 
-const cateDom = useTemplateRef('cateDom')
+const useCateDom = useTemplateRef('cateDom')
 onMounted(() => {
-  const maxHeight = window.innerHeight - cateDom.value!.clientHeight
-  const maxWidth = window.innerWidth - cateDom.value!.clientWidth
+  const maxHeight = window.innerHeight - useCateDom.value!.clientHeight
+  const maxWidth = window.innerWidth - useCateDom.value!.clientWidth
 
-  if (props.pos.top > maxHeight) {
+  if (pos.top > maxHeight) {
     position.top = 'auto'
     position.bottom = '10px'
   }
-  if (props.pos.left > maxWidth) {
+  if (pos.left > maxWidth) {
     position.left = 'auto'
     position.right = '10px'
   }

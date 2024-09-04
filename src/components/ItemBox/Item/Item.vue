@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { ElOption, ElSelect } from 'element-plus'
 import Switch from '../../Switch'
 
-const props = withDefaults(defineProps<{
+interface Props {
   switchState?: boolean
   title: string
   showSwitch?: boolean
@@ -17,14 +17,19 @@ const props = withDefaults(defineProps<{
     fn: string
     icon: string
   }[]
-}>(), {
-  switchState: true,
-  title: 'title',
-  showSwitch: false,
-  showArrow: true,
-  showListBox: false,
-  listBoxTitle: 'item',
-})
+}
+
+const {
+  switchState = true,
+  title = 'title',
+  showSwitch = false,
+  showArrow = true,
+  itemImg = '',
+  icon = '',
+  showListBox = false,
+  list = [],
+  listBoxTitle,
+} = defineProps<Props>()
 
 const emits = defineEmits<{
   (e: 'switchFun'): void
@@ -34,7 +39,7 @@ const emits = defineEmits<{
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
-const listTitle = ref(props.listBoxTitle)
+const listTitle = ref(listBoxTitle)
 
 const minWidth = ref(window.innerWidth < 750)
 window.addEventListener('resize', () => {

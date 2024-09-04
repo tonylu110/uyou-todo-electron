@@ -59,11 +59,11 @@ function deleteItem() {
   emits('deleteItem', props.time!)
 }
 
-const itemDom = useTemplateRef('itemDom')
+const useItemDom = useTemplateRef('itemDom')
 
 function copyText() {
   navigator.clipboard.writeText(props.text!).then(() => {
-    createToast({ msg: t('copyToast'), center: true }, (itemDom.value! as unknown as Element))
+    createToast({ msg: t('copyToast'), center: true }, (useItemDom.value! as unknown as Element))
   })
 }
 

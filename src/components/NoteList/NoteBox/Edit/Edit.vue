@@ -6,8 +6,8 @@ import Icons from '../../../ListMenu/MenuItem/Icons/Icons.vine'
 import Colors from '../../CateAdd/Colors/Color.vue'
 
 const props = defineProps<{
-  color: string
-  icon: string
+  color: string | null
+  icon?: string
   name: string
 }>()
 

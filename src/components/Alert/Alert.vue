@@ -1,24 +1,20 @@
 <script setup lang="ts">
-import { onMounted, ref, useTemplateRef, watchEffect } from 'vue'
+import { onMounted, ref, useTemplateRef, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ContextMenu from '../ContextMenu/ContextMenu.vue'
 
-const props = withDefaults(defineProps<{
+interface Props {
   title?: string
-  body?: Array<string>
+  body?: string[]
   cancelButtonShow?: boolean
   dialogShow?: boolean
   showTitle?: boolean
   confirmBtnName?: string
   cancelBtnName?: string
   bodyPadding?: string
-}>(), {
-  title: 'title',
-  body: () => ['1', '2'],
-  cancelButtonShow: true,
-  dialogShow: false,
-  showTitle: true,
-})
+}
+
+const { title = 'title', cancelButtonShow = true, dialogShow = false, showTitle = true } = defineProps<Props>()
 
 const emits = defineEmits<{
   (e: 'cancel'): void
@@ -27,23 +23,26 @@ const emits = defineEmits<{
 
 const { t } = useI18n()
 
-const dialog = useTemplateRef('dialog')
+const useDialog = useTemplateRef('dialog')
 
 onMounted(() => {
   // eslint-disable-next-line unicorn/consistent-function-scoping
   const closeAlert = () => {
-    dialog.value!.close()
+    useDialog.value!.close()
   }
 
-  watchEffect(() => {
-    if (props.dialogShow) {
-      dialog.value!.removeEventListener('animationend', closeAlert)
-      dialog.value!.showModal()
-    }
-    else {
-      dialog.value!.addEventListener('animationend', closeAlert)
-    }
-  })
+  watch(
+    () => dialogShow,
+    (newVal) => {
+      if (newVal) {
+        useDialog.value!.removeEventListener('animationend', closeAlert)
+        useDialog.value!.showModal()
+      }
+      else {
+        useDialog.value!.addEventListener('animationend', closeAlert)
+      }
+    },
+  )
 })
 
 const showContextMenu = ref(false)

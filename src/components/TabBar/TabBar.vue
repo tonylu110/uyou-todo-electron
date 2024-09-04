@@ -13,7 +13,7 @@ import windowButtons from './windowButtons'
 import TodayShow from './TodayShow/TodayShow.vue'
 import ChangeColor from './ChangeColor/ChangeColor.vue'
 
-withDefaults(defineProps<{
+interface Props {
   title?: string
   leftImgShow?: boolean
   rightImgShow?: boolean
@@ -21,15 +21,15 @@ withDefaults(defineProps<{
   bgColor?: string
   showMore?: boolean
   showWrap?: boolean
-}>(), {
-  title: 'uyou ToDo',
-  leftImgShow: true,
-  rightImgShow: true,
-  leftImg: 'i-ph:caret-left-bold',
-  bgColor: 'light',
-  showMore: false,
-  showWrap: false,
-})
+}
+
+const {
+  title = 'uyou ToDo',
+  leftImgShow = true,
+  rightImgShow = true,
+  leftImg = 'i-ph:caret-left-bold',
+  showWrap = false,
+} = defineProps<Props>()
 
 const emits = defineEmits<{
   (e: 'rightClick'): void
@@ -98,7 +98,7 @@ const isDark = usePreferredDark()
 
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
-const bgColor = ref(cateList.filter(value => value.id === Number(route.query.listName)))
+const useBgColor = ref(cateList.filter(value => value.id === Number(route.query.listName)))
 
 function changColor(color: string | null) {
   for (let i = 0; i < cateList.length; i++) {
@@ -111,7 +111,7 @@ function changColor(color: string | null) {
   emitter.emit('setCate', JSON.stringify({
     data: cateList,
   }))
-  bgColor.value[0].color = color
+  useBgColor.value[0].color = color
   emitter.emit('changeBgColor', color)
   if (localStorage.getItem('uid')) {
     changeCate({
@@ -126,7 +126,7 @@ function changColor(color: string | null) {
 const newNoteUI = localStorage.getItem('newNoteUI') === 'true'
 
 watchEffect(() => {
-  bgColor.value = cateList.filter(value => value.id === Number(route.query.listName))
+  useBgColor.value = cateList.filter(value => value.id === Number(route.query.listName))
 })
 </script>
 
@@ -137,10 +137,10 @@ watchEffect(() => {
       borderTopLeftRadius: isRound ? '15px' : '',
       backgroundColor: !isNaN(Number.parseInt((route.query.listName as string))) && useCustColor
         ? isBlur
-          ? bgColor[0].color
-            ? `${bgColor[0].color}50` : isDark ? 'rgba(51, 51, 51, 0.5)' : 'rgba(255, 255, 255, 0.5)'
-          : bgColor[0].color
-            ? `${bgColor[0].color}cc` : isDark ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)'
+          ? useBgColor[0].color
+            ? `${useBgColor[0].color}50` : isDark ? 'rgba(51, 51, 51, 0.5)' : 'rgba(255, 255, 255, 0.5)'
+          : useBgColor[0].color
+            ? `${useBgColor[0].color}cc` : isDark ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)'
         : isBlur
           ? isDark ? 'rgba(51, 51, 51, 0.5)' : 'rgba(255, 255, 255, 0.5)'
           : isDark ? 'rgba(51, 51, 51, 0.8)' : 'rgba(255, 255, 255, 0.8)',

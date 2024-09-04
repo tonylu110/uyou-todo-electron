@@ -12,7 +12,7 @@ const props = defineProps<{
   isOk: boolean
   star?: boolean
   color?: string | null
-  cateId: string | number
+  cateId?: string | number
 }>()
 
 const emits = defineEmits<{

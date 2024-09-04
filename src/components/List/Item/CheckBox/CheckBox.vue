@@ -1,10 +1,10 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
+interface Props {
   num: number
   color?: string
-}>(), {
-  color: 'primary-d',
-})
+}
+
+const { color = 'primary-d' } = defineProps<Props>()
 
 const model = defineModel<boolean>()
 </script>

@@ -7,11 +7,11 @@ import { topWindow } from '../../util/windowApi'
 import emitter from '../../util/bus'
 import WindowButtons from './windowButtons'
 
-withDefaults(defineProps<{
+interface Props {
   title?: string
-}>(), {
-  title: 'title',
-})
+}
+
+const { title = 'title' } = defineProps<Props>()
 
 const route = useRoute()
 const router = useRouter()

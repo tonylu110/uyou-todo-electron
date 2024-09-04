@@ -15,13 +15,14 @@ import Item from './Item/Item.vue'
 import saveItemSet from './saveItemSet'
 import AddItem from './AddItem/AddItem.vue'
 
-const props = withDefaults(defineProps<{
+interface Props {
   showAddItem: boolean
   listData: ITodoList[]
-  color?: string | null
-}>(), {
-  color: 'primary-d',
-})
+  color: string | null
+}
+
+// eslint-disable-next-line unused-imports/no-unused-vars
+const { color = 'primary-d', listData } = defineProps<Props>()
 
 const emits = defineEmits<{
   (e: 'setAddItem'): void
@@ -31,11 +32,11 @@ const { t } = useI18n()
 
 const route = useRoute()
 
-const list: Ref<ITodoList[]> = ref(props.listData) as Ref<ITodoList[]>
+const list: Ref<ITodoList[]> = ref(listData) as Ref<ITodoList[]>
 const listAll: Ref<ITodoList[]> = ref(LocalStorage('get')) as Ref<ITodoList[]>
 
 watchEffect(() => {
-  list.value = props.listData as unknown as ITodoList[]
+  list.value = listData as unknown as ITodoList[]
 })
 
 onMounted(() => {
