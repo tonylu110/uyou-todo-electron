@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref, useTemplateRef, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ContextMenu from '../ContextMenu/ContextMenu.vue'
 
@@ -28,20 +27,21 @@ const emits = defineEmits<{
 
 const { t } = useI18n()
 
-const dialog = ref(null) as unknown as Ref<HTMLDialogElement>
+const dialog = useTemplateRef('dialog')
 
 onMounted(() => {
+  // eslint-disable-next-line unicorn/consistent-function-scoping
   const closeAlert = () => {
-    dialog.value.close()
+    dialog.value!.close()
   }
 
   watchEffect(() => {
     if (props.dialogShow) {
-      dialog.value.removeEventListener('animationend', closeAlert)
-      dialog.value.showModal()
+      dialog.value!.removeEventListener('animationend', closeAlert)
+      dialog.value!.showModal()
     }
     else {
-      dialog.value.addEventListener('animationend', closeAlert)
+      dialog.value!.addEventListener('animationend', closeAlert)
     }
   })
 })

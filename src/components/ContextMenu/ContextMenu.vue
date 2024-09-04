@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
+import { computed, onMounted, reactive, ref, useTemplateRef, watchEffect } from 'vue'
 import type { Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { clipboard } from 'electron'
@@ -70,8 +70,7 @@ watchEffect(() => {
   customMenu.value = props.custom
 })
 
-const cateDom = ref(null) as unknown as Ref<HTMLDivElement>
-
+const cateDom = useTemplateRef('cateDom')
 onMounted(() => {
   const maxHeight = window.innerHeight - cateDom.value!.clientHeight
   const maxWidth = window.innerWidth - cateDom.value!.clientWidth

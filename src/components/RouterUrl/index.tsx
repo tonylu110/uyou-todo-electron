@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, useTemplateRef } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import emitter from '../../util/bus'
 
@@ -12,7 +12,7 @@ const RouterUrl: SetupFC = () => {
     routeUrl.value = ''
   }
 
-  const body = ref(null)
+  const body = useTemplateRef('body')
 
   onMounted(() => {
     const x = ref(0)
@@ -38,6 +38,7 @@ const RouterUrl: SetupFC = () => {
     })
   })
 
+  // eslint-disable-next-line unicorn/consistent-function-scoping
   const close = () => {
     emitter.emit('routerShow', false)
     localStorage.setItem('routerUrl', 'false')

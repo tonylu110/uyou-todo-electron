@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { computed, onUnmounted, reactive, ref, watch, watchEffect } from 'vue'
+import { computed, onUnmounted, reactive, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { Dropdown as VDropdown } from 'floating-vue'
@@ -48,13 +48,13 @@ const showAdd = ref(false)
 const cateTitle = ref('')
 const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
 const cateList: cateItem[] = reactive(JSON.parse(localCateList!).data)
-const cateListRef = ref(null) as unknown as Ref<{ $el: HTMLAreaElement, ps: { scrollbarYTop: number } }>
+const cateListRef = useTemplateRef('cateListRef')
 const ps = ref(0)
 function showAddFn() {
   showAdd.value = !showAdd.value
 }
 function onScroll() {
-  ps.value = cateListRef.value.ps.scrollbarYTop
+  ps.value = cateListRef.value!.ps!.scrollbarYTop
 }
 
 const icon = ref('i-ph:radio-button-bold')

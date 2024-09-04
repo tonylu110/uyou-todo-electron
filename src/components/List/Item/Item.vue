@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Ref } from 'vue'
-import { computed, onBeforeUnmount, reactive, ref, watch, watchEffect } from 'vue'
+import { computed, onBeforeUnmount, reactive, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { usePreferredDark } from '@vueuse/core'
@@ -59,14 +59,13 @@ function deleteItem() {
   emits('deleteItem', props.time!)
 }
 
+const itemDom = useTemplateRef('itemDom')
+
 function copyText() {
   navigator.clipboard.writeText(props.text!).then(() => {
-    // eslint-disable-next-line ts/no-use-before-define
-    createToast({ msg: t('copyToast'), center: true }, itemDom.value)
+    createToast({ msg: t('copyToast'), center: true }, (itemDom.value! as unknown as Element))
   })
 }
-
-const itemDom = ref(null) as unknown as Ref<HTMLElement>
 
 const showContextMenu = ref(false)
 const contextMenu = ref({
