@@ -15,3 +15,8 @@ export function isLinux() {
 export function isWindows10OrAfter() {
   return isWindow() && Number(os.release().split('.')[2]) > 15063
 }
+
+export function isWin11() {
+  // eslint-disable-next-line node/prefer-global/process
+  return (process.platform === 'win32' && Number(os.release().split('.')[2]) >= 22000)
+}
