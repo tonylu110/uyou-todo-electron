@@ -41,6 +41,11 @@ const localLang = navigator.language.toLowerCase()
     <ColorChange v-if="(!isLinux || isWindows10OrAfter) || isMac" />
     <Item :title="t('vip.proVersion')" icon="i-icon-park:vip-one" @item-fun="router.push('/vip?from=setting')" />
     <UserSettings />
+    <Item
+      icon="i-icon-park:two-dimensional-code"
+      :title="t('anotherSettings.model')"
+      @item-fun="router.push('/mode?from=setting')"
+    />
     <UpdateSettings />
     <AppUseSettings />
     <ToDoSettings />
