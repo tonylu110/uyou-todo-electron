@@ -31,7 +31,7 @@
     "mica-electron": "^1.5.15"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.0.0",
+    "@antfu/eslint-config": "^3.3.2",
     "@electron/rebuild": "^3.6.0",
     "@iconify-json/circle-flags": "^1.1.47",
     "@iconify-json/emojione-v1": "^1.1.10",
@@ -55,7 +55,7 @@
     "@vueuse/core": "^11.0.3",
     "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",
-    "electron": "^32.0.1",
+    "electron": "^32.0.2",
     "electron-builder": "^25.0.5",
     "element-plus": "^2.8.1",
     "eslint": "^9.9.1",

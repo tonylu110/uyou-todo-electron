@@ -12,6 +12,7 @@ import changeCate from '../ListMenu/changCate'
 import windowButtons from './windowButtons'
 import TodayShow from './TodayShow/TodayShow.vue'
 import ChangeColor from './ChangeColor/ChangeColor.vue'
+import Delete from './Delete/Delete.vine'
 
 interface Props {
   title?: string
@@ -210,6 +211,7 @@ watchEffect(() => {
         <window-buttons v-if="!systemTitleShow" />
       </div>
       <div mt-12px flex :h="rightImgShow ? '' : '30px'">
+        <Delete />
         <TodayShow v-if="route.query.listName === 'today'" />
         <ChangeColor
           v-if="!isNaN(Number.parseInt((route.query.listName as string))) && useCustColor"
