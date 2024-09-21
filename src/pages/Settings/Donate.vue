@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { onUnmounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import TabBar from '../../components/TabBar/TabBar.vue'
-import router from '../../router'
-import SettingList from '../../components/SettingList/SettingList.vine'
-import emitter from '../../util/bus'
-import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
 import Item from '../../components/ItemBox/Item/Item.vue'
+import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
+import SettingList from '../../components/SettingList/SettingList.vine'
 import SponsorList from '../../components/Sponsor/List.vue'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
+import TabBar from '../../components/TabBar/TabBar.vue'
+import router from '../../router'
+import emitter from '../../util/bus'
 import openUrlInBrowser from '../../util/openUrlInBrowser'
 
 const { t } = useI18n()
@@ -16,10 +16,6 @@ const { t } = useI18n()
 const menuShort = ref(window.innerWidth < 750)
 emitter.on('menuClose', (data) => {
   menuShort.value = data as boolean
-})
-
-onUnmounted(() => {
-  emitter.off('menuClose')
 })
 
 const isNoteUI = localStorage.getItem('newNoteUI') === 'true'

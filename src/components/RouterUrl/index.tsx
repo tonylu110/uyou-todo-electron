@@ -38,7 +38,6 @@ const RouterUrl: SetupFC = () => {
     })
   })
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const close = () => {
     emitter.emit('routerShow', false)
     localStorage.setItem('routerUrl', 'false')
@@ -59,7 +58,7 @@ const RouterUrl: SetupFC = () => {
       no-drag
       flex="~ col"
       items-center
-      ref={body}
+      ref={useBody}
     >
       <div>
         <span>

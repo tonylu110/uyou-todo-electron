@@ -108,7 +108,7 @@ router.isReady().then(() => {
   router.push(startRoute.value)
 })
 
-const routerShow = ref((localStorage.getItem('routerShow') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
+const routerShow = ref((localStorage.getItem('routerShow') === 'true' || !localStorage.getItem('routerShow')) && isDev)
 
 emitter.on('routerShow', (data: unknown) => {
   routerShow.value = (data as boolean)

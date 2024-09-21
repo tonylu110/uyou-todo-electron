@@ -33,7 +33,6 @@ const newTitleBar: SetupFC = () => {
   onUnmounted(() => {
     emitter.off('topWindow')
     emitter.off('titleColor')
-    emitter.off('menuClose')
   })
 
   return () => (

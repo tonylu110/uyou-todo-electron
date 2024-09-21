@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
-import { computed, onUnmounted, reactive, ref, useTemplateRef, watch, watchEffect } from 'vue'
-import { useRoute } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 import { Dropdown as VDropdown } from 'floating-vue'
+import { computed, onUnmounted, reactive, ref, useTemplateRef, watch, watchEffect } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
+import type { Ref } from 'vue'
 import router from '../../router'
 import emitter from '../../util/bus'
-import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
 import LocalStorage from '../../util/localStorage'
-import type ITodoList from '../../interface/ITodoListArray'
 import saveItemSet from '../List/saveItemSet'
 import Search from '../Search/Search.vue'
 import changeCate from './changCate'
-import type { cateItem } from './ICateItem'
+import Icons from './MenuItem/Icons/Icons.vine'
 import MenuItem from './MenuItem/MenuItem.vue'
 import TitleMenuItem from './TitleMenuItem'
-import Icons from './MenuItem/Icons/Icons.vine'
+import type ITodoList from '../../interface/ITodoListArray'
+import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
+import type { cateItem } from './ICateItem'
 
 const { t } = useI18n()
 
@@ -209,7 +209,6 @@ function delWithToDo(id: number) {
 onUnmounted(() => {
   emitter.off('setCate')
   emitter.off('setListItem')
-  emitter.off('menuClose')
   emitter.off('setLoginText')
 })
 

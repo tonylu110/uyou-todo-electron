@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import type { Ref } from 'vue'
-import { onMounted, onUnmounted, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { app } from '@electron/remote'
 import { ipcRenderer } from 'electron'
-import TabBar from '../../components/TabBar/TabBar.vue'
-import router from '../../router'
-import SettingList from '../../components/SettingList/SettingList.vine'
+import { onMounted, onUnmounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import type { Ref } from 'vue'
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
-import { versionCode } from '../../util/appVersionCode'
-import { createToast } from '../../components/Toast'
-import emitter from '../../util/bus'
 import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
+import SettingList from '../../components/SettingList/SettingList.vine'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
+import TabBar from '../../components/TabBar/TabBar.vue'
+import { createToast } from '../../components/Toast'
+import router from '../../router'
+import { versionCode } from '../../util/appVersionCode'
+import emitter from '../../util/bus'
 
 const { t, locale } = useI18n()
 
@@ -74,10 +74,6 @@ const simpleMode = localStorage.getItem('simpleMode') === 'true'
 const menuShort = ref(window.innerWidth < 750)
 emitter.on('menuClose', (data) => {
   menuShort.value = data as boolean
-})
-
-onUnmounted(() => {
-  emitter.off('menuClose')
 })
 
 const isNoteUI = localStorage.getItem('newNoteUI') === 'true'

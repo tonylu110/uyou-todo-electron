@@ -1,28 +1,24 @@
 <script setup lang="ts">
+import { shell } from 'electron'
 import { onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { shell } from 'electron'
-import TabBar from '../../components/TabBar/TabBar.vue'
-import router from '../../router'
-import SettingList from '../../components/SettingList/SettingList.vine'
-import emitter from '../../util/bus'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import ItemBox from '../../components/ItemBox/ItemBox.vue'
-import setSwitchFn from '../../util/setSwitchFn'
 import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
+import SettingList from '../../components/SettingList/SettingList.vine'
 import SponsorList from '../../components/Sponsor/List.vue'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
+import TabBar from '../../components/TabBar/TabBar.vue'
+import router from '../../router'
+import emitter from '../../util/bus'
 import openUrlInBrowser from '../../util/openUrlInBrowser'
+import setSwitchFn from '../../util/setSwitchFn'
 
 const { t } = useI18n()
 
 const menuShort = ref(window.innerWidth < 750)
 emitter.on('menuClose', (data) => {
   menuShort.value = data as boolean
-})
-
-onUnmounted(() => {
-  emitter.off('menuClose')
 })
 
 const isVip = ref(localStorage.getItem('isVip') === 'true')
