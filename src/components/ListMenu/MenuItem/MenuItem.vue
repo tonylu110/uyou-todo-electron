@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 import { Dropdown as VDropdown } from 'floating-vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
 import Icons from './Icons/Icons.vine'
 
 defineProps<{
   id: number
   title: string
-  icon?: string
+  icon: string
 }>()
 
 const emits = defineEmits<{
@@ -78,7 +78,6 @@ const showIcons = ref(false)
         v-focus
         type="text"
         :c="route.query.listName === `${id}` ? '!white group-hover:!white' : 'group-hover:!white dark:!#bbb'"
-
         m-0 ml-10px border-none bg-transparent p-0 text-14px outline-none font="bold [smartisan-t]"
       >
     </div>

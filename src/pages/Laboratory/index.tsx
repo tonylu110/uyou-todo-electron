@@ -1,11 +1,11 @@
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import TabBar from '../../components/TabBar/TabBar.vue'
-import SettingList from '../../components/SettingList/SettingList.vine'
+import { useRouter } from 'vue-router'
 import Item from '../../components/ItemBox/Item/Item.vue'
-import setSwitchFn from '../../util/setSwitchFn'
 import ItemText from '../../components/ItemBox/ItemText/ItemText.vine'
+import SettingList from '../../components/SettingList/SettingList.vine'
+import TabBar from '../../components/TabBar/TabBar.vue'
+import setSwitchFn from '../../util/setSwitchFn'
 
 const Laboratory: SetupFC = () => {
   const router = useRouter()

@@ -249,5 +249,6 @@
     "thanks": "uyou ToDo 的开发离不开开源社区\n感谢以下开源项目以构建 uyou ToDo"
   },
   "seccate": "第二类别",
-  "afd": "点击前往"
+  "afd": "点击前往",
+  "delAllDo": "是否删除所有已完成 ToDo？"
 }

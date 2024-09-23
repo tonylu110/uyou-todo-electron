@@ -1,23 +1,23 @@
-import 'virtual:uno.css'
-import 'virtual:unocss-devtools'
-import './styles/main.scss'
-import 'floating-vue/dist/style.css'
-import 'element-plus/theme-chalk/dark/css-vars.css'
+import { devtools } from '@vue/devtools'
+import { ipcRenderer } from 'electron'
+import { vClosePopper, vTooltip } from 'floating-vue'
 import { createApp, ref } from 'vue'
 import { PerfectScrollbarPlugin } from 'vue3-perfect-scrollbar'
-import { vClosePopper, vTooltip } from 'floating-vue'
-import { ipcRenderer } from 'electron'
-import { devtools } from '@vue/devtools'
 import App from './App.vue'
-import 'vue3-perfect-scrollbar/style.css'
-import router from './router'
 import AppSimple from './AppSimple.vue'
 import i18n from './i18n'
+import router from './router'
 import { vFocus } from './util/autofocus'
 import { isMac } from './util/os'
+import './styles/main.scss'
+import 'element-plus/theme-chalk/dark/css-vars.css'
+import 'floating-vue/dist/style.css'
+import 'virtual:uno.css'
+import 'virtual:unocss-devtools'
+import 'vue3-perfect-scrollbar/style.css'
 
 // eslint-disable-next-line node/prefer-global/process
-if (process.env.NODE_ENV === 'development' && !isMac())
+if (process.env.NODE_ENV === 'development')
   devtools.connect(/* host (the default is "http://localhost"), port (the default is 8090) */)
 
 const simpleMode = localStorage.getItem('simpleMode')

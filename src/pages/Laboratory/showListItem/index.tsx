@@ -1,13 +1,13 @@
-import { reactive, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import TabBar from '../../../components/TabBar/TabBar.vue'
-import SettingList from '../../../components/SettingList/SettingList.vine'
-import ItemBox from '../../../components/ItemBox/ItemBox.vue'
-import Item from '../../../components/ItemBox/Item/Item.vue'
-import emitter from '../../../util/bus'
-import NoteTabBar from '../../../components/TabBar/NoteTabBar.vue'
 import type ListItems from './ListItems'
+import { reactive, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import Item from '../../../components/ItemBox/Item/Item.vue'
+import ItemBox from '../../../components/ItemBox/ItemBox.vue'
+import SettingList from '../../../components/SettingList/SettingList.vine'
+import NoteTabBar from '../../../components/TabBar/NoteTabBar.vue'
+import TabBar from '../../../components/TabBar/TabBar.vue'
+import emitter from '../../../util/bus'
 
 const ShowListItem: SetupFC = () => {
   const router = useRouter()
@@ -61,7 +61,7 @@ const ShowListItem: SetupFC = () => {
             />
           )}
 
-      <SettingList h={isNoteUI ? '![calc(100vh-65px)]' : ''}>
+      <SettingList h={isNoteUI ? '![calc(100vh-65px)]' : '![calc(100%-105px)]'}>
         <Item
           title={t('custList.showAll')}
           showSwitch={true}

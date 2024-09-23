@@ -250,5 +250,6 @@
     "thanks": "uyou ToDo 的開發離不開源社群\n\n感謝以下開源專案以建立 uyou ToDo"
   },
   "seccate": "第二類別",
-  "afd": "點擊前往"
+  "afd": "點擊前往",
+  "delAllDo": "是否刪除所有已完成 ToDo？"
 }

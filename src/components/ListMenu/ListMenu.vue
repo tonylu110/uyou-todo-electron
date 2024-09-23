@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import type { Ref } from 'vue'
+import type ITodoList from '../../interface/ITodoListArray'
+import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
+import type { cateItem } from './ICateItem'
 import { Dropdown as VDropdown } from 'floating-vue'
 import { computed, onUnmounted, reactive, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import type { Ref } from 'vue'
 import router from '../../router'
 import emitter from '../../util/bus'
 import LocalStorage from '../../util/localStorage'
@@ -13,9 +16,6 @@ import changeCate from './changCate'
 import Icons from './MenuItem/Icons/Icons.vine'
 import MenuItem from './MenuItem/MenuItem.vue'
 import TitleMenuItem from './TitleMenuItem'
-import type ITodoList from '../../interface/ITodoListArray'
-import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
-import type { cateItem } from './ICateItem'
 
 const { t } = useI18n()
 
@@ -416,7 +416,6 @@ const useSystemTitleBar = localStorage.getItem('systemTitle') === 'true'
               @keydown.enter="addCate"
             >
             <div
-
               bg="black/5 hover:black/10 active:black/15 dark:#999/5 dark:hover:#999/10 dark:active:#999/15"
               h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '0px'"
               :m="cateTitle !== '' ? 'x-8px' : 'l-8px'" flex items-center justify-center rounded-5px
@@ -426,7 +425,6 @@ const useSystemTitleBar = localStorage.getItem('systemTitle') === 'true'
               <div i-mdi:check-bold c="#777 dark:#bbb" />
             </div>
             <div
-
               bg="black/5 hover:black/10 active:black/15 dark:#999/5 dark:hover:#999/10 dark:active:#999/15"
               h="[calc(1em+8px)]" :w="cateTitle !== '' ? '[calc(1em+16px)]' : '[calc(1em+12px)]'"
               flex items-center justify-center rounded-5px transition="300 width margin"

@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref, watchEffect } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import type { cateItem } from '../ListMenu/ICateItem'
 import { usePreferredDark } from '@vueuse/core'
 import { ipcRenderer } from 'electron'
-import CateMenu from '../CateMenu/CateMenu.vue'
-import getCateList from '../../util/getCateList'
+import { onMounted, reactive, ref, watchEffect } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import emitter from '../../util/bus'
+import getCateList from '../../util/getCateList'
 import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'
-import type { cateItem } from '../ListMenu/ICateItem'
+import CateMenu from '../CateMenu/CateMenu.vue'
 import changeCate from '../ListMenu/changCate'
-import windowButtons from './windowButtons'
-import TodayShow from './TodayShow/TodayShow.vue'
 import ChangeColor from './ChangeColor/ChangeColor.vue'
 import Delete from './Delete/Delete.vine'
+import TodayShow from './TodayShow/TodayShow.vue'
+import windowButtons from './windowButtons'
 
 interface Props {
   title?: string
@@ -211,7 +211,7 @@ watchEffect(() => {
         <window-buttons v-if="!systemTitleShow" />
       </div>
       <div mt-12px flex :h="rightImgShow ? '' : '30px'">
-        <Delete />
+        <Delete v-if="route.query.listName === 'allDo'" />
         <TodayShow v-if="route.query.listName === 'today'" />
         <ChangeColor
           v-if="!isNaN(Number.parseInt((route.query.listName as string))) && useCustColor"
