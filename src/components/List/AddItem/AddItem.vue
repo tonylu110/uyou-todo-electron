@@ -120,5 +120,5 @@ function keyEnter() {
 </template>
 
 <style lang="scss" scoped>
-@import './style.scss';
+@use './style';
 </style>

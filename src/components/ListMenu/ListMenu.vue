@@ -473,5 +473,5 @@ const useSystemTitleBar = localStorage.getItem('systemTitle') === 'true'
 </template>
 
 <style scoped lang="scss">
-@import './style.scss';
+@use './style';
 </style>

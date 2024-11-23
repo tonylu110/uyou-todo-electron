@@ -125,7 +125,7 @@ function setStar(id: number, star: boolean) {
 </template>
 
 <style scoped lang="scss">
-@import '../Alert/dialogAnimation.scss';
+@use '../Alert/dialogAnimation';
 
 .alert {
   --uno: overflow-hidden select-none;

@@ -330,5 +330,5 @@ const showToDoBtn = ref(localStorage.getItem('ToDoBtn') === 'true')
 </template>
 
 <style lang="scss" scoped>
-@import './style.scss';
+@use './style';
 </style>

@@ -113,7 +113,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@import 'dialogAnimation.scss';
+@use 'dialogAnimation';
 
 .alert {
   padding: 0;

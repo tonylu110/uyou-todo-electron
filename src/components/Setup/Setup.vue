@@ -6,7 +6,7 @@ import { useI18n } from 'vue-i18n'
 const isDark = usePreferredDark()
 const { t } = useI18n()
 
-const mode = ref('normal')
+const mode = ref('note')
 
 function setMode(setMode: string) {
   mode.value = setMode
