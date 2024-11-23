@@ -7,6 +7,7 @@ const isDark = usePreferredDark()
 const { t } = useI18n()
 
 const mode = ref('note')
+localStorage.setItem('newNoteUI', 'true')
 
 function setMode(setMode: string) {
   mode.value = setMode
