@@ -21,7 +21,7 @@ function ToDoSettings() {
       <Item
         icon="i-icon-park:save-one"
         :title="t('anotherSettings.backup')"
-        @item-fun="router.push('/backup')"
+        @item-fun="router.push('/backup?from=setting')"
       />
       <Item
         v-if="!isNoteUI"

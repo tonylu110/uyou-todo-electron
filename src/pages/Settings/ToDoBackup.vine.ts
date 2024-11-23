@@ -6,9 +6,12 @@ import { useI18n } from 'vue-i18n'
 import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
 import ItemText from '../../components/ItemBox/ItemText/ItemText.vine'
-import { ipcRenderer } from 'electron'
 import { ref } from 'vue'
 import { createToast } from '../../components/Toast'
+import { readFile, writeFile } from '../../util/rnwFile'
+import emitter from '../../util/bus'
+
+type ExtType = "uut" | "uuc"
 
 function ToDoBackup() {
   const { t } = useI18n()
@@ -18,30 +21,29 @@ function ToDoBackup() {
   const todoData = localStorage.getItem('ToDo')
   const cateData = localStorage.getItem('cate')
 
-  const fileCate = ref('')
-
-  function exportFile(name: string, text: string, ext: string) {
-    ipcRenderer.send('writeFile', name, text, ext)
-  }
-  ipcRenderer.on('writeFile', (_event, data) => {
-    if (data) {
-      createToast({msg: t('backupT.exportSuccess')})
-    }
-  })
-  function importFile(ext: string) {
-    ipcRenderer.send('readFile', ext)
-    fileCate.value = ext
-  }
-  ipcRenderer.on('readFile', (_event, data) => {
-    if (data) {
-      if (fileCate.value === 'uut') {
-        localStorage.setItem('ToDo', data)
-      } else if (fileCate.value === 'uuc') {
-        localStorage.setItem('cate', data)
+  function exportFile(name: string, text: string, ext: ExtType) {
+    writeFile<ExtType>(
+      {name, text, ext},
+      (data) => {
+        if (data) {
+          createToast({msg: t('backupT.exportSuccess')})
+        }
       }
-      createToast({msg: t('backupT.importSuccess')})
-    }
-  })
+    )
+  }
+  function importFile(ext: ExtType) {
+    readFile<ExtType>(ext, (data) => {
+      if (data) {
+        if (ext === 'uut') {
+          localStorage.setItem('ToDo', `${data}`)
+          emitter.emit('changeList')
+        } else if (ext === 'uuc') {
+          localStorage.setItem('cate', `${data}`)
+        }
+        createToast({msg: t('backupT.importSuccess')})
+      }
+    })
+  }
 
   return vine`
     <NoteTabBar v-if="isNoteUI" :title="t('anotherSettings.backup')" />
