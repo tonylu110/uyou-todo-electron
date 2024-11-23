@@ -17,6 +17,7 @@ import createRegisterWindowMac from './pages/registerMac.js'
 import createRepassWindowMac from './pages/repassMac.js'
 import createLogoffWindowMac from './pages/logoffMac.js'
 import menuTemplate from './menu.js'
+import { writeFile, readFile } from '../pages/util/rnwFile.js'
 
 const store = new Store()
 
@@ -240,6 +241,14 @@ function createWindow() {
   })
   ipcMain.on('setFontSize', (ev, size) => {
     mainWindow.webContents.insertCSS(useFontSize(size))
+  })
+  ipcMain.on('writeFile', (ev, name, text, ext) => {
+    const file = writeFile(name, text, ext)
+    ev.reply('writeFile', file)
+  })
+  ipcMain.on('readFile', (ev, ext) => {
+    const fileText = readFile(ext)
+    ev.reply('readFile', fileText)
   })
 }
 let tray

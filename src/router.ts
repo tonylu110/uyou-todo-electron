@@ -84,6 +84,11 @@ const routes = [
     name: 'mode',
     component: () => import('./pages/Settings/Mode.vue'),
   },
+  {
+    path: '/backup',
+    name: 'backup',
+    component: () => import('./pages/Settings/ToDoBackup.vine.ts'),
+  },
 ]
 
 const router = createRouter({

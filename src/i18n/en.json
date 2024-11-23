@@ -85,7 +85,8 @@
     "openPass": "Start encryption",
     "model": "Mode selection",
     "star": "show star button",
-    "ok": "Show Completed Button"
+    "ok": "Show Completed Button",
+    "backup": "Local backup ToDo"
   },
   "contextMenu": {
     "copy": "Copy",
@@ -250,5 +251,19 @@
   },
   "seccate": "Category 2",
   "afd": "Click to go",
-  "delAllDo": "Delete all completed ToDos?"
+  "delAllDo": "Delete all completed ToDos?",
+  "backup": "Synchronize ToDo content and categories on different devices by backing up to local files without logging in",
+  "backupT": {
+    "export": "Export backup",
+    "import": "Import backup",
+    "exportCate": "Export categories",
+    "importToDo": "Import ToDo",
+    "importCate": "Import categories",
+    "warn": "Note that the data will be overwritten after importing and cannot be recovered! \n! \n!",
+    "todo": "ToDo data",
+    "cate": "Category data",
+    "importSuccess": "Import successful",
+    "exportSuccess": "Export successful",
+    "exportToDo": "Export ToDo"
+  }
 }

@@ -4,9 +4,11 @@ import isNoteUI from "./util/isNoteUI"
 import { useI18n } from "vue-i18n";
 import { ref } from "vue";
 import setSwitchFn from "../../util/setSwitchFn";
+import { useRouter } from "vue-router";
 
 function ToDoSettings() {
   const { t } = useI18n()
+  const router = useRouter()
 
   const enterAddState = ref(localStorage.getItem('enterAdd') === 'true')
   const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
@@ -14,9 +16,13 @@ function ToDoSettings() {
   const showStar = ref(localStorage.getItem('showStar') === 'true' || localStorage.getItem('showStar') === null)
   const showCompleted = ref(localStorage.getItem('showCompleted') === 'true' || localStorage.getItem('showCompleted') === null)
 
-
   return vine`
     <ItemBox>
+      <Item
+        icon="i-icon-park:save-one"
+        :title="t('anotherSettings.backup')"
+        @item-fun="router.push('/backup')"
+      />
       <Item
         v-if="!isNoteUI"
         icon="i-icon-park:enter-key"

@@ -40,7 +40,7 @@ const RouterUrl: SetupFC = () => {
 
   const close = () => {
     emitter.emit('routerShow', false)
-    localStorage.setItem('routerUrl', 'false')
+    localStorage.setItem('routerShow', 'false')
   }
 
   return () => (

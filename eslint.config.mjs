@@ -1,4 +1,5 @@
 import antfu from '@antfu/eslint-config'
+import VueVine from '@vue-vine/eslint-config'
 import * as VueVineESLintParser from '@vue-vine/eslint-parser'
 
 export default antfu(
@@ -44,4 +45,5 @@ export default antfu(
       'no-console': 'off',
     },
   },
+  VueVine(),
 )

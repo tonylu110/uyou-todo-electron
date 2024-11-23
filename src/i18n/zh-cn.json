@@ -85,7 +85,8 @@
     "openPass": "启动加密",
     "model": "模式选择",
     "star": "显示加星按钮",
-    "ok": "显示完成按钮"
+    "ok": "显示完成按钮",
+    "backup": "本地备份 ToDo"
   },
   "contextMenu": {
     "copy": "复制",
@@ -250,5 +251,19 @@
   },
   "seccate": "第二类别",
   "afd": "点击前往",
-  "delAllDo": "是否删除所有已完成 ToDo？"
+  "delAllDo": "是否删除所有已完成 ToDo？",
+  "backup": "在未登录的情况下，通过备份成本地文件的形式来同步不同设备上的 ToDo 内容和分类",
+  "backupT": {
+    "export": "导出备份",
+    "import": "导入备份",
+    "exportToDo": "导出 ToDo",
+    "exportCate": "导出类别",
+    "importToDo": "导入 ToDo",
+    "importCate": "导入类别",
+    "warn": "注意，导入后数据会被覆盖且不可恢复！！！",
+    "todo": "ToDo 数据",
+    "cate": "类别数据",
+    "importSuccess": "导入成功",
+    "exportSuccess": "导出成功"
+  }
 }

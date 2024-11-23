@@ -19,6 +19,7 @@ import { initSim, simple, simpleIpc } from './store/simpleModeStore.js'
 import sendNotification from './pages/util/sendNotification.js'
 import i18n from './i18n/index.js'
 import useFontSize from './useFontSize.js'
+import { writeFile, readFile } from './pages/util/rnwFile.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -264,6 +265,15 @@ function createWindow() {
   })
   ipcMain.on('setFontSize', (ev, size) => {
     mainWindow.webContents.insertCSS(useFontSize(size))
+  })
+
+  ipcMain.on('writeFile', (ev, name, text, ext) => {
+    const file = writeFile(name, text, ext)
+    ev.reply('writeFile', file)
+  })
+  ipcMain.on('readFile', (ev, ext) => {
+    const fileText = readFile(ext)
+    ev.reply('readFile', fileText)
   })
 }
 let tray
