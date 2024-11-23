@@ -1,4 +1,4 @@
-import { onMounted, ref, useTemplateRef } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import emitter from '../../util/bus'
 
@@ -12,13 +12,13 @@ const RouterUrl: SetupFC = () => {
     routeUrl.value = ''
   }
 
-  const useBody = useTemplateRef('body')
+  const body = ref()
 
   onMounted(() => {
     const x = ref(0)
     const y = ref(0)
 
-    const bodyDOM = useBody.value as unknown as HTMLElement
+    const bodyDOM = body.value as unknown as HTMLElement
 
     const dragWindow = (ev: MouseEvent) => {
       bodyDOM.style.transform = 'translate(0px)'

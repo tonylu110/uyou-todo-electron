@@ -33,8 +33,9 @@ const {
 } = defineProps<Props>()
 
 const emits = defineEmits<{
-  (e: 'rightClick'): void
-  (e: 'leftClick'): void
+  rightClick: []
+  leftClick: []
+  deleteAllItem: []
 }>()
 
 const router = useRouter()
@@ -211,7 +212,7 @@ watchEffect(() => {
         <window-buttons v-if="!systemTitleShow" />
       </div>
       <div mt-12px flex :h="rightImgShow ? '' : '30px'">
-        <Delete v-if="route.query.listName === 'allDo'" />
+        <Delete v-if="route.query.listName === 'allDo'" @delete="emits('deleteAllItem')" />
         <TodayShow v-if="route.query.listName === 'today'" />
         <ChangeColor
           v-if="!isNaN(Number.parseInt((route.query.listName as string))) && useCustColor"

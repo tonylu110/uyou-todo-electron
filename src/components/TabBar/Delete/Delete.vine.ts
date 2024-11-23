@@ -6,13 +6,13 @@ function Delete() {
   const { t } = useI18n()
 
   const emit = vineEmits<{
-    changeColor: [color: string | null]
+    delete: []
   }>()
 
   const showColor = ref(false)
 
-  function changColor(color: string | null) {
-    emit('changeColor', color)
+  function deleteAllItem() {
+    emit('delete')
   }
 
   return vine`
@@ -30,19 +30,20 @@ function Delete() {
       <template #popper>
         <div v-close-popper flex="~ gap-5px wrap" p="x-6 y-2">
           <div flex="~ col gap-2" items-center justify-center>
-            <span text-14px>{{ t('delAllDo') }}</span>
+            <span text-14px select-none>{{ t('delAllDo') }}</span>
             <div flex>
-              <button
+              <div
                 v-close-popper
                 bg="primary-d active:primary-a" flex-1
                 p="x-10px y-5px" text="!white 12px"
                 mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
                 shadow="sm black/20" c="#555"
+                @click="deleteAllItem"
               >
                 <div i-mdi:check-bold mr-5px />
                 <span>{{ t('alertText.returnText') }}</span>
-              </button>
-              <button
+              </div>
+              <div
                 v-close-popper
                 bg="black/20 active:black/40" flex-1
                 p="x-10px y-5px" text="!black !dark:white 12px"
@@ -51,7 +52,7 @@ function Delete() {
               >
                 <div i-mdi:close-thick mr-5px />
                 <span>{{ t('alertText.cancelText') }}</span>
-              </button>
+              </div>
             </div>
           </div>
         </div>
