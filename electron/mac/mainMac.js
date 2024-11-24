@@ -68,6 +68,7 @@ function createWindow() {
       nodeIntegration: true,
       contextIsolation: false,
       webSecurity: false,
+      scrollBounc: true,
     },
   })
   if (windowSizeState)

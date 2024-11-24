@@ -265,6 +265,7 @@
     "cate": "類別數據",
     "importSuccess": "導入成功",
     "exportSuccess": "匯出成功",
-    "exportToDo": "導出 ToDo"
+    "exportToDo": "導出 ToDo",
+    "warn2": "務必同時匯出或匯入 ToDo 資料和類別資料！ \n！ \n！"
   }
 }

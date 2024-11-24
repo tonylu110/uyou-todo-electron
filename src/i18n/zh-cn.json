@@ -264,6 +264,7 @@
     "todo": "ToDo 数据",
     "cate": "类别数据",
     "importSuccess": "导入成功",
-    "exportSuccess": "导出成功"
+    "exportSuccess": "导出成功",
+    "warn2": "务必同时导出或导入 ToDo 数据和类别数据！！！"
   }
 }

@@ -39,6 +39,7 @@ function ToDoBackup() {
           emitter.emit('changeList')
         } else if (ext === 'uuc') {
           localStorage.setItem('cate', `${data}`)
+          emitter.emit('lisCateChange', data)    
         }
         createToast({msg: t('backupT.importSuccess')})
       }
@@ -68,6 +69,10 @@ function ToDoBackup() {
       <ItemText>
         <div i-emojione-v1:warning mr-2 />
         <span font-bold>{{ t('backupT.warn') }}</span>
+      </ItemText>
+      <ItemText>
+        <div i-emojione-v1:warning mr-2 />
+        <span font-bold>{{ t('backupT.warn2') }}</span>
       </ItemText>
     </SettingList>
   `

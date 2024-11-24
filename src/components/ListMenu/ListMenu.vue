@@ -4,7 +4,7 @@ import type ITodoList from '../../interface/ITodoListArray'
 import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
 import type { cateItem } from './ICateItem'
 import { Dropdown as VDropdown } from 'floating-vue'
-import { computed, onUnmounted, reactive, ref, useTemplateRef, watch, watchEffect } from 'vue'
+import { computed, reactive, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import router from '../../router'
@@ -16,6 +16,7 @@ import changeCate from './changCate'
 import Icons from './MenuItem/Icons/Icons.vine'
 import MenuItem from './MenuItem/MenuItem.vue'
 import TitleMenuItem from './TitleMenuItem'
+import { Handler } from 'mitt'
 
 const { t } = useI18n()
 
@@ -124,12 +125,15 @@ function setIcon(id: number, icon: string) {
   }
 }
 
-emitter.on('setCate', (data) => {
+function setCate(data: unknown) {
   cateList.length = 0
   JSON.parse((data as string)).data.forEach((item: cateItem) => {
     cateList.push(item)
   })
-})
+}
+
+emitter.on('setCate', setCate)
+emitter.on('lisCateChange', setCate)
 
 const showList: Ref<ListItems> = ref(localStorage.getItem('listMenuItem') && JSON.parse(localStorage.getItem('listMenuItem')!).today.name !== 'today'
   ? JSON.parse(localStorage.getItem('listMenuItem')!) as ListItems
@@ -205,12 +209,6 @@ function delWithToDo(id: number) {
 
   delCate(id)
 }
-
-onUnmounted(() => {
-  emitter.off('setCate')
-  emitter.off('setListItem')
-  emitter.off('setLoginText')
-})
 
 const count = computed(() => Object.values(showList.value).filter(obj => !obj.show).length)
 
@@ -365,7 +363,7 @@ const useSystemTitleBar = localStorage.getItem('systemTitle') === 'true'
           v-for="item in cateList"
           :id="item.id"
           :key="item.id"
-          :icon="item.icon"
+          :icon="item.icon!"
           :title="item.title"
           @del-cate="delCate"
           @edit-cate="editCate"
