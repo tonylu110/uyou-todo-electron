@@ -7,6 +7,7 @@ import LocalStorage from '../util/localStorage'
 import type ITodoList from '../interface/ITodoListArray'
 import type { cateItem } from '../components/ListMenu/ICateItem'
 import emitter from '../util/bus'
+import saveItemSet from '../components/List/saveItemSet'
 
 function Other() {
   const { t } = useI18n()
@@ -17,7 +18,7 @@ function Other() {
 
   const route = useRoute()
   const router = useRouter()
-  const list = ref(LocalStorage('get'))
+  const list = ref<ITodoList[]>(LocalStorage('get')!)
 
   const showAddItem = ref(false)
 
@@ -53,6 +54,19 @@ function Other() {
     }
   })
 
+  function delAllItem() {
+    listData.value.length = 0
+    const localList = LocalStorage('get')!
+    
+    let toRemove = localList.filter(item => item.ok);
+
+    for (let i = toRemove.length - 1; i >= 0; i--) {
+      localList.splice(localList.indexOf(toRemove[i]), 1);
+    }
+    
+    saveItemSet(localList)
+  }
+
   emitter.on('todayShow', (show) => {
     todayShow.value = show as string
   })
@@ -73,6 +87,7 @@ function Other() {
       :show-wrap="true"
       @right-click="showAddItem = !showAddItem"
       @left-click="router.push('/setting-sim')"
+      @delete-all-item="delAllItem"
     />
     <List
       :show-add-item="showAddItem"

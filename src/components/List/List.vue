@@ -25,7 +25,7 @@ interface Props {
 const { color = 'primary-d', listData } = defineProps<Props>()
 
 const emits = defineEmits<{
-  (e: 'setAddItem'): void
+  setAddItem: []
 }>()
 
 const { t } = useI18n()
