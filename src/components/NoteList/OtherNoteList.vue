@@ -8,7 +8,7 @@ import NoteBox from './NoteBox/NoteBox.vue'
 
 const { t } = useI18n()
 
-const list = ref(LocalStorage('get'))
+const list = ref(LocalStorage('get')!)
 
 function del(id: number) {
   for (let i = 0; i < list.value!.length; i++) {
@@ -57,7 +57,17 @@ function setStar(id: number, star: boolean) {
     }
   }
 
-  saveItemSet(list.value!)
+  saveItemSet(list.value)
+}
+
+function deleteAllItem() {
+  let toRemove = list.value.filter(item => item.ok);
+
+  for (let i = toRemove.length - 1; i >= 0; i--) {
+    list.value.splice(list.value.indexOf(toRemove[i]), 1);
+  }
+  
+  saveItemSet(list.value)
 }
 
 emitter.on('searchSetStar', (data) => {
@@ -102,6 +112,8 @@ onBeforeUnmount(() => {
       :title="t('listMenu.completed')"
       :show-add-item="false"
       :show-btn="false"
+      :show-delete="true"
+      @delete="deleteAllItem"
       @edit-item="editItem"
       @del-item="del"
       @set-ok="setOk"

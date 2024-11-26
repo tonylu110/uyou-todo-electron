@@ -6,6 +6,7 @@ import emitter from '../../../util/bus'
 import type ITodoList from '../../../interface/ITodoListArray'
 import Item from './Item/Item.vue'
 import Edit from './Edit/Edit.vue'
+import Delete from './Delete/Delete.vine'
 
 interface Props {
   title: string
@@ -16,9 +17,10 @@ interface Props {
   showAddItem?: boolean
   showBtn?: boolean
   list: ITodoList[]
+  showDelete?: boolean
 }
 
-const { title = 'title', color = 'primary-d', showAddItem = true, showBtn = true, id, list } = defineProps<Props>()
+const { title = 'title', color = 'primary-d', showAddItem = true, showBtn = true, showDelete = false, id, list } = defineProps<Props>()
 
 const emits = defineEmits<{
   deleteCate: [id: number | string]
@@ -28,6 +30,7 @@ const emits = defineEmits<{
   edit: [id: number | string, name: string, icon: string, color: string | null]
   editItem: [id: number, title: string, cateId: number | string]
   setStar: [id: number, star: boolean]
+  delete: []
 }>()
 
 const { t } = useI18n()
@@ -132,6 +135,13 @@ function add() {
             </div>
           </template>
         </VDropdown>
+      </div>
+      <div 
+        v-else-if="showDelete"
+        flex="~ gap-5px" w="0 hover:14px" transition="all 300"
+        items-center overflow-hidden p="r-10px l-5px" op="0 hover:100"
+      >
+        <Delete @delete="emits('delete')"/>
       </div>
       <div v-else w-13px />
     </div>
