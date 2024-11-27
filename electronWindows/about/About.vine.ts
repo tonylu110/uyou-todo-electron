@@ -43,15 +43,15 @@ function About() {
             <div p-4px bg="#2c2e3a" rounded-full mx-2 mr-1>
               <div i-logos:electron text-3 block></div>
             </div>
-            <span>Electron v{{ electronVersion }} </span>
+            <span>v{{ electronVersion }} </span>
           </div>
           <div flex items-center>
             <div i-logos:vitejs text-5 block mx-2 mr-1 mt--1></div>
-            <span>Vite v{{ viteVersion }} </span>
+            <span>v{{ viteVersion }} </span>
           </div>
           <div flex items-center>
             <div i-logos:vue text="4.3" block mx-2 mr-1></div>
-            <span>Vue v{{ vueVersion }} </span>
+            <span>v{{ vueVersion }} </span>
           </div>
         </div>
       </div>

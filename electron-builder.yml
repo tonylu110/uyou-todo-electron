@@ -33,6 +33,8 @@ linux:
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
+dmg:
+  icon: ./logo_disk.icns
 files:
   - dist/**/*
   - electron/**/*
