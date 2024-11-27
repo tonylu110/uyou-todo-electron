@@ -45,5 +45,5 @@ export default antfu(
       'no-console': 'off',
     },
   },
-  VueVine(),
+  ...VueVine(),
 )

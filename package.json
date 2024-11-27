@@ -1,6 +1,6 @@
 {
   "name": "uyoutodo",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "private": false,
   "author": {
     "name": "Anthony Lu",
@@ -46,8 +46,9 @@
     "@unocss/eslint-plugin": "^0.64.1",
     "@unocss/preset-icons": "^0.64.1",
     "@unocss/transformer-attributify-jsx": "^0.64.1",
-    "@vitejs/plugin-vue": "^5.2.0",
-    "@vitejs/plugin-vue-jsx": "^4.1.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
+    "@vue-vine/eslint-config": "^0.2.5",
     "@vue-vine/eslint-parser": "^0.2.2",
     "@vue/devtools": "^7.6.4",
     "@vueuse/components": "^11.3.0",
@@ -68,7 +69,7 @@
     "unocss": "^0.64.1",
     "unplugin-element-plus": "^0.8.0",
     "unplugin-vue-macros": "^2.13.4",
-    "vite": "^5.4.11",
+    "vite": "^6.0.0",
     "vite-plugin-electron-renderer": "^0.14.6",
     "vue": "^3.5.13",
     "vue-i18n": "10.0.4",

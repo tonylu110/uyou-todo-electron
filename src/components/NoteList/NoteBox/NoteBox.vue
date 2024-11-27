@@ -82,7 +82,7 @@ function add() {
           :color
           :icon
           :name="title"
-          @edit="(name, icon, color) => emits('edit', id!, name, icon, color)"
+          @edit="(name: string, icon: string, color: string) => emits('edit', id!, name, icon, color)"
         />
         <VDropdown
           v-model:shown="isOpen"
@@ -154,7 +154,7 @@ function add() {
             :is-ok="item.ok"
             :cate-id="id"
             :star="item.star"
-            @edit="(itemId, title, cateId) => emits('editItem', itemId, title, cateId)"
+            @edit="(itemId: string, title: string, cateId: number) => emits('editItem', itemId, title, cateId)"
             @del="(itemId: number) => emits('delItem', itemId)"
             @set-ok="(itemId: number, isOk: boolean) => emits('setOk', itemId, isOk)"
             @set-star="(itemId: number, star: boolean) => emits('setStar', itemId, star)"
@@ -170,7 +170,7 @@ function add() {
             :color="color"
             :cate-id="id"
             :star="item.star"
-            @edit="(itemId, title, cateId) => emits('editItem', itemId, title, cateId)"
+            @edit="(itemId: string, title: string, cateId: number) => emits('editItem', itemId, title, cateId)"
             @del="(itemId: number) => emits('delItem', itemId)"
             @set-ok="(itemId: number, isOk: boolean) => emits('setOk', itemId, isOk)"
             @set-star="(itemId: number, star: boolean) => emits('setStar', itemId, star)"

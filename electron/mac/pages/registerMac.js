@@ -25,6 +25,12 @@ function createRegisterWindow() {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
+      defaultFontFamily: {
+        standard: 'Helvetica',
+        serif: 'Times',
+        sansSerif: 'Helvetica',
+        monospace: 'Menlo'
+      }
     },
   })
   registerWindow.setAlwaysOnTop(true)

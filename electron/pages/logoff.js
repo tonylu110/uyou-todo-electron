@@ -25,6 +25,12 @@ function createLogoffWindow(uname) {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
+      defaultFontFamily: {
+        standard: 'Times New Roman',
+        serif: 'Times New Roman',
+        sansSerif: 'Arial',
+        monospace: 'Courier New'
+      }
     },
   })
   if (menuBlur || menuBlur === undefined) {

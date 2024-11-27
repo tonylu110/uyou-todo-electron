@@ -25,6 +25,12 @@ function createLogoffWindow(uname) {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
+      defaultFontFamily: {
+        standard: 'Helvetica',
+        serif: 'Times',
+        sansSerif: 'Helvetica',
+        monospace: 'Menlo'
+      }
     },
   })
   logoffWindow.setAlwaysOnTop(true)

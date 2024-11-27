@@ -69,6 +69,12 @@ function createWindow() {
       contextIsolation: false,
       webSecurity: false,
       scrollBounc: true,
+      defaultFontFamily: {
+        standard: 'Helvetica',
+        serif: 'Times',
+        sansSerif: 'Helvetica',
+        monospace: 'Menlo'
+      }
     },
   })
   if (windowSizeState)

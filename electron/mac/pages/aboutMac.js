@@ -25,6 +25,12 @@ function createAboutWindow() {
       enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
+      defaultFontFamily: {
+        standard: 'Helvetica',
+        serif: 'Times',
+        sansSerif: 'Helvetica',
+        monospace: 'Menlo'
+      }
     },
   })
   aboutWindow.setAlwaysOnTop(true)
