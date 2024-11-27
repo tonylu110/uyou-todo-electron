@@ -81,6 +81,11 @@ export default defineConfig({
         d: '#fcd901',
         a: '#e6a400',
       },
+      afd: {
+        d: 'hsl(260,70%,66%)',
+        h: 'hsl(260,70%,60%)',
+        a: 'hsl(260,70%,54%)',
+      },
     },
   },
 })

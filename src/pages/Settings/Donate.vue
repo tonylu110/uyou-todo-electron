@@ -32,26 +32,33 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
     @left-click="router.back()"
   />
   <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'">
-    <ItemSpace flex="~ wrap" items-center justify-center>
+    <ItemSpace flex="~ wrap gap-10px" items-center justify-center>
       <img
-        w-163px p-10px
+        w-163px
         src="/images/donate/alipay.png"
         alt=""
       >
       <img
-        w-163px p-10px
+        w-163px
         src="/images/donate/wechatpay.png"
         alt=""
       >
+      <div w-163px p-10px bg-afd-d flex="~ col" items-center>
+        <img
+          w-full
+          src="/images/donate/afd.png"
+          alt=""
+        >
+        <button 
+          mt-10px bg="white dark:#333 active:afd-a hover:afd-h" c="#956DE5 hover:white"
+          outline-none border-none px-4 py-2 rounded-1 font-bold
+          @click="openUrlInBrowser('https://afdian.com/a/tonylu')"
+        >
+          {{ t('afd') }}
+        </button>
+      </div>
       <img
-        w-163px p-10px
-        src="/images/donate/afd.png"
-        alt=""
-        :title="t('afd')"
-        @click="openUrlInBrowser('https://afdian.com/a/tonylu')"
-      >
-      <img
-        w-163px p-10px
+        w-163px
         src="/images/donate/paypal.png"
         alt=""
       >
