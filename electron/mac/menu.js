@@ -2,7 +2,7 @@ import { ipcMain, shell } from 'electron'
 import i18n from '../i18n/index.js'
 import createAboutWindowMac from './pages/aboutMac.js'
 
-export default (function (app, mainWindow) {
+export default function (app, mainWindow) {
   return [{
     label: 'uyou ToDo',
     submenu: [{
@@ -58,4 +58,4 @@ export default (function (app, mainWindow) {
       accelerator: 'CmdOrCtrl+R',
     }],
   }]
-})
+}

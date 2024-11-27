@@ -20,6 +20,8 @@ import sendNotification from './pages/util/sendNotification.js'
 import i18n from './i18n/index.js'
 import useFontSize from './useFontSize.js'
 import { writeFile, readFile } from './pages/util/rnwFile.js'
+import { installExtension, VUEJS_DEVTOOLS_BETA } from '@tomjs/electron-devtools-installer';
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -309,6 +311,11 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0)
       createWindow()
   })
+  if (NODE_ENV === 'development') {
+    installExtension(VUEJS_DEVTOOLS_BETA)
+      .then(ext => console.log(`Added Extension:  ${ext.name}`))
+      .catch(err => console.log('An error occurred: ', err));
+  }
 })
 app.on('window-all-closed', () => {
   // eslint-disable-next-line node/prefer-global/process

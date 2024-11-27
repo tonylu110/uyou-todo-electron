@@ -1,7 +1,7 @@
 import path from 'node:path'
 import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow, Menu, Tray, app, dialog, globalShortcut, ipcMain, nativeTheme, screen, shell } from 'electron'
+import { BrowserWindow, Menu, Tray, app, dialog, globalShortcut, ipcMain, nativeTheme, screen, shell, nativeImage } from 'electron'
 import Store from 'electron-store'
 import remoteMain from '@electron/remote/main/index.js'
 import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from '../store/windowSizeStore.js'
@@ -18,6 +18,7 @@ import createRepassWindowMac from './pages/repassMac.js'
 import createLogoffWindowMac from './pages/logoffMac.js'
 import menuTemplate from './menu.js'
 import { writeFile, readFile } from '../pages/util/rnwFile.js'
+import { installExtension, VUEJS_DEVTOOLS_BETA } from '@tomjs/electron-devtools-installer';
 
 const store = new Store()
 
@@ -69,6 +70,7 @@ function createWindow() {
       contextIsolation: false,
       webSecurity: false,
       scrollBounc: true,
+      allowFileAccess: true,
       defaultFontFamily: {
         standard: 'Helvetica',
         serif: 'Times',
@@ -270,7 +272,11 @@ app.whenReady().then(() => {
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
   })
-  tray = new Tray(path.join(__dirname, '../dist/logo.png'))
+  if (process.platform === 'darwin') {
+    tray = new Tray(nativeImage.createFromPath(path.join(__dirname, '../../dist/tray/logoTemplate.png')))
+  } else {
+    tray = new Tray(path.join(__dirname, '../../dist/logo.png'))
+  }
   const contextMenu = Menu.buildFromTemplate([{
     label: i18n(app).open,
     click: () => mainWindow.show(),
@@ -280,18 +286,28 @@ app.whenReady().then(() => {
   }])
   tray.setToolTip('uyou ToDo')
   tray.setContextMenu(contextMenu)
-  tray.on('click', () => mainWindow.show())
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
   Menu.setApplicationMenu(null)
 
   // eslint-disable-next-line node/prefer-global/process
-  if (process.platform === 'darwin' || windowMenu)
+  if (process.platform === 'darwin')
+    Menu.setApplicationMenu(appMenu)
+  else if (windowMenu)
     Menu.setApplicationMenu(appMenu)
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0)
       createWindow()
   })
+
+  if (NODE_ENV === 'development') {
+    installExtension(VUEJS_DEVTOOLS_BETA)
+      .then(ext => console.log(`Added Extension:  ${ext.name}`))
+      .catch(err => console.log('An error occurred: ', err));
+  }
 })
+if (process.platform === 'darwin') {
+  
+}
 app.on('window-all-closed', () => {
   // eslint-disable-next-line node/prefer-global/process
   if (process.platform !== 'darwin')

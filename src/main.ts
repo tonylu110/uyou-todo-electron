@@ -1,4 +1,3 @@
-import { devtools } from '@vue/devtools'
 import { ipcRenderer } from 'electron'
 import { vClosePopper, vTooltip } from 'floating-vue'
 import { createApp, ref } from 'vue'
@@ -14,10 +13,6 @@ import 'floating-vue/dist/style.css'
 import 'virtual:uno.css'
 import 'virtual:unocss-devtools'
 import 'vue3-perfect-scrollbar/style.css'
-
-// eslint-disable-next-line node/prefer-global/process
-if (process.env.NODE_ENV === 'development')
-  devtools.connect(/* host (the default is "http://localhost"), port (the default is 8090) */)
 
 const simpleMode = localStorage.getItem('simpleMode')
 
