@@ -1,19 +1,19 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import remoteMain from '@electron/remote/main/index.js'
 import { BrowserWindow } from 'electron'
+import remoteMain from '@electron/remote/main/index.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
 
-let aboutWindow
+let repassWindow
 
-function createAboutWindow() {
-  aboutWindow = new BrowserWindow({
-    width: 450,
-    height: 350,
+function createRepassWindow(uname) {
+  repassWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
     resizable: false,
     frame: false,
     icon: path.join(__dirname, '../../../dist/logo.png'),
@@ -22,7 +22,6 @@ function createAboutWindow() {
     maximizable: false,
     minimizable: false,
     webPreferences: {
-      enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
       defaultFontFamily: {
@@ -33,14 +32,17 @@ function createAboutWindow() {
       }
     },
   })
-  aboutWindow.setAlwaysOnTop(true)
+  repassWindow.setAlwaysOnTop(true)
   if (NODE_ENV === 'development')
-    aboutWindow.loadURL('http://localhost:3000/electronWindows/about/')
+    repassWindow.loadURL(`http://localhost:3000/electronWindows/repass/`)
   else
-    aboutWindow.loadFile(path.join(__dirname, '../../../dist/electronWindows/about/index.html'))
+    repassWindow.loadFile(path.join(__dirname, '../../../dist/electronWindows/repass/index.html'))
 
-  remoteMain.enable(aboutWindow.webContents)
-  return aboutWindow
+  remoteMain.enable(repassWindow.webContents)
+  repassWindow.on('ready-to-show', () => {
+    repassWindow.webContents.send('getUserName', uname)
+  })
+  return repassWindow
 }
 
-export default createAboutWindow
+export default createRepassWindow

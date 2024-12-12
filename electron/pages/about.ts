@@ -2,8 +2,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
 import remoteMain from '@electron/remote/main/index.js'
-import { menuBlur, micaStyle } from '../store/menuBlurStore.js'
-import setMicaStyle from './util/setMicaStyle.js'
+import { menuBlur, micaStyle } from '../store/menuBlurStore.ts'
+import setMicaStyle from './util/setMicaStyle.ts'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -19,10 +19,8 @@ function createAboutWindow() {
     resizable: false,
     frame: false,
     icon: path.join(__dirname, '../../dist/logo.png'),
-    background: '#00000000',
     show: false,
     webPreferences: {
-      enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
       defaultFontFamily: {

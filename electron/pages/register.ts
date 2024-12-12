@@ -10,18 +10,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
 
-let repassWindow
+let registerWindow
 
-function createRepassWindow(uname) {
-  repassWindow = new MicaBrowserWindow({
+function createRegisterWindow() {
+  registerWindow = new MicaBrowserWindow({
     width: 800,
     height: 600,
     resizable: false,
     frame: false,
-    icon: path.join(__dirname, '../../../dist/logo.png'),
-    background: '#00000000',
+    icon: path.join(__dirname, '../../dist/logo.png'),
+    show: false,
     webPreferences: {
-      enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
       defaultFontFamily: {
@@ -34,25 +33,23 @@ function createRepassWindow(uname) {
   })
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
-      repassWindow.setAutoTheme()
-      setMicaStyle(micaStyle || 'mica', repassWindow)
+      registerWindow.setAutoTheme()
+      setMicaStyle(micaStyle || 'mica', registerWindow)
     }
     else {
-      repassWindow.setAcrylic()
+      registerWindow.setAcrylic()
     }
   }
-  repassWindow.setAlwaysOnTop(true)
+  registerWindow.setAlwaysOnTop(true)
   if (NODE_ENV === 'development')
-    repassWindow.loadURL(`http://localhost:3000/electronWindows/repass/`)
+    registerWindow.loadURL('http://localhost:3000/electronWindows/register/')
   else
-    repassWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/repass/index.html'))
+    registerWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/register/index.html'))
 
-  remoteMain.enable(repassWindow.webContents)
-  repassWindow.once('ready-to-show', () => {
-    repassWindow.show()
-    repassWindow.webContents.send('getUserName', uname)
+  remoteMain.enable(registerWindow.webContents)
+  registerWindow.once('ready-to-show', () => {
+    registerWindow.show()
   })
-  return repassWindow
+  return registerWindow
 }
-
-export default createRepassWindow
+export default createRegisterWindow

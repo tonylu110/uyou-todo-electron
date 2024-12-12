@@ -3,7 +3,7 @@ import en from './en.js'
 import zhTW from './zh_tw.js'
 import ja from './ja.js'
 
-export default function (app) {
+export default function (app: Electron.App) {
   if (app.getLocale() === 'zh-CN')
     return zhCN
   else if (app.getLocale() === 'zh-HK' || app.getLocale() === 'zh-TW')

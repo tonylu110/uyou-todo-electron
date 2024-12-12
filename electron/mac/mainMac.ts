@@ -4,20 +4,20 @@ import { fileURLToPath } from 'node:url'
 import { BrowserWindow, Menu, Tray, app, dialog, globalShortcut, ipcMain, nativeTheme, screen, shell, nativeImage } from 'electron'
 import Store from 'electron-store'
 import remoteMain from '@electron/remote/main/index.js'
-import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from '../store/windowSizeStore.js'
-import { initSystemBar, systemBar, systemBarIpc } from '../store/systemTitleBarStore.js'
-import { initMenuBlur, menuBlur, menuBlurIpc } from '../store/menuBlurStore.js'
-import { initWindowMenu, windowMenu, windowMenuIpc } from '../store/windowMenuStore.js'
-import { initSim, simple, simpleIpc } from '../store/simpleModeStore.js'
-import sendNotification from '../pages/util/sendNotification.js'
-import i18n from '../i18n/index.js'
-import useFontSize from '../useFontSize.js'
-import createAboutWindowMac from './pages/aboutMac.js'
-import createRegisterWindowMac from './pages/registerMac.js'
-import createRepassWindowMac from './pages/repassMac.js'
-import createLogoffWindowMac from './pages/logoffMac.js'
-import menuTemplate from './menu.js'
-import { writeFile, readFile } from '../pages/util/rnwFile.js'
+import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from '../store/windowSizeStore.ts'
+import { initSystemBar, systemBar, systemBarIpc } from '../store/systemTitleBarStore.ts'
+import { initMenuBlur, menuBlur, menuBlurIpc } from '../store/menuBlurStore.ts'
+import { initWindowMenu, windowMenu, windowMenuIpc } from '../store/windowMenuStore.ts'
+import { initSim, simple, simpleIpc } from '../store/simpleModeStore.ts'
+import sendNotification from '../pages/util/sendNotification.ts'
+import i18n from '../i18n/index.ts'
+import useFontSize from '../useFontSize.ts'
+import createAboutWindowMac from './pages/aboutMac.ts'
+import createRegisterWindowMac from './pages/registerMac.ts'
+import createRepassWindowMac from './pages/repassMac.ts'
+import createLogoffWindowMac from './pages/logoffMac.ts'
+import menuTemplate from './menu.ts'
+import { writeFile, readFile } from '../pages/util/rnwFile.ts'
 import { installExtension, VUEJS_DEVTOOLS_BETA } from '@tomjs/electron-devtools-installer';
 
 const store = new Store()
@@ -49,11 +49,15 @@ function createWindow() {
     height: 750,
     minHeight: simple ? 500 : 600,
     minWidth: simple ? 290 : 400,
-    maxWidth: simple ? 400 : null,
+    maxWidth: simple ? 400 : undefined,
     maximizable: !simple,
-    x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000)) / 2,
-    y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750)) / 2,
-    vibrancy: menuBlur || menuBlur === undefined ? 'menu' : null,
+    x: (store.get('window-pos') 
+      ? (store.get('window-pos') as Array<number>)[0] 
+      : (width - (simple ? 350 : 1000)) / 2),
+    y: (store.get('window-pos') 
+      ? (store.get('window-pos') as Array<number>)[1] 
+      : (height - (simple ? 700 : 750)) / 2),
+    vibrancy: menuBlur || menuBlur === undefined ? 'menu' : undefined,
     visualEffectState: 'active',
     icon: path.join(__dirname, '../../dist/logo.png'),
     frame: systemBar,
@@ -64,13 +68,10 @@ function createWindow() {
     },
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, '../preload.mjs'),
-      enableRemoteModule: true,
+      preload: '../preload.js',
       nodeIntegration: true,
       contextIsolation: false,
       webSecurity: false,
-      scrollBounc: true,
-      allowFileAccess: true,
       defaultFontFamily: {
         standard: 'Helvetica',
         serif: 'Times',
@@ -137,21 +138,21 @@ function createWindow() {
     const registerWindow = createRegisterWindowMac()
     const registerId = registerWindow.id
     ipcMain.once('close-register', () => {
-      BrowserWindow.fromId(registerId).close()
+      BrowserWindow.fromId(registerId)!.close()
     })
   })
   ipcMain.on('open-repass', (ev, uname) => {
     const repassWindow = createRepassWindowMac(uname)
     const repassId = repassWindow.id
     ipcMain.once('close-repass', () => {
-      BrowserWindow.fromId(repassId).close()
+      BrowserWindow.fromId(repassId)!.close()
     })
   })
   ipcMain.on('open-logoff', (ev, uname) => {
     const logoffWindow = createLogoffWindowMac(uname)
     const logoffId = logoffWindow.id
     ipcMain.once('close-logoff', () => {
-      BrowserWindow.fromId(logoffId).close()
+      BrowserWindow.fromId(logoffId)!.close()
     })
   })
   ipcMain.on('setAutoStart', (ev, isAutoStart) => {
@@ -249,7 +250,7 @@ function createWindow() {
     }
   })
   ipcMain.on('setFontSize', (ev, size) => {
-    mainWindow.webContents.insertCSS(useFontSize(size))
+    mainWindow.webContents.insertCSS(useFontSize(size, false))
   })
   ipcMain.on('writeFile', (ev, name, text, ext) => {
     const file = writeFile(name, text, ext)
@@ -286,7 +287,7 @@ app.whenReady().then(() => {
   }])
   tray.setToolTip('uyou ToDo')
   tray.setContextMenu(contextMenu)
-  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
+  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow))
   Menu.setApplicationMenu(null)
 
   // eslint-disable-next-line node/prefer-global/process

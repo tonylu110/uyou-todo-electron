@@ -37,7 +37,7 @@ dmg:
   icon: ./logo_disk.icns
 files:
   - dist/**/*
-  - electron/**/*
+  - prebuild-electron/**/*
 directories:
   buildResources: assets
   output: dist_electron

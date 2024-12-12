@@ -5,21 +5,21 @@ import { BrowserWindow, Menu, Tray, app, dialog, globalShortcut, ipcMain, native
 import Store from 'electron-store'
 import remoteMain from '@electron/remote/main/index.js'
 import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
-import menuTemplate from './menu.js'
-import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from './store/windowSizeStore.js'
-import { initSystemBar, systemBar, systemBarIpc } from './store/systemTitleBarStore.js'
-import { initMenuBlur, menuBlur, menuBlurIpc, micaStyle } from './store/menuBlurStore.js'
-import { initWindowMenu, windowMenu, windowMenuIpc } from './store/windowMenuStore.js'
-import createAboutWindow from './pages/about.js'
-import createRegisterWindow from './pages/register.js'
-import createRepassWindow from './pages/repass.js'
-import createLogoffWindow from './pages/logoff.js'
-import setMicaStyle from './pages/util/setMicaStyle.js'
-import { initSim, simple, simpleIpc } from './store/simpleModeStore.js'
-import sendNotification from './pages/util/sendNotification.js'
-import i18n from './i18n/index.js'
-import useFontSize from './useFontSize.js'
-import { writeFile, readFile } from './pages/util/rnwFile.js'
+import menuTemplate from './menu.ts'
+import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from './store/windowSizeStore.ts'
+import { initSystemBar, systemBar, systemBarIpc } from './store/systemTitleBarStore.ts'
+import { initMenuBlur, menuBlur, menuBlurIpc, micaStyle } from './store/menuBlurStore.ts'
+import { initWindowMenu, windowMenu, windowMenuIpc } from './store/windowMenuStore.ts'
+import createAboutWindow from './pages/about.ts'
+import createRegisterWindow from './pages/register.ts'
+import createRepassWindow from './pages/repass.ts'
+import createLogoffWindow from './pages/logoff.ts'
+import setMicaStyle from './pages/util/setMicaStyle.ts'
+import { initSim, simple, simpleIpc } from './store/simpleModeStore.ts'
+import sendNotification from './pages/util/sendNotification.ts'
+import i18n from './i18n/index.ts'
+import useFontSize from './useFontSize.ts'
+import { writeFile, readFile } from './pages/util/rnwFile.ts'
 import { installExtension, VUEJS_DEVTOOLS_BETA } from '@tomjs/electron-devtools-installer';
 
 
@@ -52,16 +52,19 @@ function createWindow() {
     height: 750,
     minHeight: simple ? 450 : 600,
     minWidth: simple ? 270 : 400,
-    maxWidth: simple ? 400 : null,
-    x: store.get('window-pos') ? store.get('window-pos')[0] : (width - (simple ? 350 : 1000)) / 2,
-    y: store.get('window-pos') ? store.get('window-pos')[1] : (height - (simple ? 700 : 750)) / 2,
+    maxWidth: simple ? 400 : undefined,
+    x: (store.get('window-pos') 
+      ? (store.get('window-pos') as Array<number>)[0] 
+      : (width - (simple ? 350 : 1000)) / 2),
+    y: (store.get('window-pos') 
+      ? (store.get('window-pos') as Array<number>)[1] 
+      : (height - (simple ? 700 : 750)) / 2),
     maximizable: !simple,
     icon: path.join(__dirname, '../dist/logo.png'),
     frame: systemBar,
     show: false,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.mjs'),
-      enableRemoteModule: true,
+      preload: './preload.js',
       nodeIntegration: true,
       contextIsolation: false,
       webSecurity: false,
@@ -118,7 +121,7 @@ function createWindow() {
     shell.openExternal(url)
   })
 
-  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
+  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow))
   ipcMain.on('setAddItemCut', (event, use) => {
     if (use) {
       globalShortcut.register('Alt+A', () => {
@@ -272,7 +275,7 @@ function createWindow() {
     }
   })
   ipcMain.on('setFontSize', (ev, size) => {
-    mainWindow.webContents.insertCSS(useFontSize(size))
+    mainWindow.webContents.insertCSS(useFontSize(size, false))
   })
 
   ipcMain.on('writeFile', (ev, name, text, ext) => {
@@ -302,10 +305,7 @@ app.whenReady().then(() => {
   tray.setToolTip('uyou ToDo')
   tray.setContextMenu(contextMenu)
   tray.on('click', () => mainWindow.show())
-  const {
-    height,
-  } = screen.getPrimaryDisplay().workAreaSize
-  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow, height))
+  const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow))
   Menu.setApplicationMenu(windowMenu ? appMenu : null)
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0)

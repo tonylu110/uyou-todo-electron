@@ -1,6 +1,6 @@
 let fontSize = ''
 
-function useFontSize(size, init) {
+function useFontSize(size: string, init: boolean): string {
   const stringSize = `${size}`
   if (stringSize === '0') {
     fontSize = `

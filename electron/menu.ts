@@ -1,14 +1,14 @@
 import { ipcMain, shell } from 'electron'
-import i18n from '../i18n/index.js'
-import createAboutWindowMac from './pages/aboutMac.js'
+import i18n from './i18n/index.js'
+import createAboutWindow from './pages/about.js'
 
-export default function (app, mainWindow) {
+export default function (app: Electron.App, mainWindow): Array<Electron.MenuItemConstructorOptions> {
   return [{
     label: 'uyou ToDo',
     submenu: [{
       label: i18n(app).aboutText,
       click() {
-        const aboutWindow = createAboutWindowMac()
+        const aboutWindow = createAboutWindow()
         ipcMain.once('close-about', () => {
           aboutWindow.close()
         })

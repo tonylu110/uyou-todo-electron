@@ -27,3 +27,4 @@ dist-ssr
 dist_electron
 selectedFont.css
 selectedBoldFont.css
+prebuild-electron

@@ -9,7 +9,7 @@ export function initWindowMenu() {
     store.set('windowMenu', true)
 }
 export const windowMenu = store.get('windowMenu')
-export function windowMenuIpc(appMenu) {
+export function windowMenuIpc(appMenu?) {
   ipcMain.on('setWindowMenu', (event, arg) => {
     store.set('windowMenu', arg)
     Menu.setApplicationMenu(arg ? appMenu : null)

@@ -10,19 +10,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
 
-let registerWindow
+let repassWindow
 
-function createRegisterWindow() {
-  registerWindow = new MicaBrowserWindow({
+function createRepassWindow(uname) {
+  repassWindow = new MicaBrowserWindow({
     width: 800,
     height: 600,
     resizable: false,
     frame: false,
-    icon: path.join(__dirname, '../../dist/logo.png'),
-    background: '#00000000',
-    show: false,
+    icon: path.join(__dirname, '../../../dist/logo.png'),
     webPreferences: {
-      enableRemoteModule: true,
       nodeIntegration: true,
       contextIsolation: false,
       defaultFontFamily: {
@@ -35,23 +32,25 @@ function createRegisterWindow() {
   })
   if (menuBlur || menuBlur === undefined) {
     if (IS_WINDOWS_11) {
-      registerWindow.setAutoTheme()
-      setMicaStyle(micaStyle || 'mica', registerWindow)
+      repassWindow.setAutoTheme()
+      setMicaStyle(micaStyle || 'mica', repassWindow)
     }
     else {
-      registerWindow.setAcrylic()
+      repassWindow.setAcrylic()
     }
   }
-  registerWindow.setAlwaysOnTop(true)
+  repassWindow.setAlwaysOnTop(true)
   if (NODE_ENV === 'development')
-    registerWindow.loadURL('http://localhost:3000/electronWindows/register/')
+    repassWindow.loadURL(`http://localhost:3000/electronWindows/repass/`)
   else
-    registerWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/register/index.html'))
+    repassWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/repass/index.html'))
 
-  remoteMain.enable(registerWindow.webContents)
-  registerWindow.once('ready-to-show', () => {
-    registerWindow.show()
+  remoteMain.enable(repassWindow.webContents)
+  repassWindow.once('ready-to-show', () => {
+    repassWindow.show()
+    repassWindow.webContents.send('getUserName', uname)
   })
-  return registerWindow
+  return repassWindow
 }
-export default createRegisterWindow
+
+export default createRepassWindow

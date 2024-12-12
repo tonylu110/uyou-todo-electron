@@ -1,6 +1,13 @@
 import { ipcMain } from 'electron'
 import Store from 'electron-store'
 
+export interface WindowSize {
+  height: number
+  width: number
+}
+
+export type WindowSizeState = boolean
+
 const store = new Store()
 export function initWindowSize() {
   if (store.get('windowSize') === undefined) {
@@ -12,13 +19,13 @@ export function initWindowSize() {
   if (store.get('windowSizeState') === undefined)
     store.set('windowSizeState', false)
 }
-export const windowSize = store.get('windowSize')
-export const windowSizeState = store.get('windowSizeState')
+export const windowSize: WindowSize = store.get('windowSize') as WindowSize
+export const windowSizeState: WindowSizeState = store.get('windowSizeState') as WindowSizeState
 export function windowSizeIpc() {
-  ipcMain.on('getWindowSize', (event, arg) => {
+  ipcMain.on('getWindowSize', (_event, arg) => {
     store.set('windowSize', arg)
   })
-  ipcMain.on('setWindowSizeState', (event, arg) => {
+  ipcMain.on('setWindowSizeState', (_event, arg) => {
     store.set('windowSizeState', arg)
   })
 }
