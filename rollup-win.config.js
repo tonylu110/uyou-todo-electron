@@ -9,7 +9,7 @@ export default [
   {
     input: 'electron/main.ts',
     output: {
-      dir: 'prebuild-electron',
+      dir: 'prebuild_electron',
       format: 'es',
     },
     external: [/node_modules/],
@@ -22,13 +22,13 @@ export default [
       commonjs(),
       json(),
       terser(),
-      clear({ targets: ['prebuild-electron'] })
+      clear({ targets: ['prebuild_electron'] })
     ]
   },
   {
     input: 'electron/preload.ts',
     output: {
-      file: 'prebuild-electron/preload.js',
+      file: 'prebuild_electron/preload.js',
       format: 'es',
     },
     plugins: [

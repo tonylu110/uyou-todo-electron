@@ -8,7 +8,7 @@ export default [
   {
     input: 'electron/main.ts',
     output: {
-      dir: 'prebuild-electron',
+      dir: 'prebuild_electron',
       format: 'es',
     },
     external: [/node_modules/],
@@ -20,13 +20,13 @@ export default [
       resolve(),
       commonjs(),
       json(),
-      clear({ targets: ['prebuild-electron'] })
+      clear({ targets: ['prebuild_electron'] })
     ]
   },
   {
     input: 'electron/mac/mainMac.ts',
     output: {
-      dir: 'prebuild-electron/mac',
+      dir: 'prebuild_electron/mac',
       format: 'es'
     },
     external: [/node_modules/],
@@ -43,7 +43,7 @@ export default [
   {
     input: 'electron/preload.ts',
     output: {
-      file: 'prebuild-electron/preload.js',
+      file: 'prebuild_electron/preload.js',
       format: 'es',
     },
   }

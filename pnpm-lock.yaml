@@ -11,9 +11,6 @@ importers:
       '@electron/remote':
         specifier: ^2.1.2
         version: 2.1.2(electron@33.2.1)
-      '@rollup/plugin-terser':
-        specifier: ^0.4.4
-        version: 0.4.4(rollup@4.28.1)
       electron-store:
         specifier: ^8.1.0
         version: 8.2.0
@@ -60,6 +57,9 @@ importers:
       '@rollup/plugin-node-resolve':
         specifier: ^15.3.0
         version: 15.3.0(rollup@4.28.1)
+      '@rollup/plugin-terser':
+        specifier: ^0.4.4
+        version: 0.4.4(rollup@4.28.1)
       '@rollup/plugin-typescript':
         specifier: ^12.1.1
         version: 12.1.1(rollup@4.28.1)(tslib@2.8.1)(typescript@5.7.2)

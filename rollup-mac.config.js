@@ -9,7 +9,7 @@ export default [
   {
     input: 'electron/mac/mainMac.ts',
     output: {
-      dir: 'prebuild-electron/mac',
+      dir: 'prebuild_electron/mac',
       format: 'es'
     },
     external: [/node_modules/],
@@ -23,14 +23,14 @@ export default [
       json(),
       terser(),
       clear({
-        targets: ['prebuild-electron']
+        targets: ['prebuild_electron']
       })
     ]
   },
   {
     input: 'electron/preload.ts',
     output: {
-      file: 'prebuild-electron/preload.js',
+      file: 'prebuild_electron/preload.js',
       format: 'es',
     },
     plugins: [
