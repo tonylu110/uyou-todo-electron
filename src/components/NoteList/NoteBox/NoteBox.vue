@@ -56,8 +56,12 @@ const otherList = ref(list.filter(listData => listData.cate === undefined))
 
 const isOpen = ref(false)
 
+const showAdd = ref(false)
+const itemText = ref('')
 function add() {
-  emitter.emit('noteShowAddItem', id!)
+  emitter.emit('noteShowAddItem', {id, text: itemText.value})
+  showAdd.value = false
+  itemText.value = ''
 }
 </script>
 
@@ -82,7 +86,7 @@ function add() {
           :color
           :icon
           :name="title"
-          @edit="(name: string, icon: string, color: string) => emits('edit', id!, name, icon, color)"
+          @edit="(name: string, icon: string, color: string | null) => emits('edit', id!, name, icon, color)"
         />
         <VDropdown
           v-model:shown="isOpen"
@@ -154,7 +158,7 @@ function add() {
             :is-ok="item.ok"
             :cate-id="id"
             :star="item.star"
-            @edit="(itemId: string, title: string, cateId: number) => emits('editItem', itemId, title, cateId)"
+            @edit="(itemId: number, title: string, cateId: string | number) => emits('editItem', itemId, title, cateId)"
             @del="(itemId: number) => emits('delItem', itemId)"
             @set-ok="(itemId: number, isOk: boolean) => emits('setOk', itemId, isOk)"
             @set-star="(itemId: number, star: boolean) => emits('setStar', itemId, star)"
@@ -170,7 +174,7 @@ function add() {
             :color="color"
             :cate-id="id"
             :star="item.star"
-            @edit="(itemId: string, title: string, cateId: number) => emits('editItem', itemId, title, cateId)"
+            @edit="(itemId: number, title: string, cateId: string | number) => emits('editItem', itemId, title, cateId)"
             @del="(itemId: number) => emits('delItem', itemId)"
             @set-ok="(itemId: number, isOk: boolean) => emits('setOk', itemId, isOk)"
             @set-star="(itemId: number, star: boolean) => emits('setStar', itemId, star)"
@@ -178,17 +182,46 @@ function add() {
         </div>
       </template>
       <div
-        v-if="!showAddItem && listData.length === 0"
+        v-if="!showAddItem && listData.length === 0 && !showAdd"
         w-full flex items-center justify-center p-y-2
       >
         <div i-mdi:list-box-outline text-8 c="black/10 dark:#ddd/10" />
       </div>
+      <div v-if="showAdd">
+        <textarea
+          v-model="itemText"
+          w="[calc(100%-20px)]" 
+          p-10px border-none outline-none
+          bg="black/5 active:black/10" 
+          mt-5px rounded-7px
+        />
+        <div w-full flex="~ gap-5px">
+          <button 
+            v-if="itemText" 
+            flex-1 border-none outline-none 
+            rounded-7px p-2 bg="primary-d active:primary-a"
+            @click="add"
+          >
+            <div i-ph:check-bold c-white />
+          </button>
+          <button 
+            flex-1 border-none outline-none 
+            rounded-7px p-2 bg="error-d active:error-a"
+            @click="() => {
+              showAdd = false
+              itemText = ''
+            }"
+          >
+            <div i-ph:x-bold c-white />
+          </button>
+        </div>
+      </div>
       <div
-        v-if="!otherCate && showAddItem" w="[calc(100%-20px)]"
+        v-if="!otherCate && showAddItem && !showAdd" w="[calc(100%-20px)]"
         bg="black/5 active:black/10" mt-5px flex items-center justify-center rounded-7px
         p-10px
         transition="all 300"
-        @click="add"
+        @click="showAdd = true"
       >
         <div i-ph:plus-bold />
       </div>

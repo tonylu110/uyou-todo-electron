@@ -8,7 +8,6 @@ import changeCate from '../ListMenu/changCate'
 import saveItemSet from '../List/saveItemSet'
 import type ITodoList from '../../interface/ITodoListArray'
 import NoteBox from './NoteBox/NoteBox.vue'
-import AddItem from './AddItem/AddItem.vue'
 
 interface addCate {
   name: string
@@ -97,30 +96,29 @@ function delWithToDo(id: number | string) {
   delCate(id)
 }
 
-const openAddItem = ref(false)
 const itemText = ref('')
 const cateid = ref<number>()
-emitter.on('noteShowAddItem', (cateId) => {
-  cateid.value = cateId as number
-  openAddItem.value = true
+emitter.on('noteShowAddItem', (data) => {
+  const cate = data as {id: number, text: string}
+  cateid.value = cate.id
+  itemText.value = cate.text
 })
-function addItem(time: string) {
-  list.value!.unshift({
+function addItem() {
+  list.value!.push({
     ok: false,
     id: new Date().getTime(),
     text: itemText.value,
     cate: `${cateid.value}`,
-    time: Number(time),
   })
 
   saveItemSet(list.value!)
-  itemText.value = ''
-  openAddItem.value = false
 }
-function close() {
-  openAddItem.value = false
-  itemText.value = ''
-}
+emitter.on('noteShowAddItem', (data) => {
+  const cate = data as {id: number, text: string}
+  cateid.value = cate.id
+  itemText.value = cate.text
+  addItem()
+})
 
 function del(id: number) {
   for (let i = 0; i < list.value!.length; i++) {
@@ -223,7 +221,7 @@ onBeforeUnmount(() => {
       v-for="item in cateList"
       :id="item.id"
       :key="item.id"
-      :list
+      :list="list!"
       :title="item.title"
       :color="item.color"
       :icon="item.icon"
@@ -237,7 +235,7 @@ onBeforeUnmount(() => {
     />
     <NoteBox
       v-if="otherList.length > 0"
-      :list
+      :list="list!"
       :title="t('noteui.other')"
       :other-cate="true"
       @del-item="del"
@@ -245,6 +243,5 @@ onBeforeUnmount(() => {
       @edit-item="editItem"
       @set-star="setStar"
     />
-    <AddItem v-model="itemText" :open="openAddItem" @close="close" @add="addItem" />
   </div>
 </template>
