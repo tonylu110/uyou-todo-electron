@@ -7,7 +7,7 @@
     "email": "taruruchan0@gmail.com"
   },
   "license": "MIT",
-  "main": "prebuild-electron/main.js",
+  "main": "prebuild_electron/main.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
