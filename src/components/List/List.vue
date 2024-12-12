@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { usePreferredDark } from '@vueuse/core'
-import isUndefined from 'lodash/isUndefined'
+import { isUndefined } from 'es-toolkit'
 import { computed, onMounted, onUnmounted, reactive, ref, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'

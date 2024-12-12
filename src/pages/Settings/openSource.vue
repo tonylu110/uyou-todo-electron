@@ -41,7 +41,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
       <Item title="TypeScript" @item-fun="openUrlInBrowser('https://github.com/microsoft/TypeScript')" />
       <Item title="sass" @item-fun="openUrlInBrowser('https://github.com/sass')" />
       <Item title="moment" @item-fun="openUrlInBrowser('https://github.com/moment')" />
-      <Item title="lodash" @item-fun="openUrlInBrowser('https://github.com/lodash/lodash')" />
+      <Item title="es-toolkit" @item-fun="openUrlInBrowser('https://github.com/toss/es-toolkit')" />
       <Item title="mica-electron By GregVido" @item-fun="openUrlInBrowser('https://github.com/GregVido/mica-electron')" />
       <Item title="unocss By antfu" @item-fun="openUrlInBrowser('https://github.com/unocss/unocss')" />
       <Item title="electron-store By sindresorhus" @item-fun="openUrlInBrowser('https://github.com/sindresorhus/electron-store')" />
