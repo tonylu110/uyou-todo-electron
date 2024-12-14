@@ -16,7 +16,7 @@ function createLogoffWindow(uname) {
     height: 600,
     resizable: false,
     frame: false,
-    icon: path.join(__dirname, '../../../dist/logo.png'),
+    icon: path.join(__dirname, '../../dist/logo.png'),
     vibrancy: 'menu',
     titleBarStyle: 'hidden',
     maximizable: false,
@@ -36,7 +36,7 @@ function createLogoffWindow(uname) {
   if (NODE_ENV === 'development')
     logoffWindow.loadURL(`http://localhost:3000/electronWindows/logoff/`)
   else
-    logoffWindow.loadFile(path.join(__dirname, '../../../dist/electronWindows/logoff/index.html'))
+    logoffWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/logoff/index.html'))
 
   remoteMain.enable(logoffWindow.webContents)
   logoffWindow.once('ready-to-show', () => {

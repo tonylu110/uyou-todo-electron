@@ -16,7 +16,7 @@ function createRegisterWindow() {
     height: 600,
     resizable: false,
     frame: false,
-    icon: path.join(__dirname, '../../../dist/logo.png'),
+    icon: path.join(__dirname, '../../dist/logo.png'),
     vibrancy: 'menu',
     titleBarStyle: 'hidden',
     maximizable: false,
@@ -36,7 +36,7 @@ function createRegisterWindow() {
   if (NODE_ENV === 'development')
     registerWindow.loadURL('http://localhost:3000/electronWindows/register/')
   else
-    registerWindow.loadFile(path.join(__dirname, '../../../dist/electronWindows/register/index.html'))
+    registerWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/register/index.html'))
 
   remoteMain.enable(registerWindow.webContents)
   return registerWindow

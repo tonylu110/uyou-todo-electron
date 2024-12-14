@@ -18,7 +18,7 @@ function createRepassWindow(uname) {
     height: 600,
     resizable: false,
     frame: false,
-    icon: path.join(__dirname, '../../../dist/logo.png'),
+    icon: path.join(__dirname, '../dist/logo.png'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -43,7 +43,7 @@ function createRepassWindow(uname) {
   if (NODE_ENV === 'development')
     repassWindow.loadURL(`http://localhost:3000/electronWindows/repass/`)
   else
-    repassWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/repass/index.html'))
+    repassWindow.loadFile(path.join(__dirname, '../dist/electronWindows/repass/index.html'))
 
   remoteMain.enable(repassWindow.webContents)
   repassWindow.once('ready-to-show', () => {

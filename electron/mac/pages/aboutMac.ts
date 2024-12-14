@@ -16,7 +16,7 @@ function createAboutWindow() {
     height: 350,
     resizable: false,
     frame: false,
-    icon: path.join(__dirname, '../../../dist/logo.png'),
+    icon: path.join(__dirname, '../../dist/logo.png'),
     vibrancy: 'menu',
     titleBarStyle: 'hidden',
     maximizable: false,
@@ -36,7 +36,7 @@ function createAboutWindow() {
   if (NODE_ENV === 'development')
     aboutWindow.loadURL('http://localhost:3000/electronWindows/about/')
   else
-    aboutWindow.loadFile(path.join(__dirname, '../../../dist/electronWindows/about/index.html'))
+    aboutWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/about/index.html'))
 
   remoteMain.enable(aboutWindow.webContents)
   return aboutWindow
