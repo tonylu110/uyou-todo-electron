@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import type ITodoList from '../../interface/ITodoListArray'
+import type { cateItem } from '../ListMenu/ICateItem'
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { cateItem } from '../ListMenu/ICateItem'
-import LocalStorage from '../../util/localStorage'
 import emitter from '../../util/bus'
-import changeCate from '../ListMenu/changCate'
+import LocalStorage from '../../util/localStorage'
 import saveItemSet from '../List/saveItemSet'
-import type ITodoList from '../../interface/ITodoListArray'
+import changeCate from '../ListMenu/changCate'
 import NoteBox from './NoteBox/NoteBox.vue'
 
 interface addCate {
@@ -99,7 +99,7 @@ function delWithToDo(id: number | string) {
 const itemText = ref('')
 const cateid = ref<number>()
 emitter.on('noteShowAddItem', (data) => {
-  const cate = data as {id: number, text: string}
+  const cate = data as { id: number, text: string }
   cateid.value = cate.id
   itemText.value = cate.text
 })
@@ -114,7 +114,7 @@ function addItem() {
   saveItemSet(list.value!)
 }
 emitter.on('noteShowAddItem', (data) => {
-  const cate = data as {id: number, text: string}
+  const cate = data as { id: number, text: string }
   cateid.value = cate.id
   itemText.value = cate.text
   addItem()

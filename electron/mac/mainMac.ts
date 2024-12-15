@@ -1,32 +1,32 @@
-import path from 'node:path'
+/* eslint-disable node/prefer-global/process */
+/* eslint-disable no-console */
 import fs from 'node:fs'
+import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow, Menu, Tray, app, dialog, globalShortcut, ipcMain, nativeTheme, screen, shell, nativeImage } from 'electron'
-import Store from 'electron-store'
 import remoteMain from '@electron/remote/main/index.js'
-import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from '../store/windowSizeStore.ts'
-import { initSystemBar, systemBar, systemBarIpc } from '../store/systemTitleBarStore.ts'
-import { initMenuBlur, menuBlur, menuBlurIpc } from '../store/menuBlurStore.ts'
-import { initWindowMenu, windowMenu, windowMenuIpc } from '../store/windowMenuStore.ts'
-import { initSim, simple, simpleIpc } from '../store/simpleModeStore.ts'
-import sendNotification from '../pages/util/sendNotification.ts'
+import { app, BrowserWindow, dialog, globalShortcut, ipcMain, Menu, nativeImage, nativeTheme, screen, shell, Tray } from 'electron'
+import Store from 'electron-store'
 import i18n from '../i18n/index.ts'
+import { readFile, writeFile } from '../pages/util/rnwFile.ts'
+import sendNotification from '../pages/util/sendNotification.ts'
+import { initMenuBlur, menuBlur, menuBlurIpc } from '../store/menuBlurStore.ts'
+import { initSim, simple, simpleIpc } from '../store/simpleModeStore.ts'
+import { initSystemBar, systemBar, systemBarIpc } from '../store/systemTitleBarStore.ts'
+import { initWindowMenu, windowMenu, windowMenuIpc } from '../store/windowMenuStore.ts'
+import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from '../store/windowSizeStore.ts'
 import useFontSize from '../useFontSize.ts'
+import menuTemplate from './menu.ts'
 import createAboutWindowMac from './pages/aboutMac.ts'
+import createLogoffWindowMac from './pages/logoffMac.ts'
 import createRegisterWindowMac from './pages/registerMac.ts'
 import createRepassWindowMac from './pages/repassMac.ts'
-import createLogoffWindowMac from './pages/logoffMac.ts'
-import menuTemplate from './menu.ts'
-import { writeFile, readFile } from '../pages/util/rnwFile.ts'
 
 const store = new Store()
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-// eslint-disable-next-line node/prefer-global/process
 const NODE_ENV = process.env.NODE_ENV
 
-// eslint-disable-next-line node/prefer-global/process
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 
 remoteMain.initialize()
@@ -50,11 +50,11 @@ function createWindow() {
     minWidth: simple ? 290 : 400,
     maxWidth: simple ? 400 : undefined,
     maximizable: !simple,
-    x: (store.get('window-pos') 
-      ? (store.get('window-pos') as Array<number>)[0] 
+    x: (store.get('window-pos')
+      ? (store.get('window-pos') as Array<number>)[0]
       : (width - (simple ? 350 : 1000)) / 2),
-    y: (store.get('window-pos') 
-      ? (store.get('window-pos') as Array<number>)[1] 
+    y: (store.get('window-pos')
+      ? (store.get('window-pos') as Array<number>)[1]
       : (height - (simple ? 700 : 750)) / 2),
     vibrancy: menuBlur || menuBlur === undefined ? 'menu' : undefined,
     visualEffectState: 'active',
@@ -75,8 +75,8 @@ function createWindow() {
         standard: 'Helvetica',
         serif: 'Times',
         sansSerif: 'Helvetica',
-        monospace: 'Menlo'
-      }
+        monospace: 'Menlo',
+      },
     },
   })
   if (windowSizeState)
@@ -262,19 +262,16 @@ function createWindow() {
 }
 let tray
 app.whenReady().then(() => {
-  // eslint-disable-next-line node/prefer-global/process
   if (process.platform === 'win32')
     app.setAppUserModelId('uyou ToDo')
-  const {
-    height,
-  } = screen.getPrimaryDisplay().workAreaSize
   createWindow()
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
   })
   if (process.platform === 'darwin') {
     tray = new Tray(nativeImage.createFromPath(path.join(__dirname, '../../dist/tray/logoTemplate.png')))
-  } else {
+  }
+  else {
     tray = new Tray(path.join(__dirname, '../../dist/logo.png'))
   }
   const contextMenu = Menu.buildFromTemplate([{
@@ -289,7 +286,6 @@ app.whenReady().then(() => {
   const appMenu = Menu.buildFromTemplate(menuTemplate(app, mainWindow))
   Menu.setApplicationMenu(null)
 
-  // eslint-disable-next-line node/prefer-global/process
   if (process.platform === 'darwin')
     Menu.setApplicationMenu(appMenu)
   else if (windowMenu)
@@ -301,18 +297,15 @@ app.whenReady().then(() => {
 
   if (NODE_ENV === 'development') {
     import('@tomjs/electron-devtools-installer')
-      .then(devTools => {
+      .then((devTools) => {
         devTools.installExtension(devTools.VUEJS_DEVTOOLS_BETA)
           .then(ext => console.log(`Added Extension:  ${ext.name}`))
-          .catch(err => console.log('An error occurred: ', err));
+          .catch(err => console.log('An error occurred: ', err))
       })
   }
 })
-if (process.platform === 'darwin') {
-  
-}
+
 app.on('window-all-closed', () => {
-  // eslint-disable-next-line node/prefer-global/process
   if (process.platform !== 'darwin')
     app.quit()
 })

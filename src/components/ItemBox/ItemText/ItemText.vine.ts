@@ -13,8 +13,13 @@ function ItemText() {
 
   return vine`
     <div
-      c="#333 dark:#bbb" :font="isBold ? 'bold' : 'normal'" flex items-center
-      :max-w="simpleMode ? '750px' : '550px'" mb-10px select-text
+      c="#333 dark:#bbb"
+      :font="isBold ? 'bold' : 'normal'"
+      flex
+      items-center
+      :max-w="simpleMode ? '750px' : '550px'"
+      mb-10px
+      select-text
       :w="simpleMode ? '[calc(100%-50px)]' : '[calc(100vw-450px)]'"
     >
       <slot />

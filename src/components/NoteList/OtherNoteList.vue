@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import LocalStorage from '../../util/localStorage'
 import emitter from '../../util/bus'
+import LocalStorage from '../../util/localStorage'
 import saveItemSet from '../List/saveItemSet'
 import NoteBox from './NoteBox/NoteBox.vue'
 
@@ -61,12 +61,12 @@ function setStar(id: number, star: boolean) {
 }
 
 function deleteAllItem() {
-  let toRemove = list.value.filter(item => item.ok);
+  let toRemove = list.value.filter(item => item.ok)
 
   for (let i = toRemove.length - 1; i >= 0; i--) {
-    list.value.splice(list.value.indexOf(toRemove[i]), 1);
+    list.value.splice(list.value.indexOf(toRemove[i]), 1)
   }
-  
+
   saveItemSet(list.value)
 }
 

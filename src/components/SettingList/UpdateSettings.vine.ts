@@ -1,9 +1,9 @@
-import ItemBox from "../ItemBox/ItemBox.vue"
-import Item from "../ItemBox/Item/Item.vue"
-import { useI18n } from "vue-i18n";
-import { ref } from "vue";
-import setSwitchFn from "../../util/setSwitchFn";
-import { useRouter } from "vue-router";
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import setSwitchFn from '../../util/setSwitchFn'
+import Item from '../ItemBox/Item/Item.vue'
+import ItemBox from '../ItemBox/ItemBox.vue'
 
 function UpdateSettings() {
   const { t } = useI18n()
@@ -21,7 +21,13 @@ function UpdateSettings() {
         :title="t('update.autoUpdate')"
         :show-switch="true"
         :switch-state="autoUpdateState"
-        @switch-fun="setSwitchFn('autoUpdate', !autoUpdateState, () => autoUpdateState = !autoUpdateState)"
+        @switch-fun="
+          setSwitchFn(
+            'autoUpdate',
+            !autoUpdateState,
+            () => (autoUpdateState = !autoUpdateState),
+          )
+        "
       />
       <Item
         icon="i-icon-park:update-rotation"

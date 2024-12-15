@@ -1,5 +1,5 @@
-import { ref } from 'vue'
 import { ipcRenderer } from 'electron'
+import { ref } from 'vue'
 import ItemSpace from '../../ItemBox/ItemSpace/ItemSpace.vine'
 
 function ColorChange() {
@@ -23,40 +23,64 @@ function ColorChange() {
     <ItemSpace flex="~ !row gap-10px wrap">
       <div
         :bg="colorMode === 'system' ? 'primary-d dark:primary-a' : ''"
-        :w="simpleMode ? '98px' : '87px'" :h="simpleMode ? '69px' : '59px'"
-        border="1px solid #00000020" rounded-5px flex justify-center
-        items-center cursor-pointer
+        :w="simpleMode ? '98px' : '87px'"
+        :h="simpleMode ? '69px' : '59px'"
+        border="1px solid #00000020"
+        rounded-5px
+        flex
+        justify-center
+        items-center
+        cursor-pointer
         @click="setColor('system')"
       >
         <img
-          src="./color_mode/light_and_dark.png" alt=""
-          w="[calc(100%-16px)]" h="[calc(100%-16px)]" rounded-4px
+          src="./color_mode/light_and_dark.png"
+          alt=""
+          w="[calc(100%-16px)]"
+          h="[calc(100%-16px)]"
+          rounded-4px
           border="1px solid #00000020"
         />
       </div>
       <div
         :bg="colorMode === 'light' ? 'primary-d dark:primary-a' : ''"
-        :w="simpleMode ? '98px' : '87px'" :h="simpleMode ? '69px' : '59px'"
-        border="1px solid #00000020" rounded-5px flex justify-center
-        items-center cursor-pointer
+        :w="simpleMode ? '98px' : '87px'"
+        :h="simpleMode ? '69px' : '59px'"
+        border="1px solid #00000020"
+        rounded-5px
+        flex
+        justify-center
+        items-center
+        cursor-pointer
         @click="setColor('light')"
       >
         <img
-          :src="isNoteUI ? './images/note/light.png' : './color_mode/light.png'" alt=""
-          w="[calc(100%-16px)]" h="[calc(100%-16px)]" rounded-4px
+          :src="isNoteUI ? './images/note/light.png' : './color_mode/light.png'"
+          alt=""
+          w="[calc(100%-16px)]"
+          h="[calc(100%-16px)]"
+          rounded-4px
           border="1px solid #00000020"
         />
       </div>
       <div
         :bg="colorMode === 'dark' ? 'primary-d dark:primary-a' : ''"
-        :w="simpleMode ? '98px' : '87px'" :h="simpleMode ? '69px' : '59px'"
-        border="1px solid #00000020" rounded-5px flex justify-center
-        items-center cursor-pointer
+        :w="simpleMode ? '98px' : '87px'"
+        :h="simpleMode ? '69px' : '59px'"
+        border="1px solid #00000020"
+        rounded-5px
+        flex
+        justify-center
+        items-center
+        cursor-pointer
         @click="setColor('dark')"
       >
         <img
-          :src="isNoteUI ? './images/note/dark.png' : './color_mode/dark.png'" alt=""
-          w="[calc(100%-16px)]" h="[calc(100%-16px)]" rounded-4px
+          :src="isNoteUI ? './images/note/dark.png' : './color_mode/dark.png'"
+          alt=""
+          w="[calc(100%-16px)]"
+          h="[calc(100%-16px)]"
+          rounded-4px
           border="1px solid #00000020"
         />
       </div>

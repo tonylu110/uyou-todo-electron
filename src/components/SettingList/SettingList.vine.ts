@@ -11,9 +11,20 @@ function SettingList() {
 
   return vine`
     <PerfectScrollbar
-      :bg="isBlur ? (isMac() && route.name === 'Home' ? 'white/00' : 'white/50 dark:#333/50') : 'white/80 dark:#333/80'"
-      w="100%" h="[calc(100%-105px)]" :justify="justify" 
-      pt-10px flex="~ col" items-center overflow-y-scroll
+      :bg="
+        isBlur
+          ? isMac() && route.name === 'Home'
+            ? 'white/00'
+            : 'white/50 dark:#333/50'
+          : 'white/80 dark:#333/80'
+      "
+      w="100%"
+      h="[calc(100%-105px)]"
+      :justify="justify"
+      pt-10px
+      flex="~ col"
+      items-center
+      overflow-y-scroll
     >
       <slot />
     </PerfectScrollbar>

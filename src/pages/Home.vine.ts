@@ -1,10 +1,10 @@
+import type ITodoList from '../interface/ITodoListArray'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import TabBar from '../components/TabBar/TabBar.vue'
 import List from '../components/List/List.vue'
+import TabBar from '../components/TabBar/TabBar.vue'
 import LocalStorage from '../util/localStorage'
-import type ITodoList from '../interface/ITodoListArray'
 
 function Home() {
   const router = useRouter()

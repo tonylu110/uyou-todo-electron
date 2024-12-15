@@ -1,26 +1,26 @@
-import { useRouter } from 'vue-router'
+import { ipcRenderer } from 'electron'
 import { onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ipcRenderer } from 'electron'
-import WindowButtons from '../components/TabBar/windowButtons'
-import SettingList from '../components/SettingList/SettingList.vine'
-import NoteList from '../components/NoteList/NoteList.vue'
-import CateAdd from '../components/NoteList/CateAdd/CateAdd.vue'
-import firstLoad from '../components/TitleBar/firstLoad'
-import { topWindow } from '../util/windowApi'
-import emitter from '../util/bus'
-import { isMac } from '../util/os'
-import Search from '../components/Search/Search.vue'
-import Tabs from '../components/Tabs/Tabs.vue'
-import Tab from '../components/Tabs/Tab/Tab.vue'
-import SideBar from '../components/Tabs/SideBar/SideBar.vue'
-import Item from '../components/Tabs/SideBar/Item/Item.vue'
+import { useRouter } from 'vue-router'
 import Alert from '../components/Alert/Alert.vue'
-import { versionCode } from '../util/appVersionCode'
-import Divider from '../components/Tabs/SideBar/Divider/Divider.vue'
-import SpNoteList from '../components/NoteList/SpNoteList.vue'
+import CateAdd from '../components/NoteList/CateAdd/CateAdd.vue'
+import NoteList from '../components/NoteList/NoteList.vue'
 import OtherNoteList from '../components/NoteList/OtherNoteList.vue'
+import SpNoteList from '../components/NoteList/SpNoteList.vue'
+import Search from '../components/Search/Search.vue'
+import SettingList from '../components/SettingList/SettingList.vine'
+import WindowButtons from '../components/TabBar/windowButtons'
+import Divider from '../components/Tabs/SideBar/Divider/Divider.vue'
+import Item from '../components/Tabs/SideBar/Item/Item.vue'
+import SideBar from '../components/Tabs/SideBar/SideBar.vue'
+import Tab from '../components/Tabs/Tab/Tab.vue'
+import Tabs from '../components/Tabs/Tabs.vue'
+import firstLoad from '../components/TitleBar/firstLoad'
+import { versionCode } from '../util/appVersionCode'
+import emitter from '../util/bus'
 import getCateList from '../util/getCateList'
+import { isMac } from '../util/os'
+import { topWindow } from '../util/windowApi'
 
 function NoteUI() {
   const router = useRouter()
@@ -76,7 +76,7 @@ function NoteUI() {
   const lableWidth = ref('')
   const lableLeft = ref('0')
   const tabsRef = ref<{
-    $el: HTMLDivElement
+  $el: HTMLDivElement
   }>()
   function choose(id: string, width: string, left: number) {
     setLab(width, left)
@@ -141,12 +141,12 @@ function NoteUI() {
     .list-leave-to {
       --uno: scale-60 op-0;
     }
-
+    
     .list-enter-to,
     .list-leave-from {
       --uno: scale-100 op-100;
     }
-
+    
     .list-enter-active,
     .list-leave-active {
       --uno: transition-transform,
@@ -160,35 +160,107 @@ function NoteUI() {
       <div fixed left-0 top-0 h-full w-12vw drag />
       <div fixed right-0 top-0 h-full w-12vw drag />
       <SideBar :open="openSideBar" @set-side="openSideBar = false">
-        <Item id="all" icon="i-f7:square-list" :title="t('noteui.allcate')" :selected="listId === 'all'" @click="listId = 'all'" />
-        <Item id="use" icon="i-f7:staroflife" :title="t('noteui.spcate')" :selected="listId === 'use'" @click="listId = 'use'" />
-        <Item id="other" icon="i-f7:today" :title="t('noteui.othercate')" :selected="listId === 'other'" @click="listId = 'other'" />
+        <Item
+          id="all"
+          icon="i-f7:square-list"
+          :title="t('noteui.allcate')"
+          :selected="listId === 'all'"
+          @click="listId = 'all'"
+        />
+        <Item
+          id="use"
+          icon="i-f7:staroflife"
+          :title="t('noteui.spcate')"
+          :selected="listId === 'use'"
+          @click="listId = 'use'"
+        />
+        <Item
+          id="other"
+          icon="i-f7:today"
+          :title="t('noteui.othercate')"
+          :selected="listId === 'other'"
+          @click="listId = 'other'"
+        />
         <Divider />
-        <Item 
-          :icon="textWrapState ? 'i-f7:arrow-down-right-arrow-up-left' : 'i-f7:arrow-up-left-arrow-down-right'" 
-          :title="textWrapState ? t('noteui.closetext') : t('noteui.opentext')"  
-          :selected="false" 
+        <Item
+          :icon="
+            textWrapState
+              ? 'i-f7:arrow-down-right-arrow-up-left'
+              : 'i-f7:arrow-up-left-arrow-down-right'
+          "
+          :title="textWrapState ? t('noteui.closetext') : t('noteui.opentext')"
+          :selected="false"
           @click="textWrapState = !textWrapState"
         />
-        <Item icon="i-f7:search" :title="t('noteui.search')" :selected="false" @click="showSearch = true" />
+        <Item
+          icon="i-f7:search"
+          :title="t('noteui.search')"
+          :selected="false"
+          @click="showSearch = true"
+        />
       </SideBar>
-      <Tabs ref="tabsRef" :lab-width="lableWidth" :lab-left="lableLeft" :show-tab="showTab ? (listId === 'all' || listId === 'use') : listId === 'all'">
+      <Tabs
+        ref="tabsRef"
+        :lab-width="lableWidth"
+        :lab-left="lableLeft"
+        :show-tab="
+          showTab ? listId === 'all' || listId === 'use' : listId === 'all'
+        "
+      >
         <template #header>
-          <Tab id="side" icon="i-f7:sidebar-left" :control="true" @choose="openSideBar = true" />
+          <Tab
+            id="side"
+            icon="i-f7:sidebar-left"
+            :control="true"
+            @choose="openSideBar = true"
+          />
         </template>
         <template #footer>
-          <Tab id="search" icon="i-f7:search" :control="true" @choose="showSearch = true" />
+          <Tab
+            id="search"
+            icon="i-f7:search"
+            :control="true"
+            @choose="showSearch = true"
+          />
         </template>
-        <Tab id="all" :title="t('noteui.allcate')" :checked="true" :index="0" @choose="choose" @load="setLab" />
-        <Tab v-if="showTab" id="use" :title="t('noteui.spcate')" :index="1" @choose="choose" @load="setLab" />
+        <Tab
+          id="all"
+          :title="t('noteui.allcate')"
+          :checked="true"
+          :index="0"
+          @choose="choose"
+          @load="setLab"
+        />
+        <Tab
+          v-if="showTab"
+          id="use"
+          :title="t('noteui.spcate')"
+          :index="1"
+          @choose="choose"
+          @load="setLab"
+        />
       </Tabs>
       <div
         v-if="!isMac() && !systemTitle"
-        :bg="topState
-          ? 'error-d hover:error-h active:error-a'
-          : 'black/10 hover:black/20 active:black/30'"
-        fixed left-15px top-14px mr-7px h-13px w-13px flex cursor-pointer
-        items-center justify-center rounded-5px rounded-full p-6px no-drag
+        :bg="
+          topState
+            ? 'error-d hover:error-h active:error-a'
+            : 'black/10 hover:black/20 active:black/30'
+        "
+        fixed
+        left-15px
+        top-14px
+        mr-7px
+        h-13px
+        w-13px
+        flex
+        cursor-pointer
+        items-center
+        justify-center
+        rounded-5px
+        rounded-full
+        p-6px
+        no-drag
         @click="onTopWindow"
       >
         <div i-fluent:pin-12-filled text-13px :c="topState ? 'white' : '#555'" />
@@ -206,29 +278,36 @@ function NoteUI() {
       </div>
       <div flex="~ gap-10px" fixed bottom-15px left-15px no-drag>
         <div
-          v-if="(listId === 'all') && !autoSync"
+          v-if="listId === 'all' && !autoSync"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
           rounded="10px hover:30px"
           shadow="md hover:lg primary-d/70 dark:primary-a/70"
-          flex items-center justify-center p-13px
+          flex
+          items-center
+          justify-center
+          p-13px
           transform="active:scale-90 hover:scale-120"
           @click="sync"
         >
-          <div :class="uid ? 'i-ph:cloud-arrow-down-bold' : 'i-ph:user-bold'" text-22px c="!white" />
+          <div
+            :class="uid ? 'i-ph:cloud-arrow-down-bold' : 'i-ph:user-bold'"
+            text-22px
+            c="!white"
+          />
         </div>
       </div>
-      <div
-        flex="~ gap-10px" fixed
-        bottom-15px right-15px no-drag
-      >
+      <div flex="~ gap-10px" fixed bottom-15px right-15px no-drag>
         <div
           v-if="listId === 'all'"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
           rounded="10px hover:30px"
           shadow="md hover:lg primary-d/70 dark:primary-a/70"
-          flex items-center justify-center p-13px
+          flex
+          items-center
+          justify-center
+          p-13px
           transform="active:scale-90 hover:scale-120"
           @click="showCateAdd = true"
         >
@@ -239,7 +318,10 @@ function NoteUI() {
           transition="duration-300 all"
           rounded="10px hover:30px"
           shadow="md hover:lg primary-d/70 dark:primary-a/70"
-          flex items-center justify-center p-13px
+          flex
+          items-center
+          justify-center
+          p-13px
           transform="active:scale-90 hover:scale-120"
           @click="router.push('/setting')"
         >
@@ -251,9 +333,9 @@ function NoteUI() {
     </SettingList>
     <Alert
       :dialog-show="alertShow"
-      :title="t('updateText') + ' v' + newVersion"
+      :title="`${t('updateText')  } v${  newVersion}`"
       :confirm-btn-name="t('update.gotoUpdate')"
-      @cancel="() => alertShow = false"
+      @cancel="() => (alertShow = false)"
       @return="returnClick"
     >
       <ul m-0 p-l-20px>

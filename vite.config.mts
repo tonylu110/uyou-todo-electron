@@ -1,10 +1,10 @@
 import path from 'node:path'
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import UnoCSS from 'unocss/vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import VueMacros from 'unplugin-vue-macros/vite'
+import UnoCSS from 'unocss/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
+import VueMacros from 'unplugin-vue-macros/vite'
+import { defineConfig } from 'vite'
 import ElectronRenderer from 'vite-plugin-electron-renderer'
 import { VineVitePlugin } from 'vue-vine/vite'
 

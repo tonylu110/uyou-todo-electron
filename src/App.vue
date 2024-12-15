@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type ITodoList from './interface/ITodoListArray'
 import { usePreferredDark } from '@vueuse/core'
 import { ipcRenderer } from 'electron'
 import Store from 'electron-store'
@@ -26,7 +27,6 @@ import getCateList from './util/getCateList'
 import LocalStorage from './util/localStorage'
 import isDev from './util/mode'
 import { isLinux, isWindows10OrAfter } from './util/os'
-import type ITodoList from './interface/ITodoListArray'
 
 const { t, locale } = useI18n()
 

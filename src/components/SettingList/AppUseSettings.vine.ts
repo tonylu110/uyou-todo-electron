@@ -1,16 +1,16 @@
-import ItemBox from "../ItemBox/ItemBox.vue"
-import Item from "../ItemBox/Item/Item.vue"
-import isNoteUI from "./util/isNoteUI"
-import { computed, ref } from "vue";
-import { isLinux } from "../../util/os";
-import setSwitchFn from "../../util/setSwitchFn";
-import { useI18n } from "vue-i18n";
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { isLinux } from '../../util/os'
+import setSwitchFn from '../../util/setSwitchFn'
+import Item from '../ItemBox/Item/Item.vue'
+import ItemBox from '../ItemBox/ItemBox.vue'
+import isNoteUI from './util/isNoteUI'
 
 function AppUseSettings() {
   const { t } = useI18n()
 
   const autoStartState = ref(localStorage.getItem('autoStart') === 'true')
-  
+
   const startPageList = [
     {
       title: t('startPage.allTodos'),
@@ -22,7 +22,7 @@ function AppUseSettings() {
       fn: 'today',
       icon: 'i-ph:sun-bold',
     },
-  ]  
+  ]
   const startPage = computed(() => startPageList.filter(item => item.fn === (localStorage.getItem('start') ? localStorage.getItem('start') : 'home'))[0].title)
   function setStartPage(StartPage: string) {
     localStorage.setItem('start', StartPage)
@@ -46,7 +46,14 @@ function AppUseSettings() {
         :title="t('anotherSettings.autoStart')"
         :show-switch="true"
         :switch-state="autoStartState"
-        @switch-fun="setSwitchFn('autoStart', !autoStartState, () => autoStartState = !autoStartState, 'setAutoStart')"
+        @switch-fun="
+          setSwitchFn(
+            'autoStart',
+            !autoStartState,
+            () => (autoStartState = !autoStartState),
+            'setAutoStart',
+          )
+        "
       />
     </ItemBox>
   `

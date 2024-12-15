@@ -1,5 +1,5 @@
-import { defineConfig, presetAttributify, presetIcons, presetUno, transformerDirectives } from 'unocss'
 import transformerAttributifyJsx from '@unocss/transformer-attributify-jsx'
+import { defineConfig, presetAttributify, presetIcons, presetUno, transformerDirectives } from 'unocss'
 import { presetMine } from './src/styles/presetsMine'
 
 export default defineConfig({
@@ -15,12 +15,12 @@ export default defineConfig({
       extract: {
         include: [
           'src/**/*.{vue,html,jsx,tsx,vine.ts}',
-          'electronWindows/**/*.{vue,html,jsx,tsx,vine.ts}'
+          'electronWindows/**/*.{vue,html,jsx,tsx,vine.ts}',
         ],
         exclude: ['node_modules', '.git'],
       },
     }),
-    presetMine
+    presetMine,
   ],
   content: {
     pipeline: {

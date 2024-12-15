@@ -1,9 +1,9 @@
-import Item from "../../ItemBox/Item/Item.vue"
-import { isWin11, isMac, isWindows10OrAfter, isLinux } from "../../../util/os"
-import { useI18n } from "vue-i18n";
-import setSwitchFn from "../../../util/setSwitchFn";
-import { ref } from "vue";
-import { ipcRenderer } from "electron";
+import { ipcRenderer } from 'electron'
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { isLinux, isMac, isWin11, isWindows10OrAfter } from '../../../util/os'
+import setSwitchFn from '../../../util/setSwitchFn'
+import Item from '../../ItemBox/Item/Item.vue'
 
 function WindowStyleSettings() {
   const { t } = useI18n()
@@ -35,7 +35,7 @@ function WindowStyleSettings() {
       display: flex;
       align-items: center;
       justify-content: center;
-
+    
       div {
         width: 130px;
         margin: 0 10px;
@@ -55,21 +55,44 @@ function WindowStyleSettings() {
       :title="t('useSystemBar')"
       :show-switch="true"
       :switch-state="useSystemTitleBar"
-      @switch-fun="setSwitchFn('systemTitle', !useSystemTitleBar, () => useSystemTitleBar = !useSystemTitleBar, 'setSystemBar', t('restartApp'))"
+      @switch-fun="
+        setSwitchFn(
+          'systemTitle',
+          !useSystemTitleBar,
+          () => (useSystemTitleBar = !useSystemTitleBar),
+          'setSystemBar',
+          t('restartApp'),
+        )
+      "
     />
     <Item
       v-if="titleBarShow && !isMac() && !simpleMode"
       :title="t('anotherSettings.windowMenu')"
       :show-switch="true"
       :switch-state="showWindowMenuState"
-      @switch-fun="setSwitchFn('windowMenu', !showWindowMenuState, () => showWindowMenuState = !showWindowMenuState, 'setWindowMenu')"
+      @switch-fun="
+        setSwitchFn(
+          'windowMenu',
+          !showWindowMenuState,
+          () => (showWindowMenuState = !showWindowMenuState),
+          'setWindowMenu',
+        )
+      "
     />
     <Item
       v-if="(!isLinux() && isWindows10OrAfter()) || isMac()"
       :title="t('anotherSettings.menuBlur')"
       :show-switch="true"
       :switch-state="menuBlurState"
-      @switch-fun="setSwitchFn('menuBlur', !menuBlurState, () => menuBlurState = !menuBlurState, 'setMenuBlur', t('restartApp'))"
+      @switch-fun="
+        setSwitchFn(
+          'menuBlur',
+          !menuBlurState,
+          () => (menuBlurState = !menuBlurState),
+          'setMenuBlur',
+          t('restartApp'),
+        )
+      "
     />
     <div
       v-if="isWin11() && menuBlurState && !simpleMode"

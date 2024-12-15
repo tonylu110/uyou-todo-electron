@@ -1,8 +1,8 @@
-import { useI18n } from "vue-i18n";
-import Item from "../../ItemBox/Item/Item.vue"
-import { ref } from "vue";
-import firstLoad from "../../TitleBar/firstLoad";
-import setSwitchFn from "../../../util/setSwitchFn";
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import setSwitchFn from '../../../util/setSwitchFn'
+import Item from '../../ItemBox/Item/Item.vue'
+import firstLoad from '../../TitleBar/firstLoad'
 
 function WindowStateSettings() {
   const { t } = useI18n()
@@ -21,21 +21,41 @@ function WindowStateSettings() {
       :title="t('setTopState')"
       :show-switch="true"
       :switch-state="saveTopState"
-      @switch-fun="setSwitchFn('saveTopState', !saveTopState, () => saveTopState = !saveTopState)"
+      @switch-fun="
+        setSwitchFn(
+          'saveTopState',
+          !saveTopState,
+          () => (saveTopState = !saveTopState),
+        )
+      "
     />
     <Item
       v-if="titleBarShow || simpleMode"
       :title="t('setTopWindow')"
       :show-switch="true"
       :switch-state="topState"
-      @switch-fun="setSwitchFn('alwaysOnTop', !topState, () => topState = !topState, 'window-on-top')"
+      @switch-fun="
+        setSwitchFn(
+          'alwaysOnTop',
+          !topState,
+          () => (topState = !topState),
+          'window-on-top',
+        )
+      "
     />
     <Item
       v-if="!simpleMode"
       :title="t('saveWindowSize')"
       :show-switch="true"
       :switch-state="saveWindowSizeState"
-      @switch-fun="setSwitchFn('saveWindowSizeState', !saveWindowSizeState, () => saveWindowSizeState = !saveWindowSizeState, 'setWindowSizeState')"
+      @switch-fun="
+        setSwitchFn(
+          'saveWindowSizeState',
+          !saveWindowSizeState,
+          () => (saveWindowSizeState = !saveWindowSizeState),
+          'setWindowSizeState',
+        )
+      "
     />
   `
 }

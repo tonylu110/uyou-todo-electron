@@ -1,8 +1,8 @@
-import { defineConfig } from 'rolldown'
-import typescript from '@rollup/plugin-typescript';
-import resolve from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json'
-import clear from 'rollup-plugin-clear';
+import resolve from '@rollup/plugin-node-resolve'
+import typescript from '@rollup/plugin-typescript'
+import { defineConfig } from 'rolldown'
+import clear from 'rollup-plugin-clear'
 
 export default defineConfig([
   {
@@ -15,28 +15,28 @@ export default defineConfig([
     plugins: [
       typescript({
         tsconfig: './tsconfig.rollup.json',
-        exclude: ['src/**/*', 'node_modules/**/*']
+        exclude: ['src/**/*', 'node_modules/**/*'],
       }),
       resolve(),
       json(),
-      clear({ targets: ['prebuild_electron'] })
-    ]
+      clear({ targets: ['prebuild_electron'] }),
+    ],
   },
   {
     input: 'electron/mac/mainMac.ts',
     output: {
       dir: 'prebuild_electron/mac',
-      format: 'es'
+      format: 'es',
     },
     external: [/node_modules/],
     plugins: [
       typescript({
         tsconfig: './tsconfig.rollup.json',
-        exclude: ['src/**/*', 'node_modules/**/*']
+        exclude: ['src/**/*', 'node_modules/**/*'],
       }),
       resolve(),
       json(),
-    ]
+    ],
   },
   {
     input: 'electron/preload.ts',
@@ -44,5 +44,5 @@ export default defineConfig([
       dir: 'prebuild_electron',
       format: 'es',
     },
-  }
+  },
 ])

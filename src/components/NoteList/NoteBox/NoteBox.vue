@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import type ITodoList from '../../../interface/ITodoListArray'
 import { Dropdown as VDropdown } from 'floating-vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import emitter from '../../../util/bus'
-import type ITodoList from '../../../interface/ITodoListArray'
-import Item from './Item/Item.vue'
-import Edit from './Edit/Edit.vue'
 import Delete from './Delete/Delete.vine'
+import Edit from './Edit/Edit.vue'
+import Item from './Item/Item.vue'
 
 interface Props {
   title: string
@@ -59,7 +59,7 @@ const isOpen = ref(false)
 const showAdd = ref(false)
 const itemText = ref('')
 function add() {
-  emitter.emit('noteShowAddItem', {id, text: itemText.value})
+  emitter.emit('noteShowAddItem', { id, text: itemText.value })
   showAdd.value = false
   itemText.value = ''
 }
@@ -140,12 +140,12 @@ function add() {
           </template>
         </VDropdown>
       </div>
-      <div 
+      <div
         v-else-if="showDelete"
         flex="~ gap-5px" w="0 hover:14px" transition="all 300"
         items-center overflow-hidden p="r-10px l-5px" op="0 hover:100"
       >
-        <Delete @delete="emits('delete')"/>
+        <Delete @delete="emits('delete')" />
       </div>
       <div v-else w-13px />
     </div>
@@ -190,23 +190,21 @@ function add() {
       <div v-if="showAdd">
         <textarea
           v-model="itemText"
-          w="[calc(100%-20px)]" 
-          p-10px border-none outline-none
-          bg="black/5 active:black/10" 
-          mt-5px rounded-7px
+          w="[calc(100%-20px)]"
+          bg="black/5 active:black/10"
+          mt-5px rounded-7px border-none p-10px outline-none
         />
         <div w-full flex="~ gap-5px">
-          <button 
-            v-if="itemText" 
-            flex-1 border-none outline-none 
-            rounded-7px p-2 bg="primary-d active:primary-a"
+          <button
+            v-if="itemText"
+            flex-1 rounded-7px border-none p-2 outline-none bg="primary-d active:primary-a"
             @click="add"
           >
             <div i-ph:check-bold c-white />
           </button>
-          <button 
-            flex-1 border-none outline-none 
-            rounded-7px p-2 bg="error-d active:error-a"
+          <button
+            flex-1 rounded-7px border-none p-2
+            outline-none bg="error-d active:error-a"
             @click="() => {
               showAdd = false
               itemText = ''

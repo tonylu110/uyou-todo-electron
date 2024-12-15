@@ -1,26 +1,26 @@
-import path from 'node:path'
+/* eslint-disable no-console */
 import fs from 'node:fs'
+import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow, Menu, Tray, app, dialog, globalShortcut, ipcMain, nativeTheme, screen, shell } from 'electron'
-import Store from 'electron-store'
 import remoteMain from '@electron/remote/main/index.js'
+import { app, BrowserWindow, dialog, globalShortcut, ipcMain, Menu, nativeTheme, screen, shell, Tray } from 'electron'
+import Store from 'electron-store'
 import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
+import i18n from './i18n/index.ts'
 import menuTemplate from './menu.ts'
-import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from './store/windowSizeStore.ts'
-import { initSystemBar, systemBar, systemBarIpc } from './store/systemTitleBarStore.ts'
-import { initMenuBlur, menuBlur, menuBlurIpc, micaStyle } from './store/menuBlurStore.ts'
-import { initWindowMenu, windowMenu, windowMenuIpc } from './store/windowMenuStore.ts'
 import createAboutWindow from './pages/about.ts'
+import createLogoffWindow from './pages/logoff.ts'
 import createRegisterWindow from './pages/register.ts'
 import createRepassWindow from './pages/repass.ts'
-import createLogoffWindow from './pages/logoff.ts'
-import setMicaStyle from './pages/util/setMicaStyle.ts'
-import { initSim, simple, simpleIpc } from './store/simpleModeStore.ts'
+import { readFile, writeFile } from './pages/util/rnwFile.ts'
 import sendNotification from './pages/util/sendNotification.ts'
-import i18n from './i18n/index.ts'
+import setMicaStyle from './pages/util/setMicaStyle.ts'
+import { initMenuBlur, menuBlur, menuBlurIpc, micaStyle } from './store/menuBlurStore.ts'
+import { initSim, simple, simpleIpc } from './store/simpleModeStore.ts'
+import { initSystemBar, systemBar, systemBarIpc } from './store/systemTitleBarStore.ts'
+import { initWindowMenu, windowMenu, windowMenuIpc } from './store/windowMenuStore.ts'
+import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from './store/windowSizeStore.ts'
 import useFontSize from './useFontSize.ts'
-import { writeFile, readFile } from './pages/util/rnwFile.ts'
-
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -52,11 +52,11 @@ function createWindow() {
     minHeight: simple ? 450 : 600,
     minWidth: simple ? 270 : 400,
     maxWidth: simple ? 400 : undefined,
-    x: (store.get('window-pos') 
-      ? (store.get('window-pos') as Array<number>)[0] 
+    x: (store.get('window-pos')
+      ? (store.get('window-pos') as Array<number>)[0]
       : (width - (simple ? 350 : 1000)) / 2),
-    y: (store.get('window-pos') 
-      ? (store.get('window-pos') as Array<number>)[1] 
+    y: (store.get('window-pos')
+      ? (store.get('window-pos') as Array<number>)[1]
       : (height - (simple ? 700 : 750)) / 2),
     maximizable: !simple,
     icon: path.join(__dirname, '../dist/logo.png'),
@@ -71,8 +71,8 @@ function createWindow() {
         standard: 'Times New Roman',
         serif: 'Times New Roman',
         sansSerif: 'Arial',
-        monospace: 'Courier New'
-      }
+        monospace: 'Courier New',
+      },
     },
   })
   if (windowSizeState)
@@ -138,7 +138,7 @@ function createWindow() {
   windowMenuIpc(appMenu)
   simpleIpc()
 
-  // eslint-disable-next-line no-unused-vars, unused-imports/no-unused-vars
+  // eslint-disable-next-line unused-imports/no-unused-vars
   let aboutId, regId, rePassId
   ipcMain.on('open-about', () => {
     const aboutWindow = createAboutWindow()
@@ -312,10 +312,10 @@ app.whenReady().then(() => {
   })
   if (NODE_ENV === 'development') {
     import('@tomjs/electron-devtools-installer')
-      .then(devTools => {
+      .then((devTools) => {
         devTools.installExtension(devTools.VUEJS_DEVTOOLS_BETA)
           .then(ext => console.log(`Added Extension:  ${ext.name}`))
-          .catch(err => console.log('An error occurred: ', err));
+          .catch(err => console.log('An error occurred: ', err))
       })
   }
 })

@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
 import remoteMain from '@electron/remote/main/index.js'
+import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
 import { menuBlur, micaStyle } from '../store/menuBlurStore.js'
 import setMicaStyle from './util/setMicaStyle.js'
 
@@ -26,8 +26,8 @@ function createRepassWindow(uname) {
         standard: 'Times New Roman',
         serif: 'Times New Roman',
         sansSerif: 'Arial',
-        monospace: 'Courier New'
-      }
+        monospace: 'Courier New',
+      },
     },
   })
   if (menuBlur || menuBlur === undefined) {

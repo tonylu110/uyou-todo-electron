@@ -1,13 +1,13 @@
-import { onUnmounted, ref, watchEffect } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import TabBar from '../components/TabBar/TabBar.vue'
-import List from '../components/List/List.vue'
-import LocalStorage from '../util/localStorage'
-import type ITodoList from '../interface/ITodoListArray'
 import type { cateItem } from '../components/ListMenu/ICateItem'
-import emitter from '../util/bus'
+import type ITodoList from '../interface/ITodoListArray'
+import { onUnmounted, ref, watchEffect } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
+import List from '../components/List/List.vue'
 import saveItemSet from '../components/List/saveItemSet'
+import TabBar from '../components/TabBar/TabBar.vue'
+import emitter from '../util/bus'
+import LocalStorage from '../util/localStorage'
 
 function Other() {
   const { t } = useI18n()
@@ -57,13 +57,13 @@ function Other() {
   function delAllItem() {
     listData.value.length = 0
     const localList = LocalStorage('get')!
-    
-    let toRemove = localList.filter(item => item.ok);
+
+    let toRemove = localList.filter(item => item.ok)
 
     for (let i = toRemove.length - 1; i >= 0; i--) {
-      localList.splice(localList.indexOf(toRemove[i]), 1);
+      localList.splice(localList.indexOf(toRemove[i]), 1)
     }
-    
+
     saveItemSet(localList)
   }
 
@@ -82,7 +82,11 @@ function Other() {
       left-img="i-ph:gear-fine-bold"
       :title="title"
       :left-img-show="simpleMode"
-      :right-img-show="route.query.listName !== 'allNotDo' && route.query.listName !== 'allDo' && route.query.listName !== 'star'"
+      :right-img-show="
+        route.query.listName !== 'allNotDo' &&
+        route.query.listName !== 'allDo' &&
+        route.query.listName !== 'star'
+      "
       :show-more="true"
       :show-wrap="true"
       @right-click="showAddItem = !showAddItem"

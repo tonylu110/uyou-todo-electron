@@ -1,8 +1,8 @@
-import { onBeforeUnmount, ref } from "vue"
-import isDev from "../../util/mode"
-import emitter from "../../util/bus"
-import ItemBox from "../ItemBox/ItemBox.vue"
-import Item from "../ItemBox/Item/Item.vue"
+import { onBeforeUnmount, ref } from 'vue'
+import emitter from '../../util/bus'
+import isDev from '../../util/mode'
+import Item from '../ItemBox/Item/Item.vue'
+import ItemBox from '../ItemBox/ItemBox.vue'
 
 function DevSettings() {
   function openUrl(url: string) {

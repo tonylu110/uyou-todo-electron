@@ -1,10 +1,11 @@
-import { useI18n } from "vue-i18n"
+import { useI18n } from 'vue-i18n'
 
 function DeleteAllItem() {
   const { t } = useI18n()
 
+  // eslint-disable-next-line vue-vine/format-vine-macros-leading
   const emit = vineEmits<{
-    delete: []
+  delete: []
   }>()
 
   function deleteAllItem() {
@@ -18,10 +19,19 @@ function DeleteAllItem() {
         <div flex>
           <div
             v-close-popper
-            bg="primary-d active:primary-a" flex-1
-            p="x-10px y-5px" text="!white 12px"
-            mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
-            shadow="sm black/20" c="#555"
+            bg="primary-d active:primary-a"
+            flex-1
+            p="x-10px y-5px"
+            text="!white 12px"
+            mr-5px
+            flex
+            cursor-pointer
+            items-center
+            justify-center
+            rounded-5px
+            border-none
+            shadow="sm black/20"
+            c="#555"
             @click="deleteAllItem"
           >
             <div i-mdi:check-bold mr-5px />
@@ -29,10 +39,19 @@ function DeleteAllItem() {
           </div>
           <div
             v-close-popper
-            bg="black/20 active:black/40" flex-1
-            p="x-10px y-5px" text="!black !dark:white 12px"
-            mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
-            shadow="sm black/20" c="#555"
+            bg="black/20 active:black/40"
+            flex-1
+            p="x-10px y-5px"
+            text="!black !dark:white 12px"
+            mr-5px
+            flex
+            cursor-pointer
+            items-center
+            justify-center
+            rounded-5px
+            border-none
+            shadow="sm black/20"
+            c="#555"
           >
             <div i-mdi:close-thick mr-5px />
             <span>{{ t('alertText.cancelText') }}</span>

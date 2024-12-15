@@ -17,8 +17,6 @@ export default antfu(
 
     ignores: [
       '**/fixtures',
-      'electronWindows/**/*.vine.ts',
-      'src/**/*.vine.ts',
     ],
     unocss: true,
     formatters: {

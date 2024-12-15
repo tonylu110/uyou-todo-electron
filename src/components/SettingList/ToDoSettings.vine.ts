@@ -1,10 +1,10 @@
-import ItemBox from "../ItemBox/ItemBox.vue"
-import Item from "../ItemBox/Item/Item.vue"
-import isNoteUI from "./util/isNoteUI"
-import { useI18n } from "vue-i18n";
-import { ref } from "vue";
-import setSwitchFn from "../../util/setSwitchFn";
-import { useRouter } from "vue-router";
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import setSwitchFn from '../../util/setSwitchFn'
+import Item from '../ItemBox/Item/Item.vue'
+import ItemBox from '../ItemBox/ItemBox.vue'
+import isNoteUI from './util/isNoteUI'
 
 function ToDoSettings() {
   const { t } = useI18n()
@@ -29,7 +29,13 @@ function ToDoSettings() {
         :title="t('anotherSettings.enterToAdd')"
         :show-switch="true"
         :switch-state="enterAddState"
-        @switch-fun="setSwitchFn('enterAdd', !enterAddState, () => enterAddState = !enterAddState)"
+        @switch-fun="
+          setSwitchFn(
+            'enterAdd',
+            !enterAddState,
+            () => (enterAddState = !enterAddState),
+          )
+        "
       />
       <Item
         v-if="!isNoteUI"
@@ -37,14 +43,22 @@ function ToDoSettings() {
         :title="t('anotherSettings.itemBtnShow')"
         :show-switch="true"
         :switch-state="showToDoBtn"
-        @switch-fun="setSwitchFn('ToDoBtn', !showToDoBtn, () => showToDoBtn = !showToDoBtn)"
+        @switch-fun="
+          setSwitchFn('ToDoBtn', !showToDoBtn, () => (showToDoBtn = !showToDoBtn))
+        "
       />
       <Item
         icon="i-icon-park:reverse-operation-out"
         :title="t('anotherSettings.itemWrap')"
         :show-switch="true"
         :switch-state="textWrapState"
-        @switch-fun="setSwitchFn('textWrap', !textWrapState, () => textWrapState = !textWrapState)"
+        @switch-fun="
+          setSwitchFn(
+            'textWrap',
+            !textWrapState,
+            () => (textWrapState = !textWrapState),
+          )
+        "
       />
       <Item
         v-if="isNoteUI"
@@ -52,7 +66,9 @@ function ToDoSettings() {
         :title="t('anotherSettings.star')"
         :show-switch="true"
         :switch-state="showStar"
-        @switch-fun="setSwitchFn('showStar', !showStar, () => showStar = !showStar)"
+        @switch-fun="
+          setSwitchFn('showStar', !showStar, () => (showStar = !showStar))
+        "
       />
       <Item
         v-if="isNoteUI"
@@ -60,7 +76,13 @@ function ToDoSettings() {
         :title="t('anotherSettings.ok')"
         :show-switch="true"
         :switch-state="showCompleted"
-        @switch-fun="setSwitchFn('showCompleted', !showCompleted, () => showCompleted = !showCompleted)"
+        @switch-fun="
+          setSwitchFn(
+            'showCompleted',
+            !showCompleted,
+            () => (showCompleted = !showCompleted),
+          )
+        "
       />
     </ItemBox>
   `

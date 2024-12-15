@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import os from 'node:os'
 import { useI18n } from 'vue-i18n'
-import TabBar from '../components/TabBar/TabBar.vue'
-import router from '../router'
-import SettingList from '../components/SettingList/SettingList.vine'
 import Item from '../components/ItemBox/Item/Item.vue'
 import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
+import AppUseSettings from '../components/SettingList/AppUseSettings.vine'
 import ColorChange from '../components/SettingList/colorChange/colorChange.vine'
 import DevSettings from '../components/SettingList/DevSettings.vine'
-import UserSettings from '../components/SettingList/UserSettings.vine'
-import UpdateSettings from '../components/SettingList/UpdateSettings.vine'
-import AppUseSettings from '../components/SettingList/AppUseSettings.vine'
+import SettingList from '../components/SettingList/SettingList.vine'
 import ToDoSettings from '../components/SettingList/ToDoSettings.vine'
+import UpdateSettings from '../components/SettingList/UpdateSettings.vine'
+import UserSettings from '../components/SettingList/UserSettings.vine'
 import WindowSettings from '../components/SettingList/WindowSettings/WindowSettings.vine'
+import TabBar from '../components/TabBar/TabBar.vue'
+import router from '../router'
 
 const { t } = useI18n()
 

@@ -43,15 +43,15 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
         src="/images/donate/wechatpay.png"
         alt=""
       >
-      <div w-163px p-10px bg-afd-d flex="~ col" items-center>
+      <div flex="~ col" w-163px items-center bg-afd-d p-10px>
         <img
           w-full
           src="/images/donate/afd.png"
           alt=""
         >
-        <button 
-          mt-10px bg="white dark:#333 active:afd-a hover:afd-h" c="#956DE5 hover:white"
-          outline-none border-none px-4 py-2 rounded-1 font-bold
+        <button
+          bg="white dark:#333 active:afd-a hover:afd-h" c="#956DE5 hover:white"
+          mt-10px rounded-1 border-none px-4 py-2 font-bold outline-none
           @click="openUrlInBrowser('https://afdian.com/a/tonylu')"
         >
           {{ t('afd') }}

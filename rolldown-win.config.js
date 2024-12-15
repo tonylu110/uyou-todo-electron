@@ -1,9 +1,9 @@
-import { defineConfig } from 'rolldown'
-import typescript from '@rollup/plugin-typescript';
-import resolve from '@rollup/plugin-node-resolve';
 import json from '@rollup/plugin-json'
-import terser from '@rollup/plugin-terser';
-import clear from 'rollup-plugin-clear';
+import resolve from '@rollup/plugin-node-resolve'
+import terser from '@rollup/plugin-terser'
+import typescript from '@rollup/plugin-typescript'
+import { defineConfig } from 'rolldown'
+import clear from 'rollup-plugin-clear'
 
 export default defineConfig([
   {
@@ -16,13 +16,13 @@ export default defineConfig([
     plugins: [
       typescript({
         tsconfig: './tsconfig.rollup.json',
-        exclude: ['src/**/*', 'node_modules/**/*']
+        exclude: ['src/**/*', 'node_modules/**/*'],
       }),
       resolve(),
       json(),
       terser(),
-      clear({ targets: ['prebuild_electron'] })
-    ]
+      clear({ targets: ['prebuild_electron'] }),
+    ],
   },
   {
     input: 'electron/preload.ts',
@@ -31,7 +31,7 @@ export default defineConfig([
       format: 'es',
     },
     plugins: [
-      terser()
-    ]
-  }
+      terser(),
+    ],
+  },
 ])

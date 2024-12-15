@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import type { Ref } from 'vue'
+import type ITodoList from '../../interface/ITodoListArray'
+import type { cateItem } from '../ListMenu/ICateItem'
 import { usePreferredDark } from '@vueuse/core'
 import { isUndefined } from 'es-toolkit'
 import { computed, onMounted, onUnmounted, reactive, ref, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
-import type { Ref } from 'vue'
 import emitter from '../../util/bus'
 import LocalStorage from '../../util/localStorage'
 import { isLinux, isWindows10OrAfter } from '../../util/os'
@@ -12,13 +14,11 @@ import setSwitchFn from '../../util/setSwitchFn'
 import AddItem from './AddItem/AddItem.vue'
 import Item from './Item/Item.vue'
 import saveItemSet from './saveItemSet'
-import type ITodoList from '../../interface/ITodoListArray'
-import type { cateItem } from '../ListMenu/ICateItem'
 
 interface Props {
   showAddItem: boolean
   listData: ITodoList[]
-  color: string | null
+  color?: string | null
 }
 
 // eslint-disable-next-line unused-imports/no-unused-vars
