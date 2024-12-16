@@ -29,7 +29,8 @@
     "loginError": "登入失敗",
     "alertTitle": "提示",
     "changPass": "修改密碼",
-    "logoutMsg": "確定退出登入嗎？"
+    "logoutMsg": "確定退出登入嗎？",
+    "userNum": "已註冊用戶"
   },
   "listMenu": {
     "cate": "分類",

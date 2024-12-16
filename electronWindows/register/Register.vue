@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import { ipcRenderer } from 'electron'
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ipcRenderer } from 'electron'
 import Alert from '../../src/components/Alert/Alert.vue'
 import CloseButton from '../../src/components/CloseButton/CloseButton.vine'
 import { isMac } from '../../src/util/os'
@@ -68,11 +68,17 @@ function closeAlert() {
   if (alertMsg.value === t('registerPage.regSuccess'))
     closeWindow()
 }
+
+const userNumber = ref(0)
+fetch('https://api.todo.uyou.org.cn/allusers').then((res) => {
+  return res.json()
+}).then((res) => {
+  userNumber.value = res
+})
 </script>
 
 <template>
   <div
-
     flex="~ col"
     h-screen w-screen items-center justify-center bg-transparent drag
   >
@@ -81,9 +87,17 @@ function closeAlert() {
       src="/logo.png"
       alt=""
     >
+    <div
+      bg="primary-d dark:primary-a/70"
+      mb-2 flex items-center rounded-1 p-2 text-3 c-white
+    >
+      <div mr-2>
+        {{ t('accountPage.userNum') }}
+      </div>
+      <span>{{ userNumber }}</span>
+    </div>
     <div flex items-center p-7px>
       <span
-
         c="#555 dark:#bbb" w-100px flex whitespace-pre text-20px justify-content-right
       >
         {{ t('registerPage.account') }}
@@ -91,7 +105,6 @@ function closeAlert() {
       <input
         v-model="formData.account"
         v-focus
-
         rounded-5px p-10px outline-none no-drag
         bg="black/10 dark:#999/10"
         c="#555 dark:#bbb"
@@ -101,14 +114,12 @@ function closeAlert() {
     </div>
     <div flex items-center p-7px>
       <span
-
         c="#555 dark:#bbb" w-100px flex whitespace-pre text-20px justify-content-right
       >
         {{ t('registerPage.password') }}
       </span>
       <input
         v-model="formData.password"
-
         rounded-5px p-10px outline-none no-drag
         bg="black/10 dark:#999/10"
         c="#555 dark:#bbb"
@@ -118,14 +129,12 @@ function closeAlert() {
     </div>
     <div flex items-center p-7px>
       <span
-
         c="#555 dark:#bbb" w-100px flex whitespace-pre text-20px justify-content-right
       >
         {{ t('registerPage.rePass') }}
       </span>
       <input
         v-model="formData.rePassword"
-
         rounded-5px p-10px outline-none no-drag
         bg="black/10 dark:#999/10"
         c="#555 dark:#bbb"
@@ -134,10 +143,8 @@ function closeAlert() {
       >
     </div>
     <button
-
-      p="x-20px y-5px"
+      p="x-20px y-5px" shadow="~ primary-a/70"
       bg="primary-d active:primary-a dark:primary-a dark:active:primary-d"
-
       mt-10px cursor-pointer rounded-5px border-none text-18px c-white no-drag
       type="submit"
       @click="register"

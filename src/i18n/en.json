@@ -29,7 +29,8 @@
     "loginError": "Login failed",
     "alertTitle": "Hint",
     "changPass": "change Password",
-    "logoutMsg": "Are you sure you want to log out?"
+    "logoutMsg": "Are you sure you want to log out?",
+    "userNum": "Registered user"
   },
   "listMenu": {
     "cate": "Categories",

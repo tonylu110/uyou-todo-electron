@@ -29,7 +29,8 @@
     "loginError": "登录失败",
     "alertTitle": "提示",
     "changPass": "修改密码",
-    "logoutMsg": "确定退出登录吗？"
+    "logoutMsg": "确定退出登录吗？",
+    "userNum": "已注册用户"
   },
   "listMenu": {
     "cate": "分类",
