@@ -87,9 +87,6 @@ importers:
       '@vue-vine/eslint-config':
         specifier: ^0.2.11
         version: 0.2.11(typescript@5.7.2)
-      '@vue-vine/eslint-parser':
-        specifier: ^0.2.11
-        version: 0.2.11(eslint@9.17.0(jiti@2.4.0))(typescript@5.7.2)
       '@vueuse/components':
         specifier: ^12.0.0
         version: 12.0.0(typescript@5.7.2)
@@ -5948,19 +5945,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@8.16.0(eslint@9.17.0(jiti@2.4.0))(typescript@5.7.2)':
-    dependencies:
-      '@typescript-eslint/scope-manager': 8.16.0
-      '@typescript-eslint/types': 8.16.0
-      '@typescript-eslint/typescript-estree': 8.16.0(typescript@5.7.2)
-      '@typescript-eslint/visitor-keys': 8.16.0
-      debug: 4.3.7
-      eslint: 9.17.0(jiti@2.4.0)
-    optionalDependencies:
-      typescript: 5.7.2
-    transitivePeerDependencies:
-      - supports-color
-
   '@typescript-eslint/parser@8.16.0(eslint@9.6.0)(typescript@5.7.2)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.16.0
@@ -6586,21 +6570,6 @@ snapshots:
       '@vue-vine/eslint-plugin': 0.2.11(eslint@9.6.0)(typescript@5.7.2)
       eslint: 9.6.0
     transitivePeerDependencies:
-      - supports-color
-      - typescript
-
-  '@vue-vine/eslint-parser@0.2.11(eslint@9.17.0(jiti@2.4.0))(typescript@5.7.2)':
-    dependencies:
-      '@typescript-eslint/parser': 8.16.0(eslint@9.17.0(jiti@2.4.0))(typescript@5.7.2)
-      '@typescript-eslint/scope-manager': 8.18.0
-      '@typescript-eslint/typescript-estree': 8.18.0(typescript@5.7.2)
-      debug: 4.3.7
-      eslint-scope: 8.2.0
-      espree: 9.6.1
-      line-column: 1.0.2
-      semver: 7.6.3
-    transitivePeerDependencies:
-      - eslint
       - supports-color
       - typescript
 

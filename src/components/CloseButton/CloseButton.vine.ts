@@ -2,10 +2,8 @@ import { useRoute } from 'vue-router'
 import { closeWindow } from '../../util/windowApi'
 
 function CloseButton() {
-  // eslint-disable-next-line unused-imports/no-unused-vars
   const windowName = vineProp.optional<string>()
 
-  // eslint-disable-next-line unused-imports/no-unused-vars
   const route = useRoute()
 
   return vine`

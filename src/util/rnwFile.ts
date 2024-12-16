@@ -1,6 +1,6 @@
-import { ipcRenderer } from "electron";
+import { ipcRenderer } from 'electron'
 
-type FileOption<T> = {
+interface FileOption<T> {
   name: string
   text: string
   ext: T

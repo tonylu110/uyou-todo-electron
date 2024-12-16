@@ -1,6 +1,5 @@
 import antfu from '@antfu/eslint-config'
 import VueVine from '@vue-vine/eslint-config'
-import * as VueVineESLintParser from '@vue-vine/eslint-parser'
 
 export default antfu(
   {
@@ -32,15 +31,10 @@ export default antfu(
     },
   },
   {
-    files: [
-      'electronWindows/**/*.vine.ts',
-      'src/**/*.vine.ts',
-    ],
-    languageOptions: {
-      parser: VueVineESLintParser,
-    },
+    files: ['**/*.vine.ts'],
     rules: {
-      'no-console': 'off',
+      'prefer-template': 'off',
+      'unused-imports/no-unused-vars': 'off',
     },
   },
   ...VueVine(),

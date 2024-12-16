@@ -4,7 +4,6 @@ import { useI18n } from 'vue-i18n'
 import DeleteAllItem from '../../DeleteAllItem/DeleteAllItem.vine'
 
 function Delete() {
-  // eslint-disable-next-line unused-imports/no-unused-vars
   const { t } = useI18n()
 
   // eslint-disable-next-line vue-vine/format-vine-macros-leading
