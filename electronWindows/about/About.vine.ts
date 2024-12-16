@@ -1,16 +1,30 @@
 import vitePackage from 'vite/package.json'
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import vuePackage from 'vue/package.json'
 import CloseButton from '../../src/components/CloseButton/CloseButton.vine'
+import { createToast } from '../../src/components/Toast'
 import { versionText } from '../../src/util/appVersionCode'
 import openUrlInBrowser from '../../src/util/openUrlInBrowser'
 import { isMac } from '../../src/util/os'
 
 function About() {
+  const { t } = useI18n()
+
   // eslint-disable-next-line node/prefer-global/process
   const electronVersion = process.versions.electron
 
   const viteVersion = vitePackage.version
   const vueVersion = vuePackage.version
+
+  const showWin95Btn = ref(localStorage.getItem('win95') ? Number(localStorage.getItem('win95')) : 0)
+
+  watch(showWin95Btn, (newValue) => {
+    if (newValue === 6) {
+      createToast({ msg: t('win95Btn.Toast') })
+      localStorage.setItem('win95', `${newValue}`)
+    }
+  })
 
   vineStyle.scoped(scss`
     .win95-button {
@@ -42,7 +56,15 @@ function About() {
       w-screen
       h-screen
     >
-      <img w-130px h-130px m="b-20px t-40px" src="../../logo.png" alt="logo" />
+      <img
+        no-drag
+        w-130px
+        h-130px
+        m="b-20px t-40px"
+        src="../../logo.png"
+        alt="logo"
+        @click="showWin95Btn++"
+      />
       <span c="#555 dark:#bbb" font-bold text-24px>
         uyou ToDo v{{ versionText }}
       </span>
@@ -52,10 +74,12 @@ function About() {
       <button
         no-drag
         m="t-4 b-4"
+        :opacity="showWin95Btn > 5 ? '100' : '0'"
         class="win95-button"
+        :disabled="showWin95Btn < 5"
         @click="openUrlInBrowser('https://95.todo.uyou.org.cn')"
       >
-        Goto uyou ToDo 95
+        {{ t("win95Btn.Button") }}
       </button>
       <div
         flex

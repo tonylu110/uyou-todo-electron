@@ -266,5 +266,9 @@
     "exportSuccess": "Export successful",
     "exportToDo": "Export ToDo",
     "warn2": "Be sure to export or import both ToDo data and category data! \n! \n!"
+  },
+  "win95Btn": {
+    "Toast": "Win95 good!",
+    "Button": "Go to uyou ToDo 95"
   }
 }
