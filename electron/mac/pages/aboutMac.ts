@@ -12,8 +12,8 @@ let aboutWindow
 
 function createAboutWindow() {
   aboutWindow = new BrowserWindow({
-    width: 450,
-    height: 350,
+    width: 350,
+    height: 450,
     resizable: false,
     frame: false,
     icon: path.join(__dirname, '../../dist/logo.png'),
@@ -28,8 +28,8 @@ function createAboutWindow() {
         standard: 'Helvetica',
         serif: 'Times',
         sansSerif: 'Helvetica',
-        monospace: 'Menlo'
-      }
+        monospace: 'Menlo',
+      },
     },
   })
   aboutWindow.setAlwaysOnTop(true)

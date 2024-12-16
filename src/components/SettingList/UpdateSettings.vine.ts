@@ -17,7 +17,7 @@ function UpdateSettings() {
     <ItemBox>
       <Item
         v-if="!simpleMode"
-        icon="i-icon-park:auto-focus"
+        icon="i-icon-park-outline:auto-focus"
         :title="t('update.autoUpdate')"
         :show-switch="true"
         :switch-state="autoUpdateState"
@@ -30,7 +30,7 @@ function UpdateSettings() {
         "
       />
       <Item
-        icon="i-icon-park:update-rotation"
+        icon="i-icon-park-outline:update-rotation"
         :title="t('update.updateTitle')"
         @item-fun="router.push('/update?from=setting')"
       />

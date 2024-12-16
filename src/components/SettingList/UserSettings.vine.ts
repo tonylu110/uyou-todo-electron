@@ -12,12 +12,12 @@ function UserSettings() {
   return vine`
     <ItemBox>
       <Item
-        icon="i-icon-park:reduce-user"
+        icon="i-icon-park-outline:reduce-user"
         :title="loginState ? t('myAccount') : t('loginText')"
         @item-fun="() => router.push('/account?from=setting')"
       />
       <Item
-        icon="i-icon-park:lock-one"
+        icon="i-icon-park-outline:lock-one"
         :title="t('anotherSettings.openPass')"
         @item-fun="router.push('/openPass?from=setting')"
       />

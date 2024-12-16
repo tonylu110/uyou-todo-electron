@@ -32,7 +32,7 @@ function AppUseSettings() {
     <ItemBox v-if="!(isNoteUI && isLinux())">
       <Item
         v-if="!isNoteUI"
-        icon="i-icon-park:web-page"
+        icon="i-icon-park-outline:web-page"
         :title="t('startPage.startPage')"
         :show-list-box="true"
         :list-box-title="startPage"
@@ -42,7 +42,7 @@ function AppUseSettings() {
       />
       <Item
         v-if="!isLinux()"
-        icon="i-icon-park:computer"
+        icon="i-icon-park-outline:computer"
         :title="t('anotherSettings.autoStart')"
         :show-switch="true"
         :switch-state="autoStartState"

@@ -61,7 +61,7 @@ function ToDoBackup() {
     />
     <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'">
       <ItemSpace items-center c="dark:#bbb">
-        <div text-18 mb-2 i-icon-park:save-one />
+        <div text-18 mb-2 i-icon-park-outline:save-one />
         <span text-center font-bold>{{ t('backup') }}</span>
       </ItemSpace>
       <ItemText>{{ t('backupT.export') }}</ItemText>

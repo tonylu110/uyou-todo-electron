@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
 import remoteMain from '@electron/remote/main/index.js'
+import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
 import { menuBlur, micaStyle } from '../store/menuBlurStore.ts'
 import setMicaStyle from './util/setMicaStyle.ts'
 
@@ -14,8 +14,8 @@ let aboutWindow
 
 function createAboutWindow() {
   aboutWindow = new MicaBrowserWindow({
-    width: 450,
-    height: 350,
+    width: 350,
+    height: 450,
     resizable: false,
     frame: false,
     icon: path.join(__dirname, '../dist/logo.png'),
@@ -27,8 +27,8 @@ function createAboutWindow() {
         standard: 'Times New Roman',
         serif: 'Times New Roman',
         sansSerif: 'Arial',
-        monospace: 'Courier New'
-      }
+        monospace: 'Courier New',
+      },
     },
   })
   if (menuBlur || menuBlur === undefined) {

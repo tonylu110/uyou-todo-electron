@@ -17,7 +17,7 @@ function LinkList() {
     <ItemBox>
       <Item
         :title="t('otherList.toFind')"
-        icon="i-icon-park:message"
+        icon="i-icon-park-outline:message"
         @item-fun="
           openUrlInBrowser(
             'https://github.com/tonylu110/uyou-todo-electron/discussions/6',
@@ -26,26 +26,26 @@ function LinkList() {
       />
       <Item
         :title="t('otherList.toGithub')"
-        icon="i-icon-park:github"
+        icon="i-icon-park-outline:github"
         @item-fun="
           openUrlInBrowser('https://github.com/tonylu110/uyou-todo-electron')
         "
       />
       <Item
         :title="t('otherList.toDonate')"
-        icon="i-icon-park:coffee-machine"
+        icon="i-icon-park-outline:coffee-machine"
         @item-fun="router.push('/donate?from=setting')"
       />
     </ItemBox>
     <ItemBox>
       <Item
         :title="t('anotherSettings.openSource')"
-        icon="i-icon-park:heart-ballon"
+        icon="i-icon-park-outline:heart-ballon"
         @item-fun="router.push('/open?from=setting')"
       />
       <Item
         :title="t('anotherSettings.about')"
-        icon="i-icon-park:info"
+        icon="i-icon-park-outline:info"
         @item-fun="openAboutWindow"
       />
     </ItemBox>

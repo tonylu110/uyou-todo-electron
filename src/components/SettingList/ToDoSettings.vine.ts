@@ -19,13 +19,13 @@ function ToDoSettings() {
   return vine`
     <ItemBox>
       <Item
-        icon="i-icon-park:save-one"
+        icon="i-icon-park-outline:save-one"
         :title="t('anotherSettings.backup')"
         @item-fun="router.push('/backup?from=setting')"
       />
       <Item
         v-if="!isNoteUI"
-        icon="i-icon-park:enter-key"
+        icon="i-icon-park-outline:enter-key"
         :title="t('anotherSettings.enterToAdd')"
         :show-switch="true"
         :switch-state="enterAddState"
@@ -39,7 +39,7 @@ function ToDoSettings() {
       />
       <Item
         v-if="!isNoteUI"
-        icon="i-icon-park:eyes"
+        icon="i-icon-park-outline:eyes"
         :title="t('anotherSettings.itemBtnShow')"
         :show-switch="true"
         :switch-state="showToDoBtn"
@@ -48,7 +48,7 @@ function ToDoSettings() {
         "
       />
       <Item
-        icon="i-icon-park:reverse-operation-out"
+        icon="i-icon-park-outline:reverse-operation-out"
         :title="t('anotherSettings.itemWrap')"
         :show-switch="true"
         :switch-state="textWrapState"
@@ -62,7 +62,7 @@ function ToDoSettings() {
       />
       <Item
         v-if="isNoteUI"
-        icon="i-icon-park:star"
+        icon="i-icon-park-outline:star"
         :title="t('anotherSettings.star')"
         :show-switch="true"
         :switch-state="showStar"
@@ -72,7 +72,7 @@ function ToDoSettings() {
       />
       <Item
         v-if="isNoteUI"
-        icon="i-icon-park:check-one"
+        icon="i-icon-park-outline:check-one"
         :title="t('anotherSettings.ok')"
         :show-switch="true"
         :switch-state="showCompleted"

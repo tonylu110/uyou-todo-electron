@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { ElOption, ElSelect } from 'element-plus'
+import { ref } from 'vue'
 import Switch from '../../Switch'
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
   showArrow?: boolean
   itemImg?: string
   icon?: string
+  iconColor?: string
   showListBox?: boolean
   listBoxTitle?: string
   list?: {
@@ -26,6 +27,7 @@ const {
   showArrow = true,
   itemImg = '',
   icon = '',
+  iconColor = 'primary-d dark:primary-a',
   showListBox = false,
   list = [],
   listBoxTitle,
@@ -63,7 +65,7 @@ window.addEventListener('resize', () => {
     <div>
       <div v-if="itemImg" class="img-back" />
       <img v-if="itemImg" :src="itemImg" alt="">
-      <div v-if="icon" :class="icon" mr-3 block text-6 />
+      <div v-if="icon" :class="icon" mr-3 block text-6 :c="iconColor" />
       <span
         :style="{ width: simpleMode ? 'calc(100vw - 115px)' : (minWidth ? 'calc(100vw - 165px)' : '') }"
         :c="showSwitch || showListBox ? '' : 'group-active:white'"

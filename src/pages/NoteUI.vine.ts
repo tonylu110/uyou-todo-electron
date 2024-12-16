@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 import { ipcRenderer } from 'electron'
 import { onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -22,6 +23,7 @@ import getCateList from '../util/getCateList'
 import { isMac } from '../util/os'
 import { topWindow } from '../util/windowApi'
 
+// eslint-disable-next-line vue-vine/format-vine-component-name
 function NoteUI() {
   const router = useRouter()
 
@@ -333,7 +335,7 @@ function NoteUI() {
     </SettingList>
     <Alert
       :dialog-show="alertShow"
-      :title="`${t('updateText')  } v${  newVersion}`"
+      :title="t('updateText') + ' v' + newVersion"
       :confirm-btn-name="t('update.gotoUpdate')"
       @cancel="() => (alertShow = false)"
       @return="returnClick"
