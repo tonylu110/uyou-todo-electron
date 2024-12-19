@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import remoteMain from '@electron/remote/main/index.js'
-import { BrowserWindow } from 'electron'
+import { BrowserWindow, ipcMain } from 'electron'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -37,6 +37,10 @@ function createAboutWindow() {
     aboutWindow.loadURL('http://localhost:3000/electronWindows/about/')
   else
     aboutWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/about/index.html'))
+
+  ipcMain.on('setTitleBar', (_event, showBar) => {
+    aboutWindow.setWindowButtonVisibility(showBar)
+  })
 
   remoteMain.enable(aboutWindow.webContents)
   return aboutWindow

@@ -270,6 +270,7 @@
   },
   "win95Btn": {
     "Toast": "Win95 good!",
-    "Button": "Go to uyou ToDo 95"
+    "Button": "Go to uyou ToDo 95",
+    "closeToast": "Goodbye Win95!"
   }
 }

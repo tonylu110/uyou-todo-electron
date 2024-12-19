@@ -271,6 +271,7 @@
   },
   "win95Btn": {
     "Toast": "Win95 好！",
-    "Button": "前往 uyou ToDo 95"
+    "Button": "前往 uyou ToDo 95",
+    "closeToast": "拜拜 Win95！"
   }
 }
