@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ElPagination } from 'element-plus'
-import { useI18n } from 'vue-i18n'
 import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import ItemSpace from '../ItemBox/ItemSpace/ItemSpace.vine'
 import ItemText from '../ItemBox/ItemText/ItemText.vine'
 
