@@ -21,10 +21,8 @@ function SettingList() {
       w="100%"
       h="[calc(100%-105px)]"
       :justify="justify"
-      pt-10px
+      class="pt-10px items-center overflow-y-scroll"
       flex="~ col"
-      items-center
-      overflow-y-scroll
     >
       <slot />
     </PerfectScrollbar>

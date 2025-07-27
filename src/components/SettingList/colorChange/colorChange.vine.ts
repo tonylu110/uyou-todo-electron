@@ -34,7 +34,7 @@ function ColorChange() {
         @click="setColor('system')"
       >
         <img
-          src="./color_mode/light_and_dark.png"
+          src="/color_mode/light_and_dark.png"
           alt=""
           w="[calc(100%-16px)]"
           h="[calc(100%-16px)]"
@@ -55,7 +55,7 @@ function ColorChange() {
         @click="setColor('light')"
       >
         <img
-          :src="isNoteUI ? './images/note/light.png' : './color_mode/light.png'"
+          :src="isNoteUI ? '/images/note/light.png' : '/color_mode/light.png'"
           alt=""
           w="[calc(100%-16px)]"
           h="[calc(100%-16px)]"
@@ -76,7 +76,7 @@ function ColorChange() {
         @click="setColor('dark')"
       >
         <img
-          :src="isNoteUI ? './images/note/dark.png' : './color_mode/dark.png'"
+          :src="isNoteUI ? '/images/note/dark.png' : '/color_mode/dark.png'"
           alt=""
           w="[calc(100%-16px)]"
           h="[calc(100%-16px)]"

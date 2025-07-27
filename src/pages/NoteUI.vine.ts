@@ -157,9 +157,9 @@ function NoteUI() {
 
   return vine`
     <SettingList h="![calc(100vh-160px)]" p-y="!80px">
-      <div fixed left-0 top-0 h-65px w-full drag />
-      <div fixed left-0 top-0 h-full w-12vw drag />
-      <div fixed right-0 top-0 h-full w-12vw drag />
+      <div class="fixed left-0 top-0 h-65px w-full drag" />
+      <div class="fixed left-0 top-0 h-full w-12vw drag" />
+      <div class="fixed right-0 top-0 h-full w-12vw drag" />
       <SideBar :open="openSideBar" @set-side="openSideBar = false">
         <Item
           id="all"
@@ -248,104 +248,88 @@ function NoteUI() {
             ? 'error-d hover:error-h active:error-a'
             : 'black/10 hover:black/20 active:black/30'
         "
-        fixed
-        left-15px
-        top-14px
-        mr-7px
-        h-13px
-        w-13px
-        flex
-        cursor-pointer
-        items-center
-        justify-center
-        rounded-5px
-        rounded-full
-        p-6px
-        no-drag
+        class="fixed left-15px top-14px mr-7px h-13px w-13px flex cursor-pointer items-center justify-center rounded-5px rounded-full p-6px no-drag"
         @click="onTopWindow"
       >
-        <div i-fluent:pin-12-filled text-13px :c="topState ? 'white' : '#555'" />
+        <div
+          class="i-fluent:pin-12-filled text-13px"
+          :c="topState ? 'white' : '#555'"
+        />
       </div>
 
-      <div v-if="!systemTitle" fixed right-15px top-14px z-1>
+      <div v-if="!systemTitle" class="fixed right-15px top-14px z-1">
         <WindowButtons />
       </div>
-      <div relative w-75vw flex>
+      <div class="relative w-75vw flex">
         <Transition name="list">
           <NoteList v-if="listId === 'all'" />
           <SpNoteList v-else-if="listId === 'use'" />
           <OtherNoteList v-else />
         </Transition>
       </div>
-      <div flex="~ gap-10px" fixed bottom-15px left-15px no-drag>
+      <div flex="~ gap-10px" class="fixed bottom-15px left-15px no-drag">
         <div
           v-if="listId === 'all' && !autoSync"
+          class="flex items-center justify-center p-13px"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
           rounded="10px hover:30px"
           shadow="md hover:lg primary-d/70 dark:primary-a/70"
-          flex
-          items-center
-          justify-center
-          p-13px
           transform="active:scale-90 hover:scale-120"
           @click="sync"
         >
           <div
-            :class="uid ? 'i-ph:cloud-arrow-down-bold' : 'i-ph:user-bold'"
-            text-22px
+            :class="
+            uid
+              ? 'i-ph:cloud-arrow-down-bold text-22px'
+              : 'i-ph:user-bold text-22px'
+            "
             c="!white"
           />
         </div>
       </div>
-      <div flex="~ gap-10px" fixed bottom-15px right-15px no-drag>
+      <div flex="~ gap-10px" class="fixed bottom-15px right-15px no-drag">
         <div
           v-if="listId === 'all'"
+          class="flex items-center justify-center p-13px"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
           rounded="10px hover:30px"
-          shadow="md hover:lg primary-d/70 dark:primary-a/70"
-          flex
-          items-center
-          justify-center
-          p-13px
-          transform="active:scale-90 hover:scale-120"
-          @click="showCateAdd = true"
+        shadow="md hover:lg primary-d/70 dark:primary-a/70"
+        transform="active:scale-90 hover:scale-120"
+        @click="showCateAdd = true"
         >
-          <div i-ph:plus-bold text-22px c-white />
+          <div class="i-ph:plus-bold text-22px c-white" />
         </div>
         <div
+          class="flex items-center justify-center p-13px"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
           rounded="10px hover:30px"
           shadow="md hover:lg primary-d/70 dark:primary-a/70"
-          flex
-          items-center
-          justify-center
-          p-13px
           transform="active:scale-90 hover:scale-120"
-          @click="router.push('/setting')"
+        @click="router.push('/setting')"
         >
-          <div i-ph:gear-fine-bold text-22px c-white />
+          <div class="i-ph:gear-fine-bold text-22px c-white" />
         </div>
-      </div>
-      <CateAdd :open="showCateAdd" @close="showCateAdd = false" />
+    </div>
+    <CateAdd :open="showCateAdd" @close="showCateAdd = false" />
       <Search :open="showSearch" @close="showSearch = false" />
     </SettingList>
     <Alert
       :dialog-show="alertShow"
       :title="t('updateText') + ' v' + newVersion"
-      :confirm-btn-name="t('update.gotoUpdate')"
+    :confirm-btn-name="t('update.gotoUpdate')"
       @cancel="() => (alertShow = false)"
       @return="returnClick"
     >
-      <ul m-0 p-l-20px>
-        <li v-for="(item, index) in alertMsg" :key="index">
+      <ul class="m-0 p-l-20px">
+      <li v-for="(item, index) in alertMsg" :key="index">
           {{ item.slice(2) }}
         </li>
       </ul>
     </Alert>
-  `
+`
 }
 
 export default NoteUI

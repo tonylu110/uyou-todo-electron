@@ -21,6 +21,6 @@
     "noEmit": true,
     "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "electronWindows/**/*.ts", "electronWindows/**/*.d.ts", "electronWindows/**/*.tsx", "electronWindows/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "electronWindows/**/*.ts", "electronWindows/**/*.d.ts", "electronWindows/**/*.tsx", "electronWindows/**/*.vue", "src/shims.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
