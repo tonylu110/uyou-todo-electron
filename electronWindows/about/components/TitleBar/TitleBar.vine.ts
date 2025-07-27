@@ -33,23 +33,17 @@ function TitleBar() {
   return vine`
     <div
       v-if="isWin95"
+      class="fixed top-0 left-0 p-1 flex items-center justify-between"
       bg="#000e7a"
-      fixed
-      top-0
-      left-0
       w="[calc(100%-8px)]"
-      p-1
-      flex
-      items-center
-      justify-between
     >
-      <div c="#fefefe" text="shadow 3" h-4 flex items-center>
-        <img :src="win95icon" alt="" h-full mx-1 />
-        <span>{{ t("anotherSettings.about") }}</span>
+      <div c="#fefefe" text="shadow 3" class="h-4 flex items-center">
+        <img :src="win95icon" alt="" class="h-full mx-1" />
+        <span>{{ t('anotherSettings.about') }}</span>
       </div>
       <div>
-        <button class="win95-button" no-drag @click="closeWindow('about')">
-          <div i-ph:x-bold c-black />
+        <button class="win95-button no-drag" @click="closeWindow('about')">
+          <div class="i-ph:x-bold c-black" />
         </button>
       </div>
     </div>

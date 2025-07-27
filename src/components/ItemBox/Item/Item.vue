@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 import { ElOption, ElSelect } from 'element-plus'
 import { ref } from 'vue'
 import Switch from '../../Switch'
@@ -20,18 +20,17 @@ interface Props {
   }[]
 }
 
-const {
-  switchState = true,
-  title = 'title',
-  showSwitch = false,
-  showArrow = true,
-  itemImg = '',
-  icon = '',
-  iconColor = 'primary-d dark:primary-a',
-  showListBox = false,
-  list = [],
-  listBoxTitle,
-} = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  switchState: true,
+  title: 'title',
+  showSwitch: false,
+  showArrow: true,
+  itemImg: '',
+  icon: '',
+  iconColor: 'primary-d dark:primary-a',
+  showListBox: false,
+  listBoxTitle: '',
+})
 
 const emits = defineEmits<{
   (e: 'switchFun'): void
@@ -41,7 +40,7 @@ const emits = defineEmits<{
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
-const listTitle = ref(listBoxTitle)
+const listTitle = ref(props.listBoxTitle)
 
 const minWidth = ref(window.innerWidth < 750)
 window.addEventListener('resize', () => {

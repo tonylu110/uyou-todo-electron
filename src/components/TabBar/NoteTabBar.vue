@@ -1,17 +1,19 @@
-<script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router'
+<script setup lang="ts" vapor>
 import { onUnmounted, ref } from 'vue'
-import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'
-import firstLoad from '../TitleBar/firstLoad'
-import { topWindow } from '../../util/windowApi'
+import { useRoute, useRouter } from 'vue-router'
 import emitter from '../../util/bus'
+import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'
+import { topWindow } from '../../util/windowApi'
+import firstLoad from '../TitleBar/firstLoad'
 import WindowButtons from './windowButtons'
 
 interface Props {
   title?: string
 }
 
-const { title = 'title' } = defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  title: 'title',
+})
 
 const route = useRoute()
 const router = useRouter()

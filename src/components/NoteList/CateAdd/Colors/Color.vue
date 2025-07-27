@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 const props = defineProps<{
   color: string | null
 }>()

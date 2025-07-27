@@ -6,7 +6,9 @@ interface Props {
   mode?: string
 }
 
-const { mode = '' } = defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  mode: '',
+})
 
 const simpleMode = localStorage.getItem('simpleMode') === 'true'
 

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 import type { cateItem } from '../ListMenu/ICateItem'
 import { usePreferredDark } from '@vueuse/core'
 import { ipcRenderer } from 'electron'
@@ -24,13 +24,13 @@ interface Props {
   showWrap?: boolean
 }
 
-const {
-  title = 'uyou ToDo',
-  leftImgShow = true,
-  rightImgShow = true,
-  leftImg = 'i-ph:caret-left-bold',
-  showWrap = false,
-} = defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  title: 'uyou ToDo',
+  leftImgShow: true,
+  rightImgShow: true,
+  leftImg: 'i-ph:caret-left-bold',
+  showWrap: false,
+})
 
 const emits = defineEmits<{
   rightClick: []

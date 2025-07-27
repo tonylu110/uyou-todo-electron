@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { Dropdown as VDropdown } from 'floating-vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Icons from '../../../ListMenu/MenuItem/Icons/Icons.vine'
 import Colors from '../../CateAdd/Colors/Color.vue'

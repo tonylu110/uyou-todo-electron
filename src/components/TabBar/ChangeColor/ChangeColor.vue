@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 import { Dropdown as VDropdown } from 'floating-vue'
 import { ref } from 'vue'
 

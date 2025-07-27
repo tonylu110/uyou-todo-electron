@@ -1,10 +1,12 @@
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 interface Props {
   num: number
   color?: string
 }
 
-const { color = 'primary-d' } = defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  color: 'primary-d',
+})
 
 const model = defineModel<boolean>()
 </script>

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 import { onMounted, onUnmounted, ref } from 'vue'
 import emitter from '../../../util/bus'
 

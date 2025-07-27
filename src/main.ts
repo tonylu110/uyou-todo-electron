@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron'
 import { vClosePopper, vTooltip } from 'floating-vue'
-import { createApp, ref } from 'vue'
+import { createApp, ref, vaporInteropPlugin } from 'vue'
 import { PerfectScrollbarPlugin } from 'vue3-perfect-scrollbar'
 import App from './App.vue'
 import AppSimple from './AppSimple.vue'
@@ -26,6 +26,7 @@ if (simpleMode === 'false' || simpleMode === null)
 else
   app = createApp(AppSimple)
 
+app.use(vaporInteropPlugin)
 app.use(router)
 app.use(i18n)
 app.use(PerfectScrollbarPlugin)

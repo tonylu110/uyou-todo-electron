@@ -16,7 +16,6 @@ import changeCate from './changCate'
 import Icons from './MenuItem/Icons/Icons.vine'
 import MenuItem from './MenuItem/MenuItem.vue'
 import TitleMenuItem from './TitleMenuItem'
-import { Handler } from 'mitt'
 
 const { t } = useI18n()
 

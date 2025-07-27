@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import LocalStorage from '../../util/localStorage'
 import emitter from '../../util/bus'
+import LocalStorage from '../../util/localStorage'
 import saveItemSet from '../List/saveItemSet'
 import NoteBox from './NoteBox/NoteBox.vue'
 

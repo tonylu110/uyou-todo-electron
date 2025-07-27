@@ -1,3 +1,4 @@
+import { usePreferredDark } from '@vueuse/core'
 import { ipcRenderer } from 'electron'
 import vitePackage from 'vite/package.json'
 import { ref, watch } from 'vue'
@@ -16,6 +17,8 @@ function About() {
 
   const viteVersion = vitePackage.version
   const vueVersion = vuePackage.version
+
+  const isDark = usePreferredDark()
 
   const showWin95Btn = ref(localStorage.getItem('win95') ? Number(localStorage.getItem('win95')) : 0)
 
@@ -65,77 +68,52 @@ function About() {
 
   return vine`
     <div
-      drag
+      :class="'drag justify-center items-center w-screen h-screen' + (isDark ? ' dark' : '')"
       :bg="showWin95Btn > 5 ? '#c3c7cb' : 'transparent'"
       flex="~ col"
-      justify-center
-      items-center
-      w-screen
-      h-screen
     >
       <TitleBar :is-win-95="showWin95Btn > 5" />
       <button
-        :class="showWin95Btn > 5 ? 'win95-button' : 'transparent-button'"
-        w-162px
-        h-162px
+        :class="showWin95Btn > 5 ? 'win95-button w-162px h-162px' : 'transparent-button w-162px h-162px'"
         p="!16px"
         m="b-4px t-24px"
       >
-        <img
-          no-drag
-          w-full
-          h-full
-          src="../../logo.png"
-          alt="logo"
-          @click="showWin95Btn++"
-        />
+        <img class="no-drag w-full h-full" src="../../logo.png" alt="logo" @click="showWin95Btn++" />
       </button>
-      <span c="#555 dark:#bbb" font-bold text-24px>
-        uyou ToDo v{{ versionText }}
-      </span>
-      <span block mt-10px text-14px c="#555 dark:#bbb" font-bold>
+      <span :c="showWin95Btn > 5 ? '' : '#555 dark:#bbb'" class="font-bold text-24px"> uyou ToDo v{{ versionText }} </span>
+      <span class="block mt-10px text-14px font-bold" :c="showWin95Btn > 5 ? '' : '#555 dark:#bbb'">
         Copyright (c) 2022-{{ new Date().getFullYear() }}, Anthony Lu
       </span>
       <button
-      no-drag
-      m="t-4 b-4"
-      :opacity="showWin95Btn > 5 ? '100' : '0'"
-      class="win95-button"
-      :disabled="showWin95Btn < 5"
+        m="t-4 b-4"
+        :opacity="showWin95Btn > 5 ? '100' : '0'"
+        class="win95-button no-drag"
+        :disabled="showWin95Btn < 5"
         @click="openUrlInBrowser('https://95.todo.uyou.org.cn')"
       >
-        {{ t("win95Btn.Button") }}
+        {{ t('win95Btn.Button') }}
       </button>
-      <div
-        flex
-        justify-center
-        items-center
-        mt-6
-        text-12px
-        mb-4
-        c="#555/50 dark:#bbb/50"
-        font-bold
-      >
-        <span>Power By</span>
+      <div class="flex justify-center items-center mt-6 text-12px mb-4 font-bold" c="#555/50 dark:#bbb/50">
+        <span :class="showWin95Btn > 5 ? 'c-black/90' : 'dark:c-#bbb'">Power By</span>
         <div flex="~ col gap-2">
-          <div flex items-center>
-          <div p-4px bg="#2c2e3a" rounded-full mx-2 mr-1>
-            <div i-logos:electron text-3 block></div>
+          <div class="flex items-center">
+            <div bg="#2c2e3a" class="rounded-full mx-2 mr-1 p-4px">
+              <div class="i-logos:electron text-3 block" />
+            </div>
+            <span :class="showWin95Btn > 5 ? 'c-black/90' : 'dark:c-#bbb'">Electron v{{ electronVersion }} </span>
           </div>
-          <span>Electron v{{ electronVersion }} </span>
+          <div class="flex items-center">
+            <div class="i-logos:vitejs text-5 block mx-2 mr-1 mt--1" />
+            <span :class="showWin95Btn > 5 ? 'c-black' : 'dark:c-#bbb'">Vite v{{ viteVersion }} </span>
           </div>
-          <div flex items-center>
-          <div i-logos:vitejs text-5 block mx-2 mr-1 mt--1></div>
-            <span>Vite v{{ viteVersion }} </span>
-          </div>
-          <div flex items-center>
-            <div i-logos:vue text="4.3" block mx-2 mr-1></div>
-            <span>Vue v{{ vueVersion }} </span>
+          <div class="flex items-center">
+            <div class="i-logos:vue block mx-2 mr-1" text="4.3" />
+            <span :class="showWin95Btn > 5 ? 'c-black' : 'dark:c-#bbb'">Vue v{{ vueVersion }} </span>
           </div>
         </div>
       </div>
     </div>
-`
+  `
 }
 
 export default About

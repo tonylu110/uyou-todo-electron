@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 import { closeWindow } from '../../../util/windowApi'
 
 const emit = defineEmits<{

@@ -22,7 +22,8 @@ function Icons() {
     <div p-7px flex="~ gap-5px wrap" max-w-150px>
       <div
         v-for="(item, index) in icons"
-        p-5px rounded-5px
+        p-5px
+        rounded-5px
         :bg="
           icon === undefined && index === 0
             ? 'primary-d dark:primary-a'
@@ -31,18 +32,12 @@ function Icons() {
               : 'black/10 active:black/20'
         "
         :key="index"
-        @click="emits('setIcon', item)"
+      @click="emits('setIcon', item)"
       >
-        <div 
+        <div
           :class="item"
           block="!~"
-          :c="
-            icon === undefined && index === 0
-              ? '!white'
-              : icon === item
-                ? '!white'
-                : ''
-          "
+          :c="icon === undefined && index === 0 ? '!white' : icon === item ? '!white' : ''"
         />
       </div>
     </div>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import emitter from '../../../../util/bus'
 import CheckBox from '../../../List/Item/CheckBox/CheckBox.vue'
 import { createToast } from '../../../Toast'
-import emitter from '../../../../util/bus'
 import Edit from './Edit/Edit.vue'
 
 const props = defineProps<{

@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { cateItem } from '../../../../ListMenu/ICateItem'
 import { Dropdown as VDropdown } from 'floating-vue'
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { cateItem } from '../../../../ListMenu/ICateItem'
 
 const props = defineProps<{
   title: string

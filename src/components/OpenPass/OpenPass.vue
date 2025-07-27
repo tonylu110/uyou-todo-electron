@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { onLongPress } from '@vueuse/core'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { onLongPress } from '@vueuse/core'
 import { createToast } from '../../components/Toast'
 import nums from './nums.vue'
-import nums2 from './otherKey/nums2.vue'
 import none from './otherKey/none.vue'
+import nums2 from './otherKey/nums2.vue'
 
 const { t } = useI18n()
 

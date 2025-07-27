@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" vapor>
 import os from 'node:os'
 import { onUnmounted, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
