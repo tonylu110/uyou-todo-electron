@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { onMounted, ref, watchEffect } from 'vue'
-import { useRoute } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 import { ipcRenderer } from 'electron'
-import router from '../router'
-import TabBar from '../components/TabBar/TabBar.vue'
-import SettingList from '../components/SettingList/SettingList.vine'
+import { onMounted, ref, watchEffect } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRoute } from 'vue-router'
 import Alert from '../components/Alert/Alert.vue'
 import Item from '../components/ItemBox/Item/Item.vue'
 import ItemButton from '../components/ItemBox/ItemButton/ItemButton.vue'
-import emitter from '../util/bus'
-import { createToast } from '../components/Toast'
 import ItemSpace from '../components/ItemBox/ItemSpace/ItemSpace.vine'
+import SettingList from '../components/SettingList/SettingList.vine'
 import NoteTabBar from '../components/TabBar/NoteTabBar.vue'
+import TabBar from '../components/TabBar/TabBar.vue'
+import { createToast } from '../components/Toast'
+import router from '../router'
+import emitter from '../util/bus'
 
 const { t } = useI18n()
 

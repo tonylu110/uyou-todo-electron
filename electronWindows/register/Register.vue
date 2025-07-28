@@ -88,8 +88,10 @@ fetch('https://api.todo.uyou.org.cn/allusers').then((res) => {
       alt=""
     >
     <div
+      :class="isMac() ? 'right-4' : 'left-4'"
       bg="primary-d dark:primary-a/70"
-      mb-2 flex items-center rounded-1 p-2 text-3 c-white
+      fixed top-4 mb-2
+      flex items-center rounded-1 p-2 text-3 c-white
     >
       <div mr-2>
         {{ t('accountPage.userNum') }}

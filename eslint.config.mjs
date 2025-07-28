@@ -30,12 +30,5 @@ export default antfu(
       'prefer-const': 'off',
     },
   },
-  {
-    files: ['**/*.vine.ts'],
-    rules: {
-      'prefer-template': 'off',
-      'unused-imports/no-unused-vars': 'off',
-    },
-  },
   ...VueVine(),
 )

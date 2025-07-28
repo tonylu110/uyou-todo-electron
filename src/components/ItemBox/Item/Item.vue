@@ -1,4 +1,4 @@
-<script setup lang="ts" vapor>
+<script setup lang="ts">
 import { ElOption, ElSelect } from 'element-plus'
 import { ref } from 'vue'
 import Switch from '../../Switch'
