@@ -126,6 +126,12 @@ importers:
       moment:
         specifier: ^2.30.1
         version: 2.30.1
+      pinia:
+        specifier: ^3.0.3
+        version: 3.0.3(typescript@5.7.2)(vue@3.6.0-alpha.2(typescript@5.7.2))
+      pinia-plugin-persistedstate:
+        specifier: ^4.4.1
+        version: 4.4.1(pinia@3.0.3(typescript@5.7.2)(vue@3.6.0-alpha.2(typescript@5.7.2)))
       rolldown:
         specifier: 1.0.0-beta.29
         version: 1.0.0-beta.29
@@ -1637,50 +1643,50 @@ packages:
     resolution: {integrity: sha512-pWrTcoFNWuwHlA9CvlfSsGWs14JxfN1TH25zM5L7o0pRLhsoZkDnTsXfQRJBEWJoV5DL0jf+Z+sxiud+K0mq1g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250727.1':
-    resolution: {integrity: sha512-hg6++JlfEIu68riEYMbMyGWKG1i/WeTdNYPq3vaKFWRA7fPNdqE3b7TKyz+/HRJJ61qqwgtzio6xX7PIuw+ypA==}
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250730.1':
+    resolution: {integrity: sha512-QL4fBR2x1U84Gzt20MmXzgDRmtAGle61eyVIPn7cyJtZqtbPsBeNFrppEctgerJL74CQYLDtdValztcoHOAbUg==}
     engines: {node: '>=20.6.0'}
     cpu: [arm64]
     os: [darwin]
 
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250727.1':
-    resolution: {integrity: sha512-rYzoYMw0NJaRJgKxT2fQdYUaQwrKpgW2ZiVKmMj6wEyiZAEhfWK4RULcrEJbG1Dg5Uy3dX+S2YlPlCQ97RMS9Q==}
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250730.1':
+    resolution: {integrity: sha512-e0j+K3IGTXFgOGKqBj5CuSRvLV7Psojq8oTFkHKjOsAd+ekgV4EnFIaR/PUCXFlNvgLkrFqFVo+10Kav0NVzfA==}
     engines: {node: '>=20.6.0'}
     cpu: [x64]
     os: [darwin]
 
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250727.1':
-    resolution: {integrity: sha512-NC7cRGnsy6RXIokZYAAZ3x4agxNo4ltLxo760ZSh4K/9hkGqjcT7rNwZTnLqpfjPLtqlnSQvm5BfpOed2puIwQ==}
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250730.1':
+    resolution: {integrity: sha512-/IGa+bcZpBeol4NX7ZbsjtVmSHhygiNTluW+femwM47MQhsJMPNZhAVDtv2yLMgjbq9UGt75gBayNqUKFgOmaQ==}
     engines: {node: '>=20.6.0'}
     cpu: [arm64]
     os: [linux]
 
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20250727.1':
-    resolution: {integrity: sha512-J850kHPiqqjYSHu/xlDlrS0ncSQddHRJ7MhsAp34HhFMIYRMACIvspgdFBFkxwYMVtAGwTPYgH/cUVoDzTbP5A==}
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20250730.1':
+    resolution: {integrity: sha512-0fZYkDJMXS7OF1DhCUDBik8JSfbgmZZWT3qe8lBn4IlNnHrCQLkeKol94XGXeIWdqR8gAb+J12e6QCi7GM2KBQ==}
     engines: {node: '>=20.6.0'}
     cpu: [arm]
     os: [linux]
 
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20250727.1':
-    resolution: {integrity: sha512-b5msGp1HCZ1QR8yePyRkjpBhj1ui8BwgWey9B/XRaosomWeeuJLVzoFlwTjl76DkP8EHcasAkaUxmV4WVeqXyQ==}
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20250730.1':
+    resolution: {integrity: sha512-OYdwKK5zVyZgga1G300T3Y+2nzT1kZuIgNB4h7oOaEMRwAl9eQSrfSinWpmpLaXjrkaZozzcvRKtZr54wdveWw==}
     engines: {node: '>=20.6.0'}
     cpu: [x64]
     os: [linux]
 
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250727.1':
-    resolution: {integrity: sha512-bNSKa9+5FpmUrBtjearyaVE/X0l/oT+G5MnIR4Ci0nUi22hYcIh+EbYfnV3oG/XIhBxKsKNMXZ8XaaRFcTEXLw==}
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250730.1':
+    resolution: {integrity: sha512-CW3cahl3EcY1nR+eOltkoKwbKbDiTpvZh/FmqNvSpOA0RO5MgjRfNHboXKMjIIq5dfqhZHOmC2RvuacMSTHecA==}
     engines: {node: '>=20.6.0'}
     cpu: [arm64]
     os: [win32]
 
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20250727.1':
-    resolution: {integrity: sha512-n2n08YGau+IZTWWbGJwjdtx0cdh1Xv8HWgQcqxRTO4vNCv2FSrOi9e4Wd/dV0oWa5HfDNdoUZKfgmFph2DPLqw==}
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20250730.1':
+    resolution: {integrity: sha512-AGGYJpB+aysMP5FRdMHblHGLHxf7PiZTozjTzlQyFkz1Pg8NulscGS36v2XYsLgNvWpji6ZFB+4zVSJqT36IHQ==}
     engines: {node: '>=20.6.0'}
     cpu: [x64]
     os: [win32]
 
-  '@typescript/native-preview@7.0.0-dev.20250727.1':
-    resolution: {integrity: sha512-WMWrFtHIWpQHu8xiZ78dsCR0fLnClmaRh1gLDoA9j4qzUtw5BEFcS1wO8zaugoTErGxiPpxdaSJWS8wi1Z3Vtg==}
+  '@typescript/native-preview@7.0.0-dev.20250730.1':
+    resolution: {integrity: sha512-7CntXGh00x0xdvcXjEi6NueTr2yHrV2t16ydnkGLSdd240kKN+VuSZAX5I0U8wl1XIgAmTyEmPEgCIBDHXvZ5Q==}
     engines: {node: '>=20.6.0'}
     hasBin: true
 
@@ -2057,6 +2063,15 @@ packages:
   '@vue/devtools-api@6.6.4':
     resolution: {integrity: sha512-sGhTPMuXqZ1rVOk32RylztWkfXTRhuS7vgAKv0zjqk8gbsHkJ7xfFf+jbySxt7tWObEJwyKaHMikV/WGDiQm8g==}
 
+  '@vue/devtools-api@7.7.7':
+    resolution: {integrity: sha512-lwOnNBH2e7x1fIIbVT7yF5D+YWhqELm55/4ZKf45R9T8r9dE2AIOy8HKjfqzGsoTHFbWbr337O4E0A0QADnjBg==}
+
+  '@vue/devtools-kit@7.7.7':
+    resolution: {integrity: sha512-wgoZtxcTta65cnZ1Q6MbAfePVFxfM+gq0saaeytoph7nEa7yMXoi6sCPy4ufO111B9msnw0VOWjPEFCXuAKRHA==}
+
+  '@vue/devtools-shared@7.7.7':
+    resolution: {integrity: sha512-+udSj47aRl5aKb0memBvcUG9koarqnxNM5yjuREvqwK6T3ap4mn3Zqqc17QrBFTqSMjr3HK1cvStEZpMDpfdyw==}
+
   '@vue/language-core@2.1.10':
     resolution: {integrity: sha512-DAI289d0K3AB5TUG3xDp9OuQ71CnrujQwJrQnfuZDwo6eGNf0UoRlPuaVNO+Zrn65PC3j0oB2i7mNmVPggeGeQ==}
     peerDependencies:
@@ -2320,6 +2335,9 @@ packages:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
 
+  birpc@2.5.0:
+    resolution: {integrity: sha512-VSWO/W6nNQdyP520F1mhf+Lc2f8pjGQOtoHHm7Ze8Go1kX7akpVIrtTa0fn+HB0QJEDVacl6aO08YE0PgXfdnQ==}
+
   bl@4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
 
@@ -2551,6 +2569,10 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
+  copy-anything@3.0.5:
+    resolution: {integrity: sha512-yCEafptTtb4bk7GLEQoM8KVJpxAfdBJYaXyzQEgQQQgYrZiDp8SJmGKlYza6CYjEDNstAdNdKA3UuoULlEbS6w==}
+    engines: {node: '>=12.13'}
+
   core-js-compat@3.44.0:
     resolution: {integrity: sha512-JepmAj2zfl6ogy34qfWtcE7nHKAJnKsQFRn++scjVS2bZFllwptzw61BZcZFYBPpUznLfAvh0LGhxKppk04ClA==}
 
@@ -2631,6 +2653,9 @@ packages:
 
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
+
+  deep-pick-omit@1.2.1:
+    resolution: {integrity: sha512-2J6Kc/m3irCeqVG42T+SaUMesaK7oGWaedGnQQK/+O0gYc+2SP5bKh/KKTE7d7SJ+GCA9UUE1GRzh6oDe0EnGw==}
 
   deepmerge@4.3.1:
     resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
@@ -3313,6 +3338,9 @@ packages:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
 
+  hookable@5.5.3:
+    resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
+
   hosted-git-info@4.1.0:
     resolution: {integrity: sha512-kyCuEOWjJqZuDbRHzL8V93NzQhwIB71oFWSyzVo+KPZI+pnQPPxucdkrOZvkLRnrf5URsQM+IJ09Dw29cRALIA==}
     engines: {node: '>=10'}
@@ -3447,6 +3475,10 @@ packages:
   is-unicode-supported@0.1.0:
     resolution: {integrity: sha512-knxG2q4UC3u8stRGyAVJCOdxFmv5DZiRcdlIaAQXAbSfJya+OhopNotLQrstBhququ4ZpuKbDc/8S6mgXgPFPw==}
     engines: {node: '>=10'}
+
+  is-what@4.1.16:
+    resolution: {integrity: sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A==}
+    engines: {node: '>=12.13'}
 
   isarray@1.0.0:
     resolution: {integrity: sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==}
@@ -4186,6 +4218,29 @@ packages:
     resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
     engines: {node: '>=12'}
 
+  pinia-plugin-persistedstate@4.4.1:
+    resolution: {integrity: sha512-lmuMPpXla2zJKjxEq34e1E9P9jxkWEhcVwwioCCE0izG45kkTOvQfCzvwhW3i38cvnaWC7T1eRdkd15Re59ldw==}
+    peerDependencies:
+      '@nuxt/kit': '>=3.0.0'
+      '@pinia/nuxt': '>=0.10.0'
+      pinia: '>=3.0.0'
+    peerDependenciesMeta:
+      '@nuxt/kit':
+        optional: true
+      '@pinia/nuxt':
+        optional: true
+      pinia:
+        optional: true
+
+  pinia@3.0.3:
+    resolution: {integrity: sha512-ttXO/InUULUXkMHpTdp9Fj4hLpD/2AoJdmAbAeW2yu1iy1k+pkFekQXw5VpC0/5p51IOR/jDaDRfRWRnMMsGOA==}
+    peerDependencies:
+      typescript: '>=4.4.4'
+      vue: ^2.7.0 || ^3.5.11
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   pkg-types@1.3.1:
     resolution: {integrity: sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ==}
 
@@ -4363,6 +4418,9 @@ packages:
   reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
+
+  rfdc@1.4.1:
+    resolution: {integrity: sha512-q1b3N5QkRUWUl7iyylaaj3kOpIT0N2i9MqIEQXP73GVsN9cw3fdx8X63cEmWhJGi2PPCF23Ijp7ktmd39rawIA==}
 
   rimraf@2.7.1:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
@@ -4567,6 +4625,10 @@ packages:
   spdx-license-ids@3.0.13:
     resolution: {integrity: sha512-XkD+zwiqXHikFZm4AX/7JSCXA98U5Db4AFd5XUg/+9UNtnH75+Z9KxtpYiJZx36mUDVOwH83pl7yvCer6ewM3w==}
 
+  speakingurl@14.0.1:
+    resolution: {integrity: sha512-1POYv7uv2gXoyGFpBCmpDVSNV74IfsWlDW216UPjbWufNf+bSU6GdbDsxdcxtfwb4xlI3yxzOTKClUosxARYrQ==}
+    engines: {node: '>=0.10.0'}
+
   sprintf-js@1.1.3:
     resolution: {integrity: sha512-Oo+0REFV59/rz3gfJNKQiBlwfHaSESl1pcGyABQsnnIfWOFt6JNj5gCog2U6MLZ//IGYD+nA8nI+mTShREReaA==}
 
@@ -4611,6 +4673,10 @@ packages:
   sumchecker@3.0.1:
     resolution: {integrity: sha512-MvjXzkz/BOfyVDkG0oFOtBxHX2u3gKbMHIF/dXblZsgD3BWOFLmHovIpZY7BykJdAjcqRCBi1WYBNdEC9yI7vg==}
     engines: {node: '>= 8.0'}
+
+  superjson@2.2.2:
+    resolution: {integrity: sha512-5JRxVqC8I8NuOUjzBbvVJAKNM8qoVuH0O77h4WInc/qC2q5IreqKxYwgkga3PfA22OayK2ikceb/B26dztPl+Q==}
+    engines: {node: '>=16'}
 
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -6448,36 +6514,36 @@ snapshots:
       '@typescript-eslint/types': 8.38.0
       eslint-visitor-keys: 4.2.1
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250727.1':
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250730.1':
     optional: true
 
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250727.1':
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250730.1':
     optional: true
 
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250727.1':
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250730.1':
     optional: true
 
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20250727.1':
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20250730.1':
     optional: true
 
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20250727.1':
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20250730.1':
     optional: true
 
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250727.1':
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250730.1':
     optional: true
 
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20250727.1':
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20250730.1':
     optional: true
 
-  '@typescript/native-preview@7.0.0-dev.20250727.1':
+  '@typescript/native-preview@7.0.0-dev.20250730.1':
     optionalDependencies:
-      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20250727.1
-      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20250727.1
-      '@typescript/native-preview-linux-arm': 7.0.0-dev.20250727.1
-      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20250727.1
-      '@typescript/native-preview-linux-x64': 7.0.0-dev.20250727.1
-      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20250727.1
-      '@typescript/native-preview-win32-x64': 7.0.0-dev.20250727.1
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20250730.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20250730.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20250730.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20250730.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20250730.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20250730.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20250730.1
 
   '@umami/node@0.4.0': {}
 
@@ -7144,6 +7210,24 @@ snapshots:
 
   '@vue/devtools-api@6.6.4': {}
 
+  '@vue/devtools-api@7.7.7':
+    dependencies:
+      '@vue/devtools-kit': 7.7.7
+
+  '@vue/devtools-kit@7.7.7':
+    dependencies:
+      '@vue/devtools-shared': 7.7.7
+      birpc: 2.5.0
+      hookable: 5.5.3
+      mitt: 3.0.1
+      perfect-debounce: 1.0.0
+      speakingurl: 14.0.1
+      superjson: 2.2.2
+
+  '@vue/devtools-shared@7.7.7':
+    dependencies:
+      rfdc: 1.4.1
+
   '@vue/language-core@2.1.10(typescript@5.7.2)':
     dependencies:
       '@volar/language-core': 2.4.20
@@ -7518,6 +7602,8 @@ snapshots:
 
   binary-extensions@2.2.0: {}
 
+  birpc@2.5.0: {}
+
   bl@4.1.0:
     dependencies:
       buffer: 5.7.1
@@ -7816,6 +7902,10 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
+  copy-anything@3.0.5:
+    dependencies:
+      is-what: 4.1.16
+
   core-js-compat@3.44.0:
     dependencies:
       browserslist: 4.25.1
@@ -7884,6 +7974,8 @@ snapshots:
       mimic-response: 3.1.0
 
   deep-is@0.1.4: {}
+
+  deep-pick-omit@1.2.1: {}
 
   deepmerge@4.3.1: {}
 
@@ -8794,6 +8886,8 @@ snapshots:
 
   he@1.2.0: {}
 
+  hookable@5.5.3: {}
+
   hosted-git-info@4.1.0:
     dependencies:
       lru-cache: 6.0.0
@@ -8918,6 +9012,8 @@ snapshots:
   is-obj@2.0.0: {}
 
   is-unicode-supported@0.1.0: {}
+
+  is-what@4.1.16: {}
 
   isarray@1.0.0: {}
 
@@ -9782,6 +9878,21 @@ snapshots:
 
   picomatch@4.0.3: {}
 
+  pinia-plugin-persistedstate@4.4.1(pinia@3.0.3(typescript@5.7.2)(vue@3.6.0-alpha.2(typescript@5.7.2))):
+    dependencies:
+      deep-pick-omit: 1.2.1
+      defu: 6.1.4
+      destr: 2.0.5
+    optionalDependencies:
+      pinia: 3.0.3(typescript@5.7.2)(vue@3.6.0-alpha.2(typescript@5.7.2))
+
+  pinia@3.0.3(typescript@5.7.2)(vue@3.6.0-alpha.2(typescript@5.7.2)):
+    dependencies:
+      '@vue/devtools-api': 7.7.7
+      vue: 3.6.0-alpha.2(typescript@5.7.2)
+    optionalDependencies:
+      typescript: 5.7.2
+
   pkg-types@1.3.1:
     dependencies:
       confbox: 0.1.8
@@ -9956,6 +10067,8 @@ snapshots:
   retry@0.12.0: {}
 
   reusify@1.0.4: {}
+
+  rfdc@1.4.1: {}
 
   rimraf@2.7.1:
     dependencies:
@@ -10175,6 +10288,8 @@ snapshots:
 
   spdx-license-ids@3.0.13: {}
 
+  speakingurl@14.0.1: {}
+
   sprintf-js@1.1.3: {}
 
   ssri@9.0.1:
@@ -10222,6 +10337,10 @@ snapshots:
       debug: 4.4.1
     transitivePeerDependencies:
       - supports-color
+
+  superjson@2.2.2:
+    dependencies:
+      copy-anything: 3.0.5
 
   supports-color@7.2.0:
     dependencies:
@@ -10605,7 +10724,7 @@ snapshots:
 
   vue-vine-tsc@1.6.5(typescript@5.7.2):
     dependencies:
-      '@typescript/native-preview': 7.0.0-dev.20250727.1
+      '@typescript/native-preview': 7.0.0-dev.20250730.1
       '@volar/language-core': 2.4.20
       '@volar/typescript': 2.4.20
       '@vue-vine/language-service': 1.6.5(typescript@5.7.2)

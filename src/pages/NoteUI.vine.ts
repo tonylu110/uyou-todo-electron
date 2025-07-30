@@ -17,6 +17,7 @@ import SideBar from '../components/Tabs/SideBar/SideBar.vue'
 import Tab from '../components/Tabs/Tab/Tab.vue'
 import Tabs from '../components/Tabs/Tabs.vue'
 import firstLoad from '../components/TitleBar/firstLoad'
+import { useTodoStore } from '../store/todoStore'
 import { versionCode } from '../util/appVersionCode'
 import emitter from '../util/bus'
 import getCateList from '../util/getCateList'
@@ -128,48 +129,26 @@ function NoteUI() {
 
   const showSearch = ref(false)
 
-  // 缓存本地存储值，避免重复访问
   const uid = ref(localStorage.getItem('uid'))
   const autoSync = ref(localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null)
 
   const isLoading = ref(false)
 
+  const todoStore = useTodoStore()
+
   async function sync() {
-    if (!uid) {
+    if (!uid.value) {
       router.push('/account?from=setting')
       return
     }
 
     try {
       isLoading.value = true
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 10000)
-
-      const response = await fetch('https://api.todo.uyou.org.cn/gettodo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          uid: localStorage.getItem('uid'),
-        }),
-        signal: controller.signal,
-      })
-
-      clearTimeout(timeoutId)
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+      const success = await todoStore.syncFromServer(uid.value)
+      if (success) {
+        await getCateList()
+        window.location.reload()
       }
-
-      const res = await response.json()
-      localStorage.setItem('ToDo', res.data)
-      await getCateList()
-      window.location.reload()
-    }
-    catch (error) {
-      console.error('Sync failed:', error)
-      // 可以在这里添加错误提示UI
     }
     finally {
       isLoading.value = false
@@ -333,49 +312,47 @@ function NoteUI() {
       </div>
       <div class="relative w-75vw flex">
         <Transition name="list">
-          <keep-alive>
-            <component :is="noteComponents[listId as keyof typeof noteComponents]" :key="listId" />
-          </keep-alive>
+          <component :is="noteComponents[listId as keyof typeof noteComponents]" :key="listId" />
         </Transition>
       </div>
       <div flex="~ gap-10px" class="fixed bottom-15px left-15px no-drag">
         <div
         v-if="listId === 'all' && !autoSync"
-          class="flex items-center justify-center p-13px"
+        class="flex items-center justify-center p-13px"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
-        rounded="10px hover:30px"
-          shadow="md hover:lg primary-d/70 dark:primary-a/70"
+          rounded="10px hover:30px"
+        shadow="md hover:lg primary-d/70 dark:primary-a/70"
           transform="active:scale-90 hover:scale-120"
-        @click="sync"
+          @click="sync"
         >
           <div
           :class="uid ? 'i-ph:cloud-arrow-down-bold text-22px' : 'i-ph:user-bold text-22px'"
-            c="!white"
+          c="!white"
           />
         </div>
       </div>
       <div flex="~ gap-10px" class="fixed bottom-15px right-15px no-drag">
         <div
-          v-if="listId === 'all'"
+        v-if="listId === 'all'"
           class="flex items-center justify-center p-13px"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
           rounded="10px hover:30px"
           shadow="md hover:lg primary-d/70 dark:primary-a/70"
-        transform="active:scale-90 hover:scale-120"
-          @click="showCateAdd = true"
+          transform="active:scale-90 hover:scale-120"
+        @click="showCateAdd = true"
         >
           <div class="i-ph:plus-bold text-22px c-white" />
         </div>
         <div
-          class="flex items-center justify-center p-13px"
+        class="flex items-center justify-center p-13px"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
-        rounded="10px hover:30px"
-          shadow="md hover:lg primary-d/70 dark:primary-a/70"
+          rounded="10px hover:30px"
+        shadow="md hover:lg primary-d/70 dark:primary-a/70"
           transform="active:scale-90 hover:scale-120"
-        @click="router.push('/setting')"
+          @click="router.push('/setting')"
         >
           <div class="i-ph:gear-fine-bold text-22px c-white" />
         </div>
@@ -384,7 +361,7 @@ function NoteUI() {
       <Search :open="showSearch" @close="showSearch = false" />
     </SettingList>
     <Alert
-      :dialog-show="alertShow"
+    :dialog-show="alertShow"
       :title="updateTitle"
       :confirm-btn-name="t('update.gotoUpdate')"
       @cancel="() => (alertShow = false)"
@@ -392,7 +369,7 @@ function NoteUI() {
     >
       <ul class="m-0 p-l-20px">
         <li v-for="(item, index) in alertMsg" :key="index">
-          {{ item.slice(2) }}
+        {{ item.slice(2) }}
         </li>
       </ul>
     </Alert>

@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron'
 import { vClosePopper, vTooltip } from 'floating-vue'
+import { createPinia } from 'pinia'
 import { createApp, ref, vaporInteropPlugin } from 'vue'
 import { PerfectScrollbarPlugin } from 'vue3-perfect-scrollbar'
 import App from './App.vue'
@@ -14,6 +15,7 @@ import 'virtual:uno.css'
 import 'virtual:unocss-devtools'
 import 'vue3-perfect-scrollbar/style.css'
 
+const pinia = createPinia()
 const simpleMode = localStorage.getItem('simpleMode')
 
 let app
@@ -27,6 +29,7 @@ else
   app = createApp(AppSimple)
 
 app.use(vaporInteropPlugin)
+app.use(pinia)
 app.use(router)
 app.use(i18n)
 app.use(PerfectScrollbarPlugin)

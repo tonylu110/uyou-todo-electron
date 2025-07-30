@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type ITodoList from '../../../interface/ITodoListArray'
 import { Dropdown as VDropdown } from 'floating-vue'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import emitter from '../../../util/bus'
+import { useCateStore } from '../../../store/cateStore'
+import { useTodoStore } from '../../../store/todoStore'
 import Delete from './Delete/Delete.vine'
 import Edit from './Edit/Edit.vue'
 import Item from './Item/Item.vue'
@@ -16,52 +16,99 @@ interface Props {
   otherCate?: boolean
   showAddItem?: boolean
   showBtn?: boolean
-  list: ITodoList[]
   showDelete?: boolean
 }
 
-const { title = 'title', color = 'primary-d', showAddItem = true, showBtn = true, showDelete = false, id, list } = defineProps<Props>()
-
-const emits = defineEmits<{
-  deleteCate: [id: number | string]
-  delWithToDo: [id: number | string]
-  delItem: [id: number]
-  setOk: [id: number, ok: boolean]
-  edit: [id: number | string, name: string, icon: string, color: string | null]
-  editItem: [id: number, title: string, cateId: number | string]
-  setStar: [id: number, star: boolean]
-  delete: []
-}>()
-
+const { title = 'title', color = 'primary-d', showAddItem = true, showBtn = true, showDelete = false, id } = defineProps<Props>()
+const todoStore = useTodoStore()
+const cateStore = useCateStore()
 const { t } = useI18n()
 
 const listData = computed(() => {
+  const todos = todoStore.todoList.data
   if (id === 'today') {
-    return list.filter(listData => new Date(listData.id).toDateString() === new Date().toDateString() || new Date(listData.time!).toDateString() === new Date().toDateString())
+    return todos.filter(todo =>
+      new Date(todo.id).toDateString() === new Date().toDateString()
+        || new Date(todo.time!).toDateString() === new Date().toDateString(),
+    )
   }
   else if (id === 'star') {
-    return list.filter(listData => listData.star)
+    return todos.filter(todo => todo.star)
   }
   else if (id === 'allNotDo') {
-    return list.filter(listData => !listData.ok)
+    return todos.filter(todo => !todo.ok)
   }
   else if (id === 'allDo') {
-    return list.filter(listData => listData.ok)
+    return todos.filter(todo => todo.ok)
   }
   else {
-    return list.filter(listData => listData.cate === `${id}`)
+    return todos.filter(todo => todo.cate === `${id}`)
   }
 })
-const otherList = ref(list.filter(listData => listData.cate === undefined))
+
+const otherList = computed(() =>
+  todoStore.todoList.data.filter(todo => todo.cate === undefined),
+)
 
 const isOpen = ref(false)
-
 const showAdd = ref(false)
 const itemText = ref('')
-function add() {
-  emitter.emit('noteShowAddItem', { id, text: itemText.value })
+
+async function add() {
+  if (!id || !itemText.value)
+    return
+
+  await todoStore.addTodo({
+    ok: false,
+    id: new Date().getTime(),
+    text: itemText.value,
+    cate: `${id}`,
+  })
+
   showAdd.value = false
   itemText.value = ''
+}
+
+async function deleteCate(categoryId: number | string) {
+  await cateStore.deleteCategory(categoryId)
+}
+
+async function deleteWithTodos(categoryId: number | string) {
+  await cateStore.deleteCategoryWithTodos(categoryId)
+}
+
+async function deleteTodo(todoId: number) {
+  await todoStore.deleteTodo(todoId)
+}
+
+async function setTodoOk(todoId: number, isOk: boolean) {
+  await todoStore.updateTodo(todoId, { ok: isOk })
+}
+
+async function editCategory(categoryId: number | string, name: string, icon: string, color: string | null) {
+  await cateStore.updateCategory(categoryId, {
+    title: name,
+    icon,
+    color,
+  })
+}
+
+async function editTodoItem(todoId: number, title: string, cateId: number | string) {
+  await todoStore.updateTodo(todoId, {
+    text: title,
+    cate: `${cateId}`,
+  })
+}
+
+async function setTodoStar(todoId: number, star: boolean) {
+  await todoStore.updateTodo(todoId, { star })
+}
+
+async function deleteAllCompleted() {
+  const completedTodos = todoStore.todoList.data.filter(todo => todo.ok)
+  for (const todo of completedTodos) {
+    await todoStore.deleteTodo(todo.id)
+  }
 }
 </script>
 
@@ -86,7 +133,7 @@ function add() {
           :color
           :icon
           :name="title"
-          @edit="(name: string, icon: string, color: string | null) => emits('edit', id!, name, icon, color)"
+          @edit="(name: string, icon: string, color: string | null) => editCategory(id!, name, icon, color)"
         />
         <VDropdown
           v-model:shown="isOpen"
@@ -115,9 +162,7 @@ function add() {
                   bg="!primary-d active:!primary-a"
                   p="x-10px y-5px" c="!white"
                   shadow="sm black/20" mr-5px flex cursor-pointer items-center justify-center rounded-5px border-none
-                  @click.stop="() => {
-                    emits('deleteCate', id!)
-                  }"
+                  @click.stop="() => deleteCate(id!)"
                 >
                   <div i-mdi:check-bold mr-5px />
                   <span>{{ t('alertText.returnText') }}</span>
@@ -128,9 +173,7 @@ function add() {
                   p="x-10px y-5px" c="!white"
                   flex cursor-pointer items-center justify-center rounded-5px border-none
                   shadow="sm black/20"
-                  @click.stop="() => {
-                    emits('delWithToDo', id!)
-                  }"
+                  @click.stop="() => deleteWithTodos(id!)"
                 >
                   <div i-ph:warning-circle-bold mr-5px />
                   <span>{{ t('listMenu.delTodo') }}</span>
@@ -145,7 +188,7 @@ function add() {
         flex="~ gap-5px" w="0 hover:14px" transition="all 300"
         items-center overflow-hidden p="r-10px l-5px" op="0 hover:100"
       >
-        <Delete @delete="emits('delete')" />
+        <Delete @delete="deleteAllCompleted" />
       </div>
       <div v-else w-13px />
     </div>
@@ -158,10 +201,10 @@ function add() {
             :is-ok="item.ok"
             :cate-id="id"
             :star="item.star"
-            @edit="(itemId: number, title: string, cateId: string | number) => emits('editItem', itemId, title, cateId)"
-            @del="(itemId: number) => emits('delItem', itemId)"
-            @set-ok="(itemId: number, isOk: boolean) => emits('setOk', itemId, isOk)"
-            @set-star="(itemId: number, star: boolean) => emits('setStar', itemId, star)"
+            @edit="(itemId: number, title: string, cateId: string | number) => editTodoItem(itemId, title, cateId)"
+            @del="(itemId: number) => deleteTodo(itemId)"
+            @set-ok="(itemId: number, isOk: boolean) => setTodoOk(itemId, isOk)"
+            @set-star="(itemId: number, star: boolean) => setTodoStar(itemId, star)"
           />
         </div>
       </template>
@@ -174,10 +217,10 @@ function add() {
             :color="color"
             :cate-id="id"
             :star="item.star"
-            @edit="(itemId: number, title: string, cateId: string | number) => emits('editItem', itemId, title, cateId)"
-            @del="(itemId: number) => emits('delItem', itemId)"
-            @set-ok="(itemId: number, isOk: boolean) => emits('setOk', itemId, isOk)"
-            @set-star="(itemId: number, star: boolean) => emits('setStar', itemId, star)"
+            @edit="(itemId: number, title: string, cateId: string | number) => editTodoItem(itemId, title, cateId)"
+            @del="(itemId: number) => deleteTodo(itemId)"
+            @set-ok="(itemId: number, isOk: boolean) => setTodoOk(itemId, isOk)"
+            @set-star="(itemId: number, star: boolean) => setTodoStar(itemId, star)"
           />
         </div>
       </template>
