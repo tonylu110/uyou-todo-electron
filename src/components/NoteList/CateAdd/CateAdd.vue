@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import emitter from '../../../util/bus'
+import { useCateStore } from '../../../store/cateStore'
 import Alert from '../../Alert/Alert.vue'
 import Icons from '../../ListMenu/MenuItem/Icons/Icons.vine'
 import Colors from './Colors/Color.vue'
@@ -15,31 +15,38 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useI18n()
+const cateStore = useCateStore()
 
 const cateName = ref('')
 const icon = ref('i-ph:radio-button-bold')
 const color = ref<string | null>(null)
 
-function addCate() {
-  emitter.emit('addCateNote', {
-    name: cateName.value,
+async function addCate() {
+  if (!cateName.value)
+    return
+
+  await cateStore.addCategory({
+    title: cateName.value,
     icon: icon.value,
     color: color.value,
   })
+
   emit('close')
-  cateName.value = ''
-  icon.value = 'i-ph:radio-button-bold'
-  color.value = null
+  resetForm()
 }
 
 const isVip = ref(localStorage.getItem('isVip') === 'true')
 const useCustColor = ref(localStorage.getItem('useCustColor') === 'true')
 
-function close() {
-  emit('close')
+function resetForm() {
   cateName.value = ''
   icon.value = 'i-ph:radio-button-bold'
   color.value = null
+}
+
+function close() {
+  emit('close')
+  resetForm()
 }
 </script>
 
