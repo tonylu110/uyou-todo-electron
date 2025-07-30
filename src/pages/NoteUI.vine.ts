@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron'
-import { onUnmounted, ref, watch } from 'vue'
+import { debounce } from 'lodash-es'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import Alert from '../components/Alert/Alert.vue'
@@ -22,11 +23,15 @@ import getCateList from '../util/getCateList'
 import { isMac } from '../util/os'
 import { topWindow } from '../util/windowApi'
 
-// eslint-disable-next-line vue-vine/format-vine-component-name
 function NoteUI() {
   const router = useRouter()
-
   const { t, locale } = useI18n()
+
+  const noteComponents = {
+    all: NoteList,
+    use: SpNoteList,
+    other: OtherNoteList,
+  } as const
 
   const alertShow = ref(false)
   const alertMsg = ref<string[]>([])
@@ -35,19 +40,34 @@ function NoteUI() {
   const version = versionCode
   const autoUpdateState = localStorage.getItem('autoUpdate') !== 'false'
 
-  if (autoUpdateState) {
-    fetch('https://api.todo.uyou.org.cn/update/get').then((res) => {
-      return res.json()
-    }).then((res) => {
+  const checkUpdate = async () => {
+    try {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10s timeout
+
+      const response = await fetch('https://api.todo.uyou.org.cn/update/get', {
+        signal: controller.signal,
+      })
+      clearTimeout(timeoutId)
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const res = await response.json()
       if (res[1].code > version) {
-        if (locale.value === 'zh-cn')
-          alertMsg.value = res[1].data
-        else
-          alertMsg.value = res[1].enData
+        alertMsg.value = locale.value === 'zh-cn' ? res[1].data : res[1].enData
         newVersion.value = res[1].version
         alertShow.value = true
       }
-    })
+    }
+    catch (error) {
+      console.error('Update check failed:', error)
+    }
+  }
+
+  if (autoUpdateState) {
+    checkUpdate()
   }
 
   function returnClick() {
@@ -77,7 +97,7 @@ function NoteUI() {
   const lableWidth = ref('')
   const lableLeft = ref('0')
   const tabsRef = ref<{
-  $el: HTMLDivElement
+    $el: HTMLDivElement
   }>()
   function choose(id: string, width: string, left: number) {
     setLab(width, left)
@@ -90,25 +110,42 @@ function NoteUI() {
   }
 
   const showTab = ref(!(window.innerWidth < 640))
-  window.addEventListener('resize', () => {
-    if (window.innerWidth < 640) {
-      showTab.value = false
-    }
-    else {
-      showTab.value = true
-    }
+
+  const handleResize = debounce(() => {
+    showTab.value = window.innerWidth >= 640
+  }, 200)
+
+  onMounted(() => {
+    window.addEventListener('resize', handleResize)
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener('resize', handleResize)
+    handleResize.cancel()
   })
 
   const openSideBar = ref(false)
 
   const showSearch = ref(false)
 
-  const uid = localStorage.getItem('uid')
-  const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
+  // 缓存本地存储值，避免重复访问
+  const uid = ref(localStorage.getItem('uid'))
+  const autoSync = ref(localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null)
 
-  function sync() {
-    if (uid) {
-      fetch('https://api.todo.uyou.org.cn/gettodo', {
+  const isLoading = ref(false)
+
+  async function sync() {
+    if (!uid) {
+      router.push('/account?from=setting')
+      return
+    }
+
+    try {
+      isLoading.value = true
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000)
+
+      const response = await fetch('https://api.todo.uyou.org.cn/gettodo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -116,26 +153,54 @@ function NoteUI() {
         body: JSON.stringify({
           uid: localStorage.getItem('uid'),
         }),
-      }).then((res) => {
-        return res.json()
-      }).then((res) => {
-        localStorage.setItem('ToDo', res.data)
-        window.location.reload()
+        signal: controller.signal,
       })
-      getCateList()
+
+      clearTimeout(timeoutId)
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const res = await response.json()
+      localStorage.setItem('ToDo', res.data)
+      await getCateList()
+      window.location.reload()
     }
-    else {
-      router.push('/account?from=setting')
+    catch (error) {
+      console.error('Sync failed:', error)
+      // 可以在这里添加错误提示UI
+    }
+    finally {
+      isLoading.value = false
     }
   }
 
   const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
+
+  const updateTitle = computed(() => `${t('updateText')} v${newVersion}`)
 
   watch(textWrapState, (newValue) => {
     emitter.emit('textOpen', newValue)
   })
 
   const systemTitle = localStorage.getItem('systemTitle') === 'true'
+
+  const hasScrolled = ref(false)
+  const currentScroll = ref(0)
+
+  watch(currentScroll, (newVal) => {
+    if (!hasScrolled.value && newVal > 0) {
+      hasScrolled.value = true
+    }
+    else if (hasScrolled.value && newVal === 0) {
+      hasScrolled.value = false
+    }
+  })
+
+  function getScroll(top: number) {
+    currentScroll.value = top
+  }
 
   vineStyle.scoped(css`
     .list-enter-from,
@@ -153,13 +218,34 @@ function NoteUI() {
       --uno: transition-transform,
         opacity transition-duration-300 transition-ease-in-out;
     }
+    
+    .shadow-transition-enter-from,
+    .shadow-transition-leave-to {
+      opacity: 0;
+    }
+    
+    .shadow-transition-enter-to,
+    .shadow-transition-leave-from {
+      opacity: 1;
+    }
+    
+    .shadow-transition-enter-active,
+    .shadow-transition-leave-active {
+      transition: opacity 0.3s ease-in-out;
+    }
   `)
 
   return vine`
-    <SettingList h="![calc(100vh-160px)]" p-y="!80px">
+    <SettingList h="![calc(100vh-160px)]" p-y="!80px" @get-scroll="getScroll">
       <div class="fixed left-0 top-0 h-65px w-full drag" />
       <div class="fixed left-0 top-0 h-full w-12vw drag" />
       <div class="fixed right-0 top-0 h-full w-12vw drag" />
+      <Transition name="shadow-transition">
+        <div
+          v-if="hasScrolled"
+          class="pointer-events-none z-1 fixed left-0 top-0 w-full h-10 bg-gradient-to-t to-black/30 from-black/0"
+        />
+      </Transition>
       <SideBar :open="openSideBar" @set-side="openSideBar = false">
         <Item
           id="all"
@@ -204,39 +290,27 @@ function NoteUI() {
         ref="tabsRef"
         :lab-width="lableWidth"
         :lab-left="lableLeft"
-        :show-tab="
-          showTab ? listId === 'all' || listId === 'use' : listId === 'all'
-        "
+        :show-tab="showTab ? listId === 'all' || listId === 'use' : listId === 'all'"
       >
         <template #header>
-          <Tab
-            id="side"
-            icon="i-f7:sidebar-left"
-            :control="true"
-            @choose="openSideBar = true"
-          />
+          <Tab id="side" icon="i-f7:sidebar-left" :control="true" @choose="openSideBar = true" />
         </template>
         <template #footer>
-          <Tab
-            id="search"
-            icon="i-f7:search"
-            :control="true"
-            @choose="showSearch = true"
-          />
+          <Tab id="search" icon="i-f7:search" :control="true" @choose="showSearch = true" />
         </template>
         <Tab
           id="all"
           :title="t('noteui.allcate')"
-          :checked="true"
-          :index="0"
+        :checked="true"
+        :index="0"
           @choose="choose"
           @load="setLab"
         />
         <Tab
           v-if="showTab"
           id="use"
-          :title="t('noteui.spcate')"
-          :index="1"
+        :title="t('noteui.spcate')"
+        :index="1"
           @choose="choose"
           @load="setLab"
         />
@@ -244,17 +318,14 @@ function NoteUI() {
       <div
         v-if="!isMac() && !systemTitle"
         :bg="
-          topState
-            ? 'error-d hover:error-h active:error-a'
-            : 'black/10 hover:black/20 active:black/30'
+        topState
+          ? 'error-d hover:error-h active:error-a'
+          : 'black/10 hover:black/20 active:black/30'
         "
         class="fixed left-15px top-14px mr-7px h-13px w-13px flex cursor-pointer items-center justify-center rounded-5px rounded-full p-6px no-drag"
         @click="onTopWindow"
       >
-        <div
-          class="i-fluent:pin-12-filled text-13px"
-          :c="topState ? 'white' : '#555'"
-        />
+        <div class="i-fluent:pin-12-filled text-13px" :c="topState ? 'white' : '#555'" />
       </div>
 
       <div v-if="!systemTitle" class="fixed right-15px top-14px z-1">
@@ -262,28 +333,24 @@ function NoteUI() {
       </div>
       <div class="relative w-75vw flex">
         <Transition name="list">
-          <NoteList v-if="listId === 'all'" />
-          <SpNoteList v-else-if="listId === 'use'" />
-          <OtherNoteList v-else />
+          <keep-alive>
+            <component :is="noteComponents[listId as keyof typeof noteComponents]" :key="listId" />
+          </keep-alive>
         </Transition>
       </div>
       <div flex="~ gap-10px" class="fixed bottom-15px left-15px no-drag">
         <div
-          v-if="listId === 'all' && !autoSync"
+        v-if="listId === 'all' && !autoSync"
           class="flex items-center justify-center p-13px"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
-          rounded="10px hover:30px"
+        rounded="10px hover:30px"
           shadow="md hover:lg primary-d/70 dark:primary-a/70"
           transform="active:scale-90 hover:scale-120"
-          @click="sync"
+        @click="sync"
         >
           <div
-            :class="
-            uid
-              ? 'i-ph:cloud-arrow-down-bold text-22px'
-              : 'i-ph:user-bold text-22px'
-            "
+          :class="uid ? 'i-ph:cloud-arrow-down-bold text-22px' : 'i-ph:user-bold text-22px'"
             c="!white"
           />
         </div>
@@ -295,9 +362,9 @@ function NoteUI() {
           bg="primary-d active:primary-a"
           transition="duration-300 all"
           rounded="10px hover:30px"
-        shadow="md hover:lg primary-d/70 dark:primary-a/70"
+          shadow="md hover:lg primary-d/70 dark:primary-a/70"
         transform="active:scale-90 hover:scale-120"
-        @click="showCateAdd = true"
+          @click="showCateAdd = true"
         >
           <div class="i-ph:plus-bold text-22px c-white" />
         </div>
@@ -305,31 +372,31 @@ function NoteUI() {
           class="flex items-center justify-center p-13px"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
-          rounded="10px hover:30px"
+        rounded="10px hover:30px"
           shadow="md hover:lg primary-d/70 dark:primary-a/70"
           transform="active:scale-90 hover:scale-120"
         @click="router.push('/setting')"
         >
           <div class="i-ph:gear-fine-bold text-22px c-white" />
         </div>
-    </div>
-    <CateAdd :open="showCateAdd" @close="showCateAdd = false" />
+      </div>
+      <CateAdd :open="showCateAdd" @close="showCateAdd = false" />
       <Search :open="showSearch" @close="showSearch = false" />
     </SettingList>
     <Alert
       :dialog-show="alertShow"
-      :title="t('updateText') + ' v' + newVersion"
-    :confirm-btn-name="t('update.gotoUpdate')"
+      :title="updateTitle"
+      :confirm-btn-name="t('update.gotoUpdate')"
       @cancel="() => (alertShow = false)"
       @return="returnClick"
     >
       <ul class="m-0 p-l-20px">
-      <li v-for="(item, index) in alertMsg" :key="index">
+        <li v-for="(item, index) in alertMsg" :key="index">
           {{ item.slice(2) }}
         </li>
       </ul>
     </Alert>
-`
+  `
 }
 
 export default NoteUI

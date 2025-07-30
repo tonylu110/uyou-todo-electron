@@ -1,4 +1,4 @@
-import { Preset } from 'unocss'
+import type { Preset } from 'unocss'
 
 export const presetMine: Preset = {
   name: 'my-preset',
@@ -7,6 +7,7 @@ export const presetMine: Preset = {
     ['drag', { '-webkit-app-region': 'drag' }],
     ['shadow-item', { 'box-shadow': '0 2px 10px #00000030' }],
     ['shadow-inner', { 'box-shadow': 'inset 0px 5px 10px -5px #00000030' }],
+    ['shadow-inner-scroll', { 'box-shadow': 'inset 0px 20px 20px -20px #00000080' }],
     ['shadow-switch-in', { 'box-shadow': 'inset 1px 1px 5px #00000030' }],
     ['shadow-switch-out', { 'box-shadow': '1px 1px 3px #00000050' }],
     [/^justify-content-(.+)$/, ([, name]) => ({ 'justify-content': name })],

@@ -61,38 +61,29 @@ function ToDoBackup() {
     />
     <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'">
       <ItemSpace items-center c="dark:#bbb">
-        <div
-        text-18
-          mb-2
-          c="primary-d dark:primary-a"
-          i-icon-park-outline:save-one
-        />
-      <span text-center font-bold>{{ t('backup') }}</span>
+        <div text-18 mb-2 c="primary-d dark:primary-a" i-icon-park-outline:save-one />
+        <span text-center font-bold>{{ t('backup') }}</span>
       </ItemSpace>
       <ItemText>{{ t('backupT.export') }}</ItemText>
       <ItemButton @click="exportFile(t('backupT.todo'), todoData!, 'uut')">{{
-      t('backupT.exportToDo')
+        t('backupT.exportToDo')
       }}</ItemButton>
       <ItemButton @click="exportFile(t('backupT.cate'), cateData!, 'uuc')">{{
       t('backupT.exportCate')
       }}</ItemButton>
       <ItemText>{{ t('backupT.import') }}</ItemText>
-      <ItemButton mode="primary" @click="importFile('uut')">{{
-      t('backupT.importToDo')
-      }}</ItemButton>
-      <ItemButton mode="primary" @click="importFile('uuc')">{{
-      t('backupT.importCate')
-      }}</ItemButton>
+      <ItemButton mode="primary" @click="importFile('uut')">{{ t('backupT.importToDo') }}</ItemButton>
+      <ItemButton mode="primary" @click="importFile('uuc')">{{ t('backupT.importCate') }}</ItemButton>
       <ItemText>
         <div i-emojione-v1:warning mr-2 />
-      <span font-bold>{{ t('backupT.warn') }}</span>
-    </ItemText>
+        <span font-bold>{{ t('backupT.warn') }}</span>
+      </ItemText>
       <ItemText>
         <div i-emojione-v1:warning mr-2 />
         <span font-bold>{{ t('backupT.warn2') }}</span>
       </ItemText>
     </SettingList>
-`
+  `
 }
 
 export default ToDoBackup

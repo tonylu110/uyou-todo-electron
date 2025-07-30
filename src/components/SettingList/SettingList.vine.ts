@@ -5,6 +5,10 @@ import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'
 function SettingList() {
   const justify = vineProp.optional<string>()
 
+  const emits = vineEmits<{
+    getScroll: [scrollTop: number]
+  }>()
+
   const route = useRoute()
 
   const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
@@ -23,6 +27,7 @@ function SettingList() {
       :justify="justify"
       class="pt-10px items-center overflow-y-scroll"
       flex="~ col"
+      @ps-scroll-y="emits('getScroll', $event.target.scrollTop)"
     >
       <slot />
     </PerfectScrollbar>
