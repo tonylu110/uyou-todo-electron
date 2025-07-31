@@ -26,11 +26,7 @@ function ColorChange() {
         :w="simpleMode ? '98px' : '87px'"
         :h="simpleMode ? '69px' : '59px'"
         border="1px solid #00000020"
-        rounded-5px
-        flex
-        justify-center
-        items-center
-        cursor-pointer
+        class="rounded-5px flex justify-center items-center cursor-pointer"
         @click="setColor('system')"
       >
         <img
@@ -38,7 +34,7 @@ function ColorChange() {
           alt=""
           w="[calc(100%-16px)]"
           h="[calc(100%-16px)]"
-          rounded-4px
+          class="rounded-4px"
           border="1px solid #00000020"
         />
       </div>
@@ -47,11 +43,7 @@ function ColorChange() {
         :w="simpleMode ? '98px' : '87px'"
         :h="simpleMode ? '69px' : '59px'"
         border="1px solid #00000020"
-        rounded-5px
-        flex
-        justify-center
-        items-center
-        cursor-pointer
+        class="rounded-5px flex justify-center items-center cursor-pointer"
         @click="setColor('light')"
       >
         <img
@@ -59,7 +51,7 @@ function ColorChange() {
           alt=""
           w="[calc(100%-16px)]"
           h="[calc(100%-16px)]"
-          rounded-4px
+          class="rounded-4px"
           border="1px solid #00000020"
         />
       </div>
@@ -68,11 +60,7 @@ function ColorChange() {
         :w="simpleMode ? '98px' : '87px'"
         :h="simpleMode ? '69px' : '59px'"
         border="1px solid #00000020"
-        rounded-5px
-        flex
-        justify-center
-        items-center
-        cursor-pointer
+        class="rounded-5px flex justify-center items-center cursor-pointer"
         @click="setColor('dark')"
       >
         <img
@@ -80,7 +68,7 @@ function ColorChange() {
           alt=""
           w="[calc(100%-16px)]"
           h="[calc(100%-16px)]"
-          rounded-4px
+          class="rounded-4px"
           border="1px solid #00000020"
         />
       </div>

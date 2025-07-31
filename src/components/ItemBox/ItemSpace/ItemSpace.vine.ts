@@ -26,9 +26,7 @@ function ItemSpace() {
       "
       bg="white dark:#999/10"
       flex="~ col"
-      mb-10px
-      rounded-7px
-      shadow-md
+      class="mb-10px rounded-7px shadow-md"
       :max-w="simpleMode ? '750px' : '550px'"
     >
       <slot />
