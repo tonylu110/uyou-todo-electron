@@ -5,7 +5,7 @@ function DeleteAllItem() {
 
   // eslint-disable-next-line vue-vine/format-vine-macros-leading
   const emit = vineEmits<{
-  delete: []
+    delete: []
   }>()
 
   function deleteAllItem() {
