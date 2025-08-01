@@ -36,7 +36,11 @@ export default defineConfig({
       },
     }),
     UnoCSS(),
-    VineVitePlugin(),
+    VineVitePlugin({
+      vueCompilerOptions: {
+        __enableTransformBareAttrAsBool: false,
+      },
+    }),
     ElementPlus({
       useSource: true,
     }),

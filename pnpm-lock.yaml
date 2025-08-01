@@ -178,11 +178,11 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4(typescript@5.7.2)
       vue-vine:
-        specifier: ^1.6.5
-        version: 1.6.5(vue@3.6.0-alpha.2(typescript@5.7.2))
+        specifier: ^1.7.0
+        version: 1.7.0(vue@3.6.0-alpha.2(typescript@5.7.2))
       vue-vine-tsc:
-        specifier: ^1.6.5
-        version: 1.6.5(typescript@5.7.2)
+        specifier: ^1.7.0
+        version: 1.7.0(typescript@5.7.2)
       vue3-perfect-scrollbar:
         specifier: ^2.0.0
         version: 2.0.0(vue@3.6.0-alpha.2(typescript@5.7.2))
@@ -1643,50 +1643,50 @@ packages:
     resolution: {integrity: sha512-pWrTcoFNWuwHlA9CvlfSsGWs14JxfN1TH25zM5L7o0pRLhsoZkDnTsXfQRJBEWJoV5DL0jf+Z+sxiud+K0mq1g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250730.1':
-    resolution: {integrity: sha512-QL4fBR2x1U84Gzt20MmXzgDRmtAGle61eyVIPn7cyJtZqtbPsBeNFrppEctgerJL74CQYLDtdValztcoHOAbUg==}
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250801.1':
+    resolution: {integrity: sha512-7/qpMwgcqYNNXpH5j+qX6itquTI/vd+ltRdALmTLBgO36bx09E53zAk2nrAoD1jPEvyJ8N07JpzqTlj6DWOuUQ==}
     engines: {node: '>=20.6.0'}
     cpu: [arm64]
     os: [darwin]
 
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250730.1':
-    resolution: {integrity: sha512-e0j+K3IGTXFgOGKqBj5CuSRvLV7Psojq8oTFkHKjOsAd+ekgV4EnFIaR/PUCXFlNvgLkrFqFVo+10Kav0NVzfA==}
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250801.1':
+    resolution: {integrity: sha512-noNDBOjQ3tAdEeW3KEeckk67uiJ868CxZmnzysP3A23B6olZC/hoWZpdcTjLtOR9l1tvcAxeHCYaHTk5lW5OyQ==}
     engines: {node: '>=20.6.0'}
     cpu: [x64]
     os: [darwin]
 
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250730.1':
-    resolution: {integrity: sha512-/IGa+bcZpBeol4NX7ZbsjtVmSHhygiNTluW+femwM47MQhsJMPNZhAVDtv2yLMgjbq9UGt75gBayNqUKFgOmaQ==}
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250801.1':
+    resolution: {integrity: sha512-khr24vveYsHFE1ieVPhcrbe6PggV8qiQifF9vnRk65Xfn+GyBs63lVK838KkjVZMj9MXs3QYLsaK405j+S3NZw==}
     engines: {node: '>=20.6.0'}
     cpu: [arm64]
     os: [linux]
 
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20250730.1':
-    resolution: {integrity: sha512-0fZYkDJMXS7OF1DhCUDBik8JSfbgmZZWT3qe8lBn4IlNnHrCQLkeKol94XGXeIWdqR8gAb+J12e6QCi7GM2KBQ==}
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20250801.1':
+    resolution: {integrity: sha512-uzhaqEsQmNODNUEwpliLcN2hiBbxnsxVNIwToGNsYhKB8gbtFFHExImmNBuU0LZcDYZWKc/kEYqYS3W+a/5wtQ==}
     engines: {node: '>=20.6.0'}
     cpu: [arm]
     os: [linux]
 
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20250730.1':
-    resolution: {integrity: sha512-OYdwKK5zVyZgga1G300T3Y+2nzT1kZuIgNB4h7oOaEMRwAl9eQSrfSinWpmpLaXjrkaZozzcvRKtZr54wdveWw==}
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20250801.1':
+    resolution: {integrity: sha512-VPeMlnahbxQIAk97PNjJqBWlOMRULwhM0RqCfrEsacTH+FjDmheYIH4bBaF7urCjb2n/NlLv/cfK+Xpl1lKvog==}
     engines: {node: '>=20.6.0'}
     cpu: [x64]
     os: [linux]
 
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250730.1':
-    resolution: {integrity: sha512-CW3cahl3EcY1nR+eOltkoKwbKbDiTpvZh/FmqNvSpOA0RO5MgjRfNHboXKMjIIq5dfqhZHOmC2RvuacMSTHecA==}
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250801.1':
+    resolution: {integrity: sha512-TmX2Prf3L+UaCYoixczGiF9Dbc7LFndys2GD5o508lra2Dp+sE5msdaxr4djpv9HTtm8qJIoq2hSZ74aCQDlWA==}
     engines: {node: '>=20.6.0'}
     cpu: [arm64]
     os: [win32]
 
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20250730.1':
-    resolution: {integrity: sha512-AGGYJpB+aysMP5FRdMHblHGLHxf7PiZTozjTzlQyFkz1Pg8NulscGS36v2XYsLgNvWpji6ZFB+4zVSJqT36IHQ==}
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20250801.1':
+    resolution: {integrity: sha512-ou7svsHuCBj5i5qa0jg7RxxBEXIXiNd3Ws2VzPMLuRnszvuj6ngHy3J4ukw+pP3XKrqAPe28GJhLFj4WtCJ3tw==}
     engines: {node: '>=20.6.0'}
     cpu: [x64]
     os: [win32]
 
-  '@typescript/native-preview@7.0.0-dev.20250730.1':
-    resolution: {integrity: sha512-7CntXGh00x0xdvcXjEi6NueTr2yHrV2t16ydnkGLSdd240kKN+VuSZAX5I0U8wl1XIgAmTyEmPEgCIBDHXvZ5Q==}
+  '@typescript/native-preview@7.0.0-dev.20250801.1':
+    resolution: {integrity: sha512-yIfAEMeRXKB0YAAZIMkpWThfs861vbvZnTPgOyx63iYfEDqiWW5ZxjAaAT3JmijIawTtMxXOUaMoMFNpmFL8nA==}
     engines: {node: '>=20.6.0'}
     hasBin: true
 
@@ -1987,8 +1987,8 @@ packages:
       vue-tsc:
         optional: true
 
-  '@vue-vine/compiler@1.6.5':
-    resolution: {integrity: sha512-d/Sw+Lug2bqGKZrJT9HxG0IsJOZWUbkhAcDc4P7TUbP/iWaZSUVTLTWsOyApeg+ko8annoGCPjOXlbQEXOTLJQ==}
+  '@vue-vine/compiler@1.7.0':
+    resolution: {integrity: sha512-xchiNuxAXJAyqY5y4WjlfOn7OHSJvXEUX3nzHXSK7etip1QXGnBTvt70rD+ZeuIcrUtPPv8YatXLBmns7k6Fug==}
 
   '@vue-vine/eslint-config@1.1.6':
     resolution: {integrity: sha512-iLtnUlXnyP16P/GuL0aVg73TDLJSl+Tm4dfZPFWFBi4wEq4EZs+VxifeVPyLxsAQac3t4zacoO2E6e2y0tZ8gQ==}
@@ -1999,11 +1999,11 @@ packages:
   '@vue-vine/eslint-plugin@1.1.6':
     resolution: {integrity: sha512-PkgZaE6ExDJlb5QYoIoZBa4b5wOW8sck4QcYEgMF/36AdqTgA/PDe6EUFT/ylaI47G6Zai/Uz547zJUeljyIBg==}
 
-  '@vue-vine/language-service@1.6.5':
-    resolution: {integrity: sha512-NJSvV64LnT36jQ/MqFzzR2GPPLXK6YEnWILw/HvQz1WYnUq/iT1lfx3wsafkxYHfdUtv6JQ+RSnr+zq7mq4GSQ==}
+  '@vue-vine/language-service@1.7.0':
+    resolution: {integrity: sha512-xZozKBDdila/SurUtc1bkRojc2aoqNa/SlWeIUPpDAHv7FU7T5ryuEAfdmNrXqm8kOThVcxqIJxbjHu+xvwUXg==}
 
-  '@vue-vine/vite-plugin@1.6.5':
-    resolution: {integrity: sha512-i2GWLRJQNC5vCeo9Ta2LQWwH4W0RkGpPqkhkXNW7+MKSS37KqaZmJLVTQGqUJU8a+3ox42TYzOuXOYWqnZ0dYA==}
+  '@vue-vine/vite-plugin@1.7.0':
+    resolution: {integrity: sha512-DQewuRb3ZEOataGvs5GcL4fWDdlN+IEvP09F2xN7M+l7FmMt78MZT/3UKyy3u8N0sY8PZ94HHxc32yRllbSQeA==}
 
   '@vue/babel-helper-vue-transform-on@1.4.0':
     resolution: {integrity: sha512-mCokbouEQ/ocRce/FpKCRItGo+013tHg7tixg3DUNS+6bmIchPt66012kBMm476vyEIJPafrvOf4E5OYj3shSw==}
@@ -5002,12 +5002,12 @@ packages:
     peerDependencies:
       typescript: '>=5.0.0'
 
-  vue-vine-tsc@1.6.5:
-    resolution: {integrity: sha512-DqyfoEyrTDjf0Ka1/vMNq2bg9N88v1WNRsDyqKxCZOYw9VHWL/MK2NXiwwmIw5x+w1+62KlvFR8UHOamMzkL1A==}
+  vue-vine-tsc@1.7.0:
+    resolution: {integrity: sha512-Dufo7z/RKFYDzNP4rVE2+36Iy7OnShg3Wl3lze8P7iCKG4FP6fOTFG+TWji4jhycKmlfGji7MGT7eC+A+ZCu6g==}
     hasBin: true
 
-  vue-vine@1.6.5:
-    resolution: {integrity: sha512-I88eoaPQcQB7Hr8/Zc8bziX+mCExLF3CMtZuZLlq3TSOuPtZwiDj4uvhRwMSAGkFY4e8VilXyX/Sa285QaeTUQ==}
+  vue-vine@1.7.0:
+    resolution: {integrity: sha512-WQ0zIWMc+sUXBMkDwZKnjU8xoIFBLkchiLT/k+UavpWCo0UqWKbNJCVIlBtTiXkrWTTSyUt7CYpKaLH4IanCUQ==}
     peerDependencies:
       vue: '>=3.2'
 
@@ -6514,36 +6514,36 @@ snapshots:
       '@typescript-eslint/types': 8.38.0
       eslint-visitor-keys: 4.2.1
 
-  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250730.1':
+  '@typescript/native-preview-darwin-arm64@7.0.0-dev.20250801.1':
     optional: true
 
-  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250730.1':
+  '@typescript/native-preview-darwin-x64@7.0.0-dev.20250801.1':
     optional: true
 
-  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250730.1':
+  '@typescript/native-preview-linux-arm64@7.0.0-dev.20250801.1':
     optional: true
 
-  '@typescript/native-preview-linux-arm@7.0.0-dev.20250730.1':
+  '@typescript/native-preview-linux-arm@7.0.0-dev.20250801.1':
     optional: true
 
-  '@typescript/native-preview-linux-x64@7.0.0-dev.20250730.1':
+  '@typescript/native-preview-linux-x64@7.0.0-dev.20250801.1':
     optional: true
 
-  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250730.1':
+  '@typescript/native-preview-win32-arm64@7.0.0-dev.20250801.1':
     optional: true
 
-  '@typescript/native-preview-win32-x64@7.0.0-dev.20250730.1':
+  '@typescript/native-preview-win32-x64@7.0.0-dev.20250801.1':
     optional: true
 
-  '@typescript/native-preview@7.0.0-dev.20250730.1':
+  '@typescript/native-preview@7.0.0-dev.20250801.1':
     optionalDependencies:
-      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20250730.1
-      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20250730.1
-      '@typescript/native-preview-linux-arm': 7.0.0-dev.20250730.1
-      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20250730.1
-      '@typescript/native-preview-linux-x64': 7.0.0-dev.20250730.1
-      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20250730.1
-      '@typescript/native-preview-win32-x64': 7.0.0-dev.20250730.1
+      '@typescript/native-preview-darwin-arm64': 7.0.0-dev.20250801.1
+      '@typescript/native-preview-darwin-x64': 7.0.0-dev.20250801.1
+      '@typescript/native-preview-linux-arm': 7.0.0-dev.20250801.1
+      '@typescript/native-preview-linux-arm64': 7.0.0-dev.20250801.1
+      '@typescript/native-preview-linux-x64': 7.0.0-dev.20250801.1
+      '@typescript/native-preview-win32-arm64': 7.0.0-dev.20250801.1
+      '@typescript/native-preview-win32-x64': 7.0.0-dev.20250801.1
 
   '@umami/node@0.4.0': {}
 
@@ -7011,7 +7011,7 @@ snapshots:
       - typescript
       - vue
 
-  '@vue-vine/compiler@1.6.5':
+  '@vue-vine/compiler@1.7.0':
     dependencies:
       '@babel/parser': 7.28.0
       '@babel/types': 7.28.2
@@ -7064,13 +7064,13 @@ snapshots:
       - supports-color
       - typescript
 
-  '@vue-vine/language-service@1.6.5(typescript@5.7.2)':
+  '@vue-vine/language-service@1.7.0(typescript@5.7.2)':
     dependencies:
       '@umami/node': 0.4.0
       '@volar/language-core': 2.4.20
       '@volar/language-server': 2.4.20
       '@volar/typescript': 2.4.20
-      '@vue-vine/compiler': 1.6.5
+      '@vue-vine/compiler': 1.7.0
       '@vue/language-core': 3.0.4(typescript@5.7.2)
       '@vue/shared': 3.5.18
       destr: 2.0.5
@@ -7083,9 +7083,9 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@vue-vine/vite-plugin@1.6.5':
+  '@vue-vine/vite-plugin@1.7.0':
     dependencies:
-      '@vue-vine/compiler': 1.6.5
+      '@vue-vine/compiler': 1.7.0
 
   '@vue/babel-helper-vue-transform-on@1.4.0': {}
 
@@ -10722,21 +10722,21 @@ snapshots:
       '@vue/language-core': 3.0.4(typescript@5.7.2)
       typescript: 5.7.2
 
-  vue-vine-tsc@1.6.5(typescript@5.7.2):
+  vue-vine-tsc@1.7.0(typescript@5.7.2):
     dependencies:
-      '@typescript/native-preview': 7.0.0-dev.20250730.1
+      '@typescript/native-preview': 7.0.0-dev.20250801.1
       '@volar/language-core': 2.4.20
       '@volar/typescript': 2.4.20
-      '@vue-vine/language-service': 1.6.5(typescript@5.7.2)
+      '@vue-vine/language-service': 1.7.0(typescript@5.7.2)
       '@vue/language-core': 3.0.4(typescript@5.7.2)
     transitivePeerDependencies:
       - bufferutil
       - typescript
       - utf-8-validate
 
-  vue-vine@1.6.5(vue@3.6.0-alpha.2(typescript@5.7.2)):
+  vue-vine@1.7.0(vue@3.6.0-alpha.2(typescript@5.7.2)):
     dependencies:
-      '@vue-vine/vite-plugin': 1.6.5
+      '@vue-vine/vite-plugin': 1.7.0
       vue: 3.6.0-alpha.2(typescript@5.7.2)
 
   vue3-perfect-scrollbar@2.0.0(vue@3.6.0-alpha.2(typescript@5.7.2)):
