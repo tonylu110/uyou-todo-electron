@@ -1,12 +1,10 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow } from 'electron'
 import remoteMain from '@electron/remote/main/index.js'
+import { BrowserWindow } from 'electron'
+import isDev from 'electron-is-dev'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-// eslint-disable-next-line node/prefer-global/process
-const NODE_ENV = process.env.NODE_ENV
 
 let registerWindow
 
@@ -28,12 +26,12 @@ function createRegisterWindow() {
         standard: 'Helvetica',
         serif: 'Times',
         sansSerif: 'Helvetica',
-        monospace: 'Menlo'
-      }
+        monospace: 'Menlo',
+      },
     },
   })
   registerWindow.setAlwaysOnTop(true)
-  if (NODE_ENV === 'development')
+  if (isDev)
     registerWindow.loadURL('http://localhost:3000/electronWindows/register/')
   else
     registerWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/register/index.html'))

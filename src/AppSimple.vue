@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type ITodoList from './interface/ITodoListArray'
 import { usePreferredDark } from '@vueuse/core'
+import { ipcRenderer } from 'electron'
 import { ElConfigProvider } from 'element-plus'
 import en from 'element-plus/es/locale/lang/en'
 import es from 'element-plus/es/locale/lang/es'
@@ -12,15 +13,21 @@ import { useI18n } from 'vue-i18n'
 import setTime from './components/List/Item/setTime'
 import OpenPass from './components/OpenPass/OpenPass.vue'
 import RouterUrl from './components/RouterUrl'
+import { useModeStore } from './store/modeStore'
 import emitter from './util/bus'
 import getCateList from './util/getCateList'
 import LocalStorage from './util/localStorage'
-import isDev from './util/mode'
 import { isLinux, isWindows10OrAfter } from './util/os'
+
+const modeStore = useModeStore()
+
+ipcRenderer.on('isDev', (_ev, value) => {
+  modeStore.setDevMode(value)
+})
 
 const { t, locale } = useI18n()
 
-const routerShow = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && isDev)
+const routerShow = ref((localStorage.getItem('routerUrl') === 'true' || !localStorage.getItem('routerUrl')) && modeStore.isDev)
 
 emitter.on('routerShow', (data: unknown) => {
   routerShow.value = (data as boolean)

@@ -4,6 +4,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import remoteMain from '@electron/remote/main/index.js'
 import { app, BrowserWindow, dialog, globalShortcut, ipcMain, Menu, nativeTheme, screen, shell, Tray } from 'electron'
+import isDev from 'electron-is-dev'
 import Store from 'electron-store'
 import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
 import i18n from './i18n/index.ts'
@@ -25,9 +26,6 @@ import useFontSize from './useFontSize.ts'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const store = new Store()
-
-// eslint-disable-next-line node/prefer-global/process
-const NODE_ENV = process.env.NODE_ENV
 
 // eslint-disable-next-line node/prefer-global/process
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
@@ -88,11 +86,11 @@ function createWindow() {
   }
   else { mainWindow.setBackgroundColor('#fff') }
 
-  mainWindow.loadURL(NODE_ENV === 'development'
+  mainWindow.loadURL(isDev
     ? 'http://localhost:3000'
     : `file://${path.join(__dirname, '../dist/index.html')}`)
 
-  if (NODE_ENV === 'development') {
+  if (isDev) {
     mainWindow.webContents.openDevTools({
       mode: 'detach',
     })
@@ -310,7 +308,7 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0)
       createWindow()
   })
-  if (NODE_ENV === 'development') {
+  if (isDev) {
     import('@tomjs/electron-devtools-installer')
       .then((devTools) => {
         devTools.installExtension(devTools.VUEJS_DEVTOOLS_BETA)

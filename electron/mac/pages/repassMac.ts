@@ -1,12 +1,10 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { BrowserWindow } from 'electron'
 import remoteMain from '@electron/remote/main/index.js'
+import { BrowserWindow } from 'electron'
+import isDev from 'electron-is-dev'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-// eslint-disable-next-line node/prefer-global/process
-const NODE_ENV = process.env.NODE_ENV
 
 let repassWindow
 
@@ -28,12 +26,12 @@ function createRepassWindow(uname) {
         standard: 'Helvetica',
         serif: 'Times',
         sansSerif: 'Helvetica',
-        monospace: 'Menlo'
-      }
+        monospace: 'Menlo',
+      },
     },
   })
   repassWindow.setAlwaysOnTop(true)
-  if (NODE_ENV === 'development')
+  if (isDev)
     repassWindow.loadURL(`http://localhost:3000/electronWindows/repass/`)
   else
     repassWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/repass/index.html'))

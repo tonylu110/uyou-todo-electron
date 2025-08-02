@@ -1,14 +1,12 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
 import remoteMain from '@electron/remote/main/index.js'
+import isDev from 'electron-is-dev'
+import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
 import { menuBlur, micaStyle } from '../store/menuBlurStore.js'
 import setMicaStyle from './util/setMicaStyle.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-// eslint-disable-next-line node/prefer-global/process
-const NODE_ENV = process.env.NODE_ENV
 
 let logoffWindow
 
@@ -27,8 +25,8 @@ function createLogoffWindow(uname) {
         standard: 'Times New Roman',
         serif: 'Times New Roman',
         sansSerif: 'Arial',
-        monospace: 'Courier New'
-      }
+        monospace: 'Courier New',
+      },
     },
   })
   if (menuBlur || menuBlur === undefined) {
@@ -41,7 +39,7 @@ function createLogoffWindow(uname) {
     }
   }
   logoffWindow.setAlwaysOnTop(true)
-  if (NODE_ENV === 'development')
+  if (isDev)
     logoffWindow.loadURL(`http://localhost:3000/electronWindows/logoff/`)
   else
     logoffWindow.loadFile(path.join(__dirname, '../dist/electronWindows/logoff/index.html'))

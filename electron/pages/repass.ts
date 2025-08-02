@@ -1,14 +1,12 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import remoteMain from '@electron/remote/main/index.js'
+import isDev from 'electron-is-dev'
 import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
 import { menuBlur, micaStyle } from '../store/menuBlurStore.js'
 import setMicaStyle from './util/setMicaStyle.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-// eslint-disable-next-line node/prefer-global/process
-const NODE_ENV = process.env.NODE_ENV
 
 let repassWindow
 
@@ -40,7 +38,7 @@ function createRepassWindow(uname) {
     }
   }
   repassWindow.setAlwaysOnTop(true)
-  if (NODE_ENV === 'development')
+  if (isDev)
     repassWindow.loadURL(`http://localhost:3000/electronWindows/repass/`)
   else
     repassWindow.loadFile(path.join(__dirname, '../dist/electronWindows/repass/index.html'))

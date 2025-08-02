@@ -2,11 +2,9 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import remoteMain from '@electron/remote/main/index.js'
 import { BrowserWindow, ipcMain } from 'electron'
+import isDev from 'electron-is-dev'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-// eslint-disable-next-line node/prefer-global/process
-const NODE_ENV = process.env.NODE_ENV
 
 let aboutWindow
 
@@ -33,7 +31,7 @@ function createAboutWindow() {
     },
   })
   aboutWindow.setAlwaysOnTop(true)
-  if (NODE_ENV === 'development')
+  if (isDev)
     aboutWindow.loadURL('http://localhost:3000/electronWindows/about/')
   else
     aboutWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/about/index.html'))

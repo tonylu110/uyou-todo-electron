@@ -20,13 +20,19 @@ import OpenPass from './components/OpenPass/OpenPass.vue'
 import RouterUrl from './components/RouterUrl'
 import Setup from './components/Setup/Setup.vue'
 import TitleBar from './components/TitleBar/newTitleBar'
+import { useModeStore } from './store/modeStore'
 import { versionCode } from './util/appVersionCode'
 import emitter from './util/bus'
 import firstLoad from './util/firstLoad'
 import getCateList from './util/getCateList'
 import LocalStorage from './util/localStorage'
-import isDev from './util/mode'
 import { isLinux, isWindows10OrAfter } from './util/os'
+
+const modeStore = useModeStore()
+
+ipcRenderer.on('isDev', (_event, value) => {
+  modeStore.setDevMode(value)
+})
 
 const { t, locale } = useI18n()
 
@@ -108,7 +114,7 @@ router.isReady().then(() => {
   router.push(startRoute.value)
 })
 
-const routerShow = ref((localStorage.getItem('routerShow') === 'true' || !localStorage.getItem('routerShow')) && isDev)
+const routerShow = ref((localStorage.getItem('routerShow') === 'true' || !localStorage.getItem('routerShow')) && modeStore.isDev)
 
 emitter.on('routerShow', (data: unknown) => {
   routerShow.value = (data as boolean)
@@ -169,7 +175,7 @@ watch(isDark, (newValue) => {
   setAllDarkMode(newValue)
 })
 
-if (isDev) {
+if (modeStore.isDev) {
   onMounted(() => {
     document.querySelector('.vue-devtools-frame')?.classList.add('no-drag')
     document.querySelector('.vue-devtools-button-panel')?.classList.add('no-drag')

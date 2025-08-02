@@ -5,6 +5,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import remoteMain from '@electron/remote/main/index.js'
 import { app, BrowserWindow, dialog, globalShortcut, ipcMain, Menu, nativeImage, nativeTheme, screen, shell, Tray } from 'electron'
+import isDev from 'electron-is-dev'
 import Store from 'electron-store'
 import i18n from '../i18n/index.ts'
 import { readFile, writeFile } from '../pages/util/rnwFile.ts'
@@ -24,8 +25,6 @@ import createRepassWindowMac from './pages/repassMac.ts'
 const store = new Store()
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-const NODE_ENV = process.env.NODE_ENV
 
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 
@@ -82,11 +81,11 @@ function createWindow() {
   if (windowSizeState)
     mainWindow.setSize(windowSize.width, windowSize.height)
   remoteMain.enable(mainWindow.webContents)
-  mainWindow.loadURL(NODE_ENV === 'development' ? 'http://localhost:3000' : `file://${path.join(__dirname, '../../dist/index.html')}`)
+  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../../dist/index.html')}`)
 
   // mainWindow.setMaximizable(false)
 
-  if (NODE_ENV === 'development') {
+  if (isDev) {
     mainWindow.webContents.openDevTools({
       mode: 'detach',
     })
@@ -267,6 +266,7 @@ app.whenReady().then(() => {
   createWindow()
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
+    mainWindow.webContents.send('isDev', isDev)
   })
   if (process.platform === 'darwin') {
     tray = new Tray(nativeImage.createFromPath(path.join(__dirname, '../../dist/tray/logoTemplate.png')))
@@ -295,7 +295,7 @@ app.whenReady().then(() => {
       createWindow()
   })
 
-  if (NODE_ENV === 'development') {
+  if (isDev) {
     import('@tomjs/electron-devtools-installer')
       .then((devTools) => {
         devTools.installExtension(devTools.VUEJS_DEVTOOLS_BETA)

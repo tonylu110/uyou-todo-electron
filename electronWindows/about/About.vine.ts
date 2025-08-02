@@ -1,5 +1,6 @@
 import { usePreferredDark } from '@vueuse/core'
 import { ipcRenderer } from 'electron'
+import rolldownPackage from 'rolldown/package.json'
 import vitePackage from 'vite/package.json'
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -17,6 +18,7 @@ function About() {
 
   const viteVersion = vitePackage.version
   const vueVersion = vuePackage.version
+  const rolldownVersion = rolldownPackage.version
 
   const isDark = usePreferredDark()
 
@@ -76,7 +78,7 @@ function About() {
       <button
         :class="showWin95Btn > 5 ? 'win95-button w-162px h-162px' : 'transparent-button w-162px h-162px'"
         p="!16px"
-        m="b-4px t-24px"
+        m="b-4px t-10"
       >
         <img class="no-drag w-full h-full" src="../../logo.png" alt="logo" @click="showWin95Btn++" />
       </button>
@@ -93,22 +95,33 @@ function About() {
       >
         {{ t('win95Btn.Button') }}
       </button>
-      <div class="flex justify-center items-center mt-6 text-12px mb-4 font-bold" c="#555/50 dark:#bbb/50">
-        <span :class="showWin95Btn > 5 ? 'c-black/90' : 'dark:c-#bbb'">Power By</span>
-        <div flex="~ col gap-2">
-          <div class="flex items-center">
-            <div bg="#2c2e3a" class="rounded-full mx-2 mr-1 p-4px">
-              <div class="i-logos:electron text-3 block" />
+      <div flex="~ col gap-4" items-start my-4>
+        <div class="flex justify-center items-center text-12px font-bold " c="#555/50 dark:#bbb/50">
+          <span :class="showWin95Btn > 5 ? 'c-black/90' : 'dark:c-#bbb'" text-end w-14 mr-1>Power By</span>
+          <div flex="~ col gap-2">
+            <div class="flex items-center">
+              <div bg="#2c2e3a" class="rounded-full mx-2 mr-1 p-4px">
+                <div class="i-logos:electron text-3 block" />
+              </div>
+              <span :class="showWin95Btn > 5 ? 'c-black/90' : 'dark:c-#bbb'">Electron v{{ electronVersion }} </span>
             </div>
-            <span :class="showWin95Btn > 5 ? 'c-black/90' : 'dark:c-#bbb'">Electron v{{ electronVersion }} </span>
+            <div class="flex items-center">
+              <div class="i-logos:vue block mx-2 mr-1" text="4.3" />
+              <span :class="showWin95Btn > 5 ? 'c-black' : 'dark:c-#bbb'">Vue v{{ vueVersion }} </span>
+            </div>
           </div>
-          <div class="flex items-center">
-            <div class="i-logos:vitejs text-5 block mx-2 mr-1 mt--1" />
-            <span :class="showWin95Btn > 5 ? 'c-black' : 'dark:c-#bbb'">Vite v{{ viteVersion }} </span>
-          </div>
-          <div class="flex items-center">
-            <div class="i-logos:vue block mx-2 mr-1" text="4.3" />
-            <span :class="showWin95Btn > 5 ? 'c-black' : 'dark:c-#bbb'">Vue v{{ vueVersion }} </span>
+        </div>
+        <div class="flex justify-center items-center text-12px font-bold" c="#555/50 dark:#bbb/50">
+          <span :class="showWin95Btn > 5 ? 'c-black/90' : 'dark:c-#bbb'" text-end w-14 mr-1>Build By</span>
+          <div flex="~ col gap-2">
+            <div class="flex items-center">
+              <div class="i-logos:vitejs text-5 block mx-2 mr-1 mt--1" />
+              <span :class="showWin95Btn > 5 ? 'c-black' : 'dark:c-#bbb'">Vite v{{ viteVersion }} </span>
+            </div>
+            <div class="flex items-center">
+              <div class="i-vscode-icons:file-type-rolldown text-5 block mx-2 mr-1 mt--1" />
+              <span :class="showWin95Btn > 5 ? 'c-black' : 'dark:c-#bbb'">Rolldown v{{ rolldownVersion }} </span>
+            </div>
           </div>
         </div>
       </div>
