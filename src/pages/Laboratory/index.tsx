@@ -5,12 +5,16 @@ import Item from '../../components/ItemBox/Item/Item.vue'
 import ItemText from '../../components/ItemBox/ItemText/ItemText.vine'
 import SettingList from '../../components/SettingList/SettingList.vine'
 import TabBar from '../../components/TabBar/TabBar.vue'
+import { createToast } from '../../components/Toast'
+import { useModeStore } from '../../store/modeStore'
 import setSwitchFn from '../../util/setSwitchFn'
 
 const Laboratory: SetupFC = () => {
   const router = useRouter()
 
   const { t } = useI18n()
+
+  const modeStore = useModeStore()
 
   const opLab = ref(true)
   const openLab = () => {
@@ -19,6 +23,18 @@ const Laboratory: SetupFC = () => {
   }
 
   const keyToAdd = ref(localStorage.getItem('ketToAdd') === 'true')
+
+  const devClick = ref(0)
+  const setDev = () => {
+    if (devClick.value < 5) {
+      devClick.value++
+      createToast({ msg: `click ${5 - devClick.value} times to set dev mode` })
+      return
+    }
+    modeStore.setDevMode(!modeStore.isDev)
+    createToast({ msg: `dev mode ${modeStore.isDev ? 'on' : 'off'}` })
+    devClick.value = 0
+  }
 
   // const newFloatUi = ref(localStorage.getItem('newFloatUi') === 'true')
 
@@ -39,6 +55,7 @@ const Laboratory: SetupFC = () => {
           showSwitch={true}
           switchState={opLab.value}
           onSwitchFun={openLab}
+          onItemFun={setDev}
         />
         {/* <ItemBox>
           <Item

@@ -9,12 +9,17 @@ function SettingList() {
     getScroll: [scrollTop: number]
   }>()
 
+  function onScroll(ev: Event) {
+    emits('getScroll', ev.target!.scrollTop)
+  }
+
   const route = useRoute()
 
   const isBlur = (localStorage.getItem('menuBlur') === 'true' || localStorage.getItem('menuBlur') === null) && (!isLinux() || isWindows10OrAfter())
 
   return vine`
     <PerfectScrollbar
+      :swipe-wasing="true"
       :bg="
         isBlur
           ? isMac() && route.name === 'Home'
@@ -27,7 +32,7 @@ function SettingList() {
       :justify="justify"
       class="pt-10px items-center overflow-y-scroll"
       flex="~ col"
-      @ps-scroll-y="emits('getScroll', $event.target.scrollTop)"
+      @ps-scroll-y="onScroll"
     >
       <slot />
     </PerfectScrollbar>
