@@ -6,6 +6,7 @@ import ElementPlus from 'unplugin-element-plus/vite'
 import VueMacros from 'unplugin-vue-macros/vite'
 import { defineConfig } from 'vite'
 import ElectronRenderer from 'vite-plugin-electron-renderer'
+import vueJsxVapor from 'vue-jsx-vapor/vite'
 import { VineVitePlugin } from 'vue-vine/vite'
 
 export default defineConfig({
@@ -19,7 +20,6 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `@use "~/styles/element/index.scss" as *;`,
-        api: 'modern-compiler',
         silenceDeprecations: ['legacy-js-api'],
       },
     },
@@ -34,6 +34,10 @@ export default defineConfig({
         }),
         vueJsx: vueJsx(),
       },
+    }),
+    vueJsxVapor({
+      macros: true,
+      interop: true,
     }),
     UnoCSS(),
     VineVitePlugin({

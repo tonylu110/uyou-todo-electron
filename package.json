@@ -87,6 +87,7 @@
     "vite-plugin-electron-renderer": "^0.14.6",
     "vue": "^3.6.0-alpha.2",
     "vue-i18n": "11.1.11",
+    "vue-jsx-vapor": "^2.6.0",
     "vue-router": "^4.5.1",
     "vue-tsc": "^3.0.4",
     "vue-vine": "^1.7.0",

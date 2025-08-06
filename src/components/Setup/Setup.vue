@@ -2,6 +2,10 @@
 import { usePreferredDark } from '@vueuse/core'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import noteDarkImg from '../../assets/modeImages/note/dark.png'
+import noteLightImg from '../../assets/modeImages/note/light.png'
+import normalDarkImg from '../../assets/modeImages/color_mode/dark.png'
+import normalLightImg from '../../assets/modeImages/color_mode/light.png'
 
 const isDark = usePreferredDark()
 const { t } = useI18n()
@@ -39,7 +43,7 @@ function toUse() {
             @click="setMode('normal')"
           >
             <img
-              :src="isDark ? './color_mode/dark.png' : './color_mode/light.png'"
+              :src="isDark ? normalDarkImg : normalLightImg"
               alt="light"
               srcset=""
               h-full w-full rounded-6px
@@ -56,7 +60,7 @@ function toUse() {
             @click="setMode('note')"
           >
             <img
-              :src="isDark ? './images/note/dark.png' : './images/note/light.png'"
+              :src="isDark ? noteDarkImg : noteLightImg"
               alt="dark"
               srcset=""
               h-full w-full rounded-6px

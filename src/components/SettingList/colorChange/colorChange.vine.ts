@@ -1,6 +1,10 @@
 import { ipcRenderer } from 'electron'
 import { ref } from 'vue'
 import ItemSpace from '../../ItemBox/ItemSpace/ItemSpace.vine'
+import noteDarkImg from '../../../assets/modeImages/note/dark.png'
+import noteLightImg from '../../../assets/modeImages/note/light.png'
+import normalDarkImg from '../../../assets/modeImages/color_mode/dark.png'
+import normalLightImg from '../../../assets/modeImages/color_mode/light.png'
 
 function ColorChange() {
   const colorMode = ref(localStorage.getItem('colorMode') ? localStorage.getItem('colorMode') : 'system')
@@ -29,7 +33,7 @@ function ColorChange() {
           @click="setColor('system')"
         >
           <img
-            src="/color_mode/light_and_dark.png"
+            src="../../../assets/modeImages/color_mode/light_and_dark.png"
             alt=""
             w="[calc(100%-16px)]"
             :min-w="simpleMode ? '82px' : '71px'"
@@ -45,7 +49,7 @@ function ColorChange() {
           @click="setColor('light')"
         >
           <img
-            :src="isNoteUI ? '/images/note/light.png' : '/color_mode/light.png'"
+            :src="isNoteUI ? noteLightImg : normalLightImg"
             alt=""
             w="[calc(100%-16px)]"
             :min-w="simpleMode ? '82px' : '71px'"
@@ -61,7 +65,7 @@ function ColorChange() {
           @click="setColor('dark')"
         >
           <img
-            :src="isNoteUI ? '/images/note/dark.png' : '/color_mode/dark.png'"
+            :src="isNoteUI ? noteDarkImg : normalDarkImg"
             alt=""
             w="[calc(100%-16px)]"
             :min-w="simpleMode ? '82px' : '71px'"
