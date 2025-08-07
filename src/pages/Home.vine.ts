@@ -26,11 +26,7 @@ function Home() {
       @right-click="showAddItem = !showAddItem"
       @left-click="router.push('/setting-sim')"
     />
-    <List
-      :show-add-item="showAddItem"
-      :list-data="listData"
-      @set-add-item="showAddItem = false"
-    />
+    <List :show-add-item="showAddItem" :list-data="listData" @set-add-item="showAddItem = false" />
   `
 }
 

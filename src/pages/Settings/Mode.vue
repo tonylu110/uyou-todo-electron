@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { useI18n } from 'vue-i18n'
-import { onMounted, ref } from 'vue'
 import { ipcRenderer } from 'electron'
-import TabBar from '../../components/TabBar/TabBar.vue'
+import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import SettingList from '../../components/SettingList/SettingList.vine'
-import router from '../../router'
-import { createToast } from '../../components/Toast'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
+import TabBar from '../../components/TabBar/TabBar.vue'
+import { createToast } from '../../components/Toast'
+import router from '../../router'
 
 const { t } = useI18n()
 
@@ -50,14 +50,12 @@ function modeShow(mode: string): boolean {
 const simpleMode = ref(localStorage.getItem('simpleMode') === 'true')
 
 onMounted(() => {
-  // eslint-disable-next-line ts/no-unused-expressions
   window.innerWidth < 750
     ? simpleMode.value = true
     : simpleMode.value = false
 })
 
 window.addEventListener('resize', () => {
-  // eslint-disable-next-line ts/no-unused-expressions
   window.innerWidth < 750
     ? simpleMode.value = true
     : simpleMode.value = false

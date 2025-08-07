@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import Alert from '../../components/Alert/Alert.vue'
+import Item from '../../components/ItemBox/Item/Item.vue'
+import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
+import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
+import SettingList from '../../components/SettingList/SettingList.vine'
+import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import router from '../../router'
-import SettingList from '../../components/SettingList/SettingList.vine'
-import setSwitchFn from '../../util/setSwitchFn'
-import Item from '../../components/ItemBox/Item/Item.vue'
 import emitter from '../../util/bus'
-import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
-import Alert from '../../components/Alert/Alert.vue'
-import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
-import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
+import setSwitchFn from '../../util/setSwitchFn'
 
 const { t } = useI18n()
 
