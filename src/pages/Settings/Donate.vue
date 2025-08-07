@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onUnmounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'

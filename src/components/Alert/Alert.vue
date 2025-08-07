@@ -26,7 +26,6 @@ const { t } = useI18n()
 const useDialog = useTemplateRef('dialog')
 
 onMounted(() => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const closeAlert = () => {
     useDialog.value!.close()
   }

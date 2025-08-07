@@ -36,6 +36,17 @@
       "code_actions_on_format": {
         "source.fixAll.eslint": true
       }
+    },
+    "TSX": {
+      "formatter": {
+        "external": {
+          "command": "eslint",
+          "arguments": ["{buffer_path}", "--fix"]
+        }
+      },
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
     }
   }
 }
