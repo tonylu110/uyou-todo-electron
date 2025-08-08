@@ -30,9 +30,8 @@ const localLang = navigator.language.toLowerCase()
 </script>
 
 <template>
-  <NoteTabBar v-if="isNoteUI" :title="t('settingTitleText')" />
-  <TabBar
-    v-else
+  <component
+    :is="isNoteUI ? NoteTabBar : TabBar"
     :title="t('settingTitleText')"
     :right-img-show="false"
     bg-color="light"

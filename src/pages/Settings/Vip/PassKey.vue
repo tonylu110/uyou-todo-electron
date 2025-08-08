@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
-import TabBar from '../../../components/TabBar/TabBar.vue'
-import SettingList from '../../../components/SettingList/SettingList.vine'
 import Item from '../../../components/ItemBox/Item/Item.vue'
-import setSwitchFn from '../../../util/setSwitchFn'
 import ItemSpace from '../../../components/ItemBox/ItemSpace/ItemSpace.vine'
+import SettingList from '../../../components/SettingList/SettingList.vine'
 import NoteTabBar from '../../../components/TabBar/NoteTabBar.vue'
+import TabBar from '../../../components/TabBar/TabBar.vue'
+import setSwitchFn from '../../../util/setSwitchFn'
 
 const { t } = useI18n()
 
@@ -25,9 +25,8 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
-  <NoteTabBar v-if="isNoteUI" :title="t('vip.setCustPassKey')" />
-  <TabBar
-    v-else
+  <component
+    :is="isNoteUI ? NoteTabBar : TabBar"
     :title="t('vip.setCustPassKey')"
     :right-img-show="false"
     :left-img-show="true"

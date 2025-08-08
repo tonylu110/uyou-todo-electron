@@ -46,9 +46,8 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
-  <NoteTabBar v-if="isNoteUI" :title="t('anotherSettings.openPass')" />
-  <TabBar
-    v-else
+  <component
+    :is="isNoteUI ? NoteTabBar : TabBar"
     :title="t('anotherSettings.openPass')"
     :right-img-show="false"
     :left-img-show="true"

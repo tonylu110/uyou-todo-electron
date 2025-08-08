@@ -1,4 +1,5 @@
-import { type UseTimeAgoMessages, type UseTimeAgoUnitNamesDefault, useTimeAgo } from '@vueuse/core'
+import type { UseTimeAgoMessages, UseTimeAgoUnitNamesDefault } from '@vueuse/core'
+import { useTimeAgo } from '@vueuse/core'
 import { useI18n } from 'vue-i18n'
 
 export function useLocaleTimeAgo(date: Date) {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { shell } from 'electron'
-import { onUnmounted, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Item from '../../components/ItemBox/Item/Item.vue'
 import ItemBox from '../../components/ItemBox/ItemBox.vue'
@@ -37,9 +37,8 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
-  <NoteTabBar v-if="isNoteUI" :title="t('vip.proVersion')" />
-  <TabBar
-    v-else
+  <component
+    :is="isNoteUI ? NoteTabBar : TabBar"
     :title="t('vip.proVersion')"
     :right-img-show="false"
     :left-img-show="true"

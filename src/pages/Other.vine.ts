@@ -83,9 +83,9 @@ function Other() {
       :title="title"
       :left-img-show="simpleMode"
       :right-img-show="
-        route.query.listName !== 'allNotDo' &&
-        route.query.listName !== 'allDo' &&
-        route.query.listName !== 'star'
+        route.query.listName !== 'allNotDo'
+        && route.query.listName !== 'allDo'
+        && route.query.listName !== 'star'
       "
       :show-more="true"
       :show-wrap="true"
@@ -93,11 +93,7 @@ function Other() {
       @left-click="router.push('/setting-sim')"
       @delete-all-item="delAllItem"
     />
-    <List
-      :show-add-item="showAddItem"
-      :list-data="listData"
-      @set-add-item="showAddItem = false"
-    />
+    <List :show-add-item="showAddItem" :list-data="listData" @set-add-item="showAddItem = false" />
   `
 }
 

@@ -63,9 +63,8 @@ function ToDoBackup() {
   }
 
   return vine`
-    <NoteTabBar v-if="isNoteUI" :title="t('anotherSettings.backup')" />
-    <TabBar
-      v-else
+    <component
+      :is="isNoteUI ? NoteTabBar : TabBar"
       :title="t('anotherSettings.backup')"
       :right-img-show="false"
       :left-img-show="true"

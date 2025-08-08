@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import { ElSlider } from 'element-plus'
 import { ipcRenderer } from 'electron'
-import TabBar from '../../../components/TabBar/TabBar.vue'
-import SettingList from '../../../components/SettingList/SettingList.vine'
+import { ElSlider } from 'element-plus'
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 import Item from '../../../components/ItemBox/Item/Item.vue'
-import setSwitchFn from '../../../util/setSwitchFn'
-import { createToast } from '../../../components/Toast'
-import ItemText from '../../../components/ItemBox/ItemText/ItemText.vine'
 import ItemSpace from '../../../components/ItemBox/ItemSpace/ItemSpace.vine'
+import ItemText from '../../../components/ItemBox/ItemText/ItemText.vine'
+import SettingList from '../../../components/SettingList/SettingList.vine'
 import NoteTabBar from '../../../components/TabBar/NoteTabBar.vue'
+import TabBar from '../../../components/TabBar/TabBar.vue'
+import { createToast } from '../../../components/Toast'
+import setSwitchFn from '../../../util/setSwitchFn'
 
 const { t } = useI18n()
 
@@ -49,9 +49,8 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
-  <NoteTabBar v-if="isNoteUI" :title="t('vip.setCustFont')" />
-  <TabBar
-    v-else
+  <component
+    :is="isNoteUI ? NoteTabBar : TabBar"
     :title="t('vip.setCustFont')"
     :right-img-show="false"
     @left-click="() => router.back()"

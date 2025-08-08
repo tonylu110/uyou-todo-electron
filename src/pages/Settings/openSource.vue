@@ -12,12 +12,82 @@ import openUrlInBrowser from '../../util/openUrlInBrowser'
 const { t } = useI18n()
 
 const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
+
+const list = [
+  {
+    name: 'electron',
+    url: 'https://github.com/electron',
+  },
+  {
+    name: 'vue',
+    url: 'https://github.com/vuejs',
+  },
+  {
+    name: 'vue macros',
+    url: 'https://github.com/vue-macros/vue-macros',
+  },
+  {
+    name: 'vue devtools',
+    url: 'https://github.com/vuejs/devtools-next',
+  },
+  {
+    name: 'vue vine',
+    url: 'https://github.com/vue-vine',
+  },
+  {
+    name: 'vueuse',
+    url: 'https://github.com/vueuse/vueuse',
+  },
+  {
+    name: 'vite',
+    url: 'https://github.com/vitejs/vite',
+  },
+  {
+    name: 'TypeScript',
+    url: 'https://github.com/microsoft/TypeScript',
+  },
+  {
+    name: 'sass',
+    url: 'https://github.com/sass',
+  },
+  {
+    name: 'moment',
+    url: 'https://github.com/moment',
+  },
+  {
+    name: 'es-toolkit',
+    url: 'https://github.com/toss/es-toolkit',
+  },
+  {
+    name: 'mica-electron By GregVido',
+    url: 'https://github.com/GregVido/mica-electron',
+  },
+  {
+    name: 'unocss By antfu',
+    url: 'https://github.com/unocss/unocss',
+  },
+  {
+    name: 'electron-store By sindresorhus',
+    url: 'https://github.com/sindresorhus/electron-store',
+  },
+  {
+    name: 'vue3-perfect-scrollbar By mercs600',
+    url: 'https://github.com/mercs600/vue3-perfect-scrollbar',
+  },
+  {
+    name: 'concurrently By open-cli-tools',
+    url: 'https://github.com/open-cli-tools/concurrently',
+  },
+  {
+    name: 'wait-on By jeffbski',
+    url: 'https://github.com/jeffbski/wait-on',
+  },
+]
 </script>
 
 <template>
-  <NoteTabBar v-if="isNoteUI" :title="t('anotherSettings.openSource')" />
-  <TabBar
-    v-else
+  <component
+    :is="isNoteUI ? NoteTabBar : TabBar"
     :title="t('anotherSettings.openSource')"
     :right-img-show="false"
     :left-img-show="true"
@@ -31,23 +101,12 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
       </div>
     </ItemSpace>
     <ItemBox>
-      <Item title="electron" @item-fun="openUrlInBrowser('https://github.com/electron')" />
-      <Item title="vue" @item-fun="openUrlInBrowser('https://github.com/vuejs')" />
-      <Item title="vue macros" @item-fun="openUrlInBrowser('https://github.com/vue-macros/vue-macros')" />
-      <Item title="vue devtools" @item-fun="openUrlInBrowser('https://github.com/vuejs/devtools-next')" />
-      <Item title="vue vine" @item-fun="openUrlInBrowser('https://github.com/vue-vine')" />
-      <Item title="vueuse" @item-fun="openUrlInBrowser('https://github.com/vueuse')" />
-      <Item title="vite" @item-fun="openUrlInBrowser('https://github.com/vitejs')" />
-      <Item title="TypeScript" @item-fun="openUrlInBrowser('https://github.com/microsoft/TypeScript')" />
-      <Item title="sass" @item-fun="openUrlInBrowser('https://github.com/sass')" />
-      <Item title="moment" @item-fun="openUrlInBrowser('https://github.com/moment')" />
-      <Item title="es-toolkit" @item-fun="openUrlInBrowser('https://github.com/toss/es-toolkit')" />
-      <Item title="mica-electron By GregVido" @item-fun="openUrlInBrowser('https://github.com/GregVido/mica-electron')" />
-      <Item title="unocss By antfu" @item-fun="openUrlInBrowser('https://github.com/unocss/unocss')" />
-      <Item title="electron-store By sindresorhus" @item-fun="openUrlInBrowser('https://github.com/sindresorhus/electron-store')" />
-      <Item title="vue3-perfect-scrollbar By mercs600" @item-fun="openUrlInBrowser('https://github.com/mercs600/vue3-perfect-scrollbar')" />
-      <Item title="concurrently By open-cli-tools" @item-fun="openUrlInBrowser('https://github.com/open-cli-tools/concurrently')" />
-      <Item title="wait-on By jeffbski" @item-fun="openUrlInBrowser('https://github.com/jeffbski/wait-on')" />
+      <Item
+        v-for="item in list"
+        :key="item.name"
+        :title="item.name"
+        @item-fun="openUrlInBrowser(item.url)"
+      />
     </ItemBox>
   </SettingList>
 </template>

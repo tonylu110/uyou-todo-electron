@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import type { Ref } from 'vue'
 import { app } from '@electron/remote'
 import { ipcRenderer } from 'electron'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { Ref } from 'vue'
 import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue'
 import ItemSpace from '../../components/ItemBox/ItemSpace/ItemSpace.vine'
 import SettingList from '../../components/SettingList/SettingList.vine'
@@ -80,9 +80,8 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
 </script>
 
 <template>
-  <NoteTabBar v-if="isNoteUI" :title="t('update.updateTitle')" />
-  <TabBar
-    v-else
+  <component
+    :is="isNoteUI ? NoteTabBar : TabBar"
     :title="t('update.updateTitle')"
     :right-img-show="false"
     :left-img-show="true"
