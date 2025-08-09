@@ -12,9 +12,14 @@ import NoteTabBar from '../components/TabBar/NoteTabBar.vue'
 import TabBar from '../components/TabBar/TabBar.vue'
 import { createToast } from '../components/Toast'
 import router from '../router'
+import { useCateStore } from '../store/cateStore'
+import { useTodoStore } from '../store/todoStore'
 import emitter from '../util/bus'
 
 const { t } = useI18n()
+
+const todoStore = useTodoStore()
+const cateStore = useCateStore()
 
 const form = ref('')
 const route = useRoute()
@@ -111,29 +116,17 @@ function login() {
           }
           else {
             const uid = localStorage.getItem('uid')
-            fetch('https://api.todo.uyou.org.cn/gettodo', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                uid,
-              }),
-            }).then((res) => {
-              return res.json()
-            }).then((res) => {
-              if (res._id) {
+            todoStore.syncFromServer(uid!)
+              .then(() => {
                 createToast({ msg: t('accountPage.syncSuccess') })
-                localStorage.setItem('ToDo', res.data)
                 localStorage.setItem('autoSync', 'true')
                 swichState.value = true
                 emitter.emit('setLoginText', uname.value)
                 emitter.emit('changeList')
-              }
-              else {
+              })
+              .catch(() => {
                 createToast({ msg: t('accountPage.syncFail') })
-              }
-            })
+              })
           }
         })
         fetch(`https://api.todo.uyou.org.cn/todocateexist?uid=${res._id}`).then((res) => {
@@ -167,29 +160,17 @@ function login() {
             })
           }
           else {
-            fetch('https://api.todo.uyou.org.cn/gettodocate', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                uid,
-              }),
-            }).then((res) => {
-              return res.json()
-            }).then((res) => {
-              if (res._id) {
+            cateStore.syncFromServer(uid!)
+              .then(() => {
                 createToast({ msg: t('accountPage.syncSuccess') })
-                localStorage.setItem('cate', res.data)
                 localStorage.setItem('autoSync', 'true')
                 swichState.value = true
                 emitter.emit('setCate', res.data)
                 emitter.emit('setLoginText', uname.value)
-              }
-              else {
+              })
+              .catch(() => {
                 createToast({ msg: t('accountPage.syncFail') })
-              }
-            })
+              })
           }
         })
       }

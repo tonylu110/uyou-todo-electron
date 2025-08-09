@@ -1,0 +1,70 @@
+[
+  {
+    "name": "electron",
+    "url": "https://github.com/electron"
+  },
+  {
+    "name": "vue",
+    "url": "https://github.com/vuejs"
+  },
+  {
+    "name": "vue macros",
+    "url": "https://github.com/vue-macros/vue-macros"
+  },
+  {
+    "name": "vue devtools",
+    "url": "https://github.com/vuejs/devtools-next"
+  },
+  {
+    "name": "vue vine",
+    "url": "https://github.com/vue-vine"
+  },
+  {
+    "name": "vueuse",
+    "url": "https://github.com/vueuse/vueuse"
+  },
+  {
+    "name": "vite",
+    "url": "https://github.com/vitejs/vite"
+  },
+  {
+    "name": "TypeScript",
+    "url": "https://github.com/microsoft/TypeScript"
+  },
+  {
+    "name": "sass",
+    "url": "https://github.com/sass"
+  },
+  {
+    "name": "moment",
+    "url": "https://github.com/moment"
+  },
+  {
+    "name": "es-toolkit",
+    "url": "https://github.com/toss/es-toolkit"
+  },
+  {
+    "name": "mica-electron By GregVido",
+    "url": "https://github.com/GregVido/mica-electron"
+  },
+  {
+    "name": "unocss By antfu",
+    "url": "https://github.com/unocss/unocss"
+  },
+  {
+    "name": "electron-store By sindresorhus",
+    "url": "https://github.com/sindresorhus/electron-store"
+  },
+  {
+    "name": "vue3-perfect-scrollbar By mercs600",
+    "url": "https://github.com/mercs600/vue3-perfect-scrollbar"
+  },
+  {
+    "name": "concurrently By open-cli-tools",
+    "url": "https://github.com/open-cli-tools/concurrently"
+  },
+  {
+    "name": "wait-on By jeffbski",
+    "url": "https://github.com/jeffbski/wait-on"
+  }
+]

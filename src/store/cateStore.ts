@@ -101,6 +101,38 @@ export const useCateStore = defineStore('cate', () => {
     localStorage.setItem('cate', JSON.stringify({ data: cateList.value }))
   }
 
+  async function syncFromServer(uid: string) {
+    try {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000)
+
+      const response = await fetch('https://api.todo.uyou.org.cn/gettodocate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ uid }),
+        signal: controller.signal,
+      })
+
+      clearTimeout(timeoutId)
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const res = await response.json()
+      cateList.value = JSON.parse(res.data).data
+
+      saveToLocal()
+      return true
+    }
+    catch (error) {
+      console.error('Sync failed:', error)
+      return false
+    }
+  }
+
   return {
     cateList,
     addCategory,
@@ -109,5 +141,6 @@ export const useCateStore = defineStore('cate', () => {
     updateCategory,
     saveToLocal,
     saveAndSync,
+    syncFromServer,
   }
 })
