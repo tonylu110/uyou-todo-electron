@@ -3,7 +3,7 @@ productName: uyou ToDo
 copyright: Copyright © 2022-2024 Anthony Lu
 mac:
   category: public.app-category.utilities
-  icon: ./logo.icns
+  icon: ./icons/logo.icns
   darkModeSupport: true
   target:
     - target: dmg
@@ -11,13 +11,13 @@ mac:
         - x64
         - arm64
 win:
-  icon: ./logo.ico
-  artifactName: '${productName}-${version}-${arch}.${ext}'
+  icon: ./icons/logo.ico
+  artifactName: "${productName}-${version}-${arch}.${ext}"
   target:
     - nsis
     - zip
 linux:
-  icon: ./logo.png
+  icon: ./icons/logo.png
   target:
     - target: snap
       arch:
@@ -34,7 +34,7 @@ nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
 dmg:
-  icon: ./logo_disk.icns
+  icon: ./icons/logo_disk.icns
 files:
   - dist/**/*
   - prebuild_electron/**/*

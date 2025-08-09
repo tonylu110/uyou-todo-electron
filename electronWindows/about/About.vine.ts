@@ -83,7 +83,7 @@ function About() {
         p="!16px"
         m="b-4px t-10"
       >
-        <img class="no-drag w-full h-full" src="../../logo.png" alt="logo" @click="showWin95Btn++" />
+        <img class="no-drag w-full h-full" src="../../icons/logo.png" alt="logo" @click="showWin95Btn++" />
       </button>
       <span :c="showWin95Btn > 5 ? '' : '#555 dark:#bbb'" class="font-bold text-24px"> uyou ToDo v{{ versionText }} </span>
       <span class="block mt-10px text-14px font-bold" :c="showWin95Btn > 5 ? '' : '#555 dark:#bbb'">
