@@ -157,7 +157,7 @@ function NoteUI() {
 
   const textWrapState = ref(localStorage.getItem('textWrap') === 'true' || localStorage.getItem('textWrap') === null)
 
-  const updateTitle = computed(() => `${t('updateText')} v${newVersion}`)
+  const updateTitle = computed(() => `${t('updateText')} v${newVersion.value}`)
 
   watch(textWrapState, (newValue) => {
     emitter.emit('textOpen', newValue)
