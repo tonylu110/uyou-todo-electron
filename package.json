@@ -1,6 +1,6 @@
 {
   "name": "uyoutodo",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "private": false,
   "author": {
     "name": "Anthony Lu",
@@ -16,14 +16,16 @@
     "electron:servewin": "pnpm prebuild:dev && concurrently -k \"pnpm dev\" \"pnpm electron\"",
     "electron:servemac": "pnpm prebuild:dev && concurrently -k \"pnpm dev\" \"pnpm electron:mac\" ",
     "electron:servelinux": "pnpm prebuild:dev && concurrently -k \"pnpm dev\" \"pnpm electron:linux\"",
-    "electron:buildwin": "cross-env NODE_ENV=production && pnpm prebuild:win && vite build && electron-builder",
-    "electron:buildwinarm": "cross-env NODE_ENV=production && pnpm prebuild:win && vite build && electron-builder --win --arm64",
-    "electron:buildmac": "cross-env NODE_ENV=production && pnpm prebuild:mac && vite build && electron-builder --config.npmRebuild=false -c.extraMetadata.main=prebuild_electron/mac/mainMac.js",
+    "electron:buildwin": "pnpm prebuild:win && vite build && electron-builder",
+    "electron:buildwinarm": "pnpm prebuild:win && vite build && electron-builder --win --arm64",
+    "electron:buildmac": "pnpm prebuild:mac && vite build && electron-builder --config.npmRebuild=false -c.extraMetadata.main=prebuild_electron/mac/mainMac.js",
+    "electron:buildlinux": "pnpm prebuild:linux && vite build && electron-builder --config.npmRebuild=false -c.extraMetadata.main=prebuild_electron/linux/mainLinux.js",
     "electron": "wait-on tcp:3000 && cross-env NODE_ENV=development electron .",
     "electron:mac": "wait-on tcp:3000 && cross-env NODE_ENV=development electron prebuild_electron/mac/mainMac.js",
-    "electron:linux": "wait-on tcp:3000 && cross-env NODE_ENV=development electron prebuild_electron/mac/mainMac.js --no-sandbox",
+    "electron:linux": "wait-on tcp:3000 && cross-env NODE_ENV=development electron prebuild_electron/linux/mainLinux.js --no-sandbox",
     "prebuild:win": "rolldown -c rolldown-win.config.js",
     "prebuild:mac": "rolldown -c rolldown-mac.config.js",
+    "prebuild:linux": "rolldown -c rolldown-linux.config.js",
     "prebuild:dev": "rolldown -c",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -31,6 +33,7 @@
   "dependencies": {
     "@electron/remote": "^2.1.3",
     "electron-is-dev": "^3.0.1",
+    "electron-liquid-glass": "^1.0.1",
     "electron-store": "^8.1.0",
     "mica-electron": "^1.5.16"
   },

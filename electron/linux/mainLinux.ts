@@ -1,28 +1,26 @@
 /* eslint-disable node/prefer-global/process */
 /* eslint-disable no-console */
 import fs from 'node:fs'
-import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import remoteMain from '@electron/remote/main/index.js'
 import { app, BrowserWindow, dialog, globalShortcut, ipcMain, Menu, nativeImage, nativeTheme, screen, shell, Tray } from 'electron'
 import isDev from 'electron-is-dev'
-import liquidGlass from 'electron-liquid-glass'
 import Store from 'electron-store'
 import i18n from '../i18n/index.ts'
+import menuTemplate from '../mac/menu.ts'
+import createAboutWindowMac from '../mac/pages/aboutMac.ts'
+import createLogoffWindowMac from '../mac/pages/logoffMac.ts'
+import createRegisterWindowMac from '../mac/pages/registerMac.ts'
+import createRepassWindowMac from '../mac/pages/repassMac.ts'
 import { readFile, writeFile } from '../pages/util/rnwFile.ts'
 import sendNotification from '../pages/util/sendNotification.ts'
-import { initMenuBlur, liquidStyle, menuBlur, menuBlurIpc } from '../store/menuBlurStore.ts'
+import { initMenuBlur, menuBlurIpc } from '../store/menuBlurStore.ts'
 import { initSim, simple, simpleIpc } from '../store/simpleModeStore.ts'
 import { initSystemBar, systemBar, systemBarIpc } from '../store/systemTitleBarStore.ts'
 import { initWindowMenu, windowMenu, windowMenuIpc } from '../store/windowMenuStore.ts'
 import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from '../store/windowSizeStore.ts'
 import useFontSize from '../useFontSize.ts'
-import menuTemplate from './menu.ts'
-import createAboutWindowMac from './pages/aboutMac.ts'
-import createLogoffWindowMac from './pages/logoffMac.ts'
-import createRegisterWindowMac from './pages/registerMac.ts'
-import createRepassWindowMac from './pages/repassMac.ts'
 
 const store = new Store()
 
@@ -57,8 +55,6 @@ function createWindow() {
     y: (store.get('window-pos')
       ? (store.get('window-pos') as Array<number>)[1]
       : (height - (simple ? 700 : 750)) / 2),
-    vibrancy: (menuBlur || menuBlur === undefined) && liquidStyle !== 'liquid' ? 'menu' : undefined,
-    transparent: liquidStyle === 'liquid',
     visualEffectState: 'active',
     icon: path.join(__dirname, '../../dist/logo.png'),
     frame: systemBar,
@@ -81,10 +77,6 @@ function createWindow() {
       },
     },
   })
-
-  if (liquidStyle === 'liquid') {
-    mainWindow.setWindowButtonVisibility(true)
-  }
 
   if (windowSizeState)
     mainWindow.setSize(windowSize.width, windowSize.height)
@@ -266,23 +258,12 @@ function createWindow() {
     const fileText = readFile(ext)
     ev.reply('readFile', fileText)
   })
-
-  ipcMain.on('setLiquid', (_ev, liquid) => {
-    store.set('liquidStyle', liquid)
-  })
 }
 let tray
 app.whenReady().then(() => {
   if (process.platform === 'win32')
     app.setAppUserModelId('uyou ToDo')
   createWindow()
-  if (Number(os.release().split('.')[0]) > 24 && liquidStyle === 'liquid') {
-    mainWindow.webContents.once('did-finish-load', () => {
-      const glassId = liquidGlass.addView(mainWindow.getNativeWindowHandle(), {})
-
-      liquidGlass.unstable_setVariant(glassId, 2)
-    })
-  }
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
     mainWindow.webContents.send('isDev', isDev)

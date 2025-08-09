@@ -1,9 +1,10 @@
 import { ipcRenderer } from 'electron'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { isLinux, isMac, isWin11, isWindows10OrAfter } from '../../../util/os'
+import { isLinux, isMac, isMacosTahoe, isWin11, isWindows10OrAfter } from '../../../util/os'
 import setSwitchFn from '../../../util/setSwitchFn'
 import Item from '../../ItemBox/Item/Item.vue'
+import { createToast } from '../../Toast'
 
 function WindowStyleSettings() {
   const { t } = useI18n()
@@ -16,6 +17,11 @@ function WindowStyleSettings() {
 
   function changeMica(effect: string) {
     ipcRenderer.send('changeBlur', effect)
+  }
+
+  function changeLiquidGlass(effect: string) {
+    ipcRenderer.send('setLiquid', effect)
+    createToast({ msg: t('restartApp') })
   }
 
   const minWidth = ref(window.innerWidth < 750)
@@ -47,7 +53,7 @@ function WindowStyleSettings() {
         cursor: pointer;
         font-size: 14px;
       }
-    }  
+    }
   `)
 
   return vine`
@@ -120,6 +126,27 @@ function WindowStyleSettings() {
         @click="changeMica('acrylic')"
       >
         Acrylic
+      </div>
+    </div>
+    <div
+      v-if="isMacosTahoe() && menuBlurState && !simpleMode"
+      class="item item-blur"
+      :max-w="minWidth ? '' : '550px'"
+      bg="white dark:#999/10"
+    >
+      <div
+        c="black dark:#bbb active:white"
+        bg="active:primary-d dark:active:primary-a"
+        @click="changeLiquidGlass('blur')"
+      >
+        Blur
+      </div>
+      <div
+        c="black dark:#bbb active:white"
+        bg="active:primary-d dark:active:primary-a"
+        @click="changeLiquidGlass('liquid')"
+      >
+        Liquid Glass
       </div>
     </div>
   `
