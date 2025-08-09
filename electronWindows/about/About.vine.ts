@@ -5,9 +5,11 @@ import vitePackage from 'vite/package.json'
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import vuePackage from 'vue/package.json'
+import CloseButton from '../../src/components/CloseButton/CloseButton.vine'
 import { createToast } from '../../src/components/Toast'
 import { versionText } from '../../src/util/appVersionCode'
 import openUrlInBrowser from '../../src/util/openUrlInBrowser'
+import { isMac } from '../../src/util/os'
 import TitleBar from './components/TitleBar/TitleBar.vine'
 
 function About() {
@@ -75,6 +77,7 @@ function About() {
       flex="~ col"
     >
       <TitleBar :is-win-95="showWin95Btn > 5" />
+      <CloseButton v-if="!isMac() && showWin95Btn < 6" window-name="about" />
       <button
         :class="showWin95Btn > 5 ? 'win95-button w-162px h-162px' : 'transparent-button w-162px h-162px'"
         p="!16px"
