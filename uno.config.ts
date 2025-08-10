@@ -15,7 +15,7 @@ export default defineConfig({
       extract: {
         include: [
           'src/**/*.{vue,html,jsx,tsx,vine.ts}',
-          'electronWindows/**/*.{vue,html,jsx,tsx,vine.ts}',
+          'electron_windows/**/*.{vue,html,jsx,tsx,vine.ts}',
         ],
         exclude: ['node_modules', '.git'],
       },
@@ -26,11 +26,11 @@ export default defineConfig({
     pipeline: {
       include: [
         'src/**/*.vine.ts',
-        'electronWindows/**/*.vine.ts',
+        'electron_windows/**/*.vine.ts',
         'src/**/*.vue',
-        'electronWindows/**/*.vue',
+        'electron_windows/**/*.vue',
         'src/**/*.tsx',
-        'electronWindows/**/*.tsx',
+        'electron_windows/**/*.tsx',
       ],
     },
   },

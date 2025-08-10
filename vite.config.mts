@@ -57,10 +57,10 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: path.resolve(__dirname, 'index.html'),
-        about: path.resolve(__dirname, 'electronWindows/about/index.html'),
-        logoff: path.resolve(__dirname, 'electronWindows/logoff/index.html'),
-        repass: path.resolve(__dirname, 'electronWindows/repass/index.html'),
-        register: path.resolve(__dirname, 'electronWindows/register/index.html'),
+        about: path.resolve(__dirname, 'electron_windows/about/index.html'),
+        logoff: path.resolve(__dirname, 'electron_windows/logoff/index.html'),
+        repass: path.resolve(__dirname, 'electron_windows/repass/index.html'),
+        register: path.resolve(__dirname, 'electron_windows/register/index.html'),
       },
     },
   },

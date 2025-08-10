@@ -40,9 +40,9 @@ function createLogoffWindow(uname) {
   }
   logoffWindow.setAlwaysOnTop(true)
   if (isDev)
-    logoffWindow.loadURL(`http://localhost:3000/electronWindows/logoff/`)
+    logoffWindow.loadURL(`http://localhost:3000/electron_windows/logoff/`)
   else
-    logoffWindow.loadFile(path.join(__dirname, '../dist/electronWindows/logoff/index.html'))
+    logoffWindow.loadFile(path.join(__dirname, '../dist/electron_windows/logoff/index.html'))
 
   remoteMain.enable(logoffWindow.webContents)
   logoffWindow.once('ready-to-show', () => {

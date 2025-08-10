@@ -32,9 +32,9 @@ function createRepassWindow(uname) {
   })
   repassWindow.setAlwaysOnTop(true)
   if (isDev)
-    repassWindow.loadURL(`http://localhost:3000/electronWindows/repass/`)
+    repassWindow.loadURL(`http://localhost:3000/electron_windows/repass/`)
   else
-    repassWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/repass/index.html'))
+    repassWindow.loadFile(path.join(__dirname, '../../dist/electron_windows/repass/index.html'))
 
   remoteMain.enable(repassWindow.webContents)
   repassWindow.on('ready-to-show', () => {

@@ -32,9 +32,9 @@ function createAboutWindow() {
   })
   aboutWindow.setAlwaysOnTop(true)
   if (isDev)
-    aboutWindow.loadURL('http://localhost:3000/electronWindows/about/')
+    aboutWindow.loadURL('http://localhost:3000/electron_windows/about/')
   else
-    aboutWindow.loadFile(path.join(__dirname, '../../dist/electronWindows/about/index.html'))
+    aboutWindow.loadFile(path.join(__dirname, '../../dist/electron_windows/about/index.html'))
 
   ipcMain.on('setTitleBar', (_event, showBar) => {
     aboutWindow.setWindowButtonVisibility(showBar)

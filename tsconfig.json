@@ -3,7 +3,7 @@
     "target": "esnext",
     "types": [
       "vue-vine/types/macros",
-      "unplugin-vue-macros/macros-global", 
+      "unplugin-vue-macros/macros-global",
       "node"
     ],
     "useDefineForClassFields": true,
@@ -21,6 +21,16 @@
     "noEmit": true,
     "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "electronWindows/**/*.ts", "electronWindows/**/*.d.ts", "electronWindows/**/*.tsx", "electronWindows/**/*.vue", "src/shims.d.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "electron_windows/**/*.ts",
+    "electron_windows/**/*.d.ts",
+    "electron_windows/**/*.tsx",
+    "electron_windows/**/*.vue",
+    "src/shims.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
