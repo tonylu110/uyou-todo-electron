@@ -23,9 +23,9 @@
     "electron": "wait-on tcp:3000 && cross-env NODE_ENV=development electron .",
     "electron:mac": "wait-on tcp:3000 && cross-env NODE_ENV=development electron prebuild_electron/mac/mainMac.js",
     "electron:linux": "wait-on tcp:3000 && cross-env NODE_ENV=development electron prebuild_electron/linux/mainLinux.js --no-sandbox",
-    "prebuild:win": "rolldown -c rolldown-win.config.js",
-    "prebuild:mac": "rolldown -c rolldown-mac.config.js",
-    "prebuild:linux": "rolldown -c rolldown-linux.config.js",
+    "prebuild:win": "rolldown -c build_config/rolldown-win.config.js",
+    "prebuild:mac": "rolldown -c build_config/rolldown-mac.config.js",
+    "prebuild:linux": "rolldown -c build_config/rolldown-linux.config.js",
     "prebuild:dev": "rolldown -c",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
