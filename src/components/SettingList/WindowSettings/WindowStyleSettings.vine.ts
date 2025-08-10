@@ -41,10 +41,10 @@ function WindowStyleSettings() {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 15px;
     
       div {
         width: 130px;
-        margin: 0 10px;
         text-align: center;
         height: 2em;
         line-height: 2em;
@@ -147,6 +147,13 @@ function WindowStyleSettings() {
         @click="changeLiquidGlass('liquid')"
       >
         Liquid Glass
+      </div>
+      <div
+        c="black dark:#bbb active:white"
+        bg="active:primary-d dark:active:primary-a"
+        @click="changeLiquidGlass('liquidBlur')"
+      >
+        Blur Liquid Glass
       </div>
     </div>
   `

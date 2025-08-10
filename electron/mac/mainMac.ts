@@ -57,8 +57,8 @@ function createWindow() {
     y: (store.get('window-pos')
       ? (store.get('window-pos') as Array<number>)[1]
       : (height - (simple ? 700 : 750)) / 2),
-    vibrancy: (menuBlur || menuBlur === undefined) && liquidStyle !== 'liquid' ? 'menu' : undefined,
-    transparent: liquidStyle === 'liquid',
+    vibrancy: (menuBlur || menuBlur === undefined) && !liquidStyle.includes('liquid') ? 'menu' : undefined,
+    transparent: liquidStyle.includes('liquid') && (menuBlur || menuBlur === undefined)!,
     visualEffectState: 'active',
     icon: path.join(__dirname, '../../dist/logo.png'),
     frame: systemBar,
@@ -82,7 +82,7 @@ function createWindow() {
     },
   })
 
-  if (liquidStyle === 'liquid') {
+  if (Number(os.release().split('.')[0]) > 24 && liquidStyle.includes('liquid') && (menuBlur || menuBlur === undefined)) {
     mainWindow.setWindowButtonVisibility(true)
   }
 
@@ -276,11 +276,14 @@ app.whenReady().then(() => {
   if (process.platform === 'win32')
     app.setAppUserModelId('uyou ToDo')
   createWindow()
-  if (Number(os.release().split('.')[0]) > 24 && liquidStyle === 'liquid') {
+  if (Number(os.release().split('.')[0]) > 24 && liquidStyle.includes('liquid') && (menuBlur || menuBlur === undefined)) {
     mainWindow.webContents.once('did-finish-load', () => {
       const glassId = liquidGlass.addView(mainWindow.getNativeWindowHandle(), {})
 
-      liquidGlass.unstable_setVariant(glassId, 2)
+      if (liquidStyle === 'liquid')
+        liquidGlass.unstable_setVariant(glassId, 2)
+      else if (liquidStyle === 'liquidBlur')
+        liquidGlass.unstable_setVariant(glassId, 10)
     })
   }
   mainWindow.once('ready-to-show', () => {

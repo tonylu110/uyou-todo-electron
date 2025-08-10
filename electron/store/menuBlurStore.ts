@@ -10,9 +10,9 @@ export function initMenuBlur() {
   if (store.get('liquidStyle') === undefined)
     store.set('liquidStyle', 'blur')
 }
-export const menuBlur = store.get('menuBlur')
-export const micaStyle = store.get('micaStyle')
-export const liquidStyle = store.get('liquidStyle')
+export const menuBlur = store.get('menuBlur') as boolean
+export const micaStyle = store.get('micaStyle') as string
+export const liquidStyle = store.get('liquidStyle') as string
 export function menuBlurIpc() {
   ipcMain.on('setMenuBlur', (event, arg) => {
     store.set('menuBlur', arg)
