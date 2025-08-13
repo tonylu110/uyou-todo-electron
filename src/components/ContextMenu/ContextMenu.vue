@@ -1,8 +1,8 @@
 <script lang="ts" setup>
+import type customContextMenu from './customContextMenu.type'
+import { clipboard } from 'electron'
 import { computed, onMounted, reactive, ref, useTemplateRef, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { clipboard } from 'electron'
-import type customContextMenu from './customContextMenu.type'
 
 interface Props {
   pos: {
