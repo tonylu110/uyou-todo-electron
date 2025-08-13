@@ -3,6 +3,7 @@ import { debounce } from 'lodash-es'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import NoteAi from '../components/Ai/NoteAi.vine'
 import Alert from '../components/Alert/Alert.vue'
 import CateAdd from '../components/NoteList/CateAdd/CateAdd.vue'
 import NoteList from '../components/NoteList/NoteList.vue'
@@ -280,16 +281,16 @@ function NoteUI() {
         <Tab
           id="all"
           :title="t('noteui.allcate')"
-        :checked="true"
-        :index="0"
+          :checked="true"
+          :index="0"
           @choose="choose"
           @load="setLab"
         />
         <Tab
           v-if="showTab"
           id="use"
-        :title="t('noteui.spcate')"
-        :index="1"
+          :title="t('noteui.spcate')"
+          :index="1"
           @choose="choose"
           @load="setLab"
         />
@@ -297,9 +298,9 @@ function NoteUI() {
       <div
         v-if="!isMac() && !systemTitle"
         :bg="
-        topState
-          ? 'error-d hover:error-h active:error-a'
-          : 'black/10 hover:black/20 active:black/30'
+          topState
+            ? 'error-d hover:error-h active:error-a'
+            : 'black/10 hover:black/20 active:black/30'
         "
         class="fixed left-15px top-14px mr-7px h-13px w-13px flex cursor-pointer items-center justify-center rounded-5px rounded-full p-6px no-drag"
         @click="onTopWindow"
@@ -315,42 +316,43 @@ function NoteUI() {
           <component :is="noteComponents[listId as keyof typeof noteComponents]" :key="listId" />
         </Transition>
       </div>
-      <div flex="~ gap-10px" class="fixed bottom-15px left-15px no-drag">
+      <div flex="~ gap-10px" class="fixed bottom-15px left-15px no-drag z-1">
         <div
-        v-if="listId === 'all' && !autoSync"
-        class="flex items-center justify-center p-13px"
-          bg="primary-d active:primary-a"
-          transition="duration-300 all"
-          rounded="10px hover:30px"
-        shadow="md hover:lg primary-d/70 dark:primary-a/70"
-          transform="active:scale-90 hover:scale-120"
-          @click="sync"
-        >
-          <div
-          :class="uid ? 'i-ph:cloud-arrow-down-bold text-22px' : 'i-ph:user-bold text-22px'"
-          c="!white"
-          />
-        </div>
-      </div>
-      <div flex="~ gap-10px" class="fixed bottom-15px right-15px no-drag">
-        <div
-        v-if="listId === 'all'"
+          v-if="listId === 'all' && !autoSync"
           class="flex items-center justify-center p-13px"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
           rounded="10px hover:30px"
           shadow="md hover:lg primary-d/70 dark:primary-a/70"
           transform="active:scale-90 hover:scale-120"
-        @click="showCateAdd = true"
+          @click="sync"
+        >
+          <div
+            :class="uid ? 'i-ph:cloud-arrow-down-bold text-22px' : 'i-ph:user-bold text-22px'"
+            c="!white"
+          />
+        </div>
+        <NoteAi />
+      </div>
+      <div flex="~ gap-10px" class="fixed bottom-15px right-15px no-drag">
+        <div
+          v-if="listId === 'all'"
+          class="flex items-center justify-center p-13px"
+          bg="primary-d active:primary-a"
+          transition="duration-300 all"
+          rounded="10px hover:30px"
+          shadow="md hover:lg primary-d/70 dark:primary-a/70"
+          transform="active:scale-90 hover:scale-120"
+          @click="showCateAdd = true"
         >
           <div class="i-ph:plus-bold text-22px c-white" />
         </div>
         <div
-        class="flex items-center justify-center p-13px"
+          class="flex items-center justify-center p-13px"
           bg="primary-d active:primary-a"
           transition="duration-300 all"
           rounded="10px hover:30px"
-        shadow="md hover:lg primary-d/70 dark:primary-a/70"
+          shadow="md hover:lg primary-d/70 dark:primary-a/70"
           transform="active:scale-90 hover:scale-120"
           @click="router.push('/setting')"
         >
@@ -361,7 +363,7 @@ function NoteUI() {
       <Search :open="showSearch" @close="showSearch = false" />
     </SettingList>
     <Alert
-    :dialog-show="alertShow"
+      :dialog-show="alertShow"
       :title="updateTitle"
       :confirm-btn-name="t('update.gotoUpdate')"
       @cancel="() => (alertShow = false)"
@@ -369,7 +371,7 @@ function NoteUI() {
     >
       <ul class="m-0 p-l-20px">
         <li v-for="(item, index) in alertMsg" :key="index">
-        {{ item.slice(2) }}
+          {{ item.slice(2) }}
         </li>
       </ul>
     </Alert>
