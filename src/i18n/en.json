@@ -87,7 +87,8 @@
     "model": "Mode selection",
     "star": "show star button",
     "ok": "Show Completed Button",
-    "backup": "Local backup ToDo"
+    "backup": "Local backup ToDo",
+    "ai": "AI Settings"
   },
   "contextMenu": {
     "copy": "Copy",
@@ -272,5 +273,10 @@
     "Toast": "Win95 good!",
     "Button": "Go to uyou ToDo 95",
     "closeToast": "Goodbye Win95!"
+  },
+  "ai": {
+    "start": "Use AI",
+    "ollama": "Use Ollama",
+    "choose": "Choose Model Provider"
   }
 }

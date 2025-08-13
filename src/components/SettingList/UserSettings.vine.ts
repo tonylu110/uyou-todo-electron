@@ -21,6 +21,11 @@ function UserSettings() {
         :title="t('anotherSettings.openPass')"
         @item-fun="router.push('/openPass?from=setting')"
       />
+      <Item
+        icon="i-ph:chat-circle-dots-bold"
+        :title="t('anotherSettings.ai')"
+        @item-fun="router.push('/ai?from=setting')"
+      />
     </ItemBox>
   `
 }

@@ -89,6 +89,11 @@ const routes = [
     name: 'backup',
     component: () => import('./pages/Settings/ToDoBackup.vine.ts'),
   },
+  {
+    path: '/ai',
+    name: 'ai',
+    component: () => import('./pages/Settings/Ai.vine.ts'),
+  },
 ]
 
 const router = createRouter({

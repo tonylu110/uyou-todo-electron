@@ -87,7 +87,8 @@
     "model": "模式選擇",
     "star": "顯示加星按鈕",
     "ok": "顯示完成按鈕",
-    "backup": "本地備份 ToDo"
+    "backup": "本地備份 ToDo",
+    "ai": "AI 設定"
   },
   "contextMenu": {
     "copy": "複製",
@@ -273,5 +274,10 @@
     "Toast": "Win95 好！",
     "Button": "前往 uyou ToDo 95",
     "closeToast": "拜拜 Win95！"
+  },
+  "ai": {
+    "start": "啟用 AI",
+    "ollama": "使用 Ollama",
+    "choose": "選擇模型提供商"
   }
 }
