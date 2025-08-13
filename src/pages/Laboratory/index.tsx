@@ -40,6 +40,8 @@ const Laboratory: SetupFC = () => {
 
   // const newNoteUI = ref(localStorage.getItem('newNoteUI') === 'true')
 
+  const useLiquid = ref(localStorage.getItem('useLiquid') === 'true')
+
   return () => (
     <>
       <TabBar
@@ -78,6 +80,12 @@ const Laboratory: SetupFC = () => {
           showSwitch={true}
           switchState={keyToAdd.value}
           onSwitchFun={() => setSwitchFn('ketToAdd', !keyToAdd.value, () => keyToAdd.value = !keyToAdd.value, 'setAddItemCut')}
+        />
+        <Item
+          title="⚠️ use liquid glass window (macOS Tahoe)"
+          showSwitch={true}
+          switchState={useLiquid.value}
+          onSwitchFun={() => setSwitchFn('useLiquid', !useLiquid.value, () => useLiquid.value = !useLiquid.value)}
         />
         {/* <Item
           title="⚠️ new Note UI"

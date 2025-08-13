@@ -31,6 +31,8 @@ function WindowStyleSettings() {
 
   const simpleMode = localStorage.getItem('simpleMode') === 'true'
 
+  const useLiquid = localStorage.getItem('useLiquid') === 'true'
+
   vineStyle.scoped(scss`
     .item-blur {
       position: relative;
@@ -129,7 +131,7 @@ function WindowStyleSettings() {
       </div>
     </div>
     <div
-      v-if="isMacosTahoe() && menuBlurState && !simpleMode"
+      v-if="isMacosTahoe() && menuBlurState && !simpleMode && useLiquid"
       class="item item-blur"
       :max-w="minWidth ? '' : '550px'"
       bg="white dark:#999/10"
