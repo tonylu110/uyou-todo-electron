@@ -5,6 +5,8 @@ import { useRouter } from 'vue-router';
 import OpenAI from "openai";
 import type { ChatCompletionCreateParamsBase } from 'openai/resources/chat/completions';
 import { system } from './systemMsg';
+import { Ollama } from 'ollama/browser'
+import { url } from 'inspector';
 
 function NoteAi() {
   const router = useRouter()
@@ -51,6 +53,21 @@ function NoteAi() {
 
       list.value.push({isMe: false, msg: completion.choices[0].message.content!});
       pushList.value.push({role: 'assistant', content: completion.choices[0].message.content})
+    }
+
+    if (useProvider.value === 'ollama') {
+      const ollama = new Ollama({
+        host: localStorage.getItem('ollamaApi') || 'http://localhost:11434',
+      })
+
+      const completion = await ollama.chat({
+        messages: pushList.value,
+        model: localStorage.getItem('ollamaModel') || 'deepseek-r1:1.5b',
+        stream: false
+      });
+
+      list.value.push({isMe: false, msg: completion.message.content!});
+      pushList.value.push({role: 'assistant', content: completion.message.content})
     }
   }
 
