@@ -37,6 +37,7 @@ function ToDoBackup() {
       :title="t('anotherSettings.ai')"
       :right-img-show="false"
       :left-img-show="true"
+      :show-beta="true"
       @left-click="router.back()"
     />
     <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'" @get-scroll="() => {}">

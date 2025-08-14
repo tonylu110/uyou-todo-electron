@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ElOption, ElSelect } from 'element-plus'
 import { ref } from 'vue'
+import Beta from '../../Beta/Beta.vine'
 import Switch from '../../Switch'
 
 interface Props {
   switchState?: boolean
-  title: string
+  title?: string
   showSwitch?: boolean
   showArrow?: boolean
   itemImg?: string
@@ -13,6 +14,7 @@ interface Props {
   iconColor?: string
   showListBox?: boolean
   listBoxTitle?: string
+  showBeta?: boolean
   list?: {
     title: string
     fn: string
@@ -68,7 +70,8 @@ window.addEventListener('resize', () => {
       <span
         :style="{ width: simpleMode ? 'calc(100vw - 115px)' : (minWidth ? 'calc(100vw - 165px)' : '') }"
         :c="showSwitch || showListBox ? '' : 'group-active:white'"
-      >{{ title }}</span>
+        flex items-end
+      >{{ title }}<Beta v-if="showBeta" ml-1 /></span>
     </div>
     <Switch
       v-if="showSwitch"

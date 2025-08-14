@@ -3,10 +3,11 @@ import ChatList from './ChatList/ChatList.vine'
 import { IChatItem } from './ChatItem.interface';
 import { useRouter } from 'vue-router';
 import OpenAI from "openai";
-import type { ChatCompletionCreateParamsBase } from 'openai/resources/chat/completions';
 import { system } from './systemMsg';
-import { Ollama } from 'ollama/browser'
-import { url } from 'inspector';
+import { Ollama } from 'ollama/dist/browser'
+import Beta from '../Beta/Beta.vine';
+import { useTodoStore } from '../../store/todoStore';
+import { useCateStore } from '../../store/cateStore';
 
 function NoteAi() {
   const router = useRouter()
@@ -21,9 +22,14 @@ function NoteAi() {
     list.value = []
   }
 
+  const maxChat = ref(false)
+
+  const todoStore  = useTodoStore()
+  const cateStore = useCateStore()
+
   const list = ref<IChatItem[]>([])
-  const pushList = ref<ChatCompletionCreateParamsBase.messages>([
-    { role: "system", content: system }
+  const pushList = ref<OpenAI.Chat.Completions.ChatCompletionMessageParam[]>([
+    { role: "system", content: system(JSON.stringify(todoStore.todoList), JSON.stringify(cateStore.cateList)) }
   ])
 
   const msg = ref('')
@@ -60,7 +66,7 @@ function NoteAi() {
       for await (const chunk of completion) {
         useMsg.value += chunk.choices[0].delta.content
         list.value[list.value.length - 1].msg = useMsg.value
-        pushList.value[pushList.value.length - 1].content = useMsg.value 
+        pushList.value[pushList.value.length - 1].content = useMsg.value
       }
     }
 
@@ -71,7 +77,7 @@ function NoteAi() {
 
       const completion = await ollama.chat({
         messages: pushList.value,
-        model: localStorage.getItem('ollamaModel') || 'deepseek-r1:1.5b',
+        model: localStorage.getItem('ollamaModel') || '',
         stream: true
       });
 
@@ -98,12 +104,42 @@ function NoteAi() {
       :rounded="showChat ? '10px' : '10px hover:30px'"
       :shadow="showChat ? 'lg' : 'md hover:lg primary-d/70 dark:primary-a/70'"
       :transform="showChat ? '' : 'active:scale-90 hover:scale-120'"
-      :w="showChat ? '300px' : '22px'"
-      :h="showChat ? '500px' : '22px'"
+      :w="showChat ? (maxChat ? '[calc(100vw-56px)]' : '300px') : '22px'"
+      :h="showChat ? (maxChat ? '[calc(100vh-100px)]' : '500px') : '22px'"
       @click="showChat = true"
     >
-      <div v-if="!showChat" class="i-ph:chat-circle-dots-bold text-22px c-white" />
+      <div v-if="!showChat" class="i-mdi:robot-outline text-22px c-white" />
       <div v-else w-full h-full flex="~ col gap-2" relative>
+        <div
+          absolute
+          top-1
+          right-21
+          p-2
+          flex
+          items-center
+          justify-center
+          rounded-full
+          z-1
+          bg="black/20 active:black/30"
+          @click.stop="router.push('/ai?from=setting')"
+        >
+          <div i-f7:gear c="dark:white #333" block />
+        </div>
+        <div
+          absolute
+          top-1
+          right-11
+          p-2
+          flex
+          items-center
+          justify-center
+          rounded-full
+          z-1
+          bg="black/20 active:black/30"
+          @click.stop="maxChat = !maxChat"
+        >
+          <div i-ph:app-window-bold c="dark:white #333" block />
+        </div>
         <div
           absolute
           top-1
@@ -117,15 +153,17 @@ function NoteAi() {
           bg="black/20 active:black/30"
           @click.stop="closeChat"
         >
-          <div i-mdi:close-thick c="dark:white #333" block />
+          <div i-ph:caret-down-bold c="dark:white #333" block />
         </div>
         <div w-full h-36px flex items-center>
-          uyou ToDo AI chat
+          <div i-mdi:robot text-5 mr-1.5 c="primary-d dark:primary-a" />
+          <span>uyou ToDo AI</span>
+          <Beta ml-1 />
         </div>
         <ChatList :list="list" />
-        <div v-if="useAI" flex="~ row gap-2">
-          <input type="text" flex-1 p-2 rounded-8px border-none outline-none bg="black/10" v-model="msg">
-          <button rounded-8px border-none outline-none p-2 bg="primary-d active:primary-a" @click.stop="chat">
+        <div v-if="useAI" flex="~ row gap-2" broder-t-black>
+          <input type="text" flex-1 p-2 rounded-8px border-none outline-none bg="black/5" shadow="inner sm black/20" @keydown.enter="chat" v-model="msg">
+          <button rounded-8px border-none outline-none p-2 bg="primary-d active:primary-a" shadow="md primary-d/70 dark:primary-a/70" @click.stop="chat">
             <div i-mdi:send-variant-outline text-6 c="white dark:black" />
           </button>
         </div>

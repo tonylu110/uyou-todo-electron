@@ -4,11 +4,13 @@ import { useRoute, useRouter } from 'vue-router'
 import emitter from '../../util/bus'
 import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'
 import { topWindow } from '../../util/windowApi'
+import Beta from '../Beta/Beta.vine'
 import firstLoad from '../TitleBar/firstLoad'
 import WindowButtons from './windowButtons'
 
 interface Props {
   title?: string
+  showBeta?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
@@ -66,7 +68,10 @@ const systemTitle = localStorage.getItem('systemTitle') === 'true'
         <div i-ph:caret-left-bold c="#555 dark:#bbb" block text-20px />
       </div>
     </div>
-    <span text-5 font-bold>{{ title }}</span>
+    <div flex items-end>
+      <span text-5 font-bold>{{ title }}</span>
+      <Beta v-if="showBeta" mb-1 ml-1 />
+    </div>
     <div v-if="!systemTitle" fixed right-15px top-14px z-1>
       <WindowButtons />
     </div>

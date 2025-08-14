@@ -22,8 +22,9 @@ function UserSettings() {
         @item-fun="router.push('/openPass?from=setting')"
       />
       <Item
-        icon="i-ph:chat-circle-dots-bold"
+        icon="i-icon-park-outline:robot-one"
         :title="t('anotherSettings.ai')"
+        :show-beta="true"
         @item-fun="router.push('/ai?from=setting')"
       />
     </ItemBox>
