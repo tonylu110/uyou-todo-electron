@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import ContextMenu from '../../ContextMenu/ContextMenu.vue'
 import Item from '../../ItemBox/Item/Item.vue'
 import ItemButton from '../../ItemBox/ItemButton/ItemButton.vue'
 import ItemSpace from '../../ItemBox/ItemSpace/ItemSpace.vine'
@@ -28,14 +29,32 @@ function DeepseekSettings() {
     createToast({ msg: 'DeepSeek model and key saved successfully!' })
   }
 
+  const showContextMenu = ref(false)
+  const contextMenu = ref({
+    top: 0,
+    left: 0,
+  })
+
+  function contextmenuClick(e: MouseEvent) {
+    e.preventDefault()
+
+    showContextMenu.value = true
+
+    contextMenu.value = {
+      top: e.pageY,
+      left: e.pageX,
+    }
+  }
+
   return vine`
     <ItemText> Set your DeepSeek API Key </ItemText>
-    <ItemSpace>
+    <ItemSpace @click="showContextMenu = false">
       <input
         type="password"
         placeholder="Enter DeepSeek API Key"
         class="p-2 border-none bg-black/10 outline-none"
         v-model="deepseekKey"
+        @contextmenu="contextmenuClick"
       />
     </ItemSpace>
     <Item
@@ -47,6 +66,11 @@ function DeepseekSettings() {
       @r="useModel = 'deepseek-reasoner'"
     />
     <ItemButton mode="primary" @click="setModel">Save</ItemButton>
+    <ContextMenu
+      v-if="showContextMenu"
+      :pos="contextMenu"
+      @paste-text="(text: string) => (deepseekKey = text)"
+    />
   `
 }
 

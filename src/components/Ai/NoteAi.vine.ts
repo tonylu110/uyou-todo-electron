@@ -2,11 +2,16 @@ import { ref } from 'vue'
 import ChatList from './ChatList/ChatList.vine'
 import { IChatItem } from './ChatItem.interface';
 import { useRouter } from 'vue-router';
+import OpenAI from "openai";
+import type { ChatCompletionCreateParamsBase } from 'openai/resources/chat/completions';
+import { system } from './systemMsg';
 
 function NoteAi() {
   const router = useRouter()
 
   const useAI = ref(localStorage.getItem('useAI') === 'true')
+
+  const useProvider = ref(localStorage.getItem('modelProvider') || '')
 
   const showChat = ref(false)
   function closeChat() {
@@ -15,15 +20,38 @@ function NoteAi() {
   }
 
   const list = ref<IChatItem[]>([])
+  const pushList = ref<ChatCompletionCreateParamsBase.messages>([
+    { role: "system", content: system }
+  ])
 
   const msg = ref('')
-  function chat() {
+  async function chat() {
     list.value.push({
       isMe: true,
       msg: msg.value
     })
+    pushList.value.push({
+      role: 'user',
+      content: msg.value
+    })
 
     msg.value = ''
+
+    if (useProvider.value === 'deepseek') {
+      const openai = new OpenAI({
+        baseURL: 'https://api.deepseek.com',
+        apiKey: localStorage.getItem('deepseekKey') || '',
+        dangerouslyAllowBrowser: true
+      });
+
+      const completion = await openai.chat.completions.create({
+        messages: pushList.value,
+        model: localStorage.getItem('deepseekModel') || 'deepseek-chat',
+      });
+
+      list.value.push({isMe: false, msg: completion.choices[0].message.content!});
+      pushList.value.push({role: 'assistant', content: completion.choices[0].message.content})
+    }
   }
 
   return vine`
