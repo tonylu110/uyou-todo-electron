@@ -39,6 +39,8 @@ function NoteAi() {
 
     msg.value = ''
 
+    const useMsg = ref('')
+
     if (useProvider.value === 'deepseek') {
       const openai = new OpenAI({
         baseURL: 'https://api.deepseek.com',
@@ -49,10 +51,17 @@ function NoteAi() {
       const completion = await openai.chat.completions.create({
         messages: pushList.value,
         model: localStorage.getItem('deepseekModel') || 'deepseek-chat',
+        stream: true
       });
 
-      list.value.push({isMe: false, msg: completion.choices[0].message.content!});
-      pushList.value.push({role: 'assistant', content: completion.choices[0].message.content})
+      list.value.push({isMe: false, msg: ''});
+      pushList.value.push({role: 'assistant', content: ''})
+
+      for await (const chunk of completion) {
+        useMsg.value += chunk.choices[0].delta.content
+        list.value[list.value.length - 1].msg = useMsg.value
+        pushList.value[pushList.value.length - 1].content = useMsg.value 
+      }
     }
 
     if (useProvider.value === 'ollama') {
@@ -63,11 +72,17 @@ function NoteAi() {
       const completion = await ollama.chat({
         messages: pushList.value,
         model: localStorage.getItem('ollamaModel') || 'deepseek-r1:1.5b',
-        stream: false
+        stream: true
       });
 
-      list.value.push({isMe: false, msg: completion.message.content!});
-      pushList.value.push({role: 'assistant', content: completion.message.content})
+      list.value.push({isMe: false, msg: ''});
+      pushList.value.push({role: 'assistant', content: ''})
+
+      for await (const chunk of completion) {
+        useMsg.value += chunk.message.content
+        list.value[list.value.length - 1].msg = useMsg.value
+        pushList.value[pushList.value.length - 1].content = useMsg.value
+      }
     }
   }
 
