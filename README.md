@@ -30,7 +30,8 @@ English | [中文简体](https://github.com/tonylu110/uyou-todo-electron/blob/ma
   ni
   nr electron:buildwin # build for Windows
   nr electron:buildwinarm # build for Windows arm64
-  nr electron:buildmac # build for macOS or Linux
+  nr electron:buildmac # build for macOS
+  nr electron:buildlinux # build for Linux
   ```
 
 ## Preview
