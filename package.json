@@ -67,7 +67,7 @@
     "@vueuse/core": "^13.6.0",
     "concurrently": "^9.1.0",
     "cross-env": "^10.0.0",
-    "electron": "^37.2.6",
+    "electron": "^37.3.1",
     "electron-builder": "^26.0.12",
     "element-plus": "^2.10.4",
     "es-toolkit": "^1.39.8",
