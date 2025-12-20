@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type customContextMenu from './customContextMenu.type'
 import { clipboard } from 'electron'
-import { computed, onMounted, reactive, ref, useTemplateRef, watchEffect } from 'vue'
+import { computed, onMounted, onBeforeUnmount, reactive, ref, useTemplateRef, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 interface Props {
@@ -81,6 +81,14 @@ onMounted(() => {
     position.left = 'auto'
     position.right = '10px'
   }
+
+  const mouseEventHandler = (e: PointerEvent) => {
+    if (!useCateDom.value!.contains(e.target as Node)) {
+      emits('closeContext')
+    }
+  }
+  document.addEventListener('pointerdown', mouseEventHandler)
+  onBeforeUnmount(() => document.removeEventListener('pointerdown', mouseEventHandler))
 })
 
 const showItemChild = ref(false)
