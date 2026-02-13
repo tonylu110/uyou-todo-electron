@@ -22,9 +22,6 @@ linux:
     - target: snap
       arch:
         - x64
-    - target: flatpak
-      arch:
-        - x64
     - target: AppImage
       arch:
         - x64
