@@ -4,8 +4,11 @@ import ItemButton from '../../ItemBox/ItemButton/ItemButton.vue'
 import ItemSpace from '../../ItemBox/ItemSpace/ItemSpace.vine'
 import ItemText from '../../ItemBox/ItemText/ItemText.vine'
 import { createToast } from '../../Toast'
+import { useI18n } from 'vue-i18n';
 
 function OllamaSettings() {
+  const { t } = useI18n()
+
   const ollamaApi = ref(localStorage.getItem('ollamaApi') || '')
 
   const models = ref([])
@@ -85,17 +88,17 @@ function OllamaSettings() {
   `)
 
   return vine`
-    <ItemText> Set your Ollama API link </ItemText>
+    <ItemText> {{t('ai.ollamaLInk')}}</ItemText>
     <ItemSpace>
       <input
         type="text"
-        placeholder="Enter Ollama API link"
+        :placeholder="t('ai.ollamaLInkPlaceholder')"
         class="p-2 border-none bg-black/10 outline-none"
         v-model="ollamaApi"
       />
     </ItemSpace>
     <template v-if="models.length > 0">
-      <ItemText> Select your Ollama model </ItemText>
+      <ItemText> {{t('ai.selectOllamaModel')}} </ItemText>
       <div
         class="item-box"
         :w="
@@ -125,8 +128,9 @@ function OllamaSettings() {
       </div>
     </template>
 
-    <ItemButton mode="primary" @click="setModel">Save</ItemButton>
+    <ItemButton mode="primary" @click="setModel">{{t('save')}}</ItemButton>
   `
 }
 
 export default OllamaSettings
+

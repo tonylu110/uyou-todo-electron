@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import ContextMenu from '../../ContextMenu/ContextMenu.vue'
 import Item from '../../ItemBox/Item/Item.vue'
 import ItemButton from '../../ItemBox/ItemButton/ItemButton.vue'
@@ -7,6 +8,8 @@ import ItemText from '../../ItemBox/ItemText/ItemText.vine'
 import { createToast } from '../../Toast'
 
 function DeepseekSettings() {
+  const { t } = useI18n()
+
   const deepseekKey = ref(localStorage.getItem('deepseekKey') || '')
 
   const models = [
@@ -47,25 +50,25 @@ function DeepseekSettings() {
   }
 
   return vine`
-    <ItemText> Set your DeepSeek API Key </ItemText>
+    <ItemText> {{ t('ai.deepseekKey') }} </ItemText>
     <ItemSpace @click="showContextMenu = false">
       <input
         type="password"
-        placeholder="Enter DeepSeek API Key"
+        :placeholder="t('ai.deepseekKeyPlaceholder')"
         class="p-2 border-none bg-black/10 outline-none"
         v-model="deepseekKey"
         @contextmenu="contextmenuClick"
       />
     </ItemSpace>
     <Item
-      title="choose model"
+      :title="t('ai.chooseModel')"
       :show-list-box="true"
       :list="models"
       :list-box-title="useModel"
       @c="useModel = 'deepseek-chat'"
       @r="useModel = 'deepseek-reasoner'"
     />
-    <ItemButton mode="primary" @click="setModel">Save</ItemButton>
+    <ItemButton mode="primary" @click="setModel">{{ t('save') }}</ItemButton>
     <ContextMenu
       v-if="showContextMenu"
       :pos="contextMenu"

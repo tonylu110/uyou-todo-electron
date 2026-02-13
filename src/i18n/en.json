@@ -277,6 +277,14 @@
   "ai": {
     "start": "Use AI",
     "ollama": "Use Ollama",
-    "choose": "Choose Model Provider"
-  }
+    "choose": "Choose Model Provider",
+    "setai": "Set AI",
+    "deepseekKey": "Set your DeepSeek API Key",
+    "chooseModel": "Select model",
+    "ollamaLInk": "Set your Ollama API link",
+    "selectOllamaModel": "Select your Ollama model",
+    "ollamaLInkPlaceholder": "Enter Ollama API link",
+    "deepseekKeyPlaceholder": "Enter your DeepSeek API Key"
+  },
+  "save": "save"
 }

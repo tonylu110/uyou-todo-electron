@@ -225,7 +225,7 @@ function NoteAi() {
           bg="primary-d active:primary-a"
           c-white
         >
-          set AI
+          {{ t('ai.setai') }}
         </button>
       </div>
     </div>

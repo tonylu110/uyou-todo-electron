@@ -278,6 +278,14 @@
   "ai": {
     "start": "啟用 AI",
     "ollama": "使用 Ollama",
-    "choose": "選擇模型提供商"
-  }
+    "choose": "選擇模型提供商",
+    "setai": "設定 AI",
+    "deepseekKey": "設定你的 DeepSeek API Key",
+    "chooseModel": "選擇模型",
+    "ollamaLInk": "設定你的 Ollama API 鏈接",
+    "selectOllamaModel": "選擇你的 Ollama 模型",
+    "ollamaLInkPlaceholder": "輸入你的 Ollama API 鏈接",
+    "deepseekKeyPlaceholder": "輸入你的 DeepSeek API Key"
+  },
+  "save": "儲存"
 }
