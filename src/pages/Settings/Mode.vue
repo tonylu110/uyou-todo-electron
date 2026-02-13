@@ -7,8 +7,17 @@ import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import { createToast } from '../../components/Toast'
 import router from '../../router'
+import { usePreferredDark } from '@vueuse/core'
+import normalImg from '../../assets/modeImages/color_mode/light.png'
+import normalDarkImg from '../../assets/modeImages/color_mode/dark.png'
+import noteImg from '../../assets/modeImages/note/light.png'
+import noteDarkImg from '../../assets/modeImages/note/dark.png'
+import simpleImg from '../../assets/modeImages/simple/light.png'
+import simpleDarkImg from '../../assets/modeImages/simple/dark.png'
 
 const { t } = useI18n()
+
+const isDark = usePreferredDark()
 
 const simpleModeState = ref(localStorage.getItem('simpleMode') === 'true')
 const newNoteUI = ref(localStorage.getItem('newNoteUI') === 'true')
@@ -89,9 +98,13 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
           :class="modeShow('normal') ? 'select' : ''"
           :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }"
           bg="white dark:#999/10 active:primary-d dark:active:primary-a"
+          h="!60px"
           @click="() => menuClick('normal')"
         >
-          <span c="#333 dark:#bbb group-active:white">{{ t('mode.normal') }}</span>
+          <div flex items-center gap-10px>
+            <img :src="isDark ? normalDarkImg : normalImg" alt="" w-auto h-60px rounded-md>
+            <span c="#333 dark:#bbb group-active:white">{{ t('mode.normal') }}</span>
+          </div>
           <div v-if="modeShow('normal')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
         <div
@@ -99,9 +112,13 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
           :class="modeShow('normal') ? 'select' : ''"
           :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }"
           bg="white dark:#999/10 active:primary-d dark:active:primary-a"
+          h="!60px"
           @click="() => menuClick('note')"
         >
-          <span c="#333 dark:#bbb group-active:white">{{ t('mode.note') }}</span>
+          <div flex items-center gap-10px>
+            <img :src="isDark ? noteDarkImg : noteImg" alt="" w-auto h-60px rounded-md>
+            <span c="#333 dark:#bbb group-active:white">{{ t('mode.note') }}</span>
+          </div>  
           <div v-if="modeShow('note')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
         <div
@@ -109,9 +126,13 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
           :class="modeShow('simple') ? 'select' : ''"
           :style="{ width: simpleMode ? 'calc(100% - 30px)' : '' }"
           bg="white dark:#999/10 active:primary-d dark:active:primary-a"
+          h="!60px"
           @click="() => menuClick('simple')"
         >
-          <span c="#333 dark:#bbb group-active:white">{{ t('anotherSettings.simple') }}</span>
+          <div flex items-center gap-10px>
+            <img :src="isDark ? simpleDarkImg : simpleImg" alt="" w-auto h-60px rounded-md>
+            <span c="#333 dark:#bbb group-active:white">{{ t('anotherSettings.simple') }}</span>
+          </div>
           <div v-if="modeShow('simple')" i-mdi:check text-24px c="primary-d dark:primary-a" />
         </div>
       </div>
