@@ -9,6 +9,8 @@ function UserSettings() {
 
   const loginState = localStorage.getItem('uid') !== '' && localStorage.getItem('uid') !== null
 
+  const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
+
   return vine`
     <ItemBox>
       <Item
@@ -22,7 +24,9 @@ function UserSettings() {
         @item-fun="router.push('/openPass?from=setting')"
       />
       <Item
-        icon="i-icon-park-outline:robot-one"
+        v-if="isNoteUI"
+        icon="i-ph:star-four-bold"
+        :useAIBg="true"
         :title="t('anotherSettings.ai')"
         :show-beta="true"
         @item-fun="router.push('/ai?from=setting')"
@@ -32,3 +36,4 @@ function UserSettings() {
 }
 
 export default UserSettings
+

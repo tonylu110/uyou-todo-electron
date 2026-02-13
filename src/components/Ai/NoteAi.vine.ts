@@ -125,72 +125,65 @@ function NoteAi() {
       flex
       items-center
       justify-center
-      p-13px
+      :p="showChat ? 'y-13px' : '13px'"
       overflow-hidden
       :bg="showChat ? '!white !dark:#333' : 'primary-d active:primary-a'"
       transition="duration-300 all"
       :rounded="showChat ? '10px' : '10px hover:30px'"
       :shadow="showChat ? 'lg' : 'md hover:lg primary-d/70 dark:primary-a/70'"
       :transform="showChat ? '' : 'active:scale-90 hover:scale-120'"
-      :w="showChat ? (maxChat ? '[calc(100vw-56px)]' : '300px') : '22px'"
+      :w="showChat ? (maxChat ? '[calc(100vw-30px)]' : '350px') : '22px'"
       :h="showChat ? (maxChat ? '[calc(100vh-100px)]' : '500px') : '22px'"
       :class="showChat ? '' : 'aibg'"
       @click="showChat = true"
     >
-      <div v-if="!showChat" class="i-ph:star-four-bold text-22px c-white" />
+      <div v-if="!showChat" class="i-ph:star-four-bold text-22px !c-white"/>
       <div v-else w-full h-full flex="~ col gap-2" relative>
-        <div
-          absolute
-          top-1
-          right-21
-          p-2
-          flex
-          items-center
-          justify-center
-          rounded-full
-          z-1
-          bg="black/20 active:black/30"
-          @click.stop="router.push('/ai?from=setting')"
-        >
-          <div i-f7:gear c="dark:white #333" block />
+        <div flex="~ gap-1.5" items-center absolute top-1 right-13px>
+          <div
+            p-2
+            flex
+            items-center
+            justify-center
+            rounded-full
+            z-1
+            bg="black/20 active:black/30"
+            @click.stop="router.push('/ai?from=setting')"
+          >
+            <div i-f7:gear c="dark:white #333" block />
+          </div>
+          <div
+            p-2
+            flex
+            items-center
+            justify-center
+            rounded-full
+            z-1
+            bg="black/20 active:black/30"
+            @click.stop="maxChat = !maxChat"
+          >
+            <div i-ph:app-window-bold c="dark:white #333" block />
+          </div>
+          <div
+            p-2
+            flex
+            items-center
+            justify-center
+            rounded-full
+            z-1
+            bg="black/20 active:black/30"
+            @click.stop="closeChat"
+          >
+            <div i-ph:caret-down-bold c="dark:white #333" block />
+          </div>
         </div>
-        <div
-          absolute
-          top-1
-          right-11
-          p-2
-          flex
-          items-center
-          justify-center
-          rounded-full
-          z-1
-          bg="black/20 active:black/30"
-          @click.stop="maxChat = !maxChat"
-        >
-          <div i-ph:app-window-bold c="dark:white #333" block />
-        </div>
-        <div
-          absolute
-          top-1
-          right-1
-          p-2
-          flex
-          items-center
-          justify-center
-          rounded-full
-          z-1
-          bg="black/20 active:black/30"
-          @click.stop="closeChat"
-        >
-          <div i-ph:caret-down-bold c="dark:white #333" block />
-        </div>
-        <div w-full h-36px flex items-center>
+        <div w="[calc(100%-26px)]" h-36px flex items-center ml-13px>
           <div i-ph:star-four-bold text-5 mr-1.5 c="primary-d dark:primary-a" class="iconbg" />
           <span>uyou ToDo AI</span>
-          <Beta ml-1 />
+          <Beta :useAiBg="true" ml-1 />
         </div>
         <ChatList :list="list" />
-        <div v-if="useAI" flex="~ row gap-2" broder-t-black>
+        <div v-if="useAI" flex="~ row gap-2" broder-t-black mx-13px>
           <input
             type="text"
             flex-1
@@ -207,12 +200,12 @@ function NoteAi() {
             rounded-8px
             border-none
             outline-none
-            p-2
+            p-3
             bg="primary-d active:primary-a"
             shadow="md primary-d/70 dark:primary-a/70"
             @click.stop="chat"
           >
-            <div i-mdi:send-variant-outline text-6 c="white dark:black" />
+            <div i-ph:paper-plane-tilt-bold text-4 c="white dark:black" />
           </button>
         </div>
         <button
@@ -224,6 +217,7 @@ function NoteAi() {
           outline-none
           bg="primary-d active:primary-a"
           c-white
+          mx-13px
         >
           {{ t('ai.setai') }}
         </button>

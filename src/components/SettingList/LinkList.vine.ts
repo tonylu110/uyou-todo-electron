@@ -33,7 +33,7 @@ function LinkList() {
       />
       <Item
         :title="t('otherList.toDonate')"
-        icon="i-icon-park-outline:coffee-machine"
+        icon="i-icon-park-outline:bitcoin"
         @item-fun="router.push('/donate?from=setting')"
       />
     </ItemBox>

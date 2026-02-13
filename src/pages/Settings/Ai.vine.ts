@@ -38,10 +38,13 @@ function ToDoBackup() {
       :right-img-show="false"
       :left-img-show="true"
       :show-beta="true"
+      :use-ai-bg="true"
       @left-click="router.back()"
     />
     <SettingList :h="isNoteUI ? '![calc(100vh-63px)]' : '![calc(100%-105px)]'" @get-scroll="() => {}">
       <Item
+        icon="i-ph:star-four-bold"
+        :useAIBg="true"
         :title="t('ai.start')"
         :show-switch="true"
         :switch-state="useAI"

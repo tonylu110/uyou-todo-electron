@@ -11,6 +11,7 @@ import WindowButtons from './windowButtons'
 interface Props {
   title?: string
   showBeta?: boolean
+  useAiBg?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
@@ -46,7 +47,7 @@ const systemTitle = localStorage.getItem('systemTitle') === 'true'
     :bg="isBlur ? (isMac() && route.name === 'Home' ? 'white/00' : 'white/50 dark:#333/50') : 'white/80 dark:#333/80'"
   >
     <div
-      absolute :left="isMac() ? '80px' : '12px'" :top="isMac() ? '10px' : ''"
+      absolute :left="isMac() ? '85px' : '12px'" :top="isMac() ? '10px' : ''"
       flex items-center
     >
       <div
@@ -70,7 +71,7 @@ const systemTitle = localStorage.getItem('systemTitle') === 'true'
     </div>
     <div flex items-end>
       <span text-5 font-bold>{{ title }}</span>
-      <Beta v-if="showBeta" mb-1 ml-1 />
+      <Beta v-if="showBeta" :useAiBg mb-1 ml-1 />
     </div>
     <div v-if="!systemTitle" fixed right-15px top-14px z-1>
       <WindowButtons />

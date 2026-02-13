@@ -175,7 +175,7 @@ watchEffect(() => {
               ? '20px'
               : '10px'
           : '10px'"
-        :ml="isMac() && (simpleMode || newNoteUI) ? '65px' : ''"
+        :ml="isMac() && (simpleMode || newNoteUI) ? '70px' : ''"
         :mt="isMac() && newNoteUI ? '-5px' : ''"
       >
         <div

@@ -20,6 +20,7 @@ interface Props {
     fn: string
     icon: string
   }[]
+  useAIBg?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   showArrow: true,
   itemImg: '',
   icon: '',
-  iconColor: 'primary-d dark:primary-a',
+  iconColor: '!primary-d dark:primary-a',
   showListBox: false,
   listBoxTitle: '',
 })
@@ -66,12 +67,12 @@ window.addEventListener('resize', () => {
     <div>
       <div v-if="itemImg" class="img-back" />
       <img v-if="itemImg" :src="itemImg" alt="">
-      <div v-if="icon" :class="icon" mr-3 block text-6 :c="iconColor" />
+      <div v-if="icon" :class="icon + (useAIBg ? ' aibg' : '')" mr-3 block text-6 :c="iconColor" />
       <span
         :style="{ width: simpleMode ? 'calc(100vw - 115px)' : (minWidth ? 'calc(100vw - 165px)' : '') }"
         :c="showSwitch || showListBox ? '' : 'group-active:white'"
         flex items-end
-      >{{ title }}<Beta v-if="showBeta" ml-1 /></span>
+      >{{ title }}<Beta v-if="showBeta" :useAiBg="useAIBg" ml-1 /></span>
     </div>
     <Switch
       v-if="showSwitch"
@@ -102,6 +103,15 @@ window.addEventListener('resize', () => {
 </template>
 
 <style scoped lang="scss">
+$aibg: conic-gradient(
+  from 225deg,
+  #5fb3ff,
+  #ffb347,
+  #ff4d6d,
+  #a855f7,
+  #5fb3ff
+);
+
 .item {
   position: relative;
   width: calc(100vw - 450px);
@@ -156,5 +166,9 @@ window.addEventListener('resize', () => {
     background-color: transparent;
     border: none;
   }
+}
+
+.aibg {
+  background: $aibg;
 }
 </style>

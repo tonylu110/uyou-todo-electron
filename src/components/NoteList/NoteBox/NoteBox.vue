@@ -240,7 +240,7 @@ async function deleteAllCompleted() {
         <div w-full flex="~ gap-5px">
           <button
             v-if="itemText"
-            flex-1 rounded-7px border-none p-2 outline-none bg="primary-d active:primary-a"
+            flex-1 rounded-7px border-none p-2 outline-none :bg="color"
             @click="add"
           >
             <div i-ph:check-bold c-white />
