@@ -32,7 +32,7 @@ process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 
 remoteMain.initialize()
 
-let mainWindow
+let mainWindow: Electron.BrowserWindow
 
 function createWindow() {
   const {
@@ -57,7 +57,7 @@ function createWindow() {
     y: (store.get('window-pos')
       ? (store.get('window-pos') as Array<number>)[1]
       : (height - (simple ? 700 : 750)) / 2),
-    vibrancy: (menuBlur || menuBlur === undefined) && !liquidStyle.includes('liquid') ? 'menu' : undefined,
+    vibrancy: (menuBlur || menuBlur === undefined) && !liquidStyle.includes('liquid') ? 'menu' : false,
     transparent: liquidStyle.includes('liquid') && (menuBlur || menuBlur === undefined)!,
     visualEffectState: 'active',
     icon: path.join(__dirname, '../../dist/logo.png'),
