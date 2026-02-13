@@ -8,9 +8,11 @@ import { useTodoStore } from '../../store/todoStore'
 import Beta from '../Beta/Beta.vine'
 import ChatList from './ChatList/ChatList.vine'
 import { system } from './systemMsg'
+import { useI18n } from 'vue-i18n'
 
 function NoteAi() {
   const router = useRouter()
+  const { t } = useI18n()
 
   const useAI = ref(localStorage.getItem('useAI') === 'true')
 
@@ -226,4 +228,5 @@ function NoteAi() {
   `
 }
 
-export default NoteAi
+export default NoteAi;
+
