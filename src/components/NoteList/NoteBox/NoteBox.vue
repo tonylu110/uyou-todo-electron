@@ -145,7 +145,7 @@ onMounted(() => {
       <div :class="otherCate ? 'i-ph:smiley-blank-bold' : (icon ? icon : 'i-ph:radio-button-bold')" mr-8px />
       <span>{{ title }}</span>
       <div
-        v-if="showBtn"
+        v-if="showBtn && !isWindow"
         flex="~ gap-5px" w="0 hover:56px" transition="all 300"
         items-center overflow-hidden p="r-10px l-5px" op="0 hover:100"
       >
@@ -281,7 +281,7 @@ onMounted(() => {
         </div>
       </div>
       <div
-        v-if="!otherCate && showAddItem && !showAdd" w="[calc(100%-20px)]"
+        v-if="!otherCate && showAddItem && !showAdd && !isWindow" w="[calc(100%-20px)]"
         bg="black/5 active:black/10" mt-5px flex items-center justify-center rounded-7px
         p-10px
         transition="all 300"

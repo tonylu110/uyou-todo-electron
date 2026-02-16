@@ -14,6 +14,7 @@ function createDesktopNoteWindow(id: number) {
     height: 450,
     frame: false,
     vibrancy: 'menu',
+    resizable: false,
     icon: path.join(__dirname, '../../dist/logo.png'),
     titleBarStyle: 'hidden',
     maximizable: false,
