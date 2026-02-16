@@ -3,6 +3,7 @@ import type { Ref } from 'vue'
 import type ITodoList from '../../interface/ITodoListArray'
 import type ListItems from '../../pages/Laboratory/showListItem/ListItems'
 import type { cateItem } from './ICateItem'
+import { ipcRenderer } from 'electron'
 import { Dropdown as VDropdown } from 'floating-vue'
 import { computed, reactive, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -215,6 +216,10 @@ const showIcons = ref(false)
 
 const showSearch = ref(false)
 const useSystemTitleBar = localStorage.getItem('systemTitle') === 'true'
+
+function openAi() {
+  ipcRenderer.send('open-ai')
+}
 </script>
 
 <template>
@@ -224,12 +229,26 @@ const useSystemTitleBar = localStorage.getItem('systemTitle') === 'true'
     :style="{ backgroundColor: listMenuColor, height: titleBarShow ? '100vh' : '' }"
   >
     <div
-      v-if="(route.name === 'Home' || route.name === 'other') && !menuShort"
-      absolute right-10px :top="useSystemTitleBar ? '10px' : '-26px'" rounded-7px p-10px no-drag
-      bg="#333/20 dark:#bbb/20 active:#333/50 active:dark:#bbb/50"
-      @click="showSearch = true"
+      v-if="!menuShort"
+      flex="~ gap-2" absolute right-10px
+      :top="useSystemTitleBar ? '10px' : '-26px'" no-drag
     >
-      <div i-ph:magnifying-glass-bold block />
+      <div
+        rounded-7px p-10px
+        bg="#333/20 dark:#bbb/20 active:#333/50 active:dark:#bbb/50"
+        @click="openAi"
+      >
+        <div i-ph:star-four-bold block class="iconbg" />
+      </div>
+
+      <div
+        v-if="(route.name === 'Home' || route.name === 'other')"
+        rounded-7px p-10px
+        bg="#333/20 dark:#bbb/20 active:#333/50 active:dark:#bbb/50"
+        @click="showSearch = true"
+      >
+        <div i-ph:magnifying-glass-bold block />
+      </div>
     </div>
     <div
       m="l-13px t-8px"

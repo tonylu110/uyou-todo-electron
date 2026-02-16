@@ -60,4 +60,10 @@
       transition: margin 0.2s;
     }
   }
+
+  $aibg: conic-gradient(from 225deg, #5fb3ff, #ffb347, #ff4d6d, #a855f7, #5fb3ff);
+
+  .iconbg {
+    background: $aibg;
+  }
 }
