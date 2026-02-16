@@ -62,6 +62,7 @@ export default defineConfig({
         repass: path.resolve(__dirname, 'electron_windows/pages/repass/index.html'),
         register: path.resolve(__dirname, 'electron_windows/pages/register/index.html'),
         ai: path.resolve(__dirname, 'electron_windows/pages/ai/index.html'),
+        desktopNote: path.resolve(__dirname, 'electron_windows/pages/desktopNote/index.html'),
       },
     },
   },

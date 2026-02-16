@@ -2,7 +2,7 @@ import { useI18n } from 'vue-i18n'
 import CloseButton from '../../../src/components/CloseButton/CloseButton.vine'
 import { isMac } from '../../../src/util/os'
 import { closeWindow } from '../../../src/util/windowApi'
-import win95icon from '../../assets/win95.png'
+import win95icon from '../../pages/about/assets/win95.png'
 
 function TitleBar() {
   const isWin95 = vineProp<boolean>()

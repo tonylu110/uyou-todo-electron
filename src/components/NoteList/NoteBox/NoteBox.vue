@@ -287,7 +287,7 @@ onMounted(() => {
         transition="all 300"
         @click="showAdd = true"
       >
-        <div i-ph:plus-bold />
+        <div i-ph:plus-bold dark:c-white />
       </div>
     </div>
   </div>

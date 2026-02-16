@@ -5,6 +5,8 @@ import { useTodoStore } from '../../../src/store/todoStore';
 import { useCateStore } from '../../../src/store/cateStore';
 import { computed, onMounted, ref } from 'vue';
 import { ipcRenderer } from 'electron';
+import CloseButton from '../../../src/components/CloseButton/CloseButton.vine';
+import { isMac } from '../../../src/util/os';
 
 function DesktopNote() {
   const isDark = usePreferredDark()
@@ -22,6 +24,7 @@ function DesktopNote() {
 
   return vine`
     <div h-screen :class="isDark ? 'dark' : ''" flex justify-center items-center drag>
+      <CloseButton v-if="!isMac()" window-name="desktopNote" />
       <NoteBox
         ref="noteBox"
         w="[calc(100%-20px)]" no-drag 
