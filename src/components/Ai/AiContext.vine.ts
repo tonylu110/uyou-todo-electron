@@ -8,6 +8,7 @@ import Beta from '../Beta/Beta.vine'
 import ChatList from './ChatList/ChatList.vine'
 import { system } from './systemMsg'
 import { useI18n } from 'vue-i18n'
+import { ipcRenderer } from 'electron';
 
 function AiContext() {
   const { t } = useI18n()
@@ -18,12 +19,10 @@ function AiContext() {
 
   const showBtn = vineProp.withDefault(true)
 
-  const maxChat = vineProp.optional<boolean>()
-
   const emits = vineEmits<{
     close: []
     openSetting: []
-    setMaxChat: [boolean]
+    setMaxChat: []
   }>()
 
   function closeChat() {
@@ -113,94 +112,111 @@ function AiContext() {
       background: $aibg;
     }
   `)
+
+  function openNewWindow() {
+    ipcRenderer.send('open-ai')
+    emits('close')
+  }
     
-    return vine`
-      <div w-full h-full flex="~ col gap-2" relative>
-        <div v-if="showBtn" flex="~ gap-1.5" items-center absolute top-1 right-13px>
-          <div
-            p-2
-            flex
-            items-center
-            justify-center
-            rounded-full
-            z-1
-            bg="black/20 active:black/30"
-            @click.stop="emits('openSetting')"
-          >
-            <div i-f7:gear c="dark:white #333" block />
-          </div>
-          <div
-            p-2
-            flex
-            items-center
-            justify-center
-            rounded-full
-            z-1
-            bg="black/20 active:black/30"
-            @click.stop="emits('setMaxChat', !maxChat)"
-          >
-            <div i-ph:app-window-bold c="dark:white #333" block />
-          </div>
-          <div
-            p-2
-            flex
-            items-center
-            justify-center
-            rounded-full
-            z-1
-            bg="black/20 active:black/30"
-            @click.stop="closeChat"
-          >
-            <div i-ph:caret-down-bold c="dark:white #333" block />
-          </div>
+  return vine`
+    <div w-full h-full flex="~ col gap-2" relative>
+      <div v-if="showBtn" flex="~ gap-1.5" items-center absolute top-1 right-13px>
+        <div
+          p-2
+          flex
+          items-center
+          justify-center
+          rounded-full
+          z-1
+          bg="black/20 active:black/30"
+          @click.stop="openNewWindow"
+        >
+          <div i-f7:macwindow c="dark:white #333" block />
         </div>
-        <div w="[calc(100%-26px)]" h-36px flex items-center ml-13px>
-          <div i-ph:star-four-bold text-5 mr-1.5 c="primary-d dark:primary-a" class="iconbg" />
-          <span c="dark:white">uyou ToDo AI</span>
-          <Beta :useAiBg="true" ml-1 />
-        </div>
-        <ChatList :list="list" />
-        <div v-if="useAI" flex="~ row gap-2" broder-t-black mx-13px>
-          <input
-            type="text"
-            flex-1
-            p-2
-            rounded-8px
-            border-none
-            outline-none
-            bg="black/5"
-            shadow="inner sm black/20"
-            @keydown.enter="chat"
-            c="dark:white"
-            v-model="msg"
-          />
-          <button
-            rounded-8px
-            border-none
-            outline-none
-            p-3
-            bg="primary-d active:primary-a"
-            shadow="md primary-d/70 dark:primary-a/70"
-            @click.stop="chat"
-          >
-            <div i-ph:paper-plane-tilt-bold text-4 c="white dark:black" />
-          </button>
-        </div>
-        <button
-          v-else
+        <div
+          p-2
+          flex
+          items-center
+          justify-center
+          rounded-full
+          z-1
+          bg="black/20 active:black/30"
           @click.stop="emits('openSetting')"
+        >
+          <div i-f7:gear c="dark:white #333" block />
+        </div>
+        <div
+          p-2
+          flex
+          items-center
+          justify-center
+          rounded-full
+          z-1
+          bg="black/20 active:black/30"
+          @click.stop="emits('setMaxChat')"
+        >
+          <div i-ph:app-window-bold c="dark:white #333" block />
+        </div>
+        <div
+          p-2
+          flex
+          items-center
+          justify-center
+          rounded-full
+          z-1
+          bg="black/20 active:black/30"
+          @click.stop="closeChat"
+        >
+          <div i-ph:caret-down-bold c="dark:white #333" block />
+        </div>
+      </div>
+      <div w="[calc(100%-26px)]" h-36px flex items-center ml-13px>
+        <div i-ph:star-four-bold text-5 mr-1.5 c="primary-d dark:primary-a" class="iconbg" />
+        <span c="dark:white">uyou ToDo AI</span>
+        <Beta :useAiBg="true" ml-1 />
+      </div>
+      <ChatList :list="list" />
+      <div v-if="useAI" flex="~ row gap-2" broder-t-black mx-13px>
+        <input
+          type="text"
+          flex-1
           p-2
           rounded-8px
           border-none
           outline-none
+          bg="black/5"
+          shadow="inner sm black/20"
+          @keydown.enter="chat"
+          c="dark:white"
+          v-model="msg"
+        />
+        <button
+          rounded-8px
+          border-none
+          outline-none
+          p-3
           bg="primary-d active:primary-a"
-          c-white
-          mx-13px
+          shadow="md primary-d/70 dark:primary-a/70"
+          @click.stop="chat"
         >
-          {{ t('ai.setai') }}
+          <div i-ph:paper-plane-tilt-bold text-4 c="white dark:black" />
         </button>
       </div>
-    `
+      <button
+        v-else
+        @click.stop="emits('openSetting')"
+        p-2
+        rounded-8px
+        border-none
+        outline-none
+        bg="primary-d active:primary-a"
+        c-white
+        mx-13px
+      >
+        {{ t('ai.setai') }}
+      </button>
+    </div>
+  `
 }
 
 export default AiContext

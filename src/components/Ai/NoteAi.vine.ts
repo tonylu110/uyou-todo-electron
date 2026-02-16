@@ -58,7 +58,7 @@ function NoteAi() {
       @click="showChat = true"
     >
       <div v-if="!showChat" class="i-ph:star-four-bold text-22px !c-white"/>
-      <AiContext v-else @close="closeChat" @setMaxChat="maxChat = $event" :maxChat="maxChat" />
+      <AiContext v-else @close="closeChat" @setMaxChat="maxChat = !maxChat" @openSetting="openSetting" />
     </div>
   `
 }

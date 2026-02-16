@@ -61,6 +61,7 @@ export default defineConfig({
         logoff: path.resolve(__dirname, 'electron_windows/logoff/index.html'),
         repass: path.resolve(__dirname, 'electron_windows/repass/index.html'),
         register: path.resolve(__dirname, 'electron_windows/register/index.html'),
+        ai: path.resolve(__dirname, 'electron_windows/ai/index.html'),
       },
     },
   },
