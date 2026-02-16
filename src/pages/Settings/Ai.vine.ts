@@ -8,6 +8,8 @@ import SettingList from '../../components/SettingList/SettingList.vine'
 import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import setSwitchFn from '../../util/setSwitchFn'
+import ItemButton from '../../components/ItemBox/ItemButton/ItemButton.vue';
+import { ipcRenderer } from 'electron'
 
 function ToDoBackup() {
   const { t } = useI18n()
@@ -29,6 +31,10 @@ function ToDoBackup() {
   function setProvider(provider: string) {
     useProvider.value = provider
     localStorage.setItem('modelProvider', provider)
+  }
+
+  function openAiWindow() {
+    ipcRenderer.send('open-ai')
   }
 
   return vine`
@@ -62,6 +68,7 @@ function ToDoBackup() {
         <OllamaSettings v-if="useProvider === 'ollama'" />
         <DeepseekSettings v-if="useProvider === 'deepseek'" />
       </template>
+      <ItemButton @click="openAiWindow">open ai window</ItemButton>
     </SettingList>
   `
 }

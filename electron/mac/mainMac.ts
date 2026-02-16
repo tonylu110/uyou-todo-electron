@@ -20,6 +20,7 @@ import { initWindowSize, windowSize, windowSizeIpc, windowSizeState } from '../s
 import useFontSize from '../useFontSize.ts'
 import menuTemplate from './menu.ts'
 import createAboutWindowMac from './pages/aboutMac.ts'
+import createAiWindow from './pages/aiMac.ts'
 import createLogoffWindowMac from './pages/logoffMac.ts'
 import createRegisterWindowMac from './pages/registerMac.ts'
 import createRepassWindowMac from './pages/repassMac.ts'
@@ -159,6 +160,14 @@ function createWindow() {
     const logoffId = logoffWindow.id
     ipcMain.once('close-logoff', () => {
       BrowserWindow.fromId(logoffId)!.close()
+    })
+  })
+
+  ipcMain.on('open-ai', () => {
+    const aiWindow = createAiWindow()
+    const aiId = aiWindow.id
+    ipcMain.once('close-ai', () => {
+      BrowserWindow.fromId(aiId)!.close()
     })
   })
   ipcMain.on('setAutoStart', (ev, isAutoStart) => {

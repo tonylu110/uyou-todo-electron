@@ -19,7 +19,7 @@ function ChatItem() {
       >
         {{ msg }}
       </div>
-      <div v-else bg="black/10" p-2 rounded-8px rounded-tl-4px text-3 shadow="md black/20">
+      <div v-else bg="black/10" p-2 rounded-8px rounded-tl-4px text-3 shadow="md black/20" c="dark:white">
         <VueMarkdown :markdown="msg" />
       </div>
     </div>
