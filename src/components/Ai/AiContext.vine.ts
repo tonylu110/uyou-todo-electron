@@ -18,17 +18,18 @@ function AiContext() {
 
   const showBtn = vineProp.withDefault(true)
 
+  const maxChat = vineProp.optional<boolean>()
+
   const emits = vineEmits<{
     close: []
     openSetting: []
+    setMaxChat: [boolean]
   }>()
 
   function closeChat() {
     emits('close')
     list.value = []
   }
-
-  const maxChat = ref()
 
   const todoStore = useTodoStore()
   const cateStore = useCateStore()
@@ -136,7 +137,7 @@ function AiContext() {
             rounded-full
             z-1
             bg="black/20 active:black/30"
-            @click.stop="maxChat = !maxChat"
+            @click.stop="emits('setMaxChat', !maxChat)"
           >
             <div i-ph:app-window-bold c="dark:white #333" block />
           </div>

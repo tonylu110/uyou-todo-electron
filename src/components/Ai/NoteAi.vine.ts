@@ -6,6 +6,7 @@ function NoteAi() {
   const router = useRouter()
 
   const showChat = ref(false)
+  const maxChat = ref(false)
 
   function closeChat() {
     showChat.value = false
@@ -57,7 +58,7 @@ function NoteAi() {
       @click="showChat = true"
     >
       <div v-if="!showChat" class="i-ph:star-four-bold text-22px !c-white"/>
-      <AiContext v-else @close="closeChat" />
+      <AiContext v-else @close="closeChat" @setMaxChat="maxChat = $event" :maxChat="maxChat" />
     </div>
   `
 }
