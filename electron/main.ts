@@ -10,6 +10,7 @@ import { IS_WINDOWS_11, MicaBrowserWindow } from 'mica-electron'
 import i18n from './i18n/index.ts'
 import menuTemplate from './menu.ts'
 import createAboutWindow from './pages/about.ts'
+import createAiWindow from './pages/ai.ts'
 import createLogoffWindow from './pages/logoff.ts'
 import createRegisterWindow from './pages/register.ts'
 import createRepassWindow from './pages/repass.ts'
@@ -163,6 +164,12 @@ function createWindow() {
     const logoffWindow = createLogoffWindow(uname)
     ipcMain.once('close-logoff', () => {
       logoffWindow.close()
+    })
+  })
+  ipcMain.on('open-ai', () => {
+    const aiWindow = createAiWindow()
+    ipcMain.once('close-ai', () => {
+      aiWindow.close()
     })
   })
   ipcMain.on('changeBlur', (ev, effect) => {
