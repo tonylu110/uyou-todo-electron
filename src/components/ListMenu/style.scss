@@ -63,7 +63,27 @@
 
   $aibg: conic-gradient(from 225deg, #5fb3ff, #ffb347, #ff4d6d, #a855f7, #5fb3ff);
 
-  .iconbg {
-    background: $aibg;
+  .aibg {
+    box-shadow: none;
+    &:hover {
+      background: $aibg;
+
+      .iconbg {
+        background: white;
+      }
+
+      &::before {
+        content: '';
+        border-radius: 7px;
+        overflow: hidden;
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(10px);
+      }
+    }
+
+    .iconbg {
+      background: $aibg;
+    }
   }
 }

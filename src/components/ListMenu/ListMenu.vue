@@ -228,28 +228,25 @@ function openAi() {
     :w="menuShort ? '58px' : '300px'"
     :style="{ backgroundColor: listMenuColor, height: titleBarShow ? '100vh' : '' }"
   >
-    <div
-      v-if="!menuShort"
-      flex="~ gap-2" absolute right-10px
-      :top="useSystemTitleBar ? '10px' : '-26px'" no-drag
-    >
+    <template v-if="!menuShort">
       <div
-        rounded-7px p-10px
+        rounded-7px p-10px :top="useSystemTitleBar ? '10px' : '-26px'" no-drag
         bg="#333/20 dark:#bbb/20 active:#333/50 active:dark:#bbb/50"
+        class="aibg group" absolute :right="route.name === 'Home' || route.name === 'other' ? '56px' : '10px'"
         @click="openAi"
       >
         <div i-ph:star-four-bold block class="iconbg" />
       </div>
-
       <div
         v-if="(route.name === 'Home' || route.name === 'other')"
-        rounded-7px p-10px
+        rounded-7px p-10px absolute right-10px
+        :top="useSystemTitleBar ? '10px' : '-26px'" no-drag
         bg="#333/20 dark:#bbb/20 active:#333/50 active:dark:#bbb/50"
         @click="showSearch = true"
       >
         <div i-ph:magnifying-glass-bold block />
       </div>
-    </div>
+    </template>
     <div
       m="l-13px t-8px"
       bg="hover:black/10 active:black/20"
