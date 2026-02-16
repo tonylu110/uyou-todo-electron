@@ -3,7 +3,7 @@ productName: uyou ToDo
 copyright: Copyright © 2022-2025 Anthony Lu
 mac:
   category: public.app-category.utilities
-  icon: ./icons/logo.icns
+  icon: ./icons/logo.icon
   darkModeSupport: true
   target:
     - target: dmg
