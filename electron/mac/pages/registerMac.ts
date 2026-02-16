@@ -32,9 +32,9 @@ function createRegisterWindow() {
   })
   registerWindow.setAlwaysOnTop(true)
   if (isDev)
-    registerWindow.loadURL('http://localhost:3000/electron_windows/register/')
+    registerWindow.loadURL('http://localhost:3000/electron_windows/pages/register/')
   else
-    registerWindow.loadFile(path.join(__dirname, '../../dist/electron_windows/register/index.html'))
+    registerWindow.loadFile(path.join(__dirname, '../../dist/electron_windows/pages/register/index.html'))
 
   remoteMain.enable(registerWindow.webContents)
   return registerWindow

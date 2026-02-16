@@ -5,12 +5,12 @@ import vitePackage from 'vite/package.json'
 import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import vuePackage from 'vue/package.json'
-import CloseButton from '../../src/components/CloseButton/CloseButton.vine'
-import { createToast } from '../../src/components/Toast'
-import { versionText } from '../../src/util/appVersionCode'
-import openUrlInBrowser from '../../src/util/openUrlInBrowser'
-import { isMac } from '../../src/util/os'
-import TitleBar from './components/TitleBar/TitleBar.vine'
+import CloseButton from '../../../src/components/CloseButton/CloseButton.vine'
+import { createToast } from '../../../src/components/Toast'
+import { versionText } from '../../../src/util/appVersionCode'
+import openUrlInBrowser from '../../../src/util/openUrlInBrowser'
+import { isMac } from '../../../src/util/os'
+import TitleBar from '../../components/TitleBar/TitleBar.vine'
 
 function About() {
   const { t } = useI18n()

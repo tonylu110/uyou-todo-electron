@@ -21,6 +21,7 @@ import useFontSize from '../useFontSize.ts'
 import menuTemplate from './menu.ts'
 import createAboutWindowMac from './pages/aboutMac.ts'
 import createAiWindow from './pages/aiMac.ts'
+import createDesktopNoteWindow from './pages/desktopNoteMac.ts'
 import createLogoffWindowMac from './pages/logoffMac.ts'
 import createRegisterWindowMac from './pages/registerMac.ts'
 import createRepassWindowMac from './pages/repassMac.ts'
@@ -168,6 +169,14 @@ function createWindow() {
     const aiId = aiWindow.id
     ipcMain.once('close-ai', () => {
       BrowserWindow.fromId(aiId)!.close()
+    })
+  })
+
+  ipcMain.on('open-desktopNote', (ev, id) => {
+    const desktopNoteWindow = createDesktopNoteWindow(id)
+    const desktopNoteId = desktopNoteWindow.id
+    ipcMain.once('close-desktopNote', () => {
+      BrowserWindow.fromId(desktopNoteId)!.close()
     })
   })
   ipcMain.on('setAutoStart', (ev, isAutoStart) => {

@@ -1,5 +1,5 @@
-import AiContext from '../../src/components/Ai/AiContext.vine';
-import { isMac } from '../../src/util/os';
+import AiContext from '../../../src/components/Ai/AiContext.vine';
+import { isMac } from '../../../src/util/os';
 import { usePreferredDark } from '@vueuse/core';
 
 function About() {

@@ -38,9 +38,9 @@ function createAiWindow() {
   }
 
   if (isDev)
-    aiWindow.loadURL('http://localhost:3000/electron_windows/ai/')
+    aiWindow.loadURL('http://localhost:3000/electron_windows/pages/ai/')
   else
-    aiWindow.loadFile(path.join(__dirname, '../../dist/electron_windows/ai/index.html'))
+    aiWindow.loadFile(path.join(__dirname, '../../dist/electron_windows/pages/ai/index.html'))
 
   aiWindow.once('ready-to-show', () => {
     aiWindow.show()

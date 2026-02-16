@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { ipcRenderer } from 'electron'
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ipcRenderer } from 'electron'
-import Alert from '../../src/components/Alert/Alert.vue'
-import { isMac } from '../../src/util/os'
-import CloseButton from '../../src/components/CloseButton/CloseButton.vine'
+import Alert from '../../../src/components/Alert/Alert.vue'
+import CloseButton from '../../../src/components/CloseButton/CloseButton.vine'
+import { isMac } from '../../../src/util/os'
 
 const { t } = useI18n()
 

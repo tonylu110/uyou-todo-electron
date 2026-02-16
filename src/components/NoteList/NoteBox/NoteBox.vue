@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { ipcRenderer } from 'electron'
 import { Dropdown as VDropdown } from 'floating-vue'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useCateStore } from '../../../store/cateStore'
 import { useTodoStore } from '../../../store/todoStore'
@@ -17,9 +18,10 @@ interface Props {
   showAddItem?: boolean
   showBtn?: boolean
   showDelete?: boolean
+  isWindow?: boolean
 }
 
-const { title = 'title', color = 'primary-d', showAddItem = true, showBtn = true, showDelete = false, id } = defineProps<Props>()
+const { title = 'title', color = 'primary-d', showAddItem = true, showBtn = true, showDelete = false, id, isWindow = false } = defineProps<Props>()
 const todoStore = useTodoStore()
 const cateStore = useCateStore()
 const { t } = useI18n()
@@ -110,11 +112,29 @@ async function deleteAllCompleted() {
     await todoStore.deleteTodo(todo.id)
   }
 }
+
+function openNew() {
+  ipcRenderer.send('open-desktopNote', id)
+}
+
+const noteBox = ref<HTMLElement>()
+onMounted(() => {
+  const resizeObserver = new ResizeObserver((entries) => {
+    for (let entry of entries) {
+      if (!noteBox.value || !isWindow)
+        return
+      ipcRenderer.send('getContentHeight', entry.target.clientHeight + 64)
+    }
+  })
+
+  resizeObserver.observe(noteBox.value!)
+})
 </script>
 
 <template>
   <div
-    mb-30px break-inside-avoid rounded-10px bg="white dark:#333" drop-shadow-md
+    ref="noteBox" mb-30px break-inside-avoid rounded-10px bg="white dark:#333"
+    drop-shadow-md
   >
     <div
       p="y-5px x-10px r-0"
@@ -126,9 +146,12 @@ async function deleteAllCompleted() {
       <span>{{ title }}</span>
       <div
         v-if="showBtn"
-        flex="~ gap-5px" w="0 hover:37px" transition="all 300"
+        flex="~ gap-5px" w="0 hover:56px" transition="all 300"
         items-center overflow-hidden p="r-10px l-5px" op="0 hover:100"
       >
+        <div @click="openNew">
+          <div i-ph:app-window-bold block />
+        </div>
         <Edit
           :color
           :icon

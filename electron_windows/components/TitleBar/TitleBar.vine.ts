@@ -1,7 +1,7 @@
 import { useI18n } from 'vue-i18n'
-import CloseButton from '../../../../src/components/CloseButton/CloseButton.vine'
-import { isMac } from '../../../../src/util/os'
-import { closeWindow } from '../../../../src/util/windowApi'
+import CloseButton from '../../../src/components/CloseButton/CloseButton.vine'
+import { isMac } from '../../../src/util/os'
+import { closeWindow } from '../../../src/util/windowApi'
 import win95icon from '../../assets/win95.png'
 
 function TitleBar() {

@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
-import i18n from '../../src/i18n'
+import i18n from '../../../src/i18n'
 import About from './About.vine'
 import 'virtual:uno.css'
 import 'virtual:unocss-devtools'
-import '../../src/styles/main.scss'
+import '../../../src/styles/main.scss'
 
 const app = createApp(About)
 

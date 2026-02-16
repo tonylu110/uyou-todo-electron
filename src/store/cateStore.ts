@@ -133,6 +133,13 @@ export const useCateStore = defineStore('cate', () => {
     }
   }
 
+  function getCateById(id: number | string) {
+    if (id === 0)
+      return { id: 0, title: '', color: '', icon: '' }
+    else
+      return cateList.value.find(item => item.id === id)
+  }
+
   return {
     cateList,
     addCategory,
@@ -142,5 +149,6 @@ export const useCateStore = defineStore('cate', () => {
     saveToLocal,
     saveAndSync,
     syncFromServer,
+    getCateById,
   }
 })
