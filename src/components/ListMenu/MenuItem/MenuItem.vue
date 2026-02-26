@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { ipcRenderer } from 'electron'
 import { Dropdown as VDropdown } from 'floating-vue'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -82,6 +83,16 @@ const showIcons = ref(false)
       >
     </div>
     <div v-if="!showEdit">
+      <div
+        :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'"
+        h="18px" w="18px"
+        mr-7px flex items-center justify-center rounded-xl transition="300 width margin"
+        @click.stop="() => {
+          ipcRenderer.send('open-desktopNote', id)
+        }"
+      >
+        <div i-ph:app-window-bold :c="route.query.listName === `${id}` ? 'white dark:#bbb' : '#555 dark:#bbb group-hover:white'" text-12px />
+      </div>
       <div
         :bg="route.query.listName === `${id}` ? 'white/20 hover:white/30 active:whitem/40' : 'black/5 hover:black/10 active:black/15 group-hover:white/20'"
         h="18px" w="18px"
