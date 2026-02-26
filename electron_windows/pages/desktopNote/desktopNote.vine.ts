@@ -7,6 +7,7 @@ import { computed, onMounted, ref } from 'vue';
 import { ipcRenderer } from 'electron';
 import CloseButton from '../../../src/components/CloseButton/CloseButton.vine';
 import { isMac } from '../../../src/util/os';
+import { useHead } from '@unhead/vue';
 
 function DesktopNote() {
   const isDark = usePreferredDark()
@@ -18,8 +19,14 @@ function DesktopNote() {
 
   const cate = computed(() => cateStore.getCateById(cateId.value))
 
-  ipcRenderer.invoke('getCateId').then((id) => {
-    cateId.value = id
+  onMounted(() => {
+    ipcRenderer.invoke('getCateId').then((id) => {
+      cateId.value = id
+    })
+  })
+  
+  useHead({
+    title: () => cate.value?.title
   })
 
   return vine`
