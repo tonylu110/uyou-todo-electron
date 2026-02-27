@@ -1,11 +1,11 @@
+import { ElCheckbox, ElRadio, ElRadioGroup } from 'element-plus'
 import { onUnmounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ElCheckbox, ElRadio, ElRadioGroup } from 'element-plus'
+import emitter from '../../../util/bus'
 import { isMac } from '../../../util/os'
+import { closeWindow, maxWindow, minWindow, topWindow } from '../../../util/windowApi'
 import Alert from '../../Alert/Alert.vue'
 import firstLoad from '../../TitleBar/firstLoad'
-import { closeWindow, maxWindow, minWindow, topWindow } from '../../../util/windowApi'
-import emitter from '../../../util/bus'
 
 const WindowButtons: SetupFC = () => {
   const { t } = useI18n()
@@ -93,7 +93,7 @@ const WindowButtons: SetupFC = () => {
                 onClick={onTopWindow}
               >
                 <div
-                  i-fluent:pin-48-filled
+                  className="i-fluent:pin-48-filled"
                   c={topState.value
                     ? 'group-hover:white group-active:white white'
                     : '#555 dark:#bbb'}

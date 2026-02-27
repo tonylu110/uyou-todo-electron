@@ -118,7 +118,7 @@ function About() {
           <span :class="showWin95Btn > 5 ? 'c-black/90' : 'dark:c-#bbb'" text-end w-14 mr-1>Build By</span>
           <div flex="~ col gap-2">
             <div class="flex items-center">
-              <div class="i-logos:vitejs text-5 block mx-2 mr-1 mt--1" />
+              <div class="i-vscode-icons:file-type-vite text-5 block mx-2 mr-1 mt--1" />
               <span :class="showWin95Btn > 5 ? 'c-black' : 'dark:c-#bbb'">Vite v{{ viteVersion }} </span>
             </div>
             <div class="flex items-center">

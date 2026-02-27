@@ -317,6 +317,7 @@ function NoteUI() {
         </Transition>
       </div>
       <div flex="~ gap-10px" class="fixed bottom-15px left-15px no-drag z-1">
+        <NoteAi />
         <div
           v-if="listId === 'all' && !autoSync"
           class="flex items-center justify-center p-13px"
@@ -332,7 +333,6 @@ function NoteUI() {
             c="!white"
           />
         </div>
-        <NoteAi />
       </div>
       <div flex="~ gap-10px" class="fixed bottom-15px right-15px no-drag">
         <div
