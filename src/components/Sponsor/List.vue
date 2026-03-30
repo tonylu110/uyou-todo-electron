@@ -2,6 +2,7 @@
 import { ElPagination } from 'element-plus'
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { api } from '../../util/api'
 import ItemSpace from '../ItemBox/ItemSpace/ItemSpace.vine'
 import ItemText from '../ItemBox/ItemText/ItemText.vine'
 
@@ -15,12 +16,12 @@ const list = ref<{
 const listLength = ref(0)
 
 onMounted(() => {
-  fetch('https://api.todo.uyou.org.cn/getsponsors?page=1').then((res) => {
+  api('/getsponsors?page=1').then((res) => {
     return res.json()
   }).then((res) => {
     list.value = res.data
   })
-  fetch('https://api.todo.uyou.org.cn/getsponsorlenght').then((res) => {
+  api('/getsponsorlenght').then((res) => {
     return res.json()
   }).then((res) => {
     listLength.value = res
@@ -28,7 +29,7 @@ onMounted(() => {
 })
 
 function chagePage(page: number) {
-  fetch(`https://api.todo.uyou.org.cn/getsponsors?page=${page}`).then((res) => {
+  api(`/getsponsors?page=${page}`).then((res) => {
     return res.json()
   }).then((res) => {
     list.value = res.data

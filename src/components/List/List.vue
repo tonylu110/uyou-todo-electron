@@ -7,6 +7,7 @@ import { isUndefined } from 'es-toolkit'
 import { computed, onMounted, onUnmounted, reactive, ref, watchEffect } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
+import { api } from '../../util/api'
 import emitter from '../../util/bus'
 import LocalStorage from '../../util/localStorage'
 import { isLinux, isWindows10OrAfter } from '../../util/os'
@@ -44,7 +45,7 @@ onMounted(() => {
     const uid = localStorage.getItem('uid')
     const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
     if ((uid !== '' && uid !== null) && autoSync) {
-      fetch('https://api.todo.uyou.org.cn/gettodo', {
+      api('/gettodo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

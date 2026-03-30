@@ -186,7 +186,9 @@
     "thanks": "Thank you for your support, this will help uyou ToDo develop better",
     "floatUI": "Use Float UI",
     "setCustFont": "Set custom font",
-    "setCustPassKey": "Custom encryption keyboard style"
+    "setCustPassKey": "Custom encryption keyboard style",
+    "setCustApi": "Set up a custom API",
+    "useCustApi": "Use custom API"
   },
   "openPass": {
     "useOpenPass": "Use startup encryption",

@@ -1,6 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 import ShowListItem from '../../pages/Laboratory/showListItem'
 import Vip from '../../pages/Settings/vip.vue'
+import CustomApi from '../../pages/Settings/Vip/CustomApi.vine'
 import FontSet from '../../pages/Settings/Vip/FontSet.vue'
 import PassKey from '../../pages/Settings/Vip/PassKey.vue'
 
@@ -24,6 +25,10 @@ const vipRouter: Readonly<RouteRecordRaw[]> = [
     path: '/passKey',
     name: 'passKey',
     component: PassKey,
+  },
+  {
+    path: '/customApi',
+    component: CustomApi,
   },
 ]
 

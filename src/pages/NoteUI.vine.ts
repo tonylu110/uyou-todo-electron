@@ -24,6 +24,7 @@ import emitter from '../util/bus'
 import getCateList from '../util/getCateList'
 import { isMac } from '../util/os'
 import { topWindow } from '../util/windowApi'
+import { api } from '../util/api';
 
 function NoteUI() {
   const router = useRouter()
@@ -47,7 +48,7 @@ function NoteUI() {
       const controller = new AbortController()
       const timeoutId = setTimeout(() => controller.abort(), 10000) // 10s timeout
 
-      const response = await fetch('https://api.todo.uyou.org.cn/update/get', {
+      const response = await api('/update/get', {
         signal: controller.signal,
       })
       clearTimeout(timeoutId)

@@ -1,6 +1,7 @@
 import type ITodoList from '../interface/ITodoListArray'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { api } from '../util/api'
 import emitter from '../util/bus'
 
 interface TodoState {
@@ -67,7 +68,7 @@ export const useTodoStore = defineStore('todo', () => {
       const controller = new AbortController()
       const timeoutId = setTimeout(() => controller.abort(), 10000)
 
-      const response = await fetch('https://api.todo.uyou.org.cn/gettodo', {
+      const response = await api('/gettodo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -103,7 +104,7 @@ export const useTodoStore = defineStore('todo', () => {
     const uid = localStorage.getItem('uid')
     if (uid !== null && uid !== '') {
       try {
-        const response = await fetch('https://api.todo.uyou.org.cn/edittodo', {
+        const response = await api('/edittodo', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

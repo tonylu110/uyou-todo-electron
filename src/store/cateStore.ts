@@ -1,6 +1,7 @@
 import type { cateItem } from '../components/ListMenu/ICateItem'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { api } from '../util/api'
 import { useTodoStore } from './todoStore'
 
 export const useCateStore = defineStore('cate', () => {
@@ -62,7 +63,7 @@ export const useCateStore = defineStore('cate', () => {
       return
 
     try {
-      const response = await fetch('https://api.todo.uyou.org.cn/edittodocate', {
+      const response = await api('/edittodocate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,7 +107,7 @@ export const useCateStore = defineStore('cate', () => {
       const controller = new AbortController()
       const timeoutId = setTimeout(() => controller.abort(), 10000)
 
-      const response = await fetch('https://api.todo.uyou.org.cn/gettodocate', {
+      const response = await api('/gettodocate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

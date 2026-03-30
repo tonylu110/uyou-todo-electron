@@ -1,5 +1,6 @@
 import type { cateItem } from '../components/ListMenu/ICateItem'
 import { createToast } from '../components/Toast'
+import { api } from './api'
 import emitter from './bus'
 
 export default () => {
@@ -9,7 +10,7 @@ export default () => {
   const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
   const uid = localStorage.getItem('uid')
   if ((uid !== '' && uid !== null) && autoSync) {
-    fetch('https://api.todo.uyou.org.cn/gettodocate', {
+    api('/gettodocate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +30,7 @@ export default () => {
         emitter.emit('setCate', res.data)
       }
       else {
-        fetch('https://api.todo.uyou.org.cn/addtodocate', {
+        api('/addtodocate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

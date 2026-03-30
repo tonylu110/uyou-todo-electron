@@ -1,5 +1,6 @@
-import { createToast } from '../Toast'
 import type { cateItem } from './ICateItem'
+import { api } from '../../util/api'
+import { createToast } from '../Toast'
 
 interface todoCateModel {
   uid: string
@@ -9,7 +10,7 @@ interface todoCateModel {
 }
 
 export default (todoCate: todoCateModel) => {
-  fetch('https://api.todo.uyou.org.cn/edittodocate', {
+  api('/edittodocate', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

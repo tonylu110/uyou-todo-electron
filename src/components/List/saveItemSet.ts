@@ -1,5 +1,6 @@
 import type ITodoList from '../../interface/ITodoListArray'
 import type IToDoListData from '../../interface/IToDoListData'
+import { api } from '../../util/api'
 import emitter from '../../util/bus'
 import LocalStorage from '../../util/localStorage'
 import { createToast } from '../Toast'
@@ -11,7 +12,7 @@ function saveItemSet(list: ITodoList[]) {
   LocalStorage('set', localStorageSetTodoList)
   const uid = localStorage.getItem('uid')
   if (uid !== null && uid !== '') {
-    fetch('https://api.todo.uyou.org.cn/edittodo', {
+    api('/edittodo', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

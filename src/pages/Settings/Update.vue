@@ -11,6 +11,7 @@ import NoteTabBar from '../../components/TabBar/NoteTabBar.vue'
 import TabBar from '../../components/TabBar/TabBar.vue'
 import { createToast } from '../../components/Toast'
 import router from '../../router'
+import { api } from '../../util/api'
 import { versionCode } from '../../util/appVersionCode'
 import emitter from '../../util/bus'
 
@@ -23,7 +24,7 @@ const newVersion = ref('')
 const updateButton = ref(t('update.checkingUpdate'))
 function getUpdate() {
   setTimeout(() => {
-    fetch('https://api.todo.uyou.org.cn/update/get').then((res) => {
+    api('/update/get').then((res) => {
       return res.json()
     }).then((res) => {
       if (res[1].code > version) {

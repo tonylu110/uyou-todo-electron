@@ -21,6 +21,7 @@ import RouterUrl from './components/RouterUrl'
 import Setup from './components/Setup/Setup.vue'
 import TitleBar from './components/TitleBar/newTitleBar'
 import { useModeStore } from './store/modeStore'
+import { api } from './util/api'
 import { versionCode } from './util/appVersionCode'
 import emitter from './util/bus'
 import firstLoad from './util/firstLoad'
@@ -46,7 +47,7 @@ const autoUpdateState = localStorage.getItem('autoUpdate') !== 'false'
 firstLoad()
 
 if (autoUpdateState) {
-  fetch('https://api.todo.uyou.org.cn/update/get').then((res) => {
+  api('/update/get').then((res) => {
     return res.json()
   }).then((res) => {
     if (res[1].code > version) {
@@ -70,26 +71,6 @@ function returnClick() {
   alertShow.value = false
   ipcRenderer.send('open-url', 'https://github.com/tonylu110/uyou-todo-electron/releases')
 }
-
-// const autoSync = localStorage.getItem('autoSync') === 'true' || localStorage.getItem('autoSync') === null
-// if (autoSync) {
-//   const uid = localStorage.getItem('uid')
-//   if (uid !== '' && uid !== null) {
-//     fetch('https://api.todo.uyou.org.cn/gettodo', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({
-//         uid: uid
-//       })
-//     }).then(res => {
-//       return res.json()
-//     }).then(res => {
-//       localStorage.setItem('ToDo', res.data)
-//     })
-//   }
-// }
 
 window.addEventListener('resize', () => {
   ipcRenderer.send('getWindowSize', {

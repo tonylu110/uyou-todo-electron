@@ -4,6 +4,7 @@ import { usePreferredDark } from '@vueuse/core'
 import { ipcRenderer } from 'electron'
 import { onMounted, reactive, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { api } from '../../util/api'
 import emitter from '../../util/bus'
 import getCateList from '../../util/getCateList'
 import { isLinux, isMac, isWindows10OrAfter } from '../../util/os'
@@ -53,7 +54,7 @@ onMounted(() => {
 
 function sync() {
   if (syncImgShow.value) {
-    fetch('https://api.todo.uyou.org.cn/gettodo', {
+    api('/gettodo', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -110,6 +110,7 @@ const isNoteUI = localStorage.getItem('newNoteUI') === 'true'
       <SponsorList />
     </template>
     <template v-if="isVip">
+      <Item :title="t('vip.setCustApi')" @item-fun="router.push('/customApi?from=setting')" />
       <ItemBox>
         <Item
           :title="t('vip.floatUI')"

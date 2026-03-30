@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Alert from '../../../src/components/Alert/Alert.vue'
 import CloseButton from '../../../src/components/CloseButton/CloseButton.vine'
+import { api } from '../../../src/util/api'
 import { isMac } from '../../../src/util/os'
 import { closeWindow } from '../../../src/util/windowApi'
 
@@ -27,7 +28,7 @@ const Logoff: SetupFC = () => {
       showDialog.value = true
       return
     }
-    fetch('https://api.todo.uyou.org.cn/login', {
+    api('/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +41,7 @@ const Logoff: SetupFC = () => {
       return res.json()
     }).then((res) => {
       if (res._id) {
-        fetch('https://api.todo.uyou.org.cn/admin/deluser', {
+        api('/admin/deluser', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ const Logoff: SetupFC = () => {
           return res.json()
         }).then((res) => {
           if (res.code === 200) {
-            fetch('https://api.todo.uyou.org.cn/deltodo', {
+            api('/deltodo', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +65,7 @@ const Logoff: SetupFC = () => {
               return res.json()
             }).then((res) => {
               if (res.code === 200) {
-                fetch('https://api.todo.uyou.org.cn/deltodocate', {
+                api('/deltodocate', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',

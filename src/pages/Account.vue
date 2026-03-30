@@ -14,6 +14,7 @@ import { createToast } from '../components/Toast'
 import router from '../router'
 import { useCateStore } from '../store/cateStore'
 import { useTodoStore } from '../store/todoStore'
+import { api } from '../util/api'
 import emitter from '../util/bus'
 
 const { t } = useI18n()
@@ -66,7 +67,7 @@ function login() {
     alertShow.value = true
   }
   else {
-    fetch('https://api.todo.uyou.org.cn/login', {
+    api('/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -84,13 +85,13 @@ function login() {
         localStorage.setItem('uid', res._id)
         loginState.value = true
         createToast({ msg: t('accountPage.syncData') })
-        fetch(`https://api.todo.uyou.org.cn/todoexist?uid=${res._id}`).then((res) => {
+        api(`/todoexist?uid=${res._id}`).then((res) => {
           return res.json()
         }).then((res) => {
           const uid = localStorage.getItem('uid')
           const data = localStorage.getItem('ToDo')
           if (res.code === 200) {
-            fetch('https://api.todo.uyou.org.cn/addtodo', {
+            api('/addtodo', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -129,7 +130,7 @@ function login() {
               })
           }
         })
-        fetch(`https://api.todo.uyou.org.cn/todocateexist?uid=${res._id}`).then((res) => {
+        api(`/todocateexist?uid=${res._id}`).then((res) => {
           return res.json()
         }).then((res) => {
           const uid = localStorage.getItem('uid')

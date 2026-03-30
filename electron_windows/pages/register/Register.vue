@@ -4,6 +4,7 @@ import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Alert from '../../../src/components/Alert/Alert.vue'
 import CloseButton from '../../../src/components/CloseButton/CloseButton.vine'
+import { api } from '../../../src/util/api'
 import { isMac } from '../../../src/util/os'
 
 const { t } = useI18n()
@@ -39,7 +40,7 @@ function register() {
     showAlert.value = true
   }
   else {
-    fetch('https://api.todo.uyou.org.cn/register', {
+    api('/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ function closeAlert() {
 }
 
 const userNumber = ref(0)
-fetch('https://api.todo.uyou.org.cn/allusers').then((res) => {
+api('/allusers').then((res) => {
   return res.json()
 }).then((res) => {
   userNumber.value = res
