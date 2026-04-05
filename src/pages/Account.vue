@@ -136,7 +136,7 @@ function login() {
           const uid = localStorage.getItem('uid')
           const localCateList = localStorage.getItem('cate') ? localStorage.getItem('cate') : '{"data": []}'
           if (res.code === 200) {
-            fetch('https://api.todo.uyou.org.cn/addtodocate', {
+            api('/addtodocate', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

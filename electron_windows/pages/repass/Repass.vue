@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n'
 import Alert from '../../../src/components/Alert/Alert.vue'
 import CloseButton from '../../../src/components/CloseButton/CloseButton.vine'
 import { isMac } from '../../../src/util/os'
+import { api } from '../../../src/util/api'
 
 const { t } = useI18n()
 
@@ -35,7 +36,7 @@ function repass() {
     showAlert.value = true
   }
   else {
-    fetch('https://api.todo.uyou.org.cn/editpasswd', {
+    api('/editpasswd', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
